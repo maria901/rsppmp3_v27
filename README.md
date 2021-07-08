@@ -1,2 +1,2 @@
-# rsppmp3_v27
+MP
 MP3 DLL since 1997
