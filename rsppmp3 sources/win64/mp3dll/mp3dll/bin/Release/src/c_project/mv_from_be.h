@@ -910,20 +910,41 @@ getfilesize_ar_amanda_s_smart_ape(char *infile_ar);
 ) /* is it enough */
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////
-// added at 20:53, modified 23:20
+// modified 10:12
 
 bool __fastcall amanda_s_smart_ape_query_webm_and_normalization(__attribute__((unused)) char *entry_______________amanda_s_smart_ape_,
 																__attribute__((unused)) char *webm________________amanda_s_smart_ape,
 																__attribute__((unused)) char *normalization_mode__amanda_s_smart_ape,
 																__attribute__((unused)) char *normalization_value_amanda_s_smart_ape,
 																
-																__attribute__((unused)) char *normalization_value2_amanda_s_smart_ape,
+																__attribute__((unused)) char *normalization_valu2_amanda_s_smart_ape,
 																
-																__attribute__((unused)) char *normalization_value3_amanda_s_smart_ape);
+																__attribute__((unused)) char *normalization_valu3_amanda_s_smart_ape,
+																__attribute__((unused)) bool * has_an_entry_amanda_s_smart_ap);
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 //  added at 22:24
 
 int __fastcall replacestringsensitive2_juliete(char *comando, char *source, char *dest);
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////
+//  added 11:22
+
+int rsp32_amanda_s_smart_ape(int adler_amanda_s_smart_ape, char *buf_amanda_s_smart_ape, int len_amanda_s_smart_ape);
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////
+//   added 11:25
+
+#define RECOMMENDED_BUFFER_SIZE_FOR_FILE_FUNCTIONS_AMANDA_S_SMART_APE (((((((((1 << 17)))))))))
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////
+//    added 11:30
+
+int __fastcall rsp32_file_amanda_s_smart_ape(char * filename_utf_8_amanda_s_smart_ape);
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////
+//    added 11:45
+
+WCHAR * amanda_utf8towide_1_(char *pUTF8);
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////

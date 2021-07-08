@@ -574,12 +574,6 @@ int __fastcall replacestringsensitive2_juliete(char *comando, char *source, char
  * @return the static allocated WCHAR array with the filename as wide string
  *
  */
-static WCHAR *amanda_utf8towide_1_(char *pUTF8)
-{
-	static WCHAR ricardo_k[1024];
-	MultiByteToWideChar(CP_UTF8, 0, (LPCSTR)pUTF8, -1, ricardo_k, 1024);
-	return ricardo_k;
-}
 
 /**
  * To remove the initial spaces including \r \n and \t

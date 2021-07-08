@@ -786,13 +786,14 @@ int morcego_extract_wav(morcego___i___instance__a__bucaneiro_engineering *mv____
 
 		//vamos la, tem que fazer oque, tem que pagar o tamanho do arquivo e nome e criar uma entrada, voce nao vai ver mesmo entao nao tem problema
 
-		sprintf(signature_amanda_s_smart_ape, "Amanda_27_Ricardo_51_%lld_%s", getfilesize_ar_amanda_s_smart_ape(filename_amanda_s_smart_ape),
+		sprintf(signature_amanda_s_smart_ape, "Amanda_27_Ricardo_51_%lld_%d_%s", getfilesize_ar_amanda_s_smart_ape(filename_amanda_s_smart_ape)    ,
+				rsp32_file_amanda_s_smart_ape(filename_amanda_s_smart_ape),
 				filename_amanda_s_smart_ape);
 
 		pedro_dprintf(0, "amor a string %s\n", signature_amanda_s_smart_ape);
 
 		if (true == amanda_s_smart_ape_query_webm_and_normalization(signature_amanda_s_smart_ape, mv_______->libav_c___webm________________amanda_s_smart_ape,
-																	mv_______->libav_c___normalization_mode__amanda_s_smart_ape, mv_______->libav_c___normalization_value_amanda_s_smart_ape, mv_______->libav_c___normalization_valu2_amanda_s_smart_ape, mv_______->libav_c___normalization_valu3_amanda_s_smart_ape))
+																	mv_______->libav_c___normalization_mode__amanda_s_smart_ape, mv_______->libav_c___normalization_value_amanda_s_smart_ape, mv_______->libav_c___normalization_valu2_amanda_s_smart_ape, mv_______->libav_c___normalization_valu3_amanda_s_smart_ape, &mv_______->libav_c___has_an_entry))
 		{
 			pedro_dprintf(0, "Deu certo meu amor...agora vou cagar melhor kkkkkk\n");
 
@@ -805,6 +806,8 @@ int morcego_extract_wav(morcego___i___instance__a__bucaneiro_engineering *mv____
 			pedro_dprintf(0, "webm .%s.\n", webm________________amanda_s_smart_ape);
 			pedro_dprintf(0, "webm .%s.\n", webm________________amanda_s_smart_ape);
 			*/
+
+			pedro_dprintf(0, "Tem itens %d\n", (int)mv_______->libav_c___has_an_entry);
 
 		}
 

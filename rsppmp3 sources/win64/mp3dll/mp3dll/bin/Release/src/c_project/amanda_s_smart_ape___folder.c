@@ -4852,100 +4852,72 @@ rspposicaofixa (int mode, int value)
 
 }
 
-#include <stdio.h>
-/* Period parameters */
-#define N 624
-#define M 397
-#define MATRIX_A 0x9908b0df     /* constant vector a */
-#define UPPER_MASK 0x80000000   /* most significant w-r bits */
-#define LOWER_MASK 0x7fffffff   /* least significant r bits */
-/* Tempering parameters */
-#define TEMPERING_MASK_B 0x9d2c5680
-#define TEMPERING_MASK_C 0xefc60000
-#define TEMPERING_SHIFT_U(y)  (y >> 11)
-#define TEMPERING_SHIFT_S(y)  (y << 7)
-#define TEMPERING_SHIFT_T(y)  (y << 15)
-#define TEMPERING_SHIFT_L(y)  (y >> 18)
-static unsigned long mt[N];     /* the array for the state vector  */
-static int mti = N + 1;         /* mti==N+1 means mt[N] is not initialized */
-/* initializing the array with a NONZERO seed */
-void
-sgenrand_ (unsigned long seed)
+static unsigned int rsp32(unsigned int adler, const unsigned char *buf, unsigned int len)
 {
-	/* setting initial seeds to mt[N] using         */
-	/* the generator Line 25 of Table 1 in          */
-	/* [KNUTH 1981, The Art of Computer Programming */
-	/*    Vol. 2 (2nd Ed.), pp102]                  */
-	mt[0] = seed & 0xffffffff;
-	for (mti = 1; mti < N; mti++)
-		mt[mti] = (69069 * mt[mti - 1]) & 0xffffffff;
+  uchar s1 = adler & 0xff;
+  uchar s2 = (adler >> 8) & 0xff;
+  uchar s3 = (adler >> 16) & 0xff;
+  uchar s4 = (adler >> 24) & 0xff;
+  int svansa = 0;
+  int ok12 = len;
+
+  if (buf == NULL)
+  {
+    return 1L;
+  }
+
+  while (ok12)
+  {
+    s1 += buf[svansa++];
+    s2 += s1;
+    s3 += s2;
+    s4 += s3;
+    ok12--;
+  }
+
+  return s1 + (s2 << 8) + (s3 << 16) + (s4 << 24);
 }
 
-int
-genrand_ ()
+int rsp32_amanda_s_smart_ape(int adler_amanda_s_smart_ape, char *buf_amanda_s_smart_ape, int len_amanda_s_smart_ape)
 {
-	unsigned long y;
-	static unsigned long mag01[2] = { 0x0, MATRIX_A };
-	/* mag01[x] = x * MATRIX_A  for x=0,1 */
-	if (mti >= N)
-	{                       /* generate N words at one time */
-		int kk;
-		if (mti == N + 1) /* if sgenrand() has not been called, */
-			sgenrand_ (4357);  /* a default initial seed is used   */
-		for (kk = 0; kk < N - M; kk++)
-		{
-			y = (mt[kk] & UPPER_MASK) | (mt[kk + 1] & LOWER_MASK);
-			mt[kk] = mt[kk + M] ^ (y >> 1) ^ mag01[y & 0x1];
-		}
-		for (; kk < N - 1; kk++)
-		{
-			y = (mt[kk] & UPPER_MASK) | (mt[kk + 1] & LOWER_MASK);
-			mt[kk] = mt[kk + (M - N)] ^ (y >> 1) ^ mag01[y & 0x1];
-		}
-		y = (mt[N - 1] & UPPER_MASK) | (mt[0] & LOWER_MASK);
-		mt[N - 1] = mt[M - 1] ^ (y >> 1) ^ mag01[y & 0x1];
-		mti = 0;
+
+	return rsp32((unsigned int) adler_amanda_s_smart_ape, (const unsigned char *) buf_amanda_s_smart_ape, (unsigned int) len_amanda_s_smart_ape);
+
+}
+
+int __fastcall rsp32_file_amanda_s_smart_ape(char * filename_utf_8_amanda_s_smart_ape)
+{
+	unsigned char    *    buffer_amanda_s_smart_ape = malloc(RECOMMENDED_BUFFER_SIZE_FOR_FILE_FUNCTIONS_AMANDA_S_SMART_APE);
+	FILE             *    our_file_amanda_s_smart_ape        = NULL;
+	int              len_amanda_s_smart_ape                        ;
+	int64_t          filesize_amanda_s_smart_ape                   ; 
+	unsigned int     rsp32_amanda_s_smart_ape                =    1;
+	
+	filesize_amanda_s_smart_ape = getfilesize_ar_amanda_s_smart_ape(filename_utf_8_amanda_s_smart_ape);
+	if(-1 == filesize_amanda_s_smart_ape)
+	{
+		free(buffer_amanda_s_smart_ape);
+		return 0;
 	}
 
-	y = mt[mti++];
-	y ^= TEMPERING_SHIFT_U (y);
-	y ^= TEMPERING_SHIFT_S (y) & TEMPERING_MASK_B;
-	y ^= TEMPERING_SHIFT_T (y) & TEMPERING_MASK_C;
-	y ^= TEMPERING_SHIFT_L (y);
-	//return ((double) y / (unsigned long) 0xffffffff);  /* reals */
-	return (int) y;         /* for integer generation */
+	our_file_amanda_s_smart_ape = _wfopen(amanda_utf8towide_1_(filename_utf_8_amanda_s_smart_ape),
+	L"rb");
+
+	if(NULL != our_file_amanda_s_smart_ape)
+	{
+
+		while((len_amanda_s_smart_ape = fread((void *) buffer_amanda_s_smart_ape, 1, RECOMMENDED_BUFFER_SIZE_FOR_FILE_FUNCTIONS_AMANDA_S_SMART_APE, our_file_amanda_s_smart_ape)))
+		{
+			rsp32_amanda_s_smart_ape = rsp32(rsp32_amanda_s_smart_ape, (const unsigned char *) buffer_amanda_s_smart_ape, (unsigned int) len_amanda_s_smart_ape);
+		}
+
+		fclose(our_file_amanda_s_smart_ape);
+		our_file_amanda_s_smart_ape = NULL;
+	}
+
+	free(buffer_amanda_s_smart_ape);
+	buffer_amanda_s_smart_ape = NULL;
+
+	return rsp32_amanda_s_smart_ape;
+
 }
-
-/*
-   int
-   genrand_sinal (int fatia)
-   {
-
-        int a;
-        int b;
-
-        a = genrand_ ();
-
-        if (a > 0)
-        {
-                b = 1;          //positivo
-        }
-        else
-        {
-                b = 0;          //negativo
-
-        }
-
-        a = a % fatia;          //limitador de tamanho
-
-        a = abs (a);            //positivador
-
-        if (!b)                 //if b==0//negativo
-        {
-                a = -a;         //inverte o numero positivo
-        }
-
-        return a;
-
-   }
- */

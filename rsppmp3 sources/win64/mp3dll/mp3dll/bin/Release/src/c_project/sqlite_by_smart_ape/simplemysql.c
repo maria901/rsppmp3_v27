@@ -74,7 +74,11 @@ void morcego_encoder_amanda_s_smart_ape(char *morcego_in_amanda_s_smart_ape)
 }
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////
+// variaveis
 
+bool * has_an_entry_amanda_s_smart_ap_ptr = NULL;
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////
 #define MAXPATH_UTF_8_MODE_AMANDA_S_SMART_APE (MAX_PATH * 6 \
 ) /* is it enough */
 
@@ -291,7 +295,8 @@ int callback_amanda_s_smart_ape(void *NotUsed,
 
 int ar_Mode_Select_function_amanda_s_smart_ape(__attribute__((unused)) char *data__z_amanda_s_smart_ape,
 											   __attribute__((unused)) char *message_amanda_s_smart_ape,
-											   callback_amanda_s_smart_ape_ callback_amanda_s_smart_ape___)
+											   callback_amanda_s_smart_ape_ callback_amanda_s_smart_ape___ 
+											   )
 {
 	sqlite3 *db;
 	char *err_msg = 0;
@@ -368,6 +373,8 @@ int callback_amanda_s_smart_ape_23_39(__attribute__((unused)) void *NotUsed,
 
 	NotUsed = 0;
 
+	(*has_an_entry_amanda_s_smart_ap_ptr) = true;
+
 	for (int i = 0; i < argc; i++)
 	{
 		pedro_dprintf(0, "%s = %s\n", azColName[i], argv[i] ? argv[i] : "");
@@ -385,7 +392,8 @@ bool __fastcall amanda_s_smart_ape_query_webm_and_normalization(__attribute__((u
 																
 																__attribute__((unused)) char *normalization_valu2_amanda_s_smart_ape,
 																
-																__attribute__((unused)) char *normalization_valu3_amanda_s_smart_ape)
+																__attribute__((unused)) char *normalization_valu3_amanda_s_smart_ape,
+																__attribute__((unused)) bool * has_an_entry_amanda_s_smart_ap_)
 {
 	int ret_amanda_s_smart_ape;
 	
@@ -394,6 +402,10 @@ bool __fastcall amanda_s_smart_ape_query_webm_and_normalization(__attribute__((u
 	char * buffer_for_query_amanda_s_smart_ape    = malloc(Amanda_27_CONSTANTE_100000)         ;
 //	message_for_amanda_s_smart_ape[0] = '\0';
 
+	has_an_entry_amanda_s_smart_ap_ptr = has_an_entry_amanda_s_smart_ap_;
+
+	(*has_an_entry_amanda_s_smart_ap_ptr) = false;
+	
 	strcpy(entry_______________amanda_s_smart_ape, entry_______________amanda_s_smart_ape_)  ;
 
 	/*
