@@ -808,7 +808,7 @@ int morcego_extract_wav(morcego___i___instance__a__bucaneiro_engineering *mv____
 
 		}
 
-		exit(27);
+		//exit(27);
 	}
 
 	if (false == mv_______->libav_c___amanda_s_smart_ape_is_new_webm)
