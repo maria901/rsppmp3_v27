@@ -1,0 +1,97 @@
+
+/*
+    <C/C++ source code of the support dlls>
+    Copyright (C) <2021>  <BinaryWork Corp.>
+
+    This program is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU GENERAL PUBLIC LICENSE
+	and GNU LESSER GENERAL PUBLIC LICENSE along with this program.
+	If not, see <http://www.gnu.org/licenses/>.
+
+    support: http://nomade.sourceforge.net
+
+	direct programmers e-mails:
+	MathMan: arsoftware25@gmail.com
+	Amanda : arsoftware10@gmail.com
+
+	immediate contact(for a very fast answer) WhatsApp
+	(+55)41 9627 1708 - it is always on
+*/
+
+#include <windows.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <math.h>
+
+#include "mv_from_be.h"
+
+/***************************************************************************/
+void
+set_this_thread_to_idle_17_55_23_june_2011 ()
+{
+	SetThreadPriority (GetCurrentThread (), -2);
+}
+
+#include "rc4.h"
+
+int
+encryptfile (char *inputfile, char *outputfile, char *password)
+{
+	struct rc4_state s;
+	morcego___i___instance__a__bucaneiro_engineering *mv_______=calloc(sizeof(morcego___i___instance__a__bucaneiro_engineering),1);
+	__int64 mv_instance=(__int64)(__INT32_OR_INT64)mv_______;
+	FILE *myfile = NULL;
+	FILE *outfile = NULL;
+	int ret;
+	char *buffer = NULL;
+	int returnvalue = 0;
+	if ((myfile = _wfopen (utf8towide_multithread(mv_instance,inputfile), L"rb")) == NULL)
+	{
+		returnvalue = 1;
+		goto saida;
+	}
+	if ((outfile = _wfopen (utf8towide_multithread(mv_instance,outputfile), L"wb")) == NULL)
+	{
+		returnvalue = 2;
+		goto saida;
+	}
+	buffer = malloc (1 << 17);//this is the best size for buffer these days
+	rc4_setup (&s, (unsigned char *) password, strlen (password));
+	while((ret = fread (buffer, 1, 1 << 17, myfile))>0)
+	{
+		int val;
+		rc4_crypt (&s, (unsigned char *) buffer, ret);
+		val = fwrite (buffer, 1, ret, outfile);
+		if(val!=ret) //some kind of file write problem, can ocur if you remove the pen drive during the save process
+		{
+			returnvalue=3;
+		}
+	}
+	;
+saida:
+	;
+	if (buffer)
+	{
+		free (buffer);
+	}
+	if (myfile)
+	{
+		fclose (myfile);
+	}
+	if (outfile)
+	{
+		fclose (outfile);
+	}
+	free(mv_______);
+	return returnvalue;
+	;
+}

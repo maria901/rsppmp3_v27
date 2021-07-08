@@ -1,0 +1,115 @@
+C:\Documents and Settings\Administrador.HOTELARIA.001\Meus documentos\arab\rsp_mp3_dll_152_build_2037\win32\mp3dll\mp3dll\bin\x86\Release\mp3dll.exe.config
+C:\Documents and Settings\Administrador.HOTELARIA.001\Meus documentos\arab\rsp_mp3_dll_152_build_2037\win32\mp3dll\mp3dll\bin\x86\Release\mp3dll.exe.manifest
+C:\Documents and Settings\Administrador.HOTELARIA.001\Meus documentos\arab\rsp_mp3_dll_152_build_2037\win32\mp3dll\mp3dll\bin\x86\Release\mp3dll.application
+C:\Documents and Settings\Administrador.HOTELARIA.001\Meus documentos\arab\rsp_mp3_dll_152_build_2037\win32\mp3dll\mp3dll\bin\x86\Release\mp3dll.exe
+C:\Documents and Settings\Administrador.HOTELARIA.001\Meus documentos\arab\rsp_mp3_dll_152_build_2037\win32\mp3dll\mp3dll\obj\x86\Release\ResolveAssemblyReference.cache
+C:\Documents and Settings\Administrador.HOTELARIA.001\Meus documentos\arab\rsp_mp3_dll_152_build_2037\win32\mp3dll\mp3dll\obj\x86\Release\mp3dll.DebugInformation.resources
+C:\Documents and Settings\Administrador.HOTELARIA.001\Meus documentos\arab\rsp_mp3_dll_152_build_2037\win32\mp3dll\mp3dll\obj\x86\Release\mp3dll.equalizer.resources
+C:\Documents and Settings\Administrador.HOTELARIA.001\Meus documentos\arab\rsp_mp3_dll_152_build_2037\win32\mp3dll\mp3dll\obj\x86\Release\mp3dll.sample.resources
+C:\Documents and Settings\Administrador.HOTELARIA.001\Meus documentos\arab\rsp_mp3_dll_152_build_2037\win32\mp3dll\mp3dll\obj\x86\Release\mp3dll.normalize.resources
+C:\Documents and Settings\Administrador.HOTELARIA.001\Meus documentos\arab\rsp_mp3_dll_152_build_2037\win32\mp3dll\mp3dll\obj\x86\Release\mp3dll.Properties.Resources.resources
+C:\Documents and Settings\Administrador.HOTELARIA.001\Meus documentos\arab\rsp_mp3_dll_152_build_2037\win32\mp3dll\mp3dll\obj\x86\Release\mp3dll.spectrum.resources
+C:\Documents and Settings\Administrador.HOTELARIA.001\Meus documentos\arab\rsp_mp3_dll_152_build_2037\win32\mp3dll\mp3dll\obj\x86\Release\mp3dll.wave_effects.resources
+C:\Documents and Settings\Administrador.HOTELARIA.001\Meus documentos\arab\rsp_mp3_dll_152_build_2037\win32\mp3dll\mp3dll\obj\x86\Release\mp3dll.csproj.GenerateResource.Cache
+C:\Documents and Settings\Administrador.HOTELARIA.001\Meus documentos\arab\rsp_mp3_dll_152_build_2037\win32\mp3dll\mp3dll\obj\x86\Release\mp3dll.exe.manifest
+C:\Documents and Settings\Administrador.HOTELARIA.001\Meus documentos\arab\rsp_mp3_dll_152_build_2037\win32\mp3dll\mp3dll\obj\x86\Release\mp3dll.application
+C:\Documents and Settings\Administrador.HOTELARIA.001\Meus documentos\arab\rsp_mp3_dll_152_build_2037\win32\mp3dll\mp3dll\obj\x86\Release\mp3dll.exe
+C:\Documents and Settings\Administrador.HOTELARIA.001\Meus documentos\arab\rsp_mp3_dll_152_build_2037\win32\mp3dll\mp3dll\obj\x86\Release\mp3dll.select_wav_mode.resources
+C:\Documents and Settings\Administrador.HOTELARIA.001\Meus documentos\arab\rsp_mp3_dll_152_build_2037\win32\mp3dll\mp3dll\bin\x86\Release\mp3dll.XML
+C:\Documents and Settings\Administrador.HOTELARIA.001\Meus documentos\arab\rsp_mp3_dll_174_build_2058\win32\mp3dll\mp3dll\bin\x86\Release\mp3dll.exe.config
+C:\Documents and Settings\Administrador.HOTELARIA.001\Meus documentos\arab\rsp_mp3_dll_174_build_2058\win32\mp3dll\mp3dll\bin\x86\Release\mp3dll.XML
+C:\Documents and Settings\Administrador.HOTELARIA.001\Meus documentos\arab\rsp_mp3_dll_174_build_2058\win32\mp3dll\mp3dll\obj\x86\Release\mp3dll.exe
+C:\Documents and Settings\Administrador.HOTELARIA.001\Meus documentos\arab\rsp_mp3_dll_174_build_2058\win32\mp3dll\mp3dll\bin\x86\Release\mp3dll.exe.manifest
+C:\Documents and Settings\Administrador.HOTELARIA.001\Meus documentos\arab\rsp_mp3_dll_174_build_2058\win32\mp3dll\mp3dll\bin\x86\Release\mp3dll.application
+C:\Documents and Settings\Administrador.HOTELARIA.001\Meus documentos\arab\rsp_mp3_dll_174_build_2058\win32\mp3dll\mp3dll\bin\x86\Release\mp3dll.exe
+C:\Documents and Settings\Administrador.HOTELARIA.001\Meus documentos\arab\rsp_mp3_dll_174_build_2058\win32\mp3dll\mp3dll\obj\x86\Release\ResolveAssemblyReference.cache
+C:\Documents and Settings\Administrador.HOTELARIA.001\Meus documentos\arab\rsp_mp3_dll_174_build_2058\win32\mp3dll\mp3dll\obj\x86\Release\mp3dll.DebugInformation.resources
+C:\Documents and Settings\Administrador.HOTELARIA.001\Meus documentos\arab\rsp_mp3_dll_174_build_2058\win32\mp3dll\mp3dll\obj\x86\Release\mp3dll.equalizer.resources
+C:\Documents and Settings\Administrador.HOTELARIA.001\Meus documentos\arab\rsp_mp3_dll_174_build_2058\win32\mp3dll\mp3dll\obj\x86\Release\mp3dll.sample.resources
+C:\Documents and Settings\Administrador.HOTELARIA.001\Meus documentos\arab\rsp_mp3_dll_174_build_2058\win32\mp3dll\mp3dll\obj\x86\Release\mp3dll.normalize.resources
+C:\Documents and Settings\Administrador.HOTELARIA.001\Meus documentos\arab\rsp_mp3_dll_174_build_2058\win32\mp3dll\mp3dll\obj\x86\Release\mp3dll.Properties.Resources.resources
+C:\Documents and Settings\Administrador.HOTELARIA.001\Meus documentos\arab\rsp_mp3_dll_174_build_2058\win32\mp3dll\mp3dll\obj\x86\Release\mp3dll.select_wav_mode.resources
+C:\Documents and Settings\Administrador.HOTELARIA.001\Meus documentos\arab\rsp_mp3_dll_174_build_2058\win32\mp3dll\mp3dll\obj\x86\Release\mp3dll.spectrum.resources
+C:\Documents and Settings\Administrador.HOTELARIA.001\Meus documentos\arab\rsp_mp3_dll_174_build_2058\win32\mp3dll\mp3dll\obj\x86\Release\mp3dll.wave_effects.resources
+C:\Documents and Settings\Administrador.HOTELARIA.001\Meus documentos\arab\rsp_mp3_dll_174_build_2058\win32\mp3dll\mp3dll\obj\x86\Release\mp3dll.csproj.GenerateResource.Cache
+C:\Documents and Settings\Administrador.HOTELARIA.001\Meus documentos\arab\rsp_mp3_dll_174_build_2058\win32\mp3dll\mp3dll\obj\x86\Release\mp3dll.exe.manifest
+C:\Documents and Settings\Administrador.HOTELARIA.001\Meus documentos\arab\rsp_mp3_dll_174_build_2058\win32\mp3dll\mp3dll\obj\x86\Release\mp3dll.application
+C:\aocprojeto\mp3 dll\ACME_mp3_dll_192_build_2072\bucaneiro\win32\mp3dll\mp3dll\bin\x86\Release\mp3dll.exe.config
+C:\aocprojeto\mp3 dll\ACME_mp3_dll_192_build_2072\bucaneiro\win32\mp3dll\mp3dll\obj\x86\Release\mp3dll.exe
+C:\aocprojeto\mp3 dll\ACME_mp3_dll_192_build_2072\bucaneiro\win32\mp3dll\mp3dll\obj\x86\Release\ResolveAssemblyReference.cache
+C:\aocprojeto\mp3 dll\ACME_mp3_dll_192_build_2072\bucaneiro\win32\mp3dll\mp3dll\obj\x86\Release\mp3dll.DebugInformation.resources
+C:\aocprojeto\mp3 dll\ACME_mp3_dll_192_build_2072\bucaneiro\win32\mp3dll\mp3dll\obj\x86\Release\mp3dll.equalizer.resources
+C:\aocprojeto\mp3 dll\ACME_mp3_dll_192_build_2072\bucaneiro\win32\mp3dll\mp3dll\obj\x86\Release\mp3dll.sample.resources
+C:\aocprojeto\mp3 dll\ACME_mp3_dll_192_build_2072\bucaneiro\win32\mp3dll\mp3dll\obj\x86\Release\mp3dll.normalize.resources
+C:\aocprojeto\mp3 dll\ACME_mp3_dll_192_build_2072\bucaneiro\win32\mp3dll\mp3dll\obj\x86\Release\mp3dll.Properties.Resources.resources
+C:\aocprojeto\mp3 dll\ACME_mp3_dll_192_build_2072\bucaneiro\win32\mp3dll\mp3dll\obj\x86\Release\mp3dll.select_wav_mode.resources
+C:\aocprojeto\mp3 dll\ACME_mp3_dll_192_build_2072\bucaneiro\win32\mp3dll\mp3dll\obj\x86\Release\mp3dll.spectrum.resources
+C:\aocprojeto\mp3 dll\ACME_mp3_dll_192_build_2072\bucaneiro\win32\mp3dll\mp3dll\obj\x86\Release\mp3dll.wave_effects.resources
+C:\aocprojeto\mp3 dll\ACME_mp3_dll_192_build_2072\bucaneiro\win32\mp3dll\mp3dll\obj\x86\Release\mp3dll.csproj.GenerateResource.Cache
+C:\aocprojeto\mp3 dll\ACME_mp3_dll_192_build_2072\bucaneiro\win32\mp3dll\mp3dll\bin\x86\Release\mp3dll.exe.manifest
+C:\aocprojeto\mp3 dll\ACME_mp3_dll_192_build_2072\bucaneiro\win32\mp3dll\mp3dll\bin\x86\Release\mp3dll.application
+C:\aocprojeto\mp3 dll\ACME_mp3_dll_192_build_2072\bucaneiro\win32\mp3dll\mp3dll\bin\x86\Release\mp3dll.exe
+C:\aocprojeto\mp3 dll\ACME_mp3_dll_192_build_2072\bucaneiro\win32\mp3dll\mp3dll\obj\x86\Release\mp3dll.exe.manifest
+C:\aocprojeto\mp3 dll\ACME_mp3_dll_192_build_2072\bucaneiro\win32\mp3dll\mp3dll\obj\x86\Release\mp3dll.application
+C:\aocprojeto\mp3 dll\ACME_mp3_dll_192_build_2072\bucaneiro\win32\mp3dll\mp3dll\obj\x86\Release\mp3dll.progressbar.resources
+C:\aocprojeto\mp3 dll\ACME_mp3_dll_192_build_2072\bucaneiro\win32\mp3dll\mp3dll\obj\x86\Release\mp3dll.id3tag.resources
+C:\bucaneiro\samara\nosso projeto\be_arabian_mp3_dll_3.3.566_build_000C00005833_\samara_ricardo\win32\mp3dll\mp3dll\bin\x86\Release\mp3dll.exe.config
+C:\bucaneiro\samara\nosso projeto\be_arabian_mp3_dll_3.3.566_build_000C00005833_\samara_ricardo\win32\mp3dll\mp3dll\obj\x86\Release\mp3dll.exe
+C:\bucaneiro\samara\nosso projeto\be_arabian_mp3_dll_3.3.566_build_000C00005833_\samara_ricardo\win32\mp3dll\mp3dll\bin\x86\Release\mp3dll.exe.manifest
+C:\bucaneiro\samara\nosso projeto\be_arabian_mp3_dll_3.3.566_build_000C00005833_\samara_ricardo\win32\mp3dll\mp3dll\bin\x86\Release\mp3dll.application
+C:\bucaneiro\samara\nosso projeto\be_arabian_mp3_dll_3.3.566_build_000C00005833_\samara_ricardo\win32\mp3dll\mp3dll\bin\x86\Release\mp3dll.exe
+C:\bucaneiro\samara\nosso projeto\be_arabian_mp3_dll_3.3.566_build_000C00005833_\samara_ricardo\win32\mp3dll\mp3dll\obj\x86\Release\ResolveAssemblyReference.cache
+C:\bucaneiro\samara\nosso projeto\be_arabian_mp3_dll_3.3.566_build_000C00005833_\samara_ricardo\win32\mp3dll\mp3dll\obj\x86\Release\mp3dll.DebugInformation.resources
+C:\bucaneiro\samara\nosso projeto\be_arabian_mp3_dll_3.3.566_build_000C00005833_\samara_ricardo\win32\mp3dll\mp3dll\obj\x86\Release\mp3dll.equalizer.resources
+C:\bucaneiro\samara\nosso projeto\be_arabian_mp3_dll_3.3.566_build_000C00005833_\samara_ricardo\win32\mp3dll\mp3dll\obj\x86\Release\mp3dll.id3tag.resources
+C:\bucaneiro\samara\nosso projeto\be_arabian_mp3_dll_3.3.566_build_000C00005833_\samara_ricardo\win32\mp3dll\mp3dll\obj\x86\Release\mp3dll.progressbar.resources
+C:\bucaneiro\samara\nosso projeto\be_arabian_mp3_dll_3.3.566_build_000C00005833_\samara_ricardo\win32\mp3dll\mp3dll\obj\x86\Release\mp3dll.sample.resources
+C:\bucaneiro\samara\nosso projeto\be_arabian_mp3_dll_3.3.566_build_000C00005833_\samara_ricardo\win32\mp3dll\mp3dll\obj\x86\Release\mp3dll.normalize.resources
+C:\bucaneiro\samara\nosso projeto\be_arabian_mp3_dll_3.3.566_build_000C00005833_\samara_ricardo\win32\mp3dll\mp3dll\obj\x86\Release\mp3dll.Properties.Resources.resources
+C:\bucaneiro\samara\nosso projeto\be_arabian_mp3_dll_3.3.566_build_000C00005833_\samara_ricardo\win32\mp3dll\mp3dll\obj\x86\Release\mp3dll.select_wav_mode.resources
+C:\bucaneiro\samara\nosso projeto\be_arabian_mp3_dll_3.3.566_build_000C00005833_\samara_ricardo\win32\mp3dll\mp3dll\obj\x86\Release\mp3dll.spectrum.resources
+C:\bucaneiro\samara\nosso projeto\be_arabian_mp3_dll_3.3.566_build_000C00005833_\samara_ricardo\win32\mp3dll\mp3dll\obj\x86\Release\mp3dll.wave_effects.resources
+C:\bucaneiro\samara\nosso projeto\be_arabian_mp3_dll_3.3.566_build_000C00005833_\samara_ricardo\win32\mp3dll\mp3dll\obj\x86\Release\mp3dll.csproj.GenerateResource.Cache
+C:\bucaneiro\samara\nosso projeto\be_arabian_mp3_dll_3.3.566_build_000C00005833_\samara_ricardo\win32\mp3dll\mp3dll\obj\x86\Release\mp3dll.exe.manifest
+C:\bucaneiro\samara\nosso projeto\be_arabian_mp3_dll_3.3.566_build_000C00005833_\samara_ricardo\win32\mp3dll\mp3dll\obj\x86\Release\mp3dll.application
+C:\Valkíria\upload valkíria\sr_3.3.612_build_000C00005882\samararicardo\win32\mp3dll\mp3dll\obj\x86\Release\ResolveAssemblyReference.cache
+C:\Valkíria\upload valkíria\sr_3.3.612_build_000C00005882\samararicardo\win32\mp3dll\mp3dll\obj\x86\Release\mp3dll.DebugInformation.resources
+C:\Valkíria\upload valkíria\sr_3.3.612_build_000C00005882\samararicardo\win32\mp3dll\mp3dll\obj\x86\Release\mp3dll.equalizer.resources
+C:\Valkíria\upload valkíria\sr_3.3.612_build_000C00005882\samararicardo\win32\mp3dll\mp3dll\obj\x86\Release\mp3dll.id3tag.resources
+C:\Valkíria\upload valkíria\sr_3.3.612_build_000C00005882\samararicardo\win32\mp3dll\mp3dll\obj\x86\Release\mp3dll.progressbar.resources
+C:\Valkíria\upload valkíria\sr_3.3.612_build_000C00005882\samararicardo\win32\mp3dll\mp3dll\obj\x86\Release\mp3dll.sample.resources
+C:\Valkíria\upload valkíria\sr_3.3.612_build_000C00005882\samararicardo\win32\mp3dll\mp3dll\obj\x86\Release\mp3dll.normalize.resources
+C:\Valkíria\upload valkíria\sr_3.3.612_build_000C00005882\samararicardo\win32\mp3dll\mp3dll\obj\x86\Release\mp3dll.Properties.Resources.resources
+C:\Valkíria\upload valkíria\sr_3.3.612_build_000C00005882\samararicardo\win32\mp3dll\mp3dll\obj\x86\Release\mp3dll.select_wav_mode.resources
+C:\Valkíria\upload valkíria\sr_3.3.612_build_000C00005882\samararicardo\win32\mp3dll\mp3dll\obj\x86\Release\mp3dll.spectrum.resources
+C:\Valkíria\upload valkíria\sr_3.3.612_build_000C00005882\samararicardo\win32\mp3dll\mp3dll\obj\x86\Release\mp3dll.wave_effects.resources
+C:\Valkíria\upload valkíria\sr_3.3.612_build_000C00005882\samararicardo\win32\mp3dll\mp3dll\obj\x86\Release\mp3dll.csproj.GenerateResource.Cache
+C:\Valkíria\upload valkíria\sr_3.3.612_build_000C00005882\samararicardo\win32\mp3dll\mp3dll\bin\x86\Release\samararicardo_mp3dll.exe.config
+C:\Valkíria\upload valkíria\sr_3.3.612_build_000C00005882\samararicardo\win32\mp3dll\mp3dll\bin\x86\Release\samararicardo_mp3dll.exe.manifest
+C:\Valkíria\upload valkíria\sr_3.3.612_build_000C00005882\samararicardo\win32\mp3dll\mp3dll\bin\x86\Release\samararicardo_mp3dll.application
+C:\Valkíria\upload valkíria\sr_3.3.612_build_000C00005882\samararicardo\win32\mp3dll\mp3dll\bin\x86\Release\samararicardo_mp3dll.exe
+C:\Valkíria\upload valkíria\sr_3.3.612_build_000C00005882\samararicardo\win32\mp3dll\mp3dll\obj\x86\Release\samararicardo_mp3dll.exe.manifest
+C:\Valkíria\upload valkíria\sr_3.3.612_build_000C00005882\samararicardo\win32\mp3dll\mp3dll\obj\x86\Release\samararicardo_mp3dll.application
+C:\Valkíria\upload valkíria\sr_3.3.612_build_000C00005882\samararicardo\win32\mp3dll\mp3dll\obj\x86\Release\samararicardo_mp3dll.exe
+C:\ricardo\player\5888\samararicardo\win32\mp3dll\mp3dll\obj\x86\Release\ResolveAssemblyReference.cache
+C:\ricardo\player\5888\samararicardo\win32\mp3dll\mp3dll\obj\x86\Release\mp3dll.DebugInformation.resources
+C:\ricardo\player\5888\samararicardo\win32\mp3dll\mp3dll\obj\x86\Release\mp3dll.equalizer.resources
+C:\ricardo\player\5888\samararicardo\win32\mp3dll\mp3dll\obj\x86\Release\mp3dll.id3tag.resources
+C:\ricardo\player\5888\samararicardo\win32\mp3dll\mp3dll\obj\x86\Release\mp3dll.progressbar.resources
+C:\ricardo\player\5888\samararicardo\win32\mp3dll\mp3dll\obj\x86\Release\mp3dll.sample.resources
+C:\ricardo\player\5888\samararicardo\win32\mp3dll\mp3dll\obj\x86\Release\mp3dll.normalize.resources
+C:\ricardo\player\5888\samararicardo\win32\mp3dll\mp3dll\obj\x86\Release\mp3dll.Properties.Resources.resources
+C:\ricardo\player\5888\samararicardo\win32\mp3dll\mp3dll\obj\x86\Release\mp3dll.select_wav_mode.resources
+C:\ricardo\player\5888\samararicardo\win32\mp3dll\mp3dll\obj\x86\Release\mp3dll.spectrum.resources
+C:\ricardo\player\5888\samararicardo\win32\mp3dll\mp3dll\obj\x86\Release\mp3dll.wave_effects.resources
+C:\ricardo\player\5888\samararicardo\win32\mp3dll\mp3dll\obj\x86\Release\GenerateResource.read.1.tlog
+C:\ricardo\player\5888\samararicardo\win32\mp3dll\mp3dll\obj\x86\Release\GenerateResource.write.1.tlog
+C:\ricardo\player\5888\samararicardo\win32\mp3dll\mp3dll\bin\x86\Release\mp3dll.exe.config
+C:\ricardo\player\5888\samararicardo\win32\mp3dll\mp3dll\bin\x86\Release\mp3dll.exe.manifest
+C:\ricardo\player\5888\samararicardo\win32\mp3dll\mp3dll\bin\x86\Release\mp3dll.application
+C:\ricardo\player\5888\samararicardo\win32\mp3dll\mp3dll\bin\x86\Release\mp3dll.exe
+C:\ricardo\player\5888\samararicardo\win32\mp3dll\mp3dll\obj\x86\Release\GenerateResource-ResGen.read.1.tlog
+C:\ricardo\player\5888\samararicardo\win32\mp3dll\mp3dll\obj\x86\Release\GenerateResource-ResGen.write.1.tlog
+C:\ricardo\player\5888\samararicardo\win32\mp3dll\mp3dll\obj\x86\Release\mp3dll.exe.manifest
+C:\ricardo\player\5888\samararicardo\win32\mp3dll\mp3dll\obj\x86\Release\mp3dll.application
+C:\ricardo\player\5888\samararicardo\win32\mp3dll\mp3dll\obj\x86\Release\mp3dll.exe

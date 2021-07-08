@@ -1,0 +1,223 @@
+
+/*
+    <C/C++ source code of the support dlls>    
+    Copyright (C) <2020>  <BinaryWork Corp.>
+
+    This program is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU GENERAL PUBLIC LICENSE
+	and GNU LESSER GENERAL PUBLIC LICENSE along with this program.  
+	If not, see <http://www.gnu.org/licenses/>.
+    
+    support: http://nomade.sourceforge.net
+    
+	direct programmers e-mails:
+	Ricardo: arsoftware25@gmail.com
+	Amanda : arsoftware10@gmail.com
+	
+	immediate contact(for a very fast answer) WhatsApp
+	(+55)41 9627 1708 - it is always on
+*/
+
+#ifndef INCLUDEUCHAR
+#ifndef uchar
+#define uchar unsigned char
+#define uint unsigned int
+#define ulong unsigned long
+#define ushort  unsigned short
+#endif
+#endif
+
+
+#include <windows.h>
+#include <ctype.h>
+#include <errno.h>
+#include <float.h>
+#include <limits.h>
+#include <locale.h>
+#include <math.h>
+#include <setjmp.h>
+#include <signal.h>
+#include <stdarg.h>
+#include <stddef.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <time.h>
+#undef NDEBUG
+#include <assert.h>
+
+
+//Variables
+
+int is_registered = 0;
+
+////////////////////////////////////////////////////////////////////////Amanda*
+/* Ricardo ********************************************************************
+*******************************************************************************
+*******************************************************************************
+*******************************************************************************
+*******************************************************************************
+*******************************************************************Alessandra*/
+size_t fread_unbuffered (void *ptr, size_t size, size_t nelem, FILE * stream);
+size_t fwrite_unbuffered (const void *ptr, size_t size, size_t nelem,
+                          FILE * stream);
+void
+removespace_begin (char *path)
+{
+
+/*retira o caracter ' ' no inicio , e quantos mais tiver em sequencia*/
+
+	int ret;
+	char *ptr;
+
+	char *ptrdesloca;
+
+	ptrdesloca = path;
+	ret = strlen (path);
+
+	if (ret)
+	{
+		ptr = malloc (ret + 1);
+
+		memset (ptr, 0, ret + 1);
+//while ((c = getchar ()) == ' ' || c == '\t')
+		while ((*ptrdesloca == ' ') || (*ptrdesloca == '\r')
+		       || (*ptrdesloca == '\n') || (*ptrdesloca == '\t'))
+		{
+
+			ptrdesloca++;
+		}
+
+
+		strcpy (ptr, ptrdesloca);
+		memset (path, 0, ret); //pra que isto ?
+		strcpy (path, ptr);
+
+		free (ptr);
+	}
+}
+
+
+void
+removespace_end (char *path)
+{
+
+	int ret;
+
+inicio:
+
+	ret = strlen (path);
+
+	if (ret)
+	{
+//while ((c = getchar ()) == ' ' || c == '\t')
+
+
+/*
+   invertido
+ */
+		if ((path[(ret - 1)] == ' ') || (path[(ret - 1)] == '\r')
+		    || (path[(ret - 1)] == '\n') || (path[(ret - 1)] == '\t'))
+		{
+
+			path[(ret - 1)] = 0;
+			goto inicio;
+
+		}
+	}
+
+
+}
+
+void
+removespace (char *data)
+{
+	removespace_begin (data);
+	removespace_end (data);
+
+
+
+}
+
+
+char *__stdcall
+create (char *name)
+{
+	uint crc32b (uint crc, const uchar * buf, uint len);
+
+#define LICENSA "Alessandra Mbroczkoski Pereira"
+
+	char a_name[1000] = { 0, };
+	char b_code[300] = { 0, };
+
+	static char out[300];
+
+	memset (out, 0, sizeof (out));
+
+	strcpy (a_name, name);
+	strcat (a_name, LICENSA);
+
+	removespace (a_name);
+
+	sprintf (b_code, "%08x", crc32b (0, a_name, strlen (a_name)));
+
+	strcpy (out, b_code);
+	return out;
+}
+
+////////////////////////////////////////////////////////////////////////Amanda*
+/* Ricardo ********************************************************************
+*******************************************************************************
+*******************************************************************************
+*******************************************************************************
+*******************************************************************************
+*******************************************************************Alessandra*/
+
+int
+main (int argc, char **argv)
+{
+
+//printf("item-%s\n",argv[1]);
+	if (2 != argc)
+	{
+		printf ("Missing arguments\n");
+		return 1;
+
+	}
+
+	{
+		FILE *output = fopen ("lic.txt", "wb");
+
+		if (output)
+		{
+			char temp2[2000] = { 0, };
+
+			char *temp = create (argv[1]);
+
+
+			strcpy (temp2, "Name=");
+			strcat (temp2, argv[1]);
+			strcat (temp2, "\r\n");
+			strcat (temp2, "Code=");
+
+
+			fwrite_unbuffered (temp2, 1, strlen (temp2), output);
+			fwrite_unbuffered (temp, 1, strlen (temp), output);
+
+
+			fclose (output);
+		}
+
+	}
+
+	return 0;
+}
