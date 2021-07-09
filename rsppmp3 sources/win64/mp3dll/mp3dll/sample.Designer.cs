@@ -1235,10 +1235,11 @@ namespace mp3dll
 			this.use_cache_amanda_s_smart_ape.AutoSize = true;
 			this.use_cache_amanda_s_smart_ape.Location = new System.Drawing.Point(576, 469);
 			this.use_cache_amanda_s_smart_ape.Name = "use_cache_amanda_s_smart_ape";
-			this.use_cache_amanda_s_smart_ape.Size = new System.Drawing.Size(167, 17);
+			this.use_cache_amanda_s_smart_ape.Size = new System.Drawing.Size(153, 17);
 			this.use_cache_amanda_s_smart_ape.TabIndex = 139;
 			this.use_cache_amanda_s_smart_ape.Text = "Use Cache When Possible";
 			this.use_cache_amanda_s_smart_ape.UseVisualStyleBackColor = true;
+			this.use_cache_amanda_s_smart_ape.MouseUp += new System.Windows.Forms.MouseEventHandler(this.Use_cache_amanda_s_smart_apeMouseUp);
 			// 
 			// sample
 			// 

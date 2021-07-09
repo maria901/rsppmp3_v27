@@ -53,11 +53,16 @@ bucaneiro: ..\..\interface2.dll mv_from_be.h     \
 	amanda_s_smart_ape_sha512_k.o                \
 	morcego_interface.o soundtouch_arp.a
 
-	@./morcego_libav/libav_interface_new/amandaricardo_mvbuild26_32.exe \
-	./amanda_file_counter_32.ini versio_n.ama.rc \
+	@./amandaricardo_mvbuild26_33.exe            \
+	amanda_file_counter_32.ini                   \
+	versio_n.ama.rc                              \
 	version_ricardo_mislaine_final_2_.rc         \
-	aline_definitive_header_2_.h "64 bits ;-)"   \
-	rspmp3ocx1.dll increase
+	aline_definitive_header_2_.h                 \
+	"64 bits"                                    \
+	rspmp3ocx1.dll                               \
+	increase                                     \
+	'2021'                                       \
+	'./sqlite_by_smart_ape/new icon july_i.ico'
 
 	@x86_64-w64-mingw32-windres.exe -o ver.o -O  \
 	coff version_ricardo_mislaine_final_2_.rc
@@ -268,7 +273,7 @@ normalization.o: normalization.c mv_from_be.h
 	@./espaco_arp.exe $(ALINE_SIZE) 0 51
 
 pedro_64.o: pedro.c
-	  x86_64-w64-mingw32-gcC -c -o pedro_64.o \
+	x86_64-w64-mingw32-gcC -c -o pedro_64.o   \
 	pedro.c                                    \
 	$(AMANDA_FLAGS__) $(JULIET_FLAGS)           \
 	$(FELINE_FLAGS__)
@@ -359,7 +364,7 @@ smartape:
 	amandaricardo_mvbuild26_33.exe               \
 	smartape.c                                   \
 	$(AMANDA_FLAGS__) $(JULIET_FLAGS)            \
-	$(FELINE_FLAGS__)
+	$(FELINE_FLAGS__) -DAMANDA_S_SMART_APE_ENABLE_WIDE_FUNCTION_
 	@./espaco_arp.exe $(ALINE_SIZE)
 	@./espaco_arp.exe $(ALINE_SIZE) 0 51
 
@@ -372,3 +377,13 @@ smartape:
 	AssemblyInfo.viu.cs increase
 
 	cp AssemblyInfo.cs ../../../../Properties/AssemblyInfo.cs
+
+smartape_v27:
+
+	x86_64-w64-mingw32-gcc.exe  -o               \
+	amandaricardo_mvbuild26_33.exe               \
+	smartape.c                                   \
+	$(AMANDA_FLAGS__) $(JULIET_FLAGS)            \
+	$(FELINE_FLAGS__) -DAMANDA_S_SMART_APE_ENABLE_WIDE_FUNCTION_
+	@./espaco_arp.exe $(ALINE_SIZE)
+	@./espaco_arp.exe $(ALINE_SIZE) 0 51

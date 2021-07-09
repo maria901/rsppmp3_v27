@@ -6123,3 +6123,26 @@ int __stdcall memory_usage__z(char *data_z)
     
   return 0;
 }
+
+void __stdcall Amanda_s_Smart_Ape_Use_Cache(__int64 mv_instance, int value_amanda_s_smart_ape)
+{
+
+	check_mv_instance(mv_instance);
+	morcego___i___instance__a__bucaneiro_engineering *mv_______ =
+		(morcego___i___instance__a__bucaneiro_engineering *)(__INT32_OR_INT64)
+			mv_instance;
+
+	if (27 == value_amanda_s_smart_ape)
+	{
+		mv_______->libav_c___amanda_s_smart_ape_use_cache = false;
+	}
+	else if (51 == value_amanda_s_smart_ape)
+	{
+		mv_______->libav_c___amanda_s_smart_ape_use_cache = true;
+	}
+	else
+	{
+		exit(27);
+	}
+	return;
+}

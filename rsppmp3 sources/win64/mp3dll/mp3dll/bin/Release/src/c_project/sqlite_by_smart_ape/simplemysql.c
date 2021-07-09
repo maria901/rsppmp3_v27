@@ -385,6 +385,48 @@ int callback_amanda_s_smart_ape_23_39(__attribute__((unused)) void *NotUsed,
 	return 0;
 }
 
+bool __fastcall amanda_s_smart_ape_add_entry(__attribute__((unused)) char *entry_______________amanda_s_smart_ape_,
+																__attribute__((unused)) char *webm________________amanda_s_smart_ape,
+																__attribute__((unused)) char *normalization_value_amanda_s_smart_ape_replaygain,
+																
+																__attribute__((unused)) char *normalization_valu2_amanda_s_smart_ape_BENORMALIZE,
+																
+																__attribute__((unused)) char *normalization_valu3_amanda_s_smart_ape)
+{
+	int ret_amanda_s_smart_ape;
+
+	char   message_for_amanda_s_smart_ape         [Amanda_27_CONSTANTE_1027                   ];
+	char   entry_______________amanda_s_smart_ape [MAXPATH_UTF_8_MODE_AMANDA_S_SMART_APE      ];
+	char * buffer_for_insert_amanda_s_smart_ape    = malloc(Amanda_27_CONSTANTE_100000)         ;
+
+	strcpy(entry_______________amanda_s_smart_ape, entry_______________amanda_s_smart_ape_)    ;
+
+	morcego_encoder_amanda_s_smart_ape(entry_______________amanda_s_smart_ape)                 ;
+
+	strcpy(buffer_for_insert_amanda_s_smart_ape, "insert into Amanda_27_cache(entry_______________amanda_s_smart_ape, webm________________amanda_s_smart_ape,  normalization_value_amanda_s_smart_ape, normalization_valu2_amanda_s_smart_ape) values ('");
+
+	strcat(buffer_for_insert_amanda_s_smart_ape, entry_______________amanda_s_smart_ape);
+	strcat(buffer_for_insert_amanda_s_smart_ape, "', '");
+	strcat(buffer_for_insert_amanda_s_smart_ape, webm________________amanda_s_smart_ape),
+	strcat(buffer_for_insert_amanda_s_smart_ape, "', '");
+	strcat(buffer_for_insert_amanda_s_smart_ape, normalization_value_amanda_s_smart_ape_replaygain);
+	strcat(buffer_for_insert_amanda_s_smart_ape, "', '");
+	strcat(buffer_for_insert_amanda_s_smart_ape, normalization_valu2_amanda_s_smart_ape_BENORMALIZE);
+	strcat(buffer_for_insert_amanda_s_smart_ape, "');");
+
+	ret_amanda_s_smart_ape = ar_Mode_Insert_Delete_or_Update_function_amanda_s_smart_ape(buffer_for_insert_amanda_s_smart_ape, message_for_amanda_s_smart_ape);	
+	
+	if (ret_amanda_s_smart_ape)
+	{
+		free(buffer_for_insert_amanda_s_smart_ape);
+		pedro_dprintf(1001, "Error inserting data %s\n", message_for_amanda_s_smart_ape);
+		return false;
+	}
+
+	free(buffer_for_insert_amanda_s_smart_ape);
+	return true;
+}
+
 bool __fastcall amanda_s_smart_ape_query_webm_and_normalization(__attribute__((unused)) char *entry_______________amanda_s_smart_ape_,
 																__attribute__((unused)) char *webm________________amanda_s_smart_ape,
 																__attribute__((unused)) char *normalization_mode__amanda_s_smart_ape,
@@ -405,7 +447,7 @@ bool __fastcall amanda_s_smart_ape_query_webm_and_normalization(__attribute__((u
 	has_an_entry_amanda_s_smart_ap_ptr = has_an_entry_amanda_s_smart_ap_;
 
 	(*has_an_entry_amanda_s_smart_ap_ptr) = false;
-	
+
 	strcpy(entry_______________amanda_s_smart_ape, entry_______________amanda_s_smart_ape_)  ;
 
 	/*

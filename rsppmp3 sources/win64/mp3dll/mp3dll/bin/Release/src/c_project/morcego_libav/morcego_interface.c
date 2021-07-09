@@ -749,16 +749,17 @@ int morcego_extract_wav(morcego___i___instance__a__bucaneiro_engineering *mv____
 #define FAAD_FMT_32BIT 3
 #define FAAD_FMT_FLOAT 4
 
-	long long          generated_size_amanda_s_smart_ape                           =      0;
-	__int64            processed   =                                                      0;
-	int                ret_amanda_s_smart_ape                                              ;
+	long long          generated_size_amanda_s_smart_ape                           =               0;
+	__int64            processed   =                                                               0;
+	int                ret_amanda_s_smart_ape                                                       ;
 	//int64_t            file_size_
-	audio_file *       wav_stream  =                                                   NULL;
+	audio_file *       wav_stream  =                                                            NULL;
 	char               int_buffer  [4096                                                  ];
-	char               signature_amanda_s_smart_ape[MAXPATH_UTF_8_MODE_AMANDA_S_SMART_APE ];
-	int                returnvalue =                                                      0;
-	int                size_out                                                            ;
-	be_libav_struct *  be = (be_libav_struct *)mv_______->be_ptr                           ;
+	char               signature_amanda_s_smart_ape[MAXPATH_UTF_8_MODE_AMANDA_S_SMART_APE ] = { 0, };
+	int                returnvalue =                                                               0;
+	int                size_out                                                                     ;
+	__attribute((unused)) enum amanda_s_smart_ape_webm_commands webm_commands_amanda_s_smart_ape                                                                ;
+	be_libav_struct *  be = (be_libav_struct *)mv_______->be_ptr                                    ;
 
 	if (5 == wav_mode)
 	{
@@ -780,40 +781,7 @@ int morcego_extract_wav(morcego___i___instance__a__bucaneiro_engineering *mv____
 		returnvalue = 1;
 		goto saida_amanda_s_smart_ape;
 	}
-
-	assert(0 && "remova amor...");
-	{
-
-		//vamos la, tem que fazer oque, tem que pagar o tamanho do arquivo e nome e criar uma entrada, voce nao vai ver mesmo entao nao tem problema
-
-		sprintf(signature_amanda_s_smart_ape, "Amanda_27_Ricardo_51_%lld_%d_%s", getfilesize_ar_amanda_s_smart_ape(filename_amanda_s_smart_ape)    ,
-				rsp32_file_amanda_s_smart_ape(filename_amanda_s_smart_ape),
-				filename_amanda_s_smart_ape);
-
-		pedro_dprintf(0, "amor a string %s\n", signature_amanda_s_smart_ape);
-
-		if (true == amanda_s_smart_ape_query_webm_and_normalization(signature_amanda_s_smart_ape, mv_______->libav_c___webm________________amanda_s_smart_ape,
-																	mv_______->libav_c___normalization_mode__amanda_s_smart_ape, mv_______->libav_c___normalization_value_amanda_s_smart_ape, mv_______->libav_c___normalization_valu2_amanda_s_smart_ape, mv_______->libav_c___normalization_valu3_amanda_s_smart_ape, &mv_______->libav_c___has_an_entry))
-		{
-			pedro_dprintf(0, "Deu certo meu amor...agora vou cagar melhor kkkkkk\n");
-
-			pedro_dprintf(0, "webm .%s.\n"                  , mv_______->libav_c___webm________________amanda_s_smart_ape);
-			pedro_dprintf(0, "normalization_mode  .%s.\n"   , mv_______->libav_c___normalization_mode__amanda_s_smart_ape);
-			pedro_dprintf(0, "normalization_value .%s.\n"   , mv_______->libav_c___normalization_value_amanda_s_smart_ape);
-			pedro_dprintf(0, "normalization_valu2 .%s.\n"   , mv_______->libav_c___normalization_valu2_amanda_s_smart_ape);
-			pedro_dprintf(0, "normalization_valu3 .%s.\n"   , mv_______->libav_c___normalization_valu3_amanda_s_smart_ape);
-			/*
-			pedro_dprintf(0, "webm .%s.\n", webm________________amanda_s_smart_ape);
-			pedro_dprintf(0, "webm .%s.\n", webm________________amanda_s_smart_ape);
-			*/
-
-			pedro_dprintf(0, "Tem itens %d\n", (int)mv_______->libav_c___has_an_entry);
-
-		}
-
-		//exit(27);
-	}
-
+	
 	if (false == mv_______->libav_c___amanda_s_smart_ape_is_new_webm)
 	{
 		goto saida_amanda_s_smart_ape;
@@ -823,13 +791,46 @@ int morcego_extract_wav(morcego___i___instance__a__bucaneiro_engineering *mv____
 
 		//vamos la, tem que fazer oque, tem que pagar o tamanho do arquivo e nome e criar uma entrada, voce nao vai ver mesmo entao nao tem problema
 
-		sprintf(signature_amanda_s_smart_ape, "Amanda_27_Ricardo_51_%lld_%s", getfilesize_ar_amanda_s_smart_ape(filename_amanda_s_smart_ape),
+		sprintf(signature_amanda_s_smart_ape, "Amanda_27_Ricardo_51_%lld_%d_%s", getfilesize_ar_amanda_s_smart_ape(filename_amanda_s_smart_ape),
+				rsp32_file_amanda_s_smart_ape(filename_amanda_s_smart_ape),
 				filename_amanda_s_smart_ape);
 
-	pedro_dprintf(0, "amor a string %s\n", signature_amanda_s_smart_ape);
-	
+		pedro_dprintf(0, "amor a string %s\n", signature_amanda_s_smart_ape);
+
+		//exit(27);
+	}
+
+	{
+
+		//agora se nao tiver salva
+
+		if (true == amanda_s_smart_ape_query_webm_and_normalization(signature_amanda_s_smart_ape, mv_______->libav_c___webm________________amanda_s_smart_ape,
+																	mv_______->libav_c___normalization_mode__amanda_s_smart_ape, mv_______->libav_c___normalization_value_amanda_s_smart_ape, mv_______->libav_c___normalization_valu2_amanda_s_smart_ape, mv_______->libav_c___normalization_valu3_amanda_s_smart_ape, &mv_______->libav_c___has_an_entry))
+		{
+			pedro_dprintf(0, "Deu certo meu amor...agora vou cagar melhor kkkkkk\n");
+
+			pedro_dprintf(0, "webm .%s.\n", mv_______->libav_c___webm________________amanda_s_smart_ape);
+			pedro_dprintf(0, "normalization_mode  .%s.\n", mv_______->libav_c___normalization_mode__amanda_s_smart_ape);
+			pedro_dprintf(0, "normalization_value .%s.\n", mv_______->libav_c___normalization_value_amanda_s_smart_ape);
+			pedro_dprintf(0, "normalization_valu2 .%s.\n", mv_______->libav_c___normalization_valu2_amanda_s_smart_ape);
+			pedro_dprintf(0, "normalization_valu3 .%s.\n", mv_______->libav_c___normalization_valu3_amanda_s_smart_ape);
+			/*
+			pedro_dprintf(0, "webm .%s.\n", webm________________amanda_s_smart_ape);
+			pedro_dprintf(0, "webm .%s.\n", webm________________amanda_s_smart_ape);
+			*/
+
+			pedro_dprintf(0, "enabled cache? %d\n", (int) mv_______->libav_c___amanda_s_smart_ape_use_cache);
+
+			pedro_dprintf(0, "Tem itens %d\n", (int)mv_______->libav_c___has_an_entry);
+
+			if('\0' == mv_______->libav_c___webm________________amanda_s_smart_ape[0])
+			{
 
 
+
+			}
+
+		}
 	}
 
 	if (false == mv_______->libav_c___amanda_s_smart_ape__check_and_get_webm_fix_if_true)
@@ -1034,15 +1035,52 @@ saida_amanda_s_smart_ape:
 
 	mv_______->be_for_wav_convert = NULL;
 
-	if (-1 == mv_______->libav_c___amanda_s_smart_ape_new_generated_duration)
+	if (-1 == mv_______->libav_c___amanda_s_smart_ape_new_generated_duration) //uma coisa por vez...
 	{
 		mv_______->libav_c___amanda_s_smart_ape_new_generated_duration = generated_size_amanda_s_smart_ape;
 
-		mv_______->libav_c___amanda_s_smart_ape_new_generated_duration = 
-		
-		((double)(mv_______->libav_c___amanda_s_smart_ape_new_generated_duration) / (double)(be->be_samplerate) / (double)be->be_channels) / 2. * 1000000.0;
-	}
+		mv_______->libav_c___amanda_s_smart_ape_new_generated_duration =
 
+			((double)(mv_______->libav_c___amanda_s_smart_ape_new_generated_duration) / (double)(be->be_samplerate) / (double)be->be_channels) / 2. * 1000000.0;
+
+		//pensei que fosse serio...
+
+		if (mv_______->libav_c___amanda_s_smart_ape_use_cache)
+		{
+			//save... se nao estiver carregado, checa se tem o item ou nao
+			if (mv_______->libav_c___has_an_entry)
+			{
+				pedro_dprintf(0, "webm - will update it anyway...\n");
+				//update
+			}
+			else
+			{		
+
+				pedro_dprintf(0, "webm - will create an entry for webm...\n");
+
+				assert(strlen(signature_amanda_s_smart_ape));
+
+				sprintf(mv_______->libav_c___webm________________amanda_s_smart_ape, "%lld", mv_______->libav_c___amanda_s_smart_ape_new_generated_duration);
+
+				mv_______->libav_c___normalization_value_amanda_s_smart_ape[0] = '\0';
+
+				mv_______->libav_c___normalization_valu2_amanda_s_smart_ape[0] = 0x0;
+
+				mv_______->libav_c___normalization_valu3_amanda_s_smart_ape[0] = 0b0;
+
+			if(amanda_s_smart_ape_add_entry(signature_amanda_s_smart_ape, mv_______->libav_c___webm________________amanda_s_smart_ape, mv_______->libav_c___normalization_value_amanda_s_smart_ape, mv_______->libav_c___normalization_valu2_amanda_s_smart_ape,
+			mv_______->libav_c___normalization_valu3_amanda_s_smart_ape))
+			{
+					pedro_dprintf(0, "adicionou a entrada amor\n");
+
+			}
+			//here, por parts...
+			//ja passa os 4...
+
+			//vamos...
+			}
+		}
+	}
 	mv_______->libav_c___amanda_s_smart_ape__check_and_get_webm_fix_if_true = false;
 
 	//for historical reasons...

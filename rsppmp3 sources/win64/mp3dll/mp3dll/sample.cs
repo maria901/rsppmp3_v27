@@ -641,11 +641,13 @@ namespace mp3dll
 
 		int disable = 0;
 
+		StringBuilder Amanda   = new StringBuilder(8);
+		
 		StringBuilder settings = new StringBuilder(300*6);
 
-		StringBuilder message = new StringBuilder(300*6);
+		StringBuilder message  = new StringBuilder(300*6);
 
-		StringBuilder time = new StringBuilder(300);
+		StringBuilder time     = new StringBuilder(300);
 
 		morcego_ratio the_ratio = morcego_ratio.BE_AUTO_______;
 
@@ -808,6 +810,24 @@ namespace mp3dll
 			video_f_p.Image = dummy2_p.Image;
 			track.Items.Add("1");
 			track.Text = "1";
+			
+			MP3.GetSettings("Amanda", Amanda, "27");
+			
+			if("27" == Amanda.ToString())//disabled my love
+			{
+				use_cache_amanda_s_smart_ape.Checked = false;
+				MP3.Amanda_s_Smart_Ape_Use_Cache(number, 27);
+			}
+			else if("51" == Amanda.ToString())
+			{
+				use_cache_amanda_s_smart_ape.Checked = true;
+				MP3.Amanda_s_Smart_Ape_Use_Cache(number, 51);
+			}
+			else
+			{
+				util_amanda.exit_ramses(27);
+			}
+			
 			MP3.GetSettings("slow_computers_hack_k_p", settings, "0");
 			MP3.SlowComputersCommand_k_p
 				(
@@ -3582,6 +3602,21 @@ namespace mp3dll
 				Button2Click_amanda(null, null);
 				new_width = -1;
 			}
+		}
+		void Use_cache_amanda_s_smart_apeMouseUp(object sender, MouseEventArgs e)
+		{
+	
+			if(true == use_cache_amanda_s_smart_ape.Checked)
+			{
+				MP3.SaveSettings("Amanda", "51");
+				MP3.Amanda_s_Smart_Ape_Use_Cache(number, 51);
+			}
+			else
+			{
+				MP3.Amanda_s_Smart_Ape_Use_Cache(number, 27);
+				MP3.SaveSettings("Amanda", "27");
+			}
+			
 		}
 	}
 }

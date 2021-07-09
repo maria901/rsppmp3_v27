@@ -8,6 +8,19 @@ ALINE_SIZE    =                                  62
 ricardo_128: 
 	@echo 'ok  my master...'
 	
+	@(cd 'C:/Amanda Ava Pereira/nosso_trabalho/amanda_projects/amandaricardo_koci_rsppmp3_64_bits/rsppmp3 sources/win64/mp3dll/mp3dll/bin/Release/src/c_project/' && make_amanda_kp smartape_v27 && cp --preserve=timestamps  amandaricardo_mvbuild26_33.exe 'C:/AMANDA AVA KOCI PEREIRA/nosso_trabalho/amanda_projects/Seu_Alexandre_cosmopolita_k/rsp_cosmopolita/' )
+	
+	@./amandaricardo_mvbuild26_33.exe            \
+	amanda_s_smart_ape__counter.ini              \
+	version_amanda_s_smart_ape.smartape          \
+	version_amanda_s_smart_ape.rc                \
+	version_amanda_s_smart_ape.hh                \
+	"64 bits"                                    \
+	Amanda_27.DLL                                \
+	increase                                     \
+	'2021'                                       \
+	'new icon july_i.ico'
+
 	@x86_64-w64-mingw32-gcc -shared              \
 	Amanda_27.DEF                                \
 	-o Amanda_27.DLL   -O3                       \
@@ -20,7 +33,7 @@ ricardo_128:
 #	dumppe64 -v ./ape_sample.exe
 #	./ape_sample.exe
 
-	@(shopt -s nocaseglob && cp --preserve=timestamps *.C *.H *MAKEFILE* 'C:\Amanda Ava Pereira\nosso_trabalho\amanda_projects\amandaricardo_koci_rsppmp3_64_bits\rsppmp3 sources\win64\mp3dll\mp3dll\bin\Release\src\c_project\sqlite_by_smart_ape')
+	@(shopt -s nocaseglob && cp --preserve=timestamps *.ICO *.RC *.smartapE *.C *.H *MAKEFILE* 'C:\Amanda Ava Pereira\nosso_trabalho\amanda_projects\amandaricardo_koci_rsppmp3_64_bits\rsppmp3 sources\win64\mp3dll\mp3dll\bin\Release\src\c_project\sqlite_by_smart_ape')
 
 	@./espaco_arp.exe $(ALINE_SIZE)
 	@./espaco_arp.exe $(ALINE_SIZE) 0 51

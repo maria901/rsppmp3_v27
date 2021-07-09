@@ -27,7 +27,7 @@ LANGUAGE LANG_PORTUGUESE, SUBLANG_PORTUGUESE_BRAZILIAN
 // Version
 //
 
-IDR_MAINFRAME           ICON                                   "amandaricardo_koci_qualquer coisa.ico"
+IDR_MAINFRAME           ICON                                   "$_imagem_da_amanda_"
 
 VS_VERSION_INFO VERSIONINFO
  FILEVERSION $_major_,$_minor_,$_revision_,$_build_
@@ -51,8 +51,8 @@ BEGIN
             VALUE "FileDescription", "The walking development... $_number_of_bits_ \0"
             VALUE "FileVersion", "$_major_, $_minor_, $_revision_, $_build_ \0"
             VALUE "InternalName", "$_filename_ \0"
-            VALUE "LegalCopyright", "Copyleft BW © 2020 \0"
-            VALUE "LegalTrademarks", "Copyleft BW © 2020 \0"
+            VALUE "LegalCopyright", "Copyleft BW © $_ano_meu_amor..._ \0"
+            VALUE "LegalTrademarks", "Copyleft BW © $_ano_meu_amor..._ \0"
             VALUE "OriginalFilename", "$_filename_ \0"
             VALUE "PrivateBuild", "$_build_ \0"
             VALUE "ProductName", "BW MP3 DLL $_major_, $_minor_, $_revision_, $_build_ $_number_of_bits_ \0"

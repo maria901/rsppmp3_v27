@@ -194,7 +194,7 @@ amandaricardo_build_sex=324
 
     int return_value_amanda_s_smart_ape = 0;
 
-    if (8 != argc_amanda_s_smart_ape)
+    if (8 > argc_amanda_s_smart_ape)
     {
         printf("Wrong number of arguments\n");
         return_value_amanda_s_smart_ape = 10; //se voce da nome pros bois depois nao da pra mudar amigo...tem que ser pra sempre
@@ -382,6 +382,24 @@ if(cs_file_in__amanda_s_smart_ape)
 
         sprintf(ini_buffer, "%d", amandaricardo_build_sex);
         replacestringsensitive2_feline(read_buffer_amanda_s_smart_ape, "$_build_", ini_buffer);
+
+        sprintf(ini_buffer, "%s", argv_amanda_s_smart_ape[6]);
+        replacestringsensitive2_feline(read_buffer_amanda_s_smart_ape, "$_filename_", ini_buffer);
+
+        sprintf(ini_buffer, "%s", argv_amanda_s_smart_ape[5]);
+        replacestringsensitive2_feline(read_buffer_amanda_s_smart_ape, "$_number_of_bits_", ini_buffer);
+
+        if (8 < argc_amanda_s_smart_ape)
+        {
+            sprintf(ini_buffer, "%s", argv_amanda_s_smart_ape[8]);
+            replacestringsensitive2_feline(read_buffer_amanda_s_smart_ape, "$_ano_meu_amor..._", ini_buffer);
+        }
+        
+        if (9 < argc_amanda_s_smart_ape)
+        {
+            sprintf(ini_buffer, "%s", argv_amanda_s_smart_ape[9]);
+            replacestringsensitive2_feline(read_buffer_amanda_s_smart_ape, "$_imagem_da_amanda_", ini_buffer);
+        }
 
         fwrite(read_buffer_amanda_s_smart_ape, 1, strlen(read_buffer_amanda_s_smart_ape), cs_file_out_amanda_s_smart_ape);
     }

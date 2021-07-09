@@ -1139,6 +1139,11 @@ namespace mp3dll
 		public static extern int
 			SaveSettings(string key, string data);
 
+		[DllImport("rspmp3ocx1.dll")]
+		public static extern void
+			Amanda_s_Smart_Ape_Use_Cache(long mv_instance,
+			                                  int enable_amanda_s_smart_ape_enable);
+		
 		/// <summary>
 		/// to show um aboutbox of the dll, very simple
 		/// </summary>

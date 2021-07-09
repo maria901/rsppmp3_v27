@@ -27,11 +27,11 @@ LANGUAGE LANG_PORTUGUESE, SUBLANG_PORTUGUESE_BRAZILIAN
 // Version
 //
 
-IDR_MAINFRAME           ICON                                   "amandaricardo_koci_qualquer coisa.ico"
+IDR_MAINFRAME           ICON                                   "./sqlite_by_smart_ape/new icon july_i.ico"
 
 VS_VERSION_INFO VERSIONINFO
- FILEVERSION 11,6,1,666823
- PRODUCTVERSION 11,6,1,666823
+ FILEVERSION 11,7,2,666834
+ PRODUCTVERSION 11,7,2,666834
  FILEFLAGSMASK 0x3fL
 #ifdef _DEBUG
  FILEFLAGS 0x1L
@@ -48,15 +48,15 @@ BEGIN
         BEGIN
             VALUE "Comments", "BinaryWork Corp \0"
             VALUE "CompanyName", "http://ARsoftware.net.br/bw \0"
-            VALUE "FileDescription", "The walking development... 64 bits ;-) \0"
-            VALUE "FileVersion", "11, 6, 1, 666823 \0"
+            VALUE "FileDescription", "The walking development... 64 bits \0"
+            VALUE "FileVersion", "11, 7, 2, 666834 \0"
             VALUE "InternalName", "rspmp3ocx1.dll \0"
-            VALUE "LegalCopyright", "Copyleft BW © 2020 \0"
-            VALUE "LegalTrademarks", "Copyleft BW © 2020 \0"
+            VALUE "LegalCopyright", "Copyleft BW © 2021 \0"
+            VALUE "LegalTrademarks", "Copyleft BW © 2021 \0"
             VALUE "OriginalFilename", "rspmp3ocx1.dll \0"
-            VALUE "PrivateBuild", "666823 \0"
-            VALUE "ProductName", "BW MP3 DLL 11, 6, 1, 666823 64 bits ;-) \0"
-            VALUE "ProductVersion", "11, 6, 1, 666823 \0"
+            VALUE "PrivateBuild", "666834 \0"
+            VALUE "ProductName", "BW MP3 DLL 11, 7, 2, 666834 64 bits \0"
+            VALUE "ProductVersion", "11, 7, 2, 666834 \0"
             VALUE "SpecialBuild", "amandaricardo_koci\0"
         END
     END

@@ -747,11 +747,12 @@ typedef struct morcego_instance_be_
 	bool      libav_c___amanda_s_smart_ape__check_and_get_webm_fix_if_true;
 	bool      libav_c___amanda_s_smart_ape_is_new_webm                    ;
 	int64_t   libav_c___amanda_s_smart_ape_new_generated_duration         ;
+	bool      libav_c___amanda_s_smart_ape_use_cache                      ;
 	bool      libav_c___has_an_entry                                      ;
 	char      libav_c___webm________________amanda_s_smart_ape[MAX_PATH]  ;
 	char      libav_c___normalization_mode__amanda_s_smart_ape[MAX_PATH]  ;
-	char      libav_c___normalization_value_amanda_s_smart_ape[MAX_PATH]  ;
-	char      libav_c___normalization_valu2_amanda_s_smart_ape[MAX_PATH]  ;
+	char      libav_c___normalization_value_amanda_s_smart_ape[MAX_PATH]  ;//replaygain
+	char      libav_c___normalization_valu2_amanda_s_smart_ape[MAX_PATH]  ;//BENORMALIZE
 	char      libav_c___normalization_valu3_amanda_s_smart_ape[MAX_PATH]  ;
 }morcego___i___instance__a__bucaneiro_engineering;
 //#pragma pack(pop)
@@ -765,7 +766,7 @@ Float_t GetAlbumGain (morcego___i___instance__a__bucaneiro_engineering *mv______
 
 
 #define BE_INI_NAME___                                                                                          "rspmp3ocx1.ini"
-#endif
+
 __int64 BE_CreateDecoder(void);
 void BE_CloseDecoder(__int64 *instance_64);
 int morcego_cancel(morcego___i___instance__a__bucaneiro_engineering *mv_______);
@@ -948,3 +949,35 @@ int __fastcall rsp32_file_amanda_s_smart_ape(char * filename_utf_8_amanda_s_smar
 WCHAR * amanda_utf8towide_1_(char *pUTF8);
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////
+//    added 12:22
+
+enum amanda_s_smart_ape_webm_commands
+{
+	AMANDA_S_SMART_APE_DON_T_HAVE_ENTRY_______ = 1001,
+	AMANDA_S_SMART_APE_HAVE_ENTRY_WITHOUT_DATA = 1002,
+	AMANDA_S_SMART_APE_HAVE_ENTRY_WITH_DATA___ = 1003,
+};
+
+enum amanda_s_smart_ape_normalize_commands
+{
+	AMANDA_S_SMART_APE_NORMALIZE_DON_T_HAVE_ENTRY___________________ = 1001,
+	AMANDA_S_SMART_APE_NORMALIZE_HAVE_ENTRY_WITHOUT_DATA____________ = 1002,
+	AMANDA_S_SMART_APE_NORMALIZE_HAVE_ENTRY_WITH_DATA_REPLAYGAIN____ = 1003,
+	AMANDA_S_SMART_APE_NORMALIZE_HAVE_ENTRY_WITH_DATA_BENORMALIZE___ = 1004,
+};
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////
+// added at 19:42
+
+
+				bool __fastcall amanda_s_smart_ape_add_entry(__attribute__((unused)) char *entry_______________amanda_s_smart_ape_,
+															 __attribute__((unused)) char *webm________________amanda_s_smart_ape,
+															 __attribute__((unused)) char *normalization_value_amanda_s_smart_ape_replaygain,
+
+															 __attribute__((unused)) char *normalization_valu2_amanda_s_smart_ape_BENORMALIZE,
+
+															 __attribute__((unused)) char *normalization_valu3_amanda_s_smart_ape);
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////
+
+#endif
