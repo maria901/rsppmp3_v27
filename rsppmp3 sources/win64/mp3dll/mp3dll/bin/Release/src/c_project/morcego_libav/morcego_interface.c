@@ -792,17 +792,15 @@ int morcego_extract_wav(morcego___i___instance__a__bucaneiro_engineering *mv____
 
 	{
 
-		//vamos la, tem que fazer oque, tem que pagar o tamanho do arquivo e nome e criar uma entrada, voce nao vai ver mesmo entao nao tem problema
-
 		amanda_s_smart_ape_timestamp = get_bucaneiro_tick();
 
 		sprintf(signature_amanda_s_smart_ape, "Amanda_27_Ricardo_51_%lld_%d_%s", getfilesize_ar_amanda_s_smart_ape(filename_amanda_s_smart_ape),
-				rsp32_file_amanda_s_smart_ape(filename_amanda_s_smart_ape),
+				27 + 51,
 				filename_amanda_s_smart_ape);
 
 		amanda_s_smart_ape_timestamp = get_bucaneiro_tick() - amanda_s_smart_ape_timestamp;
 
-		
+		pedro_dprintf(0, "tempo que leva com rsp %.6f\n", amanda_s_smart_ape_timestamp);
 
 		pedro_dprintf(0, "amor a string %s\n", signature_amanda_s_smart_ape);
 
@@ -811,11 +809,11 @@ int morcego_extract_wav(morcego___i___instance__a__bucaneiro_engineering *mv____
 
 	{
 
-		//agora se nao tiver salva
-
 		if (true == amanda_s_smart_ape_query_webm_and_normalization(signature_amanda_s_smart_ape, mv_______->libav_c___webm________________amanda_s_smart_ape,
 																	mv_______->libav_c___normalization_mode__amanda_s_smart_ape, mv_______->libav_c___normalization_value_amanda_s_smart_ape, mv_______->libav_c___normalization_valu2_amanda_s_smart_ape, mv_______->libav_c___normalization_valu3_amanda_s_smart_ape, &mv_______->libav_c___has_an_entry))
 		{
+
+
 			pedro_dprintf(0, "Deu certo meu amor...agora vou cagar melhor kkkkkk\n");
 
 			pedro_dprintf(0, "webm .%s.\n", mv_______->libav_c___webm________________amanda_s_smart_ape);
@@ -839,6 +837,20 @@ int morcego_extract_wav(morcego___i___instance__a__bucaneiro_engineering *mv____
 			else
 			{
 				pedro_dprintf(0, "!Tem webm data salva, simplesmente isso\n");
+
+				if (mv_______->libav_c___amanda_s_smart_ape_use_cache)
+				{
+					pedro_dprintf(0, "Ta usando cache entao vai colocar o webm no item\n");
+
+					generated_size_amanda_s_smart_ape strtoll(mv_______->libav_c___webm________________amanda_s_smart_ape, NULL, 10);
+
+					goto saida_amanda_s_smart_ape;
+				}
+				else
+				{
+					pedro_dprintf(0, "Não ta usando cache entao nao vai fazer nada\n");
+				}
+
 			}
 
 		}
@@ -1048,7 +1060,7 @@ saida_amanda_s_smart_ape:
 
 	if (-1 == mv_______->libav_c___amanda_s_smart_ape_new_generated_duration) //uma coisa por vez...
 	{
-		mv_______->libav_c___amanda_s_smart_ape_new_generated_duration = generated_size_amanda_s_smart_ape;
+		mv_______->libav_c___amanda_s_smart_ape_new_generated_duration = generated_size_amanda_s_smart_ape;//nao é isso?
 
 		mv_______->libav_c___amanda_s_smart_ape_new_generated_duration =
 
