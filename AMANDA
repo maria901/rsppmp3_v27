@@ -1,0 +1,179 @@
+esta Ã© a entrada de .emacs necessaria, atualizada dia 21/04/2021...
+
+begin
+{
+
+;; Added by Package.el.  This must come before configurations of
+;; installed packages.  Don't delete this line.  If you don't want it,
+;; just comment it out by adding a semicolon to the start of the line.
+;; You may delete these explanatory comments.
+(package-initialize)
+
+(add-to-list 'load-path "~/emacs-load-path")
+
+(autoload 'csharp-mode "csharp-mode" "Major mode for editing C# code." t)
+;;   (setq auto-mode-alist
+;;      (append '(("\\.cs$" . csharp-mode)) auto-mode-alist))
+
+(when (file-directory-p "~/emacs-load-path")
+  (load "~/emacs-load-path/php-mode-autoloads.el"))
+
+(set-face-foreground 'font-lock-comment-face "#009900")
+(custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(cua-mode t nil (cua-base))
+ '(global-display-line-numbers-mode t))
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(default ((t (:family "Consolas" :foundry "outline" :slant normal :weight normal :height 143 :width normal)))))
+
+}
+end
+
+
+
+Common Name	Common Key	Emacs Name	Emacs Key
+Cut	C-x	Kill-region			C-w   lembre-se control w corta
+Copy	C-c	Kill-ring-save	M-w    alt w copia, ok 
+Paste	C-v	Yank			C-y
+—	—	Yank next			M-y
+
+
+*	C-a	move cursor to (at) beginning-of-line
+ 	C-e	move cursor to end-of-line
+*	C-f	move cursor forward one character
+*	C-b	move cursor backward one character
+*	C-n	move cursor to next line
+*	C-p	move cursor to previous line
+ 	C-v	scroll file forward by one screenful
+ 	ESC v	scroll file backward by one screenful
+*	ESC <	go to beginning-of-buffer
+*	ESC >	go to end-of-buffer
+ 	ESC f	move cursor forward one word
+ 	ESC b	move cursor backward one word
+
+C g  desfaz o inicio de chamada de comando
+
+
+*	C-x C-f	find-file: first prompts for a filename and  then loads that file into a editor buffer of the same name
+*	C-x C-s	save-buffer: saves the buffer into the associated filename
+ 	C-x C-w	write-named-file: prompts for a new filename and writes the buffer into it
+
+C-x b move between buffers
+
+
+-x <comando> - chama o comando   
+
+C-/ undo
+C-S-/ redo
+
+(defun crazy-yank ()
+  (interactive)
+  (delete-char (length (current-kill 0)))
+  (yank))
+
+(global-set-key (kbd "C-M-y") 'crazy-yank)
+
+para habilitar sobrescrito de paste
+
+e M-x delete-selection-mode direto no buffer
+
+M-x global-display-line-numbers-mode para habilitar line numbers in all buffers
+
+M-x set-buffer-file-coding-system para salvar o arquivo em utf-8
+
+M-x revert-buffer para ler o arquivo denovo do disco, ok meu amor?...
+
+C-s search for a string forward
+
+C-r search backwards, just type again it for circular search, ok, the information was wrong
+
+M-x invert-face <RET> default  - para modo noturno.
+
+C-x h  seleciona todo o texto
+
+C-x k para fechar o texto (kill)
+
+aprendendo sobre cygwin e Unix, arquivos de texto e escripts tem que ser definidos como utf-8 ... mas em makefile tem que ser ansi, talvez pra manter compatibilidade.
+
+
+find . -type f -name '*.exe'  para procurar todos os exe no diretorio e subdiretorio
+
+para procurar todos os mp3 no diretorio Music, fácil
+find Music/ -name *.mp3
+
+pra nao esquecer pra formatar texto C basta selecionar e dar TAB, ok? !... te amo
+
+para dar sort em selected lines M-x sort-lines kkkkkk
+
+to sort strings by number M-x sort-numeric-fields give it a try
+
+nao esqueca amor o style Ã© k&r ok?
+
+para Redo C-g C/
+
+C - k para deletar a linha a partir da posicao que esta
+
+Para fazer um buffer read-only C - x C - q
+
+para fazer um arquivo qualquer formatar com C M-x c-mode ou c++-mode
+
+para dar sort case nao sensitivo
+
+adicionar ao .emacs
+
+(defun sort-lines-nocase ()
+  (interactive)
+  (let ((sort-fold-case t))
+    (call-interactively 'sort-lines)))
+
+para ver todas as funcoes do arquivo .c -> M-X imenu
+
+para fazer o bash ser case insensitive -> shopt -s nocaseglob ou (shopt -s nocaseglob ; ls *A*) no .sh , para nao setar isto pode usar ls *[aA][bB][cC]* para selecionar abc e ABC
+
+setar estilo C amor...: M - x set-c-style
+
+jobs	Lists jobs in current shell
+bg %n	Send process to background
+fg %n	Bring process to foreground
+
+
+Amanda
+
+aprenda amor:
+
+Ctrl - space para marcar o inicio
+
+mova o cursor ate o final do bloco
+
+Alt - w para copiar
+
+Mover para inserir posicao
+
+colar em Linux -> Ctrl - y
+
+Amanda
+
+Como abre o tutorial? ja esta aberto
+
+como dividir a tela:
+
+C - u 0  C - l
+
+C - x 2
+
+Para alternar entre janelas C - x o
+
+para efetuar uma busca por string dentro de um arquivo
+
+find . -type f -name '*.c' -exec grep -H "pedro_dprintf" {} \;
+
+para insensitive
+
+find . -type f -name '*.c' -exec grep -iH "pedro_dprintf" {} \;
