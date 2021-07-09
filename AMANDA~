@@ -178,4 +178,3 @@ para insensitive
 
 find . -type f -name '*.c' -exec grep -niH "pedro_dprintf" {} \;
 
-para pesquisar strings em arquivos em emacs M - x find-grep e enter ok amor?...
