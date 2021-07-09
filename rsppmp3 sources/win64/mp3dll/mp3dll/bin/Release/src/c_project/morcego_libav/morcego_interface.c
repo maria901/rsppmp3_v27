@@ -749,15 +749,18 @@ int morcego_extract_wav(morcego___i___instance__a__bucaneiro_engineering *mv____
 #define FAAD_FMT_32BIT 3
 #define FAAD_FMT_FLOAT 4
 
-	long long          generated_size_amanda_s_smart_ape                           =               0;
+	
 	__int64            processed   =                                                               0;
-	int                ret_amanda_s_smart_ape                                                       ;
 	//int64_t            file_size_
 	audio_file *       wav_stream  =                                                            NULL;
-	char               int_buffer  [4096                                                  ];
+	char               int_buffer  [4096                                                           ];
 	char               signature_amanda_s_smart_ape[MAXPATH_UTF_8_MODE_AMANDA_S_SMART_APE ] = { 0, };
+	double             amanda_s_smart_ape_timestamp                                                 ;
+	int                ret_amanda_s_smart_ape                                                       ;
 	int                returnvalue =                                                               0;
 	int                size_out                                                                     ;
+	long long          generated_size_amanda_s_smart_ape                           =               0;
+
 	__attribute((unused)) enum amanda_s_smart_ape_webm_commands webm_commands_amanda_s_smart_ape                                                                ;
 	be_libav_struct *  be = (be_libav_struct *)mv_______->be_ptr                                    ;
 
@@ -791,9 +794,15 @@ int morcego_extract_wav(morcego___i___instance__a__bucaneiro_engineering *mv____
 
 		//vamos la, tem que fazer oque, tem que pagar o tamanho do arquivo e nome e criar uma entrada, voce nao vai ver mesmo entao nao tem problema
 
+		amanda_s_smart_ape_timestamp = get_bucaneiro_tick();
+
 		sprintf(signature_amanda_s_smart_ape, "Amanda_27_Ricardo_51_%lld_%d_%s", getfilesize_ar_amanda_s_smart_ape(filename_amanda_s_smart_ape),
 				rsp32_file_amanda_s_smart_ape(filename_amanda_s_smart_ape),
 				filename_amanda_s_smart_ape);
+
+		amanda_s_smart_ape_timestamp = get_bucaneiro_tick() - amanda_s_smart_ape_timestamp;
+
+		
 
 		pedro_dprintf(0, "amor a string %s\n", signature_amanda_s_smart_ape);
 
@@ -825,9 +834,11 @@ int morcego_extract_wav(morcego___i___instance__a__bucaneiro_engineering *mv____
 
 			if('\0' == mv_______->libav_c___webm________________amanda_s_smart_ape[0])
 			{
-
-
-
+				pedro_dprintf(0, "Não tem webm data salva, simplesmente isso\n");
+			}
+			else
+			{
+				pedro_dprintf(0, "!Tem webm data salva, simplesmente isso\n");
 			}
 
 		}
@@ -1072,7 +1083,6 @@ saida_amanda_s_smart_ape:
 			mv_______->libav_c___normalization_valu3_amanda_s_smart_ape))
 			{
 					pedro_dprintf(0, "adicionou a entrada amor\n");
-
 			}
 			//here, por parts...
 			//ja passa os 4...

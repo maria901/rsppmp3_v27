@@ -51,6 +51,8 @@ pedro_dprintf
 
 int __fastcall replacestringsensitive2_juliete(char *comando, char *source, char *dest);
 
+bool __fastcall init_amanda_s_smart_ape(void);
+
 //////////////////////////////////////////////////////////////////////////////////////////////////////
 // suas funções amor...
 
@@ -78,7 +80,11 @@ void morcego_encoder_amanda_s_smart_ape(char *morcego_in_amanda_s_smart_ape)
 //////////////////////////////////////////////////////////////////////////////////////////////////////
 // variaveis
 
-bool * has_an_entry_amanda_s_smart_ap_ptr = NULL;
+bool * has_an_entry_amanda_s_smart_ap_ptr     = NULL;
+char * webm________________amanda_s_smart_ape = NULL;
+char * normalization_value_amanda_s_smart_ape = NULL;
+char * normalization_valu2_amanda_s_smart_ape = NULL;
+char * normalization_valu3_amanda_s_smart_ape = NULL;
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////
 #define MAXPATH_UTF_8_MODE_AMANDA_S_SMART_APE (MAX_PATH * 6 \
@@ -347,8 +353,8 @@ int ar_Mode_Select_function_amanda_s_smart_ape(__attribute__((unused)) char *dat
     
     return 0;
 }
-
-int callback_amanda_s_smart_ape(__attribute__((unused)) void *NotUsed,
+//amanda
+int callback_amanda_s_smart_ape_not_in_use(__attribute__((unused)) void *NotUsed,
 								__attribute__((unused)) int argc,
 								__attribute__((unused)) char **argv,
 								__attribute__((unused)) char **azColName)
@@ -358,6 +364,22 @@ int callback_amanda_s_smart_ape(__attribute__((unused)) void *NotUsed,
 
 	for (int i = 0; i < argc; i++)
 	{
+		if(0 == strcmp("webm________________amanda_s_smart_ape", azColName[i]))
+		{
+			strcpy(webm________________amanda_s_smart_ape, argv[i] ? argv[i] : "");
+		}
+		if(0 == strcmp("normalization_value_amanda_s_smart_ape", azColName[i]))
+		{
+			strcpy(normalization_value_amanda_s_smart_ape, argv[i] ? argv[i] : "");
+		}
+		if(0 == strcmp("normalization_valu2_amanda_s_smart_ape", azColName[i]))
+		{
+			strcpy(normalization_valu2_amanda_s_smart_ape, argv[i] ? argv[i] : "");
+		}
+		if(0 == strcmp("normalization_valu3_amanda_s_smart_ape", azColName[i]))
+		{
+			strcpy(normalization_valu2_amanda_s_smart_ape, argv[i] ? argv[i] : "");
+		}
 		pedro_dprintf(0, "%s = %s\n", azColName[i], argv[i] ? argv[i] : "");
 	}
 
@@ -366,7 +388,7 @@ int callback_amanda_s_smart_ape(__attribute__((unused)) void *NotUsed,
 	return 0;
 }
 
-
+//amanda1
 int callback_amanda_s_smart_ape_23_39(__attribute__((unused)) void *NotUsed,
 								__attribute__((unused)) int argc,
 								__attribute__((unused)) char **argv,
@@ -379,14 +401,31 @@ int callback_amanda_s_smart_ape_23_39(__attribute__((unused)) void *NotUsed,
 
 	for (int i = 0; i < argc; i++)
 	{
+		if(0 == strcmp("webm________________amanda_s_smart_ape", azColName[i]))
+		{
+			strcpy(webm________________amanda_s_smart_ape, argv[i] ? argv[i] : "");
+		}
+		if(0 == strcmp("normalization_value_amanda_s_smart_ape", azColName[i]))
+		{
+			strcpy(normalization_value_amanda_s_smart_ape, argv[i] ? argv[i] : "");
+		}
+		if(0 == strcmp("normalization_valu2_amanda_s_smart_ape", azColName[i]))
+		{
+			strcpy(normalization_valu2_amanda_s_smart_ape, argv[i] ? argv[i] : "");
+		}
+		if(0 == strcmp("normalization_valu3_amanda_s_smart_ape", azColName[i]))
+		{
+			strcpy(normalization_valu2_amanda_s_smart_ape, argv[i] ? argv[i] : "");
+		}
 		pedro_dprintf(0, "%s = %s\n", azColName[i], argv[i] ? argv[i] : "");
 	}
 
-	pedro_dprintf(0, "********************************\n");
+	pedro_dprintf(0, "-*******************************\n");
 
 	return 0;
 }
 
+//amanda2
 bool __fastcall amanda_s_smart_ape_add_entry(__attribute__((unused)) char *entry_______________amanda_s_smart_ape_,
 																__attribute__((unused)) char *webm________________amanda_s_smart_ape,
 																__attribute__((unused)) char *normalization_value_amanda_s_smart_ape_replaygain,
@@ -400,6 +439,11 @@ bool __fastcall amanda_s_smart_ape_add_entry(__attribute__((unused)) char *entry
 	char   message_for_amanda_s_smart_ape         [Amanda_27_CONSTANTE_1027                   ];
 	char   entry_______________amanda_s_smart_ape [MAXPATH_UTF_8_MODE_AMANDA_S_SMART_APE      ];
 	char * buffer_for_insert_amanda_s_smart_ape    = malloc(Amanda_27_CONSTANTE_100000)         ;
+	
+	if (false == init_amanda_s_smart_ape())
+	{
+		return false;
+	}
 
 	strcpy(entry_______________amanda_s_smart_ape, entry_______________amanda_s_smart_ape_)    ;
 
@@ -429,32 +473,14 @@ bool __fastcall amanda_s_smart_ape_add_entry(__attribute__((unused)) char *entry
 	return true;
 }
 
-bool __fastcall amanda_s_smart_ape_query_webm_and_normalization(__attribute__((unused)) char *entry_______________amanda_s_smart_ape_,
-																__attribute__((unused)) char *webm________________amanda_s_smart_ape,
-																__attribute__((unused)) char *normalization_mode__amanda_s_smart_ape,
-																__attribute__((unused)) char *normalization_value_amanda_s_smart_ape,
-																
-																__attribute__((unused)) char *normalization_valu2_amanda_s_smart_ape,
-																
-																__attribute__((unused)) char *normalization_valu3_amanda_s_smart_ape,
-																__attribute__((unused)) bool * has_an_entry_amanda_s_smart_ap_)
+//amanda5
+bool __fastcall init_amanda_s_smart_ape(void)
 {
 	int ret_amanda_s_smart_ape;
 	
 	char   message_for_amanda_s_smart_ape         [Amanda_27_CONSTANTE_1027                   ];
-	char   entry_______________amanda_s_smart_ape [MAXPATH_UTF_8_MODE_AMANDA_S_SMART_APE      ];
 	char * buffer_for_query_amanda_s_smart_ape    = malloc(Amanda_27_CONSTANTE_100000)         ;
-//	message_for_amanda_s_smart_ape[0] = '\0';
 
-	has_an_entry_amanda_s_smart_ap_ptr = has_an_entry_amanda_s_smart_ap_;
-
-	(*has_an_entry_amanda_s_smart_ap_ptr) = false;
-
-	strcpy(entry_______________amanda_s_smart_ape, entry_______________amanda_s_smart_ape_)  ;
-
-	/*
-	ret_amanda_s_smart_ape = ar_Mode_Select_function_amanda_s_smart_ape("SELECT COUNT(*) FROM cars", message_for_amanda_s_smart_ape, *callback_amanda_s_smart_ape);
-*/
 	ret_amanda_s_smart_ape = ar_Mode_Insert_Delete_or_Update_function_amanda_s_smart_ape("CREATE TABLE IF NOT EXISTS Amanda_27_cache (amanda_s_smart_ape INTEGER PRIMARY KEY, webm________________amanda_s_smart_ape TEXT, normalization_mode__amanda_s_smart_ape TEXT, normalization_value_amanda_s_smart_ape TEXT);", message_for_amanda_s_smart_ape);
 
 	if (ret_amanda_s_smart_ape)
@@ -487,10 +513,45 @@ bool __fastcall amanda_s_smart_ape_query_webm_and_normalization(__attribute__((u
 		pedro_dprintf(-1, "Error in ALTER table: %s\n", message_for_amanda_s_smart_ape);
 		//return false;
 	}
-		
+	free(buffer_for_query_amanda_s_smart_ape);
+	return true;
+}
+//amanda3
+bool __fastcall amanda_s_smart_ape_query_webm_and_normalization(__attribute__((unused)) char *entry_______________amanda_s_smart_ape_,
+																__attribute__((unused)) char *webm________________amanda_s_smart_ape__,
+																__attribute__((unused)) char *normalization_mode__amanda_s_smart_ape_not_in_use,
+																__attribute__((unused)) char *normalization_value_amanda_s_smart_ape__,
+																
+																__attribute__((unused)) char *normalization_valu2_amanda_s_smart_ape__,
+																
+																__attribute__((unused)) char *normalization_valu3_amanda_s_smart_ape__,
+																__attribute__((unused)) bool * has_an_entry_amanda_s_smart_ap_)
+{
+	int ret_amanda_s_smart_ape;
+	
+	char   message_for_amanda_s_smart_ape         [Amanda_27_CONSTANTE_1027                   ];
+	char   entry_______________amanda_s_smart_ape [MAXPATH_UTF_8_MODE_AMANDA_S_SMART_APE      ];
+	char * buffer_for_query_amanda_s_smart_ape    = malloc(Amanda_27_CONSTANTE_100000)         ;
+
+	webm________________amanda_s_smart_ape = webm________________amanda_s_smart_ape__;
+	normalization_value_amanda_s_smart_ape = normalization_value_amanda_s_smart_ape__;
+	normalization_valu2_amanda_s_smart_ape = normalization_valu2_amanda_s_smart_ape__;
+	normalization_valu3_amanda_s_smart_ape = normalization_valu3_amanda_s_smart_ape__;
+
+	has_an_entry_amanda_s_smart_ap_ptr = has_an_entry_amanda_s_smart_ap_;
+
+	(*has_an_entry_amanda_s_smart_ap_ptr) = false;
+
+	strcpy(entry_______________amanda_s_smart_ape, entry_______________amanda_s_smart_ape_)  ;
+
+	if (false == init_amanda_s_smart_ape())
+	{
+		return false;
+	}
+
 	morcego_encoder_amanda_s_smart_ape(entry_______________amanda_s_smart_ape)           ;
 
-	strcpy(buffer_for_query_amanda_s_smart_ape, "SELECT webm________________amanda_s_smart_ape, normalization_mode__amanda_s_smart_ape, normalization_value_amanda_s_smart_ape, normalization_valu2_amanda_s_smart_ape, normalization_valu3_amanda_s_smart_ape FROM Amanda_27_cache WHERE entry_______________amanda_s_smart_ape = '");
+	strcpy(buffer_for_query_amanda_s_smart_ape, "SELECT entry_______________amanda_s_smart_ape,  webm________________amanda_s_smart_ape, normalization_value_amanda_s_smart_ape, normalization_valu2_amanda_s_smart_ape, normalization_valu3_amanda_s_smart_ape FROM Amanda_27_cache WHERE entry_______________amanda_s_smart_ape = '");
 
 	strcat(buffer_for_query_amanda_s_smart_ape, entry_______________amanda_s_smart_ape);
 	strcat(buffer_for_query_amanda_s_smart_ape, "';");
