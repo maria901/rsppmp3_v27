@@ -185,6 +185,7 @@ amandaricardo_build_sex=324
     char *   read_buffer_amanda_s_smart_ape = calloc(1, AMANDA_S_SMART_APE_SIZE);
     FILE *   cs_file_in__amanda_s_smart_ape = NULL;
     FILE *   cs_file_out_amanda_s_smart_ape = NULL;
+    FILE *   cs_file_h___amanda_s_smart_ape = NULL;
     int      amandaricardo_build_sex;
     int      amandaricardo_major;
     int      amandaricardo_minor;
@@ -382,6 +383,16 @@ if(cs_file_in__amanda_s_smart_ape)
 
         sprintf(ini_buffer, "%d", amandaricardo_build_sex);
         replacestringsensitive2_feline(read_buffer_amanda_s_smart_ape, "$_build_", ini_buffer);
+
+        sprintf(ini_buffer, "#define AMARIC__VERSION \"%d.%d.%d build %d\"", amandaricardo_major, amandaricardo_minor, amandaricardo_revision, amandaricardo_build_sex);
+        {
+            cs_file_h___amanda_s_smart_ape = fopen(argv_amanda_s_smart_ape[4], "wb");
+            if(cs_file_h___amanda_s_smart_ape)
+            {
+                fwrite(ini_buffer, 1, strlen(ini_buffer), cs_file_h___amanda_s_smart_ape);
+                fclose(cs_file_h___amanda_s_smart_ape);
+            }
+        }
 
         sprintf(ini_buffer, "%s", argv_amanda_s_smart_ape[6]);
         replacestringsensitive2_feline(read_buffer_amanda_s_smart_ape, "$_filename_", ini_buffer);

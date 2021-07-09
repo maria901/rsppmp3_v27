@@ -37,6 +37,8 @@ http://rspsoftware.com.br
 
 //#include /* amanda's smart ape */   "mysql.h" for historical reasons...
 
+#include "version_amanda_s_smart_ape.hh"
+
 //////////////////////////////////////////////////////////////////////////////////////////////////////
 // function defines at 22:31
 
