@@ -1,0 +1,131 @@
+AMANDA_FLAGS__=-O3 -Wall -Wfatal-errors -Werror
+FELINE_FLAGS__=-Wno-unused-function  -I .
+JULIET_FLAGS  =
+ALINE_SIZE    = 62
+amandaricardo_valquiria: interface2.def          \
+	../../mv_from_be.h makefile                  \
+	libav.o                                      \
+	libav_video.o                                \
+	amandaricardo_koci_dprintf.o
+
+	@./amandaricardo_mvbuild26_32.exe            \
+	./amanda_file_counter_32.ini versio_n.ama.rc \
+	version_ricardo_mislaine_final_2_.rc         \
+	aline_definitive_header_2_.h "64 bits"       \
+	interface2.dll increase
+
+	@x86_64-w64-mingw32-windres.exe              \
+	-o ver.o -O coff                             \
+	version_ricardo_mislaine_final_2_.rc
+
+	x86_64-w64-mingw32-gcc.exe -O3 -mdll -o      \
+	interface2.dll                               \
+	libav_video.o libav.o                        \
+	                                             \
+	amanda.c                                     \
+	                                             \
+	amandaricardo_koci_dprintf.o                 \
+	                                             \
+	                                             \
+	                                             \
+	                                             \
+	                                             \
+	ver.o interface2.def                         \
+	                                             \
+	                                             \
+	../../../../avcodec-59.dll                   \
+	../../../../avdevice-59.dll                  \
+	../../../../avfilter-8.dll                   \
+	../../../../avformat-59.dll                  \
+	../../../../avutil-57.dll                    \
+	../../../../postproc-56.dll                  \
+	../../../../swresample-4.dll                 \
+	../../../../swscale-6.dll                    \
+	                                             \
+	../../../../rspmp3ocx1.dll                   \
+	                                             \
+	../../../../mod_sdl2_2_0_12_kp.dll           \
+	-static
+
+	@echo 
+#	@echo  				...................mude a compilacao para -O3.................
+
+	cp --preserve=timestamps interface2.dll ../../../../interface2.dll
+
+	@./espaco_arp.exe $(ALINE_SIZE)
+	@./espaco_arp.exe $(ALINE_SIZE) 0 1000
+
+#	-rm *~*
+#	-rm *.orig
+#esfregue a lampada     "../../../../rspmp3ocx1.dll" falta incluir isto
+
+dump:
+	dumppe avcodec-53.dll >avcodec-53.dll.txt.h
+	dumppe avdevice-53.dll >avdevice-53.dll.txt.h
+	dumppe avfilter-2.dll >avfilter-2.dll.txt.h
+	dumppe avformat-53.dll >avformat-53.dll.txt.h
+	dumppe avutil-51.dll >avutil-51.dll.txt.h
+	dumppe postproc-51.dll >postproc-51.dll.txt.h
+	dumppe swresample-0.dll >swresample-0.dll.txt.h
+	dumppe swscale-2.dll >swscale-2.dll.txt.h
+	dumppe avcodec-53.dll >avcodec-53.dll.txt.h	
+
+id:
+	unc77.bat libav.c
+	unc77.bat libav_video.c
+	unc77.bat playlist.c
+
+amanda_clean:
+	-@rm *.???~ >nulo 2>nulo
+	-@rm *.unc-backup~	>nulo 2>nulo
+	-@rm *.?~ >nulo 2>nulo
+
+libav.o: libav.c libav_video.c                       \
+	../../mv_from_be.h                           \
+	AV_SAMPLE_FMT_U8P_k_p.c                      \
+	AV_SAMPLE_FMT_S16P_k_p.c                     \
+	AV_SAMPLE_FMT_S32P_k_p.c                     \
+	AV_SAMPLE_FMT_FLTP_k_p.c                     \
+	AV_SAMPLE_FMT_DBL_k_p.c                      \
+	AV_SAMPLE_FMT_S64P_k_p.c                     \
+	AV_SAMPLE_FMT_U8_k_p.c                       \
+	AV_SAMPLE_FMT_S16_k_p.c                      \
+	AV_SAMPLE_FMT_S32_k_p.c                      \
+	AV_SAMPLE_FMT_S64_k_p.c                      \
+	AV_SAMPLE_FMT_FLT_k_p.c                      \
+	AV_SAMPLE_FMT_DBLP_k_p.c
+
+	x86_64-w64-mingw32-gcc.exe -c -o             \
+	libav.o libav.c                              \
+	$(AMANDA_FLAGS__) $(JULIET_FLAGS)            \
+	$(FELINE_FLAGS__) -DMINHA_AMANDA_
+	@./espaco_arp.exe $(ALINE_SIZE)
+	@./espaco_arp.exe $(ALINE_SIZE) 0 100
+
+libav_video.o: libav_video.c libav.c                 \
+	../../mv_from_be.h playlist.c
+	x86_64-w64-mingw32-gcc.exe -c -o             \
+	libav_video.o libav_video.c                  \
+	$(AMANDA_FLAGS__) $(JULIET_FLAGS)            \
+	$(FELINE_FLAGS__) -DMINHA_AMANDA_
+	@./espaco_arp.exe $(ALINE_SIZE)
+	@./espaco_arp.exe $(ALINE_SIZE) 0 100
+
+amandaricardo_koci_dprintf.o :                   \
+	amandaricardo_koci_dprintf.c
+	x86_64-w64-mingw32-gcc.exe -c -o             \
+	amandaricardo_koci_dprintf.o                 \
+	amandaricardo_koci_dprintf.c                 \
+	$(AMANDA_FLAGS__) $(JULIET_FLAGS)            \
+	$(FELINE_FLAGS__)
+	@./espaco_arp.exe $(ALINE_SIZE)
+	@./espaco_arp.exe $(ALINE_SIZE) 0 100
+
+feline_test:
+	x86_64-w64-mingw32-gcc.exe -c -o maria.exe   \
+	amanda_and_ricardo_test.c                    \
+	$(AMANDA_FLAGS__) $(JULIET_FLAGS)            \
+	$(FELINE_FLAGS__)
+	@./espaco_arp.exe $(ALINE_SIZE)
+	@./espaco_arp.exe $(ALINE_SIZE) 0 100
+ 

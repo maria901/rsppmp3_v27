@@ -1,0 +1,103 @@
+
+/*
+    <C/C++ source code of the support dlls>
+    Copyright (C) <2020>  <BinaryWork Corp.>
+
+    This program is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU GENERAL PUBLIC LICENSE
+        and GNU LESSER GENERAL PUBLIC LICENSE along with this program.
+        If not, see <http://www.gnu.org/licenses/>.
+
+    support: http://nomade.sourceforge.net
+
+        direct programmers e-mails:
+        Ricardo: arsoftware25@gmail.com
+        Amanda : arsoftware10@gmail.com
+
+        immediate contact(for a very fast answer) WhatsApp
+        (+55)41 9627 1708 - it is always on
+ */
+
+#include <windows.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <time.h>
+#include <errno.h>
+#include <fcntl.h>
+#include <ctype.h>
+#include <math.h>
+#include <wctype.h>
+#include <wchar.h>
+#include <stdarg.h>
+#include <stddef.h>
+#include <setjmp.h>
+#include <locale.h>
+#include <signal.h>
+#include <limits.h>
+#include <float.h>
+#include <iso646.h>
+
+#undef NDEBUG
+#include <assert.h>
+
+/**
+   definitive checksum solution
+ */
+int bucaneiro32(int buc,char*buf,int len)
+{
+	char *temp=(char*)&buc;
+	char item0 = temp[0];
+	char item1 = temp[1];
+	char item2 = temp[2];
+	char item3 = temp[3];
+	if(0==len)
+	{
+		return buc;
+	}
+	while(len--)
+	{
+		{
+
+			item0 = item0 + *buf++;
+			item0++;
+			item1 = item1 + item0;
+			item1++;
+			item2 = item2 + item1;
+			item2++;
+			item3 = item3 + item2;
+			item3++;
+
+		}
+	}
+	temp[0]=item0;
+	temp[1]=item1;
+	temp[2]=item2;
+	temp[3]=item3;
+	return buc;
+}
+
+int
+main ()
+{
+
+	int ret;
+	int val=1000000;
+	static char test[1000000]={0,};
+	{
+
+		ret = bucaneiro32(0,test,val);
+		printf("val %08x\n",ret);
+	}
+
+	return 0;
+}

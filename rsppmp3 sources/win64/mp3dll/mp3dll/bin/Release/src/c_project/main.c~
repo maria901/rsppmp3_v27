@@ -1,0 +1,154 @@
+
+/*
+    <C/C++ source code of the support dlls>    
+    Copyright (C) <2020>  <BinaryWork Corp.>
+
+    This program is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU GENERAL PUBLIC LICENSE
+	and GNU LESSER GENERAL PUBLIC LICENSE along with this program.  
+	If not, see <http://www.gnu.org/licenses/>.
+    
+    support: http://nomade.sourceforge.net
+    
+	direct programmers e-mails:
+	Ricardo: arsoftware25@gmail.com
+	Amanda : arsoftware10@gmail.com
+	
+	immediate contact(for a very fast answer) WhatsApp
+	(+55)41 9627 1708 - it is always on
+*/
+ 
+#pragma warning( disable : 4101 )
+#pragma warning( disable : 4102 )
+#pragma warning( disable : 4018 )
+
+#pragma comment (lib,"user32.lib")
+
+#ifndef INCLUDEUCHAR
+#ifndef uchar
+#define uchar unsigned char
+#define uint unsigned int
+#define ulong unsigned long
+#define ushort  unsigned short
+#endif
+#endif
+
+
+#include <windows.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <math.h>
+#include <string.h>
+
+#include <conio.h>
+
+// #define NDEBUG
+
+#undef NDEBUG
+#include <assert.h>
+
+
+
+void
+dprintf_z (const char *format, ...)
+{
+//#line 353
+//#error  C2059: syntax error : '}'
+#ifdef RSPDEBUG
+
+  {
+
+    int rete;
+    va_list args;
+    static char buffer[1000000];
+    int ret;
+
+    rete = GetLastError ();
+
+    va_start (args, format);
+    ret = vsprintf (buffer, format, args);
+    OutputDebugString (buffer);
+    printf (buffer);
+
+//setmessage (501, buffer);
+//rspsendmessage ();
+
+    SetLastError (rete);
+
+  }
+#else
+
+  return;
+#endif
+
+
+}
+
+typedef int (__stdcall * PlayMp3) (int number, char *filename, int loop);
+PlayMp3 PlayMp3_f;
+
+
+
+int
+main ()
+{
+
+  HMODULE hmod;
+
+  int funcao = 0;
+
+
+
+
+
+
+
+
+
+  hmod = LoadLibrary ("rspmp3ocx1.dll");
+
+  if (0 == hmod)
+    {
+      dprintf_z ("Error loading dll\n");
+      goto saida;
+    }
+
+
+
+  PlayMp3_f = (void *) GetProcAddress (hmod, "PlayMp3");
+
+  PlayMp3_f (4, "c:\\orinoco.mp3", 0);
+  PlayMp3_f (5, "c:\\orinoco.mp3", 0);
+
+
+
+  while (1)
+    {
+      int ret;
+
+      //printf("Vai chamar getchar\n");
+      ret = getch ();
+
+      if ('q' == ret)
+	{
+	  break;
+	}
+
+    }
+
+
+
+
+saida:
+  dprintf_z ("saindo\n");
+  return 0;
+}

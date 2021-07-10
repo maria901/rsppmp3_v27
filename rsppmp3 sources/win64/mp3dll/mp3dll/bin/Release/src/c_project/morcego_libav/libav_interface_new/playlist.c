@@ -22,8 +22,8 @@
  *              http: //nomade.sourceforge.net/binarywork_______________/       *
  *                                                                              *
  *     E-mails direto dos felizes programadores:                                *
- *     Ricardinho:    arsoftware25@gmail.com    ricardo@arsoftware.net.br       *
- *     Koci______:    arsoftware10@gmail.com    am_koci@arsoftware.net.br       *
+ *     Ricardo rsoftware25@gmail.com    ricardo@arsoftware.net.br       *
+ *     Amanda arsoftware10@gmail.com    am_koci@arsoftware.net.br       *
  *                                                                              *
  *     contato imediato(para uma resposta muita rápida) WhatsApp                *
  *     (+55)41 9627 1708 - isto está sempre ligado (eu acho...)                 *      

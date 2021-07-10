@@ -212,7 +212,7 @@ then
     if [ "0" != "$oi" ] 
     then
 	echo "Reboot amor agora..."
-	exit
+	exit 0
     fi
 
     (shopt -s nocaseglob ; rm -r -f *.DLL)

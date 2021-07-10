@@ -1,0 +1,138 @@
+
+/*
+    <C/C++ source code of the support dlls>    
+    Copyright (C) <2020>  <BinaryWork Corp.>
+
+    This program is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU GENERAL PUBLIC LICENSE
+	and GNU LESSER GENERAL PUBLIC LICENSE along with this program.  
+	If not, see <http://www.gnu.org/licenses/>.
+    
+    support: http://nomade.sourceforge.net
+    
+	direct programmers e-mails:
+	Ricardo: arsoftware25@gmail.com
+	Amanda : arsoftware10@gmail.com
+	
+	immediate contact(for a very fast answer) WhatsApp
+	(+55)41 9627 1708 - it is always on
+*/
+ 
+#include <windows.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <time.h>
+#include <errno.h>
+#include <fcntl.h>
+#include <ctype.h>
+#include <math.h>
+#include <wctype.h>
+#include <wchar.h>
+#include <stdarg.h>
+#include <stddef.h>
+#include <setjmp.h>
+#include <locale.h>
+#include <signal.h>
+#include <limits.h>
+#include <float.h>
+#include <iso646.h>
+
+#undef NDEBUG
+#include <assert.h>
+
+char *
+decimalparabinarioprintf (unsigned int value)
+{
+
+/*converte decimal para uma string
+   binaria mas formata para impressao*/
+	int i;
+	unsigned int mask;
+
+	static char fixo[255];
+
+	memset (fixo, 0, 254);
+
+	for (i = 31; i > -1; i--)
+	{
+
+		mask = (1 << i);
+
+		if (mask & value)
+		{
+			strcat (fixo, "1");
+
+			if ((i % 4 == 0) && i != 0)
+			{
+				strcat (fixo, "-");
+			}
+
+		}
+		else
+		{
+			strcat (fixo, "0");
+			if ((i % 4 == 0) && i != 0)
+			{
+				strcat (fixo, "-");
+			}
+		}
+
+
+	}
+
+	return fixo;
+
+}
+
+
+int main()
+{
+int eu=0;
+int *ptr = &eu;
+char temp[300];
+char temp2[300]="olaseuburro";
+short val;
+temp[0]=0xff;
+temp[1]=0xff;
+temp[2]=0xee;
+temp[3]=0x80;
+ptr=temp;
+
+
+//*ptr=-*ptr;
+printf("valor %x %d %s\n",*ptr ,*ptr, decimalparabinarioprintf(*ptr));
+
+printf("valor %x %d %s\n",*ptr ,*ptr, decimalparabinarioprintf(*ptr));
+*ptr = (*ptr >> 8) ;
+val = *ptr ;
+printf("valor %x %d %s\n",*ptr ,*ptr, decimalparabinarioprintf(*ptr));
+
+printf("valor %x %d %s\n",val ,val, decimalparabinarioprintf(val));
+
+{
+int len=0;
+printf("val %d %d\n",len,len%3);
+
+len=1;
+printf("val %d %d\n",len,len%3);
+
+len=2;
+printf("val %d %d\n",len,len%3);
+
+len=3;
+printf("val %d %d\n",len,len%3);
+
+len=4;
+printf("val %d %d\n",len,len%3);
+}
+}

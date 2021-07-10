@@ -1,0 +1,243 @@
+
+/*
+    <C/C++ source code of the support dlls>    
+    Copyright (C) <2020>  <BinaryWork Corp.>
+
+    This program is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU GENERAL PUBLIC LICENSE
+	and GNU LESSER GENERAL PUBLIC LICENSE along with this program.  
+	If not, see <http://www.gnu.org/licenses/>.
+    
+    support: http://nomade.sourceforge.net
+    
+	direct programmers e-mails:
+	Ricardo: arsoftware25@gmail.com
+	Amanda : arsoftware10@gmail.com
+	
+	immediate contact(for a very fast answer) WhatsApp
+	(+55)41 9627 1708 - it is always on
+*/
+/* enhanced malloc */
+/*
+
+Wed Apr 20 GMT 19:11:15 2011 , by arab
+
+*/
+#include <windows.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <time.h>
+#include <errno.h>
+#include <fcntl.h>
+#include <ctype.h>
+#include <math.h>
+#include <wctype.h>
+#include <wchar.h>
+#include <stdarg.h>
+#include <stddef.h>
+#include <setjmp.h>
+#include <locale.h>
+#include <signal.h>
+#include <limits.h>
+#include <float.h>
+#include <iso646.h>
+
+#undef NDEBUG
+#include <assert.h>
+
+/* 
+
+__MINGW32__ or __GNUC__ in mingw
+WIN32 both mingw and msvc
+#if defined (__MINGW32__) || defined (WIN32)
+
+*/
+
+#define DEBUG___
+
+void e_memory_test(void *ptr,char*source,int line);
+void *e_calloc(size_t nelem, size_t size__);
+void *e_malloc(size_t size__);
+void *e_realloc(void *ptr, size_t size__);
+void e_free(void *ptr,char*source,int line);
+
+static void
+mprintf___ (char *format, ...)
+{
+	/* void *calloc(size_t nelem, size_t size); */
+    char *buffer=calloc(1, 10000); //for multithread sake
+    va_list amanda;
+    va_start(amanda, format);
+    vsprintf (buffer, format, amanda);
+    MessageBox (0, buffer, "Error", MB_OK | MB_ICONERROR | MB_SYSTEMMODAL);
+	va_end(amanda);
+    free(buffer);
+}
+
+void *e_malloc(size_t size__)
+{
+#ifdef DEBUG___
+    char *ptr;
+    int *iptr;
+    char*returnvalue;
+    ptr=malloc((size__)+12);
+    if(NULL==ptr)
+    {
+        return NULL;
+    }
+    iptr=(int*)ptr;
+    *iptr=size__;
+    iptr++;
+    *iptr=0x12345678;
+    ptr=(char*)iptr;
+    ptr+=4;
+    returnvalue=ptr;
+    ptr+=size__;
+    iptr=(int*)ptr;
+    *iptr=0x87654321;
+    return returnvalue;
+#else
+    return malloc(size__);
+#endif
+}
+
+void *e_calloc(size_t nelem, size_t size__)
+{
+#ifdef DEBUG___
+    char *ptr;
+    int *iptr;
+    char*returnvalue;
+    ptr=malloc((nelem*size__)+12);
+    if(NULL==ptr)
+    {
+        return NULL;
+    }
+    memset(ptr,0,(nelem*size__)+12);
+    iptr=(int*)ptr;
+    *iptr=nelem*size__;
+    iptr++;
+    *iptr=0x12345678;
+    ptr=(char*)iptr;
+    ptr+=4;
+    returnvalue=ptr;
+    ptr+=nelem*size__;
+    iptr=(int*)ptr;
+    *iptr=0x87654321;
+    return returnvalue;
+#else
+    return calloc(nelem,size__);
+#endif
+}
+
+void e_free(void *ptr__,char*source,int line)
+{
+#ifdef DEBUG___
+    int *iptr;
+    int nelen;
+    char*a;
+    char*ptr=ptr__;
+    if(NULL==ptr)
+    {
+        mprintf___("NULL pointer being freed at source: %s line: %d ",source,line);
+        exit(1);
+    }
+    ptr-=8;
+    a=ptr;
+    iptr=(int*)ptr;
+    nelen=*iptr;
+    iptr++;
+    if(0x12345678!=*iptr)
+    {
+        mprintf___("Memory corruption detected at source: %s line: %d ",source,line);
+        exit(1);
+    }
+    ptr+=8;
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wmaybe-uninitialized"	
+    ptr+=nelen;
+#pragma GCC diagnostic pop	
+    iptr=(int*)ptr;
+    if(0x87654321!=*iptr)
+    {
+        mprintf___("Memory corruption detected at source: %s line: %d ",source,line);
+        exit(1);
+    }
+    free(a);
+#else
+    free(ptr__);
+#endif
+    return;
+}
+
+void e_memory_test(void *ptr__,char*source,int line)
+{
+#ifdef DEBUG___
+    int *iptr     ;
+    int nelen     ;
+    char*ptr=ptr__;
+    if(NULL==ptr  )
+    {
+        mprintf___("NULL pointer being tested at source: %s line: %d ",source,line);
+        exit(1)   ;
+    }
+    ptr       -= 8;
+    iptr=(int*)ptr;
+    nelen =*  iptr;
+    iptr++        ;
+    if(0x12345678!=*iptr)
+    {
+        mprintf___("Memory corruption detected at source: %s line: %d ",source,line);
+        exit(1);
+    }
+    ptr       += 8;
+    ptr +=   nelen;
+    iptr=(int*)ptr;
+    if(0x87654321!=*iptr)
+    {
+        mprintf___("Memory corruption detected at source: %s line: %d ",source,line);
+        exit(1);
+    }
+#else
+
+#endif
+    return;
+}
+
+void *e_realloc(void *ptr__, size_t size__)
+{
+#ifdef DEBUG___
+    char *ptr_;
+    int *iptr;
+    char*returnvalue;
+    char*ptr=ptr__;
+    ptr-=8;
+    ptr_=realloc(ptr,(size__)+12);
+    if(NULL==ptr_)
+    {
+        return NULL;
+    }
+    iptr=(int*)ptr_;
+    *iptr=size__;
+    iptr++;
+    *iptr=0x12345678;
+    ptr_=(char*)iptr;
+    ptr_+=4;
+    returnvalue=ptr_;
+    ptr_+=size__;
+    iptr=(int*)ptr_;
+    *iptr=0x87654321;
+    return returnvalue;
+#else
+    return realloc(ptr__,size__);
+#endif
+}
