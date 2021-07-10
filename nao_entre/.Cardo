@@ -1,34 +1,10 @@
 #!/bin/bash
 
-
-if [ "clean_my_love_v27" == "$1" ] 
-then
-
-    cp '/cygdrive/c/Amanda Ava Pereira/nosso_trabalho/amanda_projects/amandaricardo_koci_rsppmp3_64_bits/rsppmp3 sources/win64/mp3dll/mp3dll/bin/Release/src/c_project/morcego_libav/libav_interface_new/playlist.c' '/cygdrive/c/cygwin64_amandaricardo_koci_10.2.0/home/User/playlist.c'
-
-    emacs                      /cygdrive/c/cygwin64_amandaricardo_koci_10.2.0/home/User/rsppmp3/playlist.c
-    
-    cp '/cygdrive/c/cygwin64_amandaricardo_koci_10.2.0/home/User/playlist.c' '/cygdrive/c/Amanda Ava Pereira/nosso_trabalho/amanda_projects/amandaricardo_koci_rsppmp3_64_bits/rsppmp3 sources/win64/mp3dll/mp3dll/bin/Release/src/c_project/morcego_libav/libav_interface_new/playlist.c'
-
-    rm /cygdrive/c/cygwin64_amandaricardo_koci_10.2.0/home/User/playlist.c
-
-    rm -f '/cygdrive/c/Amanda Ava Pereira/nosso_trabalho/amanda_projects/amandaricardo_koci_rsppmp3_64_bits/rsppmp3 sources/win64/mp3dll/mp3dll/bin/Release/src/c_project/espaco_arp.exe'
-    
-    mp3_a_kp.sh compile
-    
-    pwd
-
-    exit
-
-fi
-
-
 #////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 if [ "clean_my_love_1001_v27" == "$1" ] 
 then
 
-    mkdir rsppmp3
 
     cp '/cygdrive/c/Amanda Ava Pereira/nosso_trabalho/amanda_projects/amandaricardo_koci_rsppmp3_64_bits/rsppmp3 sources/win64/mp3dll/mp3dll/bin/Release/src/c_project/morcego_libav/libav_interface_new/playlist.c' '/cygdrive/c/cygwin64_amandaricardo_koci_10.2.0/home/User/rsppmp3/playlist.c'
 
@@ -42,7 +18,7 @@ then
     
     pwd
 
-    exit
+    exit 0
 
 fi
 
@@ -58,13 +34,13 @@ then
 
     rm /cygdrive/c/cygwin64_amandaricardo_koci_10.2.0/home/User/playlist.c
 
-    /cygdrive/c/Amanda Ava Pereira/nossos_scripts_k/Amanda.sh Amanda9   
+#error    /cygdrive/c/Amanda Ava Pereira/nossos_scripts_k/Amanda.sh Amanda9   
 
-    #    mp3_a_kp.sh compile
-    
     pwd
+    
+    /cygdrive/c/cygwin64_amandaricardo_koci_10.2.0/home/User/MinhAva/Amanda.sh Amanda10
 
-    exit
+    exit 0
 
 fi
 
@@ -81,11 +57,11 @@ then
 
     rm /cygdrive/c/cygwin64_amandaricardo_koci_10.2.0/home/User/espaco_arp.c
     
-    Amanda.sh compile32z
+    /cygdrive/c/cygwin64_amandaricardo_koci_10.2.0/home/User/Amanda.sh compile32z
 
     cp '/cygdrive/c/Amanda Ava Pereira/nosso_trabalho/amanda_projects/Lurdes_tar_gzip_parolin_k/files_k/tar_1_33_k/espaco_arp.exe' '/cygdrive/c/Amanda Ava Pereira/nosso_trabalho/amanda_projects/amandaricardo_koci_rsppmp3_64_bits/rsppmp3 sources/win64/mp3dll/mp3dll/bin/Release/src/c_project/'
     
-    exit
+    exit 0
 
 fi
 
@@ -99,7 +75,7 @@ then
     
     cp '/cygdrive/c/cygwin64_amandaricardo_koci_10.2.0/home/User/rsppmp3/makefile' '/cygdrive/c/Amanda Ava Pereira/nosso_trabalho/amanda_projects/amandaricardo_koci_rsppmp3_64_bits/rsppmp3 sources/win64/mp3dll/mp3dll/bin/Release/src/c_project/makefile'
 
-    exit
+    exit 0
 
 fi
 
@@ -130,7 +106,7 @@ then
 
     git push
     
-    exit
+    exit 0
 
 fi
 
@@ -143,7 +119,7 @@ then
 
     cp /cygdrive/c/cygwin64_amandaricardo_koci_10.2.0/home/User/AMANDA  /cygdrive/c/cygwin64_amandaricardo_koci_10.2.0/home/User/.AMANDA
   
-    exit
+    exit 0
 
 fi
 
@@ -152,8 +128,8 @@ if [ "clean_my_love_95_v27" == "$1" ]
 then
 
 
-    Amanda.sh Amanda6
-    exit
+    /cygdrive/c/cygwin64_amandaricardo_koci_10.2.0/home/User/MinhAva/Amanda.sh Amanda6
+    exit 0
 
 fi
 
@@ -163,8 +139,8 @@ if [ "clean_my_love_94_v27" == "$1" ]
 then
 
 
-    Amanda.sh Amanda7
-    exit
+    /cygdrive/c/cygwin64_amandaricardo_koci_10.2.0/home/User/MinhAva/Amanda.sh Amanda7
+    exit 0
 
 fi
 
@@ -175,7 +151,7 @@ then
 
     #    Amanda.sh Amanda8
     echo nao cofigurado ainda seu bobão, kkkkk '...'
-    exit
+    exit 0
 
 fi
 
@@ -184,9 +160,9 @@ fi
 if [ "clean_my_love_92_v27" == "$1" ] 
 then
 
-    Amanda.sh Amanda9
+    /cygdrive/c/cygwin64_amandaricardo_koci_10.2.0/home/User/MinhAva/Amanda.sh Amanda9
 #   echo nao cofigurado ainda seu bobão, kkkkk '...'
-    exit
+    exit 0
 
 fi
 
