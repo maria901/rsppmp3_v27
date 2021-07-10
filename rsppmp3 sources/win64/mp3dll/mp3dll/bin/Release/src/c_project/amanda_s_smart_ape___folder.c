@@ -1850,7 +1850,40 @@ save_to_file (char *infile, char *data, int size, int mode, int limit)
 	return 0;
 }
 
+//"Amanda0"
+int __fastcall
+save_to_file_amanda_s_smart_ape (char *data, int size, enum Amanda Amanda_mode)
+{
 
+     FILE * myfile = NULL;
+     char   modo[20] = "wb";
+
+     /*
+
+       MARIA_CREATE_NEW_LOG___ = 1001,
+       MARIA_APPEND_TO__LOG___ = 0,    
+
+     */
+     if (MARIA_CREATE_NEW_LOG___ == Amanda_mode)
+     {
+	  strcpy (modo, "wb");
+     }
+     if (MARIA_APPEND_TO__LOG___ == Amanda_mode)
+     {
+	  strcpy (modo, "ab");
+     }
+
+     if ((myfile = fopen ("Amanda.log", modo)) == NULL)
+     {
+	  return 1;
+     }
+  
+     fwrite (data, 1, strlen(data), myfile);
+
+     fclose (myfile);
+	
+     return 0;
+}
 
 
 ////////////////////////////////////////////////////////////////////////////////////////

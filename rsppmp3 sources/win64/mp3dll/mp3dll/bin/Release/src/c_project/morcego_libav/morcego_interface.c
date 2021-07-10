@@ -1,4 +1,6 @@
 
+
+
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
  *                                                                              *
  *        Licensa de Cópia (C) <2021>  <Corporação do Trabalho Binário>         *
@@ -90,35 +92,35 @@ int decode_mad_MP3(char *, int, char *, int, int *, int *);
 /** Simple function to retrieve the bitrate
  */
 int get_morcego_bitrate(
-	char *file,
-	double seconds)
+     char *file,
+     double seconds)
 {
-	double a;
-	int size;
-	double sizeb;
-	size = getfilesize(file);
-	sizeb = (double)size;
-	a = sizeb / seconds;
-	a = a / 125.0; // magic value my love...
-	return (int)a;
+     double a;
+     int size;
+     double sizeb;
+     size = getfilesize(file);
+     sizeb = (double)size;
+     a = sizeb / seconds;
+     a = a / 125.0; // magic value my love...
+     return (int)a;
 }
 
 int strip_extension_alladin(char *data, char *ext);
 
 static int convert_multiples_channels_to_2(morcego___i___instance__a__bucaneiro_engineering *mv_______, int len, char *sample_buffer,
-										   int channels);
+					   int channels);
 /**
  * It will get the percentage based on the slice
  */
 static double
 getporf(double maxa, double fatiaa)
 {
-	if (maxa == 0 || fatiaa == 0)
-	{
-		return 0;
-	}
-	maxa = ((double)100.0 / maxa * fatiaa);
-	return maxa;
+     if (maxa == 0 || fatiaa == 0)
+     {
+	  return 0;
+     }
+     maxa = ((double)100.0 / maxa * fatiaa);
+     return maxa;
 }
 /**
  * it will retrieve the percentage based on the slice over the maximum value (100/(max/slice))
@@ -126,15 +128,15 @@ getporf(double maxa, double fatiaa)
 static __int64
 getpor__int64(double maxa_, double fatiaa_)
 {
-	//fix for negative values when got time.
-	double maxa = maxa_;
-	double fatiaa = fatiaa_;
-	if (maxa == 0 || fatiaa == 0)
-	{
-		return 0;
-	}
-	maxa = ((double)100 / maxa * fatiaa);
-	return (__int64)maxa;
+     //fix for negative values when got time.
+     double maxa = maxa_;
+     double fatiaa = fatiaa_;
+     if (maxa == 0 || fatiaa == 0)
+     {
+	  return 0;
+     }
+     maxa = ((double)100 / maxa * fatiaa);
+     return (__int64)maxa;
 }
 
 /**
@@ -143,18 +145,18 @@ getpor__int64(double maxa_, double fatiaa_)
 double getval_100(double max, double por)
 {
 
-	// a formula aqui Ã©
-	// max / 100 * por
+     // a formula aqui Ã©
+     // max / 100 * por
 
-	double maxa;
-	double porr;
+     double maxa;
+     double porr;
 
-	maxa = (double)max;
-	porr = (double)por;
+     maxa = (double)max;
+     porr = (double)por;
 
-	maxa = (maxa / 100.0) * porr;
+     maxa = (maxa / 100.0) * porr;
 
-	return maxa;
+     return maxa;
 }
 
 /**
@@ -163,18 +165,18 @@ double getval_100(double max, double por)
 __int64 getval_10000(__int64 max, __int64 por)
 {
 
-	// a formula aqui Ã©
-	// max / 100 * por
+     // a formula aqui Ã©
+     // max / 100 * por
 
-	double maxa;
-	double porr;
+     double maxa;
+     double porr;
 
-	maxa = (double)max;
-	porr = (double)por;
+     maxa = (double)max;
+     porr = (double)por;
 
-	maxa = (maxa / 10000.0) * porr;
+     maxa = (maxa / 10000.0) * porr;
 
-	return (__int64)maxa;
+     return (__int64)maxa;
 }
 /**
  * It will print a message box with printf arguments
@@ -182,17 +184,17 @@ __int64 getval_10000(__int64 max, __int64 por)
 static void
 mprintf(char *format, ...)
 {
-	/* void *calloc(size_t nelem, size_t size); */
-	char *buffer2 = calloc(1, 10000); //for
-									  //multithread sake
-	va_list args;
-	va_start(args, format);
-	vsprintf(buffer2, format, args);
+     /* void *calloc(size_t nelem, size_t size); */
+     char *buffer2 = calloc(1, 10000); //for
+     //multithread sake
+     va_list args;
+     va_start(args, format);
+     vsprintf(buffer2, format, args);
 
-	MessageBox(0, buffer2, "Error",
-			   MB_OK | MB_ICONINFORMATION |
-				   MB_SYSTEMMODAL);
-	free(buffer2);
+     MessageBox(0, buffer2, "Error",
+		MB_OK | MB_ICONINFORMATION |
+		MB_SYSTEMMODAL);
+     free(buffer2);
 }
 /**
  *     It is the flag to see whether the com support was
@@ -207,10 +209,10 @@ const int com_inited = 0; //this variable will be here forever, donÂ´t remove it
 static int
 init()
 {
-	//this empty function I will not remove, because it
-	//remembers me of ffms2.dll, we have some good reasons
-	//to dont use ffms2.dll anymore
-	return 0;
+     //this empty function I will not remove, because it
+     //remembers me of ffms2.dll, we have some good reasons
+     //to dont use ffms2.dll anymore
+     return 0;
 }
 void dprintf_z(const char *format, ...);
 
@@ -219,122 +221,122 @@ void dprintf_z(const char *format, ...);
  */
 int convert_pcm_data(morcego___i___instance__a__bucaneiro_engineering *mv_______, int len, char *buffer_, int bits, int format, int channels)
 {
-	short *morcego_sample_short = (short *)mv_______->morcego_interface_c___morcego_temp;
-	int i;
-	switch (bits)
-	{
-	case 8:
-		for (i = 0; i < len; i++)
-		{
-			unsigned char a;
-			int e;
-			a = (unsigned char)buffer_[i];
-			e = a;
-			e -= 127;
-			e *= 256;
-			if (e > 32767)
-			{
-				e = 32767;
-			}
-			if (e < -32768)
-			{
-				e = -32768;
-			}
+     short *morcego_sample_short = (short *)mv_______->morcego_interface_c___morcego_temp;
+     int i;
+     switch (bits)
+     {
+     case 8:
+	  for (i = 0; i < len; i++)
+	  {
+	       unsigned char a;
+	       int e;
+	       a = (unsigned char)buffer_[i];
+	       e = a;
+	       e -= 127;
+	       e *= 256;
+	       if (e > 32767)
+	       {
+		    e = 32767;
+	       }
+	       if (e < -32768)
+	       {
+		    e = -32768;
+	       }
 
-			e = e > 32767 ? 32767 : e < -32768 ? -32768
-											   : e; //you need to read it twice to understand what it does
+	       e = e > 32767 ? 32767 : e < -32768 ? -32768
+		    : e; //you need to read it twice to understand what it does
 
-			morcego_sample_short[i] = (short)e;
-		}
-		memcpy(buffer_, morcego_sample_short, len * 2);
-		len = convert_multiples_channels_to_2(mv_______, len * 2, buffer_, channels);
-		return len;
-		break;
-	case 16:
-		len = convert_multiples_channels_to_2(mv_______, len, buffer_, channels);
-		return len;
-		break;
-	case 24:
-		return len;
-		break;
-	case 32:
-		switch (format)
-		{
-		case FFMS_FMT_S32:
-		{
-			int outsample = 0;
-			short outval;
-			int *ptr;
-			char temp[4];
-			ptr = (int *)temp;
-			for (i = 0; i < len; i += 4)
-			{
+	       morcego_sample_short[i] = (short)e;
+	  }
+	  memcpy(buffer_, morcego_sample_short, len * 2);
+	  len = convert_multiples_channels_to_2(mv_______, len * 2, buffer_, channels);
+	  return len;
+	  break;
+     case 16:
+	  len = convert_multiples_channels_to_2(mv_______, len, buffer_, channels);
+	  return len;
+	  break;
+     case 24:
+	  return len;
+	  break;
+     case 32:
+	  switch (format)
+	  {
+	  case FFMS_FMT_S32:
+	  {
+	       int outsample = 0;
+	       short outval;
+	       int *ptr;
+	       char temp[4];
+	       ptr = (int *)temp;
+	       for (i = 0; i < len; i += 4)
+	       {
 
-				temp[0] = buffer_[i];
-				temp[1] = buffer_[i + 1];
-				temp[2] = buffer_[i + 2];
-				temp[3] = buffer_[i + 3];
+		    temp[0] = buffer_[i];
+		    temp[1] = buffer_[i + 1];
+		    temp[2] = buffer_[i + 2];
+		    temp[3] = buffer_[i + 3];
 
-				*ptr = *ptr >> 16;
+		    *ptr = *ptr >> 16;
 
-				*ptr = *ptr > 32767 ? 32767 : *ptr < -32768 ? -32768
-															: *ptr;
+		    *ptr = *ptr > 32767 ? 32767 : *ptr < -32768 ? -32768
+			 : *ptr;
 
-				outval = (short)*ptr;
+		    outval = (short)*ptr;
 
-				morcego_sample_short[outsample++] = outval;
-			}
-			memcpy(buffer_, morcego_sample_short, outsample * 2);
-			len = convert_multiples_channels_to_2(mv_______, outsample * 2, buffer_, channels);
-			return len;
-		}
-		break;
-		case FFMS_FMT_FLT:
-		{
-			{
-				int outsample = 0;
-				short outval;
-				float *ptr;
-				char temp[4];
-				ptr = (float *)temp;
-				for (i = 0; i < len; i += 4)
-				{
+		    morcego_sample_short[outsample++] = outval;
+	       }
+	       memcpy(buffer_, morcego_sample_short, outsample * 2);
+	       len = convert_multiples_channels_to_2(mv_______, outsample * 2, buffer_, channels);
+	       return len;
+	  }
+	  break;
+	  case FFMS_FMT_FLT:
+	  {
+	       {
+		    int outsample = 0;
+		    short outval;
+		    float *ptr;
+		    char temp[4];
+		    ptr = (float *)temp;
+		    for (i = 0; i < len; i += 4)
+		    {
 
-					temp[0] = buffer_[i];
-					temp[1] = buffer_[i + 1];
-					temp[2] = buffer_[i + 2];
-					temp[3] = buffer_[i + 3];
+			 temp[0] = buffer_[i];
+			 temp[1] = buffer_[i + 1];
+			 temp[2] = buffer_[i + 2];
+			 temp[3] = buffer_[i + 3];
 
-					*ptr = 32767.0 * *ptr;
+			 *ptr = 32767.0 * *ptr;
 
-					*ptr = *ptr > 32767 ? 32767 : *ptr < -32787 ? -32787
-																: *ptr;
+			 *ptr = *ptr > 32767 ? 32767 : *ptr < -32787 ? -32787
+			      : *ptr;
 
-					outval = (short)*ptr;
+			 outval = (short)*ptr;
 
-					morcego_sample_short[outsample++] = outval;
-				}
-				memcpy(buffer_, morcego_sample_short, outsample * 2);
-				len = convert_multiples_channels_to_2(mv_______, outsample * 2, buffer_, channels);
-				return len;
-			}
-			break;
+			 morcego_sample_short[outsample++] = outval;
+		    }
+		    memcpy(buffer_, morcego_sample_short, outsample * 2);
+		    len = convert_multiples_channels_to_2(mv_______, outsample * 2, buffer_, channels);
+		    return len;
+	       }
+	       break;
 
-		default:
-			return len;
-		}
-		break;
-		}
-		return len;
-		break;
+	       default:
+		    return len;
+	  }
+	  break;
+	  }
+	  return len;
+	  break;
 
-	default:
+     default:
 
-		return len;
-		break;
-	}
+	  return len;
+	  break;
+     }
 
-	return len;
+     return len;
 }
 
 /** This function was not tested with a 4 6 or 8 channels media file yet, it will convert multiples channels samples to 2 or 1 channel
@@ -343,213 +345,213 @@ int convert_pcm_data(morcego___i___instance__a__bucaneiro_engineering *mv_______
 static int
 convert_multiples_channels_to_2(morcego___i___instance__a__bucaneiro_engineering *mv_______, int len, char *sample_buffer, int channels)
 {
-	short *samples_in = (short *)sample_buffer;
+     short *samples_in = (short *)sample_buffer;
 
-	int i;
+     int i;
 
-	int samples = 0;
+     int samples = 0;
 
-	if (channels < 3)
-	{
-		return len;
-	}
-	if (channels == 4)
-	{
-		len = len / 2;
-		for (i = 0; i < len; i += 4)
-		{
-			mv_______->morcego_interface_c___short_temp[samples++] = samples_in[i];
-			mv_______->morcego_interface_c___short_temp[samples++] = samples_in[i + 1];
-		}
+     if (channels < 3)
+     {
+	  return len;
+     }
+     if (channels == 4)
+     {
+	  len = len / 2;
+	  for (i = 0; i < len; i += 4)
+	  {
+	       mv_______->morcego_interface_c___short_temp[samples++] = samples_in[i];
+	       mv_______->morcego_interface_c___short_temp[samples++] = samples_in[i + 1];
+	  }
 
-		memcpy(sample_buffer, mv_______->morcego_interface_c___short_temp, samples * 2);
+	  memcpy(sample_buffer, mv_______->morcego_interface_c___short_temp, samples * 2);
 
-		return samples * 2;
-	}
-	if (channels == 6)
-	{
-		len = len / 2;
-		for (i = 0; i < len; i += 6)
-		{
-			mv_______->morcego_interface_c___short_temp[samples++] = samples_in[i];
-			mv_______->morcego_interface_c___short_temp[samples++] = samples_in[i + 1];
-		}
+	  return samples * 2;
+     }
+     if (channels == 6)
+     {
+	  len = len / 2;
+	  for (i = 0; i < len; i += 6)
+	  {
+	       mv_______->morcego_interface_c___short_temp[samples++] = samples_in[i];
+	       mv_______->morcego_interface_c___short_temp[samples++] = samples_in[i + 1];
+	  }
 
-		memcpy(sample_buffer, mv_______->morcego_interface_c___short_temp, samples * 2);
+	  memcpy(sample_buffer, mv_______->morcego_interface_c___short_temp, samples * 2);
 
-		return samples * 2;
-	}
-	if (channels == 8)
-	{
-		len = len / 2;
-		for (i = 0; i < len; i += 8)
-		{
-			mv_______->morcego_interface_c___short_temp[samples++] = samples_in[i];
-			mv_______->morcego_interface_c___short_temp[samples++] = samples_in[i + 1];
-		}
+	  return samples * 2;
+     }
+     if (channels == 8)
+     {
+	  len = len / 2;
+	  for (i = 0; i < len; i += 8)
+	  {
+	       mv_______->morcego_interface_c___short_temp[samples++] = samples_in[i];
+	       mv_______->morcego_interface_c___short_temp[samples++] = samples_in[i + 1];
+	  }
 
-		memcpy(sample_buffer, mv_______->morcego_interface_c___short_temp, samples * 2);
+	  memcpy(sample_buffer, mv_______->morcego_interface_c___short_temp, samples * 2);
 
-		return samples * 2;
-	}
-	assert(0 && "number of channels not equal 4, 6 or 8");
-	exit(1);
+	  return samples * 2;
+     }
+     assert(0 && "number of channels not equal 4, 6 or 8");
+     exit(1);
 }
 const int is_mp3 = 0;
 void set_debug_value(int val);
 
 /**
  *     It will initiate the decoder library
-   \param morcego_is_mp3 This will define if the file will play as a mp3, if 0 it will detect te media type
- */
+ \param morcego_is_mp3 This will define if the file will play as a mp3, if 0 it will detect te media type
+*/
 int morcego_init_libav(morcego___i___instance__a__bucaneiro_engineering *mv_______, be_libav_struct *be_data, int morcego_is_mp3)
 {
-	int returnvalue = 0;
-	mv_______->libav_c___amanda_s_smart_ape__is_open = true;
+     int returnvalue = 0;
+     mv_______->libav_c___amanda_s_smart_ape__is_open = true;
 	
-	init();
-	pedro_dprintf(-1, "morcego_init_libav                          b");
-	if (mv_______->morcego_interface_c___decoder_in_use)
-	{
-		strcpy(be_data->be_error_message, "Decoder is in use");
-		returnvalue = 1;
-		goto saida;
-	}
-	mv_______->morcego_interface_c___seek = -1;
-	mv_______->morcego_interface_c___decoder_in_use = 1;
-	mv_______->morcego_interface_c___decoder_state = BE_STATE_DECODING;
+     init();
+     pedro_dprintf(-1, "morcego_init_libav                          b");
+     if (mv_______->morcego_interface_c___decoder_in_use)
+     {
+	  strcpy(be_data->be_error_message, "Decoder is in use");
+	  returnvalue = 1;
+	  goto saida;
+     }
+     mv_______->morcego_interface_c___seek = -1;
+     mv_______->morcego_interface_c___decoder_in_use = 1;
+     mv_______->morcego_interface_c___decoder_state = BE_STATE_DECODING;
 
-	mv_______->morcego_interface_c___buffer_address = mv_______->morcego_interface_c___internal_buffer;
-	mv_______->morcego_interface_c___bytes_available_in_buffer = 0;
-	mv_______->libav_c___pixel_format = 1000;
-	strcpy(be_data->be_error_message, "");
+     mv_______->morcego_interface_c___buffer_address = mv_______->morcego_interface_c___internal_buffer;
+     mv_______->morcego_interface_c___bytes_available_in_buffer = 0;
+     mv_______->libav_c___pixel_format = 1000;
+     strcpy(be_data->be_error_message, "");
 
-	pedro_dprintf(-1, "dentro de morcego_init_libav");
+     pedro_dprintf(-1, "dentro de morcego_init_libav");
 
-	{
+     {
 
-		int ret;
-		pedro_dprintf(-1, "morcego_init_libav c");
-		if ((ret = init_decoder2(mv_______, be_data)))
-		{
-			{
-				char savemessage[1024];
-				strcpy(savemessage,
-					   be_data->be_error_message);
+	  int ret;
+	  pedro_dprintf(-1, "morcego_init_libav c");
+	  if ((ret = init_decoder2(mv_______, be_data)))
+	  {
+	       {
+		    char savemessage[1024];
+		    strcpy(savemessage,
+			   be_data->be_error_message);
 
-				if (30 == ret)
-				{
-					goto pula;
-				}
+		    if (30 == ret)
+		    {
+			 goto pula;
+		    }
 
-			pula:;
-				strcpy(be_data->be_error_message,
-					   savemessage);
-			}
-			returnvalue = 2;
-			goto saida;
-		}
-		pedro_dprintf(-1, "morcego_init_libav d");
-		pedro_dprintf(-1,
-					  "passou de init_decoder2");
+	       pula:;
+		    strcpy(be_data->be_error_message,
+			   savemessage);
+	       }
+	       returnvalue = 2;
+	       goto saida;
+	  }
+	  pedro_dprintf(-1, "morcego_init_libav d");
+	  pedro_dprintf(-1,
+			"passou de init_decoder2");
 
-		mv_______->morcego_interface_c___adjusted_bps =
-			be_data->be_bits_per_sample;
-		if (24 == be_data->be_bits_per_sample)
-		{
+	  mv_______->morcego_interface_c___adjusted_bps =
+	       be_data->be_bits_per_sample;
+	  if (24 == be_data->be_bits_per_sample)
+	  {
 
-			mv_______->morcego_interface_c___adjusted_bps =
-				32;
-			assert(FFMS_FMT_S32 == be_data->sample_format);
-		}
+	       mv_______->morcego_interface_c___adjusted_bps =
+		    32;
+	       assert(FFMS_FMT_S32 == be_data->sample_format);
+	  }
 
-		if (2 == be_data->be_channels)
-		{
-			strcpy(be_data->be_mode,
-				   "normal LR stereo");
-		}
-		if (1 == be_data->be_channels)
-		{
-			strcpy(be_data->be_mode,
-				   "single channel");
-		}
-		if (4 == be_data->be_channels)
-		{
-			strcpy(be_data->be_mode, "4 channels");
-		}
-		if (6 == be_data->be_channels)
-		{
-			strcpy(be_data->be_mode, "6 channels");
-		}
-		if (8 == be_data->be_channels)
-		{
-			strcpy(be_data->be_mode, "8 channels");
-		}
-		double size_of_data;
+	  if (2 == be_data->be_channels)
+	  {
+	       strcpy(be_data->be_mode,
+		      "normal LR stereo");
+	  }
+	  if (1 == be_data->be_channels)
+	  {
+	       strcpy(be_data->be_mode,
+		      "single channel");
+	  }
+	  if (4 == be_data->be_channels)
+	  {
+	       strcpy(be_data->be_mode, "4 channels");
+	  }
+	  if (6 == be_data->be_channels)
+	  {
+	       strcpy(be_data->be_mode, "6 channels");
+	  }
+	  if (8 == be_data->be_channels)
+	  {
+	       strcpy(be_data->be_mode, "8 channels");
+	  }
+	  double size_of_data;
 
-		if (be_data->be_channels > 2)
-		{
-			size_of_data =
-				be_data->be_seconds * 2 * (double)be_data->be_samplerate *
-				(double)mv_______->morcego_interface_c___adjusted_bps / 8.0;
-		}
-		else
-		{
-			size_of_data =
-				be_data->be_seconds * be_data->be_channels * (double)be_data->be_samplerate *
-				(double)mv_______->morcego_interface_c___adjusted_bps / 8.0;
-		}
-		be_data->be_size_of_pcm_data = (__int64)size_of_data;
-		//("passou 2");
-		if (be_data->be_samplerate < 8000 || be_data->be_samplerate > 96000)
-		{
+	  if (be_data->be_channels > 2)
+	  {
+	       size_of_data =
+		    be_data->be_seconds * 2 * (double)be_data->be_samplerate *
+		    (double)mv_______->morcego_interface_c___adjusted_bps / 8.0;
+	  }
+	  else
+	  {
+	       size_of_data =
+		    be_data->be_seconds * be_data->be_channels * (double)be_data->be_samplerate *
+		    (double)mv_______->morcego_interface_c___adjusted_bps / 8.0;
+	  }
+	  be_data->be_size_of_pcm_data = (__int64)size_of_data;
+	  //("passou 2");
+	  if (be_data->be_samplerate < 8000 || be_data->be_samplerate > 96000)
+	  {
 
-			strcpy(be_data->be_error_message, "Invalid sample rate");
-			returnvalue = 7;
-			goto saida;
-		}
+	       strcpy(be_data->be_error_message, "Invalid sample rate");
+	       returnvalue = 7;
+	       goto saida;
+	  }
 
-		if (be_data->be_bits_per_sample < 8 || be_data->be_bits_per_sample > 64)
-		{
-			strcpy(be_data->be_error_message, "Invalid bits per sample value");
-			returnvalue = 8;
-			goto saida;
-		}
+	  if (be_data->be_bits_per_sample < 8 || be_data->be_bits_per_sample > 64)
+	  {
+	       strcpy(be_data->be_error_message, "Invalid bits per sample value");
+	       returnvalue = 8;
+	       goto saida;
+	  }
 
-		{
+	  {
 
-			mv_______->morcego_interface_c___after_conversion_size = 0;
-			mv_______->morcego_interface_c___tamanhodecadafatia = 0;
-			mv_______->morcego_interface_c___restante = 0;
-			mv_______->morcego_interface_c___tamanho = 0;
+	       mv_______->morcego_interface_c___after_conversion_size = 0;
+	       mv_______->morcego_interface_c___tamanhodecadafatia = 0;
+	       mv_______->morcego_interface_c___restante = 0;
+	       mv_______->morcego_interface_c___tamanho = 0;
 
-			mv_______->morcego_interface_c___tamanhodecadafatia = (mv_______->morcego_interface_c___adjusted_bps / 8) * be_data->be_channels;
+	       mv_______->morcego_interface_c___tamanhodecadafatia = (mv_______->morcego_interface_c___adjusted_bps / 8) * be_data->be_channels;
 
-			if (1 != be_data->be_channels && 2 != be_data->be_channels && 4 != be_data->be_channels && 6 != be_data->be_channels && 8 != be_data->be_channels)
-			{
-				strcpy(be_data->be_error_message,
-					   "Only support to 1, 2, 4, 5.1 or 7.1 channels (output to 2 channels) available at this moment");
-				returnvalue = 9;
-				goto saida;
-			}
+	       if (1 != be_data->be_channels && 2 != be_data->be_channels && 4 != be_data->be_channels && 6 != be_data->be_channels && 8 != be_data->be_channels)
+	       {
+		    strcpy(be_data->be_error_message,
+			   "Only support to 1, 2, 4, 5.1 or 7.1 channels (output to 2 channels) available at this moment");
+		    returnvalue = 9;
+		    goto saida;
+	       }
 
-			if (64 == be_data->be_bits_per_sample)
-			{
-				strcpy(be_data->be_error_message,
-					   "Cannot play 64 bits audio for the moment");
-				returnvalue = 11;
-				goto saida;
-			}
-		saida:;
-			if (returnvalue)
-			{
-				morcego_deinit_libav(mv_______);
-			}
-			pedro_dprintf(-1, "morcego_init_libav f");
+	       if (64 == be_data->be_bits_per_sample)
+	       {
+		    strcpy(be_data->be_error_message,
+			   "Cannot play 64 bits audio for the moment");
+		    returnvalue = 11;
+		    goto saida;
+	       }
+	  saida:;
+	       if (returnvalue)
+	       {
+		    morcego_deinit_libav(mv_______);
+	       }
+	       pedro_dprintf(-1, "morcego_init_libav f");
 
-			return returnvalue;
-		}
-	}
+	       return returnvalue;
+	  }
+     }
 }
 /**
  * This is the function to decode to pcm 16 bits
@@ -557,141 +559,141 @@ int morcego_init_libav(morcego___i___instance__a__bucaneiro_engineering *mv_____
 int morcego_decode_libav(morcego___i___instance__a__bucaneiro_engineering *mv_______, int bytes_to_decode, char *bufout, int *size_out)
 {
 
-	be_libav_struct *be_copy;
-	if (mv_______->be_for_wav_convert)
-	{
-		be_copy = (be_libav_struct *)mv_______->be_for_wav_convert;
-	}
-	else
-		be_copy = (be_libav_struct *)mv_______->be_real;
+     be_libav_struct *be_copy;
+     if (mv_______->be_for_wav_convert)
+     {
+	  be_copy = (be_libav_struct *)mv_______->be_for_wav_convert;
+     }
+     else
+	  be_copy = (be_libav_struct *)mv_______->be_real;
 
-	int size_out_b;
+     int size_out_b;
 
-	int bytes = 0;
+     int bytes = 0;
 
-	int returnvalue;
+     int returnvalue;
 
-	int bytespegos = 0;
+     int bytespegos = 0;
 
-	if (0 == mv_______->morcego_interface_c___decoder_in_use)
-	{
+     if (0 == mv_______->morcego_interface_c___decoder_in_use)
+     {
 
-		return BE_DECODER_NOT_LOADED;
-	}
+	  return BE_DECODER_NOT_LOADED;
+     }
 
-	assert(bytes_to_decode);
+     assert(bytes_to_decode);
 
-	assert(bytes_to_decode < 1000000);
+     assert(bytes_to_decode < 1000000);
 
-	*size_out = 0;
+     *size_out = 0;
 
-	if (-1 != mv_______->morcego_interface_c___seek)
-	{
+     if (-1 != mv_______->morcego_interface_c___seek)
+     {
 
-		if (0 == is_mp3)
-		{
+	  if (0 == is_mp3)
+	  {
 
-			mv_______->morcego_interface_c___bytes_available_in_buffer = 0;
-			mv_______->morcego_interface_c___buffer_address = mv_______->morcego_interface_c___internal_buffer;
+	       mv_______->morcego_interface_c___bytes_available_in_buffer = 0;
+	       mv_______->morcego_interface_c___buffer_address = mv_______->morcego_interface_c___internal_buffer;
 
-			seek2(mv_______, mv_______->morcego_interface_c___seek);
-			mv_______->morcego_interface_c___seek = -1;
-			mv_______->morcego_interface_c___decoder_state = BE_STATE_DECODING;
-		}
-	}
+	       seek2(mv_______, mv_______->morcego_interface_c___seek);
+	       mv_______->morcego_interface_c___seek = -1;
+	       mv_______->morcego_interface_c___decoder_state = BE_STATE_DECODING;
+	  }
+     }
 
 again:;
-	if (mv_______->morcego_interface_c___bytes_available_in_buffer)
-	{
+     if (mv_______->morcego_interface_c___bytes_available_in_buffer)
+     {
 
-		int fatia_copiada;
-		fatia_copiada =
-			BucaneiroMin(bytes_to_decode, mv_______->morcego_interface_c___bytes_available_in_buffer);
+	  int fatia_copiada;
+	  fatia_copiada =
+	       BucaneiroMin(bytes_to_decode, mv_______->morcego_interface_c___bytes_available_in_buffer);
 
-		memcpy(bufout, mv_______->morcego_interface_c___buffer_address, fatia_copiada);
+	  memcpy(bufout, mv_______->morcego_interface_c___buffer_address, fatia_copiada);
 
-		mv_______->morcego_interface_c___buffer_address += fatia_copiada;
+	  mv_______->morcego_interface_c___buffer_address += fatia_copiada;
 
-		bytes += fatia_copiada;
+	  bytes += fatia_copiada;
 
-		bufout += fatia_copiada;
-		bytes_to_decode -= fatia_copiada;
-		mv_______->morcego_interface_c___bytes_available_in_buffer -= fatia_copiada;
+	  bufout += fatia_copiada;
+	  bytes_to_decode -= fatia_copiada;
+	  mv_______->morcego_interface_c___bytes_available_in_buffer -= fatia_copiada;
 
-		if (0 == mv_______->morcego_interface_c___bytes_available_in_buffer)
-		{
-			mv_______->morcego_interface_c___buffer_address = mv_______->morcego_interface_c___internal_buffer;
-		}
+	  if (0 == mv_______->morcego_interface_c___bytes_available_in_buffer)
+	  {
+	       mv_______->morcego_interface_c___buffer_address = mv_______->morcego_interface_c___internal_buffer;
+	  }
 
-		*size_out += fatia_copiada;
-		bytespegos += fatia_copiada;
-		if (0 == bytes_to_decode)
-		{
-			pedro_dprintf(-1, " BE_DECODED %d", *size_out);
+	  *size_out += fatia_copiada;
+	  bytespegos += fatia_copiada;
+	  if (0 == bytes_to_decode)
+	  {
+	       pedro_dprintf(-1, " BE_DECODED %d", *size_out);
 
-			return BE_DECODED;
-		}
-	}
+	       return BE_DECODED;
+	  }
+     }
 
-	if (BE_STATE_NO_MORE_SAMPLES == mv_______->morcego_interface_c___decoder_state)
-	{
-		pedro_dprintf(-1, " BE_DECODED_BUT_NO_MORE_SAMPLES_AVAILABLE %d", *size_out);
-		return BE_DECODED_BUT_NO_MORE_SAMPLES_AVAILABLE;
-	}
+     if (BE_STATE_NO_MORE_SAMPLES == mv_______->morcego_interface_c___decoder_state)
+     {
+	  pedro_dprintf(-1, " BE_DECODED_BUT_NO_MORE_SAMPLES_AVAILABLE %d", *size_out);
+	  return BE_DECODED_BUT_NO_MORE_SAMPLES_AVAILABLE;
+     }
 
-	if (mv_______->morcego_interface_c___bytes_available_in_buffer)
-	{
-		goto again;
-	}
+     if (mv_______->morcego_interface_c___bytes_available_in_buffer)
+     {
+	  goto again;
+     }
 
-	while (1)
-	{
-		returnvalue = BE_DECODED;
+     while (1)
+     {
+	  returnvalue = BE_DECODED;
 
-		decode2(mv_______, mv_______->morcego_interface_c___buffer, &size_out_b);
+	  decode2(mv_______, mv_______->morcego_interface_c___buffer, &size_out_b);
 
-		mv_______->morcego_interface_c___restante = size_out_b;
+	  mv_______->morcego_interface_c___restante = size_out_b;
 
-		mv_______->morcego_interface_c___after_conversion_size =
-			convert_pcm_data(
-				mv_______, size_out_b, mv_______->morcego_interface_c___buffer,
-				/*mv_______->morcego_interface_c___adjusted_bps this is a hac to force 16 bits because the decoder always convert all audio formats to 16 bits*/ 16, be_copy->sample_format, be_copy->be_channels);
+	  mv_______->morcego_interface_c___after_conversion_size =
+	       convert_pcm_data(
+		    mv_______, size_out_b, mv_______->morcego_interface_c___buffer,
+		    /*mv_______->morcego_interface_c___adjusted_bps this is a hac to force 16 bits because the decoder always convert all audio formats to 16 bits*/ 16, be_copy->sample_format, be_copy->be_channels);
 
-		memcpy(mv_______->morcego_interface_c___buffer_address, mv_______->morcego_interface_c___buffer, mv_______->morcego_interface_c___after_conversion_size);
-		mv_______->morcego_interface_c___bytes_available_in_buffer += mv_______->morcego_interface_c___after_conversion_size;
+	  memcpy(mv_______->morcego_interface_c___buffer_address, mv_______->morcego_interface_c___buffer, mv_______->morcego_interface_c___after_conversion_size);
+	  mv_______->morcego_interface_c___bytes_available_in_buffer += mv_______->morcego_interface_c___after_conversion_size;
 
-		if (!mv_______->morcego_interface_c___restante)
-		{
-			mv_______->morcego_interface_c___decoder_state = BE_STATE_NO_MORE_SAMPLES;
-			goto again;
-			break;
-		}
-		mv_______->morcego_interface_c___decoder_state = BE_STATE_DECODING;
-		goto again;
-	}
+	  if (!mv_______->morcego_interface_c___restante)
+	  {
+	       mv_______->morcego_interface_c___decoder_state = BE_STATE_NO_MORE_SAMPLES;
+	       goto again;
+	       break;
+	  }
+	  mv_______->morcego_interface_c___decoder_state = BE_STATE_DECODING;
+	  goto again;
+     }
 
-	return returnvalue;
+     return returnvalue;
 }
 /**
  * It will free the memory used and files opened
  */
 void morcego_deinit_libav(morcego___i___instance__a__bucaneiro_engineering *mv_______)
 {
-	mv_______->morcego_interface_c___decoder_in_use = 0;
-	deinit2(mv_______);
+     mv_______->morcego_interface_c___decoder_in_use = 0;
+     deinit2(mv_______);
 
-	//("deinit");
-	mv_______->libav_c___amanda_s_smart_ape__is_open = false;
+     //("deinit");
+     mv_______->libav_c___amanda_s_smart_ape__is_open = false;
 
-	return;
+     return;
 }
 
 void get_wav_progress_information(morcego___i___instance__a__bucaneiro_engineering *mv_______, int *por, int *ret, int *fin, char *message_)
 {
-	*por = mv_______->morcego_interface_c___porcentagem;
-	*ret = mv_______->morcego_interface_c___returnvalue_wav;
-	*fin = mv_______->morcego_interface_c___finished_wav;
-	strcpy(message_, mv_______->morcego_interface_c___message___);
+     *por = mv_______->morcego_interface_c___porcentagem;
+     *ret = mv_______->morcego_interface_c___returnvalue_wav;
+     *fin = mv_______->morcego_interface_c___finished_wav;
+     strcpy(message_, mv_______->morcego_interface_c___message___);
 }
 
 /**
@@ -706,10 +708,10 @@ void get_wav_progress_information(morcego___i___instance__a__bucaneiro_engineeri
  */
 WCHAR * amanda_utf8towide_1_(char *pUTF8)
 {
-	static WCHAR ricardo_k[1024];
+     static WCHAR ricardo_k[1024];
 
-	MultiByteToWideChar(CP_UTF8, 0, (LPCSTR)pUTF8, -1, ricardo_k, 1024);
-	return ricardo_k;
+     MultiByteToWideChar(CP_UTF8, 0, (LPCSTR)pUTF8, -1, ricardo_k, 1024);
+     return ricardo_k;
 }
 
 /**
@@ -724,24 +726,26 @@ WCHAR * amanda_utf8towide_1_(char *pUTF8)
 int64_t
 getfilesize_ar_amanda_s_smart_ape(char *infile_ar)
 {
-	__int64 ret;
-	FILE *myfile;
+     __int64 ret;
+     FILE *myfile;
 
-	if ((myfile = _wfopen(amanda_utf8towide_1_(infile_ar), L"rb")) == NULL)
-	{
-		return -1;
-	}
-	ret = _fseeki64(myfile, 0, SEEK_END);
-	ret = _ftelli64(myfile);
-	fclose(myfile);
-	return ret;
+     if ((myfile = _wfopen(amanda_utf8towide_1_(infile_ar), L"rb")) == NULL)
+     {
+	  return -1;
+     }
+     ret = _fseeki64(myfile, 0, SEEK_END);
+     ret = _ftelli64(myfile);
+     fclose(myfile);
+     return ret;
 }
+
+//"Amanda0"
 
 /**
  * It will extract the media file to wav
  */
 int morcego_extract_wav(morcego___i___instance__a__bucaneiro_engineering *mv_______, char *filename_amanda_s_smart_ape, char *out_wav_file, int wav_mode,
-						int track)
+			int track)
 {
 
 #define FAAD_FMT_16BIT 1
@@ -750,402 +754,410 @@ int morcego_extract_wav(morcego___i___instance__a__bucaneiro_engineering *mv____
 #define FAAD_FMT_FLOAT 4
 
 	
-	__int64            processed   =                                                               0;
-	//int64_t            file_size_
-	audio_file *       wav_stream  =                                                            NULL;
-	char               int_buffer  [4096                                                           ];
-	char               signature_amanda_s_smart_ape[MAXPATH_UTF_8_MODE_AMANDA_S_SMART_APE ] = { 0, };
-	double             amanda_s_smart_ape_timestamp                                                 ;
-	int                ret_amanda_s_smart_ape                                                       ;
-	int                returnvalue =                                                               0;
-	int                size_out                                                                     ;
-	long long          generated_size_amanda_s_smart_ape                           =               0;
+     __int64            processed   =                                                               0;
+     //int64_t            file_size_
+     audio_file *       wav_stream  =                                                            NULL;
+     char               int_buffer  [4096                                                           ];
+     char               signature_amanda_s_smart_ape[MAXPATH_UTF_8_MODE_AMANDA_S_SMART_APE ] = { 0, };
+     double             amanda_s_smart_ape_timestamp                                =               0;
+     int                ret_amanda_s_smart_ape                                                       ;
+     int                returnvalue =                                                               0;
+     int                size_out                                                                     ;
+     long long          generated_size_amanda_s_smart_ape                           =               0;
 
-	__attribute((unused)) enum amanda_s_smart_ape_webm_commands webm_commands_amanda_s_smart_ape                                                                ;
-	be_libav_struct *  be = (be_libav_struct *)mv_______->be_ptr                                    ;
+     __attribute((unused)) enum amanda_s_smart_ape_webm_commands webm_commands_amanda_s_smart_ape                                                                ;
+     be_libav_struct *  be = (be_libav_struct *)mv_______->be_ptr                                    ;
 
-	if (5 == wav_mode)
-	{
-		mprintf("64 bits FLOAT not implemented yet, moving to 32 bits FLOAT");
-		wav_mode = FAAD_FMT_FLOAT;
-	}
+     if (5 == wav_mode)
+     {
+	  mprintf("64 bits FLOAT not implemented yet, moving to 32 bits FLOAT");
+	  wav_mode = FAAD_FMT_FLOAT;
+     }
 
-	memset(be, 0, sizeof(be_libav_struct));
-
-	strcpy(be->sourcefile, filename_amanda_s_smart_ape);
-
-	be->track_to_play_or_decode = track;
-
-	mv_______->be_for_wav_convert = (void *)be;
-
-	if (morcego_init_libav(mv_______, be, 0))
-	{
-		strcpy(mv_______->morcego_interface_c___message___, be->be_error_message);
-		returnvalue = 1;
-		goto saida_amanda_s_smart_ape;
-	}
+     printf("Te amo Amanda...\n");
 	
-	if (false == mv_______->libav_c___amanda_s_smart_ape_is_new_webm)
-	{
-		goto saida_amanda_s_smart_ape;
-	}
+     memset(be, 0, sizeof(be_libav_struct));
 
-	{
+     strcpy(be->sourcefile, filename_amanda_s_smart_ape);
 
-		amanda_s_smart_ape_timestamp = get_bucaneiro_tick();
+     be->track_to_play_or_decode = track;
 
-		sprintf(signature_amanda_s_smart_ape, "Amanda_27_Ricardo_51_%lld_%d_%s", getfilesize_ar_amanda_s_smart_ape(filename_amanda_s_smart_ape),
-				27 + 51,
-				filename_amanda_s_smart_ape);
+     mv_______->be_for_wav_convert = (void *)be;
 
-		amanda_s_smart_ape_timestamp = get_bucaneiro_tick() - amanda_s_smart_ape_timestamp;
+     if (morcego_init_libav(mv_______, be, 0))
+     {
+	  strcpy(mv_______->morcego_interface_c___message___, be->be_error_message);
+	  returnvalue = 1;
+	  goto saida_amanda_s_smart_ape;
+     }
+	
+     if (false == mv_______->libav_c___amanda_s_smart_ape_is_new_webm)
+     {
+	  goto saida_amanda_s_smart_ape;
+     }
 
-		pedro_dprintf(0, "tempo que leva com rsp %.6f\n", amanda_s_smart_ape_timestamp);
+     {
 
-		pedro_dprintf(0, "amor a string %s\n", signature_amanda_s_smart_ape);
+	  amanda_s_smart_ape_timestamp = get_bucaneiro_tick();
 
-		//exit(27);
-	}
+	  sprintf(signature_amanda_s_smart_ape, "Amanda_27_Ricardo_51_%lld_%d_%s", getfilesize_ar_amanda_s_smart_ape(filename_amanda_s_smart_ape),
+		  27 + 51,
+		  filename_amanda_s_smart_ape);
 
-	{
+	  amanda_s_smart_ape_timestamp = get_bucaneiro_tick() - amanda_s_smart_ape_timestamp;
 
-		if (true == amanda_s_smart_ape_query_webm_and_normalization(signature_amanda_s_smart_ape, mv_______->libav_c___webm________________amanda_s_smart_ape,
-																	mv_______->libav_c___normalization_mode__amanda_s_smart_ape, mv_______->libav_c___normalization_value_amanda_s_smart_ape, mv_______->libav_c___normalization_valu2_amanda_s_smart_ape, mv_______->libav_c___normalization_valu3_amanda_s_smart_ape, &mv_______->libav_c___has_an_entry))
-		{
+	  pedro_dprintf(0, "tempo que leva com rsp %.6f\n", amanda_s_smart_ape_timestamp);
+
+	  pedro_dprintf(0, "amor a string %s\n", signature_amanda_s_smart_ape);
+
+	  //exit(27);
+     }
+
+     {
+
+	  if (true == amanda_s_smart_ape_query_webm_and_normalization(signature_amanda_s_smart_ape, mv_______->libav_c___webm________________amanda_s_smart_ape,
+								      mv_______->libav_c___normalization_mode__amanda_s_smart_ape, mv_______->libav_c___normalization_value_amanda_s_smart_ape, mv_______->libav_c___normalization_valu2_amanda_s_smart_ape, mv_______->libav_c___normalization_valu3_amanda_s_smart_ape, &mv_______->libav_c___has_an_entry))
+	  {
 
 
-			pedro_dprintf(0, "Deu certo meu amor...agora vou cagar melhor kkkkkk\n");
+	       pedro_dprintf(0, "Deu certo meu amor...agora vou cagar melhor kkkkkk\n");
 
-			pedro_dprintf(0, "webm .%s.\n", mv_______->libav_c___webm________________amanda_s_smart_ape);
-			pedro_dprintf(0, "normalization_mode  .%s.\n", mv_______->libav_c___normalization_mode__amanda_s_smart_ape);
-			pedro_dprintf(0, "normalization_value .%s.\n", mv_______->libav_c___normalization_value_amanda_s_smart_ape);
-			pedro_dprintf(0, "normalization_valu2 .%s.\n", mv_______->libav_c___normalization_valu2_amanda_s_smart_ape);
-			pedro_dprintf(0, "normalization_valu3 .%s.\n", mv_______->libav_c___normalization_valu3_amanda_s_smart_ape);
-			/*
-			pedro_dprintf(0, "webm .%s.\n", webm________________amanda_s_smart_ape);
-			pedro_dprintf(0, "webm .%s.\n", webm________________amanda_s_smart_ape);
-			*/
+	       pedro_dprintf(0, "webm .%s.\n", mv_______->libav_c___webm________________amanda_s_smart_ape);
+	       pedro_dprintf(0, "normalization_mode  .%s.\n", mv_______->libav_c___normalization_mode__amanda_s_smart_ape);
+	       pedro_dprintf(0, "normalization_value .%s.\n", mv_______->libav_c___normalization_value_amanda_s_smart_ape);
+	       pedro_dprintf(0, "normalization_valu2 .%s.\n", mv_______->libav_c___normalization_valu2_amanda_s_smart_ape);
+	       pedro_dprintf(0, "normalization_valu3 .%s.\n", mv_______->libav_c___normalization_valu3_amanda_s_smart_ape);
+	       /*
+		 pedro_dprintf(0, "webm .%s.\n", webm________________amanda_s_smart_ape);
+		 pedro_dprintf(0, "webm .%s.\n", webm________________amanda_s_smart_ape);
+	       */
 
-			pedro_dprintf(0, "enabled cache? %d\n", (int) mv_______->libav_c___amanda_s_smart_ape_use_cache);
+	       pedro_dprintf(0, "enabled cache? %d\n", (int) mv_______->libav_c___amanda_s_smart_ape_use_cache);
 
-			pedro_dprintf(0, "Tem itens %d\n", (int)mv_______->libav_c___has_an_entry);
+	       pedro_dprintf(0, "Tem itens %d\n", (int)mv_______->libav_c___has_an_entry);
 
-			if('\0' == mv_______->libav_c___webm________________amanda_s_smart_ape[0])
-			{
-				pedro_dprintf(0, "Não tem webm data salva, simplesmente isso\n");
-			}
-			else
-			{
-				pedro_dprintf(0, "!Tem webm data salva, simplesmente isso\n");
+	       amanda_s_smart_ape_timestamp = get_bucaneiro_tick();
+	       
+	       if('\0' == mv_______->libav_c___webm________________amanda_s_smart_ape[0])
+	       {
+		    pedro_dprintf(0, "Não tem webm data salva, simplesmente isso\n");
+	       }
+	       else
+	       {
+		    pedro_dprintf(0, "!Tem webm data salva, simplesmente isso\n");
 
-				if (mv_______->libav_c___amanda_s_smart_ape_use_cache)
-				{
-					pedro_dprintf(0, "Ta usando cache entao vai colocar o webm no item\n");
+		    if (mv_______->libav_c___amanda_s_smart_ape_use_cache)
 
-					generated_size_amanda_s_smart_ape strtoll(mv_______->libav_c___webm________________amanda_s_smart_ape, NULL, 10);
+		    {
+			 pedro_dprintf(0, "Ta usando cache entao vai colocar o webm no item usando o codigo que uso os dados no cache\n");
 
-					goto saida_amanda_s_smart_ape;
-				}
-				else
-				{
-					pedro_dprintf(0, "Não ta usando cache entao nao vai fazer nada\n");
-				}
+			 generated_size_amanda_s_smart_ape  = strtoll(mv_______->libav_c___webm________________amanda_s_smart_ape, NULL, 10);
 
-			}
+			 goto saida_amanda_s_smart_ape;
+		    }
+		    else
+		    {
+			 pedro_dprintf(0, "Não ta usando cache entao nao vai fazer nada\n");
+		    }
 
-		}
-	}
+	       }
 
-	if (false == mv_______->libav_c___amanda_s_smart_ape__check_and_get_webm_fix_if_true)
-	{
+	  }
+     }
 
-		wav_stream =
-			open_audio_file(out_wav_file, be->be_samplerate, be->be_channels, wav_mode,
-							1, 0);
+     if (false == mv_______->libav_c___amanda_s_smart_ape__check_and_get_webm_fix_if_true)
+     {
 
-		if (NULL == wav_stream)
-		{
-			//strcpy (be_error_message, "Cannot open outputfile to write");
-			strcpy(mv_______->morcego_interface_c___message___, "Cannot open outputfile to write");
-			returnvalue = 2; //se dois deu erro
-			goto saida_amanda_s_smart_ape;
-		};
-	}
+	  wav_stream =
+	       open_audio_file(out_wav_file, be->be_samplerate, be->be_channels, wav_mode,
+			       1, 0);
+
+	  if (NULL == wav_stream)
+	  {
+	       //strcpy (be_error_message, "Cannot open outputfile to write");
+	       strcpy(mv_______->morcego_interface_c___message___, "Cannot open outputfile to write");
+	       returnvalue = 2; //se dois deu erro
+	       goto saida_amanda_s_smart_ape;
+	  };
+     }
 
 again:;
-	//
-	int por;
-	mv_______->morcego_interface_c___percent = getpor__int64(be->be_size_of_pcm_data, processed);
-	por = (int)mv_______->morcego_interface_c___percent;
-	if (por >= 100)
-		por = 99;
-	if (por < 0)
-		por = 0;
+     //
+     int por;
+     mv_______->morcego_interface_c___percent = getpor__int64(be->be_size_of_pcm_data, processed);
+     por = (int)mv_______->morcego_interface_c___percent;
+     if (por >= 100)
+	  por = 99;
+     if (por < 0)
+	  por = 0;
 
-	mv_______->morcego_interface_c___porcentagem = por;
+     mv_______->morcego_interface_c___porcentagem = por;
 
-	ret_amanda_s_smart_ape = morcego_decode_libav(mv_______, sizeof(int_buffer), int_buffer, &size_out);
+     ret_amanda_s_smart_ape = morcego_decode_libav(mv_______, sizeof(int_buffer), int_buffer, &size_out);
 
-	processed += size_out;
+     processed += size_out;
 
-	if (BE_ERROR_DURING_DECODE == ret_amanda_s_smart_ape)
-	{
-		returnvalue = 3;
-		strcpy(mv_______->morcego_interface_c___message___, be->be_error_message);
-		//strcpy (be_error_message, be_copy->be_error_message);
-		goto saida_amanda_s_smart_ape;
-	}
-	if (BE_DECODED == ret_amanda_s_smart_ape || BE_DECODED_BUT_NO_MORE_SAMPLES_AVAILABLE == ret_amanda_s_smart_ape)
-	{
+     if (BE_ERROR_DURING_DECODE == ret_amanda_s_smart_ape)
+     {
+	  returnvalue = 3;
+	  strcpy(mv_______->morcego_interface_c___message___, be->be_error_message);
+	  //strcpy (be_error_message, be_copy->be_error_message);
+	  goto saida_amanda_s_smart_ape;
+     }
+     if (BE_DECODED == ret_amanda_s_smart_ape || BE_DECODED_BUT_NO_MORE_SAMPLES_AVAILABLE == ret_amanda_s_smart_ape)
+     {
 
-		int size = size_out;
-		char *out = int_buffer;
-		if (0 == size_out)
-		{
-			goto saida_amanda_s_smart_ape;
-		}
-		switch (wav_mode)
-		{
-		case FAAD_FMT_16BIT:
+	  int size = size_out;
+	  char *out = int_buffer;
+	  if (0 == size_out)
+	  {
+	       goto saida_amanda_s_smart_ape;
+	  }
+	  switch (wav_mode)
+	  {
+	  case FAAD_FMT_16BIT:
 
-		if(-1 == mv_______->libav_c___amanda_s_smart_ape_new_generated_duration)
-		{
-generated_size_amanda_s_smart_ape += size_out;
-		}
+	       if(-1 == mv_______->libav_c___amanda_s_smart_ape_new_generated_duration)
+	       {
+		    generated_size_amanda_s_smart_ape += size_out;
+	       }
 
-			if (false == mv_______->libav_c___amanda_s_smart_ape__check_and_get_webm_fix_if_true)
-			{
-				if (write_audio_file(wav_stream, out, size / 2, 0) == 0)
-				{
-					;
-					//strcpy (be_error_message, "Error on the wav write function");
-					strcpy(mv_______->morcego_interface_c___message___, "Error on the wav write function");
-					//strcpy(mv_______->morcego_interface_c___message___, be_copy->be_error_message);
-					returnvalue = 4;
-					goto saida_amanda_s_smart_ape;
-				}
-			}
-			break;
-		case FAAD_FMT_24BIT:
-		{
-			long *data = malloc(size * 4 + 1);
-			int i;
-			short *datashort = (short *)out;
-			if (size)
-			{
-				for (i = 0; i < size / 2; i++)
-				{
-					data[i] = datashort[i] * 256;
-				}
+	       if (false == mv_______->libav_c___amanda_s_smart_ape__check_and_get_webm_fix_if_true)
+	       {
+		    if (write_audio_file(wav_stream, out, size / 2, 0) == 0)
+		    {
+			 ;
+			 //strcpy (be_error_message, "Error on the wav write function");
+			 strcpy(mv_______->morcego_interface_c___message___, "Error on the wav write function");
+			 //strcpy(mv_______->morcego_interface_c___message___, be_copy->be_error_message);
+			 returnvalue = 4;
+			 goto saida_amanda_s_smart_ape;
+		    }
+	       }
+	       break;
+	  case FAAD_FMT_24BIT:
+	  {
+	       long *data = malloc(size * 4 + 1);
+	       int i;
+	       short *datashort = (short *)out;
+	       if (size)
+	       {
+		    for (i = 0; i < size / 2; i++)
+		    {
+			 data[i] = datashort[i] * 256;
+		    }
 
-				if (-1 == mv_______->libav_c___amanda_s_smart_ape_new_generated_duration)
-				{
-					generated_size_amanda_s_smart_ape += size;
-				}
+		    if (-1 == mv_______->libav_c___amanda_s_smart_ape_new_generated_duration)
+		    {
+			 generated_size_amanda_s_smart_ape += size;
+		    }
 
-				if (false == mv_______->libav_c___amanda_s_smart_ape__check_and_get_webm_fix_if_true)
-				{
-					if (write_audio_file(wav_stream, (void *)data, size / 2, 0) == 0)
-					{
-						strcpy(mv_______->morcego_interface_c___message___,
-							   "Error on the wav write function");
-						returnvalue = 4;
-						free(data);
-						goto saida_amanda_s_smart_ape;
-					}
-				}
-			}
-			free(data);
-		}
-		break;
-		case FAAD_FMT_32BIT:
-		{
-			long *data = malloc(size * 4 + 1); //long
-			int i;
-			short *datashort = (short *)out;
-			if (size)
-			{
-				for (i = 0; i < size / 2; i++)
-				{
-					int tam = datashort[i];
-					data[i] = tam * (256 * 256);
-				}
+		    if (false == mv_______->libav_c___amanda_s_smart_ape__check_and_get_webm_fix_if_true)
+		    {
+			 if (write_audio_file(wav_stream, (void *)data, size / 2, 0) == 0)
+			 {
+			      strcpy(mv_______->morcego_interface_c___message___,
+				     "Error on the wav write function");
+			      returnvalue = 4;
+			      free(data);
+			      goto saida_amanda_s_smart_ape;
+			 }
+		    }
+	       }
+	       free(data);
+	  }
+	  break;
+	  case FAAD_FMT_32BIT:
+	  {
+	       long *data = malloc(size * 4 + 1); //long
+	       int i;
+	       short *datashort = (short *)out;
+	       if (size)
+	       {
+		    for (i = 0; i < size / 2; i++)
+		    {
+			 int tam = datashort[i];
+			 data[i] = tam * (256 * 256);
+		    }
 
-				if (-1 == mv_______->libav_c___amanda_s_smart_ape_new_generated_duration)
-				{
-					generated_size_amanda_s_smart_ape += size;
-				}
+		    if (-1 == mv_______->libav_c___amanda_s_smart_ape_new_generated_duration)
+		    {
+			 generated_size_amanda_s_smart_ape += size;
+		    }
 
-				if (false == mv_______->libav_c___amanda_s_smart_ape__check_and_get_webm_fix_if_true)
-				{
-					if (write_audio_file(wav_stream, (void *)data, size / 2, 0) == 0)
-					{
-						strcpy(mv_______->morcego_interface_c___message___,
-							   "Error on the wav write function");
-						free(data);
-						returnvalue = 4;
-						goto saida_amanda_s_smart_ape;
-					}
-				}
-			}
-			free(data);
-		}
-		break;
-		case FAAD_FMT_FLOAT:
-		{
-			float *data = malloc(size * 4 + 1);
-			int i;
-			short *datashort = (short *)out;
-			if (size)
-			{
-				for (i = 0; i < size / 2; i++)
-				{
-					data[i] = (float)datashort[i] / 32767;
-					if (data[i] > 1.0)
-					{
-						data[i] = 1.0;
-					}
-					if (data[i] < -1.0)
-					{
-						data[i] = -1.0;
-					}
-				}
+		    if (false == mv_______->libav_c___amanda_s_smart_ape__check_and_get_webm_fix_if_true)
+		    {
+			 if (write_audio_file(wav_stream, (void *)data, size / 2, 0) == 0)
+			 {
+			      strcpy(mv_______->morcego_interface_c___message___,
+				     "Error on the wav write function");
+			      free(data);
+			      returnvalue = 4;
+			      goto saida_amanda_s_smart_ape;
+			 }
+		    }
+	       }
+	       free(data);
+	  }
+	  break;
+	  case FAAD_FMT_FLOAT:
+	  {
+	       float *data = malloc(size * 4 + 1);
+	       int i;
+	       short *datashort = (short *)out;
+	       if (size)
+	       {
+		    for (i = 0; i < size / 2; i++)
+		    {
+			 data[i] = (float)datashort[i] / 32767;
+			 if (data[i] > 1.0)
+			 {
+			      data[i] = 1.0;
+			 }
+			 if (data[i] < -1.0)
+			 {
+			      data[i] = -1.0;
+			 }
+		    }
 				
-				if (-1 == mv_______->libav_c___amanda_s_smart_ape_new_generated_duration)
-				{
-					generated_size_amanda_s_smart_ape += size;
-				}
+		    if (-1 == mv_______->libav_c___amanda_s_smart_ape_new_generated_duration)
+		    {
+			 generated_size_amanda_s_smart_ape += size;
+		    }
 
-				if (false == mv_______->libav_c___amanda_s_smart_ape__check_and_get_webm_fix_if_true)
-				{
-					if (write_audio_file(wav_stream, (void *)data, size / 2, 0) == 0)
-					{
-						strcpy(mv_______->morcego_interface_c___message___,
-							   "Error on the wav write function");
-						free(data);
-						returnvalue = 4;
-						goto saida_amanda_s_smart_ape;
-					}
-				}
-			}
-			free(data);
-		}
-		break;
-		default:
+		    if (false == mv_______->libav_c___amanda_s_smart_ape__check_and_get_webm_fix_if_true)
+		    {
+			 if (write_audio_file(wav_stream, (void *)data, size / 2, 0) == 0)
+			 {
+			      strcpy(mv_______->morcego_interface_c___message___,
+				     "Error on the wav write function");
+			      free(data);
+			      returnvalue = 4;
+			      goto saida_amanda_s_smart_ape;
+			 }
+		    }
+	       }
+	       free(data);
+	  }
+	  break;
+	  default:
 
-			break;
-		}
+	       break;
+	  }
 
-		if (size_out)
-		{
-			goto again;
-		}
-	}
+	  if (size_out)
+	  {
+	       goto again;
+	  }
+     }
 
 saida_amanda_s_smart_ape:
 
-	if (false == mv_______->libav_c___amanda_s_smart_ape__check_and_get_webm_fix_if_true)
-	{
-		if (wav_stream)
-			close_audio_file(wav_stream);
-	}
-	mv_______->morcego_interface_c___decoder_in_use = 0;
-	morcego_deinit_libav(mv_______);
+     if (false == mv_______->libav_c___amanda_s_smart_ape__check_and_get_webm_fix_if_true)
+     {
+	  if (wav_stream)
+	       close_audio_file(wav_stream);
+     }
+     mv_______->morcego_interface_c___decoder_in_use = 0;
+     morcego_deinit_libav(mv_______);
 
-	mv_______->morcego_interface_c___porcentagem = 100;
-	mv_______->morcego_interface_c___returnvalue_wav = returnvalue;
-	mv_______->morcego_interface_c___finished_wav = 1;
+     mv_______->morcego_interface_c___porcentagem = 100;
+     mv_______->morcego_interface_c___returnvalue_wav = returnvalue;
+     mv_______->morcego_interface_c___finished_wav = 1;
 
-	mv_______->be_for_wav_convert = NULL;
+     mv_______->be_for_wav_convert = NULL;
 
-	if (-1 == mv_______->libav_c___amanda_s_smart_ape_new_generated_duration) //uma coisa por vez...
-	{
-		mv_______->libav_c___amanda_s_smart_ape_new_generated_duration = generated_size_amanda_s_smart_ape;//nao é isso?
+     if (-1 == mv_______->libav_c___amanda_s_smart_ape_new_generated_duration) //uma coisa por vez...
+     {
+	  mv_______->libav_c___amanda_s_smart_ape_new_generated_duration = generated_size_amanda_s_smart_ape;//nao é isso?
 
-		mv_______->libav_c___amanda_s_smart_ape_new_generated_duration =
+	  mv_______->libav_c___amanda_s_smart_ape_new_generated_duration =
 
-			((double)(mv_______->libav_c___amanda_s_smart_ape_new_generated_duration) / (double)(be->be_samplerate) / (double)be->be_channels) / 2. * 1000000.0;
+	       ((double)(mv_______->libav_c___amanda_s_smart_ape_new_generated_duration) / (double)(be->be_samplerate) / (double)be->be_channels) / 2. * 1000000.0;
 
-		//pensei que fosse serio...
+	  //pensei que fosse serio...
 
-		if (mv_______->libav_c___amanda_s_smart_ape_use_cache)
-		{
-			//save... se nao estiver carregado, checa se tem o item ou nao
-			if (mv_______->libav_c___has_an_entry)
-			{
-				pedro_dprintf(0, "webm - will update it anyway...\n");
-				//update
-			}
-			else
-			{		
+	  if (mv_______->libav_c___amanda_s_smart_ape_use_cache)
+	  {
+	       //save... se nao estiver carregado, checa se tem o item ou nao
+	       if (mv_______->libav_c___has_an_entry)
+	       {
+		    pedro_dprintf(0, "webm - will update it anyway...\n");
+		    //update
+	       }
+	       else
+	       {		
 
-				pedro_dprintf(0, "webm - will create an entry for webm...\n");
+		    pedro_dprintf(0, "webm - will create an entry for webm...\n");
 
-				assert(strlen(signature_amanda_s_smart_ape));
+		    assert(strlen(signature_amanda_s_smart_ape));
 
-				sprintf(mv_______->libav_c___webm________________amanda_s_smart_ape, "%lld", mv_______->libav_c___amanda_s_smart_ape_new_generated_duration);
+		    sprintf(mv_______->libav_c___webm________________amanda_s_smart_ape, "%lld", mv_______->libav_c___amanda_s_smart_ape_new_generated_duration);
 
-				mv_______->libav_c___normalization_value_amanda_s_smart_ape[0] = '\0';
+		    mv_______->libav_c___normalization_value_amanda_s_smart_ape[0] = '\0';
 
-				mv_______->libav_c___normalization_valu2_amanda_s_smart_ape[0] = 0x0;
+		    mv_______->libav_c___normalization_valu2_amanda_s_smart_ape[0] = 0x0;
 
-				mv_______->libav_c___normalization_valu3_amanda_s_smart_ape[0] = 0b0;
+		    mv_______->libav_c___normalization_valu3_amanda_s_smart_ape[0] = 0b0;
 
-			if(amanda_s_smart_ape_add_entry(signature_amanda_s_smart_ape, mv_______->libav_c___webm________________amanda_s_smart_ape, mv_______->libav_c___normalization_value_amanda_s_smart_ape, mv_______->libav_c___normalization_valu2_amanda_s_smart_ape,
-			mv_______->libav_c___normalization_valu3_amanda_s_smart_ape))
-			{
-					pedro_dprintf(0, "adicionou a entrada amor\n");
-			}
-			//here, por parts...
-			//ja passa os 4...
+		    if(amanda_s_smart_ape_add_entry(signature_amanda_s_smart_ape, mv_______->libav_c___webm________________amanda_s_smart_ape, mv_______->libav_c___normalization_value_amanda_s_smart_ape, mv_______->libav_c___normalization_valu2_amanda_s_smart_ape,
+						    mv_______->libav_c___normalization_valu3_amanda_s_smart_ape))
+		    {
+			 pedro_dprintf(0, "adicionou a entrada amor\n");
+		    }
+		    //here, por parts...
+		    //ja passa os 4...
 
-			//vamos...
-			}
-		}
-	}
-	mv_______->libav_c___amanda_s_smart_ape__check_and_get_webm_fix_if_true = false;
+		    //vamos...
+	       }
+	  }
+     }
+     mv_______->libav_c___amanda_s_smart_ape__check_and_get_webm_fix_if_true = false;
 
-	//for historical reasons...
+     amanda_s_smart_ape_timestamp = get_bucaneiro_tick() - amanda_s_smart_ape_timestamp;
 
-	return returnvalue;
+     pedro_dprintf(0, "Tempo  pra terminar %.6f\n", amanda_s_smart_ape_timestamp);
+     //for historical reasons...
+
+     return returnvalue;
 }
 /**
  * It will mv_______->morcego_interface_c___seek based in percentage
  */
 void morcego_seek_100_libav(morcego___i___instance__a__bucaneiro_engineering *mv_______, double valor)
 {
-	be_libav_struct *be_copy;
-	if (mv_______->be_for_wav_convert)
-	{
-		be_copy = (be_libav_struct *)mv_______->be_for_wav_convert;
-	}
-	else
-		be_copy = (be_libav_struct *)mv_______->be_real;
+     be_libav_struct *be_copy;
+     if (mv_______->be_for_wav_convert)
+     {
+	  be_copy = (be_libav_struct *)mv_______->be_for_wav_convert;
+     }
+     else
+	  be_copy = (be_libav_struct *)mv_______->be_real;
 
-	if (mv_______->morcego_interface_c___decoder_in_use)
-	{
-		double ret;
-		if (0 == is_mp3)
-		{
-			mv_______->morcego_interface_c___seek = valor; //ready
-		}
-		else
-		{
-			ret = getval_100(be_copy->mp3_sizeofdata, valor);
-			if (ret >= be_copy->mp3_sizeofdata)
-			{
-				ret = be_copy->mp3_sizeofdata;
-			}
-			//ret--;
-			ret--;
-			if (ret < 0)
-			{
-				ret = 0;
-			}
-			mv_______->morcego_interface_c___seek = ret;
-			mv_______->morcego_interface_c___seek += be_copy->mp3_adjust;
-		}
-	}
+     if (mv_______->morcego_interface_c___decoder_in_use)
+     {
+	  double ret;
+	  if (0 == is_mp3)
+	  {
+	       mv_______->morcego_interface_c___seek = valor; //ready
+	  }
+	  else
+	  {
+	       ret = getval_100(be_copy->mp3_sizeofdata, valor);
+	       if (ret >= be_copy->mp3_sizeofdata)
+	       {
+		    ret = be_copy->mp3_sizeofdata;
+	       }
+	       //ret--;
+	       ret--;
+	       if (ret < 0)
+	       {
+		    ret = 0;
+	       }
+	       mv_______->morcego_interface_c___seek = ret;
+	       mv_______->morcego_interface_c___seek += be_copy->mp3_adjust;
+	  }
+     }
 }
 /**
  * The version of the ffms2.dll interface
@@ -1153,7 +1165,7 @@ void morcego_seek_100_libav(morcego___i___instance__a__bucaneiro_engineering *mv
 char *
 get_morcego_interface_version(morcego___i___instance__a__bucaneiro_engineering *mv_______)
 {
-	return MORCEGO_VERSION;
+     return MORCEGO_VERSION;
 }
 /**
  * This is the function that will call the extract to wav function
@@ -1161,14 +1173,14 @@ get_morcego_interface_version(morcego___i___instance__a__bucaneiro_engineering *
 static int __stdcall init_decoder(morcego___i___instance__a__bucaneiro_engineering *mv_______)
 {
 
-	mv_______->morcego_interface_c___porcentagem = 0;
-	mv_______->morcego_interface_c___returnvalue_wav = 0;
-	mv_______->morcego_interface_c___finished_wav = 0;
+     mv_______->morcego_interface_c___porcentagem = 0;
+     mv_______->morcego_interface_c___returnvalue_wav = 0;
+     mv_______->morcego_interface_c___finished_wav = 0;
 
-	set_this_thread_to_idle_17_55_23_june_2011();
-	morcego_extract_wav(mv_______, mv_______->morcego_interface_c___filename_, mv_______->morcego_interface_c___out_wav_file_, mv_______->morcego_interface_c___wav_mode_,
-						mv_______->morcego_interface_c___the_track);
-	return 0;
+     set_this_thread_to_idle_17_55_23_june_2011();
+     morcego_extract_wav(mv_______, mv_______->morcego_interface_c___filename_, mv_______->morcego_interface_c___out_wav_file_, mv_______->morcego_interface_c___wav_mode_,
+			 mv_______->morcego_interface_c___the_track);
+     return 0;
 }
 /**
  * The function that will create the thread to decode
@@ -1176,36 +1188,36 @@ static int __stdcall init_decoder(morcego___i___instance__a__bucaneiro_engineeri
 static int __stdcall decode(morcego___i___instance__a__bucaneiro_engineering *mv_______)
 {
 
-	HANDLE myhandle;
-	__INT32_OR_INT64 ThreadId;
-	myhandle = CreateThread(
-		(LPSECURITY_ATTRIBUTES)0,
-		0,
-		(LPTHREAD_START_ROUTINE)init_decoder,
-		(LPVOID)mv_______,
-		0,
-		(LPDWORD)&ThreadId);
-	CloseHandle(myhandle);
-	return 0;
+     HANDLE myhandle;
+     __INT32_OR_INT64 ThreadId;
+     myhandle = CreateThread(
+	  (LPSECURITY_ATTRIBUTES)0,
+	  0,
+	  (LPTHREAD_START_ROUTINE)init_decoder,
+	  (LPVOID)mv_______,
+	  0,
+	  (LPDWORD)&ThreadId);
+     CloseHandle(myhandle);
+     return 0;
 }
 /**
  * It will decode to wav with progress support
  */
 void morcego_extract_wav_extended(
-	morcego___i___instance__a__bucaneiro_engineering *mv_______,
-	char *filename,
-	char *out_wav_file,
-	int wav_mode,
-	int track)
+     morcego___i___instance__a__bucaneiro_engineering *mv_______,
+     char *filename,
+     char *out_wav_file,
+     int wav_mode,
+     int track)
 {
-	mv_______->morcego_interface_c___the_track = track; //tem que verificar isto mais tarde...
-	strcpy(mv_______->morcego_interface_c___filename_, filename);
-	strcpy(mv_______->morcego_interface_c___out_wav_file_, out_wav_file);
-	mv_______->morcego_interface_c___wav_mode_ = wav_mode;
-	decode(mv_______);
-	return;
+     mv_______->morcego_interface_c___the_track = track; //tem que verificar isto mais tarde...
+     strcpy(mv_______->morcego_interface_c___filename_, filename);
+     strcpy(mv_______->morcego_interface_c___out_wav_file_, out_wav_file);
+     mv_______->morcego_interface_c___wav_mode_ = wav_mode;
+     decode(mv_______);
+     return;
 }
 int get_number_of_audio_tracks(morcego___i___instance__a__bucaneiro_engineering *mv_______, char *utf8_filename, char *error_message)
 {
-	return get_number_of_audio_tracks_internal(mv_______, utf8_filename, error_message); //defined in libav.c
+     return get_number_of_audio_tracks_internal(mv_______, utf8_filename, error_message); //defined in libav.c
 }
