@@ -169,6 +169,28 @@ then
 fi
 
 
+#
+if [ "clean_my_love_93_v27" == "$1" ] 
+then
+
+    #    Amanda.sh Amanda8
+    echo nao cofigurado ainda seu bobão, kkkkk '...'
+    exit
+
+fi
+
+
+#
+if [ "clean_my_love_92_v27" == "$1" ] 
+then
+
+    Amanda.sh Amanda9
+#   echo nao cofigurado ainda seu bobão, kkkkk '...'
+    exit
+
+fi
+
+
 echo válidos valores sao clean_my_love_xxx_v27 e por ai a fora '...'
 
 choice
