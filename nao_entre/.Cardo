@@ -1,10 +1,45 @@
 #!/bin/bash
 
+#/******************************************************************************************************************************/
+
+
+if [ "--help" == "$1" ] || [ "help" == "$1" ] ;
+then
+
+
+    echo '                                                                          ...   '
+    echo '0091   -> IE     Internet Explorer, not working yet                       ...   '
+    echo '0092   -> Explorer                                                        ...   '
+    echo '0094   -> Edge                                                            ...   '
+    echo '0095   -> Chrome                                                          ...   '
+    echo '0096   -> Copia .Ricardo.sh e AMANDA                                      ...   '
+    echo '0097   -> Edita Amanda.sh, salva ela e faz push em rsppmp3                ...   '
+    echo '0998   -> Edita makefile rsppmp3                                          ...   '
+    echo '0999   -> Compila espaco_arp.exe                                          ...   '
+    echo '1000   -> Compila playlist.c                                              ...   '
+    echo '1001   -> Compila rsppmp3                                                 ...   '
+    echo 'clear_my_love_xx_v27 ou clean_my_love_xx_v27, se errar vai ter que esperar...   '
+#   echo '                                                                          ...   '
+
+
+     exit 1
+fi
+
+
 #////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
 
 if [ "clean_my_love_1001_v27" == "$1" ] 
 then
 
+    cp '/cygdrive/c/Amanda Ava Pereira/nosso_trabalho/amanda_projects/amandaricardo_koci_rsppmp3_64_bits/rsppmp3 sources/win64/mp3dll/mp3dll/bin/Release/src/c_project/makefile' '/cygdrive/c/cygwin64_amandaricardo_koci_10.2.0/home/User/rsppmp3/makefile'
+
+    emacs                      /cygdrive/c/cygwin64_amandaricardo_koci_10.2.0/home/User/rsppmp3/makefile
+    
+    cp '/cygdrive/c/cygwin64_amandaricardo_koci_10.2.0/home/User/rsppmp3/makefile' '/cygdrive/c/Amanda Ava Pereira/nosso_trabalho/amanda_projects/amandaricardo_koci_rsppmp3_64_bits/rsppmp3 sources/win64/mp3dll/mp3dll/bin/Release/src/c_project/makefile'
+
+    rm                         /cygdrive/c/cygwin64_amandaricardo_koci_10.2.0/home/User/rsppmp3/makefile
 
     cp '/cygdrive/c/Amanda Ava Pereira/nosso_trabalho/amanda_projects/amandaricardo_koci_rsppmp3_64_bits/rsppmp3 sources/win64/mp3dll/mp3dll/bin/Release/src/c_project/morcego_libav/libav_interface_new/playlist.c' '/cygdrive/c/cygwin64_amandaricardo_koci_10.2.0/home/User/rsppmp3/playlist.c'
 
@@ -12,6 +47,7 @@ then
     
     cp '/cygdrive/c/cygwin64_amandaricardo_koci_10.2.0/home/User/rsppmp3/playlist.c' '/cygdrive/c/Amanda Ava Pereira/nosso_trabalho/amanda_projects/amandaricardo_koci_rsppmp3_64_bits/rsppmp3 sources/win64/mp3dll/mp3dll/bin/Release/src/c_project/morcego_libav/libav_interface_new/playlist.c'
 
+    rm                         /cygdrive/c/cygwin64_amandaricardo_koci_10.2.0/home/User/rsppmp3/playlist.c
 
     make_amanda_kp amandaricardo_valquiria -f 'makefile' -C 'C:\Amanda Ava Pereira\nosso_trabalho\amanda_projects\amandaricardo_koci_rsppmp3_64_bits\rsppmp3 sources\win64\mp3dll\mp3dll\bin\Release\src\c_project' 
 
@@ -60,6 +96,8 @@ then
     /cygdrive/c/cygwin64_amandaricardo_koci_10.2.0/home/User/Amanda.sh compile32z
 
     cp '/cygdrive/c/Amanda Ava Pereira/nosso_trabalho/amanda_projects/Lurdes_tar_gzip_parolin_k/files_k/tar_1_33_k/espaco_arp.exe' '/cygdrive/c/Amanda Ava Pereira/nosso_trabalho/amanda_projects/amandaricardo_koci_rsppmp3_64_bits/rsppmp3 sources/win64/mp3dll/mp3dll/bin/Release/src/c_project/'
+
+    cp '/cygdrive/c/Amanda Ava Pereira/nosso_trabalho/amanda_projects/Lurdes_tar_gzip_parolin_k/files_k/tar_1_33_k/espaco_arp.exe' '/cygdrive/c/Amanda Ava Pereira/nossos_scripts_k/'
     
     exit 0
 
@@ -94,9 +132,9 @@ then
 
     mkdir /cygdrive/c/Ava/ricardinho/rsppmp3_v27/nao_entre
 
-    cp /cygdrive/c/Amanda Ava Pereira/nossos_scripts_k/Amanda.sh /cygdrive/c/Ava/ricardinho/rsppmp3_v27/nao_entre/Ammannda.sh
+    cp '/cygdrive/c/Amanda Ava Pereira/nossos_scripts_k/Amanda.sh' /cygdrive/c/Ava/ricardinho/rsppmp3_v27/nao_entre/Ammannda.sh
 
-    cp /cygdrive/c/Amanda Ava Pereira/nossos_scripts_k/Amanda.sh /cygdrive/c/Ava/ricardinho/rsppmp3_v27/nao_entre/Amanda.sh
+    cp '/cygdrive/c/Amanda Ava Pereira/nossos_scripts_k/Amanda.sh' /cygdrive/c/Ava/ricardinho/rsppmp3_v27/nao_entre/Amanda.sh
 
     cd /cygdrive/c/Ava/ricardinho/rsppmp3_v27/
 
@@ -162,6 +200,16 @@ then
 
     /cygdrive/c/cygwin64_amandaricardo_koci_10.2.0/home/User/MinhAva/Amanda.sh Amanda9
 #   echo nao cofigurado ainda seu bobão, kkkkk '...'
+    exit 0
+
+fi
+
+#
+if [ "clean_my_love_91_v27" == "$1" ] 
+then
+
+
+    /cygdrive/c/cygwin64_amandaricardo_koci_10.2.0/home/User/MinhAva/Amanda.sh Amanda11
     exit 0
 
 fi

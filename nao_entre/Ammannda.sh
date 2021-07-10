@@ -245,6 +245,17 @@ exit 0
 fi
 
 
+if [ "Amanda11" == "$1" ] 
+then
+
+    iexplore.exe
+    
+exit 0
+
+fi
+
+
+
 if [ "compilekkk_7zalone32" == "$1" ] 
 then
 
