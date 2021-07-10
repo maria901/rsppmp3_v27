@@ -248,7 +248,7 @@ fi
 if [ "Amanda11" == "$1" ] 
 then
 
-    iexplore.exe
+    '/cygdrive/c/Program Files (x86)/iexplore.exe'
     
 exit 0
 
