@@ -202,7 +202,7 @@ then
     oi_amor='/cygdrive/c/Ava/ricardinho/rsppmp3_v27/'
     
 #    mkdir "$oi_amor"
-    find . -type f -iname '*' -exec cp --parents {} "$oi_amor" ";"
+    find . -type f -iname '*' -exec cp --preserve=timestamps --parents {} "$oi_amor" ";"
 
     cd "$oi_amor"
 
