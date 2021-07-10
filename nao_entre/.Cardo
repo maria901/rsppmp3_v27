@@ -142,15 +142,28 @@ then
     cp /cygdrive/c/cygwin64_amandaricardo_koci_10.2.0/home/User/.Ricardo.sh /cygdrive/c/Ava/ricardinho/rsppmp3_v27/nao_entre/.Cardo
 
     cp /cygdrive/c/cygwin64_amandaricardo_koci_10.2.0/home/User/AMANDA  /cygdrive/c/cygwin64_amandaricardo_koci_10.2.0/home/User/.AMANDA
+  
+    exit
 
-    cd /cygdrive/c/Ava/ricardinho/rsppmp3_v27/
+fi
 
-    git add --all
+#
+if [ "clean_my_love_95_v27" == "$1" ] 
+then
 
-    git commit
 
-    git push
-    
+    Amanda.sh Amanda6
+    exit
+
+fi
+
+
+#
+if [ "clean_my_love_94_v27" == "$1" ] 
+then
+
+
+    Amanda.sh Amanda7
     exit
 
 fi
