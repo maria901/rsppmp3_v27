@@ -1,0 +1,1 @@
+"C:\AMANDA AVA KOCI PEREIRA\nossas tools\uncrustify\uncrustify-0.72.0_f_win64\uncrustify" -c "C:\AMANDA AVA KOCI PEREIRA\nossas tools\uncrustify\uncrustify-0.72.0_f_win64\cfg\gnu-indent.cfg" --replace %1

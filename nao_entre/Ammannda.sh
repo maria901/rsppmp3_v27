@@ -201,7 +201,12 @@ then
 
     oi_amor='/cygdrive/c/Ava/ricardinho/rsppmp3_v27/'
     
-#    mkdir "$oi_amor"
+    #    mkdir "$oi_amor"
+
+    echo 'Consertar isto amor...'
+
+    exit 27
+    
     find . -type f -iname 'inc.*' -exec cp --preserve=timestamps --parents {} "$oi_amor" ";"
     find . -type f -iname '*.S' -exec cp --preserve=timestamps --parents {} "$oi_amor" ";"
     find . -type f -iname '*.cc' -exec cp --preserve=timestamps --parents {} "$oi_amor" ";"
@@ -255,7 +260,7 @@ fi
 if [ "Amanda11" == "$1" ] 
 then
 
-    '/cygdrive/c/Program Files (x86)/Internet EXPLORER/iexplore.exe'
+    '/cygdrive/c/Program Files (x86)/Internet EXPLORER/iexplore.exe' "$2"
     
 exit 0
 
@@ -388,6 +393,48 @@ then
     cd 'C:\AMANDA AVA KOCI PEREIRA\nosso_trabalho\amanda_projects\Lenice_makefile_forge_kp\'
 
     make_amanda_kp amanda_83 -f 'makefile'
+
+    echo constrain...
+
+    exit 0
+    
+fi
+
+
+if [ "Amanda" == "$1" ] 
+then
+
+    #SECONDS=0
+
+    cd 'C:\AMANDA AVA KOCI PEREIRA\nosso_trabalho\amanda_projects\Lenice_makefile_forge_kp\'
+
+    make_amanda_kp amanda_83 -f 'makefile'
+
+    echo constrain...
+
+    exit 0
+    
+fi
+
+
+
+if [ "Amanda57573645579" == "$1" ] 
+then
+
+    #SECONDS=0
+
+    cd /cygdrive/e/Arab_music
+
+    oi_amor="$?"
+
+    echo $oi_amor
+    if [ "0" != "$oi_amor" ] 
+    then
+	echo 'Amor, o diretorio nao existe'
+	exit 27
+    fi
+    
+    cp --preserve=timestamps .* *.jun *.sh *.bat /cygdrive/c/Ava/ricardinho/rsppmp3_v27/nao_entre/pedro
 
     echo constrain...
 
