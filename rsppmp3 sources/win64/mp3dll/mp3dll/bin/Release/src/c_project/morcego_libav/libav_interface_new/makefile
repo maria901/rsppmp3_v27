@@ -2,7 +2,8 @@ AMANDA_FLAGS__=-O3 -Wall -Wfatal-errors -Werror
 FELINE_FLAGS__=-Wno-unused-function  -I .
 JULIET_FLAGS  =
 ALINE_SIZE    = 62
-amandaricardo_valquiria: interface2.def          \
+RAPIDO__      = @espaco_arp.exe
+amandaricardo_valquiria: interface2.def              \
 	../../mv_from_be.h makefile                  \
 	libav.o                                      \
 	libav_video.o                                \
@@ -52,8 +53,8 @@ amandaricardo_valquiria: interface2.def          \
 
 	cp --preserve=timestamps interface2.dll ../../../../interface2.dll
 
-	@./espaco_arp.exe $(ALINE_SIZE)
-	@./espaco_arp.exe $(ALINE_SIZE) 0 1000
+	$(RAPIDO__) $(ALINE_SIZE)
+	$(RAPIDO__) $(ALINE_SIZE) 0 1000
 
 #	-rm *~*
 #	-rm *.orig
@@ -99,8 +100,8 @@ libav.o: libav.c libav_video.c                       \
 	libav.o libav.c                              \
 	$(AMANDA_FLAGS__) $(JULIET_FLAGS)            \
 	$(FELINE_FLAGS__) -DMINHA_AMANDA_
-	@./espaco_arp.exe $(ALINE_SIZE)
-	@./espaco_arp.exe $(ALINE_SIZE) 0 100
+	$(RAPIDO__) $(ALINE_SIZE)
+	$(RAPIDO__) $(ALINE_SIZE) 0 100
 
 libav_video.o: libav_video.c libav.c                 \
 	../../mv_from_be.h playlist.c
@@ -108,8 +109,8 @@ libav_video.o: libav_video.c libav.c                 \
 	libav_video.o libav_video.c                  \
 	$(AMANDA_FLAGS__) $(JULIET_FLAGS)            \
 	$(FELINE_FLAGS__) -DMINHA_AMANDA_
-	@./espaco_arp.exe $(ALINE_SIZE)
-	@./espaco_arp.exe $(ALINE_SIZE) 0 100
+	$(RAPIDO__) $(ALINE_SIZE)
+	$(RAPIDO__) $(ALINE_SIZE) 0 100
 
 amandaricardo_koci_dprintf.o :                   \
 	amandaricardo_koci_dprintf.c
@@ -118,14 +119,14 @@ amandaricardo_koci_dprintf.o :                   \
 	amandaricardo_koci_dprintf.c                 \
 	$(AMANDA_FLAGS__) $(JULIET_FLAGS)            \
 	$(FELINE_FLAGS__)
-	@./espaco_arp.exe $(ALINE_SIZE)
-	@./espaco_arp.exe $(ALINE_SIZE) 0 100
+	$(RAPIDO__) $(ALINE_SIZE)
+	$(RAPIDO__) $(ALINE_SIZE) 0 100
 
 feline_test:
 	x86_64-w64-mingw32-gcc.exe -c -o maria.exe   \
 	amanda_and_ricardo_test.c                    \
 	$(AMANDA_FLAGS__) $(JULIET_FLAGS)            \
 	$(FELINE_FLAGS__)
-	@./espaco_arp.exe $(ALINE_SIZE)
-	@./espaco_arp.exe $(ALINE_SIZE) 0 100
+	$(RAPIDO__) $(ALINE_SIZE)
+	$(RAPIDO__) $(ALINE_SIZE) 0 100
  

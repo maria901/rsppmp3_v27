@@ -13,7 +13,6 @@ amandaricardo_valquiria: bucaneiro
 	.\morcego_libav\libav_interface_new\playlist.c \
 	.\morcego_libav\libav_interface_new\interface2.def
 
-	@rm espaco_arp.exe
 
 	@make amandaricardo_valquiria -C             \
 	.\morcego_libav\libav_interface_new
@@ -369,7 +368,7 @@ smartape:
 	$(AMANDA_FLAGS__) $(JULIET_FLAGS)            \
 	$(FELINE_FLAGS__) -DAMANDA_S_SMART_APE_ENABLE_WIDE_FUNCTION_
 	$(LICAO_DE_VIDA_DO_MEU_AMOR) $(ALINE_SIZE)
-	@./espaco_arp.exe $(ALINE_SIZE) 0 51
+	$(LICAO_DE_VIDA_DO_MEU_AMOR) $(ALINE_SIZE) 0 51
 
 	@./amandaricardo_mvbuild26_33.exe            \
 	amanda_s_smart_ape__counter.ini              \

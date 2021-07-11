@@ -8,15 +8,21 @@ then
 
 
     echo '                                                                          ...   '
+    echo '0089   -> rsppmp3 sources backup                                          ...   '
+    echo '0090   -> Parolin sources backup                                          ...   '
     echo '0091   -> IE     Internet Explorer, not working yet                       ...   '
     echo '0092   -> Explorer                                                        ...   '
     echo '0094   -> Edge                                                            ...   '
     echo '0095   -> Chrome                                                          ...   '
     echo '0096   -> Copia .Ricardo.sh e AMANDA                                      ...   '
-    echo '0097   -> Edita Amanda.sh, salva ela e faz push em rsppmp3                ...   '
+    echo '0097   -> Edita Amanda.sh, salva ela e faz push em rsppmp3 if $2 == Ava   ...   '
+    echo '0270   -> Abre vscode                                                     ...   '
+    echo '0271   -> Edita makefile DLL interface2.DLL                               ...   '
+    echo '0272   -> Atualiza 5 arquivos em 3 sites                                  ...   '
+    echo '0273   -> Edita Main.html                                                 ...   '
     echo '0998   -> Edita makefile rsppmp3                                          ...   '
     echo '0999   -> Compila espaco_arp.exe                                          ...   '
-    echo '1000   -> Compila playlist.c                                              ...   '
+    echo '1000   -> Editar playlist.c, if $2 == vscode, then open it there          ...   '
     echo '1001   -> Compila rsppmp3                                                 ...   '
     echo 'clear_my_love_xx_v27 ou clean_my_love_xx_v27, se errar vai ter que esperar...   '
 #   echo '                                                                          ...   '
@@ -49,10 +55,7 @@ then
 
     rm                         /cygdrive/c/cygwin64_amandaricardo_koci_10.2.0/home/User/rsppmp3/playlist.c
 
-    make_amanda_kp amandaricardo_valquiria -f 'makefile' -C 'C:\Amanda Ava Pereira\nosso_trabalho\amanda_projects\amandaricardo_koci_rsppmp3_64_bits\rsppmp3 sources\win64\mp3dll\mp3dll\bin\Release\src\c_project' 
-
-    
-    pwd
+    make_amanda_kp amandaricardo_valquiria -f 'makefile' -C 'C:\Amanda Ava Pereira\nosso_trabalho\amanda_projects\amandaricardo_koci_rsppmp3_64_bits\rsppmp3 sources\win64\mp3dll\mp3dll\bin\Release\src\c_project'
 
     exit 0
 
@@ -62,19 +65,20 @@ fi
 if [ "clean_my_love_1000_v27" == "$1" ] 
 then
 
-    cp '/cygdrive/c/Amanda Ava Pereira/nosso_trabalho/amanda_projects/amandaricardo_koci_rsppmp3_64_bits/rsppmp3 sources/win64/mp3dll/mp3dll/bin/Release/src/c_project/morcego_libav/libav_interface_new/playlist.c' '/cygdrive/c/cygwin64_amandaricardo_koci_10.2.0/home/User/playlist.c'
+    cp '/cygdrive/c/Amanda Ava Pereira/nosso_trabalho/amanda_projects/amandaricardo_koci_rsppmp3_64_bits/rsppmp3 sources/win64/mp3dll/mp3dll/bin/Release/src/c_project/morcego_libav/libav_interface_new/playlist.c' '/cygdrive/c/cygwin64_amandaricardo_koci_10.2.0/home/User/rsppmp3/playlist.c'
 
-    emacs                      /cygdrive/c/cygwin64_amandaricardo_koci_10.2.0/home/User/rsppmp3/playlist.c
+    if [ "" == "$1" ] 
+    then
+	emacs                                                            /cygdrive/c/cygwin64_amandaricardo_koci_10.2.0/home/User/rsppmp3/playlist.c
+
+    else
+	'/cygdrive/c/Amanda Ava Pereira/Visual Studio Code _ i/Code.exe' 'C:\cygwin64_amandaricardo_koci_10.2.0\home\User\rsppmp3\playlist.c'
+
+    fi
     
-    cp '/cygdrive/c/cygwin64_amandaricardo_koci_10.2.0/home/User/playlist.c' '/cygdrive/c/Amanda Ava Pereira/nosso_trabalho/amanda_projects/amandaricardo_koci_rsppmp3_64_bits/rsppmp3 sources/win64/mp3dll/mp3dll/bin/Release/src/c_project/morcego_libav/libav_interface_new/playlist.c'
+    cp '/cygdrive/c/cygwin64_amandaricardo_koci_10.2.0/home/User/rsppmp3/playlist.c' '/cygdrive/c/Amanda Ava Pereira/nosso_trabalho/amanda_projects/amandaricardo_koci_rsppmp3_64_bits/rsppmp3 sources/win64/mp3dll/mp3dll/bin/Release/src/c_project/morcego_libav/libav_interface_new/playlist.c'
 
-    rm /cygdrive/c/cygwin64_amandaricardo_koci_10.2.0/home/User/playlist.c
-
-#error    /cygdrive/c/Amanda Ava Pereira/nossos_scripts_k/Amanda.sh Amanda9   
-
-    pwd
-    
-    /cygdrive/c/cygwin64_amandaricardo_koci_10.2.0/home/User/MinhAva/Amanda.sh Amanda10
+    rm /cygdrive/c/cygwin64_amandaricardo_koci_10.2.0/home/User/rsppmp3/playlist.c
 
     exit 0
 
@@ -93,7 +97,7 @@ then
 
     rm /cygdrive/c/cygwin64_amandaricardo_koci_10.2.0/home/User/espaco_arp.c
     
-    /cygdrive/c/cygwin64_amandaricardo_koci_10.2.0/home/User/Amanda.sh compile32z
+    /cygdrive/c/cygwin64_amandaricardo_koci_10.2.0/home/User/MinhAva/Amanda.sh compile32z
 
     cp '/cygdrive/c/Amanda Ava Pereira/nosso_trabalho/amanda_projects/Lurdes_tar_gzip_parolin_k/files_k/tar_1_33_k/espaco_arp.exe' '/cygdrive/c/Amanda Ava Pereira/nosso_trabalho/amanda_projects/amandaricardo_koci_rsppmp3_64_bits/rsppmp3 sources/win64/mp3dll/mp3dll/bin/Release/src/c_project/'
 
@@ -117,12 +121,76 @@ then
 
 fi
 
+#
+if [ "clean_my_love_273_v27" == "$1" ] 
+then
+
+    mkdir '/cygdrive/c/cygwin64_amandaricardo_koci_10.2.0/home/User/nomade/'
+
+    cp 'C:\Ricardo Santos Pereira\nossos projetos web\page nomade sf.net\main.html' '/cygdrive/c/cygwin64_amandaricardo_koci_10.2.0/home/User/nomade/main.html'
+
+    if [ "" != "$2" ] 
+    then
+    emacs                                                            /cygdrive/c/cygwin64_amandaricardo_koci_10.2.0/home/User/nomade/main.html
+
+    else
+
+    '/cygdrive/c/Ricardo Santos Pereira/nossos projetos web/page nomade sf.net/aoprojeto_koci_valquiria_maria_juliete_pedro_feline.exe'
+
+    '/cygdrive/c/Amanda Ava Pereira/Visual Studio Code _ i/Code.exe' 'C:\cygwin64_amandaricardo_koci_10.2.0\home\User\nomade\main.html'
+
+    fi
+
+    cp '/cygdrive/c/cygwin64_amandaricardo_koci_10.2.0/home/User/nomade/main.html' 'C:\Ricardo Santos Pereira\nossos projetos web\page nomade sf.net\main.html' 
+
+    exit 0
+
+fi
+
+#
+if [ "clean_my_love_272_v27" == "$1" ] 
+then
+
+
+    /cygdrive/c/cygwin64_amandaricardo_koci_10.2.0/home/User/MinhAva/Amanda.sh Amanda271
+    exit 0
+
+fi
+
+
+#
+if [ "clean_my_love_271_v27" == "$1" ] 
+then
+
+    cp '/cygdrive/c/Amanda Ava Pereira/nosso_trabalho/amanda_projects/amandaricardo_koci_rsppmp3_64_bits/rsppmp3 sources/win64/mp3dll/mp3dll/bin/Release/src/c_project/morcego_libav/libav_interface_new/makefile' '/cygdrive/c/cygwin64_amandaricardo_koci_10.2.0/home/User/rsppmp3/makefile'
+
+    emacs                      /cygdrive/c/cygwin64_amandaricardo_koci_10.2.0/home/User/rsppmp3/makefile
+    
+    cp '/cygdrive/c/cygwin64_amandaricardo_koci_10.2.0/home/User/rsppmp3/makefile' '/cygdrive/c/Amanda Ava Pereira/nosso_trabalho/amanda_projects/amandaricardo_koci_rsppmp3_64_bits/rsppmp3 sources/win64/mp3dll/mp3dll/bin/Release/src/c_project/morcego_libav/libav_interface_new/makefile'
+
+    rm                         /cygdrive/c/cygwin64_amandaricardo_koci_10.2.0/home/User/rsppmp3/makefile
+    
+    exit 0
+
+fi
+
+
+#
+if [ "clean_my_love_270_v27" == "$1" ] 
+then
+
+
+    /cygdrive/c/cygwin64_amandaricardo_koci_10.2.0/home/User/MinhAva/Amanda.sh Amanda270 "$2"
+    exit 0
+
+fi
+
 
 # aqui é o push amor...agora sim Amanda
 if [ "clean_my_love_97_v27" == "$1" ] 
 then
 
-    mkdir /cygdrive/c/cygwin64_amandaricardo_koci_10.2.0/home/User/MinhAva
+#    mkdir /cygdrive/c/cygwin64_amandaricardo_koci_10.2.0/home/User/MinhAva
 
     cp '/cygdrive/c/Amanda Ava Pereira/nossos_scripts_k/Amanda.sh' /cygdrive/c/cygwin64_amandaricardo_koci_10.2.0/home/User/MinhAva/
     
@@ -130,12 +198,22 @@ then
 
     cp --preserve=timestamps /cygdrive/c/cygwin64_amandaricardo_koci_10.2.0/home/User/MinhAva/Amanda.sh '/cygdrive/c/Amanda Ava Pereira/nossos_scripts_k/Amanda.sh'
 
-    mkdir /cygdrive/c/Ava/ricardinho/rsppmp3_v27/nao_entre
+#    mkdir /cygdrive/c/Ava/ricardinho/rsppmp3_v27/nao_entre
 
     cp '/cygdrive/c/Amanda Ava Pereira/nossos_scripts_k/Amanda.sh' /cygdrive/c/Ava/ricardinho/rsppmp3_v27/nao_entre/Ammannda.sh
 
     cp '/cygdrive/c/Amanda Ava Pereira/nossos_scripts_k/Amanda.sh' /cygdrive/c/Ava/ricardinho/rsppmp3_v27/nao_entre/Amanda.sh
+    if [ "Ava" != "$2" ] 
+    then
 
+	exit 0
+
+    fi
+    
+    /cygdrive/c/cygwin64_amandaricardo_koci_10.2.0/home/User/MinhAva/Amanda.sh Amanda8
+
+    exit 27
+    
     cd /cygdrive/c/Ava/ricardinho/rsppmp3_v27/
 
     git add --all
@@ -208,8 +286,36 @@ fi
 if [ "clean_my_love_91_v27" == "$1" ] 
 then
 
+    amanda=$2
+
+    amanda+=' ola'
 
     /cygdrive/c/cygwin64_amandaricardo_koci_10.2.0/home/User/MinhAva/Amanda.sh Amanda11
+
+    echo $amanda
+    
+    exit 0
+
+fi
+
+
+#
+if [ "clean_my_love_90_v27" == "$1" ] 
+then
+
+
+    /cygdrive/c/cygwin64_amandaricardo_koci_10.2.0/home/User/MinhAva/Amanda.sh Amanda12
+    exit 0
+
+fi
+
+
+#
+if [ "clean_my_love_89_v27" == "$1" ] 
+then
+
+
+    /cygdrive/c/cygwin64_amandaricardo_koci_10.2.0/home/User/MinhAva/Amanda.sh Amanda27
     exit 0
 
 fi

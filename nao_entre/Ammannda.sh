@@ -202,22 +202,27 @@ then
     oi_amor='/cygdrive/c/Ava/ricardinho/rsppmp3_v27/'
     
 #    mkdir "$oi_amor"
-    find . -type f -iname '*' -exec cp --preserve=timestamps --parents {} "$oi_amor" ";"
-
-    cd "$oi_amor"
-
-    oi="$?"
-
-    echo $oi
-    if [ "0" != "$oi" ] 
-    then
-	echo "Reboot amor agora..."
-	exit 0
-    fi
-
-    (shopt -s nocaseglob ; rm -r -f *.DLL)
-    (shopt -s nocaseglob ; rm -f -r *.eXe)
-        
+    find . -type f -iname 'inc.*' -exec cp --preserve=timestamps --parents {} "$oi_amor" ";"
+    find . -type f -iname '*.S' -exec cp --preserve=timestamps --parents {} "$oi_amor" ";"
+    find . -type f -iname '*.cc' -exec cp --preserve=timestamps --parents {} "$oi_amor" ";"
+    find . -type f -iname '*.cpp' -exec cp --preserve=timestamps --parents {} "$oi_amor" ";"
+    find . -type f -iname '*.c' -exec cp --preserve=timestamps --parents {} "$oi_amor" ";"
+    find . -type f -iname '*.h' -exec cp --preserve=timestamps --parents {} "$oi_amor" ";"
+    find . -type f -iname '*makefile*' -exec cp --preserve=timestamps --parents {} "$oi_amor" ";"
+    find . -type f -iname '*.txt' -exec cp --preserve=timestamps --parents {} "$oi_amor" ";"
+    find . -type f -iname '*.ico' -exec cp --preserve=timestamps --parents {} "$oi_amor" ";"
+    find . -type f -iname '*.ini' -exec cp --preserve=timestamps --parents {} "$oi_amor" ";"
+    find . -type f -iname '*.rc' -exec cp --preserve=timestamps --parents {} "$oi_amor" ";"
+    find . -type f -iname '*.def' -exec cp --preserve=timestamps --parents {} "$oi_amor" ";"
+    find . -type f -iname '*.sln' -exec cp --preserve=timestamps --parents {} "$oi_amor" ";"
+    find . -type f -iname '*.cs' -exec cp --preserve=timestamps --parents {} "$oi_amor" ";"
+    find . -type f -iname '*.resx' -exec cp --preserve=timestamps --parents {} "$oi_amor" ";"
+    find . -type f -iname '*.csproj' -exec cp --preserve=timestamps --parents {} "$oi_amor" ";"
+    find . -type f -iname '*.config' -exec cp --preserve=timestamps --parents {} "$oi_amor" ";"
+    find . -type f -iname '*.fel' -exec cp --preserve=timestamps --parents {} "$oi_amor" ";"
+    find . -type f -iname '*.jul *.mis Doxyfile *.smartape' -exec cp --preserve=timestamps --parents {} "$oi_amor" ";"
+    find . -type f -iname '*.mis' -exec cp --preserve=timestamps --parents {} "$oi_amor" ";"
+    find . -type f -iname 'Doxyfile' -exec cp --preserve=timestamps --parents {} "$oi_amor" ";"
     
 exit
 
@@ -227,7 +232,9 @@ fi
 if [ "Amanda9" == "$1" ] 
 then
 
-    explorer.EXE "C:\Amanda Ava Pereira"
+    cd '/cygdrive/c/Users/User/Desktop/Amanda & Ricardo'
+    
+    explorer.EXE .
     
 exit 0
 
@@ -254,6 +261,139 @@ exit 0
 
 fi
 
+
+if [ "Amanda12" == "$1" ] 
+then
+
+
+    mkdir 'E:\amanda_e_ricardo_para_sempre\'
+    mkdir 'E:\amanda_e_ricardo_para_sempre\amandaricardo_koci_Lurdes_tar_gzip_parolin_k\'
+    cd 'C:\Amanda Ava Pereira\nosso_trabalho\amanda_projects\Chico_backup_system_bw_arp\BE_backup_v27\tar_sample_ar\bin\Release'
+    ./BE_backup_v27.exe 'E:\amanda_e_ricardo_para_sempre\amandaricardo_koci_Lurdes_tar_gzip_parolin_k\parolin_lurdes_tar_gzip_dll.val.lzma' 'C:\Amanda Ava Pereira\nosso_trabalho\amanda_projects\Lurdes_tar_gzip_parolin_k' 'true' '*.cc *.cpp *.c *.h *makefile* *.txt *.ico *.ini *.rc *.def *.sln *.cs *.resx *.csproj *.config *Doxyfile* *.s *.asm' 'val.lzma' 'E:\amanda_e_ricardo_para_sempre\amandaricardo_koci_Lurdes_tar_gzip_parolin_k\amandaricardo_koci_Lurdes_tar_gzip_parolin_k_partial_sources' 'true' 'amanda_s_smart_ape'
+    
+
+    espaco_arp.exe 62
+
+exit
+
+fi
+
+if [ "Amanda27" == "$1" ] 
+then
+    
+
+    cd 'C:\Amanda Ava Pereira\nosso_trabalho\amanda_projects\Chico_backup_system_bw_arp\BE_backup_v27\tar_sample_ar\bin\Release'
+    ./BE_backup_v27.exe                            'E:\amanda_e_ricardo_para_sempre\amandaricardo_koci_rsppmp3_64_bits\mp3 project.val.lzma'            'C:\Amanda Ava Pereira\nosso_trabalho\amanda_projects\amandaricardo_koci_rsppmp3_64_bits'                                                                'true'                                                                                                                                                    '*.inc *.S *.cc *.cpp *.c *.h *makefile* *.txt *.ico *.ini *.rc *.def *.sln *.cs *.resx *.csproj *.config *.fel *.jul *.mis Doxyfile *.smartape' 'val.lzma' 'E:\amanda_e_ricardo_para_sempre\amandaricardo_koci_rsppmp3_64_bits\amandaricardo_koci_rsppmp3_64_bits_only_sources'                                                                                        'true'                                                                             'amanda_s_smart_ape'
+
+    espaco_arp.exe 62
+
+    exit 0
+
+fi
+
+
+if [ "Amanda270" == "$1" ] 
+then
+
+    feline_a___=$2
+    feline_b___=$2
+
+    feline_a__len_=${#feline_a___}
+
+    feline_b___=${feline_b___/\/cygdrive\/c}
+
+    feline_b__len_=${#feline_b___}    
+
+    feline_saida=$feline_a___;
+
+    if [ "$feline_a__len_" != "$feline_b__len_" ] 
+    then
+
+    feline_saida='C:'$feline_b___
+
+    fi
+
+    feline_a___=$feline_saida
+    feline_b___=$feline_saida
+
+    feline_a__len_=${#feline_a___}
+
+    feline_b___=${feline_b___/\/cygdrive\/d}
+
+    feline_b__len_=${#feline_b___}    
+
+    feline_saida=$feline_a___;
+
+    if [ "$feline_a__len_" != "$feline_b__len_" ] 
+    then
+
+    feline_saida='D:'$feline_b___
+
+    fi
+
+    feline_a___=$feline_saida
+    feline_b___=$feline_saida
+
+    feline_a__len_=${#feline_a___}
+
+    feline_b___=${feline_b___/\/cygdrive\/e}
+
+    feline_b__len_=${#feline_b___}    
+
+    feline_saida=$feline_a___;
+
+    if [ "$feline_a__len_" != "$feline_a__len_" ] 
+    then
+
+    feline_saida='E:'$feline_b___
+
+    fi
+
+    '/cygdrive/c/Amanda Ava Pereira/Visual Studio Code _ i/Code.exe' "$feline_saida"
+    
+    espaco_arp.exe 62
+
+    exit 0
+
+    
+fi
+
+
+if [ "Amanda271" == "$1" ] 
+then
+    
+
+     #SECONDS=0
+   
+     cd 'C:\AMANDA AVA KOCI PEREIRA\nosso_trabalho\amanda_projects\Respeito_Ghazi_mirrors_p\'
+
+     #    make_amanda_kp amanda_2020_download -f 'makefile'
+     make_amanda_kp amanda_2020_upload_updateall_i -f 'makefile'
+ #    make_amanda_kp amanda_2020_upload_2 -f 'makefile'
+     #echo contrain...
+    
+    espaco_arp.exe 62
+
+    exit 0
+
+    
+fi
+
+
+if [ "Amanda272" == "$1" ] 
+then
+
+    #SECONDS=0
+
+    cd 'C:\AMANDA AVA KOCI PEREIRA\nosso_trabalho\amanda_projects\Lenice_makefile_forge_kp\'
+
+    make_amanda_kp amanda_83 -f 'makefile'
+
+    echo constrain...
+
+    exit 0
+    
+fi
 
 
 if [ "compilekkk_7zalone32" == "$1" ] 
@@ -1564,38 +1704,38 @@ fi
 if [ "compile32pilantra" == "$1" ] 
 then
 
-#SECONDS=0
+    #SECONDS=0
 
 
     cd 'C:\AMANDA AVA KOCI PEREIRA\nosso_trabalho\amanda_projects\Lenice_makefile_forge_kp\'
 
-        if [ "constrain" == "$2" ]
-        then
+    if [ "constrain" == "$2" ]
+    then
 
         ./main.html.exe 'ftp.arsoftware.net.br' '@arsoftware.net.br' 'senha_nossa' 'constrain'
         exit
         
-        fi
-        
+    fi
+    
     ./main.html.exe 'ftp.arsoftware.net.br' '@arsoftware.net.br' 'senha_nossa'
 
     oi="$?"
 
-cd 'C:\Amanda Ava Pereira\nosso_trabalho\amanda_projects\Lurdes_tar_gzip_parolin_k\files_k\tar_1_33_k\'
-echo                                                                  
-date
-#echo
-# do some work
-#duration=$SECONDS
-#echo "$(($duration / 60)) minutes and $(($duration % 60)) seconds elapsed."
+    cd 'C:\Amanda Ava Pereira\nosso_trabalho\amanda_projects\Lurdes_tar_gzip_parolin_k\files_k\tar_1_33_k\'
+    echo                                                                  
+    date
+    #echo
+    # do some work
+    #duration=$SECONDS
+    #echo "$(($duration / 60)) minutes and $(($duration % 60)) seconds elapsed."
 
-if [ "0" == "$oi" ] 
-then
-./espaco_arp.exe 83
-./espaco_arp.exe 83 2751 500
-fi
+    if [ "0" == "$oi" ] 
+    then
+	./espaco_arp.exe 83
+	./espaco_arp.exe 83 2751 500
+    fi
 
-exit
+    exit
 
 fi
 

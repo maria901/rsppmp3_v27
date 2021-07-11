@@ -1,5 +1,5 @@
 
- /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
  *                                                                              *
  *        Licensa de Cópia (C) <2021>  <Corporação do Trabalho Binário>         *
  *                                                                              *
@@ -29,11 +29,10 @@
  *     (+55)41 9627 1708 - isto está sempre ligado (eu acho...)                 *      
  *                                                                              *
  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *  **/
- 
-void process_playlist_junior_filho_do_ricardo(morcego___i___instance__a__bucaneiro_engineering * mv_______);
 
-int
-getpos (char *comando, char *string)
+void process_playlist_junior_filho_do_ricardo(morcego___i___instance__a__bucaneiro_engineering *mv_______);
+
+int getpos(char *comando, char *string)
 {
 	char *intcomando;
 	int ret;
@@ -45,18 +44,18 @@ getpos (char *comando, char *string)
 
 	c = 0;
 
-	intcomando = malloc (strlen (comando) + 2);
+	intcomando = malloc(strlen(comando) + 2);
 
-	strcpy (intcomando, comando);
+	strcpy(intcomando, comando);
 
-	ret = strlen (intcomando);
+	ret = strlen(intcomando);
 
-	sizeret = strlen (string);
+	sizeret = strlen(string);
 
 	if (sizeret > ret)
 	{
 
-		free (intcomando);
+		free(intcomando);
 		return 0;
 	}
 
@@ -76,7 +75,6 @@ getpos (char *comando, char *string)
 					{
 						goto error1;
 					}
-
 				}
 
 				if (b == sizeret)
@@ -84,65 +82,61 @@ getpos (char *comando, char *string)
 
 					pos = i + 1;
 
-					free (intcomando);
+					free(intcomando);
 					return pos;
 				}
 
-error1:
+			error1:
 				continue;
 			}
-
 		}
 
-		free (intcomando);
+		free(intcomando);
 		return pos;
-
 	}
 	else
 	{
-		free (intcomando);
+		free(intcomando);
 		return 0;
-	}
-	;
+	};
 
-	free (intcomando);
+	free(intcomando);
 	return 0;
 
-	free (intcomando);//why??!
+	free(intcomando); //why??!
 	return c + 1;
 }
 
-void morcego_string_replace(char*data,char*search_string,char*dest_string);
+void morcego_string_replace(char *data, char *search_string, char *dest_string);
 #include "string_replace_or_remove_final.c"
 
-void
-strtolower (char *path)
+void strtolower(char *path)
 {
 	int ret;
 	int i;
-	ret = strlen (path);
+	ret = strlen(path);
 	if (ret)
 	{
 		for (i = 0; i < ret; i++)
 		{
-			path[i] = tolower (path[i]);
+			path[i] = tolower(path[i]);
 		}
 		return;
 	}
 }
 char *
-strrstr (char *s1, char *s2)
+strrstr(char *s1, char *s2)
 {
 	char *sc2, *psc1, *ps1;
 	if (*s2 == '\0')
 	{
-		return ((char *) s1);
+		return ((char *)s1);
 	}
-	ps1 = s1 + strlen (s1);
+	ps1 = s1 + strlen(s1);
 	while (ps1 != s1)
 	{
 		--ps1;
-		for (psc1 = ps1, sc2 = s2;; )
+		for (psc1 = ps1, sc2 = s2;;)
 		{
 			if (*(psc1++) != *(sc2++))
 			{
@@ -150,19 +144,18 @@ strrstr (char *s1, char *s2)
 			}
 			else if (*sc2 == '\0')
 			{
-				return ((char *) ps1);
+				return ((char *)ps1);
 			}
 		}
 	}
-	return ((char *) NULL);
+	return ((char *)NULL);
 }
-int
-stripfilenameandpath (char *path, char *onlypath, char *onlyfilename)
+int stripfilenameandpath(char *path, char *onlypath, char *onlyfilename)
 {
 	int ret;
 	int i;
 	int p;
-	char temp[300*6];
+	char temp[300 * 6];
 	char *fixo;
 	const int separator = '\\';
 	fixo = path;
@@ -171,30 +164,30 @@ stripfilenameandpath (char *path, char *onlypath, char *onlyfilename)
 
 		if (onlypath != NULL)
 		{
-			memset (onlypath, 0, 1);
+			memset(onlypath, 0, 1);
 		}
 
 		if (onlyfilename != NULL)
 		{
-			memset (onlyfilename, 0, 1);
+			memset(onlyfilename, 0, 1);
 		}
 
 		return 1;
 	}
 
-	ret = strlen (path);
+	ret = strlen(path);
 
 	if (!ret)
 	{
 
 		if (onlypath != NULL)
 		{
-			memset (onlypath, 0, 1);
+			memset(onlypath, 0, 1);
 		}
 
 		if (onlyfilename != NULL)
 		{
-			memset (onlyfilename, 0, 1);
+			memset(onlyfilename, 0, 1);
 		}
 
 		return 0;
@@ -207,30 +200,28 @@ stripfilenameandpath (char *path, char *onlypath, char *onlyfilename)
 		{
 			goto continua;
 		}
-
 	}
 
 	if (onlypath != NULL)
 	{
-		memset (onlypath, 0, 1);
+		memset(onlypath, 0, 1);
 	}
 
 	if (onlyfilename != NULL)
 	{
-		strcpy (onlyfilename, path);
+		strcpy(onlyfilename, path);
 	}
 
 	return 0;
 
 	;
-continua:
-	;
+continua:;
 
-	strcpy (temp, path);
+	strcpy(temp, path);
 
 	p = 0;
 
-	for (i = strlen (path); i > -1; i--)
+	for (i = strlen(path); i > -1; i--)
 	{
 
 		if (temp[i] == separator)
@@ -246,142 +237,131 @@ continua:
 	fixo += p + 1;
 	if (onlypath != NULL)
 	{
-		strcpy (onlypath, temp);
+		strcpy(onlypath, temp);
 	}
 	if (onlyfilename != NULL)
 	{
-		strcpy (onlyfilename, fixo);
+		strcpy(onlyfilename, fixo);
 	}
 	return 0;
 }
-int
-strip_extension_alladin (char *data, char *ext)
+int strip_extension_alladin(char *data, char *ext)
 {
-	char temp[300*6];
+	char temp[300 * 6];
 	char *ptr = NULL;
-	stripfilenameandpath (data, NULL, temp);
-	ptr = strrstr (temp, ".");
+	stripfilenameandpath(data, NULL, temp);
+	ptr = strrstr(temp, ".");
 	if (NULL == ptr)
 	{
-		strcpy (ext, "");
+		strcpy(ext, "");
 		return 0;
 	}
 	ptr++;
-	strcpy (ext, ptr);
-	strtolower (ext);
+	strcpy(ext, ptr);
+	strtolower(ext);
 	return 0;
 }
 
-void process_playlist(morcego___i___instance__a__bucaneiro_engineering * mv_______)
+void process_playlist(morcego___i___instance__a__bucaneiro_engineering *mv_______)
 {
-	WCHAR *__stdcall
-	utf8towide_multithread
-	(
+	WCHAR *__stdcall utf8towide_multithread(
 		__int64 mv_instance,
-		const char *pUTF8
-	)
-	;
+		const char *pUTF8);
 
-	char playlist_path[300*6];
+	char playlist_path[300 * 6];
 
-	__int64 mv_instance=(__int64)(__INT32_OR_INT64)mv_______;
+	__int64 mv_instance = (__int64)(__INT32_OR_INT64)mv_______;
 
-/*
+	/*
    char *mv_______->playlist_c___media_files[50000];
         int mv_______->playlist_c___media_files_int[50000][2];
         int mv_______->playlist_c___media_files_count;
  */
 	int i;
 
-	stripfilenameandpath (mv_______->playlist_c___playlist_filename, playlist_path, NULL);
+	stripfilenameandpath(mv_______->playlist_c___playlist_filename, playlist_path, NULL);
 
-	for(i=0; i<mv_______->playlist_c___media_files_count; i++)
+	for (i = 0; i < mv_______->playlist_c___media_files_count; i++)
 	{
-		if(mv_______->playlist_c___media_files[i])
+		if (mv_______->playlist_c___media_files[i])
 		{
 			//dprintf("dando free");
 			free(mv_______->playlist_c___media_files[i]);
-			mv_______->playlist_c___media_files[i]=NULL;
+			mv_______->playlist_c___media_files[i] = NULL;
 		}
 	}
-	mv_______->playlist_c___player_index=0;
-	mv_______->playlist_c___media_files_count=0;
+	mv_______->playlist_c___player_index = 0;
+	mv_______->playlist_c___media_files_count = 0;
 
 	//now read the data
 	{
-		FILE *myfile=NULL;
+		FILE *myfile = NULL;
 
-		myfile=_wfopen (utf8towide_multithread(mv_instance,mv_______->playlist_c___playlist_filename),L"rb");
-		if(myfile)
+		myfile = _wfopen(utf8towide_multithread(mv_instance, mv_______->playlist_c___playlist_filename), L"rb");
+		if (myfile)
 		{
 
-			char media_file[300*4+1]={0,};
+			char media_file[300 * 4 + 1] = {
+				0,
+			};
 
-			while(fgets(media_file, 300*4, myfile))
-			  {
-			    if(0 == ftell(myfile))//he he he...
-			      {
-				break;
-			      }
-			    {
+			while (fgets(media_file, 300 * 4, myfile))
+			{
+				if (0 == ftell(myfile)) //he he he...
+				{
+					break;
+				}
+				{
 					int ret;
-					ret = getpos(media_file,"media src=");
-					if(ret)
+					ret = getpos(media_file, "media src=");
+					if (ret)
 					{
 
-						char media_file_[300*4+1]={0,};
-						strcpy(media_file_,&media_file[ret+strlen("media src=")]);
-						ret=getpos(media_file_,"\"");
-						media_file_[ret-1]=0;
+						char media_file_[300 * 4 + 1] = {
+							0,
+						};
+						strcpy(media_file_, &media_file[ret + strlen("media src=")]);
+						ret = getpos(media_file_, "\"");
+						media_file_[ret - 1] = 0;
 						//te amo é isso ai
-						morcego_string_replace(media_file_,"&amp;","&"); morcego_string_replace(media_file_,"&apos;","'");
+						morcego_string_replace(media_file_, "&amp;", "&");
+						morcego_string_replace(media_file_, "&apos;", "'");
 						{
 
-							if
-							(
-								('\\'==media_file_[0]&&'\\'==media_file_[1])
-								||
-								(':'==media_file_[1])
-							)
+							if (
+								('\\' == media_file_[0] && '\\' == media_file_[1]) ||
+								(':' == media_file_[1]))
 							{
-
 							}
 							else
 							{
-								char temp[300*6]
-								;
-								strcpy(temp,playlist_path)
-								;
+								char temp[300 * 6];
+								strcpy(temp, playlist_path);
 
-								strcat(temp,media_file_);
+								strcat(temp, media_file_);
 
-								strcpy(media_file_,temp);
-
+								strcpy(media_file_, temp);
 							}
 						}
 
-						if(mv_______->playlist_c___media_files_count<50000)
+						if (mv_______->playlist_c___media_files_count < 50000)
 						{
-							mv_______->playlist_c___media_files[mv_______->playlist_c___media_files_count]=malloc(300*6+1);
+							mv_______->playlist_c___media_files[mv_______->playlist_c___media_files_count] = malloc(300 * 6 + 1);
 
-							strcpy(mv_______->playlist_c___media_files[mv_______->playlist_c___media_files_count],&media_file_[0]);//what is this?!
+							strcpy(mv_______->playlist_c___media_files[mv_______->playlist_c___media_files_count], &media_file_[0]); //what is this?!
 							mv_______->playlist_c___media_files_count++;
 						}
-
 					}
-
 				}
-
 			}
 
 			fclose(myfile);
 		}
 	}
-
 }
 
 int64_t
-getfilesize_ar_fixed__(morcego___i___instance__a__bucaneiro_engineering * mv_______, char *infile_ar)
+getfilesize_ar_fixed__(morcego___i___instance__a__bucaneiro_engineering *mv_______, char *infile_ar)
 {
 	__int64 ret;
 	FILE *myfile;
@@ -397,140 +377,144 @@ getfilesize_ar_fixed__(morcego___i___instance__a__bucaneiro_engineering * mv____
 	return ret;
 }
 
-void process_playlist_junior_filho_do_ricardo(morcego___i___instance__a__bucaneiro_engineering * mv_______)
+void process_playlist_junior_filho_do_ricardo(morcego___i___instance__a__bucaneiro_engineering *mv_______)
 {
-  int ret_arp;
-  WCHAR *__stdcall
-    utf8towide_multithread
-    (
-     __int64 mv_instance,
-     const char *pUTF8
-     )
-    ;
+	int ret_arp;
+	WCHAR *__stdcall utf8towide_multithread(
+		__int64 mv_instance,
+		const char *pUTF8);
 
-  __int64 mv_instance=(__int64)(__INT32_OR_INT64)mv_______;
+	__int64 mv_instance = (__int64)(__INT32_OR_INT64)mv_______;
 
-  /*
+	/*
     char *mv_______->playlist_c___media_files[50000];
     int mv_______->playlist_c___media_files_int[50000][2];
     int mv_______->playlist_c___media_files_count;
   */
-  int i;
+	int i;
+	
+	assert(0 && "inicio");
 
-  for(i=0; i<mv_______->playlist_c___media_files_count; i++)
-    {
-      if(mv_______->playlist_c___media_files[i])
+	for (i = 0; i < mv_______->playlist_c___media_files_count; i++)
 	{
-	  //dprintf("dando free");
-	  free(mv_______->playlist_c___media_files[i]);
-	  mv_______->playlist_c___media_files[i]=NULL;
+		if (mv_______->playlist_c___media_files[i])
+		{
+			//dprintf("dando free");
+			free(mv_______->playlist_c___media_files[i]);
+			mv_______->playlist_c___media_files[i] = NULL;
+		}
 	}
-    }
-  mv_______->playlist_c___player_index=0;
-  mv_______->playlist_c___media_files_count=0;
+	
+	assert(0 && "fim");
 
-  //now read the data
-  {
-    FILE *myfile=NULL;
+	mv_______->playlist_c___player_index = 0;
+	mv_______->playlist_c___media_files_count = 0;
 
-    myfile=_wfopen (utf8towide_multithread(mv_instance,mv_______->playlist_c___playlist_filename),L"rb");
-    if(myfile)
-      {
+	//now read the data
+	{
+		FILE *myfile = NULL;
 
-	char media_file[300*4+1]={0,};
+		myfile = _wfopen(utf8towide_multithread(mv_instance, mv_______->playlist_c___playlist_filename), L"rb");
+		if (myfile)
+		{
 
-	while(fgets(media_file, 300*4, myfile))
-	  {
-	    if(0 == ftell(myfile))
-	      {
-		break;
-	      }	    
+			char media_file[300 * 4 + 1] = {
+				0,
+			};
 
-	    char   media_file_copy__amanda_s_smart_ape[300*4+1] = {0,};
-	    char   media_file_                        [300*4+1] = {0,};
-		char * ptr__amanda_s_smart_ape     ;
-		char * ptr__amanda_s_smart_ape_init;
-	    strcpy(media_file_, media_file);
-	    ret_arp=getpos(media_file_,"\n");  
-				  
-	    media_file_[ret_arp-1]=0;
+			while (fgets(media_file, 300 * 4, myfile))
+			{
+				if (0 == ftell(myfile))
+				{
+					break;
+				}
 
-	    ret_arp=getpos(media_file_,"\r");
-  
-	    if(0 != ret_arp)
-	      //ok...!?
-	      media_file_[ret_arp-1]=0;
+				char media_file_copy__amanda_s_smart_ape[300 * 4 + 1] = {
+					0,
+				};
+				char media_file_[300 * 4 + 1] = {
+					0,
+				};
+				char *ptr__amanda_s_smart_ape;
+				char *ptr__amanda_s_smart_ape_init;
+				strcpy(media_file_, media_file);
+				ret_arp = getpos(media_file_, "\n");
 
-	    if(0 == strlen(media_file_))
-	      {
-		continue;
-	      }
-	      
-	    //viu?...
+				media_file_[ret_arp - 1] = 0;
 
-		  {
-			  if ((ptr__amanda_s_smart_ape_init = strstr(media_file_, "#")))
-			  {
-				  
-				  strcpy(media_file_copy__amanda_s_smart_ape, media_file_);
+				ret_arp = getpos(media_file_, "\r");
 
-				  ptr__amanda_s_smart_ape = strstr(media_file_copy__amanda_s_smart_ape, "#");
+				if (0 != ret_arp)
+					//ok...!?
+					media_file_[ret_arp - 1] = 0;
 
-				  if (ptr__amanda_s_smart_ape)//double check...this is it...
-				  {
-					  
-					  if ('#' == media_file_[0])
-					  {
-						  continue;
-					  }
+				if (0 == strlen(media_file_))
+				{
+					continue;
+				}
 
-					  *ptr__amanda_s_smart_ape = 0;
-					  if (-1 != getfilesize_ar_fixed__(mv_______, media_file_copy__amanda_s_smart_ape))
-					   {
-						  *ptr__amanda_s_smart_ape_init = 0;
-					  }
-				  }
-			  }
-		  }
+				//viu?...
 
-		if(mv_______->playlist_c___media_files_count<50000)// kkkk em casa de ferreiro espeto de pau
-	      {
-		mv_______->playlist_c___media_files[mv_______->playlist_c___media_files_count]=malloc(300*6+1);
+				{
+					if ((ptr__amanda_s_smart_ape_init = strstr(media_file_, "#")))
+					{
 
-		strcpy(mv_______->playlist_c___media_files[mv_______->playlist_c___media_files_count],&media_file_[0]);//what is this?!
-		mv_______->playlist_c___media_files_count++;
-	      }	    
-	  }
-	fclose(myfile);
-      }
-  }
+						strcpy(media_file_copy__amanda_s_smart_ape, media_file_);
+
+						ptr__amanda_s_smart_ape = strstr(media_file_copy__amanda_s_smart_ape, "#");
+
+						if (ptr__amanda_s_smart_ape) //double check...this is it...
+						{
+
+							if ('#' == media_file_[0])
+							{
+								continue;
+							}
+
+							*ptr__amanda_s_smart_ape = 0;
+							if (-1 != getfilesize_ar_fixed__(mv_______, media_file_copy__amanda_s_smart_ape))
+							{
+								*ptr__amanda_s_smart_ape_init = 0;
+							}
+						}
+					}
+				}
+
+				if (mv_______->playlist_c___media_files_count < 50000) // kkkk em casa de ferreiro espeto de pau
+				{
+					mv_______->playlist_c___media_files[mv_______->playlist_c___media_files_count] = malloc(300 * 6 + 1);
+
+					strcpy(mv_______->playlist_c___media_files[mv_______->playlist_c___media_files_count], &media_file_[0]); //what is this?!
+					mv_______->playlist_c___media_files_count++;
+				}
+			}
+			fclose(myfile);
+		}
+	}
 }
 
-int is_playlist(morcego___i___instance__a__bucaneiro_engineering * mv_______,char*filename_)
+int is_playlist(morcego___i___instance__a__bucaneiro_engineering *mv_______, char *filename_)
 {
-	char extension[300*6];
-	strip_extension_alladin
-	(
+	char extension[300 * 6];
+	strip_extension_alladin(
 		filename_,
-		extension
-	)
-	;
+		extension);
 
-	if(0==strcmp(extension,"wpl"))
+	if (0 == strcmp(extension, "wpl"))
 	{
-		mv_______->playlist_c___is_playlist=1;
-		strcpy(mv_______->playlist_c___playlist_filename,filename_);
+		mv_______->playlist_c___is_playlist = 1;
+		strcpy(mv_______->playlist_c___playlist_filename, filename_);
 		process_playlist(mv_______);
 		return 1;
 	}
-	
-	if(0==strcmp(extension,"jun"))
+
+	if (0 == strcmp(extension, "jun"))
 	{
-		mv_______->playlist_c___is_playlist=1;
-		strcpy(mv_______->playlist_c___playlist_filename,filename_);
+		mv_______->playlist_c___is_playlist = 1;
+		strcpy(mv_______->playlist_c___playlist_filename, filename_);
 		process_playlist_junior_filho_do_ricardo(mv_______);
 		return 1;
 	}
-	mv_______->playlist_c___is_playlist=0;
+	mv_______->playlist_c___is_playlist = 0;
 	return 0;
 }
