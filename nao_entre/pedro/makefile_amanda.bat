@@ -1,1 +1,0 @@
-"C:\Program Files\Notepad++\notepad++.exe" makefile_ava

@@ -1,1 +1,0 @@
-"C:\AMANDA AVA KOCI PEREIRA\nossas tools\uncrustify\uncrustify-0.70.1_f-win32\uncrustify" -c "C:\AMANDA AVA KOCI PEREIRA\nossas tools\uncrustify\uncrustify-0.70.1_f-win32\cfg\defaults.cfg" --replace %1

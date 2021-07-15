@@ -1,0 +1,53 @@
+
+/*
+    <C/C++ source code of the support dlls>    
+    Copyright (C) <2020>  <BinaryWork Corp.>
+
+    This program is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU GENERAL PUBLIC LICENSE
+	and GNU LESSER GENERAL PUBLIC LICENSE along with this program.  
+	If not, see <http://www.gnu.org/licenses/>.
+    
+    support: http://nomade.sourceforge.net
+    
+	direct programmers e-mails:
+	Ricardo: arsoftware25@gmail.com
+	Amanda : arsoftware10@gmail.com
+	
+	immediate contact(for a very fast answer) WhatsApp
+	(+55)41 9627 1708 - it is always on
+*/
+ 
+ __int64 mv_instance
+ 
+ check_mv_instance(mv_instance);
+ 
+ long mv_instance
+ 
+ __INT32_OR_INT64
+ 
+ (morcego___i___instance__a__bucaneiro_engineering*)(__INT32_OR_INT64)mv_instance
+ 
+ morcego___i___instance__a__bucaneiro_engineering *mv_______
+ 
+ morcego___i___instance__a__bucaneiro_engineering *mv_______=
+ (morcego___i___instance__a__bucaneiro_engineering*)(__INT32_OR_INT64)mv_instance;
+ 
+ mv_______->decoder_c___phwo
+ 
+ __int64 mv_instance=(__int64)(__INT32_OR_INT64)mv_______;
+ 
+ mv_______->freeverb_plugin___buffer_in_left
+ 
+ unicode_large *ul_______=calloc(sizeof(unicode_large),1);
+	ret = GetFileAttributesW (utf8towide_fixed(ul_______,x));
+free(ul_______);
