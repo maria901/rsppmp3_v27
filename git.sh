@@ -41,6 +41,7 @@ echo "Erro 40"
 exit
 fi
 
+
 git add --all
 oi="$?"
 #echo $oi
@@ -49,6 +50,7 @@ then
 echo "Erro 50"
 exit
 fi
+
 
 git commit
 oi="$?"
@@ -59,6 +61,7 @@ echo "Erro 60"
 exit
 fi
 
+
 git push
 oi="$?"
 #echo $oi
@@ -68,9 +71,12 @@ echo "Erro 70"
 exit
 fi
 
+
 echo 'Feito amor...'
+
 
 exit
 fi
+
 
 echo 'Errou amor...'

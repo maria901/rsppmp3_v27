@@ -787,6 +787,8 @@ int morcego_extract_wav(morcego___i___instance__a__bucaneiro_engineering *mv____
 	  goto saida_amanda_s_smart_ape;
      }
 	
+	printf("********************************************************\n");
+
      if (false == mv_______->libav_c___amanda_s_smart_ape_is_new_webm)
      {
 	  goto saida_amanda_s_smart_ape;
@@ -801,6 +803,8 @@ int morcego_extract_wav(morcego___i___instance__a__bucaneiro_engineering *mv____
 		  filename_amanda_s_smart_ape);
 
 	  amanda_s_smart_ape_timestamp = get_bucaneiro_tick() - amanda_s_smart_ape_timestamp;
+
+	  printf("Arquivo é webm modelo novo\n");
 
 	  printf("tempo que leva com rsp %.6f\n", amanda_s_smart_ape_timestamp);
 
@@ -853,12 +857,11 @@ int morcego_extract_wav(morcego___i___instance__a__bucaneiro_engineering *mv____
 
 			 goto saida_amanda_s_smart_ape;
 		    }
-		    else
-		    {
-			 printf("Não ta usando cache entao nao vai fazer nada\n");
-		    }
-
-	       }
+			else
+			{
+				printf("Não ta usando cache entao nao vai fazer nada\n");
+			}
+		   }
 
 	  }
      }
@@ -1077,42 +1080,45 @@ saida_amanda_s_smart_ape:
 
 	  if (mv_______->libav_c___amanda_s_smart_ape_use_cache)
 	  {
-	       //save... se nao estiver carregado, checa se tem o item ou nao
-	       if (mv_______->libav_c___has_an_entry)
-	       {
-		    printf("webm - will update it anyway...\n");
-		    //update
-	       }
-	       else
-	       {		
+		  if (true == mv_______->libav_c___amanda_s_smart_ape_is_new_webm)
+		  {
+			  //save... se nao estiver carregado, checa se tem o item ou nao
+			  if (mv_______->libav_c___has_an_entry)
+			  {
+				  printf("webm - will update it anyway...\n");
+				  //update
+			  }
+			  else
+			  {
 
-		    printf("webm - will create an entry for webm...\n");
+				  printf("webm - will create an entry for webm...\n");
 
-		    assert(strlen(signature_amanda_s_smart_ape));
+				  assert(strlen(signature_amanda_s_smart_ape));
 
-		    sprintf(mv_______->libav_c___webm________________amanda_s_smart_ape, "%lld", mv_______->libav_c___amanda_s_smart_ape_new_generated_duration);
+				  sprintf(mv_______->libav_c___webm________________amanda_s_smart_ape, "%lld", mv_______->libav_c___amanda_s_smart_ape_new_generated_duration);
 
-		    mv_______->libav_c___normalization_value_amanda_s_smart_ape[0] = '\0';
+				  mv_______->libav_c___normalization_value_amanda_s_smart_ape[0] = '\0';
 
-		    mv_______->libav_c___normalization_valu2_amanda_s_smart_ape[0] = 0x0;
+				  mv_______->libav_c___normalization_valu2_amanda_s_smart_ape[0] = 0x0;
 
-		    mv_______->libav_c___normalization_valu3_amanda_s_smart_ape[0] = 0b0;
+				  mv_______->libav_c___normalization_valu3_amanda_s_smart_ape[0] = 0b0;
 
-		    if(amanda_s_smart_ape_add_entry(signature_amanda_s_smart_ape, mv_______->libav_c___webm________________amanda_s_smart_ape, mv_______->libav_c___normalization_value_amanda_s_smart_ape, mv_______->libav_c___normalization_valu2_amanda_s_smart_ape,
-						    mv_______->libav_c___normalization_valu3_amanda_s_smart_ape))
-		    {
-			 printf("adicionou a entrada amor\n");
-		    }
-		    //here, por parts...
-		    //ja passa os 4...
+				  if (amanda_s_smart_ape_add_entry(signature_amanda_s_smart_ape, mv_______->libav_c___webm________________amanda_s_smart_ape, mv_______->libav_c___normalization_value_amanda_s_smart_ape, mv_______->libav_c___normalization_valu2_amanda_s_smart_ape,
+												   mv_______->libav_c___normalization_valu3_amanda_s_smart_ape))
+				  {
+					  printf("adicionou a entrada amor\n");
+				  }
+				  //here, por parts...
+				  //ja passa os 4...
 
-		    //vamos...
-	       }
+				  //vamos...
+			  }
+		  }
 	  }
-     }
-     mv_______->libav_c___amanda_s_smart_ape__check_and_get_webm_fix_if_true = false;
+	 }
+	 mv_______->libav_c___amanda_s_smart_ape__check_and_get_webm_fix_if_true = false;
 
-     amanda_s_smart_ape_timestamp = get_bucaneiro_tick() - amanda_s_smart_ape_timestamp;
+	 amanda_s_smart_ape_timestamp = get_bucaneiro_tick() - amanda_s_smart_ape_timestamp;
 
      printf("Tempo  pra terminar %.6f\n", amanda_s_smart_ape_timestamp);
      //for historical reasons...

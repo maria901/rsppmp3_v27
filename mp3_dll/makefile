@@ -106,7 +106,7 @@ bucaneiro: bin\interface2.dll mv_from_be.h     \
 
 #	-static-libstdc++ -static-libgcc             \ will keep it here for historical reasons...
 
-	cp rspmp3ocx1.dll ../../rspmp3ocx1.dll
+	cp rspmp3ocx1.dll /bin/mp3dll/rspmp3ocx1.dll
 
 	@echo Amanda says that it is compiled....
 	$(LICAO_DE_VIDA_DO_MEU_AMOR)
