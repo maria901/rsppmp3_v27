@@ -56,9 +56,9 @@ amandaricardo_valquiria: interface2.def          \
 #	@echo  				...................mude a compilacao para -O3.................
 
 	cp --preserve=timestamps interface2.dll /bin/mp3dll/interface2.dll
+	cp --preserve=timestamps interface2.dll ../bin/
 
-	$(RAPIDO__) $(ALINE_SIZE)
-	$(RAPIDO__) $(ALINE_SIZE) 0 1000
+	$(RAPIDO__)
 
 #	-rm *~*
 #	-rm *.orig

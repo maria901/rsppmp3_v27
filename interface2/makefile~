@@ -2,8 +2,13 @@ AMANDA_FLAGS__=-O3 -Wall -Wfatal-errors -Werror
 FELINE_FLAGS__=-Wno-unused-function  -I .
 JULIET_FLAGS  =
 ALINE_SIZE    = 62
+
+include ../make_include
+
+RAPIDO__       = $(RIC) 
+
 amandaricardo_valquiria: interface2.def          \
-	../../mv_from_be.h makefile                  \
+	../mp3_dll/mv_from_be.h makefile             \
 	libav.o                                      \
 	libav_video.o                                \
 	amandaricardo_koci_dprintf.o
@@ -33,34 +38,31 @@ amandaricardo_valquiria: interface2.def          \
 	ver.o interface2.def                         \
 	                                             \
 	                                             \
-	../../../../avcodec-58.dll                   \
-	../../../../avdevice-58.dll                  \
-	../../../../avfilter-7.dll                   \
-	../../../../avformat-58.dll                  \
-	../../../../avutil-56.dll                    \
-	../../../../postproc-55.dll                  \
-	../../../../swresample-3.dll                 \
-	../../../../swscale-5.dll                    \
+	/bin/mp3dll/avcodec-59.dll                   \
+	/bin/mp3dll/avdevice-59.dll                  \
+	/bin/mp3dll/avfilter-8.dll                   \
+	/bin/mp3dll/avformat-59.dll                  \
+	/bin/mp3dll/avutil-57.dll                    \
+	/bin/mp3dll/postproc-56.dll                  \
+	/bin/mp3dll/swresample-4.dll                 \
+	/bin/mp3dll/swscale-6.dll                    \
 	                                             \
-	../../../../rspmp3ocx1.dll                   \
+	/bin/mp3dll/rspmp3ocx1.dll                   \
 	                                             \
-	../../../../mod_sdl2_2_0_12_kp.dll
+	/bin/mp3dll/mod_sdl2_2_0_12_kp.dll           \
+	-static
 
 	@echo 
 #	@echo  				...................mude a compilacao para -O3.................
 
-	-cp --preserve=timestamps interface2.dll 'C:\Ava\back\marido pilantra kkkkk\rsppmp3 sources\win32\mp3dll\mp3dll\bin\x86'
+	cp --preserve=timestamps interface2.dll /bin/mp3dll/interface2.dll
 
-	-cp --preserve=timestamps interface2.dll 'C:\Ava\back\media test\debug_k\support_DLLs_z'
-
-	-cp --preserve=timestamps interface2.dll ../../../../interface2.dll
-
-	@./espaco_arp.exe $(ALINE_SIZE)
-	@./espaco_arp.exe $(ALINE_SIZE) 0 1000
+	$(RAPIDO__) $(ALINE_SIZE)
+	$(RAPIDO__) $(ALINE_SIZE) 0 1000
 
 #	-rm *~*
 #	-rm *.orig
-#esfregue a lampada     "../../../../rspmp3ocx1.dll" falta incluir isto
+#esfregue a lampada     "../mp3_dllrspmp3ocx1.dll" falta incluir isto
 
 dump:
 	dumppe avcodec-53.dll >avcodec-53.dll.txt.h
@@ -83,7 +85,8 @@ amanda_clean:
 	-@rm *.unc-backup~	>nulo 2>nulo
 	-@rm *.?~ >nulo 2>nulo
 
-libav.o: libav.c ../../mv_from_be.h              \
+libav.o: libav.c libav_video.c                   \
+	../mp3_dll/mv_from_be.h                      \
 	AV_SAMPLE_FMT_U8P_k_p.c                      \
 	AV_SAMPLE_FMT_S16P_k_p.c                     \
 	AV_SAMPLE_FMT_S32P_k_p.c                     \
@@ -95,23 +98,25 @@ libav.o: libav.c ../../mv_from_be.h              \
 	AV_SAMPLE_FMT_S32_k_p.c                      \
 	AV_SAMPLE_FMT_S64_k_p.c                      \
 	AV_SAMPLE_FMT_FLT_k_p.c                      \
-	AV_SAMPLE_FMT_DBLP_k_p.c
+	AV_SAMPLE_FMT_DBLP_k_p.c                     \
+	../morcego/be_constants.h
 
 	x86_64-w64-mingw32-gcc.exe -c -o             \
 	libav.o libav.c                              \
 	$(AMANDA_FLAGS__) $(JULIET_FLAGS)            \
 	$(FELINE_FLAGS__) -DMINHA_AMANDA_
-	@./espaco_arp.exe $(ALINE_SIZE)
-	@./espaco_arp.exe $(ALINE_SIZE) 0 100
+	$(RAPIDO__) $(ALINE_SIZE)
+	$(RAPIDO__) $(ALINE_SIZE) 0 100
 
-libav_video.o: libav_video.c                     \
-	../../mv_from_be.h playlist.c
+libav_video.o: libav_video.c libav.c             \
+	../mp3_dll/mv_from_be.h playlist.c           \
+	../morcego/be_constants.h
 	x86_64-w64-mingw32-gcc.exe -c -o             \
 	libav_video.o libav_video.c                  \
 	$(AMANDA_FLAGS__) $(JULIET_FLAGS)            \
 	$(FELINE_FLAGS__) -DMINHA_AMANDA_
-	@./espaco_arp.exe $(ALINE_SIZE)
-	@./espaco_arp.exe $(ALINE_SIZE) 0 100
+	$(RAPIDO__) $(ALINE_SIZE)
+	$(RAPIDO__) $(ALINE_SIZE) 0 100
 
 amandaricardo_koci_dprintf.o :                   \
 	amandaricardo_koci_dprintf.c
@@ -120,14 +125,14 @@ amandaricardo_koci_dprintf.o :                   \
 	amandaricardo_koci_dprintf.c                 \
 	$(AMANDA_FLAGS__) $(JULIET_FLAGS)            \
 	$(FELINE_FLAGS__)
-	@./espaco_arp.exe $(ALINE_SIZE)
-	@./espaco_arp.exe $(ALINE_SIZE) 0 100
+	$(RAPIDO__) $(ALINE_SIZE)
+	$(RAPIDO__) $(ALINE_SIZE) 0 100
 
 feline_test:
 	x86_64-w64-mingw32-gcc.exe -c -o maria.exe   \
 	amanda_and_ricardo_test.c                    \
 	$(AMANDA_FLAGS__) $(JULIET_FLAGS)            \
 	$(FELINE_FLAGS__)
-	@./espaco_arp.exe $(ALINE_SIZE)
-	@./espaco_arp.exe $(ALINE_SIZE) 0 100
+	$(RAPIDO__) $(ALINE_SIZE)
+	$(RAPIDO__) $(ALINE_SIZE) 0 100
  
