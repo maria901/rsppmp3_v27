@@ -51,7 +51,8 @@ bucaneiro: bin\interface2.dll mv_from_be.h     \
 	freeverb_plugin.o allpass.o comb.o           \
 	freeverb_plugin_2.o revmodel.o pedro_64.o    \
 	amanda_s_smart_ape_sha512_k.o                \
-	morcego_interface.o soundtouch_arp.a
+	morcego_interface.o smartape.c_kk.o          \
+	soundtouch_arp.a
 
 	@./amandaricardo_mvbuild26_33.exe            \
 	amanda_file_counter_32.ini                   \
@@ -335,11 +336,23 @@ smartape:
 
 	cp AssemblyInfo.cs ../../../../Properties/AssemblyInfo.cs
 
-smartape_v27:
-
-	x86_64-w64-mingw32-gcc.exe  -o               \
+smartape_v27: smartape.c_kk.o
+	x86_64-w64-mingw32-gcc.exe -o                \
 	amandaricardo_mvbuild26_33.exe               \
+	smartape.c_kk.o                              \
+	-O3                                          \
+	$(LICAO_DE_VIDA_DO_MEU_AMOR)
+
+smartape.c_kk.o: smartape.c
+	x86_64-w64-mingw32-gcc.exe -c -o             \
+	smartape.c_kk.o                              \
 	smartape.c                                   \
 	$(AMANDA_FLAGS__) $(JULIET_FLAGS)            \
 	$(FELINE_FLAGS__) -DAMANDA_S_SMART_APE_ENABLE_WIDE_FUNCTION_
+	$(LICAO_DE_VIDA_DO_MEU_AMOR)
+
+	x86_64-w64-mingw32-gcc.exe -o                \
+	amandaricardo_mvbuild26_33.exe               \
+	smartape.c_kk.o                              \
+	-O3
 	$(LICAO_DE_VIDA_DO_MEU_AMOR)
