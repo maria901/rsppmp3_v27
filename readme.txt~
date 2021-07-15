@@ -18,18 +18,18 @@
  *     Se não, veja <http://www.gnu.org/licenses/>.                             *
  *                                                                              *
  *     Suporte: https://arsoftware.net.br/binarywork_____________________       *
-
+ *     Mirrors: https://locacaodiaria.com.br/corporacaodotrabalhobinario/       *
  *              http: //nomade.sourceforge.net/binarywork_______________/       *
  *                                                                              *
  *     E-mails direto dos felizes programadores:                                *
- *     O Ricardinho :    arsoftware25@gmail.com    ricardo@arsoftware.net.br    *
- *     Little_Amanda:    arsoftware10@gmail.com    amanda.@arsoftware.net.br    *
+ *     Ricardinho:    arsoftware25@gmail.com    ricardo@arsoftware.net.br       *
+ *     Koci______:    arsoftware10@gmail.com    am_koci@arsoftware.net.br       *
  *                                                                              *
  *     contato imediato(para uma resposta muita rápida) WhatsApp                *
  *     (+55)41 9627 1708 - isto está sempre ligado (eu acho...)                 *      
  *                                                                              *
  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *  **/
-  
+ 
 First of all: thanks to the developers of:
 
 Libav(ffmpeg)
@@ -143,11 +143,7 @@ with different copies of the Libav dlls in the same process running
 
 Changelog:
 
-What is new in 12.3.2  build 666894  Thu 15/July/2021 08:10:15  codename 'Dréo'
-Rearranged the sources to small names and now the precompiled
-binaries goes in another package name (bin), the first step for
-cache usage is ready but not complete, support for egenration of
-duration of new webm files is already working, minor modifications.
+What is new in 11.5.4  build 666816 b Thu 08/July/2021 08:56:49  codename
 
 What is new in 11.5.4  build 666816   Thu 08/July/2021 06:08:35  codename Chéreau
 Incomplete version, for debug purposes only, new version will be
