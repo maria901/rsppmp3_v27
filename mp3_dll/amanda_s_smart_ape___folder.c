@@ -476,13 +476,13 @@ rsp_error_print ()
 		if (value > 9999 && value < 12000)
 		{
 #ifdef NPRINTF
-			dprintf_z ("Winsock error : %d %s \n", value, lpMsgBuf);
+			//dprintf_z ("Winsock error : %d %s \n", value, lpMsgBuf);
 #endif
 		}
 		else
 		{
 #ifdef NPRINTF
-			dprintf_z ("System error : %d %s \n", value, lpMsgBuf);
+			//dprintf_z ("System error : %d %s \n", value, lpMsgBuf);
 #endif
 		}
 

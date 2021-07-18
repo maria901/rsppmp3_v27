@@ -1,34 +1,33 @@
 
- /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
-  *                                                                                *
-  *      Licensa de Cópia (C) <202*>  <Corporação do Trabalho Binário>             *
-  *                                                                                *
-  *   Este programa é software livre: você pode redistribuir isto e/ou modificar   *
-  *   isto sobre os termos do GNU Licensa Geral Pública como publicado pela        *
-  *   Fundação de Software Livre, tanto a versão 3 da Licensa, ou                  *
-  *   (dependendo da sua opção) qualquer versão posterior.                         *
-  *                                                                                *
-  *   Este programa é distribuído na esperança que isto vai ser útil,              *
-  *   mas SEM QUALQUER GARANTIA; sem até mesmo a implicada garantia de             *
-  *   COMERCIALIZAÇÃO ou CABIMENTO PARA UM FIM PARTICULAR.  Veja a                 *
-  *   Licensa Geral Pública para mais detalhes.                                    *
-  *                                                                                *
-  *   Você deve ter recebido uma cópia da LICENSA GERAL PUBLICA                    *
-  *       e a GNU Licensa Pública Menor junto com este programa                    *
-  *       Se não, veja <http://www.gnu.org/licenses/>.                             *
-  *                                                                                *
-  *   Suporte: https://arsoftware.net.br/binarywork ____________________           *
-  *   Mirrors: https://locacaodiaria.com.br/corporacaodotrabalhobinario/           *
-  *             http://nomade.sourceforge.net/binarywork/ ______________            *
-  *                                                                                *
-  *       e-mails direto dos felizes programadores:                                *
-  *       MathMan: arsoftware25@gmail.com  ricardo@arsoftware.net.br               *
-  *        Amanda: arsoftware10@gmail.com  amanda@arsoftware.net.br                *
-  *                                                                                *
-  *       contato imediato(para uma resposta muita rápida) WhatsApp                *
-  *       (+55)41 9627 1708 - isto está sempre ligado                              *
-  *                                                                                *
-  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
+ /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+ *                                                                              *
+ *        Licensa de Cópia (C) <2021>  <Corporação do Trabalho Binário>         *
+ *                                                                              *
+ *     Este  programa  é software livre: você pode redistribuir isto e/ou       *
+ *     modificar  isto sobre os termos do  GNU Licensa Geral Pública como       8
+ *     publicado  pela Fundação  de Software  Livre, tanto a versão 3  da       *
+ *     Licensa, ou (dependendo da sua opção) qualquer versão posterior.         *
+ *                                                                              *
+ *     Este  programa é distribuído na  esperança que isto vai  ser útil,       *
+ *     mas SEM  QUALQUER GARANTIA; sem  até mesmo a implicada garantia de       *
+ *     COMERCIALIZAÇÃO ou CABIMENTO PARA UM FIM PARTICULAR.  Veja a             *
+ *     Licensa Geral Pública para mais detalhes.                                *
+ *                                                                              *
+ *     Você deve ter recebido uma  cópia da LICENSA GERAL PUBLICA e a GNU       *
+ *     Licensa Pública Menor junto com este programa                            *
+ *     Se não, veja <http://www.gnu.org/licenses/>.                             *
+ *                                                                              *
+ *     Suporte: https://nomade.sourceforge.io/                                  *
+ *                                                                              *
+ *                                                                              *
+ *     E-mails direto dos felizes programadores:                                *
+ *     O Ricardinho :    arsoftware25@gmail.com    ricardo@arsoftware.net.br    *
+ *     Little_Amanda:    arsoftware10@gmail.com    amanda.@arsoftware.net.br    *
+ *                                                                              *
+ *     contato imediato(para uma resposta muita rápida) WhatsApp                *
+ *     (+55)41 9627 1708 - isto está sempre ligado (eu acho...)                 *      
+ *                                                                              *
+ * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *  **/
  
 #define _WIN32_WINNT 0x500
 #include "mv_from_be.h"
@@ -526,8 +525,8 @@ int getdev()
  * simple callback function, required by the mv_______->decoder_c___wav write process
  */
 static void CALLBACK
-callback(HWAVEOUT handle, UINT message, DWORD data, DWORD param1,
-         DWORD param2)
+callback(__attribute__((unused)) HWAVEOUT handle, UINT message, __attribute__((unused)) DWORD data, __attribute__((unused)) DWORD param1,
+         __attribute__((unused)) DWORD param2)
 {
 	switch (message)
 	{
@@ -1557,7 +1556,7 @@ void setvolume2(morcego___i___instance__a__bucaneiro_engineering *mv_______,
 	float           temp;
 	int i;
 	fatia = (signed short *)buf;
-	for (i = 0; i < len; i = i + 2)
+	for (i = 0; i < (int) len; i = i + 2)
 	{
 		*fatia2 = (int)*fatia;
 		temp = (float)*fatia2;
@@ -1590,7 +1589,7 @@ int setvolume3(morcego___i___instance__a__bucaneiro_engineering *mv_______,
 	float                     temp;
 	int                          i;
 	fatia = (signed short *)   buf;
-	for (i = 0; i < len; i = i + 2)
+	for (i = 0; i < (int) len; i = i + 2)
 	{
 
 		*fatia2 = (int)*fatia;
@@ -1732,8 +1731,8 @@ checkinit(morcego___i___instance__a__bucaneiro_engineering *mv_______)
  * today we have an interface2.dll for the video functions
  *
  */
-int __stdcall interface1(__INT32_OR_INT64 argumento1, __INT32_OR_INT64 argumento2,
-                         __INT32_OR_INT64 argumento3, __INT32_OR_INT64 argumento4)
+int __stdcall interface1(__attribute__((unused)) __INT32_OR_INT64 argumento1, __attribute__((unused)) __INT32_OR_INT64 argumento2,
+                         __attribute__((unused)) __INT32_OR_INT64 argumento3, __attribute__((unused)) __INT32_OR_INT64 argumento4)
 {
 	assert(0 && "Not in use anymore, unfortunatelly...\n");
 	return                            0;
@@ -1862,9 +1861,10 @@ BE_CreateDecoder()
 		mv_______->libav_c___uvPlaneSz_kp                      =    0;
 		mv_______->libav_c___uvPitch_kp                        =    0;
 		mv_______->libav_c___sc_kp                             = NULL;
-
-		dprintf_z("allocated memory %08x size %d\n",        mv_______,
-		        sizeof(morcego___i___instance__a__bucaneiro_engineering));
+		/*
+			dprintf_z("allocated memory %08x size %d\n",        mv_______,
+			sizeof(morcego___i___instance__a__bucaneiro_engineering));
+		*/
 	}
 	else
 		mprintf("Cannot allocate memory\n"),                 exit(23);
@@ -1881,7 +1881,7 @@ void BE_CloseDecoder(__int64 *instance_64)
 
 	if (instance)
 	{
-		dprintf_z("freeing memory %p\n", instance);
+		//dprintf_z("freeing memory %p\n", instance);
 
 		morcego___i___instance__a__bucaneiro_engineering     *mv_______ =
 			(morcego___i___instance__a__bucaneiro_engineering *)instance;
@@ -3582,7 +3582,7 @@ int __stdcall GetMpegMode(__int64 mv_instance, char *mode_)
  *
  */
 int __stdcall ConvertMP3ToWav(__int64 mv_instance, char *input, char *output,
-                              int tipo, char *mess, int track)
+                              int tipo, __attribute__((unused)) char *mess, int track)
 {
 	int ret;
 	check_mv_instance(mv_instance);

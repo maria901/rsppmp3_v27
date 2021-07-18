@@ -147,6 +147,37 @@ analize (morcego___i___instance__a__bucaneiro_engineering *mv_______,char *filen
 
 	assert(be_real_real);
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 	ret = morcego_init_libav (mv_______,be_real_real, 0);
 
 	if (ret)

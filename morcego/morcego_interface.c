@@ -770,11 +770,13 @@ int morcego_extract_wav(morcego___i___instance__a__bucaneiro_engineering *mv____
 	  wav_mode = FAAD_FMT_FLOAT;
      }
 
-     printf("Te amo Amanda...\n");
+     pedro_dprintf(0, "Te amo Amanda...\n");
 	
      memset(be, 0, sizeof(be_libav_struct));
 
      strcpy(be->sourcefile, filename_amanda_s_smart_ape);
+	 
+	 strcpy(mv_______->libav_c___filename_copy, filename_amanda_s_smart_ape);
 
      be->track_to_play_or_decode = track;
 
@@ -787,7 +789,7 @@ int morcego_extract_wav(morcego___i___instance__a__bucaneiro_engineering *mv____
 	  goto saida_amanda_s_smart_ape;
      }
 	
-	printf("********************************************************\n");
+	pedro_dprintf(0, "********************************************************\n");
 
      if (false == mv_______->libav_c___amanda_s_smart_ape_is_new_webm)
      {
@@ -804,11 +806,11 @@ int morcego_extract_wav(morcego___i___instance__a__bucaneiro_engineering *mv____
 
 	  amanda_s_smart_ape_timestamp = get_bucaneiro_tick() - amanda_s_smart_ape_timestamp;
 
-	  printf("Arquivo é webm modelo novo\n");
+	  pedro_dprintf(0, "Arquivo é webm modelo novo\n");
 
-	  printf("tempo que leva com rsp %.6f\n", amanda_s_smart_ape_timestamp);
+	  pedro_dprintf(0, "tempo que leva com rsp %.6f\n", amanda_s_smart_ape_timestamp);
 
-	  printf("amor a string %s\n",            signature_amanda_s_smart_ape);
+	  pedro_dprintf(0, "amor a string %s\n",            signature_amanda_s_smart_ape);
 
 	  //exit(27);
      }
@@ -834,32 +836,32 @@ int morcego_extract_wav(morcego___i___instance__a__bucaneiro_engineering *mv____
 
 	       //para compilar rsppmp3: 1001
 	       //para rodar rsppmp3   : 1548
-	       printf("enabled cache? %d\n", (int) mv_______->libav_c___amanda_s_smart_ape_use_cache);
+	       pedro_dprintf(0, "enabled cache? %d\n", (int) mv_______->libav_c___amanda_s_smart_ape_use_cache);
 
-	       printf("Tem itens %d\n", (int)mv_______->libav_c___has_an_entry);
+	       pedro_dprintf(0, "Tem itens %d\n", (int)mv_______->libav_c___has_an_entry);
 
 	       amanda_s_smart_ape_timestamp = get_bucaneiro_tick();
 	       
 	       if('\0' == mv_______->libav_c___webm________________amanda_s_smart_ape[0])
 	       {
-		    printf("Não tem webm data salva, simplesmente isso\n");
+		    pedro_dprintf(0, "Não tem webm data salva, simplesmente isso\n");
 	       }
 	       else
 	       {
-		    printf("!Tem webm data salva, simplesmente isso\n");
+		    pedro_dprintf(0, "!Tem webm data salva, simplesmente isso\n");
 
 		    if (mv_______->libav_c___amanda_s_smart_ape_use_cache)
 
 		    {
-			 printf("Ta usando cache entao vai colocar o webm no item usando o codigo que uso os dados no cache\n");
+			 pedro_dprintf(0, "Ta usando cache entao vai colocar o webm no item usando o codigo que uso os dados no cache\n");
 
-			 generated_size_amanda_s_smart_ape  = strtoll(mv_______->libav_c___webm________________amanda_s_smart_ape, NULL, 10);
+			 mv_______->libav_c___amanda_s_smart_ape_new_generated_duration = strtoll(mv_______->libav_c___webm________________amanda_s_smart_ape, NULL, 10);
 
 			 goto saida_amanda_s_smart_ape;
 		    }
 			else
 			{
-				printf("Não ta usando cache entao nao vai fazer nada\n");
+				pedro_dprintf(0, "Não ta usando cache entao nao vai fazer nada\n");
 			}
 		   }
 
@@ -1085,17 +1087,19 @@ saida_amanda_s_smart_ape:
 			  //save... se nao estiver carregado, checa se tem o item ou nao
 			  if (mv_______->libav_c___has_an_entry)
 			  {
-				  printf("webm - will update it anyway...\n");
+				  pedro_dprintf(0, "webm - will update it anyway...\n");
 				  //update
 			  }
 			  else
 			  {
 
-				  printf("webm - will create an entry for webm...\n");
+				  pedro_dprintf(0, "webm - will create an entry for webm...\n");
 
 				  assert(strlen(signature_amanda_s_smart_ape));
 
 				  sprintf(mv_______->libav_c___webm________________amanda_s_smart_ape, "%lld", mv_______->libav_c___amanda_s_smart_ape_new_generated_duration);
+
+				  pedro_dprintf(0, "Valor gerado de duration %lld\n", mv_______->libav_c___amanda_s_smart_ape_new_generated_duration);
 
 				  mv_______->libav_c___normalization_value_amanda_s_smart_ape[0] = '\0';
 
@@ -1106,7 +1110,7 @@ saida_amanda_s_smart_ape:
 				  if (amanda_s_smart_ape_add_entry(signature_amanda_s_smart_ape, mv_______->libav_c___webm________________amanda_s_smart_ape, mv_______->libav_c___normalization_value_amanda_s_smart_ape, mv_______->libav_c___normalization_valu2_amanda_s_smart_ape,
 												   mv_______->libav_c___normalization_valu3_amanda_s_smart_ape))
 				  {
-					  printf("adicionou a entrada amor\n");
+					  pedro_dprintf(0, "adicionou a entrada amor\n");
 				  }
 				  //here, por parts...
 				  //ja passa os 4...
@@ -1120,7 +1124,7 @@ saida_amanda_s_smart_ape:
 
 	 amanda_s_smart_ape_timestamp = get_bucaneiro_tick() - amanda_s_smart_ape_timestamp;
 
-     printf("Tempo  pra terminar %.6f\n", amanda_s_smart_ape_timestamp);
+     pedro_dprintf(0, "Tempo  pra terminar %.6f\n", amanda_s_smart_ape_timestamp);
      //for historical reasons...
 
      return returnvalue;

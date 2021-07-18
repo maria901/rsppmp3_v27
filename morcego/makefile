@@ -4,9 +4,7 @@ JULIET_FLAGS  =
 
 ALINE_SIZE    =                                  62
 
-include ../make_include
-
-AMANDA_ESPACO_= $(RIC)
+AMANDA_ESPACO_= 
 
 amandaricardo_valquiria: ../mp3_dll/mv_from_be.h \
 	be_constants.h

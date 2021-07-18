@@ -281,7 +281,7 @@ rsp_error ()
 
 		replacespacewithchar (lpMsgBuf, '\n', ' ', 257);
 #ifdef NPRINTF
-		dprintf_z ("200 System error : %d %s \n", value, lpMsgBuf);
+		//dprintf_z ("200 System error : %d %s \n", value, lpMsgBuf);
 #endif
 	}
 
@@ -309,7 +309,7 @@ rsp_error_val (int value)
 	if (ret)
 	{
 #ifdef NPRINTF
-		dprintf_z ("%d %s \n", value, lpMsgBuf);
+		//dprintf_z ("%d %s \n", value, lpMsgBuf);
 #endif
 	}
 	SetLastError (value);
@@ -342,7 +342,7 @@ rsp_net_error ()
 
 		replacespacewithchar (strName, '\n', ' ', 299);
 #ifdef NPRINTF
-		dprintf_z ("201 WinInet Error : %d %s \n", dError, strName);
+		//dprintf_z ("201 WinInet Error : %d %s \n", dError, strName);
 #endif
 
 	}
@@ -362,7 +362,7 @@ keyboard (int parameter)
 
 	//  return 0;
 #ifdef NPRINTF
-	dprintf_z ("->Keyboard activated <- \n");
+	//dprintf_z ("->Keyboard activated <- \n");
 #endif
 	while (1)
 	{
@@ -551,9 +551,9 @@ http ()
 
 
 #ifdef NPRINTF
-	dprintf_z ("filename %s \n", filetosave);
+	//dprintf_z ("filename %s \n", filetosave);
 
-	dprintf_z ("URL %s \n", strURL);
+	//dprintf_z ("URL %s \n", strURL);
 #endif
 
 	mod = GetModuleHandle ("wininet.dll");
@@ -569,7 +569,7 @@ http ()
 			internetrunning = 0;
 			isdownloading = 0;
 #ifdef NPRINTF
-			dprintf_z ("Cannot load required dll to access the Internet \n");
+			//dprintf_z ("Cannot load required dll to access the Internet \n");
 #endif
 			return 1; //canot load wininet dll
 
@@ -598,7 +598,7 @@ http ()
 
 	}
 #ifdef NPRINTF
-	dprintf_z ("Depois de InternetOpen \n");
+	//dprintf_z ("Depois de InternetOpen \n");
 #endif
 
 	hInternetFile =
@@ -639,7 +639,7 @@ direto:
 				if (strlen (temp))
 				{
 #ifdef NPRINTF
-					dprintf_z ("%d %s \n", a, temp);
+					//dprintf_z ("%d %s \n", a, temp);
 #endif
 
 				}
@@ -651,7 +651,7 @@ direto:
 		{
 			ret = InternetCloseHandle (m_hSession);
 #ifdef NPRINTF
-			dprintf_z ("Fechou handle de m_hSession ? %d \n", ret);
+			//dprintf_z ("Fechou handle de m_hSession ? %d \n", ret);
 #endif
 
 			m_hSession = 0;
@@ -664,9 +664,9 @@ direto:
 	}
 
 #ifdef NPRINTF
-	dprintf_z ("Depois de InternetOpenUrl \n");
+	//dprintf_z ("Depois de InternetOpenUrl \n");
 
-	dprintf_z ("Vai tentar abrir arquivo \n");
+	//dprintf_z ("Vai tentar abrir arquivo \n");
 #endif
 
 	f = CreateFile (filetosave, GENERIC_READ | GENERIC_WRITE,
@@ -710,7 +710,7 @@ direto3:
 				if (strlen (temp))
 				{
 #ifdef NPRINTF
-					dprintf_z ("%d %s \n", a, temp);
+					//dprintf_z ("%d %s \n", a, temp);
 #endif
 
 				}
@@ -722,7 +722,7 @@ direto3:
 		{
 			ret = InternetCloseHandle (hInternetFile);
 #ifdef NPRINTF
-			dprintf_z ("Fechou handle de hInternetFile ? %d \n", ret);
+			//dprintf_z ("Fechou handle de hInternetFile ? %d \n", ret);
 #endif
 
 			hInternetFile = 0;
@@ -732,14 +732,14 @@ direto3:
 		{
 			ret = InternetCloseHandle (m_hSession);
 #ifdef NPRINTF
-			dprintf_z ("Fechou handle de m_hSession ? %d \n", ret);
+			//dprintf_z ("Fechou handle de m_hSession ? %d \n", ret);
 #endif
 
 			m_hSession = 0;
 		}
 		internetrunning = 0;
 #ifdef NPRINTF
-		dprintf_z ("Nao vai fechar arquivo porque nao foi aberto \n");
+		//dprintf_z ("Nao vai fechar arquivo porque nao foi aberto \n");
 #endif
 
 		internetrunning = 0;
@@ -748,7 +748,7 @@ direto3:
 
 	}
 #ifdef NPRINTF
-	dprintf_z ("Esta puxando arquivo \n");
+	//dprintf_z ("Esta puxando arquivo \n");
 #endif
 
 volta:
@@ -786,7 +786,7 @@ volta:
 		int a, b;
 		char temp[256];
 #ifdef NPRINTF
-		dprintf_z ("Deu erro em InternetReadFile \n");
+		//dprintf_z ("Deu erro em InternetReadFile \n");
 #endif
 
 		b = 256;
@@ -813,7 +813,7 @@ direto2:
 				if (strlen (temp))
 				{
 #ifdef NPRINTF
-					dprintf_z ("%d %s \n", a, temp);
+					//dprintf_z ("%d %s \n", a, temp);
 #endif
 
 				}
@@ -825,7 +825,7 @@ direto2:
 		{
 			ret = InternetCloseHandle (hInternetFile);
 #ifdef NPRINTF
-			dprintf_z ("Fechou handle de hInternetFile ? %d \n", ret);
+			//dprintf_z ("Fechou handle de hInternetFile ? %d \n", ret);
 #endif
 
 			hInternetFile = 0;
@@ -836,7 +836,7 @@ direto2:
 		{
 			ret = InternetCloseHandle (m_hSession);
 #ifdef NPRINTF
-			dprintf_z ("Fechou handle de m_hSession ? %d \n", ret);
+			//dprintf_z ("Fechou handle de m_hSession ? %d \n", ret);
 #endif
 
 			m_hSession = 0;
@@ -850,7 +850,7 @@ direto2:
 	if (dwRead == 0)
 	{
 #ifdef NPRINTF
-		dprintf_z ("Nao tem mais nada , sai fora \n");
+		//dprintf_z ("Nao tem mais nada , sai fora \n");
 #endif
 
 		goto final;
@@ -872,7 +872,7 @@ direto2:
 
 
 #ifdef NPRINTF
-	dprintf_z ("retornando \n");
+	//dprintf_z ("retornando \n");
 #endif
 	goto volta;
 
@@ -881,7 +881,7 @@ final:
 saidaok:
 
 #ifdef NPRINTF
-	dprintf_z ("len %d tamanho %d \n", len, tamanho);
+	//dprintf_z ("len %d tamanho %d \n", len, tamanho);
 #endif
 
 	if (0 && (len != -1) && (len != 0) && (len != tamanho) && (tamanho > len))
@@ -896,14 +896,14 @@ saidaok:
 
 	CloseHandle (f);
 #ifdef NPRINTF
-	dprintf_z ("Fechou arquivo \n");
+	//dprintf_z ("Fechou arquivo \n");
 #endif
 
 	if (hInternetFile)
 	{
 		ret = InternetCloseHandle (hInternetFile);
 #ifdef NPRINTF
-		dprintf_z ("Fechou handle de hInternetFile ? %d \n", ret);
+		//dprintf_z ("Fechou handle de hInternetFile ? %d \n", ret);
 #endif
 
 		hInternetFile = 0;
@@ -915,7 +915,7 @@ saidaok:
 
 		ret = InternetCloseHandle (m_hSession);
 #ifdef NPRINTF
-		dprintf_z ("Fechou handle de m_hSession ? %d \n", ret);
+		//dprintf_z ("Fechou handle de m_hSession ? %d \n", ret);
 #endif
 
 		m_hSession = 0;
@@ -923,7 +923,7 @@ saidaok:
 	}
 
 #ifdef NPRINTF
-	dprintf_z ("puxou arquivo \n");
+	//dprintf_z ("puxou arquivo \n");
 #endif
 
 	internetrunning = 0;
@@ -943,7 +943,7 @@ void
 cancel_execution ()
 {
 #ifdef NPRINTF
-	dprintf_z ("chamando cancel \n");
+	//dprintf_z ("chamando cancel \n");
 #endif
 	while (internetrunning)
 	{
@@ -952,7 +952,7 @@ cancel_execution ()
 	}
 	intcancel = 0;
 #ifdef NPRINTF
-	dprintf_z ("ja deu cancel \n");
+	//dprintf_z ("ja deu cancel \n");
 #endif
 }
 
@@ -1024,7 +1024,7 @@ isurl (char *url)
 
 		sizeis = 7;
 #ifdef NPRINTF
-		dprintf_z ("is http \n");
+		//dprintf_z ("is http \n");
 #endif
 
 	}
@@ -1032,14 +1032,14 @@ isurl (char *url)
 	{
 		sizeis = 6;
 #ifdef NPRINTF
-		dprintf_z ("is ftp \n");
+		//dprintf_z ("is ftp \n");
 #endif
 
 	}
 	else
 	{
 #ifdef NPRINTF
-		dprintf_z ("no protocol \n");
+		//dprintf_z ("no protocol \n");
 #endif
 
 		sizeis = 0;
@@ -1047,7 +1047,7 @@ isurl (char *url)
 
 	free (temp);
 #ifdef NPRINTF
-	dprintf_z ("isulr == %d \n", sizeis);
+	//dprintf_z ("isulr == %d \n", sizeis);
 #endif
 	return sizeis;
 

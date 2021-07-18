@@ -64,20 +64,21 @@ pedro_dprintf
 {
 	if(-1 < amanda_level)
 	{
+		
 		va_list args;
 		char *buffer_kp = malloc(20000);
 		va_start (args, format);
 		vsprintf (buffer_kp, format, args);
-		fprintf(stdout, "%s", buffer_kp); 
-		fflush(stdout);
-		/*		
+		//fprintf(stdout, "%s", buffer_kp); 
+		//fflush(stdout);
+				
 				if('\n' == buffer_kp[strlen(buffer_kp)-1])
 				{
 				buffer_kp[strlen(buffer_kp)-1]=' ';
 				}
 				strcat(buffer_kp," _amanda_debug_");
 				OutputDebugString (buffer_kp);
-		*/		
+				
 		free(buffer_kp);
 		//someday we fix it...
 	}

@@ -25,7 +25,6 @@ DisableVideo                                                                    
 DisableWidthLimit                                                                 @170
 Don_t_Draw_Video                                                                  @180
 DoubleBuffer                                                                      @190
-dprintf_z                                                                           @200
 EnableEcho                                                                        @210
 EnableEqualizer                                                                   @220
 EnableFreeverb                                                                    @230

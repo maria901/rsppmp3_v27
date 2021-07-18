@@ -186,7 +186,7 @@ av_log_windebug_callback (void *ptr, int level, const char *fmt, va_list vl)
 	vsnprintf (line, sizeof (line), fmt, vl);
 	changecharacter (line, '\r', ' '), changecharacter (line, '\n', ' ');
 #ifndef MINHA_AMANDA
-	dprintf_z ("-%s-  debugfixo", line);
+	//dprintf_z ("-%s-  debugfixo", line);
 #endif
 	/*
 	   if(copy)

@@ -121,7 +121,7 @@ main ()
 
   if (0 == hmod)
     {
-      dprintf_z ("Error loading dll\n");
+      //dprintf_z ("Error loading dll\n");
       goto saida;
     }
 
@@ -152,6 +152,6 @@ main ()
 
 
 saida:
-  dprintf_z ("saindo\n");
+  //dprintf_z ("saindo\n");
   return 0;
 }

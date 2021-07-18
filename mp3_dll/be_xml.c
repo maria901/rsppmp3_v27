@@ -660,7 +660,7 @@ inicio:
 int feline_read_xml(char *filename_utf8_feline,
 					char *root__________feline,
 					char *node__________feline,
-					char *attribute_____feline,
+					__attribute__((unused)) char *attribute_____feline,
 					char *out_data______feline)
 {
 	char *node__________feline_copy_a;
@@ -839,7 +839,7 @@ next_feline:;
 int feline_write_xml(char *filename_utf8_feline,
 					 char *root__________feline,
 					 char *node__________feline,
-					 char *attribute_____feline,
+					 __attribute__((unused)) char *attribute_____feline,
 					 char *in_data_______feline_)
 {
 	bool did_arp = false;

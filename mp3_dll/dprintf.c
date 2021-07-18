@@ -134,7 +134,7 @@ my_timer (int val, char *filter)
 	}
 	else
 	{
-		dprintf_z ("tempo decorrido %f - %s\n", inittimer2 (1), filter);
+		//dprintf_z ("tempo decorrido %f - %s\n", inittimer2 (1), filter);
 	}
 	return 0;
 }

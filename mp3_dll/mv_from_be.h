@@ -17,13 +17,12 @@
  *     Licensa Pública Menor junto com este programa                            *
  *     Se não, veja <http://www.gnu.org/licenses/>.                             *
  *                                                                              *
- *     Suporte: https://arsoftware.net.br/binarywork_____________________       *
- *     Mirrors: https://locacaodiaria.com.br/corporacaodotrabalhobinario/       *
- *              http: //nomade.sourceforge.net/binarywork_______________/       *
+ *     Suporte: https://nomade.sourceforge.io/                                  *
+ *                                                                              *
  *                                                                              *
  *     E-mails direto dos felizes programadores:                                *
- *     Ricardinho:    arsoftware25@gmail.com    ricardo@arsoftware.net.br       *
- *     Koci______:    arsoftware10@gmail.com    am_koci@arsoftware.net.br       *
+ *     O Ricardinho :    arsoftware25@gmail.com    ricardo@arsoftware.net.br    *
+ *     Little_Amanda:    arsoftware10@gmail.com    amanda.@arsoftware.net.br    *
  *                                                                              *
  *     contato imediato(para uma resposta muita rápida) WhatsApp                *
  *     (+55)41 9627 1708 - isto está sempre ligado (eu acho...)                 *      
@@ -60,6 +59,15 @@
 
 #ifndef MORCEGO___I___INSTANCE__A__BUCANEIRO_ENGINEERING__
 #define MORCEGO___I___INSTANCE__A__BUCANEIRO_ENGINEERING__
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////
+// 18 July 2021
+
+#define MAXPATH_UTF_8_MODE_AMANDA_S_SMART_APE (MAX_PATH * 6 \
+) /* is it enough */
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////
+
 /**
  * Função pra imprimir dados para o cara...
  *
@@ -743,17 +751,18 @@ typedef struct morcego_instance_be_
 	void *copy;
 
 	//setor de wav extract, hack for new webm files without duration
-	bool      libav_c___amanda_s_smart_ape__is_open                       ;
-	bool      libav_c___amanda_s_smart_ape__check_and_get_webm_fix_if_true;
-	bool      libav_c___amanda_s_smart_ape_is_new_webm                    ;
-	int64_t   libav_c___amanda_s_smart_ape_new_generated_duration         ;
-	bool      libav_c___amanda_s_smart_ape_use_cache                      ;
-	bool      libav_c___has_an_entry                                      ;
-	char      libav_c___webm________________amanda_s_smart_ape[MAX_PATH]  ;
-	char      libav_c___normalization_mode__amanda_s_smart_ape[MAX_PATH]  ;
-	char      libav_c___normalization_value_amanda_s_smart_ape[MAX_PATH]  ;//replaygain
-	char      libav_c___normalization_valu2_amanda_s_smart_ape[MAX_PATH]  ;//BENORMALIZE
-	char      libav_c___normalization_valu3_amanda_s_smart_ape[MAX_PATH]  ;
+	bool      libav_c___amanda_s_smart_ape__is_open                          ;
+	bool      libav_c___amanda_s_smart_ape__check_and_get_webm_fix_if_true   ;
+	bool      libav_c___amanda_s_smart_ape_is_new_webm                       ;
+	int64_t   libav_c___amanda_s_smart_ape_new_generated_duration            ;
+	bool      libav_c___amanda_s_smart_ape_use_cache                         ;
+	bool      libav_c___has_an_entry                                         ;
+	char      libav_c___webm________________amanda_s_smart_ape[MAX_PATH]     ;
+	char      libav_c___normalization_mode__amanda_s_smart_ape[MAX_PATH]     ;
+	char      libav_c___normalization_value_amanda_s_smart_ape[MAX_PATH]     ;//replaygain
+	char      libav_c___normalization_valu2_amanda_s_smart_ape[MAX_PATH]     ;//BENORMALIZE
+	char      libav_c___normalization_valu3_amanda_s_smart_ape[MAX_PATH]     ;
+	char      libav_c___filename_copy[MAXPATH_UTF_8_MODE_AMANDA_S_SMART_APE] ;                         
 }morcego___i___instance__a__bucaneiro_engineering;
 //#pragma pack(pop)
 //morcego_instance_be *mv_______
@@ -903,12 +912,6 @@ int __fastcall get_amanda_s_smart_ape_sha513(char * buf_in, int len_amanda_s_sma
  */
 int64_t
 getfilesize_ar_amanda_s_smart_ape(char *infile_ar);
-
-//////////////////////////////////////////////////////////////////////////////////////////////////////
-// added at 19:47
-
-#define MAXPATH_UTF_8_MODE_AMANDA_S_SMART_APE (MAX_PATH * 6 \
-) /* is it enough */
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////
 // modified 10:12

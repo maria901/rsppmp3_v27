@@ -54,11 +54,11 @@
 
  */
 
-#define AMANDA_MODE 1
+#define AMANDA_MODE 0
 
 #if AMANDA_MODE == 0
 #define VIDEO_CONVERSION_MODE SWS_BICUBIC
-#warning VIDEO_CONVERSION_MODE == SWS_BICUBIC
+//#warning VIDEO_CONVERSION_MODE == SWS_BICUBIC
 #elif AMANDA_MODE == 1
 #define VIDEO_CONVERSION_MODE SWS_FAST_BILINEAR
 //#warning VIDEO_CONVERSION_MODE == SWS_FAST_BILINEAR
@@ -1141,6 +1141,8 @@ int morcego_vermelho_player_thread_koci(morcego___i___instance__a__bucaneiro_eng
 					case 0:
 					{
 
+						pedro_dprintf(-1, "Frame got 1 %p %p\n", pFrame_ptr_koci, packet_ptr_pereira_koci_forever);
+
 						while(AMANDA_RICARDO_DECODER_DATA_IS_READY_TO_PLAY == mislaine_command.juliete_decoder_status[mislaine_command.aline_array_index_decoder])// aonde verifica isto seta o AMANDA_RICARDO_DECODER_IS_WORKING
 						{
 
@@ -1149,7 +1151,7 @@ int morcego_vermelho_player_thread_koci(morcego___i___instance__a__bucaneiro_eng
 							{
 
 								//av_packet_unref(packet);
-								pedro_dprintf(-1, "saiu 2020 %d %d",mv_______->libav_c___cancel_video_thread,  mv_______->decoder_c___cancelflag);
+								pedro_dprintf(-1, "saiu 8 %d %d",mv_______->libav_c___cancel_video_thread,  mv_______->decoder_c___cancelflag);
 								goto koci_finish;
 
 							}
@@ -1160,7 +1162,9 @@ int morcego_vermelho_player_thread_koci(morcego___i___instance__a__bucaneiro_eng
 						mislaine_command.libav_c_amanda__video_frame[mislaine_command.aline_array_index_decoder] = amanda_pts;
 						
 						mislaine_command.pFrame_ptr_koci[mislaine_command.aline_array_index_decoder] = pFrame_ptr_koci;
-					
+						
+						pedro_dprintf(-1, "Frame got 2 %p %p\n", pFrame_ptr_koci, packet_ptr_pereira_koci_forever);
+						
 						mislaine_command.packet_ptr_pereira[mislaine_command.aline_array_index_decoder] = packet_ptr_pereira_koci_forever;
 						mislaine_command.juliete_decoder_status[mislaine_command.aline_array_index_decoder] = AMANDA_RICARDO_DECODER_DATA_IS_READY_TO_PLAY;
 
@@ -1176,7 +1180,7 @@ int morcego_vermelho_player_thread_koci(morcego___i___instance__a__bucaneiro_eng
 							{
 
 								//av_packet_unref(packet);
-								pedro_dprintf(-1, "saiu 2020 %d %d",mv_______->libav_c___cancel_video_thread,  mv_______->decoder_c___cancelflag);
+								pedro_dprintf(-1, "saiu 27 %d %d",mv_______->libav_c___cancel_video_thread,  mv_______->decoder_c___cancelflag);
 								goto koci_finish;
 
 							}
@@ -1185,7 +1189,7 @@ int morcego_vermelho_player_thread_koci(morcego___i___instance__a__bucaneiro_eng
 							pFrame_ptr_koci = av_frame_alloc();
 							packet_ptr_pereira_koci_forever = av_malloc(sizeof(AVPacket));
 						*/
-
+						pedro_dprintf(-1, "vai pegar o novo frame...\n");
 						pFrame_ptr_koci = mislaine_command.pFrame_ptr_koci[mislaine_command.aline_array_index_decoder];
 						packet_ptr_pereira_koci_forever = mislaine_command.packet_ptr_pereira[mislaine_command.aline_array_index_decoder];
 
@@ -1270,6 +1274,7 @@ int morcego_vermelho_player_thread_koci(morcego___i___instance__a__bucaneiro_eng
 		     av_frame_unref (pFrame_ptr_koci);
 		}
 	}
+	pedro_dprintf(-1, "saiu 9\n");
 koci_finish:
 	;
 
@@ -1894,7 +1899,9 @@ return_call_for_one_frame_only_playback_k:      //remenber it
 				     av_frame_unref (pFrame_ptr_koci_player);				
 				}
 				first_pass_z = true;
-							
+				
+				pedro_dprintf(-1, "Frame shown %p %p\n", pFrame_ptr_koci_player, packet_ptr_pereira_koci_forever_player);
+				
 				mislaine_command.juliete_decoder_status[mislaine_command.maria_array_index_player] = AMANDA_RICARDO_DECODER_IS_WORKING;
 
 				mislaine_command.maria_array_index_player++;

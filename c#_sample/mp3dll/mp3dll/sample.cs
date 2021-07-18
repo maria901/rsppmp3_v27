@@ -1,5 +1,5 @@
 
- /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
  *                                                                              *
  *        Licensa de Cópia (C) <2021>  <Corporação do Trabalho Binário>         *
  *                                                                              *
@@ -26,7 +26,7 @@
  *     Little_Amanda:    arsoftware10@gmail.com    amanda.@arsoftware.net.br    *
  *                                                                              *
  *     contato imediato(para uma resposta muita rápida) WhatsApp                *
- *     (+55)41 9627 1708 - isto está sempre ligado (eu acho...)                 *      
+ *     (+55)41 9627 1708 - isto está sempre ligado (eu acho...)                 *
  *                                                                              *
  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *  **/
 
@@ -541,6 +541,11 @@ namespace mp3dll
 			{
 				disable_standby.EnableConstantDisplayAndPower(false);
 				label10.Text = "Finished event raised";
+				
+				//aqui...
+				video_p.Image = dummy2_p.Image;
+				video_f_p.Image = dummy2_p.Image;
+				
 				main_timer.Enabled = false;
 				if (0 != ret)
 				{
@@ -768,7 +773,7 @@ namespace mp3dll
 		
 		private void Form1_Load(object sender, EventArgs e)
 		{
-		
+			
 			string temp_i;
 			this.Height = Screen.PrimaryScreen.WorkingArea.Height + 20;
 			this.Width  = Screen.PrimaryScreen.WorkingArea.Width ;
@@ -799,10 +804,10 @@ namespace mp3dll
 			}
 			koci_timer.Enabled = true;
 			this.Top = 0; //why my love?...
-/*
+			/*
 			MP3.ControlName(message);
 			nome_da_dll = message.ToString();
-*/
+			 */
 
 			video_p.Image = dummyimage_p.Image;
 			
@@ -1014,8 +1019,17 @@ namespace mp3dll
 					waveout.Items.Add(settings.ToString());
 				}
 				MP3.GetSettings("waveout", settings, "0");
-				waveout.SelectedIndex = int.Parse(settings.ToString());
-
+				
+				try
+				{
+					waveout.SelectedIndex = int.Parse(settings.ToString());
+				}
+				catch
+				{
+					waveout.SelectedIndex = 0;
+				}
+				
+				
 				disable = 0;
 			}
 			slider_original_location = progressbar_27_51_z_v21.Left;
@@ -1166,7 +1180,7 @@ namespace mp3dll
 					MP3.playlist_index = v;
 				}
 				playlist.Visible = true;
-								
+				
 				if(false == did_it_d)
 				{
 					ListViewItem coisa = playlist.Items.Add("<none>");
@@ -1951,7 +1965,7 @@ namespace mp3dll
 				this.Top = 0;
 				this.Left = 0;
 				mode_is_ricardo_window = false;
-								
+				
 				fullscreen_state_ = 0;
 				video_p_MouseClick(null, null);
 				
@@ -2033,7 +2047,7 @@ namespace mp3dll
 			/*
 			else
 				;//this.Height = 706 - 38;
-			*/
+			 */
 			this.Height = 706 ;//- 38;
 			
 			this.TopMost = false;
@@ -3568,7 +3582,7 @@ namespace mp3dll
 							{
 								MP3.SaveSettings("_i_top_position", "0");
 							}
-														
+							
 							if(ret_arp_ > Screen.PrimaryScreen.Bounds.Height)
 							{
 								MP3.SaveSettings("_i_top_position", "0");
@@ -3626,7 +3640,7 @@ namespace mp3dll
 		}
 		void Use_cache_amanda_s_smart_apeMouseUp(object sender, MouseEventArgs e)
 		{
-	
+			
 			if(true == use_cache_amanda_s_smart_ape.Checked)
 			{
 				MP3.SaveSettings("Amanda", "51");
