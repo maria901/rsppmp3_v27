@@ -422,18 +422,20 @@ int callback_amanda_s_smart_ape_23_39(__attribute__((unused)) void *NotUsed,
 			strcpy(webm________________amanda_s_smart_ape, argv[i] ? argv[i] : "");
 		}
 		if(0 == strcmp("normalization_value_amanda_s_smart_ape", azColName[i]))
-		{
+		{			
 			strcpy(normalization_value_amanda_s_smart_ape, argv[i] ? argv[i] : "");
-		}
+			pedro_dprintf(0, "pegou 1 %s\n", normalization_value_amanda_s_smart_ape);
+		}//             normalization_valu2_amanda_s_smart_ape
 		if(0 == strcmp("normalization_valu2_amanda_s_smart_ape", azColName[i]))
-		{
+		{//        normalization_valu2_amanda_s_smart_ape
 			strcpy(normalization_valu2_amanda_s_smart_ape, argv[i] ? argv[i] : "");
+			pedro_dprintf(0, "pegou 2 %s\n", normalization_valu2_amanda_s_smart_ape);
 		}
 		if(0 == strcmp("normalization_valu3_amanda_s_smart_ape", azColName[i]))
 		{
-			strcpy(normalization_valu2_amanda_s_smart_ape, argv[i] ? argv[i] : "");
+			strcpy(normalization_valu3_amanda_s_smart_ape, argv[i] ? argv[i] : "");
 		}
-		pedro_dprintf(0, "%s = %s\n", azColName[i], argv[i] ? argv[i] : "");
+		pedro_dprintf(0, ".%s. = %s\n", azColName[i], argv[i] ? argv[i] : "");
 	}
 
 	pedro_dprintf(0, "-*******************************\n");
@@ -581,6 +583,8 @@ bool __fastcall amanda_s_smart_ape_query_webm_and_normalization(__attribute__((u
 	char   entry_______________amanda_s_smart_ape [MAXPATH_UTF_8_MODE_AMANDA_S_SMART_APE      ];
 	char * buffer_for_query_amanda_s_smart_ape    = malloc(Amanda_27_CONSTANTE_100000)         ;
 
+	//init_amanda_s_smart_ape();
+
 	webm________________amanda_s_smart_ape = webm________________amanda_s_smart_ape__;
 	normalization_value_amanda_s_smart_ape = normalization_value_amanda_s_smart_ape__;
 	normalization_valu2_amanda_s_smart_ape = normalization_valu2_amanda_s_smart_ape__;
@@ -604,6 +608,10 @@ bool __fastcall amanda_s_smart_ape_query_webm_and_normalization(__attribute__((u
 	strcat(buffer_for_query_amanda_s_smart_ape, entry_______________amanda_s_smart_ape);
 	strcat(buffer_for_query_amanda_s_smart_ape, "';");
 
+	(*has_an_entry_amanda_s_smart_ap_ptr) = false;
+
+	//exit(27);
+
 	ret_amanda_s_smart_ape = ar_Mode_Select_function_amanda_s_smart_ape(buffer_for_query_amanda_s_smart_ape, message_for_amanda_s_smart_ape, callback_amanda_s_smart_ape_23_39);
 
 	if (ret_amanda_s_smart_ape)
@@ -612,7 +620,7 @@ bool __fastcall amanda_s_smart_ape_query_webm_and_normalization(__attribute__((u
 		free(buffer_for_query_amanda_s_smart_ape);
 		return false;
 	}
-	
+		
 	free(buffer_for_query_amanda_s_smart_ape);
 	return true;
 }

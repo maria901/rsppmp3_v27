@@ -1,4 +1,4 @@
-AMANDA_FLAGS__=-O3 -Wall -Wfatal-errors -Werror -Wextra -Wno-unused-function -I .
+AMANDA_FLAGS__=-O3 -Wall -Wfatal-errors -Werror -Wno-restrict -Wextra -Wno-unused-function -I .
  
 amandaricardo_valquiria: bucaneiro
 

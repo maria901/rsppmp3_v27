@@ -758,8 +758,8 @@ typedef struct morcego_instance_be_
 	bool      libav_c___has_an_entry                                                   ;
 	char      libav_c___webm________________amanda_s_smart_ape[MAX_PATH]               ;
 	char      libav_c___normalization_mode__amanda_s_smart_ape[MAX_PATH]               ;
-	char      libav_c___normalization_value_amanda_s_smart_ape[MAX_PATH]               ;//replaygain
-	char      libav_c___normalization_valu2_amanda_s_smart_ape[MAX_PATH]               ;//BENORMALIZE
+	char      libav_c___normalization_repla_amanda_s_smart_ape[MAX_PATH]               ;//replaygain normalization_value_amanda_s_smart_ape
+	char      libav_c___normalization_BENOR_amanda_s_smart_ape[MAX_PATH]               ;//BENORMALIZE normalization_valu2_amanda_s_smart_ape
 	char      libav_c___normalization_valu3_amanda_s_smart_ape[MAX_PATH]               ;
 	char      libav_c___filename_copy[MAXPATH_UTF_8_MODE_AMANDA_S_SMART_APE]           ;
 	char      libav_c___signature___________amanda_s_smart_ape[MAX_PATH]               ;
