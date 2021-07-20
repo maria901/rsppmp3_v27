@@ -101,11 +101,11 @@ static int replacestringsensitive2_feline(char *comando, char *source, char *des
  */
 void strncpy_z(char *dest_z, char *src_z, size_t len)
 {
-    assert(0 <= len);
+    assert(0 <= (int) len);
 
     len--;
 
-    if (0 > len)
+    if (0 > (int) len)
     {
         len = 0;
     }

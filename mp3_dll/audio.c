@@ -254,7 +254,7 @@ write_wav_header (audio_file * aufile)
 }
 
 static int
-write_wav_extensible_header (audio_file * aufile, long channelMask)
+write_wav_extensible_header (audio_file * aufile, __attribute__((unused)) long channelMask)
 {
 	unsigned char header[68];
 	unsigned char *p = header;

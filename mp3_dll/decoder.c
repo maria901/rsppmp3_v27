@@ -19,7 +19,6 @@
  *                                                                              *
  *     Suporte: https://nomade.sourceforge.io/                                  *
  *                                                                              *
- *                                                                              *
  *     E-mails direto dos felizes programadores:                                *
  *     O Ricardinho :    arsoftware25@gmail.com    ricardo@arsoftware.net.br    *
  *     Little_Amanda:    arsoftware10@gmail.com    amanda.@arsoftware.net.br    *
@@ -4931,6 +4930,7 @@ int morcego_geterrorstring(morcego___i___instance__a__bucaneiro_engineering *mv_
 		break;
 	case 900:
 		strcpy((char *)argumento3, "Unknown event");
+		break;
 	case 901:
 		strcpy((char *)argumento3, "Libav error: ");
 		strcat((char *)argumento3,
@@ -5238,7 +5238,7 @@ void __stdcall GetPixelFormat____(__int64 mv_instance, char *format)
 		(morcego___i___instance__a__bucaneiro_engineering *)(__INT32_OR_INT64)
 		mv_instance;
 
-	if (mv_______->decoder_c___tm < GetTickCount())
+	if (mv_______->decoder_c___tm < (int) GetTickCount())
 	{
 		mv_______->decoder_c___tm = GetTickCount() + 500;
 		mv_______->decoder_c___tm_value = mv_______->analisys_c___sync;
@@ -5975,7 +5975,7 @@ int __stdcall get_video_size_z(char * media_file_utf8_z,
 			       int height__z,
 			       int left_z,
 			       int top_z,
-			       int * width_z, int * height_z)
+			       __attribute__((unused)) int * width_z, __attribute__((unused)) int * height_z)
 {
 
   init_data_info_z();
@@ -6093,7 +6093,7 @@ int __stdcall memory_usage__z(char *data_z)
        
   }
   
-  if(GetTickCount() > oldvalue_Z)
+  if(GetTickCount() > (DWORD) oldvalue_Z)
   {
 
   inside_Z:;
@@ -6114,7 +6114,7 @@ int __stdcall memory_usage__z(char *data_z)
   val_z = val_z / 1024.0;
   sprintf(data_z, "%.3f MB", val_z);
 
-  if(GetTickCount() < oldvalue_Z - 600)//o avoid the 49 days problem...
+  if(GetTickCount() < (DWORD) oldvalue_Z - 600)//o avoid the 49 days problem...
   {
 
        oldvalue_Z = GetTickCount();

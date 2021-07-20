@@ -18,19 +18,16 @@
  *     Licensa Pública Menor junto com este programa                            *
  *     Se não, veja <http://www.gnu.org/licenses/>.                             *
  *                                                                              *
- *     Suporte: https://arsoftware.net.br/binarywork_____________________       *
- *     Mirrors: https://locacaodiaria.com.br/corporacaodotrabalhobinario/       *
- *              http: //nomade.sourceforge.net/binarywork_______________/       *
+ *     Suporte: https://nomade.sourceforge.io/                                  *
  *                                                                              *
  *     E-mails direto dos felizes programadores:                                *
- *     Ricardinho:    arsoftware25@gmail.com    ricardo@arsoftware.net.br       *
- *     Koci______:    arsoftware10@gmail.com    am_koci@arsoftware.net.br       *
+ *     O Ricardinho :    arsoftware25@gmail.com    ricardo@arsoftware.net.br    *
+ *     Little_Amanda:    arsoftware10@gmail.com    amanda.@arsoftware.net.br    *
  *                                                                              *
  *     contato imediato(para uma resposta muita rápida) WhatsApp                *
  *     (+55)41 9627 1708 - isto está sempre ligado (eu acho...)                 *      
  *                                                                              *
  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *  **/
- 
 
 /*
 #pragma warning( disable : 4101 )
@@ -325,7 +322,7 @@ detect_readonly_file (char *filename)
 	int ret;
 
 	ret = GetFileAttributesW (utf8towide_fixed(ul_______,filename));
-	if (0xffffffff != ret)
+	if (0xffffffff != (unsigned int) ret)
 	{
 		if (FILE_ATTRIBUTE_READONLY & ret)
 		{
@@ -369,7 +366,7 @@ fix_filesize
 		ret =
 		        SetFilePointer (f, position.LowPart, &position.HighPart, FILE_BEGIN);
 	}
-	if (0xFFFFFFFF != ret)
+	if (0xFFFFFFFF != (unsigned int) ret)
 	{
 
 		ret = SetEndOfFile (f);
@@ -1852,7 +1849,7 @@ save_to_file (char *infile, char *data, int size, int mode, int limit)
 
 //"Amanda0"
 int __fastcall
-save_to_file_amanda_s_smart_ape (char *data, int size, enum Amanda Amanda_mode)
+save_to_file_amanda_s_smart_ape (char *data, __attribute__((unused)) int size, enum Amanda Amanda_mode)
 {
 
      FILE * myfile = NULL;
@@ -3929,7 +3926,7 @@ ispathreadonly (char *path)
 UNC:
 
 	ret = GetFileAttributes (x);
-	if (0xffffffff != ret)
+	if (0xffffffff != (unsigned int) ret)
 	{
 
 		if (FILE_ATTRIBUTE_DIRECTORY & ret)
@@ -4020,7 +4017,7 @@ UNC:
 	unicode_large *ul_______=calloc(sizeof(unicode_large),1);
 	ret = GetFileAttributesW (utf8towide_fixed(ul_______,x));
 	free(ul_______);
-	if (0xffffffff != ret)
+	if (0xffffffff != (unsigned int) ret)
 	{
 
 		if (ret & (FILE_ATTRIBUTE_DIRECTORY))
@@ -4065,7 +4062,7 @@ ispathfilepartial (char *path)
 	ret = GetFileAttributes (x);
 
 
-	if (0xffffffff != ret)
+	if (0xffffffff != (unsigned int) ret)
 	{
 
 		if (ret & (FILE_ATTRIBUTE_DIRECTORY))
@@ -4145,7 +4142,7 @@ UNC:
 	ret = GetFileAttributesW (utf8towide_fixed(ul_______,x));
 	free(ul_______);
 
-	if (0xffffffff != ret)
+	if (0xffffffff != (unsigned int) ret)
 	{
 
 		if (ret & (FILE_ATTRIBUTE_DIRECTORY))

@@ -1,34 +1,32 @@
 
- /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
-  *                                                                                *
-  *      Licensa de Cópia (C) <202*>  <Corporação do Trabalho Binário>             *
-  *                                                                                *
-  *   Este programa é software livre: você pode redistribuir isto e/ou modificar   *
-  *   isto sobre os termos do GNU Licensa Geral Pública como publicado pela        *
-  *   Fundação de Software Livre, tanto a versão 3 da Licensa, ou                  *
-  *   (dependendo da sua opção) qualquer versão posterior.                         *
-  *                                                                                *
-  *   Este programa é distribuído na esperança que isto vai ser útil,              *
-  *   mas SEM QUALQUER GARANTIA; sem até mesmo a implicada garantia de             *
-  *   COMERCIALIZAÇÃO ou CABIMENTO PARA UM FIM PARTICULAR.  Veja a                 *
-  *   Licensa Geral Pública para mais detalhes.                                    *
-  *                                                                                *
-  *   Você deve ter recebido uma cópia da LICENSA GERAL PUBLICA                    *
-  *       e a GNU Licensa Pública Menor junto com este programa                    *
-  *       Se não, veja <http://www.gnu.org/licenses/>.                             *
-  *                                                                                *
-  *   Suporte: https://arsoftware.net.br/binarywork ____________________           *
-  *   Mirrors: https://locacaodiaria.com.br/corporacaodotrabalhobinario/           *
-  *             http://nomade.sourceforge.net/binarywork/ ______________            *
-  *                                                                                *
-  *       e-mails direto dos felizes programadores:                                *
-  *       MathMan: arsoftware25@gmail.com  ricardo@arsoftware.net.br               *
-  *        Amanda: arsoftware10@gmail.com  amanda@arsoftware.net.br                *
-  *                                                                                *
-  *       contato imediato(para uma resposta muita rápida) WhatsApp                *
-  *       (+55)41 9627 1708 - isto está sempre ligado                              *
-  *                                                                                *
-  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
+ /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+ *                                                                              *
+ *        Licensa de Cópia (C) <2021>  <Corporação do Trabalho Binário>         *
+ *                                                                              *
+ *     Este  programa  é software livre: você pode redistribuir isto e/ou       *
+ *     modificar  isto sobre os termos do  GNU Licensa Geral Pública como       8
+ *     publicado  pela Fundação  de Software  Livre, tanto a versão 3  da       *
+ *     Licensa, ou (dependendo da sua opção) qualquer versão posterior.         *
+ *                                                                              *
+ *     Este  programa é distribuído na  esperança que isto vai  ser útil,       *
+ *     mas SEM  QUALQUER GARANTIA; sem  até mesmo a implicada garantia de       *
+ *     COMERCIALIZAÇÃO ou CABIMENTO PARA UM FIM PARTICULAR.  Veja a             *
+ *     Licensa Geral Pública para mais detalhes.                                *
+ *                                                                              *
+ *     Você deve ter recebido uma  cópia da LICENSA GERAL PUBLICA e a GNU       *
+ *     Licensa Pública Menor junto com este programa                            *
+ *     Se não, veja <http://www.gnu.org/licenses/>.                             *
+ *                                                                              *
+ *     Suporte: https://nomade.sourceforge.io/                                  *
+ *                                                                              *
+ *     E-mails direto dos felizes programadores:                                *
+ *     O Ricardinho :    arsoftware25@gmail.com    ricardo@arsoftware.net.br    *
+ *     Little_Amanda:    arsoftware10@gmail.com    amanda.@arsoftware.net.br    *
+ *                                                                              *
+ *     contato imediato(para uma resposta muita rápida) WhatsApp                *
+ *     (+55)41 9627 1708 - isto está sempre ligado (eu acho...)                 *      
+ *                                                                              *
+ * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *  **/
  
 #include <windows.h>
 #include <stdio.h>
@@ -120,7 +118,7 @@ voiceremoval (char *buf, int bytes, int bps, int nch)
 	return 0;
 }
 int
-echo (morcego___i___instance__a__bucaneiro_engineering *mv_______,char *buf, int bytes, int bps, int nch)
+echo (morcego___i___instance__a__bucaneiro_engineering *mv_______,char *buf, int bytes, int bps, __attribute__((unused)) int nch)
 {
 
 	short int          *samples;
@@ -373,7 +371,7 @@ pitch_control
 
 }
 int
-surround (morcego___i___instance__a__bucaneiro_engineering *mv_______,char *buf, int bytes, int bps, int nch)
+surround (morcego___i___instance__a__bucaneiro_engineering *mv_______,char *buf, int bytes, __attribute__((unused)) int bps, int nch)
 {
 	short *chan1 = NULL;
 	short temp1[50000];
@@ -423,7 +421,7 @@ surround (morcego___i___instance__a__bucaneiro_engineering *mv_______,char *buf,
 	return 0;
 }
 int
-surround2 (morcego___i___instance__a__bucaneiro_engineering *mv_______,char *buf, int bytes, int bps, int nch)
+surround2 (morcego___i___instance__a__bucaneiro_engineering *mv_______,char *buf, int bytes, __attribute__((unused)) int bps, int nch)
 {
 	int i       =          0;
 	int global_range_int;

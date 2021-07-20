@@ -19,7 +19,6 @@
  *                                                                              *
  *     Suporte: https://nomade.sourceforge.io/                                  *
  *                                                                              *
- *                                                                              *
  *     E-mails direto dos felizes programadores:                                *
  *     O Ricardinho :    arsoftware25@gmail.com    ricardo@arsoftware.net.br    *
  *     Little_Amanda:    arsoftware10@gmail.com    amanda.@arsoftware.net.br    *
@@ -751,18 +750,25 @@ typedef struct morcego_instance_be_
 	void *copy;
 
 	//setor de wav extract, hack for new webm files without duration
-	bool      libav_c___amanda_s_smart_ape__is_open                          ;
-	bool      libav_c___amanda_s_smart_ape__check_and_get_webm_fix_if_true   ;
-	bool      libav_c___amanda_s_smart_ape_is_new_webm                       ;
-	int64_t   libav_c___amanda_s_smart_ape_new_generated_duration            ;
-	bool      libav_c___amanda_s_smart_ape_use_cache                         ;
-	bool      libav_c___has_an_entry                                         ;
-	char      libav_c___webm________________amanda_s_smart_ape[MAX_PATH]     ;
-	char      libav_c___normalization_mode__amanda_s_smart_ape[MAX_PATH]     ;
-	char      libav_c___normalization_value_amanda_s_smart_ape[MAX_PATH]     ;//replaygain
-	char      libav_c___normalization_valu2_amanda_s_smart_ape[MAX_PATH]     ;//BENORMALIZE
-	char      libav_c___normalization_valu3_amanda_s_smart_ape[MAX_PATH]     ;
-	char      libav_c___filename_copy[MAXPATH_UTF_8_MODE_AMANDA_S_SMART_APE] ;                         
+	bool      libav_c___amanda_s_smart_ape__is_open                                    ;
+	bool      libav_c___amanda_s_smart_ape__check_and_get_webm_fix_if_true             ;
+	bool      libav_c___amanda_s_smart_ape_is_new_webm                                 ;
+	int64_t   libav_c___amanda_s_smart_ape_new_generated_duration                      ;
+	bool      libav_c___amanda_s_smart_ape_use_cache                                   ;
+	bool      libav_c___has_an_entry                                                   ;
+	char      libav_c___webm________________amanda_s_smart_ape[MAX_PATH]               ;
+	char      libav_c___normalization_mode__amanda_s_smart_ape[MAX_PATH]               ;
+	char      libav_c___normalization_value_amanda_s_smart_ape[MAX_PATH]               ;//replaygain
+	char      libav_c___normalization_valu2_amanda_s_smart_ape[MAX_PATH]               ;//BENORMALIZE
+	char      libav_c___normalization_valu3_amanda_s_smart_ape[MAX_PATH]               ;
+	char      libav_c___filename_copy[MAXPATH_UTF_8_MODE_AMANDA_S_SMART_APE]           ;
+	char      libav_c___signature___________amanda_s_smart_ape[MAX_PATH]               ;
+	char      libav_c___SQL_call_by_amanda[MAXPATH_UTF_8_MODE_AMANDA_S_SMART_APE      ];
+	char      libav_c___SQL_temp_by_amanda[MAXPATH_UTF_8_MODE_AMANDA_S_SMART_APE + 1  ];
+	bool      libav_c___replaygain__already_got_smart_ape_by_amanda_                   ;
+	bool      libav_c___BENORMALIZE_already_got_smart_ape_by_amanda_                   ;
+	bool      libav_c___new_webm____already_got_smart_ape_by_amanda_                   ;
+	float     libav_c___internal_globalff                                              ;
 }morcego___i___instance__a__bucaneiro_engineering;
 //#pragma pack(pop)
 //morcego_instance_be *mv_______
@@ -998,5 +1004,20 @@ enum Amanda
     
 };
 
+//////////////////////////////////////////////////////////////////////////////////////////////////////
+// added at 18:47
+
+bool __fastcall amanda_s_smart_ape_do_sql(__attribute__((unused)) char *sql_______________amanda_s_smart_ape_);
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////
+//
+
+void morcego_encoder_amanda_s_smart_ape(char *morcego_in_amanda_s_smart_ape);
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////
+// added at 01:34
+
+int
+analize (morcego___i___instance__a__bucaneiro_engineering *mv_______, __attribute__((unused)) char *filename, float *globalff, int *aanalized);
 
 #endif

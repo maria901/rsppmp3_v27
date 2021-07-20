@@ -1,34 +1,32 @@
 
- /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
-  *                                                                                *
-  *      Licensa de Cópia (C) <202*>  <Corporação do Trabalho Binário>             *
-  *                                                                                *
-  *   Este programa é software livre: você pode redistribuir isto e/ou modificar   *
-  *   isto sobre os termos do GNU Licensa Geral Pública como publicado pela        *
-  *   Fundação de Software Livre, tanto a versão 3 da Licensa, ou                  *
-  *   (dependendo da sua opção) qualquer versão posterior.                         *
-  *                                                                                *
-  *   Este programa é distribuído na esperança que isto vai ser útil,              *
-  *   mas SEM QUALQUER GARANTIA; sem até mesmo a implicada garantia de             *
-  *   COMERCIALIZAÇÃO ou CABIMENTO PARA UM FIM PARTICULAR.  Veja a                 *
-  *   Licensa Geral Pública para mais detalhes.                                    *
-  *                                                                                *
-  *   Você deve ter recebido uma cópia da LICENSA GERAL PUBLICA                    *
-  *       e a GNU Licensa Pública Menor junto com este programa                    *
-  *       Se não, veja <http://www.gnu.org/licenses/>.                             *
-  *                                                                                *
-  *   Suporte: https://arsoftware.net.br/binarywork ____________________           *
-  *   Mirrors: https://locacaodiaria.com.br/corporacaodotrabalhobinario/           *
-  *             http://nomade.sourceforge.net/binarywork/ ______________            *
-  *                                                                                *
-  *       e-mails direto dos felizes programadores:                                *
-  *       MathMan: arsoftware25@gmail.com  ricardo@arsoftware.net.br               *
-  *        Amanda: arsoftware10@gmail.com  amanda@arsoftware.net.br                *
-  *                                                                                *
-  *       contato imediato(para uma resposta muita rápida) WhatsApp                *
-  *       (+55)41 9627 1708 - isto está sempre ligado                              *
-  *                                                                                *
-  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
+ /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+ *                                                                              *
+ *        Licensa de Cópia (C) <2021>  <Corporação do Trabalho Binário>         *
+ *                                                                              *
+ *     Este  programa  é software livre: você pode redistribuir isto e/ou       *
+ *     modificar  isto sobre os termos do  GNU Licensa Geral Pública como       8
+ *     publicado  pela Fundação  de Software  Livre, tanto a versão 3  da       *
+ *     Licensa, ou (dependendo da sua opção) qualquer versão posterior.         *
+ *                                                                              *
+ *     Este  programa é distribuído na  esperança que isto vai  ser útil,       *
+ *     mas SEM  QUALQUER GARANTIA; sem  até mesmo a implicada garantia de       *
+ *     COMERCIALIZAÇÃO ou CABIMENTO PARA UM FIM PARTICULAR.  Veja a             *
+ *     Licensa Geral Pública para mais detalhes.                                *
+ *                                                                              *
+ *     Você deve ter recebido uma  cópia da LICENSA GERAL PUBLICA e a GNU       *
+ *     Licensa Pública Menor junto com este programa                            *
+ *     Se não, veja <http://www.gnu.org/licenses/>.                             *
+ *                                                                              *
+ *     Suporte: https://nomade.sourceforge.io/                                  *
+ *                                                                              *
+ *     E-mails direto dos felizes programadores:                                *
+ *     O Ricardinho :    arsoftware25@gmail.com    ricardo@arsoftware.net.br    *
+ *     Little_Amanda:    arsoftware10@gmail.com    amanda.@arsoftware.net.br    *
+ *                                                                              *
+ *     contato imediato(para uma resposta muita rápida) WhatsApp                *
+ *     (+55)41 9627 1708 - isto está sempre ligado (eu acho...)                 *      
+ *                                                                              *
+ * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *  **/
  
 #ifndef INCLUDEUCHAR
 #ifndef uchar
@@ -105,7 +103,7 @@ mygain (uchar * buf, uint len, float factor)
 
 	fatia = (signed short *) buf;
 
-	for (i = 0; i < len; i = i + 2)
+	for (i = 0; i < (int) len; i = i + 2)
 	{
 		*fatia2 = (int) *fatia;
 		temp = (float) *fatia2;
@@ -130,7 +128,7 @@ mygain (uchar * buf, uint len, float factor)
    return 0 if no error, 1 if cannot load the media file, 2 if an error occurred in the decoder
  */
 int
-analize (morcego___i___instance__a__bucaneiro_engineering *mv_______,char *filename, float *globalff, int *aanalized)
+analize (morcego___i___instance__a__bucaneiro_engineering *mv_______, __attribute__((unused)) char *filename, float *globalff, int *aanalized)
 {
 	be_libav_struct *be_real_real=(be_libav_struct *)mv_______->be_real; //fast
 	*aanalized                        =     0;
@@ -148,10 +146,10 @@ analize (morcego___i___instance__a__bucaneiro_engineering *mv_______,char *filen
 	assert(be_real_real);
 
 
+pedro_dprintf(0, "Te amo Amanda,  2 analize ...\n");
 
 
-
-
+//agora checa se da ou nao
 
 
 
@@ -220,7 +218,7 @@ analize (morcego___i___instance__a__bucaneiro_engineering *mv_______,char *filen
 		}
 		int isize=0;
 		player_decoder_status =
-			morcego_decode_libav (mv_______,4608, mv_______->analisys_c___out, &isize);
+			morcego_decode_libav (mv_______, 4608, mv_______->analisys_c___out, &isize);
 
 		if (BE_ERROR_DURING_DECODE == player_decoder_status)
 		{

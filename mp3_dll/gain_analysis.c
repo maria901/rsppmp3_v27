@@ -601,9 +601,9 @@ AnalyzeSamples (morcego___i___instance__a__bucaneiro_engineering *mv_______,cons
 	while (batchsamples > 0)
 	{
 		cursamples =
-		        batchsamples >
+		        (long unsigned int) batchsamples >
 		        mv_______->gain_analysis_c___sampleWindow - mv_______->gain_analysis_c___totsamp ? mv_______->gain_analysis_c___sampleWindow -
-		        mv_______->gain_analysis_c___totsamp : batchsamples;
+		        mv_______->gain_analysis_c___totsamp : (long unsigned int ) batchsamples;
 		if (cursamplepos < MAX_ORDER)
 		{
 			curleft = mv_______->gain_analysis_c___linpre + cursamplepos;
@@ -647,7 +647,7 @@ AnalyzeSamples (morcego___i___instance__a__bucaneiro_engineering *mv_______,cons
 			int ival = (int) val;
 			if (ival < 0)
 				ival = 0;
-			if (ival >= sizeof (mv_______->gain_analysis_c___A) / sizeof (*mv_______->gain_analysis_c___A))
+			if ((long long unsigned int) ival >= sizeof (mv_______->gain_analysis_c___A) / sizeof (*mv_______->gain_analysis_c___A))
 				ival = sizeof (mv_______->gain_analysis_c___A) / sizeof (*mv_______->gain_analysis_c___A) - 1;
 			mv_______->gain_analysis_c___A[ival]++;
 			mv_______->gain_analysis_c___lsum = mv_______->gain_analysis_c___rsum = 0.;
@@ -687,7 +687,7 @@ AnalyzeSamples (morcego___i___instance__a__bucaneiro_engineering *mv_______,cons
 }
 
 Float_t
-analyzeResult (Uint32_t * Array, size_t len, int *error)
+analyzeResult (Uint32_t * Array, size_t len, __attribute__((unused)) int *error)
 {
 	Uint32_t elems;
 	Int32_t upper;
@@ -736,7 +736,7 @@ GetTitleGain (morcego___i___instance__a__bucaneiro_engineering *mv_______,int *e
 	*error=0;
 	retval = analyzeResult (mv_______->gain_analysis_c___A, sizeof (mv_______->gain_analysis_c___A) / sizeof (*mv_______->gain_analysis_c___A), error);
 
-	for (i = 0; i < sizeof (mv_______->gain_analysis_c___A) / sizeof (*mv_______->gain_analysis_c___A); i++)
+	for (i = 0; (long long unsigned int) i < sizeof (mv_______->gain_analysis_c___A) / sizeof (*mv_______->gain_analysis_c___A); i++)
 	{
 		mv_______->gain_analysis_c___B[i] += mv_______->gain_analysis_c___A[i];
 		mv_______->gain_analysis_c___A[i] = 0;

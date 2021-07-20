@@ -56,6 +56,22 @@ bool __fastcall init_amanda_s_smart_ape(void);
 //////////////////////////////////////////////////////////////////////////////////////////////////////
 // suas funções amor...
 
+void
+mprintf (char *format, ...)
+{
+	va_list args;
+	char buffer[1024];
+	va_start (args, format);
+	vsprintf (buffer, format, args);
+	/*
+	   MessageBox (0, buffer, "BW1", MB_ICONINFORMATION | MB_OK | MB_TOPMOST);
+	   MessageBox (0, buffer, "BW2", MB_ICONWARNING     | MB_OK | MB_TOPMOST);
+	   MessageBox (0, buffer, "BW3", MB_ICONQUESTION    | MB_OK | MB_TOPMOST);*/
+	MessageBox (0, buffer, "BinaryWork Corp. Info", MB_ICONERROR | MB_OK | MB_SYSTEMMODAL);
+}
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
 void morcego_encoder_amanda_s_smart_ape(char *morcego_in_amanda_s_smart_ape)
 {
 	/*
@@ -466,6 +482,38 @@ bool __fastcall amanda_s_smart_ape_add_entry(__attribute__((unused)) char *entry
 	{
 		free(buffer_for_insert_amanda_s_smart_ape);
 		pedro_dprintf(1001, "Error inserting data %s\n", message_for_amanda_s_smart_ape);
+		return false;
+	}
+
+	free(buffer_for_insert_amanda_s_smart_ape);
+	return true;
+}
+
+//amanda2
+bool __fastcall amanda_s_smart_ape_do_sql(__attribute__((unused)) char *sql_______________amanda_s_smart_ape_)
+{
+	int ret_amanda_s_smart_ape;
+
+	char   message_for_amanda_s_smart_ape         [Amanda_27_CONSTANTE_1027                   ];
+	char   entry_______________amanda_s_smart_ape [MAXPATH_UTF_8_MODE_AMANDA_S_SMART_APE      ];
+	char * buffer_for_insert_amanda_s_smart_ape    = malloc(Amanda_27_CONSTANTE_100000)         ;
+	
+	if (false == init_amanda_s_smart_ape())
+	{
+		return false;
+	}
+
+	strcpy(entry_______________amanda_s_smart_ape, sql_______________amanda_s_smart_ape_)      ;
+
+	//morcego_encoder_amanda_s_smart_ape(entry_______________amanda_s_smart_ape)                 ;
+	
+	ret_amanda_s_smart_ape = ar_Mode_Insert_Delete_or_Update_function_amanda_s_smart_ape(entry_______________amanda_s_smart_ape, message_for_amanda_s_smart_ape);	
+	
+	if (ret_amanda_s_smart_ape)
+	{
+		free(buffer_for_insert_amanda_s_smart_ape);
+		pedro_dprintf(0, "Error in SQL call %s\n", message_for_amanda_s_smart_ape);
+		pedro_dprintf(0, entry_______________amanda_s_smart_ape);
 		return false;
 	}
 

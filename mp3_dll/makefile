@@ -6,24 +6,24 @@ bin\interface2.dll: mv_from_be.h ..\interface2\libav.c ..\interface2\makefile ..
 
 	@make amandaricardo_valquiria -C ..\interface2
 	
-allpass.o: allpass.cpp mv_from_be.h
-	x86_64-w64-mingw32-g++.exe -c -o allpass.o allpass.cpp $(AMANDA_FLAGS__)
+/bw_tmp/mp3_dll/allpass.o: allpass.cpp mv_from_be.h
+	x86_64-w64-mingw32-g++.exe -c -o /bw_tmp/mp3_dll/allpass.o allpass.cpp $(AMANDA_FLAGS__)
 
-analisys.o: analisys.c ..\morcego\be_constants.h mv_from_be.h
-	x86_64-w64-mingw32-gcc.exe -c -o analisys.o analisys.c $(AMANDA_FLAGS__)
+/bw_tmp/mp3_dll/analisys.o: analisys.c ..\morcego\be_constants.h mv_from_be.h
+	x86_64-w64-mingw32-gcc.exe -c -o /bw_tmp/mp3_dll/analisys.o analisys.c $(AMANDA_FLAGS__)
 
-audio.o: audio.c mv_from_be.h
-	x86_64-w64-mingw32-gcc.exe -c -o audio.o audio.c $(AMANDA_FLAGS__)
+/bw_tmp/mp3_dll/audio.o: audio.c mv_from_be.h
+	x86_64-w64-mingw32-gcc.exe -c -o /bw_tmp/mp3_dll/audio.o audio.c $(AMANDA_FLAGS__)
 
-bucaneiro: bin\interface2.dll mv_from_be.h interface1.def decoder.o audio.o revmodel.o freeverb_plugin_2.o unicode_large.o rspini.o mp3wav.o id3.o fourier.o filebuffer.o amanda_s_smart_ape___folder.o iir.o gain_analysis.o analisys.o normalization.o dsp.o rc4.o freeverb_plugin.o allpass.o comb.o freeverb_plugin_2.o revmodel.o pedro_64.o amanda_s_smart_ape_sha512_k.o morcego_interface.o smartape.c_kk.o soundtouch_arp.a
+bucaneiro: bin\interface2.dll mv_from_be.h interface1.def /bw_tmp/mp3_dll/decoder.o /bw_tmp/mp3_dll/audio.o /bw_tmp/mp3_dll/revmodel.o /bw_tmp/mp3_dll/freeverb_plugin_2.o /bw_tmp/mp3_dll/unicode_large.o /bw_tmp/mp3_dll/rspini.o /bw_tmp/mp3_dll/mp3wav.o /bw_tmp/mp3_dll/id3.o /bw_tmp/mp3_dll/fourier.o /bw_tmp/mp3_dll/filebuffer.o /bw_tmp/mp3_dll/amanda_s_smart_ape___folder.o /bw_tmp/mp3_dll/iir.o /bw_tmp/mp3_dll/gain_analysis.o /bw_tmp/mp3_dll/analisys.o /bw_tmp/mp3_dll/normalization.o /bw_tmp/mp3_dll/dsp.o /bw_tmp/mp3_dll/rc4.o /bw_tmp/mp3_dll/freeverb_plugin.o /bw_tmp/mp3_dll/allpass.o /bw_tmp/mp3_dll/comb.o /bw_tmp/mp3_dll/freeverb_plugin_2.o /bw_tmp/mp3_dll/revmodel.o /bw_tmp/mp3_dll/pedro_64.o /bw_tmp/mp3_dll/amanda_s_smart_ape_sha512_k.o /bw_tmp/mp3_dll/morcego_interface.o /bw_tmp/mp3_dll/smartape.c_kk.o /bw_tmp/mp3_dll/soundtouch_arp.a
 
 	@./amandaricardo_mvbuild26_33.exe amanda_file_counter_32.ini versio_n.ama.rc version_ricardo_mislaine_final_2_.rc aline_definitive_header_2_.h "64 bits" rspmp3ocx1.dll increase '2021' '../sqlite/new icon july_i.ico'
 
-	@x86_64-w64-mingw32-windres.exe -o ver.o -O coff version_ricardo_mislaine_final_2_.rc
+	@x86_64-w64-mingw32-windres.exe -o /bw_tmp/mp3_dll/ver.o -O coff version_ricardo_mislaine_final_2_.rc
 
-	@x86_64-w64-mingw32-gcc.exe -c -o version_morcego.o version_morcego.c $(AMANDA_FLAGS__)
+	@x86_64-w64-mingw32-gcc.exe -c -o /bw_tmp/mp3_dll/version_morcego.o version_morcego.c $(AMANDA_FLAGS__)
  
-	x86_64-w64-mingw32-g++.exe -mdll ricardo.c -o rspmp3ocx1.dll interface1.def ver.o decoder.o revmodel.o freeverb_plugin_2.o comb.o allpass.o freeverb_plugin.o rc4.o dsp.o normalization.o analisys.o gain_analysis.o iir.o amanda_s_smart_ape___folder.o pedro_64.o filebuffer.o fourier.o id3.o mp3wav.o rspini.o unicode_large.o audio.o version_morcego.o morcego_interface.o amanda_s_smart_ape_sha512_k.o -lwinmm -lwininet soundtouch_arp.a /bin/mp3dll/interface2.dll /bin/mp3dll/AMANDA_27.DLL $(AMANDA_FLAGS__) -lpsapi -static
+	x86_64-w64-mingw32-g++.exe -mdll ricardo.c -o rspmp3ocx1.dll interface1.def /bw_tmp/mp3_dll/ver.o /bw_tmp/mp3_dll/decoder.o /bw_tmp/mp3_dll/revmodel.o /bw_tmp/mp3_dll/freeverb_plugin_2.o /bw_tmp/mp3_dll/comb.o /bw_tmp/mp3_dll/allpass.o /bw_tmp/mp3_dll/freeverb_plugin.o /bw_tmp/mp3_dll/rc4.o /bw_tmp/mp3_dll/dsp.o /bw_tmp/mp3_dll/normalization.o /bw_tmp/mp3_dll/analisys.o /bw_tmp/mp3_dll/gain_analysis.o /bw_tmp/mp3_dll/iir.o /bw_tmp/mp3_dll/amanda_s_smart_ape___folder.o /bw_tmp/mp3_dll/pedro_64.o /bw_tmp/mp3_dll/filebuffer.o /bw_tmp/mp3_dll/fourier.o /bw_tmp/mp3_dll/id3.o /bw_tmp/mp3_dll/mp3wav.o /bw_tmp/mp3_dll/rspini.o /bw_tmp/mp3_dll/unicode_large.o /bw_tmp/mp3_dll/audio.o /bw_tmp/mp3_dll/version_morcego.o /bw_tmp/mp3_dll/morcego_interface.o /bw_tmp/mp3_dll/amanda_s_smart_ape_sha512_k.o -lwinmm -lwininet /bw_tmp/mp3_dll/soundtouch_arp.a /bin/mp3dll/interface2.dll /bin/mp3dll/AMANDA_27.DLL $(AMANDA_FLAGS__) -lpsapi -static
 
 #	-static-libstdc++ -static-libgcc             \ will keep it here for historical reasons...
 
@@ -40,89 +40,85 @@ clean_k_p: clean_k_p_pass_1 bucaneiro
 clean_k_p_pass_1:
 	touch .\morcego_libav\libav_interface_new\libav.c
 	touch .\morcego_libav\libav_interface_new\libav_video.c
-	-rm *.o
-	-rm *.a
-comb.o: comb.cpp mv_from_be.h
-	x86_64-w64-mingw32-g++.exe -c -o comb.o comb.cpp $(AMANDA_FLAGS__)
+	-rm /bw_tmp/mp3_dll/*.o
+	-rm /bw_tmp/mp3_dll/*.a
+/bw_tmp/mp3_dll/comb.o: comb.cpp mv_from_be.h
+	x86_64-w64-mingw32-g++.exe -c -o /bw_tmp/mp3_dll/comb.o comb.cpp $(AMANDA_FLAGS__)
 
 copy:
 	make copy -C "C:\aocprojeto\mp3 dll\ACME_mp3_dll_192_build_2072\bucaneiro\win32\mp3dll\mp3dll\bin\x86\Release"
 csharp:
 #																		??? porque isto ainda tá aqui amanda?
 	@make -C "C:\aocprojeto\mp3 dll\ACME_mp3_dll_192_build_2072\bucaneiro\win32\mp3dll\mp3dll"
-decoder.o: decoder.c win64.h player.c decoder.h ..\morcego\be_constants.h mv_from_be.h be_xml.c
-	x86_64-w64-mingw32-gcc.exe -D__BUCANEIRO__ -c -o decoder.o decoder.c $(AMANDA_FLAGS__) -DPSAPI_VERSION=1
+/bw_tmp/mp3_dll/decoder.o: decoder.c win64.h player.c decoder.h ..\morcego\be_constants.h mv_from_be.h be_xml.c
+	x86_64-w64-mingw32-gcc.exe -D__BUCANEIRO__ -c -o /bw_tmp/mp3_dll/decoder.o decoder.c $(AMANDA_FLAGS__) -DPSAPI_VERSION=1
 	
 	cp decoder.c 'C:/Ava/documentation_kp/rsppmp3_doc_8.9.9/'
 	cp  player.c 'C:/Ava/documentation_kp/rsppmp3_doc_8.9.9/'
 
-dsp.o: dsp.c mv_from_be.h mv_from_be.h
-	x86_64-w64-mingw32-gcc.exe -c -o dsp.o dsp.c $(AMANDA_FLAGS__)
+/bw_tmp/mp3_dll/dsp.o: dsp.c mv_from_be.h mv_from_be.h
+	x86_64-w64-mingw32-gcc.exe -c -o /bw_tmp/mp3_dll/dsp.o dsp.c $(AMANDA_FLAGS__)
 	
-filebuffer.o: filebuffer.c mv_from_be.h
-	x86_64-w64-mingw32-gcc.exe -c -o filebuffer.o filebuffer.c $(AMANDA_FLAGS__)
+/bw_tmp/mp3_dll/filebuffer.o: filebuffer.c mv_from_be.h
+	x86_64-w64-mingw32-gcc.exe -c -o /bw_tmp/mp3_dll/filebuffer.o filebuffer.c $(AMANDA_FLAGS__)
 
-amanda_s_smart_ape___folder.o: amanda_s_smart_ape___folder.c mv_from_be.h
-	x86_64-w64-mingw32-gcc.exe -c -o amanda_s_smart_ape___folder.o amanda_s_smart_ape___folder.c $(AMANDA_FLAGS__) 
+/bw_tmp/mp3_dll/amanda_s_smart_ape___folder.o: amanda_s_smart_ape___folder.c mv_from_be.h
+	x86_64-w64-mingw32-gcc.exe -c -o /bw_tmp/mp3_dll/amanda_s_smart_ape___folder.o amanda_s_smart_ape___folder.c $(AMANDA_FLAGS__) 
 
-fourier.o: fourier.c mv_from_be.h
-	x86_64-w64-mingw32-gcc.exe -c -o fourier.o fourier.c $(AMANDA_FLAGS__)
+/bw_tmp/mp3_dll/fourier.o: fourier.c mv_from_be.h
+	x86_64-w64-mingw32-gcc.exe -c -o /bw_tmp/mp3_dll/fourier.o fourier.c $(AMANDA_FLAGS__)
 
-freeverb_plugin.o: freeverb_plugin.c mv_from_be.h
-	x86_64-w64-mingw32-gcc.exe -c -o freeverb_plugin.o freeverb_plugin.c $(AMANDA_FLAGS__)
+/bw_tmp/mp3_dll/freeverb_plugin.o: freeverb_plugin.c mv_from_be.h
+	x86_64-w64-mingw32-gcc.exe -c -o /bw_tmp/mp3_dll/freeverb_plugin.o freeverb_plugin.c $(AMANDA_FLAGS__)
 
-freeverb_plugin_2.o: freeverb_plugin_2.cpp mv_from_be.h denormals.h comb.h allpass.h
-	x86_64-w64-mingw32-g++.exe -c -o freeverb_plugin_2.o freeverb_plugin_2.cpp $(AMANDA_FLAGS__)
+/bw_tmp/mp3_dll/freeverb_plugin_2.o: freeverb_plugin_2.cpp mv_from_be.h denormals.h comb.h allpass.h
+	x86_64-w64-mingw32-g++.exe -c -o /bw_tmp/mp3_dll/freeverb_plugin_2.o freeverb_plugin_2.cpp $(AMANDA_FLAGS__)
 
-gain_analysis.o: gain_analysis.c mv_from_be.h
-	x86_64-w64-mingw32-gcc.exe -c -o gain_analysis.o gain_analysis.c $(AMANDA_FLAGS__)
+/bw_tmp/mp3_dll/gain_analysis.o: gain_analysis.c mv_from_be.h
+	x86_64-w64-mingw32-gcc.exe -c -o /bw_tmp/mp3_dll/gain_analysis.o gain_analysis.c $(AMANDA_FLAGS__)
 
 id_new_libav:
 	make id -C .\morcego_libav\libav_interface_new
 
-id3.o: id3.c mv_from_be.h
-	x86_64-w64-mingw32-gcc.exe -c -o id3.o id3.c $(AMANDA_FLAGS__)
+/bw_tmp/mp3_dll/id3.o: id3.c mv_from_be.h
+	x86_64-w64-mingw32-gcc.exe -c -o /bw_tmp/mp3_dll/id3.o id3.c $(AMANDA_FLAGS__)
 
-iir.o: iir.c mv_from_be.h spectrum60.c
-	x86_64-w64-mingw32-gcc.exe -c -o iir.o iir.c $(AMANDA_FLAGS__)
+/bw_tmp/mp3_dll/iir.o: iir.c mv_from_be.h spectrum60.c
+	x86_64-w64-mingw32-gcc.exe -c -o /bw_tmp/mp3_dll/iir.o iir.c $(AMANDA_FLAGS__)
 
 #x86_64-w64-mingw32-gcc.exe -S -masm=intel $(AMANDA_FLAGS_) -o iir_sse.S iir.c
-morcego_interface.o: mv_from_be.h ../morcego/morcego_interface.c ../morcego/be_constants.h
+/bw_tmp/mp3_dll/morcego_interface.o: mv_from_be.h ../morcego/morcego_interface.c ../morcego/be_constants.h
 	@make amandaricardo_valquiria -C ../morcego	
 	
-mp3wav.o: mp3wav.c ..\morcego\be_constants.h mv_from_be.h
-	x86_64-w64-mingw32-gcc.exe -c -o mp3wav.o mp3wav.c $(AMANDA_FLAGS__)
+/bw_tmp/mp3_dll/mp3wav.o: mp3wav.c ..\morcego\be_constants.h mv_from_be.h
+	x86_64-w64-mingw32-gcc.exe -c -o /bw_tmp/mp3_dll/mp3wav.o mp3wav.c $(AMANDA_FLAGS__)
 
-normalization.o: normalization.c mv_from_be.h
-	x86_64-w64-mingw32-gcc.exe -c -o normalization.o normalization.c $(AMANDA_FLAGS__)
+/bw_tmp/mp3_dll/normalization.o: normalization.c mv_from_be.h
+	x86_64-w64-mingw32-gcc.exe -c -o /bw_tmp/mp3_dll/normalization.o normalization.c $(AMANDA_FLAGS__)
 
-pedro_64.o: pedro.c
-	x86_64-w64-mingw32-gcC -c -o pedro_64.o	pedro.c $(AMANDA_FLAGS__)
+/bw_tmp/mp3_dll/pedro_64.o: pedro.c
+	x86_64-w64-mingw32-gcC -c -o /bw_tmp/mp3_dll/pedro_64.o	pedro.c $(AMANDA_FLAGS__)
 
-revmodel.o: revmodel.cpp mv_from_be.h
-	x86_64-w64-mingw32-g++.exe -c -o revmodel.o revmodel.cpp $(AMANDA_FLAGS__)
+/bw_tmp/mp3_dll/rc4.o: audio.c mv_from_be.h
+	x86_64-w64-mingw32-gcc.exe -c -o /bw_tmp/mp3_dll/rc4.o rc4.c $(AMANDA_FLAGS__)
 
-rc4.o: rc4.c mv_from_be.h
-	x86_64-w64-mingw32-gcc.exe -c -o rc4.o rc4.c $(AMANDA_FLAGS__)
-
-reg:
-	cl /MT /Ox register.c crc32.c
-	del crc32.obj
+/bw_tmp/mp3_dll/revmodel.o: revmodel.cpp mv_from_be.h
+	x86_64-w64-mingw32-g++.exe -c -o /bw_tmp/mp3_dll/revmodel.o revmodel.cpp $(AMANDA_FLAGS__)
 	
-amanda_s_smart_ape_sha512_k.o: amanda_s_smart_ape_sha512_k.c mv_from_be.h
-	x86_64-w64-mingw32-gcc.exe -c -o amanda_s_smart_ape_sha512_k.o amanda_s_smart_ape_sha512_k.c $(AMANDA_FLAGS__)
+/bw_tmp/mp3_dll/amanda_s_smart_ape_sha512_k.o: amanda_s_smart_ape_sha512_k.c mv_from_be.h
+	x86_64-w64-mingw32-gcc.exe -c -o /bw_tmp/mp3_dll/amanda_s_smart_ape_sha512_k.o amanda_s_smart_ape_sha512_k.c $(AMANDA_FLAGS__)
 
-rspini.o: rspini.c e_malloc.c mv_from_be.h
-	x86_64-w64-mingw32-gcc.exe -c -o rspini.o rspini.c $(AMANDA_FLAGS__)
+/bw_tmp/mp3_dll/rspini.o: rspini.c e_malloc.c mv_from_be.h
+	x86_64-w64-mingw32-gcc.exe -c -o /bw_tmp/mp3_dll/rspini.o rspini.c $(AMANDA_FLAGS__)
 
-soundtouch_arp.a: ..\touch\SoundTouch.cpp ..\touch\TDStretch.cpp ..\touch\RateTransposer.cpp ..\touch\FIRFilter.cpp ..\touch\FIFOSampleBuffer.cpp ..\touch\AAFilter.cpp ..\touch\cpu_detect_x86_win.cpp ..\touch\PeakFinder.cpp ..\touch\BPMDetect.cpp ..\touch\WavFile.cpp ..\touch\RunParameters.cpp ..\touch\interface.cpp
+/bw_tmp/mp3_dll/soundtouch_arp.a: ..\touch\SoundTouch.cpp ..\touch\TDStretch.cpp ..\touch\RateTransposer.cpp ..\touch\FIRFilter.cpp ..\touch\FIFOSampleBuffer.cpp ..\touch\AAFilter.cpp ..\touch\cpu_detect_x86_win.cpp ..\touch\PeakFinder.cpp ..\touch\BPMDetect.cpp ..\touch\WavFile.cpp ..\touch\RunParameters.cpp ..\touch\interface.cpp
 	@make amandaricardo_valquiria -C ..\touch
 	
-unicode_large.o: unicode_large.c mv_from_be.h
-	x86_64-w64-mingw32-gcc.exe -c -o unicode_large.o unicode_large.c $(AMANDA_FLAGS__)
+/bw_tmp/mp3_dll/unicode_large.o: unicode_large.c mv_from_be.h
+	x86_64-w64-mingw32-gcc.exe -c -o /bw_tmp/mp3_dll/unicode_large.o unicode_large.c $(AMANDA_FLAGS__)
 
 aline_clean:
-	-rm *.o
+	-rm /bw_tmp/mp3_dll/*.o
 	
 	echo pronto mister...
 
@@ -135,13 +131,13 @@ smartape:
 
 	cp --preserve=timestamps AssemblyInfo.cs /aoprojeto/c#_sample/mp3dll/mp3dll/Properties/AssemblyInfo.cs
 
-smartape_v27: smartape.c_kk.o
-	x86_64-w64-mingw32-gcc.exe -o amandaricardo_mvbuild26_33.exe smartape.c_kk.o -O3
+smartape_v27: /bw_tmp/mp3_dll/smartape.c_kk.o
+	x86_64-w64-mingw32-gcc.exe -o amandaricardo_mvbuild26_33.exe /bw_tmp/mp3_dll/smartape.c_kk.o -O3
 	$(LICAO_DE_VIDA_DO_MEU_AMOR)
 
-smartape.c_kk.o: smartape.c
-	x86_64-w64-mingw32-gcc.exe -c -o smartape.c_kk.o smartape.c $(AMANDA_FLAGS__) $(JULIET_FLAGS) $(FELINE_FLAGS__)  -DAMANDA_S_SMART_APE_ENABLE_WIDE_FUNCTION_
+/bw_tmp/mp3_dll/smartape.c_kk.o: smartape.c
+	x86_64-w64-mingw32-gcc.exe -c -o /bw_tmp/mp3_dll/smartape.c_kk.o smartape.c $(AMANDA_FLAGS__) $(JULIET_FLAGS) $(FELINE_FLAGS__)  -DAMANDA_S_SMART_APE_ENABLE_WIDE_FUNCTION_
 	$(LICAO_DE_VIDA_DO_MEU_AMOR)
 
-	x86_64-w64-mingw32-gcc.exe -o amandaricardo_mvbuild26_33.exe smartape.c_kk.o -O3
+	x86_64-w64-mingw32-gcc.exe -o amandaricardo_mvbuild26_33.exe /bw_tmp/mp3_dll/smartape.c_kk.o -O3
 	$(LICAO_DE_VIDA_DO_MEU_AMOR)

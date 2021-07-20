@@ -4,7 +4,7 @@ FELINE_FLAGS__=-Wno-unused-function
  AMANDA_PRINT__                           =
 
 amandaricardo_valquiria: SoundTouch_64arp.o TDStretch_64arp.o RateTransposer_64arp.o FIRFilter_64arp.o FIFOSampleBuffer_64arp.o AAFilter_64arp.o cpu_detect_x86_win_64arp.o PeakFinder_64arp.o BPMDetect_64arp.o WavFile_64arp.o RunParameters_64arp.o interface.2._64arp.o 
-	x86_64-w64-mingw32-ar.exe rcs ../mp3_dll/soundtouch_arp.a SoundTouch_64arp.o TDStretch_64arp.o RateTransposer_64arp.o FIRFilter_64arp.o FIFOSampleBuffer_64arp.o AAFilter_64arp.o cpu_detect_x86_win_64arp.o PeakFinder_64arp.o BPMDetect_64arp.o WavFile_64arp.o RunParameters_64arp.o interface.2._64arp.o 
+	x86_64-w64-mingw32-ar.exe rcs /bw_tmp/mp3_dll/soundtouch_arp.a SoundTouch_64arp.o TDStretch_64arp.o RateTransposer_64arp.o FIRFilter_64arp.o FIFOSampleBuffer_64arp.o AAFilter_64arp.o cpu_detect_x86_win_64arp.o PeakFinder_64arp.o BPMDetect_64arp.o WavFile_64arp.o RunParameters_64arp.o interface.2._64arp.o 
 
 	$(AMANDA_PRINT__)
 

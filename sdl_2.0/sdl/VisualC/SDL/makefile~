@@ -38,7 +38,7 @@ ricardo_64: $(APRENDENDO_COM_MEU_MORZAO)SDL_atomic.o $(APRENDENDO_COM_MEU_MORZAO
 	\
 	$(APRENDENDO_COM_MEU_MORZAO)SDL_shaders_gles2.o $(APRENDENDO_COM_MEU_MORZAO)SDL_d3dmath.o $(APRENDENDO_COM_MEU_MORZAO)SDL_render.o $(APRENDENDO_COM_MEU_MORZAO)SDL_yuv_sw.o $(APRENDENDO_COM_MEU_MORZAO)SDL_blendfillrect.o                 \
 	$(APRENDENDO_COM_MEU_MORZAO)SDL_blendline.o $(APRENDENDO_COM_MEU_MORZAO)SDL_blendpoint.o  $(APRENDENDO_COM_MEU_MORZAO)SDL_drawline.o $(APRENDENDO_COM_MEU_MORZAO)SDL_drawpoint.o $(APRENDENDO_COM_MEU_MORZAO)SDL_render_sw.o $(APRENDENDO_COM_MEU_MORZAO)SDL_rotate.o   \
-	$(APRENDENDO_COM_MEU_MORZAO)SDL.o $(APRENDENDO_COM_MEU_MORZAO)SDL_assert.o $(APRENDENDO_COM_MEU_MORZAO)SDL_dataqueue.o $(APRENDENDO_COM_MEU_MORZAO)SDL_error.o $(APRENDENDO_COM_MEU_MORZAO)SDL_hints.o $(APRENDENDO_COM_MEU_MORZAO)SDL_log.o $(APRENDENDO_COM_MEU_MORZAO)SDL_dummysensor.o          \
+	$(APRENDENDO_COM_MEU_MORZAO)SDL.o $(APRENDENDO_COM_MEU_MORZAO)SDL_assert.o $(APRENDENDO_COM_MEU_MORZAO)SDL_dataqueue.o $(APRENDENDO_COM_MEU_MORZAO)SDL_error.o $(APRENDENDO_COM_MEU_MORZAO)SDL_hints.o SDL_log.o $(APRENDENDO_COM_MEU_MORZAO)SDL_dummysensor.o          \
 	$(APRENDENDO_COM_MEU_MORZAO)SDL_sensor.o $(APRENDENDO_COM_MEU_MORZAO)SDL_getenv.o $(APRENDENDO_COM_MEU_MORZAO)SDL_iconv.o $(APRENDENDO_COM_MEU_MORZAO)SDL_kkkkk_malloc.o $(APRENDENDO_COM_MEU_MORZAO)SDL_qsort.o $(APRENDENDO_COM_MEU_MORZAO)SDL_stdlib.o $(APRENDENDO_COM_MEU_MORZAO)SDL_string.o  \
 	$(APRENDENDO_COM_MEU_MORZAO)SDL_strtokr.o $(APRENDENDO_COM_MEU_MORZAO)SDL_syscond.o $(APRENDENDO_COM_MEU_MORZAO)SDL_thread.o $(APRENDENDO_COM_MEU_MORZAO)SDL_sysmutex.o $(APRENDENDO_COM_MEU_MORZAO)SDL_syssem.o $(APRENDENDO_COM_MEU_MORZAO)SDL_systhread.o            \
 	$(APRENDENDO_COM_MEU_MORZAO)SDL_systls.o $(APRENDENDO_COM_MEU_MORZAO)SDL_timer.o $(APRENDENDO_COM_MEU_MORZAO)SDL_systimer.o $(APRENDENDO_COM_MEU_MORZAO)SDL_nullevents.o $(APRENDENDO_COM_MEU_MORZAO)SDL_nullframebuffer.o $(APRENDENDO_COM_MEU_MORZAO)SDL_nullvideo.o  \
@@ -50,9 +50,9 @@ ricardo_64: $(APRENDENDO_COM_MEU_MORZAO)SDL_atomic.o $(APRENDENDO_COM_MEU_MORZAO
 	$(APRENDENDO_COM_MEU_MORZAO)SDL_windowsopengl.o $(APRENDENDO_COM_MEU_MORZAO)SDL_windowsopengles.o $(APRENDENDO_COM_MEU_MORZAO)SDL_windowsshape.o   $(APRENDENDO_COM_MEU_MORZAO)SDL_windowsvideo.o             \
 	$(APRENDENDO_COM_MEU_MORZAO)SDL_windowsvulkan.o   $(APRENDENDO_COM_MEU_MORZAO)SDL_windowswindow.o   $(APRENDENDO_COM_MEU_MORZAO)yuv_rgb.o $(APRENDENDO_COM_MEU_MORZAO)dprintf_kp.o
 
-	/aoprojeto/mp3_dll/amandaricardo_mvbuild26_33.exe ./amanda_file_counter_32.ini versio_n.ama.rc version_ricardo_mislaine_final_2_.rc aline_definitive_header_2_.h "64 bits" mod_sdl2_2_0_12_kp.dll increase
+	-./amandaricardo_mvbuild26_32.exe ./amanda_file_counter_32.ini versio_n.ama.rc $(APRENDENDO_COM_MEU_MORZAO)version_ricardo_mislaine_final_2_.rc aline_definitive_header_2_.h "64 bits" mod_sdl2_2_0_12_kp.dll increase
 
-	x86_64-w64-mingw32-windres -O coff -o $(APRENDENDO_COM_MEU_MORZAO)version64.o version_ricardo_mislaine_final_2_.rc
+	x86_64-w64-mingw32-windres -O coff -o version64.o $(APRENDENDO_COM_MEU_MORZAO)version_ricardo_mislaine_final_2_.rc
 
 	x86_64-w64-mingw32-gcc.exe -mdll -o $(APRENDENDO_COM_MEU_MORZAO)mod_sdl2_2_0_12_kp.dll $(APRENDENDO_COM_MEU_MORZAO)SDL_atomic.o $(APRENDENDO_COM_MEU_MORZAO)SDL_spinlock.o          \
 	$(APRENDENDO_COM_MEU_MORZAO)SDL_directsound.o $(APRENDENDO_COM_MEU_MORZAO)SDL_diskaudio.o $(APRENDENDO_COM_MEU_MORZAO)SDL_dummyaudio.o $(APRENDENDO_COM_MEU_MORZAO)SDL_audio.o                                  \
@@ -318,7 +318,7 @@ $(APRENDENDO_COM_MEU_MORZAO)s_tan.o: ../../src/libm/s_tan.c
 	x86_64-w64-mingw32-gcc.exe -c $(AMANDA_FLAGS__) -I "../../include" "../../src/libm/s_tan.c" -o $(APRENDENDO_COM_MEU_MORZAO)s_tan.o
 
 $(APRENDENDO_COM_MEU_MORZAO)SDL_sysloadso.o: ../../src/loadso/windows/SDL_sysloadso.c
-	x86_64-w64-mingw32-gcc.exe -c $(AMANDA_FLAGS__) -I "../../include" "../../src/loadso/windows/SDL_sysloadso.c" -o $(APRENDENDO_COM_MEU_MORZAO)SDL_sysloadso.o
+	x86_64-w64-mingw32-gcc.exe -c $(AMANDA_FLAGS__) -I "../../include" "../../src/loadso/windows/SDL_sysloadso.c" -o SDL_sysloadso.o
 
 $(APRENDENDO_COM_MEU_MORZAO)SDL_power.o: ../../src/power/SDL_power.c
 	x86_64-w64-mingw32-gcc.exe -c $(AMANDA_FLAGS__) -I "../../include" "../../src/power/SDL_power.c" -o $(APRENDENDO_COM_MEU_MORZAO)SDL_power.o

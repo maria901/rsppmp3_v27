@@ -755,11 +755,13 @@ int morcego_extract_wav(morcego___i___instance__a__bucaneiro_engineering *mv____
      audio_file *       wav_stream  =                                                            NULL;
      char               int_buffer  [4096                                                           ];
      char               signature_amanda_s_smart_ape[MAXPATH_UTF_8_MODE_AMANDA_S_SMART_APE ] = { 0, };
-     double             amanda_s_smart_ape_timestamp                                =               0;
+	 double             amanda_s_smart_ape_timestamp                                   =            0;
      int                ret_amanda_s_smart_ape                                                       ;
      int                returnvalue =                                                               0;
+	 int                aanalized_amanda_s_smart_ape                                                 ;
      int                size_out                                                                     ;
-     long long          generated_size_amanda_s_smart_ape                           =               0;
+     long long          generated_size_amanda_s_smart_ape                              =            0;
+	 __attribute__((unused)) bool precisa_atualizar_smartape_from_amanda               =        false;
 
      __attribute((unused)) enum amanda_s_smart_ape_webm_commands webm_commands_amanda_s_smart_ape                                                                ;
      be_libav_struct *  be = (be_libav_struct *)mv_______->be_ptr                                    ;
@@ -770,7 +772,7 @@ int morcego_extract_wav(morcego___i___instance__a__bucaneiro_engineering *mv____
 	  wav_mode = FAAD_FMT_FLOAT;
      }
 
-     pedro_dprintf(0, "Te amo Amanda...\n");
+     pedro_dprintf(0, "Te amo Amanda,  1 morcego_extract_wav ...\n");
 	
      memset(be, 0, sizeof(be_libav_struct));
 
@@ -782,6 +784,37 @@ int morcego_extract_wav(morcego___i___instance__a__bucaneiro_engineering *mv____
 
      mv_______->be_for_wav_convert = (void *)be;
 
+
+sprintf(signature_amanda_s_smart_ape, "Amanda_27_Ricardo_51_%lld_%d_%s", getfilesize_ar_amanda_s_smart_ape(filename_amanda_s_smart_ape),
+		  27 + 51,
+		  filename_amanda_s_smart_ape);
+		  
+	strcpy(mv_______->libav_c___signature___________amanda_s_smart_ape, signature_amanda_s_smart_ape);
+
+
+	analize (mv_______, NULL, &mv_______->libav_c___internal_globalff, & aanalized_amanda_s_smart_ape);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
      if (morcego_init_libav(mv_______, be, 0))
      {
 	  strcpy(mv_______->morcego_interface_c___message___, be->be_error_message);
@@ -791,18 +824,14 @@ int morcego_extract_wav(morcego___i___instance__a__bucaneiro_engineering *mv____
 	
 	pedro_dprintf(0, "********************************************************\n");
 
+	amanda_s_smart_ape_timestamp = get_bucaneiro_tick();
+
      if (false == mv_______->libav_c___amanda_s_smart_ape_is_new_webm)
      {
 	  goto saida_amanda_s_smart_ape;
      }
 
      {
-
-	  amanda_s_smart_ape_timestamp = get_bucaneiro_tick();
-
-	  sprintf(signature_amanda_s_smart_ape, "Amanda_27_Ricardo_51_%lld_%d_%s", getfilesize_ar_amanda_s_smart_ape(filename_amanda_s_smart_ape),
-		  27 + 51,
-		  filename_amanda_s_smart_ape);
 
 	  amanda_s_smart_ape_timestamp = get_bucaneiro_tick() - amanda_s_smart_ape_timestamp;
 
@@ -844,7 +873,7 @@ int morcego_extract_wav(morcego___i___instance__a__bucaneiro_engineering *mv____
 	       
 	       if('\0' == mv_______->libav_c___webm________________amanda_s_smart_ape[0])
 	       {
-		    pedro_dprintf(0, "Não tem webm data salva, simplesmente isso\n");
+		    pedro_dprintf(0, "Tem entry mas nao tem webm salvo, simplesmente isso\n");
 	       }
 	       else
 	       {
@@ -1084,11 +1113,36 @@ saida_amanda_s_smart_ape:
 	  {
 		  if (true == mv_______->libav_c___amanda_s_smart_ape_is_new_webm)
 		  {
+			  
 			  //save... se nao estiver carregado, checa se tem o item ou nao
 			  if (mv_______->libav_c___has_an_entry)
 			  {
-				  pedro_dprintf(0, "webm - will update it anyway...\n");
+				pedro_dprintf(0, "webm - will update it anyway...\n");
 				  //update
+				  
+				strcpy(mv_______->libav_c___SQL_call_by_amanda, "update Amanda_27_cache set webm________________amanda_s_smart_ape = '");
+
+				sprintf(mv_______->libav_c___SQL_call_by_amanda + strlen(mv_______->libav_c___SQL_call_by_amanda), "%lld", mv_______->libav_c___amanda_s_smart_ape_new_generated_duration);
+
+				strcat(mv_______->libav_c___SQL_call_by_amanda, "' where entry_______________amanda_s_smart_ape = '");
+
+				strcpy(mv_______->libav_c___SQL_temp_by_amanda, mv_______->libav_c___signature___________amanda_s_smart_ape);
+
+				morcego_encoder_amanda_s_smart_ape(mv_______->libav_c___SQL_temp_by_amanda);
+
+				strcat(mv_______->libav_c___SQL_call_by_amanda, mv_______->libav_c___SQL_temp_by_amanda);
+
+				strcat(mv_______->libav_c___SQL_call_by_amanda, "';;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;");
+				  
+				if(amanda_s_smart_ape_do_sql(mv_______->libav_c___SQL_call_by_amanda))
+				{
+					pedro_dprintf(0, "Atualizado......\n");
+				}
+				else
+				{
+					pedro_dprintf(0, "Erro de SQL......: %s\n", mv_______->libav_c___SQL_call_by_amanda);
+				}
+				  
 			  }
 			  else
 			  {
