@@ -770,8 +770,6 @@ int morcego_extract_wav(morcego___i___instance__a__bucaneiro_engineering *mv____
 	  mprintf("64 bits FLOAT not implemented yet, moving to 32 bits FLOAT");
 	  wav_mode = FAAD_FMT_FLOAT;
      }
-
-     pedro_dprintf(0, "Te amo Amanda,  1 morcego_extract_wav ...\n");
 	
      memset(be, 0, sizeof(be_libav_struct));
 
@@ -797,8 +795,6 @@ int morcego_extract_wav(morcego___i___instance__a__bucaneiro_engineering *mv____
 		goto saida_amanda_s_smart_ape;
 	}
 	
-	pedro_dprintf(0, "********************************************************\n");
-
 	amanda_s_smart_ape_timestamp = get_bucaneiro_tick();
 
      if (false == mv_______->libav_c___amanda_s_smart_ape_is_new_webm)
@@ -809,13 +805,7 @@ int morcego_extract_wav(morcego___i___instance__a__bucaneiro_engineering *mv____
      {
 
 	  amanda_s_smart_ape_timestamp = get_bucaneiro_tick() - amanda_s_smart_ape_timestamp;
-
-	  pedro_dprintf(0, "Arquivo é webm modelo novo\n");
-
-	  pedro_dprintf(0, "tempo que leva com rsp %.6f\n", amanda_s_smart_ape_timestamp);
-
-	  pedro_dprintf(0, "amor a string %s\n",            signature_amanda_s_smart_ape);
-
+  
 	  //exit(27);
      }
 
@@ -824,15 +814,6 @@ int morcego_extract_wav(morcego___i___instance__a__bucaneiro_engineering *mv____
 	  if (true == amanda_s_smart_ape_query_webm_and_normalization(signature_amanda_s_smart_ape, mv_______->libav_c___webm________________amanda_s_smart_ape,
 								      mv_______->libav_c___normalization_mode__amanda_s_smart_ape, mv_______->libav_c___normalization_repla_amanda_s_smart_ape, mv_______->libav_c___normalization_BENOR_amanda_s_smart_ape, mv_______->libav_c___normalization_valu3_amanda_s_smart_ape, &mv_______->libav_c___has_an_entry))
 	  {
-
-
-	       pedro_dprintf(0, "deu certo meu amor...agora vou cagar melhor kkkkkk\n");
-
-	       pedro_dprintf(0, "webm .%s.\n", mv_______->libav_c___webm________________amanda_s_smart_ape);
-	       pedro_dprintf(0, "-normalization_mode  .%s.\n", mv_______->libav_c___normalization_mode__amanda_s_smart_ape);
-	       pedro_dprintf(0, "normalization_value .%s.\n", mv_______->libav_c___normalization_repla_amanda_s_smart_ape);
-	       pedro_dprintf(0, "normalization_valu2 .%s.\n", mv_______->libav_c___normalization_BENOR_amanda_s_smart_ape);
-	       pedro_dprintf(0, "normalization_valu3 .%s.\n", mv_______->libav_c___normalization_valu3_amanda_s_smart_ape);
 	       /*
 		     printf("webm .%s.\n", webm________________amanda_s_smart_ape);
 		     printf("webm .%s.\n", webm________________amanda_s_smart_ape);
@@ -840,42 +821,38 @@ int morcego_extract_wav(morcego___i___instance__a__bucaneiro_engineering *mv____
 
 	       //para compilar rsppmp3: 1001
 	       //para rodar rsppmp3   : 1548
-	       pedro_dprintf(0, "enabled cache? %d\n", (int) mv_______->libav_c___amanda_s_smart_ape_use_cache);
-
-	       pedro_dprintf(0, "Tem itens %d\n", (int)mv_______->libav_c___has_an_entry);
-
+	       
 	       amanda_s_smart_ape_timestamp = get_bucaneiro_tick();
 	       
 	       if('\0' == mv_______->libav_c___webm________________amanda_s_smart_ape[0])
 	       {
-		    pedro_dprintf(0, "Tem entry mas nao tem webm salvo, simplesmente isso\n");
+		    
 	       }
 	       else
 	       {
-		    pedro_dprintf(0, "!Tem webm data salva, simplesmente isso\n");
+		    
 
 		    if (mv_______->libav_c___amanda_s_smart_ape_use_cache)
 
 		    {
-			 pedro_dprintf(0, "Ta usando cache entao vai colocar o webm no item usando o codigo que uso os dados no cache\n");
-
+			 
 			 mv_______->libav_c___amanda_s_smart_ape_new_generated_duration = strtoll(mv_______->libav_c___webm________________amanda_s_smart_ape, NULL, 10);
 
 			 goto saida_amanda_s_smart_ape;
 		    }
 			else
 			{
-				pedro_dprintf(0, "Não ta usando cache entao nao vai fazer nada\n");
+				
 			}
 		   }
 
 	  }
 	  else
 	  {
-		  pedro_dprintf(0, "Error my love...\n");
+		  
 	  }
      }
-
+	 
      if (false == mv_______->libav_c___amanda_s_smart_ape__check_and_get_webm_fix_if_true)
      {
 
@@ -1096,8 +1073,7 @@ saida_amanda_s_smart_ape:
 			  //save... se nao estiver carregado, checa se tem o item ou nao
 			  if (mv_______->libav_c___has_an_entry)
 			  {
-				pedro_dprintf(0, "webm - will update it anyway...\n");
-				  //update
+				//update
 				  
 				strcpy(mv_______->libav_c___SQL_call_by_amanda, "update Amanda_27_cache set webm________________amanda_s_smart_ape = '");
 
@@ -1115,25 +1091,21 @@ saida_amanda_s_smart_ape:
 				  
 				if(amanda_s_smart_ape_do_sql(mv_______->libav_c___SQL_call_by_amanda))
 				{
-					pedro_dprintf(0, "Atualizado......\n");
+					
 				}
 				else
 				{
-					pedro_dprintf(0, "Erro de SQL......: %s\n", mv_______->libav_c___SQL_call_by_amanda);
+					
 				}
 				  
 			  }
 			  else
 			  {
-
-				  pedro_dprintf(0, "webm - will create an entry for webm...\n");
-
+			  
 				  assert(strlen(signature_amanda_s_smart_ape));
 
 				  sprintf(mv_______->libav_c___webm________________amanda_s_smart_ape, "%lld", mv_______->libav_c___amanda_s_smart_ape_new_generated_duration);
-
-				  pedro_dprintf(0, "Valor gerado de duration %lld\n", mv_______->libav_c___amanda_s_smart_ape_new_generated_duration);
-
+				  
 				  mv_______->libav_c___normalization_repla_amanda_s_smart_ape[0] = '\0';
 
 				  mv_______->libav_c___normalization_BENOR_amanda_s_smart_ape[0] = 0x0;
@@ -1143,7 +1115,7 @@ saida_amanda_s_smart_ape:
 				  if (amanda_s_smart_ape_add_entry(signature_amanda_s_smart_ape, mv_______->libav_c___webm________________amanda_s_smart_ape, mv_______->libav_c___normalization_repla_amanda_s_smart_ape, mv_______->libav_c___normalization_BENOR_amanda_s_smart_ape,
 												   mv_______->libav_c___normalization_valu3_amanda_s_smart_ape))
 				  {
-					  pedro_dprintf(0, "adicionou a entrada amor\n");
+					  
 				  }
 				  //here, por parts...
 				  //ja passa os 4...
@@ -1156,8 +1128,7 @@ saida_amanda_s_smart_ape:
 	 mv_______->libav_c___amanda_s_smart_ape__check_and_get_webm_fix_if_true = false;
 
 	 amanda_s_smart_ape_timestamp = get_bucaneiro_tick() - amanda_s_smart_ape_timestamp;
-
-     pedro_dprintf(0, "Tempo  pra terminar %.6f\n", amanda_s_smart_ape_timestamp);
+     
      //for historical reasons...
 
      return returnvalue;

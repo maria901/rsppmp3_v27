@@ -396,10 +396,8 @@ int callback_amanda_s_smart_ape_not_in_use(__attribute__((unused)) void *NotUsed
 		{
 			strcpy(normalization_valu2_amanda_s_smart_ape, argv[i] ? argv[i] : "");
 		}
-		pedro_dprintf(0, "%s = %s\n", azColName[i], argv[i] ? argv[i] : "");
+		
 	}
-
-	pedro_dprintf(0, "********************************\n");
 
 	return 0;
 }
@@ -424,21 +422,19 @@ int callback_amanda_s_smart_ape_23_39(__attribute__((unused)) void *NotUsed,
 		if(0 == strcmp("normalization_value_amanda_s_smart_ape", azColName[i]))
 		{			
 			strcpy(normalization_value_amanda_s_smart_ape, argv[i] ? argv[i] : "");
-			pedro_dprintf(0, "pegou 1 %s\n", normalization_value_amanda_s_smart_ape);
+			
 		}//             normalization_valu2_amanda_s_smart_ape
 		if(0 == strcmp("normalization_valu2_amanda_s_smart_ape", azColName[i]))
 		{//        normalization_valu2_amanda_s_smart_ape
 			strcpy(normalization_valu2_amanda_s_smart_ape, argv[i] ? argv[i] : "");
-			pedro_dprintf(0, "pegou 2 %s\n", normalization_valu2_amanda_s_smart_ape);
+			
 		}
 		if(0 == strcmp("normalization_valu3_amanda_s_smart_ape", azColName[i]))
 		{
 			strcpy(normalization_valu3_amanda_s_smart_ape, argv[i] ? argv[i] : "");
 		}
-		pedro_dprintf(0, ".%s. = %s\n", azColName[i], argv[i] ? argv[i] : "");
+		
 	}
-
-	pedro_dprintf(0, "-*******************************\n");
 
 	return 0;
 }
@@ -514,8 +510,7 @@ bool __fastcall amanda_s_smart_ape_do_sql(__attribute__((unused)) char *sql_____
 	if (ret_amanda_s_smart_ape)
 	{
 		free(buffer_for_insert_amanda_s_smart_ape);
-		pedro_dprintf(0, "Error in SQL call %s\n", message_for_amanda_s_smart_ape);
-		pedro_dprintf(0, entry_______________amanda_s_smart_ape);
+		
 		return false;
 	}
 

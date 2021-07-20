@@ -145,12 +145,7 @@ analize (morcego___i___instance__a__bucaneiro_engineering *mv_______, __attribut
 	double amanda_s_smart_ape_timestamp      =          0;
 	assert(be_real_real);
 
-
-pedro_dprintf(0, "Te amo Amanda,  2 analize ...\n");
-
-
 //agora checa se da ou nao
-
 
 amanda_s_smart_ape_timestamp = get_bucaneiro_tick();
 
@@ -161,14 +156,6 @@ if (mv_______->libav_c___amanda_s_smart_ape_use_cache)
 								 mv_______->libav_c___normalization_mode__amanda_s_smart_ape, mv_______->libav_c___normalization_repla_amanda_s_smart_ape, mv_______->libav_c___normalization_BENOR_amanda_s_smart_ape, mv_______->libav_c___normalization_valu3_amanda_s_smart_ape, &mv_______->libav_c___has_an_entry))
      {
 
-
-	  pedro_dprintf(0, "Deu certo meu amor 2...gostou da noite?\n");
-
-	  pedro_dprintf(0, "normalize webm .%s.\n", mv_______->libav_c___webm________________amanda_s_smart_ape);
-	  pedro_dprintf(0, "normalize normalization_mode  .%s.\n", mv_______->libav_c___normalization_mode__amanda_s_smart_ape);
-	  pedro_dprintf(0, "normalize normalization_value .%s.\n", mv_______->libav_c___normalization_repla_amanda_s_smart_ape);
-	  pedro_dprintf(0, "normalize normalization_valu2 .%s.\n", mv_______->libav_c___normalization_BENOR_amanda_s_smart_ape);
-	  pedro_dprintf(0, "normalize normalization_valu3 .%s.\n", mv_______->libav_c___normalization_valu3_amanda_s_smart_ape);
 	  /*
 	    printf("webm .%s.\n", webm________________amanda_s_smart_ape);
 	    printf("webm .%s.\n", webm________________amanda_s_smart_ape);
@@ -176,44 +163,28 @@ if (mv_______->libav_c___amanda_s_smart_ape_use_cache)
 
 	  //para compilar rsppmp3: 1001
 	  //para rodar rsppmp3   : 1548
-	  pedro_dprintf(0, "normalize enabled cache? %d\n", (int) mv_______->libav_c___amanda_s_smart_ape_use_cache);
-
-	  pedro_dprintf(0, "normalize Tem itens %d\n", (int)mv_______->libav_c___has_an_entry);
+	  	   
+	   if(strlen(mv_______->libav_c___normalization_repla_amanda_s_smart_ape) && mv_______->analisys_c___normalization_is_replaygain)
+	   {
+		   *globalff = strtod(mv_______->libav_c___normalization_repla_amanda_s_smart_ape, NULL);
+		   
+		   *aanalized = 1;
+		   goto saida_amanda_s_smart_ape;
+	   }
+	   if(strlen(mv_______->libav_c___normalization_BENOR_amanda_s_smart_ape) && !mv_______->analisys_c___normalization_is_replaygain)
+	   {
+		   *globalff = strtod(mv_______->libav_c___normalization_BENOR_amanda_s_smart_ape, NULL);
+		   
+		   *aanalized = 1;
+		   goto saida_amanda_s_smart_ape;
+	   }
 					   
-	  if('\0' == mv_______->libav_c___webm________________amanda_s_smart_ape[0])
-	  {
-	       //pedro_dprintf(0, "Tem entry mas nao tem webm salvo, simplesmente isso\n");
-	  }
-	  else
-	  {
-		  /*
-	       pedro_dprintf(0, "!Tem webm data salva, simplesmente isso\n");
-
-	       if (mv_______->libav_c___amanda_s_smart_ape_use_cache)
-
-	       {
-		    pedro_dprintf(0, "Ta usando cache entao vai colocar o webm no item usando o codigo que uso os dados no cache\n");
-
-		    //mv_______->libav_c___amanda_s_smart_ape_new_generated_duration = strtoll(mv_______->libav_c___webm________________amanda_s_smart_ape, NULL, 10);
-
-		    goto saida_amanda_s_smart_ape;
-	       }
-	       else
-	       {
-		    pedro_dprintf(0, "Não ta usando cache entao nao vai fazer nada\n");
-	       }
-		   */
-	  }
+	  
 
      }
 
 
 }
-
-
-
-
-
 
 
 
@@ -543,17 +514,45 @@ if(mv_______->libav_c___amanda_s_smart_ape_use_cache)
 
 		if(amanda_s_smart_ape_do_sql(mv_______->libav_c___SQL_call_by_amanda))
 		{
-			pedro_dprintf(0, "normalize Atualizado......\n");
+			
 		}
 		else
 		{
-			pedro_dprintf(0, "normalize Erro de SQL......: %s\n", mv_______->libav_c___SQL_call_by_amanda);
+			
 		}
 
 	}
 	else
 	{
 		//create entry
+		
+				  mv_______->libav_c___webm________________amanda_s_smart_ape[0] = 0;
+
+				  mv_______->libav_c___normalization_repla_amanda_s_smart_ape[0] = '\0';
+
+				  mv_______->libav_c___normalization_BENOR_amanda_s_smart_ape[0] = 0x0;
+
+				  mv_______->libav_c___normalization_valu3_amanda_s_smart_ape[0] = 0b0;
+
+				if(mv_______->analisys_c___normalization_is_replaygain)
+				{
+					sprintf(mv_______->libav_c___normalization_repla_amanda_s_smart_ape, "%f", *globalff);
+				}
+				else
+				{
+					sprintf(mv_______->libav_c___normalization_BENOR_amanda_s_smart_ape, "%f", *globalff);
+				}
+
+				  if (amanda_s_smart_ape_add_entry(mv_______->libav_c___signature___________amanda_s_smart_ape, mv_______->libav_c___webm________________amanda_s_smart_ape, mv_______->libav_c___normalization_repla_amanda_s_smart_ape, mv_______->libav_c___normalization_BENOR_amanda_s_smart_ape,
+												   mv_______->libav_c___normalization_valu3_amanda_s_smart_ape))
+				  {
+					  
+				  }
+				  //here, por parts...
+				  //ja passa os 4...
+
+				  //vamos...
+		
 	}
 }
 
@@ -563,9 +562,7 @@ saida_amanda_s_smart_ape:
 ;
 
 	amanda_s_smart_ape_timestamp = get_bucaneiro_tick() - amanda_s_smart_ape_timestamp;
-
-	pedro_dprintf(0, "tempo que meu amor levou pra pegar o normalize %.3f\n", amanda_s_smart_ape_timestamp);
-
+	
 	return 0;
 
 }

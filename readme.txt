@@ -17,9 +17,7 @@
  *     Licensa Pública Menor junto com este programa                            *
  *     Se não, veja <http://www.gnu.org/licenses/>.                             *
  *                                                                              *
- *     Suporte: https://arsoftware.net.br/binarywork_____________________       *
-
- *              http: //nomade.sourceforge.net/binarywork_______________/       *
+ *     Suporte: https://nomade.sourceforge.io/                                  *
  *                                                                              *
  *     E-mails direto dos felizes programadores:                                *
  *     O Ricardinho :    arsoftware25@gmail.com    ricardo@arsoftware.net.br    *
@@ -64,8 +62,8 @@ GitHub : https://github.com/maria901/rsppmp3_v27
 
 Win32/64 Dll to play all audio and video that are supported by the library Libav
 
-rspmp3ocx1.dll and interface2.dll compiled with gcc 10.3.0, SDL2 (mod) compiled with
-mingw64 10.3.0
+rspmp3ocx1.dll and interface2.dll compiled with gcc 11.1.0, SDL2 (mod) compiled with
+mingw64 11.1.0
 
 Sources of the win64 dll available on the folder <extracted folder>\rsppmp3 sources\win64\mp3dll\mp3dll\bin\Release\src\c_project
 Sources of the Csharp sample code available on the folder <extracted folder>\rsppmp3 sources\win64\mp3dll\mp3dll
@@ -142,6 +140,11 @@ with different copies of the Libav dlls in the same process running
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Changelog:
+What is new in 13.1.1  build 666973  Tue 20/July/2021 14:43:57  codename 'Page and Mentré'
+First release with full support to cache when loading normalization code
+and new webm files that need to compute the duration from the audio wav extraction,
+notice that the reported bug that was done yesterday at 00:00 was not fixed yet,
+it only occurs with fast machines and will be fixed today, minor modifications.
 
 What is new in 12.3.2  build 666894  Thu 15/July/2021 08:10:15  codename 'Dréo'
 Rearranged the sources to small names and now the precompiled
