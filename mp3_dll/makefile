@@ -17,7 +17,7 @@ bin\interface2.dll: mv_from_be.h ..\interface2\libav.c ..\interface2\makefile ..
 
 bucaneiro: bin\interface2.dll mv_from_be.h interface1.def /bw_tmp/mp3_dll/decoder.o /bw_tmp/mp3_dll/audio.o /bw_tmp/mp3_dll/revmodel.o /bw_tmp/mp3_dll/freeverb_plugin_2.o /bw_tmp/mp3_dll/unicode_large.o /bw_tmp/mp3_dll/rspini.o /bw_tmp/mp3_dll/mp3wav.o /bw_tmp/mp3_dll/id3.o /bw_tmp/mp3_dll/fourier.o /bw_tmp/mp3_dll/filebuffer.o /bw_tmp/mp3_dll/amanda_s_smart_ape___folder.o /bw_tmp/mp3_dll/iir.o /bw_tmp/mp3_dll/gain_analysis.o /bw_tmp/mp3_dll/analisys.o /bw_tmp/mp3_dll/normalization.o /bw_tmp/mp3_dll/dsp.o /bw_tmp/mp3_dll/rc4.o /bw_tmp/mp3_dll/freeverb_plugin.o /bw_tmp/mp3_dll/allpass.o /bw_tmp/mp3_dll/comb.o /bw_tmp/mp3_dll/freeverb_plugin_2.o /bw_tmp/mp3_dll/revmodel.o /bw_tmp/mp3_dll/pedro_64.o /bw_tmp/mp3_dll/amanda_s_smart_ape_sha512_k.o /bw_tmp/mp3_dll/morcego_interface.o /bw_tmp/mp3_dll/smartape.c_kk.o /bw_tmp/mp3_dll/soundtouch_arp.a
 
-	@./amandaricardo_mvbuild26_33.exe amanda_file_counter_32.ini versio_n.ama.rc version_ricardo_mislaine_final_2_.rc aline_definitive_header_2_.h "64 bits" rspmp3ocx1.dll increase '2021' '../sqlite/new icon july_i.ico'
+	@/bw_tmp/amandaricardo_mvbuild26_33.exe amanda_file_counter_32.ini versio_n.ama.rc version_ricardo_mislaine_final_2_.rc aline_definitive_header_2_.h "64 bits" rspmp3ocx1.dll increase '2021' '../sqlite/new icon july_i.ico'
 
 	@x86_64-w64-mingw32-windres.exe -o /bw_tmp/mp3_dll/ver.o -O coff version_ricardo_mislaine_final_2_.rc
 
@@ -111,8 +111,8 @@ id_new_libav:
 /bw_tmp/mp3_dll/rspini.o: rspini.c e_malloc.c mv_from_be.h
 	x86_64-w64-mingw32-gcc.exe -c -o /bw_tmp/mp3_dll/rspini.o rspini.c $(AMANDA_FLAGS__)
 
-/bw_tmp/mp3_dll/soundtouch_arp.a: ..\touch\SoundTouch.cpp ..\touch\TDStretch.cpp ..\touch\RateTransposer.cpp ..\touch\FIRFilter.cpp ..\touch\FIFOSampleBuffer.cpp ..\touch\AAFilter.cpp ..\touch\cpu_detect_x86_win.cpp ..\touch\PeakFinder.cpp ..\touch\BPMDetect.cpp ..\touch\WavFile.cpp ..\touch\RunParameters.cpp ..\touch\interface.cpp
-	@make amandaricardo_valquiria -C ..\touch
+/bw_tmp/mp3_dll/soundtouch_arp.a: ../touch/SoundTouch.cpp ../touch/TDStretch.cpp ../touch/RateTransposer.cpp ../touch/FIRFilter.cpp ../touch/FIFOSampleBuffer.cpp ../touch/AAFilter.cpp ../touch/cpu_detect_x86_win.cpp ../touch/PeakFinder.cpp ../touch/BPMDetect.cpp ../touch/WavFile.cpp ../touch/RunParameters.cpp ../touch/interface.cpp
+	@make amandaricardo_valquiria -C ../touch
 	
 /bw_tmp/mp3_dll/unicode_large.o: unicode_large.c mv_from_be.h
 	x86_64-w64-mingw32-gcc.exe -c -o /bw_tmp/mp3_dll/unicode_large.o unicode_large.c $(AMANDA_FLAGS__)
@@ -124,20 +124,20 @@ aline_clean:
 
 smartape:
 
-	x86_64-w64-mingw32-gcc.exe  -o amandaricardo_mvbuild26_33.exe smartape.c $(AMANDA_FLAGS__) $(JULIET_FLAGS) $(FELINE_FLAGS__) -DAMANDA_S_SMART_APE_ENABLE_WIDE_FUNCTION_
+	x86_64-w64-mingw32-gcc.exe -o /bw_tmp/amandaricardo_mvbuild26_33.exe smartape.c $(AMANDA_FLAGS__) $(JULIET_FLAGS) $(FELINE_FLAGS__) -DAMANDA_S_SMART_APE_ENABLE_WIDE_FUNCTION_
 	$(LICAO_DE_VIDA_DO_MEU_AMOR)
 
-	@./amandaricardo_mvbuild26_33.exe amanda_s_smart_ape__counter.ini AssemblyInfo.smartape AssemblyInfo.cs AssemblyInfo.hh "1024 bits" 	AssemblyInfo.viu.cs increase
+	@/bw_tmp/amandaricardo_mvbuild26_33.exe amanda_s_smart_ape__counter.ini AssemblyInfo.smartape AssemblyInfo.cs AssemblyInfo.hh "1024 bits" 	AssemblyInfo.viu.cs increase
 
 	cp --preserve=timestamps AssemblyInfo.cs /aoprojeto/c#_sample/mp3dll/mp3dll/Properties/AssemblyInfo.cs
 
 smartape_v27: /bw_tmp/mp3_dll/smartape.c_kk.o
-	x86_64-w64-mingw32-gcc.exe -o amandaricardo_mvbuild26_33.exe /bw_tmp/mp3_dll/smartape.c_kk.o -O3
+	x86_64-w64-mingw32-gcc.exe -o /bw_tmp/amandaricardo_mvbuild26_33.exe /bw_tmp/mp3_dll/smartape.c_kk.o -O3
 	$(LICAO_DE_VIDA_DO_MEU_AMOR)
 
 /bw_tmp/mp3_dll/smartape.c_kk.o: smartape.c
 	x86_64-w64-mingw32-gcc.exe -c -o /bw_tmp/mp3_dll/smartape.c_kk.o smartape.c $(AMANDA_FLAGS__) $(JULIET_FLAGS) $(FELINE_FLAGS__)  -DAMANDA_S_SMART_APE_ENABLE_WIDE_FUNCTION_
 	$(LICAO_DE_VIDA_DO_MEU_AMOR)
 
-	x86_64-w64-mingw32-gcc.exe -o amandaricardo_mvbuild26_33.exe /bw_tmp/mp3_dll/smartape.c_kk.o -O3
+	x86_64-w64-mingw32-gcc.exe -o /bw_tmp/amandaricardo_mvbuild26_33.exe /bw_tmp/mp3_dll/smartape.c_kk.o -O3
 	$(LICAO_DE_VIDA_DO_MEU_AMOR)

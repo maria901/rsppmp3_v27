@@ -77,10 +77,8 @@ char copyleft_cirkut[] =
 " *     Licensa Pública Menor junto com este programa                            *\r\n"
 " *     Se não, veja <http://www.gnu.org/licenses/>.                             *\r\n"
 " *                                                                              *\r\n"
-" *     Suporte: https://arsoftware.net.br/binarywork_____________________       *\r\n"
+" *     Suporte: https://nomade.sourceforge.io/                                  *\r\n"
 "                                                                                 \r\n"
-" *              http: //nomade.sourceforge.net/binarywork_______________/       *\r\n"
-" *                                                                              *\r\n"
 " *     E-mails direto dos felizes programadores:                                *\r\n"
 " *     O Ricardinho :    arsoftware25@gmail.com    ricardo@arsoftware.net.br    *\r\n"
 " *     Little_Amanda:    arsoftware10@gmail.com    amanda.@arsoftware.net.br    *\r\n"
@@ -120,6 +118,23 @@ void strncpy_z(char *dest_z, char *src_z, size_t len)
         dest_z[len] = 0;
     }
     return;
+}
+
+char * 
+getyear_my_love (void)
+{
+	/*
+
+	   typedef struct _SYSTEMTIME {  WORD wYear;  WORD wMonth;  WORD wDayOfWeek;
+	   WORD wDay;  WORD wHour;  WORD wMinute;  WORD wSecond;  WORD wMilliseconds;
+	   } SYSTEMTIME,
+	 */
+
+	static char amanda_s_smart_ape_out[MAX_PATH];
+	SYSTEMTIME lst = { 0, };
+	GetLocalTime (&lst);
+	sprintf (amanda_s_smart_ape_out, "%04d", lst.wYear);
+	return amanda_s_smart_ape_out;
 }
 
 /**
@@ -438,9 +453,9 @@ if(cs_file_in__amanda_s_smart_ape)
         sprintf(ini_buffer, "%s", argv_amanda_s_smart_ape[5]);
         replacestringsensitive2_feline(read_buffer_amanda_s_smart_ape, "$_number_of_bits_", ini_buffer);
 
-        if (8 < argc_amanda_s_smart_ape)
+        if (true || 8 < argc_amanda_s_smart_ape)
         {
-            sprintf(ini_buffer, "%s", argv_amanda_s_smart_ape[8]);
+            sprintf(ini_buffer, "%s", getyear_my_love());
             replacestringsensitive2_feline(read_buffer_amanda_s_smart_ape, "$_ano_meu_amor..._", ini_buffer);
         }
         

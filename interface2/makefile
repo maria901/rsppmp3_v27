@@ -1,22 +1,21 @@
 AMANDA_FLAGS__=-O3 -Wall -Wfatal-errors -Werror -Wno-unused-function -I .
 
-amandaricardo_valquiria: interface2.def ../mp3_dll/mv_from_be.h makefile /bw_tmp/interface2/libav.o /bw_tmp/interface2/libav_video.o /bw_tmp/interface2/amandaricardo_koci_dprintf.o
+amandaricardo_valquiria: interface2.def ../mp3_dll/mv_from_be.h makefile /bw_tmp/interface2/libav.o /bw_tmp/interface2/libav_video.o /bw_tmp/interface2/amandaricardo_koci_dprintf.o /bw_tmp/amandaricardo_mvbuild26_33.exe
 
-	@./amandaricardo_mvbuild26_32.exe ./amanda_file_counter_32.ini versio_n.ama.rc version_ricardo_mislaine_final_2_.rc aline_definitive_header_2_.h "64 bits"       \
-	interface2.dll increase
+
+	@/bw_tmp/amandaricardo_mvbuild26_33.exe ./amanda_file_counter_32.ini versio_n.ama.rc version_ricardo_mislaine_final_2_.rc aline_definitive_header_2_.h "64 bits" interface2.dll increase 2021
 
 	@x86_64-w64-mingw32-windres.exe -o /bw_tmp/interface2/ver.o -O coff version_ricardo_mislaine_final_2_.rc
 
 	x86_64-w64-mingw32-gcc.exe -O3 -mdll -o interface2.dll /bw_tmp/interface2/libav_video.o /bw_tmp/interface2/libav.o amanda.c /bw_tmp/interface2/amandaricardo_koci_dprintf.o /bw_tmp/interface2/ver.o interface2.def /bin/mp3dll/avcodec-59.dll /bin/mp3dll/avdevice-59.dll /bin/mp3dll/avfilter-8.dll /bin/mp3dll/avformat-59.dll /bin/mp3dll/avutil-57.dll /bin/mp3dll/postproc-56.dll /bin/mp3dll/swresample-4.dll /bin/mp3dll/swscale-6.dll /bin/mp3dll/rspmp3ocx1.dll /bin/mp3dll/mod_sdl2_2_0_12_kp.dll -static
 
 	@echo 
-#	@echo  				...................mude a compilacao para -O3.................
 
 	cp --preserve=timestamps interface2.dll /bin/mp3dll/interface2.dll
 	cp --preserve=timestamps interface2.dll ../bin/
 
-#	-rm *~*
-#	-rm *.orig
+	rm interface2.dll
+
 #esfregue a lampada     "../mp3_dllrspmp3ocx1.dll" falta incluir isto
 
 dump:
@@ -53,4 +52,6 @@ amanda_clean:
 
 feline_test:
 	x86_64-w64-mingw32-gcc.exe -c -o maria.exe amanda_and_ricardo_test.c $(AMANDA_FLAGS__)
-	 
+	
+/bw_tmp/amandaricardo_mvbuild26_33.exe: /aoprojeto/mp3_dll/smartape.c
+	make_amanda_kp.exe smartape -C '/aoprojeto/mp3_dll/'

@@ -50,7 +50,7 @@ ricardo_64: $(APRENDENDO_COM_MEU_MORZAO)SDL_atomic.o $(APRENDENDO_COM_MEU_MORZAO
 	$(APRENDENDO_COM_MEU_MORZAO)SDL_windowsopengl.o $(APRENDENDO_COM_MEU_MORZAO)SDL_windowsopengles.o $(APRENDENDO_COM_MEU_MORZAO)SDL_windowsshape.o   $(APRENDENDO_COM_MEU_MORZAO)SDL_windowsvideo.o             \
 	$(APRENDENDO_COM_MEU_MORZAO)SDL_windowsvulkan.o   $(APRENDENDO_COM_MEU_MORZAO)SDL_windowswindow.o   $(APRENDENDO_COM_MEU_MORZAO)yuv_rgb.o $(APRENDENDO_COM_MEU_MORZAO)dprintf_kp.o
 
-	/aoprojeto/mp3_dll/amandaricardo_mvbuild26_33.exe ./amanda_file_counter_32.ini versio_n.ama.rc version_ricardo_mislaine_final_2_.rc aline_definitive_header_2_.h "64 bits" mod_sdl2_2_0_12_kp.dll increase
+	/bw_tmp/amandaricardo_mvbuild26_33.exe ./amanda_file_counter_32.ini versio_n.ama.rc version_ricardo_mislaine_final_2_.rc aline_definitive_header_2_.h "64 bits" mod_sdl2_2_0_12_kp.dll increase
 
 	x86_64-w64-mingw32-windres -O coff -o $(APRENDENDO_COM_MEU_MORZAO)version64.o version_ricardo_mislaine_final_2_.rc
 
