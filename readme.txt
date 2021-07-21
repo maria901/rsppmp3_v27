@@ -140,6 +140,13 @@ with different copies of the Libav dlls in the same process running
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Changelog:
+
+What is new in 13.2.6  build 666988  Tue 20/July/2021 21:59:41  codename 'Huang'
+Fixed two bugs related to  each other that can generate error in sync and
+wrong duration information, the update is a must, also the .DB file
+(the cache) need to be deleted because the bugs can save erroneus
+information that need to be updated, minor modifications.
+
 What is new in 13.1.1  build 666973  Tue 20/July/2021 14:43:57  codename 'Page and Mentré'
 First release with full support to cache when loading normalization code
 and new webm files that need to compute the duration from the audio wav extraction,
