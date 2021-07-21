@@ -211,6 +211,8 @@ morcego_play
 
 	converted_long_int_amanda_s_smart_ape = (__INT32_OR_INT64) mv_______;
 
+	mv_______->libav_c___amanda_s_smart_ape_is_new_webm = false;
+
 	(void)ConvertMP3ToWavExtended(converted_long_int_amanda_s_smart_ape, (void *) filename,
 								  (void *) "lpt1", 1,
 								  mv_______->decoder_c___track);

@@ -414,6 +414,10 @@ achou:
 			//mv_______->libav_c___duracao = 
 
 		}
+		else
+		{
+			
+		}
 
 		if(mv_______->libav_c___amanda_s_smart_ape_is_new_webm)
 		{

@@ -2109,9 +2109,9 @@ return_call_for_one_frame_only_playback_k:      //remenber it
 							if (free_to_adjust > 7)
 							{
 
-#define AMANDA__FIXED_MILLISECONDS_VALUE 12 /* magic value */
+#define AMANDA__FIXED_MILLISECONDS_VALUE 50 /* magic value */
 
-							     
+//#define AMANDA__FIXED_MILLISECONDS_VALUE 12 /* magic value */
 								if (1)
 								{
 									if (!mv_______->libav_c___audio_finished) //if audio has finished playing no need to sinchronize anymore, just finish drawing the last frames

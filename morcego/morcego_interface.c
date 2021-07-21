@@ -781,7 +781,6 @@ int morcego_extract_wav(morcego___i___instance__a__bucaneiro_engineering *mv____
 
      mv_______->be_for_wav_convert = (void *)be;
 
-
 	sprintf(signature_amanda_s_smart_ape, "Amanda_27_Ricardo_51_%lld_%d_%s", getfilesize_ar_amanda_s_smart_ape(filename_amanda_s_smart_ape),
 		  27 + 51,
 		  filename_amanda_s_smart_ape);
@@ -799,7 +798,8 @@ int morcego_extract_wav(morcego___i___instance__a__bucaneiro_engineering *mv____
 
      if (false == mv_______->libav_c___amanda_s_smart_ape_is_new_webm)
      {
-	  goto saida_amanda_s_smart_ape;
+		
+		goto saida_amanda_s_smart_ape;
      }
 
      {
