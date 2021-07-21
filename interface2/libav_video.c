@@ -2079,6 +2079,8 @@ return_call_for_one_frame_only_playback_k:      //remenber it
 
 							posicao += -75; //magic value //quanto mais baixo mais o video adianta em rela��o ao audio
 
+							posicao-= 100;
+							
 						        /*Use a suffix �q� or �Q� in printf for _float128.*/ __float128 dif = audiovalue - //__float128 is the 80 bits precison float type, we will be using it after now
 							     videovalue;
 
@@ -2109,9 +2111,10 @@ return_call_for_one_frame_only_playback_k:      //remenber it
 							if (free_to_adjust > 7)
 							{
 
-#define AMANDA__FIXED_MILLISECONDS_VALUE 50 /* magic value */
+//#define AMANDA__FIXED_MILLISECONDS_VALUE 50 /* magic value */
 
-//#define AMANDA__FIXED_MILLISECONDS_VALUE 12 /* magic value */
+#define AMANDA__FIXED_MILLISECONDS_VALUE 12 /* magic value */
+
 								if (1)
 								{
 									if (!mv_______->libav_c___audio_finished) //if audio has finished playing no need to sinchronize anymore, just finish drawing the last frames
