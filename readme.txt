@@ -28,13 +28,17 @@
  *                                                                              *
  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *  **/
   
+  
+  The codenames in the changelog are very important GNU contributors...
+  
+  
 First of all: thanks to the developers of:
 
 Libav(ffmpeg)
 SDL
 Rabbit MP3 DLL
 Dialog Medien MP3 OCX
-Maplay 1.2
+Maplay 1.2, sorry Jeff...
 Netshow 2.0
 https://stackoverflow.com/
 http://equ.sourceforge.net/
@@ -51,7 +55,7 @@ Now back to the technical information...
 			// if 1 it will simulate a delay in the audio, if 2 in the video
 			
 			test also to see if the return from hibernation and suspend state is
-			working as expected, my tests passed
+			working as expected, my tests passed, but I will test again in Win10
 			
 			~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~			
 
@@ -62,9 +66,10 @@ GitHub : https://github.com/maria901/rsppmp3_v27
 
 Win32/64 Dll to play all audio and video that are supported by the library Libav
 
-rspmp3ocx1.dll and interface2.dll compiled with gcc 11.1.0, SDL2 (mod) compiled with
-mingw64 11.1.0
+rspmp3ocx1.dll and interface2.dll compiled with gcc 11.1.0, SDL2 (mod) compiled
+also with the same version.
 
+(the next sentence is old, now the folders are not this anymore, will be fixed today (21, July, 2021))
 Sources of the win64 dll available on the folder <extracted folder>\rsppmp3 sources\win64\mp3dll\mp3dll\bin\Release\src\c_project
 Sources of the Csharp sample code available on the folder <extracted folder>\rsppmp3 sources\win64\mp3dll\mp3dll
 Sample project already compiled in the folder <extracted folder>\rsppmp3 sources\win64\mp3dll\mp3dll\bin\Release\mp3dll.exe
@@ -77,14 +82,16 @@ https://arsoftware.net.br/binarywork/Amanda_Ava_Pereira/rsppmp3_doc_8.9.9/html/d
 Description
 
 - Ability to play media files in the following formats:
-All media formats supported by ffmpeg (flv avi mov rm ra including the new amazingly fast and advanced rsp format (:-))
-and many many more)
-- It has a high quality (I supose) graphical equalizer (copied (as usual) from the XMMS project, as
-far as I know it is optimized for 44100 (soon 48000) sample rate, I will use the Shibatch version later,
+All media formats supported by ffmpeg (new webm files (2021), flv avi mov rm ra including the new amazingly fast and
+advanced rsp format (.ricardo4) (:-)) and many many more)
+- It has a high quality (we supose) graphical equalizer (copied (as usual) from the XMMS project, as
+far as we know it is optimized for 44100 (soon 48000) sample rate, we will be using the Shibatch version later,
 because some people say that it is a real high quality version)
 - It has a spectrum analyzer (now working) with 10 bands 
 - The decoder engine is loaded dynamically in the process(sic...)
-- You can define what wave out device ( soundcard ) will play the MP3 file (in case you have twenty soundcards installed)
+- You can define what wave out device ( soundcard ) will play the MP3 file (in case you have twenty soundcards installed, 
+but for BlueTooth phones it is handy, the sample project waits for your selection to return the playback if the Phone
+is close)
 - The control has support to Xing and VBRI based VBR files 
 - The control can retrieve bitrate, samplerate, layer, stereo 
 mode and the time of the media file as formatted string or milliseconds 
@@ -92,7 +99,7 @@ mode and the time of the media file as formatted string or milliseconds
 - ReplayGain and the new and recommended BENormalize normalization method
 - Ability to extract to wav pcm in 16, 24 and 32 bits and FLOAT (soon to all formats too)
 - Future versions will be able to play backwards.
-- Future versions will have more features (at least this is what everyone is expecting I supose)
+- Future versions will have more features (at least this is what everyone is expecting we supose)
 
 			~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -103,7 +110,7 @@ All problems related to Libav are related also to this dll
 If you want to see a Libav problem that can crash our DLL just try to play a flv file with an id3 v2 tag, soon we will
 fix it or create a workaround (how Ricardo?)
 
-No subtitles support for the moment
+No subtitles support for the moment ( we need free time to add this, then wait)
 
 Can select any audio track for playback (sic..., don't believe on it) but only the first video
 track for the moment, it will be extended soon
@@ -132,7 +139,8 @@ END:
 
 You can replace the Libav dlls with different and updated versions, indeed it is
 recommended
-In a near future the Libav will be incorporated inside the rspmp3ocx1.dll(not sure) to
+In a near future the Libav will be incorporated inside the rspmp3ocx1.dll(not sure,
+but the sources are there for a long time now, just need to be compiled...) to
 avoid too many dlls in the same path of the dll and avoid conflicts
 with different copies of the Libav dlls in the same process running
 (it is rare to occur but is possible)
@@ -141,7 +149,14 @@ with different copies of the Libav dlls in the same process running
 
 Changelog:
 
-What is new in 13.2.6  build 666988  Tue 20/July/2021 21:59:41  codename 'Huang'
+What is new in 13.2.8  build 666990  Quarta 21 Julho 2021  11:42  codename 'Beebe'
+The old packages may have up to 100 milliseconds of delay between
+audio and video syc, new versions have less difference, anyway
+you can calibrate it a little more yourself modifying the line 2082
+of the libav_video.c file of the release 13.2.8 and above,
+minor modifications.
+
+What is new in 13.2.6  build 666988  Tue 20/July/2021 21:59:41    codename 'Huang'
 Fixed two bugs related to  each other that can generate error in sync and
 wrong duration information, the update is a must, also the .DB file
 (the cache) need to be deleted because the bugs can save erroneus
