@@ -183,7 +183,7 @@ namespace mp3dll
 					.Visible = flag;
 
 				MP3.is_full_screen = false;
-				this.Text = copia;
+				this.Text = copia + " - Path: " + Application.StartupPath;
 				
 				bugfix_fullscreen_z.BackColor = System.Drawing.Color.Black;
 
@@ -522,7 +522,7 @@ namespace mp3dll
 
 			label14.Text = "Time position " + time.ToString();
 
-			this.Text = time.ToString() + " - " + nome_da_dll;
+			this.Text = time.ToString() + " - " + nome_da_dll + " - Path: " + Application.StartupPath;
 
 			MP3.GetLengthString(number, time);
 
@@ -976,7 +976,7 @@ namespace mp3dll
 			
 			nome_da_dll = copia;
 			
-			this.Text = copia;
+			this.Text = copia + " - Path: " + Application.StartupPath;
 			
 			MP3.GetSettings("filename", settings, "");
 			filename.Text = MP3.utf82wide(settings.ToString());
@@ -1982,7 +1982,7 @@ namespace mp3dll
 					.Visible = flag;
 
 				MP3.is_full_screen = false;
-				this.Text = copia;
+				this.Text = copia + " - Path: " + Application.StartupPath;
 				
 				bugfix_fullscreen_z.BackColor = System.Drawing.Color.Black;
 
@@ -2076,7 +2076,7 @@ namespace mp3dll
 					.Visible = flag;
 
 				MP3.is_full_screen = false;
-				this.Text = copia;
+				this.Text = copia + " - Path: " + Application.StartupPath;
 
 				video_p.Left = 20;
 				video_p.Top = 92;

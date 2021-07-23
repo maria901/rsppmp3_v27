@@ -55,7 +55,7 @@ Now back to the technical information...
 			// if 1 it will simulate a delay in the audio, if 2 in the video
 			
 			test also to see if the return from hibernation and suspend state is
-			working as expected, my tests passed, but I will test again in Win10
+			working as expected, my tests passed, but we will test again in Win10
 			
 			~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~			
 
@@ -64,27 +64,38 @@ site   : https://sourceforge.net/projects/rsppmp3
 
 GitHub : https://github.com/maria901/rsppmp3_v27
 
-Win32/64 Dll to play all audio and video that are supported by the library Libav
+Win32(soon)/64 Dll to play all audio and video that are supported by the library Libav
+
+If you need 32 bits version just now you need to use the release 5.2.3
+
+Libav is provided as GPL and LGPL, soon our binary packages will have both methods, for the moment
+it is only GPL
 
 rspmp3ocx1.dll and interface2.dll compiled with gcc 11.1.0, SDL2 (mod) compiled
 also with the same version.
 
-(the next sentence is old, now the folders are not this anymore, will be fixed today (21, July, 2021))
-Sources of the win64 dll available on the folder <extracted folder>\rsppmp3 sources\win64\mp3dll\mp3dll\bin\Release\src\c_project
-Sources of the Csharp sample code available on the folder <extracted folder>\rsppmp3 sources\win64\mp3dll\mp3dll
-Sample project already compiled in the folder <extracted folder>\rsppmp3 sources\win64\mp3dll\mp3dll\bin\Release\mp3dll.exe
-The sample project requires .net framework 4.5.1 or above installed on your machine
+The files are available in the following folders:
+/bin              <- the compiled binaries
+/c#_sample        <- the C# sample project ready to be compiled with SharpDevelop 5.1.0
+/interface2       <- sources of the interface2.DLL, that is the interface for Libav
+/morcego          <- sources for the morcego_interface.o obj file, some small functions
+/mp3_dll          <- sources for the rspmp3ocx1.DLL, decoder.c and player.c are the main files
+/sdl_2.0          <- the sources for our modified SDL 2.0 library, ready to be compiled again if needed
+/sqlite           <- sources for the Amanda_27.DLL, it is just a wrapper for SQLite, recommended the latest SQLite library
+/touch            <- sources for the C++ library SoundTouch that allows the change in playback speed in many modes
 
-Documentation of the latest version available online at:
+Documentation of the version 9.9.9 available online at:
 https://arsoftware.net.br/binarywork/Amanda_Ava_Pereira/rsppmp3_doc_8.9.9/html/decoder_8c.html
                 http://nomade.sf.net/Amanda_Ava_Pereira/rsppmp3_doc_8.9.9/html/decoder_8c.html
+				
+The documentation will be updated soon...				
 
 Description
 
 - Ability to play media files in the following formats:
 All media formats supported by ffmpeg (new webm files (2021), flv avi mov rm ra including the new amazingly fast and
 advanced rsp format (.ricardo4) (:-)) and many many more)
-- It has a high quality (we supose) graphical equalizer (copied (as usual) from the XMMS project, as
+- It has a high quality (we supose) graphical equalizer (copied (as usual) from the XMMS project), as
 far as we know it is optimized for 44100 (soon 48000) sample rate, we will be using the Shibatch version later,
 because some people say that it is a real high quality version)
 - It has a spectrum analyzer (now working) with 10 bands 
@@ -149,7 +160,10 @@ with different copies of the Libav dlls in the same process running
 
 Changelog:
 
-What is new in 13.2.8  build 666990  Quarta 21 Julho 2021  11:42  codename 'Beebe'
+What is new in 13.4.2  build 667004  'Sexta(Friday) 23 Julho 2021  09:03'  codename 'Krüger'
+Fixed a weird bug in the new cache system, minor modifications.
+
+What is new in 13.2.8  build 666990  Quarta 21 Julho 2021  11:42           codename 'Beebe'
 The old packages may have up to 100 milliseconds of delay between
 audio and video syc, new versions have less difference, anyway
 you can calibrate it a little more yourself modifying the line 2082
