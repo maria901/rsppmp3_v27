@@ -213,6 +213,10 @@ morcego_play
 
 	mv_______->libav_c___amanda_s_smart_ape_is_new_webm = false;
 
+	mv_______->libav_c___normalization_BENOR_amanda_s_smart_ape[0] = 0;
+	
+	mv_______->libav_c___normalization_repla_amanda_s_smart_ape[0] = 0;
+
 	(void)ConvertMP3ToWavExtended(converted_long_int_amanda_s_smart_ape, (void *) filename,
 								  (void *) "lpt1", 1,
 								  mv_______->decoder_c___track);

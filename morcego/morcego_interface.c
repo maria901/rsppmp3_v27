@@ -764,7 +764,7 @@ int morcego_extract_wav(morcego___i___instance__a__bucaneiro_engineering *mv____
 	 __attribute__((unused)) bool precisa_atualizar_smartape_from_amanda               =        false;
      __attribute__((unused)) enum amanda_s_smart_ape_webm_commands webm_commands_amanda_s_smart_ape    ;
      be_libav_struct *  be = (be_libav_struct *)mv_______->be_ptr                                    ;
-
+	 
      if (5 == wav_mode)
      {
 	  mprintf("64 bits FLOAT not implemented yet, moving to 32 bits FLOAT");
@@ -852,7 +852,7 @@ int morcego_extract_wav(morcego___i___instance__a__bucaneiro_engineering *mv____
 		  
 	  }
      }
-	 
+	 	 
      if (false == mv_______->libav_c___amanda_s_smart_ape__check_and_get_webm_fix_if_true)
      {
 
@@ -1130,7 +1130,7 @@ saida_amanda_s_smart_ape:
 	 amanda_s_smart_ape_timestamp = get_bucaneiro_tick() - amanda_s_smart_ape_timestamp;
      
      //for historical reasons...
-
+	 
      return returnvalue;
 }
 /**

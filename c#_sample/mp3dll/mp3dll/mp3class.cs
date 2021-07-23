@@ -122,12 +122,15 @@ namespace mp3dll
 	/// </remarks>
 	public class MP3
 	{
-		internal static spectrum         k  = null;
-		internal static normalize        k2 = null;
-		internal static wave_effects     k3 = null;
-		internal static equalizer        p  = null;
-		internal static id3tag           p4 = null;
-		internal static DebugInformation p2 = null;
+		internal static amanda_search search_copy = null;
+		internal static sample sample_copy_ar     = null;
+		internal static spectrum               k  = null;
+		internal static normalize              k2 = null;
+		internal static wave_effects           k3 = null;
+		internal static equalizer              p  = null;
+		internal static id3tag                 p4 = null;
+		internal static DebugInformation       p2 = null;
+		
 		internal static StringBuilder ricardo_koci_strb = new StringBuilder ((int)Amanda_Constants.MAX_PATH_k_p);
 		internal static bool allow_create_new_instance_k_p = false;
 		/// <summary>
@@ -175,11 +178,14 @@ namespace mp3dll
 				int position_k_p,
 				string data)
 		{
-			data = data.Replace ("\n"," .. ");
+			
 			if(-1 < position_k_p)
 			{
 				data = data + " _amanda_debug_";
+				
 				Console.WriteLine(data);
+				data = data.Replace ("\n"," .. ");
+				OutputDebugString(data);
 			}
 		}
 		/// <summary>

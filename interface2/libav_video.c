@@ -1065,11 +1065,12 @@ char maria_decoded_something;
 
 int morcego_vermelho_player_thread_koci(morcego___i___instance__a__bucaneiro_engineering *mv_______)
 {
-     int counter_z = 0;
-     bool data_used_z = false;
-     double amanda_tempo;
-     int amandaricardo_used = 0;
-     int frameFinished;
+	//int error_value_amanda;
+	int counter_z = 0;
+	bool data_used_z = false;
+	double amanda_tempo;
+	int amandaricardo_used = 0;
+	int frameFinished;
 
 	amandaricardo_koci_deslocador_decoder = 0;
 	amandaricardo_koci_player_exited_at = 0;
@@ -1087,14 +1088,15 @@ int morcego_vermelho_player_thread_koci(morcego___i___instance__a__bucaneiro_eng
 
 	mv_______->libav_c___displacement_for_see_adjust_k_p = -1;
 
-	while (av_read_frame(FormatContext, packet_ptr_pereira_koci_forever) >= 0)
+	while (av_read_frame(FormatContext, packet_ptr_pereira_koci_forever) >=0)
 	{
-	     
+	 
 	     data_used_z = false;
 	     pedro_dprintf(-1, "dentro de decoder thread ");
 	     if (mv_______->libav_c___cancel_video_thread || mv_______->decoder_c___cancelflag || ar_koci_force_exit)
 	     {
-		  goto koci_finish;
+			pedro_dprintf(-1, "Saiu no erro a %p %p\n", pFrame_ptr_koci, packet_ptr_pereira_koci_forever);
+			goto koci_finish;
 	     }
 
 		if (packet_ptr_pereira_koci_forever->stream_index == mv_______->libav_c___videostream)
@@ -1104,6 +1106,7 @@ int morcego_vermelho_player_thread_koci(morcego___i___instance__a__bucaneiro_eng
 
 			if (mv_______->libav_c___cancel_video_thread || mv_______->decoder_c___cancelflag||ar_koci_force_exit)
 			{
+				pedro_dprintf(-1, "Saiu no erro b %p %p\n", pFrame_ptr_koci, packet_ptr_pereira_koci_forever);
 				goto koci_finish;
 			}
 
@@ -1114,6 +1117,7 @@ int morcego_vermelho_player_thread_koci(morcego___i___instance__a__bucaneiro_eng
 			amandaricardo_used = avcodec_send_packet(pCodecCtx, packet_ptr_pereira_koci_forever);
 			if (amandaricardo_used < 0 && amandaricardo_used != AVERROR(EAGAIN) && amandaricardo_used != AVERROR_EOF)
 			{
+				pedro_dprintf(-1, "Saiu no erro 1 %p %p\n", pFrame_ptr_koci, packet_ptr_pereira_koci_forever);
 			}
 			else
 			{
@@ -1123,6 +1127,8 @@ int morcego_vermelho_player_thread_koci(morcego___i___instance__a__bucaneiro_eng
 				amandaricardo_used = avcodec_receive_frame(pCodecCtx, pFrame_ptr_koci);
 				if (amandaricardo_used >= 0)
 					frameFinished = 1;
+
+				pedro_dprintf(-1, "Antes de framefinished %p %p\n", pFrame_ptr_koci, packet_ptr_pereira_koci_forever);
 
 				if(frameFinished)
 				{    
@@ -1139,7 +1145,7 @@ int morcego_vermelho_player_thread_koci(morcego___i___instance__a__bucaneiro_eng
 					case 0:
 					{
 
-						pedro_dprintf(-1, "Frame got 1 %p %p\n", pFrame_ptr_koci, packet_ptr_pereira_koci_forever);
+						pedro_dprintf(-1, "Frame got 8.0 %p %p\n", pFrame_ptr_koci, packet_ptr_pereira_koci_forever);
 
 						while(AMANDA_RICARDO_DECODER_DATA_IS_READY_TO_PLAY == mislaine_command.juliete_decoder_status[mislaine_command.aline_array_index_decoder])// aonde verifica isto seta o AMANDA_RICARDO_DECODER_IS_WORKING
 						{
@@ -1147,9 +1153,9 @@ int morcego_vermelho_player_thread_koci(morcego___i___instance__a__bucaneiro_eng
 							Sleep(1);
 							if (mv_______->libav_c___cancel_video_thread || mv_______->decoder_c___cancelflag || ar_koci_force_exit)
 							{
-
+								pedro_dprintf(-1, "Frame got 8.1 %p %p\n", pFrame_ptr_koci, packet_ptr_pereira_koci_forever);
 								//av_packet_unref(packet);
-								pedro_dprintf(-1, "saiu 8 %d %d",mv_______->libav_c___cancel_video_thread,  mv_______->decoder_c___cancelflag);
+								pedro_dprintf(-1, "saiu 8.2 %d %d",mv_______->libav_c___cancel_video_thread,  mv_______->decoder_c___cancelflag);
 								goto koci_finish;
 
 							}
@@ -1158,12 +1164,13 @@ int morcego_vermelho_player_thread_koci(morcego___i___instance__a__bucaneiro_eng
 						junior_last_frame_forever++;
 						mislaine_command.junior_last_frame[mislaine_command.aline_array_index_decoder] = junior_last_frame_forever;
 						mislaine_command.libav_c_amanda__video_frame[mislaine_command.aline_array_index_decoder] = amanda_pts;
-						
+												
 						mislaine_command.pFrame_ptr_koci[mislaine_command.aline_array_index_decoder] = pFrame_ptr_koci;
-						
+												
 						pedro_dprintf(-1, "Frame got 2 %p %p\n", pFrame_ptr_koci, packet_ptr_pereira_koci_forever);
 						
 						mislaine_command.packet_ptr_pereira[mislaine_command.aline_array_index_decoder] = packet_ptr_pereira_koci_forever;
+												
 						mislaine_command.juliete_decoder_status[mislaine_command.aline_array_index_decoder] = AMANDA_RICARDO_DECODER_DATA_IS_READY_TO_PLAY;
 
 						mislaine_command.aline_array_index_decoder++;
@@ -1176,9 +1183,9 @@ int morcego_vermelho_player_thread_koci(morcego___i___instance__a__bucaneiro_eng
 							Sleep(1);
 							if (mv_______->libav_c___cancel_video_thread || mv_______->decoder_c___cancelflag || ar_koci_force_exit)
 							{
-
+								pedro_dprintf(-1, "Frame got 9.1 %p %p\n", pFrame_ptr_koci, packet_ptr_pereira_koci_forever);
 								//av_packet_unref(packet);
-								pedro_dprintf(-1, "saiu 27 %d %d",mv_______->libav_c___cancel_video_thread,  mv_______->decoder_c___cancelflag);
+								pedro_dprintf(-1, "saiu 9.2 %d %d",mv_______->libav_c___cancel_video_thread,  mv_______->decoder_c___cancelflag);
 								goto koci_finish;
 
 							}
@@ -1271,8 +1278,12 @@ int morcego_vermelho_player_thread_koci(morcego___i___instance__a__bucaneiro_eng
 		     av_packet_unref(packet_ptr_pereira_koci_forever);
 		     av_frame_unref (pFrame_ptr_koci);
 		}
+		
 	}
-	pedro_dprintf(-1, "saiu 9\n");
+		
+	
+	pedro_dprintf(-1, "Last pointer used io %p %p\n", pFrame_ptr_koci, packet_ptr_pereira_koci_forever);
+	pedro_dprintf(-1, "saiu 99.0 \n");
 koci_finish:
 	;
 
@@ -1311,7 +1322,7 @@ int morcego_vermelho_player_thread(morcego___i___instance__a__bucaneiro_engineer
 		
      pFrame_ptr_koci = mislaine_command.pFrame_ptr_koci[0];
      packet_ptr_pereira_koci_forever = mislaine_command.packet_ptr_pereira[0];
-	
+		
      junior_last_frame_forever = 0;
 
      mislaine_command.junior_last_frame[0] = -1;
@@ -1807,7 +1818,6 @@ return_call_for_one_frame_only_playback_k:      //remenber it
 
 							SDL_RenderPresent((SDL_Renderer *)mv_______-> libav_c___renderer_kp);
 							pedro_dprintf(-1, "3 tempo decorrido %f", (get_bucaneiro_tick() - amanda_timer) * 1000.);
-
 							
 							if(get_device_lost_state_k())
 							{
@@ -1892,13 +1902,14 @@ return_call_for_one_frame_only_playback_k:      //remenber it
 				}
 
 				if(first_pass_z)
-				{				    
-				     av_packet_unref(packet_ptr_pereira_koci_forever_player);
-				     av_frame_unref (pFrame_ptr_koci_player);				
+				{					
+					av_packet_unref(packet_ptr_pereira_koci_forever_player);
+					av_frame_unref (pFrame_ptr_koci_player);					
 				}
+				
 				first_pass_z = true;
 				
-				pedro_dprintf(-1, "Frame shown %p %p\n", pFrame_ptr_koci_player, packet_ptr_pereira_koci_forever_player);
+				pedro_dprintf(-1, "Frame shown 10.0 %p %p\n", pFrame_ptr_koci_player, packet_ptr_pereira_koci_forever_player);
 				
 				mislaine_command.juliete_decoder_status[mislaine_command.maria_array_index_player] = AMANDA_RICARDO_DECODER_IS_WORKING;
 

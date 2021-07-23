@@ -152,6 +152,10 @@ amanda_s_smart_ape_timestamp = get_bucaneiro_tick();
 if (mv_______->libav_c___amanda_s_smart_ape_use_cache)
 {
 
+	mv_______->libav_c___normalization_BENOR_amanda_s_smart_ape[0] = 0;
+	
+	mv_______->libav_c___normalization_repla_amanda_s_smart_ape[0] = 0;
+
      if (true == amanda_s_smart_ape_query_webm_and_normalization(mv_______->libav_c___signature___________amanda_s_smart_ape, mv_______->libav_c___webm________________amanda_s_smart_ape,
 								 mv_______->libav_c___normalization_mode__amanda_s_smart_ape, mv_______->libav_c___normalization_repla_amanda_s_smart_ape, mv_______->libav_c___normalization_BENOR_amanda_s_smart_ape, mv_______->libav_c___normalization_valu3_amanda_s_smart_ape, &mv_______->libav_c___has_an_entry))
      {
@@ -169,6 +173,7 @@ if (mv_______->libav_c___amanda_s_smart_ape_use_cache)
 		   *globalff = strtod(mv_______->libav_c___normalization_repla_amanda_s_smart_ape, NULL);
 		   
 		   *aanalized = 1;
+		   
 		   goto saida_amanda_s_smart_ape;
 	   }
 	   if(strlen(mv_______->libav_c___normalization_BENOR_amanda_s_smart_ape) && !mv_______->analisys_c___normalization_is_replaygain)
@@ -176,6 +181,7 @@ if (mv_______->libav_c___amanda_s_smart_ape_use_cache)
 		   *globalff = strtod(mv_______->libav_c___normalization_BENOR_amanda_s_smart_ape, NULL);
 		   
 		   *aanalized = 1;
+		   
 		   goto saida_amanda_s_smart_ape;
 	   }
 					   
@@ -492,6 +498,7 @@ if(mv_______->libav_c___amanda_s_smart_ape_use_cache)
 	if(mv_______->libav_c___has_an_entry)
 	{
 		//update...
+				
 		if(mv_______->analisys_c___normalization_is_replaygain)
 		{
 			strcpy(mv_______->libav_c___SQL_call_by_amanda, "update Amanda_27_cache set normalization_value_amanda_s_smart_ape = '");
@@ -525,7 +532,7 @@ if(mv_______->libav_c___amanda_s_smart_ape_use_cache)
 	else
 	{
 		//create entry
-		
+				
 				  mv_______->libav_c___webm________________amanda_s_smart_ape[0] = 0;
 
 				  mv_______->libav_c___normalization_repla_amanda_s_smart_ape[0] = '\0';

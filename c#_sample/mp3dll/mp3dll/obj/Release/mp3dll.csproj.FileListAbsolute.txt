@@ -141,3 +141,4 @@ C:\cygwin64_amandaricardo_koci_10.2.0\aoprojeto\c#_sample\mp3dll\mp3dll\obj\Rele
 C:\cygwin64_amandaricardo_koci_10.2.0\aoprojeto\c#_sample\mp3dll\mp3dll\obj\Release\mp3dll.exe.manifest
 C:\cygwin64_amandaricardo_koci_10.2.0\aoprojeto\c#_sample\mp3dll\mp3dll\obj\Release\mp3dll.application
 C:\cygwin64_amandaricardo_koci_10.2.0\aoprojeto\c#_sample\mp3dll\mp3dll\obj\Release\mp3dll.exe
+C:\cygwin64_amandaricardo_koci_10.2.0\aoprojeto\c#_sample\mp3dll\mp3dll\obj\Release\mp3dll.amanda_search.resources

@@ -146,6 +146,7 @@ namespace mp3dll
 			this.fullscreen_fix_p = new System.Windows.Forms.CheckBox();
 			this.button2 = new System.Windows.Forms.Button();
 			this.use_cache_amanda_s_smart_ape = new System.Windows.Forms.CheckBox();
+			this.next_amanda = new System.Windows.Forms.Button();
 			this.menu.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.play_v12)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.pause_v12)).BeginInit();
@@ -1241,11 +1242,22 @@ namespace mp3dll
 			this.use_cache_amanda_s_smart_ape.UseVisualStyleBackColor = true;
 			this.use_cache_amanda_s_smart_ape.MouseUp += new System.Windows.Forms.MouseEventHandler(this.Use_cache_amanda_s_smart_apeMouseUp);
 			// 
+			// next_amanda
+			// 
+			this.next_amanda.Location = new System.Drawing.Point(624, 64);
+			this.next_amanda.Name = "next_amanda";
+			this.next_amanda.Size = new System.Drawing.Size(67, 22);
+			this.next_amanda.TabIndex = 142;
+			this.next_amanda.Text = "Search";
+			this.next_amanda.UseVisualStyleBackColor = true;
+			this.next_amanda.Click += new System.EventHandler(this.Next_amandaClick);
+			// 
 			// sample
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.ClientSize = new System.Drawing.Size(1294, 708);
+			this.Controls.Add(this.next_amanda);
 			this.Controls.Add(this.use_cache_amanda_s_smart_ape);
 			this.Controls.Add(this.button2);
 			this.Controls.Add(this.fullscreen_fix_p);
@@ -1461,7 +1473,7 @@ namespace mp3dll
 		private System.Windows.Forms.Button fs_by_heigth;
 		private System.Windows.Forms.Button fs_300;
 		private System.Windows.Forms.Button fs_400;
-		private System.Windows.Forms.ListView playlist;
+		public System.Windows.Forms.ListView playlist;
 		private System.Windows.Forms.Button button4;
 		private System.Windows.Forms.ColumnHeader File;
 		private System.Windows.Forms.CheckBox randon;
@@ -1489,6 +1501,7 @@ namespace mp3dll
 		private System.Windows.Forms.CheckBox fullscreen_fix_p;
 		private System.Windows.Forms.Button button2;
 		private System.Windows.Forms.CheckBox use_cache_amanda_s_smart_ape;
+		private System.Windows.Forms.Button next_amanda;
 	}
 }
 

@@ -133,6 +133,10 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="amanda_search.cs" />
+    <Compile Include="amanda_search.Designer.cs">
+      <DependentUpon>amanda_search.cs</DependentUpon>
+    </Compile>
     <Compile Include="ar_newinit.cs" />
     <Compile Include="ar_newinit.Designer.cs">
       <DependentUpon>ar_newinit.cs</DependentUpon>
@@ -179,6 +183,9 @@
     </Compile>
     <Compile Include="Amanda.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="amanda_search.resx">
+      <DependentUpon>amanda_search.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="DebugInformation.resx">
       <DependentUpon>DebugInformation.cs</DependentUpon>
     </EmbeddedResource>

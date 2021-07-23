@@ -1,5 +1,5 @@
 
-/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+ /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
  *                                                                              *
  *        Licensa de Cópia (C) <2021>  <Corporação do Trabalho Binário>         *
  *                                                                              *
@@ -17,16 +17,14 @@
  *     Licensa Pública Menor junto com este programa                            *
  *     Se não, veja <http://www.gnu.org/licenses/>.                             *
  *                                                                              *
- *     Suporte: https://arsoftware.net.br/binarywork_____________________       *
-
- *              http: //nomade.sourceforge.net/binarywork_______________/       *
+ *     Suporte: https://nomade.sourceforge.io/                                  *
  *                                                                              *
  *     E-mails direto dos felizes programadores:                                *
  *     O Ricardinho :    arsoftware25@gmail.com    ricardo@arsoftware.net.br    *
  *     Little_Amanda:    arsoftware10@gmail.com    amanda.@arsoftware.net.br    *
  *                                                                              *
  *     contato imediato(para uma resposta muita rápida) WhatsApp                *
- *     (+55)41 9627 1708 - isto está sempre ligado (eu acho...)                 *
+ *     (+55)41 9627 1708 - isto está sempre ligado (eu acho...)                 *      
  *                                                                              *
  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *  **/
 
@@ -58,6 +56,7 @@ namespace mp3dll
 		string old_stringz   = "-1";
 		bool disable_pause_resume = false;
 		int old_value_v27_z = 0;
+		int position_amanda = 0;
 		PictureBox temp_z_pic = new PictureBox();
 		protected bool  mode_is_ricardo_window = false;
 		
@@ -543,6 +542,7 @@ namespace mp3dll
 				label10.Text = "Finished event raised";
 				
 				//aqui...
+				
 				video_p.Image = dummy2_p.Image;
 				video_f_p.Image = dummy2_p.Image;
 				
@@ -3653,5 +3653,82 @@ namespace mp3dll
 			}
 			
 		}
+		void Next_amandaClick(object sender, EventArgs e)
+		{
+			MP3.sample_copy_ar = this;
+			amanda_search ar = new amanda_search();
+			ar.Show();
+		}
+		
+		public void playlist_search_amanda_DoubleClick(string filename_ricardo)
+		{
+			int amanda_i;
+			
+			try
+			{
+			for(amanda_i = 0; amanda_i < playlist.Items.Count; amanda_i ++)
+			{
+				if(filename_ricardo == playlist.Items[amanda_i].SubItems[0].Text)
+				{
+					goto found_amanda;
+				}
+			}
+			
+			return;
+			
+			found_amanda:
+				;
+			ListViewItem coisa = playlist.Items[amanda_i];
+			MP3.playlist_index = playlist.Items[amanda_i].Index;
+			
+			MP3.set_played_item_z(MP3.playlist_index);
+			
+			int loop_ = 0;
+			if (CheckState.Checked == loop.CheckState)
+			{
+				loop_ = 1;
+			}
+			file_l.Text = coisa.SubItems[0].Text;
+			
+			MP3.SlowComputersCommand_k_p
+				(
+					number,
+					0
+				);
+			if(true == enable_sc_hack.Checked)
+			{
+				MP3.SlowComputersCommand_k_p
+					(
+						number,
+						1
+					);
+			}
+			
+			video_p.  Image   = dummy2_p.Image;
+			video_f_p.Image   = dummy2_p.Image;
+			can_scape_z = true;
+			MP3.clean_up_memory_p();
+			
+			Clipboard.SetText(coisa.SubItems[1].Text);
+			
+			MP3.Play(number, MP3.wide2utf8(coisa.SubItems[1].Text), loop_, int.Parse(track.Text),
+			         video_p.Handle.ToInt64(),
+			         video_f_p.Handle.ToInt64(),
+			         video_p.Width,
+			         video_p.Height,
+			         the_ratio,
+			         video_p.Left,
+			         video_p.Top);
+			playlist.Visible = false;
+			main_timer.Enabled = true;
+			disable_pause_resume = false;
+			}
+			catch
+			{
+				
+			}
+		}
+
+		
 	}
 }
