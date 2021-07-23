@@ -3678,6 +3678,9 @@ namespace mp3dll
 			
 			found_amanda:
 				;
+			
+			playlist.Items[amanda_i].EnsureVisible();
+			
 			ListViewItem coisa = playlist.Items[amanda_i];
 			MP3.playlist_index = playlist.Items[amanda_i].Index;
 			
