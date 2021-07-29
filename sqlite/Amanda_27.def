@@ -1,7 +1,0 @@
-DESCRIPTION "BinaryWork Corp. development version amanda_0xbadc0da - 07 July 2021      "
-EXPORTS
-
-amanda_s_smart_ape_query_webm_and_normalization                                      @27
-amanda_s_smart_ape_add_entry                                                         @51
-amanda_s_smart_ape_do_sql                                                            @1001
-morcego_encoder_amanda_s_smart_ape                                                   @1002
