@@ -3431,6 +3431,7 @@ namespace mp3dll
 		{
 			filetowav .Text = "Z:/Ava/back/" + file_l.Text;
 		}
+				
 		void Button2Click_amanda(object sender, EventArgs e)
 		{
 			int new_window_w = -1;
@@ -3473,26 +3474,26 @@ namespace mp3dll
 				
 				MP3.SaveSettings("_i_amanda_initial_size_w", this.Width.ToString());
 				
-				double calc_a = this.Width;
+				double calc_a = this.Width + 51;
 				double calc_h = calc_a;
 				
-				calc_h = calc_a / 1.7777777;
+				calc_h = calc_a / 1.77777;
 				
 				this.Height = Convert.ToInt32(calc_h);
 				
 				fs.Enabled = true;
 				
-				double calc_c = 68;
-				double calc_d = calc_c / 1.77777;
+				double calc_c = 66;
+				double calc_d = calc_c / 1.77777; //1.77777;
 				
 				video_p.Width  = Convert.ToInt32(calc_a - calc_c);
 				video_p.Height = Convert.ToInt32(calc_h - calc_d);
 
 				int p;
 
-				p = ((this.Width - 20) - video_p.Width) / 2;
+				p = ((this.Width - 16) - video_p.Width) / 2;
 
-				video_p.Left = p + 3;
+				video_p.Left = p;// + 1;
 
 				video_p.Top = 0;
 
@@ -3731,7 +3732,6 @@ namespace mp3dll
 				
 			}
 		}
-
 		
 	}
 }

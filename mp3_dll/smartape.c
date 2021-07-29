@@ -17,9 +17,7 @@
  *     Licensa Pública Menor junto com este programa                            *
  *     Se não, veja <http://www.gnu.org/licenses/>.                             *
  *                                                                              *
- *     Suporte: https://arsoftware.net.br/binarywork_____________________       *
-
- *              http: //nomade.sourceforge.net/binarywork_______________/       *
+ *     Suporte: https://nomade.sourceforge.io/                                  *
  *                                                                              *
  *     E-mails direto dos felizes programadores:                                *
  *     O Ricardinho :    arsoftware25@gmail.com    ricardo@arsoftware.net.br    *
@@ -467,6 +465,12 @@ if(cs_file_in__amanda_s_smart_ape)
 
         fwrite(read_buffer_amanda_s_smart_ape, 1, strlen(read_buffer_amanda_s_smart_ape), cs_file_out_amanda_s_smart_ape);
     }
+}
+else
+{
+	printf("Missing input file %s\n", argv_amanda_s_smart_ape[2]);
+	return_value_amanda_s_smart_ape = 51; //se voce da nome pros bois depois nao da pra mudar amigo...tem que ser pra sempre
+	goto saida_amanda_s_smart_ape       ;
 }
 
 saida_amanda_s_smart_ape:

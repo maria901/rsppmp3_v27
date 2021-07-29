@@ -1167,7 +1167,8 @@ int morcego_vermelho_player_thread_koci(morcego___i___instance__a__bucaneiro_eng
 												
 						mislaine_command.pFrame_ptr_koci[mislaine_command.aline_array_index_decoder] = pFrame_ptr_koci;
 												
-						pedro_dprintf(-1, "Frame got 2 %p %p\n", pFrame_ptr_koci, packet_ptr_pereira_koci_forever);
+						pedro_dprintf(-1, "Frame got 2.a %p %p\n", pFrame_ptr_koci, packet_ptr_pereira_koci_forever);
+						pedro_dprintf(-1, "Frame internal address 2.b %p\n", pFrame_ptr_koci->data);
 						
 						mislaine_command.packet_ptr_pereira[mislaine_command.aline_array_index_decoder] = packet_ptr_pereira_koci_forever;
 												
@@ -1901,8 +1902,12 @@ return_call_for_one_frame_only_playback_k:      //remenber it
 
 				}
 
+				pedro_dprintf(-1, "Frame shown 10.-1 internal address %p\n", pFrame_ptr_koci_player->data);
+
 				if(first_pass_z)
 				{					
+			
+			
 					av_packet_unref(packet_ptr_pereira_koci_forever_player);
 					av_frame_unref (pFrame_ptr_koci_player);					
 				}

@@ -769,7 +769,8 @@ typedef struct morcego_instance_be_
 	bool      libav_c___BENORMALIZE_already_got_smart_ape_by_amanda_                   ;
 	bool      libav_c___new_webm____already_got_smart_ape_by_amanda_                   ;
 	float     libav_c___internal_globalff                                              ;
-}morcego___i___instance__a__bucaneiro_engineering;
+		
+}morcego___i___instance__a__bucaneiro_engineering                                      ;
 //#pragma pack(pop)
 //morcego_instance_be *mv_______
 

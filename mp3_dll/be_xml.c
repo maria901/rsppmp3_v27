@@ -2,7 +2,7 @@
 //not complete...works only for simple read and write XML process, more code need to
 //be added when possible
 
-/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+ /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
  *                                                                              *
  *        Licensa de Cópia (C) <2021>  <Corporação do Trabalho Binário>         *
  *                                                                              *
@@ -20,13 +20,11 @@
  *     Licensa Pública Menor junto com este programa                            *
  *     Se não, veja <http://www.gnu.org/licenses/>.                             *
  *                                                                              *
- *     Suporte: https://arsoftware.net.br/binarywork_____________________       *
- *     Mirrors: https://locacaodiaria.com.br/corporacaodotrabalhobinario/       *
- *              http: //nomade.sourceforge.net/binarywork_______________/       *
+ *     Suporte: https://nomade.sourceforge.io/                                  *
  *                                                                              *
  *     E-mails direto dos felizes programadores:                                *
- *     Ricardinho:    arsoftware25@gmail.com    ricardo@arsoftware.net.br       *
- *     Koci______:    arsoftware10@gmail.com    am_koci@arsoftware.net.br       *
+ *     O Ricardinho :    arsoftware25@gmail.com    ricardo@arsoftware.net.br    *
+ *     Little_Amanda:    arsoftware10@gmail.com    amanda.@arsoftware.net.br    *
  *                                                                              *
  *     contato imediato(para uma resposta muita rápida) WhatsApp                *
  *     (+55)41 9627 1708 - isto está sempre ligado (eu acho...)                 *      
@@ -855,6 +853,7 @@ int feline_write_xml(char *filename_utf8_feline,
 	char adjusted_root_feline_b[1027];
 	char adjusted_node_feline_a[1027];
 	char item_feline = 0;
+	bool add_amanda_is_my_love_n_in_ab = false;
 
 	FILE *my_file_feline;
 
@@ -1113,11 +1112,16 @@ int feline_write_xml(char *filename_utf8_feline,
 		{
 			my_file_feline = _wfopen(amanda_utf8towide_1_(filename_utf8_feline),
 									 L"ab");
+			add_amanda_is_my_love_n_in_ab = true;
 		}
 
 		if (my_file_feline)
 		{
 
+			if(add_amanda_is_my_love_n_in_ab)
+			{
+				fwrite("\n", 1, 1, my_file_feline);
+			}
 			fwrite(signature_feline, 1, strlen(signature_feline), my_file_feline);
 			fwrite("<", 1, 1, my_file_feline);
 			fwrite(root__________feline, 1, strlen(root__________feline), my_file_feline);
