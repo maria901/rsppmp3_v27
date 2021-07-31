@@ -75,7 +75,7 @@ rspmp3ocx1.dll and interface2.dll compiled with gcc 11.1.0, SDL2 (mod) compiled
 also with the same version.
 
 The files are available in the following folders:
-/bin              <- the compiled binaries
+/bin              <- the compiled binaries, empty after 13.5.5
 /c#_sample        <- the C# sample project ready to be compiled with SharpDevelop 5.1.0
 /interface2       <- sources of the interface2.DLL, that is the interface for Libav
 /morcego          <- sources for the morcego_interface.o obj file, some small functions
@@ -159,6 +159,10 @@ with different copies of the Libav dlls in the same process running
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Changelog:
+
+What is new in 13.5.5  build 667017  'Sabado(Saturday) 31 Julho 2021  08:08' codename 'Kovalenko'
+Updated and  uploaded the  latest rsppmp3 release, the sample was  enhanced and
+some small  bugs got fixed, minor modifications.
 
 What is new in 13.4.2  build 667004  'Sexta(Friday) 23 Julho 2021  09:03'  codename 'Krüger'
 Fixed a weird bug in the new cache system, minor modifications.
