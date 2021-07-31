@@ -1,5 +1,5 @@
 
- /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
  *                                                                              *
  *        Licensa de Cópia (C) <2021>  <Corporação do Trabalho Binário>         *
  *                                                                              *
@@ -24,7 +24,7 @@
  *     Little_Amanda:    arsoftware10@gmail.com    amanda.@arsoftware.net.br    *
  *                                                                              *
  *     contato imediato(para uma resposta muita rápida) WhatsApp                *
- *     (+55)41 9627 1708 - isto está sempre ligado (eu acho...)                 *      
+ *     (+55)41 9627 1708 - isto está sempre ligado (eu acho...)                 *
  *                                                                              *
  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *  **/
 
@@ -373,7 +373,6 @@ namespace mp3dll
 			 * media file not loaded yet
 			 */
 			
-			//MP3.pedro_dprintf(0, "enter 1");
 			MP3.memory_usage__z(memory_usage_z);
 			label20.Text = "Memory Usage: " + memory_usage_z.ToString();
 			
@@ -632,7 +631,7 @@ namespace mp3dll
 					main_timer.Enabled = true;
 				}
 			}
-			//MP3.pedro_dprintf(0, "exit 1");
+			
 		}
 		private void button2_Click(object sender, EventArgs e)
 		{
@@ -661,6 +660,7 @@ namespace mp3dll
 		string copia = "";
 
 		int slider_original_location;
+		int slider_original_location_top;
 
 		int slider_width;
 
@@ -672,6 +672,8 @@ namespace mp3dll
 
 		int pause_state_ = 0;
 		int fullscreen_state_ = 0;
+		
+		bool force_fullscreen_slider_adjust_i = false;
 
 		long number = MP3.number;
 		string nome_da_dll;
@@ -682,7 +684,7 @@ namespace mp3dll
 		private void my_thread_fullscreen_fix_p()
 		{
 			if(false == mode_is_ricardo_window)
-				progressbar_27_51_z_v21.Top = bar_pos_top_p;
+				progressbar_27_51_z_v21.Top = this.Height - 90;
 			
 			if(false == main_timer.Enabled)
 			{
@@ -713,16 +715,6 @@ namespace mp3dll
 				
 				Thread.Sleep(1000);
 				
-				//counter_p++;
-				/*
-				if(0 == counter_p % 3)
-				{
-				
-					MP3.clean_up_memory_p();
-					MP3.pedro_dprintf(0, "clean...");
-					
-				}
-				 */
 				if(0 == number)
 				{
 					return;
@@ -793,7 +785,6 @@ namespace mp3dll
 			
 			int ret;
 			
-			MP3.pedro_dprintf(0, "Deu\nCerto?\n");
 			if (MP3.count_running_k_p(Application.ExecutablePath) > 1)
 			{
 				if(false == MP3.allow_create_new_instance_k_p)
@@ -1032,7 +1023,8 @@ namespace mp3dll
 				
 				disable = 0;
 			}
-			slider_original_location = progressbar_27_51_z_v21.Left;
+			slider_original_location     = progressbar_27_51_z_v21.Left;
+			slider_original_location_top = progressbar_27_51_z_v21.Top;
 			slider_width = progressbar_27_51_z_v21.Width;
 			
 			if("" != the_file_to_play)
@@ -1916,9 +1908,9 @@ namespace mp3dll
 				progressbar_27_51_z_v21.Width = this.Width - 56;
 
 				int val = (this.Width - progressbar_27_51_z_v21.Width) / 2;
-
-				progressbar_27_51_z_v21.Left = val - 5;
-
+				
+				force_fullscreen_slider_adjust_i = true;
+				
 				video_p.Height = Screen.PrimaryScreen.Bounds.Height;
 
 				if (1 == video_p.Height % 2)//these values always need to be a a multiple of 2
@@ -2054,9 +2046,13 @@ namespace mp3dll
 			MP3.ShowCursor_(1);
 			background_p.Visible = false;
 			weird_timer.Enabled = false;
-			progressbar_27_51_z_v21.Width = slider_width;
-			progressbar_27_51_z_v21.Left = slider_original_location;
-			progressbar_27_51_z_v21.Top = 569;
+			progressbar_27_51_z_v21.Width    = slider_width;
+			
+			progressbar_27_51_z_v21.Left     = slider_original_location;
+			
+			progressbar_27_51_z_v21.Top      = slider_original_location_top;
+			adjust_ricardo_s_father_buttons();
+			//progressbar_27_51_z_v21.Top = this.Height - 90;
 			
 			fullscreen_state_ = 0;
 			
@@ -2244,8 +2240,23 @@ namespace mp3dll
 		private void show_constrols(MouseEventArgs e)
 		{
 
-
-			if (oldposition != e.X)
+			bool do_it_my_love = false;
+			
+			try
+			{
+				if (oldposition  !=  e.X)
+				{
+					oldposition   =  e.X;
+					do_it_my_love = true;
+				}
+			}
+			catch
+			{
+				do_it_my_love = true;
+				oldposition   =   -1;
+			}
+			
+			if (do_it_my_love)
 			{
 				play_v13
 					.BringToFront();
@@ -2263,25 +2274,41 @@ namespace mp3dll
 
 					fs.Enabled = false;
 					fs.Enabled = true;
-					play_v13
-						.Top = 536;
-					pause_v13
-						.Top = 536;
-					resume_v13
-						.Top = 536;
-					cancel_v13
-						.Top = 536;
+					
 					if(false == mode_is_ricardo_window)
-						progressbar_27_51_z_v21.Top = bar_pos_top_p;
-					else
+					{
 						progressbar_27_51_z_v21.Top = this.Height - 90;
+						play_v13
+							.Top = progressbar_27_51_z_v21.Top - 50;
+						pause_v13
+							.Top = progressbar_27_51_z_v21.Top - 50;
+						resume_v13
+							.Top = progressbar_27_51_z_v21.Top - 50;
+						cancel_v13
+							.Top = progressbar_27_51_z_v21.Top - 50;
+					}
+					else
+					{
+						progressbar_27_51_z_v21.Top = this.Height - 90;
+						
+						play_v13
+							.Top = progressbar_27_51_z_v21.Top - 50;
+						pause_v13
+							.Top = progressbar_27_51_z_v21.Top - 50;
+						resume_v13
+							.Top = progressbar_27_51_z_v21.Top - 50;
+						cancel_v13
+							.Top = progressbar_27_51_z_v21.Top - 50;
+						
+					}
 					
 					esconde_t.Enabled = false;
 					esconde_t.Interval = 3000;
 
 				}
-				oldposition = e.X;
+				
 			}
+
 		}
 
 		private void video_f_p_MouseMove(object sender, MouseEventArgs e)
@@ -2300,11 +2327,9 @@ namespace mp3dll
 			video_p.Width = this.Width;
 
 			progressbar_27_51_z_v21.Width = this.Width - 46;
-
-			int val = (this.Width - progressbar_27_51_z_v21.Width) / 2;
-
-			progressbar_27_51_z_v21.Left = val;
-
+			
+			progressbar_27_51_z_v21.Left = adjust_bar_i();
+			adjust_ricardo_s_father_buttons();
 			video_p.Height = this.Height;
 
 			if (1 == video_p.Height % 2)
@@ -2494,11 +2519,11 @@ namespace mp3dll
 
 				}
 				progressbar_27_51_z_v21.Width = this.Width - 56;
-
-				int val = (this.Width - progressbar_27_51_z_v21.Width) / 2;
-
-				progressbar_27_51_z_v21.Left = val - 5;
-
+				/*
+				
+				 */
+				force_fullscreen_slider_adjust_i = true;
+				
 				if (1 == video_p.Height % 2)//these values always need to be a a multiple of 2
 				{
 					video_p.Height--;
@@ -2594,8 +2619,32 @@ namespace mp3dll
 
 		}
 
+		protected long adjust_ricardo_s_father_buttons()
+		{
+			int magic_val     = 7;
+			
+			play_v13.Left     = progressbar_27_51_z_v21.Left;
+			pause_v13.Left    = play_v13.Left + play_v13.Width + magic_val;
+			resume_v13.Left   = pause_v13.Left + play_v13.Width + magic_val;
+			cancel_v13.Left   = resume_v13.Left + play_v13.Width + magic_val;
+			
+			play_v13				.Top = progressbar_27_51_z_v21.Top - 50;
+			pause_v13				.Top = progressbar_27_51_z_v21.Top - 50;
+			resume_v13				.Top = progressbar_27_51_z_v21.Top - 50;
+			cancel_v13				.Top = progressbar_27_51_z_v21.Top - 50;
+			
+			return -27;
+		}
 		private void weird_timer_Tick(object sender, EventArgs e)
 		{
+			if(force_fullscreen_slider_adjust_i)
+			{
+								
+				progressbar_27_51_z_v21.Left = adjust_bar_i_fullscreen();
+				
+				adjust_ricardo_s_father_buttons();
+				force_fullscreen_slider_adjust_i = false;
+			}
 			play_v13
 				.Visible = true;
 			pause_v13
@@ -2690,11 +2739,9 @@ namespace mp3dll
 
 				}
 				progressbar_27_51_z_v21.Width = this.Width - 56;
-
-				int val = (this.Width - progressbar_27_51_z_v21.Width) / 2;
-
-				progressbar_27_51_z_v21.Left = val - 5;
-
+				
+				force_fullscreen_slider_adjust_i = true;
+				
 				if (1 == video_p.Height % 2)//these values always need to be a a multiple of 2
 				{
 					video_p.Height--;
@@ -2797,11 +2844,9 @@ namespace mp3dll
 
 				}
 				progressbar_27_51_z_v21.Width = this.Width - 56;
-
-				int val = (this.Width - progressbar_27_51_z_v21.Width) / 2;
-
-				progressbar_27_51_z_v21.Left = val - 5;
-
+				
+				force_fullscreen_slider_adjust_i = true;
+				
 				if (1 == video_p.Height % 2)//these values always need to be a a multiple of 2
 				{
 					video_p.Height--;
@@ -2921,11 +2966,9 @@ namespace mp3dll
 
 				}
 				progressbar_27_51_z_v21.Width = this.Width - 56;
-
-				int val = (this.Width - progressbar_27_51_z_v21.Width) / 2;
-
-				progressbar_27_51_z_v21.Left = val - 5;
-
+				
+				force_fullscreen_slider_adjust_i = true;
+				
 				if (1 == video_p.Height % 2)//these values always need to be a a multiple of 2
 				{
 					video_p.Height--;
@@ -2955,7 +2998,16 @@ namespace mp3dll
 				fs.Enabled = true;
 			}
 		}
-
+		internal int adjust_bar_i()
+		{
+			return
+				((this.Width - progressbar_27_51_z_v21.Width) / 2) - 8;
+		}
+		internal int adjust_bar_i_fullscreen()
+		{
+			return
+				((this.Width - progressbar_27_51_z_v21.Width) / 2) - 1;
+		}
 		private void fs_300_Click(object sender, EventArgs e)
 		{
 			(new Thread(new ThreadStart(my_thread_fullscreen_fix_p))).Start();
@@ -3031,10 +3083,8 @@ namespace mp3dll
 				}
 				progressbar_27_51_z_v21.Width = this.Width - 56;
 
-				int val = (this.Width - progressbar_27_51_z_v21.Width) / 2;
-
-				progressbar_27_51_z_v21.Left = val - 5;
-
+				force_fullscreen_slider_adjust_i = true;
+				
 				if (1 == video_p.Height % 2)//these values always need to be a a multiple of 2
 				{
 					video_p.Height--;
@@ -3138,11 +3188,9 @@ namespace mp3dll
 
 				}
 				progressbar_27_51_z_v21.Width = this.Width - 56;
-
-				int val = (this.Width - progressbar_27_51_z_v21.Width) / 2;
-
-				progressbar_27_51_z_v21.Left = val - 5;
-
+				
+				force_fullscreen_slider_adjust_i = true;
+				
 				if (1 == video_p.Height % 2)//these values always need to be a a multiple of 2
 				{
 					video_p.Height--;
@@ -3431,7 +3479,7 @@ namespace mp3dll
 		{
 			filetowav .Text = "Z:/Ava/back/" + file_l.Text;
 		}
-				
+		
 		void Button2Click_amanda(object sender, EventArgs e)
 		{
 			int new_window_w = -1;
@@ -3530,8 +3578,13 @@ namespace mp3dll
 				fs.Enabled = true;
 				
 				progressbar_27_51_z_v21.Width = this.Width - 50;
-				progressbar_27_51_z_v21.Left = 15;
-				progressbar_27_51_z_v21.Top = this.Height - 90;
+				
+				progressbar_27_51_z_v21.Left  = adjust_bar_i();
+								
+				progressbar_27_51_z_v21.Top   = this.Height - 90;
+				
+				adjust_ricardo_s_father_buttons();
+				
 				this.TopMost = true;
 				
 				if(adjust_me_please_i)
@@ -3637,6 +3690,8 @@ namespace mp3dll
 				new_width = this.Width;
 				Button2Click_amanda(null, null);
 				new_width = -1;
+				
+				show_constrols(null);
 			}
 		}
 		void Use_cache_amanda_s_smart_apeMouseUp(object sender, MouseEventArgs e)
@@ -3667,65 +3722,65 @@ namespace mp3dll
 			
 			try
 			{
-			for(amanda_i = 0; amanda_i < playlist.Items.Count; amanda_i ++)
-			{
-				if(filename_ricardo == playlist.Items[amanda_i].SubItems[0].Text)
+				for(amanda_i = 0; amanda_i < playlist.Items.Count; amanda_i ++)
 				{
-					goto found_amanda;
+					if(filename_ricardo == playlist.Items[amanda_i].SubItems[0].Text)
+					{
+						goto found_amanda;
+					}
 				}
-			}
-			
-			return;
-			
-			found_amanda:
-				;
-			
-			playlist.Items[amanda_i].EnsureVisible();
-			
-			ListViewItem coisa = playlist.Items[amanda_i];
-			MP3.playlist_index = playlist.Items[amanda_i].Index;
-			
-			MP3.set_played_item_z(MP3.playlist_index);
-			
-			int loop_ = 0;
-			if (CheckState.Checked == loop.CheckState)
-			{
-				loop_ = 1;
-			}
-			file_l.Text = coisa.SubItems[0].Text;
-			
-			MP3.SlowComputersCommand_k_p
-				(
-					number,
-					0
-				);
-			if(true == enable_sc_hack.Checked)
-			{
+				
+				return;
+				
+				found_amanda:
+					;
+				
+				playlist.Items[amanda_i].EnsureVisible();
+				
+				ListViewItem coisa = playlist.Items[amanda_i];
+				MP3.playlist_index = playlist.Items[amanda_i].Index;
+				
+				MP3.set_played_item_z(MP3.playlist_index);
+				
+				int loop_ = 0;
+				if (CheckState.Checked == loop.CheckState)
+				{
+					loop_ = 1;
+				}
+				file_l.Text = coisa.SubItems[0].Text;
+				
 				MP3.SlowComputersCommand_k_p
 					(
 						number,
-						1
+						0
 					);
-			}
-			
-			video_p.  Image   = dummy2_p.Image;
-			video_f_p.Image   = dummy2_p.Image;
-			can_scape_z = true;
-			MP3.clean_up_memory_p();
-			
-			Clipboard.SetText(coisa.SubItems[1].Text);
-			
-			MP3.Play(number, MP3.wide2utf8(coisa.SubItems[1].Text), loop_, int.Parse(track.Text),
-			         video_p.Handle.ToInt64(),
-			         video_f_p.Handle.ToInt64(),
-			         video_p.Width,
-			         video_p.Height,
-			         the_ratio,
-			         video_p.Left,
-			         video_p.Top);
-			playlist.Visible = false;
-			main_timer.Enabled = true;
-			disable_pause_resume = false;
+				if(true == enable_sc_hack.Checked)
+				{
+					MP3.SlowComputersCommand_k_p
+						(
+							number,
+							1
+						);
+				}
+				
+				video_p.  Image   = dummy2_p.Image;
+				video_f_p.Image   = dummy2_p.Image;
+				can_scape_z = true;
+				MP3.clean_up_memory_p();
+				
+				Clipboard.SetText(coisa.SubItems[1].Text);
+				
+				MP3.Play(number, MP3.wide2utf8(coisa.SubItems[1].Text), loop_, int.Parse(track.Text),
+				         video_p.Handle.ToInt64(),
+				         video_f_p.Handle.ToInt64(),
+				         video_p.Width,
+				         video_p.Height,
+				         the_ratio,
+				         video_p.Left,
+				         video_p.Top);
+				playlist.Visible = false;
+				main_timer.Enabled = true;
+				disable_pause_resume = false;
 			}
 			catch
 			{
