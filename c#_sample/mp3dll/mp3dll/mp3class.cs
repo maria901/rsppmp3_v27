@@ -1176,6 +1176,10 @@ namespace mp3dll
 		public static extern int
 			GetNumberofWaveOutDevices(long mv_instance);
 
+		[DllImport("rspmp3ocx1.dll")]
+		public static extern int
+			DetectChangeInSoundCards_i(long mv_instance);
+		
 		/// <summary>
 		/// When the computer is old the time required to decompress
 		/// and draw the video can be more than the processing time

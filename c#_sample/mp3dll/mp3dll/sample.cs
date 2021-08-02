@@ -65,6 +65,7 @@ namespace mp3dll
 		internal  int new_width  = -1;
 		
 		protected bool can_scape_z = true;
+		protected int counter_i = 0;
 		protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
 		{
 
@@ -708,7 +709,6 @@ namespace mp3dll
 			//int counter_p = 0;
 			int ret_arp;
 			
-			old_value_z = MP3.GetNumberofWaveOutDevices(number);
 			label20.Left = label20.Left - 2;
 			while(true)
 			{
@@ -738,27 +738,28 @@ namespace mp3dll
 					return;
 				}
 				
-				ret_arp = MP3.GetNumberofWaveOutDevices(number);
 				
-				if(old_value_z  != ret_arp)
+				if(2 == MP3.DetectChangeInSoundCards_i(number))
 				{
-					MP3.pedro_dprintf(-1, "Detected changes in soundcards");
-					disable_pause_resume = true;
-					button7_Click(null, null);
+					MP3.pedro_dprintf(-1, "Detected changes in soundcards " + counter_i);
+					counter_i++;
+					ret_arp = MP3.GetNumberofWaveOutDevices(number);
 					
-					if(ret_arp != 0)
 					{
-						int l;
-						waveout.Items.Clear();
-						for (l = 0; l < ret_arp; l++)
+						
+						if(ret_arp != 0)
 						{
-							MP3.GetWaveOutDevicesName(number, l, settings);
-							waveout.Items.Add(settings.ToString());
-							waveout.SelectedIndex = 0;
-						}
-					}
-					old_value_z = ret_arp;
+							int l;
+							waveout.Items.Clear();
+							for (l = 0; l < ret_arp; l++)
+							{
+								MP3.GetWaveOutDevicesName(number, l, settings);
+								waveout.Items.Add(settings.ToString());
+								waveout.SelectedIndex = 0;
+							}
+						}						
 
+					}
 				}
 			}
 		}
@@ -2639,7 +2640,7 @@ namespace mp3dll
 		{
 			if(force_fullscreen_slider_adjust_i)
 			{
-								
+				
 				progressbar_27_51_z_v21.Left = adjust_bar_i_fullscreen();
 				
 				adjust_ricardo_s_father_buttons();
@@ -3580,7 +3581,7 @@ namespace mp3dll
 				progressbar_27_51_z_v21.Width = this.Width - 50;
 				
 				progressbar_27_51_z_v21.Left  = adjust_bar_i();
-								
+				
 				progressbar_27_51_z_v21.Top   = this.Height - 90;
 				
 				adjust_ricardo_s_father_buttons();

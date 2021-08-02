@@ -4,7 +4,7 @@
   <description asmv2:iconFile="amanda &amp; ricardo_new icon.ico" xmlns="urn:schemas-microsoft-com:asm.v1" />
   <application />
   <entryPoint>
-    <assemblyIdentity name="mp3dll" version="3.3.6.341" language="neutral" processorArchitecture="amd64" />
+    <assemblyIdentity name="mp3dll" version="3.3.7.342" language="neutral" processorArchitecture="amd64" />
     <commandLine file="mp3dll.exe" parameters="" />
   </entryPoint>
   <trustInfo>
@@ -106,13 +106,13 @@
   </dependency>
   <dependency>
     <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="mp3dll.exe" size="1989632">
-      <assemblyIdentity name="mp3dll" version="3.3.6.341" language="neutral" processorArchitecture="amd64" />
+      <assemblyIdentity name="mp3dll" version="3.3.7.342" language="neutral" processorArchitecture="amd64" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>Hp5ehwGLznVAOpY8lPOZZ/j4oxMnEbvff5Ffzk5Ep+c=</dsig:DigestValue>
+        <dsig:DigestValue>/GdjVVyA4nNqcnraekd+m1KfwTZv2DUHPKfvi3aGsWA=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>

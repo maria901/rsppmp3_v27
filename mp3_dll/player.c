@@ -28,6 +28,8 @@
  *                                                                              *
  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *  **/
 
+int __fastcall DetectChangeInSoundCards_i_internal(void);
+
 void get_sha_512_as_string_k(char *buffer_k, unsigned int len_k, char * digest_k);
 
 double amanda_tempo;
@@ -422,6 +424,103 @@ morcego_play
 	{
 retornaaqui:
 
+if(2 == DetectChangeInSoundCards_i_internal())
+{
+	
+	//aqui amor, vai láaa....
+		
+	
+	int ret_minha_amanda_da_albania_eh_pra_sempre = 0;
+
+	mv_______->decoder_c___pwfx.wFormatTag = WAVE_FORMAT_PCM;
+
+	mv_______->decoder_c___pwfx.nChannels = 2;  /*
+	                                               hardcoded because even mono files are converted to stereo in order to play and multichannel files are mixed to play using only two channels (October/2020).
+	                                             */
+
+	mv_______->decoder_c___pwfx.nSamplesPerSec =
+		mv_______->decoder_c___intsamplerate;
+
+	mv_______->decoder_c___pwfx.nAvgBytesPerSec = (mv_______->decoder_c___intsamplerate * 4);
+	mv_______->decoder_c___pwfx.nAvgBytesPerSec =
+		mv_______->decoder_c___wav.avebytespersec;
+	mv_______->decoder_c___pwfx.nBlockAlign = 4;
+	mv_______->decoder_c___pwfx.wBitsPerSample = 16; //hardcoded because even other values are converted to signed 16 bits in order to play at this moment, may change in the future, I am not sure...
+	mv_______->decoder_c___pwfx.cbSize = 0;
+
+	if (mv_______->decoder_c___phwo)
+	{
+
+		waveOutReset(
+			mv_______->decoder_c___phwo
+		);
+		
+		ret_minha_amanda_da_albania_eh_pra_sempre = waveOutClose(mv_______->decoder_c___phwo);
+
+		if (ret_minha_amanda_da_albania_eh_pra_sempre == MMSYSERR_NOERROR)
+		{
+			mv_______->decoder_c___phwo = 0;
+		}
+		else
+		{
+
+			switch (ret_minha_amanda_da_albania_eh_pra_sempre)
+			{
+			case MMSYSERR_INVALHANDLE:
+				//dprintf("MMSYSERR_INVALHANDLE\n");
+				break;
+			case WAVERR_STILLPLAYING:
+
+				//dprintf("WAVERR_STILLPLAYING\n");
+				break;
+			case MMSYSERR_NOERROR:
+				//dprintf("MMSYSERR_NOERROR\n");
+				break;
+			case WAVERR_SYNC:
+				//dprintf("WAVERR_SYNC\n");
+				break;
+			case WAVERR_BADFORMAT:
+				//dprintf("WAVERR_BADFORMAT\n");
+				break;
+			case MMSYSERR_NOMEM:
+				//dprintf("MMSYSERR_NOMEM\n");
+				break;
+			case MMSYSERR_NODRIVER:
+				//dprintf("MMSYSERR_NODRIVER\n");
+				break;
+			case MMSYSERR_BADDEVICEID:
+				//dprintf("MMSYSERR_BADDEVICEID\n");
+				break;
+			default:
+				//dprintf("UNKNOWN\n");
+				break;
+			}
+		}
+	}
+
+	if (0 == mv_______->decoder_c___phwo)
+	{
+		mv_______->decoder_c___intwaveout = 0;
+		//dprintf("waveOutOpen init\n");
+		ret_minha_amanda_da_albania_eh_pra_sempre =
+			waveOutOpen(&mv_______->decoder_c___phwo,
+			            mv_______->decoder_c___intwaveout,
+			            &mv_______->decoder_c___pwfx, (DWORD_PTR)callback, 0,
+			            CALLBACK_FUNCTION);
+
+		if(ret_minha_amanda_da_albania_eh_pra_sempre)
+		{
+			returnvalue = 2;
+			mv_______->decoder_c___cancelflag = 1;
+			goto saida;
+		}
+	}
+
+	
+}
+
+
+
 		if (mv_______->decoder_c___seekto != -1)
 		{
 			/*if (method_is_internal_pcm)
@@ -552,6 +651,7 @@ retornaaqui:
 		pedro_dprintf(-1, "never appear here f");
 		if (mv_______->decoder_c___ponto < mv_______->decoder_c___inttamanho)
 		{
+			;//to remember forever...
 		}
 		else
 		{

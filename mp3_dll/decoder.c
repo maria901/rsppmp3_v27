@@ -3480,6 +3480,7 @@ int __stdcall SetWaveOutDevice(__int64 mv_instance, int device)
  */
 int __stdcall GetWaveOutDevicesName(__int64 mv_instance, int device, char *data)
 {
+	if(0 != mv_instance)
 	check_mv_instance(mv_instance);
 	
 	getdevicename((unsigned char *)data, device);
@@ -4789,8 +4790,111 @@ int __stdcall EnableSoundTouch(__int64 mv_instance, int enable, int tempo, int p
  */
 int __stdcall GetNumberofWaveOutDevices(__int64 mv_instance) //not really necessary but we are tring to follow standards
 {
+	if(0 != mv_instance)
 	check_mv_instance(mv_instance);
 	return waveOutGetNumDevs();
+}
+
+/**
+ * To detect whether a new Phone or soundcard appeared to the system
+ *
+ */
+int __stdcall DetectChangeInSoundCards_i(__int64 mv_instance) //not really necessary but we are tring to follow standards
+{
+	int ret_i;
+	int l_i;
+
+	check_mv_instance(mv_instance);
+	
+	static char signature_phones    [1027] = {0};
+	char        signature_phones_cur[1027] = {0};
+	char        data_i              [1027] = {0};
+	
+	ret_i = GetNumberofWaveOutDevices(mv_instance);
+
+			if (0 == ret_i)
+			{
+				return 0;
+			}
+			else
+			{
+				for (l_i = 0; l_i < ret_i; l_i++)
+				{
+					memset(data_i, 0, sizeof(data_i));
+					GetWaveOutDevicesName(mv_instance, l_i, data_i);
+					strcat(signature_phones_cur, data_i);
+				}
+			}
+	
+	if(0 != strcmp(signature_phones, signature_phones_cur))
+	{
+		if(0 == strlen(signature_phones))
+		{
+			strcpy(signature_phones, signature_phones_cur);
+			return 1; //first change
+		}
+		else
+		{
+			strcpy(signature_phones, signature_phones_cur);
+			return 2; //real change
+		}
+
+	}
+	else
+	{
+		return 0;
+	}
+	
+}
+
+/**
+ * To detect whether a new Phone or soundcard appeared to the system, internal use
+ *
+ */
+int __fastcall DetectChangeInSoundCards_i_internal(void) //not really necessary but we are tring to follow standards
+{
+	int ret_i;
+	int l_i;
+	
+	static char signature_phones    [1027] = {0};
+	char        signature_phones_cur[1027] = {0};
+	char        data_i              [1027] = {0};
+	
+	ret_i = GetNumberofWaveOutDevices(0);
+
+			if (0 == ret_i)
+			{
+				return 0;
+			}
+			else
+			{
+				for (l_i = 0; l_i < ret_i; l_i++)
+				{
+					memset(data_i, 0, sizeof(data_i));
+					GetWaveOutDevicesName(0, l_i, data_i);
+					strcat(signature_phones_cur, data_i);
+				}
+			}
+	
+	if(0 != strcmp(signature_phones, signature_phones_cur))
+	{
+		if(0 == strlen(signature_phones))
+		{
+			strcpy(signature_phones, signature_phones_cur);
+			return 1; //first change
+		}
+		else
+		{
+			strcpy(signature_phones, signature_phones_cur);
+			return 2; //real change
+		}
+
+	}
+	else
+	{
+		return 0;
+	}
+	
 }
 
 ////////////////////////////////////////////////////////////////////////
@@ -5006,7 +5110,7 @@ void mprintf_about(char *format,     ...)
 int __stdcall About()
 {
 	void mprintf_about(char *format, ...);
-	mprintf_about("GPL 3 DLL to play and decode"
+	mprintf_about("Brazilian GPL 3 DLL to play and decode"
 	              " any media file"
 	              " supported by ffmpeg (Libav) with some wave effects and equalizer");
 	return 0xdeadbeef;

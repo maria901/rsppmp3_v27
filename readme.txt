@@ -160,6 +160,12 @@ with different copies of the Libav dlls in the same process running
 
 Changelog:
 
+What is new in 13.6.5  build 667027  'Segunda(Monday) 02 Agosto 2021  15:39' codename 'Clark'
+Now the DLL can detect and adjust the playback to a new Phone or new SoundCard
+available on the system on the fly, before when a new Phone was detected by
+Windows 10 the playback was paused, now it keep playing with the new attached
+device, minor modifications.
+
 What is new in 13.5.5  build 667017  'Sabado(Saturday) 31 Julho 2021  08:08' codename 'Kovalenko'
 Updated and  uploaded the  latest rsppmp3 release, the sample was  enhanced and
 some small  bugs got fixed, minor modifications.
