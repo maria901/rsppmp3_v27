@@ -2382,6 +2382,31 @@ finish:
 	mv_______->decoder_c___cancelflag = 0;
 	ar_koci_force_exit = FALSE;
 
+	if(mv_______->libav_c___is_desktop_playback_amanda)
+	{
+			
+	SetWindowPos(
+		(HWND)(__INT32_OR_INT64)
+		mv_______->libav_c___player_hwnd,
+		WINDOW_FLAG___,
+		2,
+		2,
+		mv_______->libav_c___original_width__i - 2,
+		mv_______->libav_c___original_height_i - 2,
+		(SHOW_FLAG__));
+					
+	SetWindowPos(
+		(HWND)(__INT32_OR_INT64)
+		mv_______->libav_c___player_hwnd,
+		WINDOW_FLAG___,
+		0,
+		0,
+		mv_______->libav_c___original_width__i,
+		mv_______->libav_c___original_height_i,
+		(SHOW_FLAG__));
+		
+	}
+
 	//amanda_final
 	return 0;
 }

@@ -61,7 +61,7 @@ morcego_play
 )
 {
 	reinicia_z:;
-	
+	RECT      rect;
 	char                                                                *myptr;
 	char      tempname[                 MAXPATH_UTF_8_MODE_AMANDA_S_SMART_APE];
 	char      message_amanda_s_smart_ape[            1027] =               {0};
@@ -98,27 +98,42 @@ morcego_play
 		HWND hwnd;
 			
 		{
-			
-		 hwnd = FindWindow( ("Progman"), NULL );
-		 if( hwnd ) hwnd = FindWindowEx( hwnd, NULL, ("SHELLDLL_DefView"), NULL );
-		 if( hwnd ) hwnd = FindWindowEx( hwnd, NULL, ("SysListView32"), NULL );
-		 if( !hwnd )
-		 {
-			 pedro_dprintf(-1, "couldn't find \"SysListView32\" window, "
-					   "wallpaper mode not supported" );
-			 goto no_use_i;
-		 }
+				
+			 hwnd = FindWindow( ("Progman"), NULL );
+			 if( hwnd ) hwnd = FindWindowEx( hwnd, NULL, ("SHELLDLL_DefView"), NULL );
+			 if( hwnd ) hwnd = FindWindowEx( hwnd, NULL, ("SysListView32"), NULL );
+			 if( !hwnd )
+			 {
+				 pedro_dprintf(-1, "couldn't find \"SysListView32\" window, "
+						   "wallpaper mode not supported" );
+				 goto no_use_i;
+			 }
 		 
-		    mv_______->libav_c___is_desktop_playback_amanda = true;
+			mv_______->libav_c___is_desktop_playback_amanda = true;
 		 
-			mv_______->libav_c___size_of_window_width = w_i;
-			mv_______->libav_c___size_of_window_height = h_i;
-			mv_______->libav_c___player_hwnd = (int64_t) hwnd; 
+			mv_______->libav_c___size_of_window_width    = w_i;
+			mv_______->libav_c___size_of_window_height   = h_i;
+			mv_______->libav_c___player_hwnd = (int64_t)  hwnd; 
 			//mv_______->libav_c___the_ratio = ratio_;
 			mv_______->libav_c___adjust_top = 0;
 			mv_______->libav_c___adjust_left = 0;
 			
-			mv_______->libav_c___request_for_adjust = 1;
+			mv_______->libav_c___request_for_adjust   =   1;
+			mv_______->libav_c___original_width__i    = w_i;
+			mv_______->libav_c___original_height_i    = h_i;
+			
+			if(GetWindowRect((HWND)(__INT32_OR_INT64)
+			mv_______->libav_c___player_hwnd, &rect))
+			{
+
+				int width__i = rect.right - rect.left;
+				int height_i = rect.bottom - rect.top;
+				pedro_dprintf(-1, "ok ric,,,sizes %d %d\n", width__i, height_i);
+
+				mv_______->libav_c___original_width__i    = width__i;
+				mv_______->libav_c___original_height_i    = height_i;
+
+			}
 		 
 		}
 		

@@ -771,6 +771,8 @@ typedef struct morcego_instance_be_
 	float     libav_c___internal_globalff                                              ;
 	bool      libav_c___is_desktop_playback_amanda                                     ;
 	int       libav_c___adjusted_i_width_for_directx                                   ;
+	int       libav_c___original_width__i                                              ;
+	int       libav_c___original_height_i                                              ;
 		
 }morcego___i___instance__a__bucaneiro_engineering                                      ;
 //#pragma pack(pop)
