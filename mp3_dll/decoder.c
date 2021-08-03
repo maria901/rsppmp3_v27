@@ -134,6 +134,14 @@ bool enable_playlist_debug = false;
 #define limite_i 1
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// for desktop playback
+
+bool enable_desktop_i = 0;
+
+int w_i;
+int h_i;
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 int stripfilenameandpath(char *path, char *onlypath, char *onlyfilename);
 
 int __stdcall Play(__int64 mv_instance, char *filename___, int loop, int track,
@@ -1639,12 +1647,13 @@ int __stdcall startapi2(morcego___i___instance__a__bucaneiro_engineering *mv____
 	//thinktwice1);
 
 	int ret;
+	
 	ret =
 		morcego_play(mv_______,
 		             (unsigned char *) mv_______->decoder_c___intfilename, mv_______->decoder_c___the_track);
 
 	mv_______->decoder_c___intreturn2 = mv_______->decoder_c___intreturn = ret;
-
+	
 	return 0;
 }
 
@@ -2567,6 +2576,9 @@ void check_mv_instance(__int64 mv_instance)
 int morcego_cancel(morcego___i___instance__a__bucaneiro_engineering *mv_______)
 {
 
+
+//pedro_dprintf(0, "in cancel 1\n");
+
 	mv_______->syncstatus                     = 0;
 
 	if (mv_______->decoder_c___phwo              )
@@ -2575,6 +2587,8 @@ int morcego_cancel(morcego___i___instance__a__bucaneiro_engineering *mv_______)
 		waveOutReset(mv_______->decoder_c___phwo);
 
 	}
+
+//pedro_dprintf(0, "in cancel 2\n");
 
 	mv_______->decoder_c___intloop = 0;
 	mv_______->decoder_c___cancelflag = 1;
@@ -2590,6 +2604,7 @@ int morcego_cancel(morcego___i___instance__a__bucaneiro_engineering *mv_______)
 
 		return -1;
 	}
+	
 	mv_______->decoder_c___leftvalf = 0;
 	mv_______->decoder_c___rightvalf = 0;
 	mv_______->decoder_c___spec.peak = 0;
@@ -2625,6 +2640,32 @@ void pass_information_to_replay(morcego___i___instance__a__bucaneiro_engineering
 	mv_______->decoder_c___track = track_;
 }
 
+HWND GetRealParent(HWND hWnd)
+{
+    HWND hParent;
+
+    hParent = GetAncestor(hWnd, GA_PARENT);
+    if(!hParent || hParent == GetDesktopWindow())
+        return NULL;
+
+    return hParent;
+}
+
+int __stdcall PlayInDesktop(int enable_i, int w, int h)
+{
+	enable_desktop_i = false;
+	if(enable_i)
+	{
+		enable_desktop_i = true;
+	}
+
+	w_i = w;
+	h_i = h;	
+	
+	return 0;
+	
+}
+
 /**
  * It will play the media file
  *
@@ -2650,10 +2691,11 @@ void pass_information_to_replay(morcego___i___instance__a__bucaneiro_engineering
  *
  * is the number of audio track to play, starting from 1 (usually 1)
  */
-int __stdcall Play(__int64 mv_instance, char *filename, int loop, int track, __int64 hwnd_,
-                   __int64 player_hwnd_,
+int __stdcall Play(__int64 mv_instance, char *filename, int loop, int track, __attribute__((unused)) __int64 hwnd_,
+                   __attribute__((unused)) __int64 player_hwnd_,
                    int width_, int heigth_, int ratio_, int left_, int top_)
 {
+	
 	check_mv_instance(mv_instance);
 
 	pedro_dprintf(-1, "Dentro de play");
@@ -2666,24 +2708,26 @@ int __stdcall Play(__int64 mv_instance, char *filename, int loop, int track, __i
 
 	pedro_dprintf(-1, "veja %s", mv_______->libav_c___sample_rate_format_string);
 
-	mv_______->libav_c___hwnd = hwnd_;
-	mv_______->libav_c___size_of_window_width = width_;
-	mv_______->libav_c___size_of_window_height = heigth_;
-	mv_______->libav_c___player_hwnd = player_hwnd_;
-	mv_______->libav_c___the_ratio = ratio_;
-	mv_______->libav_c___adjust_top = top_;
-	mv_______->libav_c___adjust_left = left_;
-
-	pass_information_to_replay(mv_______, filename, loop, track);
 
 	if (mv_______->decoder_c___notloaded)
 	{
 		return -1;
 	}
-
+	
 	while (-1 == morcego_cancel(mv_______))
 	{
 	}
+		
+	mv_______->libav_c___hwnd = (int64_t)hwnd_;
+	mv_______->libav_c___size_of_window_width = width_;
+	mv_______->libav_c___size_of_window_height = heigth_;
+	mv_______->libav_c___player_hwnd = (int64_t) player_hwnd_; 
+	mv_______->libav_c___the_ratio = ratio_;
+	mv_______->libav_c___adjust_top = top_;
+	mv_______->libav_c___adjust_left = left_;
+
+	pass_information_to_replay(mv_______, filename, loop, track);
+	
 	//mv_______->decoder_c___phwo = 0;//fix
 	if (loop)
 	{
@@ -2729,6 +2773,15 @@ int __stdcall Open(__int64 mv_instance, char *filename, int loop, int track, __i
 		(morcego___i___instance__a__bucaneiro_engineering *)(__INT32_OR_INT64)
 		mv_instance;
 
+	if (mv_______->decoder_c___notloaded)
+	{
+		return -1;
+	}
+
+	while (-1 == morcego_cancel(mv_______))
+	{
+	}
+	
 	mv_______->libav_c___sample_rate_format_string[0] = '\0';
 
 	mv_______->libav_c___hwnd = hwnd_;
@@ -2740,15 +2793,6 @@ int __stdcall Open(__int64 mv_instance, char *filename, int loop, int track, __i
 	mv_______->libav_c___adjust_left = left_;
 
 	pass_information_to_replay(mv_______, filename, loop, track);
-
-	if (mv_______->decoder_c___notloaded)
-	{
-		return -1;
-	}
-
-	while (-1 == morcego_cancel(mv_______))
-	{
-	}
 	//mv_______->decoder_c___phwo = 0;
 	if (loop)
 	{
@@ -5263,6 +5307,11 @@ void __stdcall PassWindowInformation(__int64 mv_instance,
 	morcego___i___instance__a__bucaneiro_engineering *mv_______ =
 		(morcego___i___instance__a__bucaneiro_engineering *)(__INT32_OR_INT64)
 		mv_instance;
+
+	if(enable_desktop_i)
+	{
+		return;
+	}
 
 	mv_______->libav_c___hwnd = hwnd;
 	mv_______->libav_c___size_of_window_width = width;

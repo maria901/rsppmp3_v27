@@ -147,6 +147,7 @@ namespace mp3dll
 			this.button2 = new System.Windows.Forms.Button();
 			this.use_cache_amanda_s_smart_ape = new System.Windows.Forms.CheckBox();
 			this.next_amanda = new System.Windows.Forms.Button();
+			this.is_amanda_desktop = new System.Windows.Forms.CheckBox();
 			this.menu.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.play_v12)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.pause_v12)).BeginInit();
@@ -1252,11 +1253,21 @@ namespace mp3dll
 			this.next_amanda.UseVisualStyleBackColor = true;
 			this.next_amanda.Click += new System.EventHandler(this.Next_amandaClick);
 			// 
+			// is_amanda_desktop
+			// 
+			this.is_amanda_desktop.Location = new System.Drawing.Point(576, 495);
+			this.is_amanda_desktop.Name = "is_amanda_desktop";
+			this.is_amanda_desktop.Size = new System.Drawing.Size(166, 18);
+			this.is_amanda_desktop.TabIndex = 143;
+			this.is_amanda_desktop.Text = "Play in Desktop";
+			this.is_amanda_desktop.UseVisualStyleBackColor = true;
+			// 
 			// sample
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.ClientSize = new System.Drawing.Size(1294, 708);
+			this.Controls.Add(this.is_amanda_desktop);
 			this.Controls.Add(this.next_amanda);
 			this.Controls.Add(this.use_cache_amanda_s_smart_ape);
 			this.Controls.Add(this.button2);
@@ -1502,6 +1513,7 @@ namespace mp3dll
 		private System.Windows.Forms.Button button2;
 		private System.Windows.Forms.CheckBox use_cache_amanda_s_smart_ape;
 		private System.Windows.Forms.Button next_amanda;
+		private System.Windows.Forms.CheckBox is_amanda_desktop;
 	}
 }
 

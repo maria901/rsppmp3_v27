@@ -91,6 +91,41 @@ morcego_play
 	unsigned                                              int      returnvalue;
 	int64_t                              converted_long_int_amanda_s_smart_ape;
 
+	mv_______->libav_c___is_desktop_playback_amanda = false;
+	
+	if(enable_desktop_i)
+	{
+		HWND hwnd;
+			
+		{
+			
+		 hwnd = FindWindow( ("Progman"), NULL );
+		 if( hwnd ) hwnd = FindWindowEx( hwnd, NULL, ("SHELLDLL_DefView"), NULL );
+		 if( hwnd ) hwnd = FindWindowEx( hwnd, NULL, ("SysListView32"), NULL );
+		 if( !hwnd )
+		 {
+			 pedro_dprintf(-1, "couldn't find \"SysListView32\" window, "
+					   "wallpaper mode not supported" );
+			 goto no_use_i;
+		 }
+		 
+		    mv_______->libav_c___is_desktop_playback_amanda = true;
+		 
+			mv_______->libav_c___size_of_window_width = w_i;
+			mv_______->libav_c___size_of_window_height = h_i;
+			mv_______->libav_c___player_hwnd = (int64_t) hwnd; 
+			//mv_______->libav_c___the_ratio = ratio_;
+			mv_______->libav_c___adjust_top = 0;
+			mv_______->libav_c___adjust_left = 0;
+			
+			mv_______->libav_c___request_for_adjust = 1;
+		 
+		}
+		
+	}
+
+no_use_i:;
+
 	pedro_dprintf(-1, "em player, file %s\n", filename);
 	
 	mv_______->decodec_c___last_pcm_slice_to_play_k_p = 0;
@@ -1295,6 +1330,7 @@ final:
 	{
 		unlink (tempname);// bug found no utf-8 support
 	}
+	
 	mv_______->decoder_c___spec.peak = 0;//why it is not always working my love?...
 	mv_______->libav_c___video_ready_to_play=0;
 

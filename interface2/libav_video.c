@@ -150,13 +150,11 @@ int final_adjust_fuction(morcego___i___instance__a__bucaneiro_engineering *mv___
 
 			//Mr. do kkkkk, eu te amo...
 
-			pedro_dprintf(-1, "ajustou...");
-
 			samara_e_ricardo_close_screen(mv_______);
-
+			
 			mv_______->libav_c___request_for_adjust = 0;
 			adjust_window_position_and_size(mv_______);
-
+			
 			mv_______->libav_c___old_x = mv_______->libav_c___adjust_left;
 			mv_______->libav_c___old_y = mv_______->libav_c___adjust_top;
 			mv_______->libav_c___old_width = mv_______->libav_c___size_of_window_width;
@@ -165,7 +163,7 @@ int final_adjust_fuction(morcego___i___instance__a__bucaneiro_engineering *mv___
 			mv_______->libav_c___old_adjusted_ratio = mv_______->libav_c___adjusted_ratio;
 
 			return_value_kp = restart_video(mv_______);
-
+			
 		}
 	}
 	return return_value_kp;
@@ -173,6 +171,7 @@ int final_adjust_fuction(morcego___i___instance__a__bucaneiro_engineering *mv___
 
 int adjust_window_position_and_size(morcego___i___instance__a__bucaneiro_engineering *mv_______)
 {
+	__attribute__((unused)) double adjusted_ricardo;
 	int rv = 0;
 	char temp[1024] = {0};
 
@@ -312,7 +311,12 @@ retorna:
 		}
 
 		mv_______->libav_c___the_width = temp;
-		mv_______->libav_c___the_height = (int)((double)temp / (double)mv_______->libav_c___the_real_ratio);
+				
+		mv_______->libav_c___the_height = (int)((double)temp / ((double)mv_______->libav_c___the_real_ratio) /*((1.777777)*/);
+
+		//mv_______->libav_c___the_height = (int)((double)temp / ((double)mv_______->libav_c___the_real_ratio * (adjusted_ricardo / mv_______->libav_c___the_real_ratio)));
+
+		//mv_______->libav_c___the_width /= 2;
 
 		if (mv_______->libav_c___the_height > mv_______->libav_c___size_of_window_height)
 		{
@@ -344,8 +348,9 @@ retorna:
 			mv_______->libav_c___inputwidth = pCodecCtx->width;
 		}
 		mv_______->libav_c___the_width = mv_______->libav_c___inputwidth;
+				
 		mv_______->libav_c___the_height = (int)((double)mv_______->libav_c___the_width / (double)mv_______->libav_c___the_real_ratio);
-
+		
 		if (mv_______->libav_c___the_width % 2)
 		{
 			mv_______->libav_c___the_width--;
@@ -431,6 +436,10 @@ int restart_video(morcego___i___instance__a__bucaneiro_engineering *mv_______)
 		(void *)mv_______->libav_c___pCodecCtx_ptr_video;
 
 	{
+			
+		if(true || !mv_______->libav_c___is_desktop_playback_amanda)
+		{
+						
 		SetWindowPos(
 			(HWND)(__INT32_OR_INT64)
 			mv_______->libav_c___player_hwnd,
@@ -440,7 +449,9 @@ int restart_video(morcego___i___instance__a__bucaneiro_engineering *mv_______)
 			mv_______->libav_c___the_width,
 			mv_______->libav_c___the_height,
 			(SHOW_FLAG__));
-			     		     
+			
+		} 
+							 
 		if(mv_______->libav_c___texture_kp)
 		     SDL_DestroyTexture((SDL_Texture *)mv_______->libav_c___texture_kp), mv_______->libav_c___texture_kp = NULL;
 
@@ -461,7 +472,7 @@ int restart_video(morcego___i___instance__a__bucaneiro_engineering *mv_______)
 		}
 		else
 		{
-		     pedro_dprintf(-1, "criou o window");
+		     ;
 		}
 
 		mv_______->libav_c___renderer_kp =(void *) SDL_CreateRenderer((SDL_Window *)mv_______->libav_c___screen_kp, -1, SDL_RENDERER_ACCELERATED);
@@ -474,17 +485,22 @@ int restart_video(morcego___i___instance__a__bucaneiro_engineering *mv_______)
 		}
 		else
 		{
-		     pedro_dprintf(-1, "criou o render");
+		     ;
 		}
 
+		{
+		
+		mv_______->libav_c___adjusted_i_width_for_directx = mv_______->libav_c___the_width;
+			
 		mv_______->libav_c___texture_kp = (void *) SDL_CreateTexture(
 		     (SDL_Renderer *)mv_______->libav_c___renderer_kp,
 		     SDL_PIXELFORMAT_YV12,
 		     SDL_TEXTUREACCESS_STREAMING,
-		     mv_______->libav_c___the_width,
+		     mv_______->libav_c___adjusted_i_width_for_directx,
 		     mv_______->libav_c___the_height
 		     );
-
+		}
+		
 		if (!mv_______->libav_c___texture_kp)
 		{
 		     pedro_dprintf(-1, "SDL: could not create texture - exiting 1 \n");
@@ -501,7 +517,7 @@ int restart_video(morcego___i___instance__a__bucaneiro_engineering *mv_______)
 		assert(NULL == mv_______->libav_c___sc_kp);
 
 		mv_______->libav_c___sc_kp = (void *) sws_getContext(pCodecCtx->width, pCodecCtx->height,
-		                                                     pCodecCtx->pix_fmt, mv_______->libav_c___the_width, mv_______->libav_c___the_height,
+		                                                     pCodecCtx->pix_fmt, mv_______->libav_c___adjusted_i_width_for_directx, mv_______->libav_c___the_height,
 		                                                     AV_PIX_FMT_YUV420P,
 		                                                     VIDEO_CONVERSION_MODE,
 		                                                     NULL,
@@ -519,8 +535,8 @@ int restart_video(morcego___i___instance__a__bucaneiro_engineering *mv_______)
 			pedro_dprintf(-1, "iniciou sws_getContext corretamente");
 		}
 
-		mv_______->libav_c___yPlaneSz_kp = mv_______->libav_c___the_width * mv_______->libav_c___the_height;
-		mv_______->libav_c___uvPlaneSz_kp = mv_______->libav_c___the_width * mv_______->libav_c___the_height / 4;
+		mv_______->libav_c___yPlaneSz_kp = mv_______->libav_c___adjusted_i_width_for_directx * mv_______->libav_c___the_height;
+		mv_______->libav_c___uvPlaneSz_kp = mv_______->libav_c___adjusted_i_width_for_directx * mv_______->libav_c___the_height / 4;
 		mv_______->libav_c___yPlane_kp = (Uint8*)malloc(mv_______->libav_c___yPlaneSz_kp);
 		mv_______->libav_c___uPlane_kp = (Uint8*)malloc(mv_______->libav_c___uvPlaneSz_kp);
 		mv_______->libav_c___vPlane_kp = (Uint8*)malloc(mv_______->libav_c___uvPlaneSz_kp);
@@ -532,7 +548,7 @@ int restart_video(morcego___i___instance__a__bucaneiro_engineering *mv_______)
 			goto saida_amanda_kp;
 		}
 
-		mv_______->libav_c___uvPitch_kp = mv_______->libav_c___the_width / 2;
+		mv_______->libav_c___uvPitch_kp = mv_______->libav_c___adjusted_i_width_for_directx / 2;
 
 	}
 
@@ -545,6 +561,9 @@ void adjust_video(morcego___i___instance__a__bucaneiro_engineering *mv_______)
 {
 	if (IsWindow((HWND)(__INT32_OR_INT64)mv_______->libav_c___player_hwnd))
 	{
+		if(true || !mv_______->libav_c___is_desktop_playback_amanda)
+		{
+					
 		SetWindowPos(
 			(HWND)(__INT32_OR_INT64)
 			mv_______->libav_c___player_hwnd,
@@ -554,6 +573,7 @@ void adjust_video(morcego___i___instance__a__bucaneiro_engineering *mv_______)
 			mv_______->libav_c___the_width,
 			mv_______->libav_c___the_height,
 			(SHOW_FLAG__));
+		}
 	}
 }
 void init_video(morcego___i___instance__a__bucaneiro_engineering *mv_______,
@@ -873,14 +893,18 @@ void init_video(morcego___i___instance__a__bucaneiro_engineering *mv_______,
 	     pedro_dprintf(-1, "criou o render");
 	}
 
-	mv_______->libav_c___texture_kp = (void *) SDL_CreateTexture(
-	     (SDL_Renderer *)mv_______-> libav_c___renderer_kp,
+	{
+	
+		mv_______->libav_c___adjusted_i_width_for_directx = mv_______->libav_c___the_width;
+		
+		mv_______->libav_c___texture_kp = (void *) SDL_CreateTexture(
+	     (SDL_Renderer *)mv_______->libav_c___renderer_kp,
 	     SDL_PIXELFORMAT_YV12,
 	     SDL_TEXTUREACCESS_STREAMING,
-	     mv_______->libav_c___the_width,
+	     mv_______->libav_c___adjusted_i_width_for_directx,
 	     mv_______->libav_c___the_height
 	     );
-
+	}
 	if (!mv_______->libav_c___texture_kp)
 	{
 	     pedro_dprintf(-1, "SDL: could not create texture - exiting\n");
@@ -923,6 +947,7 @@ void init_video(morcego___i___instance__a__bucaneiro_engineering *mv_______,
 	{
 		goto saida;
 	}
+
 	video_player_thread(mv_______);
 
 	while (!mv_______->libav_c___video_thread_running)
@@ -1076,13 +1101,11 @@ int morcego_vermelho_player_thread_koci(morcego___i___instance__a__bucaneiro_eng
 	amandaricardo_koci_player_exited_at = 0;
 	maria_decoded_something = 0;
 
-	pedro_dprintf(-1, "dentro de decoder 1 ");
-	pedro_dprintf(-1, "dentro de decoder thread");
 	while(FALSE == mv_______->libav_c___player_ar_ready)
 	{
 		Sleep(1);
 	}
-
+	
 	pedro_dprintf(-1, "dentro de decoder 2 ");
 	libav_c____decoder_feline_running = KOCI_DECODER_LOADED;
 
@@ -1284,7 +1307,7 @@ int morcego_vermelho_player_thread_koci(morcego___i___instance__a__bucaneiro_eng
 		
 	
 	pedro_dprintf(-1, "Last pointer used io %p %p\n", pFrame_ptr_koci, packet_ptr_pereira_koci_forever);
-	pedro_dprintf(-1, "saiu 99.0 \n");
+	
 koci_finish:
 	;
 
@@ -1300,6 +1323,7 @@ int morcego_vermelho_player_thread(morcego___i___instance__a__bucaneiro_engineer
      DWORD style_kp;
 
      amanda_locked = 0;
+
 
      mv_______->libav_c___video_thread_running = 1;
 
@@ -1388,7 +1412,7 @@ int morcego_vermelho_player_thread(morcego___i___instance__a__bucaneiro_engineer
 	}
 
 	mv_______->libav_c___sc_kp = (void *) sws_getContext(pCodecCtx->width, pCodecCtx->height,
-	                                                     pCodecCtx->pix_fmt, mv_______->libav_c___the_width, mv_______->libav_c___the_height,
+	                                                     pCodecCtx->pix_fmt, mv_______->libav_c___adjusted_i_width_for_directx, mv_______->libav_c___the_height,
 	                                                     AV_PIX_FMT_YUV420P,
 	                                                     VIDEO_CONVERSION_MODE,
 	                                                     NULL,
@@ -1405,8 +1429,8 @@ int morcego_vermelho_player_thread(morcego___i___instance__a__bucaneiro_engineer
 		pedro_dprintf(-1, "iniciou sws_getContext corretamente");
 	}
 
-	mv_______->libav_c___yPlaneSz_kp = mv_______->libav_c___the_width * mv_______->libav_c___the_height;
-	mv_______->libav_c___uvPlaneSz_kp = mv_______->libav_c___the_width * mv_______->libav_c___the_height / 4;
+	mv_______->libav_c___yPlaneSz_kp = mv_______->libav_c___adjusted_i_width_for_directx * mv_______->libav_c___the_height;
+	mv_______->libav_c___uvPlaneSz_kp = mv_______->libav_c___adjusted_i_width_for_directx * mv_______->libav_c___the_height / 4;
 	mv_______->libav_c___yPlane_kp = (Uint8*)malloc(mv_______->libav_c___yPlaneSz_kp);
 	mv_______->libav_c___uPlane_kp = (Uint8*)malloc(mv_______->libav_c___uvPlaneSz_kp);
 	mv_______->libav_c___vPlane_kp = (Uint8*)malloc(mv_______->libav_c___uvPlaneSz_kp);
@@ -1417,7 +1441,7 @@ int morcego_vermelho_player_thread(morcego___i___instance__a__bucaneiro_engineer
 		goto finish;
 	}
 
-	mv_______->libav_c___uvPitch_kp = mv_______->libav_c___the_width / 2;
+	mv_______->libav_c___uvPitch_kp = mv_______->libav_c___adjusted_i_width_for_directx / 2;
 
 final:
 	;
@@ -1635,7 +1659,7 @@ return_jump_point_after_frame_shown_k:
 									pict.data[0] = mv_______->libav_c___yPlane_kp;
 									pict.data[1] = mv_______->libav_c___uPlane_kp;
 									pict.data[2] = mv_______->libav_c___vPlane_kp;
-									pict.linesize[0] = mv_______->libav_c___the_width;
+									pict.linesize[0] = mv_______->libav_c___adjusted_i_width_for_directx;
 									pict.linesize[1] = mv_______->libav_c___uvPitch_kp;
 									pict.linesize[2] = mv_______->libav_c___uvPitch_kp;
 
@@ -1660,7 +1684,7 @@ return_jump_point_after_frame_shown_k:
 											(SDL_Texture *)mv_______->libav_c___texture_kp,
 											NULL,
 											mv_______->libav_c___yPlane_kp,
-											mv_______->libav_c___the_width,
+											mv_______->libav_c___adjusted_i_width_for_directx,
 											mv_______->libav_c___uPlane_kp,
 											mv_______->libav_c___uvPitch_kp,
 											mv_______->libav_c___vPlane_kp,
@@ -1741,7 +1765,6 @@ return_jump_point_after_frame_shown_k:
 				}
 				mv_______->libav_c___skipframes = 0;//hack...
 
-				pedro_dprintf(-1, "dentro de player thread 3.2");
 				if ((0 == mv_______->libav_c___skipframes /*||mv_______->decoder_c___enablesoundtouch*/) && !mv_______->libav_c___donot_draw_video)
 				{
 
@@ -1762,7 +1785,7 @@ return_call_for_one_frame_only_playback_k:      //remenber it
 						pict.data[0] = mv_______->libav_c___yPlane_kp;
 						pict.data[1] = mv_______->libav_c___uPlane_kp;
 						pict.data[2] = mv_______->libav_c___vPlane_kp;
-						pict.linesize[0] = mv_______->libav_c___the_width;
+						pict.linesize[0] = mv_______->libav_c___adjusted_i_width_for_directx;
 						pict.linesize[1] = mv_______->libav_c___uvPitch_kp;
 						pict.linesize[2] = mv_______->libav_c___uvPitch_kp;
 
@@ -1786,11 +1809,12 @@ return_call_for_one_frame_only_playback_k:      //remenber it
 							amanda_timer = get_bucaneiro_tick();
 
 							//aqui mesmo...
+							
 							ar_ret = SDL_UpdateYUVTexture(
 								(SDL_Texture *)mv_______->libav_c___texture_kp,
 								NULL,
 								mv_______->libav_c___yPlane_kp,
-								mv_______->libav_c___the_width,
+								mv_______->libav_c___adjusted_i_width_for_directx,
 								mv_______->libav_c___uPlane_kp,
 								mv_______->libav_c___uvPitch_kp,
 								mv_______->libav_c___vPlane_kp,
@@ -1801,14 +1825,14 @@ return_call_for_one_frame_only_playback_k:      //remenber it
 							{
 								pedro_dprintf(2, "Erro de SDL em SDL_UpdateYUVTexture : %s - linha: %d", SDL_GetError(), __LINE__);
 							}
-
+							
 							ar_ret = SDL_RenderClear((SDL_Renderer *)mv_______->libav_c___renderer_kp);
 
 							if(0 != ar_ret)
 							{
 								pedro_dprintf(2, "Erro de SDL em SDL_RenderClear : %s - linha: %d", SDL_GetError(), __LINE__);
 							}
-
+							
 							ar_ret = SDL_RenderCopy((SDL_Renderer *)mv_______->libav_c___renderer_kp,
 							                        (SDL_Texture *)mv_______->libav_c___texture_kp, NULL, NULL);
 
@@ -1816,7 +1840,7 @@ return_call_for_one_frame_only_playback_k:      //remenber it
 							{
 								pedro_dprintf(2, "Erro de SDL em SDL_RenderCopy : %s - linha: %d", SDL_GetError(), __LINE__);
 							}
-
+							
 							SDL_RenderPresent((SDL_Renderer *)mv_______-> libav_c___renderer_kp);
 							pedro_dprintf(-1, "3 tempo decorrido %f", (get_bucaneiro_tick() - amanda_timer) * 1000.);
 							
@@ -1826,7 +1850,7 @@ return_call_for_one_frame_only_playback_k:      //remenber it
 								pedro_dprintf(-1, "device lost ... %d", lost_counter++);
 								mv_______->libav_c___request_for_adjust = 1;
 							}
-
+							
 						}
 						else
 						{
@@ -1892,7 +1916,6 @@ return_call_for_one_frame_only_playback_k:      //remenber it
 
 					}
 
-
 					final_adjust_fuction(mv_______);
 
 					if(flag_for_a_single_frame_playback_k)
@@ -1905,9 +1928,7 @@ return_call_for_one_frame_only_playback_k:      //remenber it
 				pedro_dprintf(-1, "Frame shown 10.-1 internal address %p\n", pFrame_ptr_koci_player->data);
 
 				if(first_pass_z)
-				{					
-			
-			
+				{	
 					av_packet_unref(packet_ptr_pereira_koci_forever_player);
 					av_frame_unref (pFrame_ptr_koci_player);					
 				}
@@ -2306,7 +2327,6 @@ return_call_for_one_frame_only_playback_k:      //remenber it
 //aqui6
 finish:
 	;
-
 
 	if(NULL != mv_______->libav_c___sc_kp)
 	{

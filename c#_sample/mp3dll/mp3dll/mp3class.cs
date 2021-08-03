@@ -1311,6 +1311,11 @@ namespace mp3dll
 				int top
 			)
 			;
+		
+		[DllImport("rspmp3ocx1.dll")]
+		public extern static
+			int
+			PlayInDesktop(int enable, int w, int h);
 		/// <summary>
 		/// returns a string with the description of the media file about the video if applicable
 		/// </summary>

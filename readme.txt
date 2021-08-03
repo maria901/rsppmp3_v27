@@ -160,6 +160,9 @@ with different copies of the Libav dlls in the same process running
 
 Changelog:
 
+What is new in 14.1.8  build 667080  'Terça(Tuesday)  03 Agosto 2021  10:51' codename 'Brabec'
+First version capable of playing video in the Desktop window, minor modifications.
+
 What is new in 13.6.5  build 667027  'Segunda(Monday) 02 Agosto 2021  15:39' codename 'Clark'
 Now the DLL can detect and adjust the playback to a new Phone or new SoundCard
 available on the system on the fly, before when a new Phone was detected by
