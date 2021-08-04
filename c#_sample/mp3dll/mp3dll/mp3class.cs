@@ -71,6 +71,12 @@ namespace mp3dll
 		public const int SpeedOfLight = 325000; // km per sec.
 	}
 	
+	public enum amanda_position
+	{
+		I_TOP__,
+		I_CENTER,
+		I_BOTTOM,
+	};
 	/// <summary>
 	/// Some of the possible ratios, at least the most used
 	/// </summary>
@@ -1312,10 +1318,21 @@ namespace mp3dll
 			)
 			;
 		
+		/// <summary>
+		/// Function to enable or disable the playback in Desktop
+		/// </summary>
+		/// <param name="mv_instance">the DLL instance (the whole internal struct address)</param>
+		/// <param name="enable">to enable or disable</param>
+		/// <param name="system_screen_w">the system screen width</param>
+		/// <param name="system_screen_h">the system screen height</param>
+		/// <param name="desired_w">the width of the video to play</param>
+		/// <param name="desired_h">the height of the video to play</param>
+		/// <param name="position_i">the values to position the screen on the desktop window</param>
+		/// <returns></returns>
 		[DllImport("rspmp3ocx1.dll")]
 		public extern static
 			int
-			PlayInDesktop(int enable, int w, int h);
+			PlayInDesktop(long mv_instance, int enable, int system_screen_w, int system_screen_h, int desired_w, int desired_h, amanda_position position_i);
 		/// <summary>
 		/// returns a string with the description of the media file about the video if applicable
 		/// </summary>

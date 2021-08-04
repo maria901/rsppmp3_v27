@@ -136,6 +136,13 @@ bool enable_playlist_debug = false;
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // for desktop playback
 
+enum amanda_position
+{
+	I_TOP__,
+	I_CENTER,
+	I_BOTTOM,
+};
+
 bool enable_desktop_i = 0;
 
 int w_i;
@@ -2650,14 +2657,28 @@ HWND GetRealParent(HWND hWnd)
 
     return hParent;
 }
-
-int __stdcall PlayInDesktop(int enable_i, int w, int h)
+//PlayInDesktop(long mv_instance, int enable, int system_screen_w, int system_screen_h, int desired_w, int desired_h, amanda_position position_i);
+int __stdcall PlayInDesktop(__int64 mv_instance, int enable_i, int system_screen_w,
+							int system_screen_h, int w, int h, int position_i_)
 {
+	
+	
+	check_mv_instance(mv_instance);
+
+	morcego___i___instance__a__bucaneiro_engineering *mv_______ =
+		(morcego___i___instance__a__bucaneiro_engineering *)(__INT32_OR_INT64)
+		mv_instance;
+		
 	enable_desktop_i = false;
 	if(enable_i)
 	{
 		enable_desktop_i = true;
 	}
+	
+	mv_______->libav_c___show_in_position____i = position_i_;
+	
+	mv_______->libav_c___system_screen_w_____i = system_screen_w;
+	mv_______->libav_c___system_screen_h_____i = system_screen_h;
 
 	w_i = w;
 	h_i = h;	
@@ -2717,6 +2738,8 @@ int __stdcall Play(__int64 mv_instance, char *filename, int loop, int track, __a
 	while (-1 == morcego_cancel(mv_______))
 	{
 	}
+			
+	//mv_______->libav_c___show_in_position____i = position_i;
 		
 	mv_______->libav_c___hwnd = (int64_t)hwnd_;
 	mv_______->libav_c___size_of_window_width = width_;

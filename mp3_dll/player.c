@@ -28,11 +28,17 @@
  *                                                                              *
  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *  **/
 
+#define WINDOW_FLAG___ HWND_TOP
+#define SHOW_FLAG__    SWP_SHOWWINDOW | SWP_NOCOPYBITS
+#define NO_SHOW_FLAG__ SWP_HIDEWINDOW | SWP_NOCOPYBITS
+
 int __fastcall DetectChangeInSoundCards_i_internal(void);
 
 void get_sha_512_as_string_k(char *buffer_k, unsigned int len_k, char * digest_k);
 
 double amanda_tempo;
+
+int already_got_i = -1;
 
 /**
    calculate the size of the player buffer for mv_______->decoder_c___wav
@@ -93,6 +99,8 @@ morcego_play
 
 	mv_______->libav_c___is_desktop_playback_amanda = false;
 	
+	mv_______->libav_c___window_was_set______i = false;
+	
 	if(enable_desktop_i)
 	{
 		HWND hwnd;
@@ -121,7 +129,26 @@ morcego_play
 			mv_______->libav_c___request_for_adjust   =   1;
 			mv_______->libav_c___original_width__i    = w_i;
 			mv_______->libav_c___original_height_i    = h_i;
-			
+
+			if(-1 == already_got_i)
+			{
+						{
+							WINDOWINFO info_i = {0};
+							info_i.cbSize = sizeof(info_i);
+							GetWindowInfo((HWND)(__INT32_OR_INT64)
+							mv_______->libav_c___player_hwnd, & info_i);
+
+							mv_______->libav_c___show_desktop_window_i = false;
+							if( (info_i.dwStyle & 0x10000000) == 0x10000000)
+							{			
+								mv_______->libav_c___show_desktop_window_i = true;
+							}
+						}
+						already_got_i = mv_______->libav_c___show_desktop_window_i;
+			}
+
+			mv_______->libav_c___show_desktop_window_i = already_got_i;
+
 			if(GetWindowRect((HWND)(__INT32_OR_INT64)
 			mv_______->libav_c___player_hwnd, &rect))
 			{
@@ -1354,6 +1381,45 @@ final:
 	if (mv_______->decoder_c___intloop == 1 && (!mv_______->decoder_c___cancelflag))
 	{
 		goto reinicia_z;
+	}
+
+	if(mv_______->libav_c___window_was_set______i)
+	{
+		if(mv_______->libav_c___is_desktop_playback_amanda)
+		{
+			SetWindowPos(
+			(HWND)(__INT32_OR_INT64)
+			mv_______->libav_c___player_hwnd,
+			WINDOW_FLAG___,
+			2,
+			2,
+			mv_______->libav_c___original_width__i - 2,
+			mv_______->libav_c___original_height_i - 2,
+			(SHOW_FLAG__));
+						
+			SetWindowPos(
+			(HWND)(__INT32_OR_INT64)
+			mv_______->libav_c___player_hwnd,
+			WINDOW_FLAG___,
+			0,
+			0,
+			mv_______->libav_c___original_width__i,
+			mv_______->libav_c___original_height_i,
+			(SHOW_FLAG__));
+			
+			if(!mv_______->libav_c___show_desktop_window_i)
+			{
+				SetWindowPos(
+				(HWND)(__INT32_OR_INT64)
+				mv_______->libav_c___player_hwnd,
+				WINDOW_FLAG___,
+				0,
+				0,
+				mv_______->libav_c___original_width__i,
+				mv_______->libav_c___original_height_i,
+				(NO_SHOW_FLAG__));
+			}
+		}
 	}
 
 	return returnvalue;

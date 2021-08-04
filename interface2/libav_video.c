@@ -108,11 +108,24 @@
 
 //defines
 #define WINDOW_FLAG___ HWND_TOP
-#define SHOW_FLAG__ SWP_SHOWWINDOW | SWP_NOCOPYBITS
+#define SHOW_FLAG__    SWP_SHOWWINDOW | SWP_NOCOPYBITS
+#define NO_SHOW_FLAG__ SWP_HIDEWINDOW | SWP_NOCOPYBITS
 
 /////////////////////////////////////////////////////////////////////////////
 
 int amanda_locked = 0;//to avoid a nasty bug in the video initialization
+
+/////////////////////////////////////////////////////////////////////////////
+//addef or desktop playback.
+
+enum amanda_position
+{
+	I_TOP__,
+	I_CENTER,
+	I_BOTTOM,
+};
+
+long adjust_definitive_function_i(morcego___i___instance__a__bucaneiro_engineering *mv_______);
 
 /////////////////////////////////////////////////////////////////////////////
 morcego___i___instance__a__bucaneiro_engineering *copy = NULL;
@@ -439,17 +452,7 @@ int restart_video(morcego___i___instance__a__bucaneiro_engineering *mv_______)
 			
 		if(true || !mv_______->libav_c___is_desktop_playback_amanda)
 		{
-						
-		SetWindowPos(
-			(HWND)(__INT32_OR_INT64)
-			mv_______->libav_c___player_hwnd,
-			WINDOW_FLAG___,
-			mv_______->libav_c___adjust_left + (mv_______->libav_c___ajuste_width / 2),
-			mv_______->libav_c___adjust_top + (mv_______->libav_c___ajuste_heigth / 2),
-			mv_______->libav_c___the_width,
-			mv_______->libav_c___the_height,
-			(SHOW_FLAG__));
-			
+			adjust_definitive_function_i(mv_______);
 		} 
 							 
 		if(mv_______->libav_c___texture_kp)
@@ -557,23 +560,80 @@ saida_amanda_kp:;
 	mv_______->libav_c___amanda_video_thread_error_value_kp = returnvalue_kp;
 	return returnvalue_kp;
 }
+
+long adjust_definitive_function_i(morcego___i___instance__a__bucaneiro_engineering *mv_______)
+{
+	
+		if(true)
+		{
+
+			mv_______->libav_c___window_was_set______i = true;
+
+			if(mv_______->libav_c___is_desktop_playback_amanda && I_CENTER == mv_______->libav_c___show_in_position____i)
+			{
+								
+				SetWindowPos(
+					(HWND)(__INT32_OR_INT64)
+					mv_______->libav_c___player_hwnd,
+					WINDOW_FLAG___,
+					(mv_______->libav_c___system_screen_w_____i - mv_______->libav_c___the_width) / 2,
+					(mv_______->libav_c___system_screen_h_____i - mv_______->libav_c___the_height) / 2,
+					mv_______->libav_c___the_width,
+					mv_______->libav_c___the_height,
+					(SHOW_FLAG__));
+
+			}
+			
+			else if(mv_______->libav_c___is_desktop_playback_amanda && I_TOP__ == mv_______->libav_c___show_in_position____i)
+			{
+								
+				SetWindowPos(
+					(HWND)(__INT32_OR_INT64)
+					mv_______->libav_c___player_hwnd,
+					WINDOW_FLAG___,
+					(mv_______->libav_c___system_screen_w_____i - mv_______->libav_c___the_width) / 2,
+					0,
+					mv_______->libav_c___the_width,
+					mv_______->libav_c___the_height,
+					(SHOW_FLAG__));
+
+			}
+			else if(mv_______->libav_c___is_desktop_playback_amanda && I_BOTTOM == mv_______->libav_c___show_in_position____i)
+			{
+								
+				SetWindowPos(
+					(HWND)(__INT32_OR_INT64)
+					mv_______->libav_c___player_hwnd,
+					WINDOW_FLAG___,
+					(mv_______->libav_c___system_screen_w_____i - mv_______->libav_c___the_width) / 2,
+					(mv_______->libav_c___system_screen_h_____i - mv_______->libav_c___the_height),
+					mv_______->libav_c___the_width,
+					mv_______->libav_c___the_height,
+					(SHOW_FLAG__));
+					
+			}
+			else
+			{
+				SetWindowPos(
+				(HWND)(__INT32_OR_INT64)
+				mv_______->libav_c___player_hwnd,
+				WINDOW_FLAG___,
+				mv_______->libav_c___adjust_left + (mv_______->libav_c___ajuste_width / 2),
+				mv_______->libav_c___adjust_top + (mv_______->libav_c___ajuste_heigth / 2),
+				mv_______->libav_c___the_width,
+				mv_______->libav_c___the_height,
+				(SHOW_FLAG__));
+			}
+			
+		}
+	return -27;
+}
+
 void adjust_video(morcego___i___instance__a__bucaneiro_engineering *mv_______)
 {
 	if (IsWindow((HWND)(__INT32_OR_INT64)mv_______->libav_c___player_hwnd))
 	{
-		if(true || !mv_______->libav_c___is_desktop_playback_amanda)
-		{
-					
-		SetWindowPos(
-			(HWND)(__INT32_OR_INT64)
-			mv_______->libav_c___player_hwnd,
-			WINDOW_FLAG___,
-			mv_______->libav_c___adjust_left + (mv_______->libav_c___ajuste_width / 2),
-			mv_______->libav_c___adjust_top + (mv_______->libav_c___ajuste_heigth / 2),
-			mv_______->libav_c___the_width,
-			mv_______->libav_c___the_height,
-			(SHOW_FLAG__));
-		}
+		adjust_definitive_function_i(mv_______);
 	}
 }
 void init_video(morcego___i___instance__a__bucaneiro_engineering *mv_______,
@@ -2381,31 +2441,6 @@ finish:
 	mv_______->libav_c___video_thread_running = 0;
 	mv_______->decoder_c___cancelflag = 0;
 	ar_koci_force_exit = FALSE;
-
-	if(mv_______->libav_c___is_desktop_playback_amanda)
-	{
-			
-	SetWindowPos(
-		(HWND)(__INT32_OR_INT64)
-		mv_______->libav_c___player_hwnd,
-		WINDOW_FLAG___,
-		2,
-		2,
-		mv_______->libav_c___original_width__i - 2,
-		mv_______->libav_c___original_height_i - 2,
-		(SHOW_FLAG__));
-					
-	SetWindowPos(
-		(HWND)(__INT32_OR_INT64)
-		mv_______->libav_c___player_hwnd,
-		WINDOW_FLAG___,
-		0,
-		0,
-		mv_______->libav_c___original_width__i,
-		mv_______->libav_c___original_height_i,
-		(SHOW_FLAG__));
-		
-	}
 
 	//amanda_final
 	return 0;

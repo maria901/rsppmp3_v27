@@ -148,6 +148,9 @@ namespace mp3dll
 			this.use_cache_amanda_s_smart_ape = new System.Windows.Forms.CheckBox();
 			this.next_amanda = new System.Windows.Forms.Button();
 			this.is_amanda_desktop = new System.Windows.Forms.CheckBox();
+			this.i_half = new System.Windows.Forms.CheckBox();
+			this.size_i = new System.Windows.Forms.TextBox();
+			this.label11 = new System.Windows.Forms.Label();
 			this.menu.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.play_v12)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.pause_v12)).BeginInit();
@@ -1262,11 +1265,40 @@ namespace mp3dll
 			this.is_amanda_desktop.Text = "Play in Desktop";
 			this.is_amanda_desktop.UseVisualStyleBackColor = true;
 			// 
+			// i_half
+			// 
+			this.i_half.Location = new System.Drawing.Point(671, 495);
+			this.i_half.Name = "i_half";
+			this.i_half.Size = new System.Drawing.Size(106, 18);
+			this.i_half.TabIndex = 144;
+			this.i_half.Text = "Size";
+			this.i_half.UseVisualStyleBackColor = true;
+			// 
+			// size_i
+			// 
+			this.size_i.Location = new System.Drawing.Point(713, 493);
+			this.size_i.Name = "size_i";
+			this.size_i.Size = new System.Drawing.Size(40, 20);
+			this.size_i.TabIndex = 145;
+			this.size_i.Text = "440";
+			// 
+			// label11
+			// 
+			this.label11.AutoSize = true;
+			this.label11.Location = new System.Drawing.Point(753, 495);
+			this.label11.Name = "label11";
+			this.label11.Size = new System.Drawing.Size(18, 13);
+			this.label11.TabIndex = 146;
+			this.label11.Text = "px";
+			// 
 			// sample
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.ClientSize = new System.Drawing.Size(1294, 708);
+			this.Controls.Add(this.label11);
+			this.Controls.Add(this.size_i);
+			this.Controls.Add(this.i_half);
 			this.Controls.Add(this.is_amanda_desktop);
 			this.Controls.Add(this.next_amanda);
 			this.Controls.Add(this.use_cache_amanda_s_smart_ape);
@@ -1514,6 +1546,9 @@ namespace mp3dll
 		private System.Windows.Forms.CheckBox use_cache_amanda_s_smart_ape;
 		private System.Windows.Forms.Button next_amanda;
 		private System.Windows.Forms.CheckBox is_amanda_desktop;
+		private System.Windows.Forms.CheckBox i_half;
+		private System.Windows.Forms.TextBox size_i;
+		private System.Windows.Forms.Label label11;
 	}
 }
 

@@ -66,6 +66,54 @@ namespace mp3dll
 		
 		protected bool can_scape_z = true;
 		protected int counter_i = 0;
+		
+		void desktop_playback_settings()
+		{
+			if(true == i_half.Checked)
+			{
+				
+				int max_width__i = 300;
+				int max_height_i = 300;
+				
+				try
+				{
+					max_width__i = int.Parse(size_i.Text);
+					max_height_i = max_width__i          ;
+				}
+				catch
+				{
+					
+				}
+				/*
+				MP3.PlayInDesktop(number, 0, Screen.PrimaryScreen.Bounds.Width, Screen.PrimaryScreen.Bounds.Height, Screen.PrimaryScreen.Bounds.Width / 2, Screen.PrimaryScreen.Bounds.Height / 2, amanda_position.I_CENTER);
+				if(true == is_amanda_desktop.Checked)
+				{
+					MP3.PlayInDesktop(number, 1, Screen.PrimaryScreen.Bounds.Width, Screen.PrimaryScreen.Bounds.Height, Screen.PrimaryScreen.Bounds.Width / 2, Screen.PrimaryScreen.Bounds.Height / 2, amanda_position.I_CENTER);
+				}
+				*/
+				MP3.PlayInDesktop(number, 0, Screen.PrimaryScreen.Bounds.Width, Screen.PrimaryScreen.Bounds.Height, max_width__i, max_height_i,     amanda_position.I_TOP__);
+				if(true == is_amanda_desktop.Checked)
+				{
+					MP3.PlayInDesktop(number, 1, Screen.PrimaryScreen.Bounds.Width, Screen.PrimaryScreen.Bounds.Height, max_width__i, max_height_i, amanda_position.I_TOP__);
+				}
+				/*
+				MP3.PlayInDesktop(number, 0, Screen.PrimaryScreen.Bounds.Width, Screen.PrimaryScreen.Bounds.Height, Screen.PrimaryScreen.Bounds.Width / 2, Screen.PrimaryScreen.Bounds.Height / 2, amanda_position.I_BOTTOM);
+				if(true == is_amanda_desktop.Checked)
+				{
+					MP3.PlayInDesktop(number, 1, Screen.PrimaryScreen.Bounds.Width, Screen.PrimaryScreen.Bounds.Height, Screen.PrimaryScreen.Bounds.Width / 2, Screen.PrimaryScreen.Bounds.Height / 2, amanda_position.I_BOTTOM);
+				}
+				*/
+			}
+			else
+			{
+				MP3.PlayInDesktop(number, 0, Screen.PrimaryScreen.Bounds.Width, Screen.PrimaryScreen.Bounds.Height, Screen.PrimaryScreen.Bounds.Width, Screen.PrimaryScreen.Bounds.Height, amanda_position.I_CENTER);
+				if(true == is_amanda_desktop.Checked)
+				{
+					MP3.PlayInDesktop(number, 1, Screen.PrimaryScreen.Bounds.Width, Screen.PrimaryScreen.Bounds.Height, Screen.PrimaryScreen.Bounds.Width, Screen.PrimaryScreen.Bounds.Height, amanda_position.I_CENTER);
+				}
+			}
+		}
+		
 		protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
 		{
 
@@ -99,11 +147,7 @@ namespace mp3dll
 					can_scape_z = true;
 					MP3.clean_up_memory_p();
 					
-					MP3.PlayInDesktop(0, Screen.PrimaryScreen.Bounds.Width, Screen.PrimaryScreen.Bounds.Height);
-					if(true == is_amanda_desktop.Checked)
-					{
-						MP3.PlayInDesktop(1, Screen.PrimaryScreen.Bounds.Width, Screen.PrimaryScreen.Bounds.Height);
-					}
+					desktop_playback_settings();
 					
 					MP3.Play(number, MP3.wide2utf8(MP3.the_filename), loop_, int.Parse(track.Text),
 					         video_p.Handle.ToInt64(),
@@ -627,11 +671,7 @@ namespace mp3dll
 					can_scape_z = true;
 					MP3.clean_up_memory_p();
 					
-					MP3.PlayInDesktop(0, Screen.PrimaryScreen.Bounds.Width, Screen.PrimaryScreen.Bounds.Height);
-					if(true == is_amanda_desktop.Checked)
-					{
-						MP3.PlayInDesktop(1, Screen.PrimaryScreen.Bounds.Width, Screen.PrimaryScreen.Bounds.Height);
-					}
+					desktop_playback_settings();
 					
 					ret = MP3.Play(number, MP3.wide2utf8(playlist.Items[MP3.playlist_index].SubItems[1].Text), loop_, int.Parse(track.Text),
 					               video_p.Handle.ToInt64(),
@@ -1093,6 +1133,10 @@ namespace mp3dll
 		{
 			bool did_it_d = false;
 			int ret;
+			
+			lvwColumnSorter = new ListViewColumnSorter();
+			this.playlist.ListViewItemSorter = lvwColumnSorter;
+			
 			disable_pause_resume = false;
 			already=0;
 			playlist.Visible = false;
@@ -1136,11 +1180,7 @@ namespace mp3dll
 				can_scape_z = true;
 				MP3.clean_up_memory_p();
 				
-				MP3.PlayInDesktop(0, Screen.PrimaryScreen.Bounds.Width, Screen.PrimaryScreen.Bounds.Height);
-				if(true == is_amanda_desktop.Checked)
-				{
-					MP3.PlayInDesktop(1, Screen.PrimaryScreen.Bounds.Width, Screen.PrimaryScreen.Bounds.Height);
-				}
+				desktop_playback_settings();
 				
 				ret = MP3.Play(number, MP3.wide2utf8(filename.Text), loop_, int.Parse(track.Text),
 				               video_p.Handle.ToInt64(),
@@ -1229,11 +1269,7 @@ namespace mp3dll
 				can_scape_z = true;
 				MP3.clean_up_memory_p();
 				
-				MP3.PlayInDesktop(0, Screen.PrimaryScreen.Bounds.Width, Screen.PrimaryScreen.Bounds.Height);
-				if(true == is_amanda_desktop.Checked)
-				{
-					MP3.PlayInDesktop(1, Screen.PrimaryScreen.Bounds.Width, Screen.PrimaryScreen.Bounds.Height);
-				}
+				desktop_playback_settings();
 				
 				ret = MP3.Play(number, MP3.wide2utf8(playlist.Items[MP3.playlist_index].SubItems[1].Text), loop_, int.Parse(track.Text),
 				               video_p.Handle.ToInt64(),
@@ -1261,6 +1297,10 @@ namespace mp3dll
 		{
 			bool did_it_d = false;
 			int ret;
+			
+			lvwColumnSorter = new ListViewColumnSorter();
+			this.playlist.ListViewItemSorter = lvwColumnSorter;
+			
 			disable_pause_resume = false;
 			already=0;
 			playlist.Visible = false;
@@ -1300,11 +1340,7 @@ namespace mp3dll
 						);
 				}
 				
-				MP3.PlayInDesktop(0, Screen.PrimaryScreen.Bounds.Width, Screen.PrimaryScreen.Bounds.Height);
-				if(true == is_amanda_desktop.Checked)
-				{
-					MP3.PlayInDesktop(1, Screen.PrimaryScreen.Bounds.Width, Screen.PrimaryScreen.Bounds.Height);
-				}
+				desktop_playback_settings();
 				
 				can_scape_z = true;
 				ret = MP3.Open(number, MP3.wide2utf8(filename.Text), loop_, int.Parse(track.Text),
@@ -1389,11 +1425,7 @@ namespace mp3dll
 				}
 				can_scape_z = true;
 				
-				MP3.PlayInDesktop(0, Screen.PrimaryScreen.Bounds.Width, Screen.PrimaryScreen.Bounds.Height);
-				if(true == is_amanda_desktop.Checked)
-				{
-					MP3.PlayInDesktop(1, Screen.PrimaryScreen.Bounds.Width, Screen.PrimaryScreen.Bounds.Height);
-				}
+				desktop_playback_settings();
 				
 				ret = MP3.Open(number, MP3.wide2utf8(playlist.Items[MP3.playlist_index].SubItems[1].Text), loop_, int.Parse(track.Text),
 				               video_p.Handle.ToInt64(),
@@ -3358,11 +3390,7 @@ namespace mp3dll
 			
 			Clipboard.SetText(coisa.SubItems[1].Text);
 			
-			MP3.PlayInDesktop(0, Screen.PrimaryScreen.Bounds.Width, Screen.PrimaryScreen.Bounds.Height);
-			if(true == is_amanda_desktop.Checked)
-			{
-				MP3.PlayInDesktop(1, Screen.PrimaryScreen.Bounds.Width, Screen.PrimaryScreen.Bounds.Height);
-			}
+			desktop_playback_settings();
 			
 			MP3.Play(number, MP3.wide2utf8(coisa.SubItems[1].Text), loop_, int.Parse(track.Text),
 			         video_p.Handle.ToInt64(),
@@ -3818,11 +3846,7 @@ namespace mp3dll
 				
 				Clipboard.SetText(coisa.SubItems[1].Text);
 				
-				MP3.PlayInDesktop(0, Screen.PrimaryScreen.Bounds.Width, Screen.PrimaryScreen.Bounds.Height);
-				if(true == is_amanda_desktop.Checked)
-				{
-					MP3.PlayInDesktop(1, Screen.PrimaryScreen.Bounds.Width, Screen.PrimaryScreen.Bounds.Height);
-				}
+				desktop_playback_settings();
 				
 				MP3.Play(number, MP3.wide2utf8(coisa.SubItems[1].Text), loop_, int.Parse(track.Text),
 				         video_p.Handle.ToInt64(),

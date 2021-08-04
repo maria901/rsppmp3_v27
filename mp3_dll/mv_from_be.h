@@ -773,6 +773,11 @@ typedef struct morcego_instance_be_
 	int       libav_c___adjusted_i_width_for_directx                                   ;
 	int       libav_c___original_width__i                                              ;
 	int       libav_c___original_height_i                                              ;
+	bool      libav_c___show_desktop_window_i                                          ;
+	int       libav_c___show_in_position____i                                          ;
+	int       libav_c___system_screen_w_____i                                          ;
+	int       libav_c___system_screen_h_____i                                          ;
+	bool      libav_c___window_was_set______i                                          ;
 		
 }morcego___i___instance__a__bucaneiro_engineering                                      ;
 //#pragma pack(pop)
