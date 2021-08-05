@@ -231,7 +231,9 @@ if (mv_______->libav_c___amanda_s_smart_ape_use_cache)
 
 		//morcego_seek_100_libav (mv_______,50);
 
-		sampleslimit = madchannel * madsamplerate * 2 * 60;
+		sampleslimit = madchannel * madsamplerate * 2 * 60 * 2;
+
+		pedro_dprintf(-1, "sampleslimit on entering %d size in bytes\n", sampleslimit);
 
 	}
 
@@ -269,6 +271,7 @@ if (mv_______->libav_c___amanda_s_smart_ape_use_cache)
 			}
 			else
 			{
+				pedro_dprintf(-1, "clear be\n");
 				be_normalization_method
 				(
 					mv_______,
@@ -346,6 +349,7 @@ if (mv_______->libav_c___amanda_s_smart_ape_use_cache)
 
 						if (bytesprocessed > sampleslimit)
 						{
+							pedro_dprintf(-1, "Chegou no limite %d\n", sampleslimit);
 							saiagora = 1;
 						}
 					}
@@ -400,6 +404,7 @@ if (mv_______->libav_c___amanda_s_smart_ape_use_cache)
 
 						if (bytesprocessed > sampleslimit)
 						{
+							pedro_dprintf(-1, "Chegou no limite %d\n", sampleslimit);
 							saiagora = 1;
 						}
 
@@ -592,6 +597,9 @@ double be_normalization_method
 			short val = sample[i];
 			val = abs(val);
 			mv_______->analisys_c___analisys_value=BucaneiroMax(mv_______->analisys_c___analisys_value,val);
+			
+			
+			
 		}
 	}
 	break;
@@ -603,11 +611,17 @@ double be_normalization_method
 	case BE_RETRIEVE_NORMALIZATION_VALUE:
 	{
 		double input=mv_______->analisys_c___analisys_value;
+		
+		pedro_dprintf(-1, "value %f\n", input);
+		
 		if(input<1.0)
 		{
 			input=32768;
 		}
 		input = 32768. / input;
+		
+		pedro_dprintf(-1, "input na saida %f\n", input);
+		
 		return input;
 	}
 	break;

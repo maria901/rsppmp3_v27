@@ -822,8 +822,11 @@ namespace mp3dll
 		{
 			
 			string temp_i;
-			this.Height = Screen.PrimaryScreen.WorkingArea.Height + 20;
-			this.Width  = Screen.PrimaryScreen.WorkingArea.Width ;
+			
+			this.WindowState = FormWindowState.Normal;
+			
+			this.Height      = Screen.PrimaryScreen.Bounds.Height - 1;
+			this.Width       = Screen.PrimaryScreen.Bounds.Width  - 1;
 			
 			(new Thread(new ThreadStart(my_thread))).Start();
 			
