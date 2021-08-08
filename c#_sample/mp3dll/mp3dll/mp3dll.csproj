@@ -183,6 +183,10 @@
     </Compile>
     <Compile Include="Amanda.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="tracks_and_subtitles_i.cs" />
+    <Compile Include="tracks_and_subtitles_i.Designer.cs">
+      <DependentUpon>tracks_and_subtitles_i.cs</DependentUpon>
+    </Compile>
     <EmbeddedResource Include="amanda_search.resx">
       <DependentUpon>amanda_search.cs</DependentUpon>
     </EmbeddedResource>
@@ -214,6 +218,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="spectrum.resx">
       <DependentUpon>spectrum.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="tracks_and_subtitles_i.resx">
+      <DependentUpon>tracks_and_subtitles_i.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="wave_effects.resx">
       <DependentUpon>wave_effects.cs</DependentUpon>

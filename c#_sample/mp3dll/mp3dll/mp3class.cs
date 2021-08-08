@@ -128,6 +128,7 @@ namespace mp3dll
 	/// </remarks>
 	public class MP3
 	{
+		internal static sample sample_copy_i      = null;
 		internal static amanda_search search_copy = null;
 		internal static sample sample_copy_ar     = null;
 		internal static spectrum               k  = null;

@@ -17,13 +17,11 @@
  *     Licensa Pública Menor junto com este programa                            *
  *     Se não, veja <http://www.gnu.org/licenses/>.                             *
  *                                                                              *
- *     Suporte: https://arsoftware.net.br/binarywork_____________________       *
- *     Mirrors: https://locacaodiaria.com.br/corporacaodotrabalhobinario/       *
- *              http: //nomade.sourceforge.net/binarywork_______________/       *
+ *     Suporte: https://nomade.sourceforge.io/                                  *
  *                                                                              *
  *     E-mails direto dos felizes programadores:                                *
- *     Ricardinho:    arsoftware25@gmail.com    ricardo@arsoftware.net.br       *
- *     Koci______:    arsoftware10@gmail.com    am_koci@arsoftware.net.br       *
+ *     O Ricardinho :    arsoftware25@gmail.com    ricardo@arsoftware.net.br    *
+ *     Little_Amanda:    arsoftware10@gmail.com    amanda.@arsoftware.net.br    *
  *                                                                              *
  *     contato imediato(para uma resposta muita rápida) WhatsApp                *
  *     (+55)41 9627 1708 - isto está sempre ligado (eu acho...)                 *      
@@ -1355,23 +1353,56 @@ int get_number_of_audio_tracks_internal(morcego___i___instance__a__bucaneiro_eng
 		goto saida;
 	}
 	/*
-
-	    AVMEDIA_TYPE_UNKNOWN = -1,
-	    AVMEDIA_TYPE_VIDEO,
-	    AVMEDIA_TYPE_AUDIO,
-	    AVMEDIA_TYPE_DATA,
-	    AVMEDIA_TYPE_SUBTITLE,
-	    AVMEDIA_TYPE_ATTACHMENT,
-	    AVMEDIA_TYPE_NB
+	AVMEDIA_TYPE_UNKNOWN = -1,  ///< Usually treated as AVMEDIA_TYPE_DATA
+    AVMEDIA_TYPE_VIDEO,
+    AVMEDIA_TYPE_AUDIO,
+    AVMEDIA_TYPE_DATA,          ///< Opaque data information usually continuous
+    AVMEDIA_TYPE_SUBTITLE,
+    AVMEDIA_TYPE_ATTACHMENT,    ///< Opaque data information usually sparse
+    AVMEDIA_TYPE_NB
 
 
 	        codecpar;
 
 	 */
+	 
+	 
+	 
+	for (i = 0; i < FormatContext_b->nb_streams; i++)
+	{
+		switch(FormatContext_b->streams[i]->codecpar->codec_type)
+		{
+			case AVMEDIA_TYPE_UNKNOWN:
+			pedro_dprintf(0, "track %d == AVMEDIA_TYPE_UNKNOWN\n", i + 1);
+			break;
+			case AVMEDIA_TYPE_VIDEO:
+			pedro_dprintf(0, "track %d == AVMEDIA_TYPE_VIDEO\n", i + 1);
+			break;
+			case AVMEDIA_TYPE_AUDIO:
+			pedro_dprintf(0, "track %d == AVMEDIA_TYPE_AUDIO\n", i + 1);
+			break;
+			case AVMEDIA_TYPE_DATA:
+			pedro_dprintf(0, "track %d == AVMEDIA_TYPE_DATA\n", i + 1);
+			break;
+			case AVMEDIA_TYPE_SUBTITLE:
+			pedro_dprintf(0, "track %d == AVMEDIA_TYPE_SUBTITLE\n", i + 1);
+			break;
+			case AVMEDIA_TYPE_ATTACHMENT:
+			pedro_dprintf(0, "track %d == AVMEDIA_TYPE_ATTACHMENT\n", i + 1);
+			break;
+			case AVMEDIA_TYPE_NB:
+			pedro_dprintf(0, "track %d == AVMEDIA_TYPE_NB\n", i + 1);
+			break;			
+		}
+	}
+		
+	 
+	 count = 0;
+	 
 	for (i = 0; i < FormatContext_b->nb_streams; i++)
 		if (FormatContext_b->streams[i]->codecpar->codec_type == /*AVMEDIA_TYPE_AUDIO*/ AVMEDIA_TYPE_AUDIO)
 		{
-			//dprintf("achou track %d debug8\n",i+1);
+			pedro_dprintf(0, "achou audio track %d \n",i+1);
 			count++; //untested, as usual
 		}
 saida:

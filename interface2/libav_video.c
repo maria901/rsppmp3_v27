@@ -1140,6 +1140,9 @@ AVPacket *packet_ptr_pereira_koci_forever_player;
 AVCodecContext *pCodecCtx;
 AVFormatContext *FormatContext;
 
+AVSubtitle sub_amanda_;
+AVSubtitle sub_ricardo;
+
 char amandaricardo_koci_deslocador_decoder;
 
 int libav_c____decoder_feline_running;

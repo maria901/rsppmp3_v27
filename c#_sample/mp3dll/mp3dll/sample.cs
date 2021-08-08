@@ -706,7 +706,7 @@ namespace mp3dll
 		
 		StringBuilder settings = new StringBuilder(300*6);
 
-		StringBuilder message  = new StringBuilder(300*6);
+		public StringBuilder message  = new StringBuilder(300*6);
 
 		StringBuilder time     = new StringBuilder(300);
 
@@ -730,7 +730,7 @@ namespace mp3dll
 		
 		bool force_fullscreen_slider_adjust_i = false;
 
-		long number = MP3.number;
+		public long number = MP3.number;
 		string nome_da_dll;
 		int already=0;
 		
@@ -822,6 +822,8 @@ namespace mp3dll
 		{
 			
 			string temp_i;
+			
+			MP3.sample_copy_i = this;
 			
 			this.WindowState = FormWindowState.Normal;
 			
@@ -3867,6 +3869,11 @@ namespace mp3dll
 			{
 				
 			}
+		}
+		void TracksToolStripMenuItemClick(object sender, EventArgs e)
+		{
+			tracks_and_subtitles_i amandinha = new tracks_and_subtitles_i();
+			amandinha.ShowDialog();
 		}
 		
 	}

@@ -151,6 +151,10 @@ namespace mp3dll
 			this.i_half = new System.Windows.Forms.CheckBox();
 			this.size_i = new System.Windows.Forms.TextBox();
 			this.label11 = new System.Windows.Forms.Label();
+			this.button5 = new System.Windows.Forms.Button();
+			this.label23 = new System.Windows.Forms.Label();
+			this.comboBox1 = new System.Windows.Forms.ComboBox();
+			this.tracksToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.menu.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.play_v12)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.pause_v12)).BeginInit();
@@ -400,7 +404,8 @@ namespace mp3dll
 			// menu
 			// 
 			this.menu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-			this.aboutToolStripMenuItem});
+			this.aboutToolStripMenuItem,
+			this.tracksToolStripMenuItem});
 			this.menu.Location = new System.Drawing.Point(0, 0);
 			this.menu.Name = "menu";
 			this.menu.Size = new System.Drawing.Size(1294, 24);
@@ -989,7 +994,7 @@ namespace mp3dll
 			// 
 			this.background_p.BackColor = System.Drawing.Color.Black;
 			this.background_p.Image = global::mp3dll.Properties.Resources.vazio;
-			this.background_p.Location = new System.Drawing.Point(870, 362);
+			this.background_p.Location = new System.Drawing.Point(996, 143);
 			this.background_p.Name = "background_p";
 			this.background_p.Size = new System.Drawing.Size(92, 85);
 			this.background_p.TabIndex = 105;
@@ -1291,11 +1296,48 @@ namespace mp3dll
 			this.label11.TabIndex = 146;
 			this.label11.Text = "px";
 			// 
+			// button5
+			// 
+			this.button5.Location = new System.Drawing.Point(1194, 462);
+			this.button5.Name = "button5";
+			this.button5.Size = new System.Drawing.Size(88, 20);
+			this.button5.TabIndex = 147;
+			this.button5.Text = "Get Subtitles";
+			this.button5.UseVisualStyleBackColor = true;
+			// 
+			// label23
+			// 
+			this.label23.AutoSize = true;
+			this.label23.Location = new System.Drawing.Point(1159, 492);
+			this.label23.Name = "label23";
+			this.label23.Size = new System.Drawing.Size(77, 13);
+			this.label23.TabIndex = 149;
+			this.label23.Text = "Use subtitle N°";
+			// 
+			// comboBox1
+			// 
+			this.comboBox1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+			this.comboBox1.FormattingEnabled = true;
+			this.comboBox1.Location = new System.Drawing.Point(1242, 488);
+			this.comboBox1.Name = "comboBox1";
+			this.comboBox1.Size = new System.Drawing.Size(40, 21);
+			this.comboBox1.TabIndex = 148;
+			// 
+			// tracksToolStripMenuItem
+			// 
+			this.tracksToolStripMenuItem.Name = "tracksToolStripMenuItem";
+			this.tracksToolStripMenuItem.Size = new System.Drawing.Size(122, 20);
+			this.tracksToolStripMenuItem.Text = "Tracks and Subtitles";
+			this.tracksToolStripMenuItem.Click += new System.EventHandler(this.TracksToolStripMenuItemClick);
+			// 
 			// sample
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.ClientSize = new System.Drawing.Size(1294, 708);
+			this.Controls.Add(this.label23);
+			this.Controls.Add(this.comboBox1);
+			this.Controls.Add(this.button5);
 			this.Controls.Add(this.label11);
 			this.Controls.Add(this.size_i);
 			this.Controls.Add(this.i_half);
@@ -1435,7 +1477,7 @@ namespace mp3dll
 		#endregion
 
 		private System.Windows.Forms.Timer main_timer;
-		private System.Windows.Forms.TextBox filename;
+		public System.Windows.Forms.TextBox filename;
 		private System.Windows.Forms.OpenFileDialog of1;
 		private System.Windows.Forms.Label label2;
 		private System.Windows.Forms.ComboBox priority;
@@ -1459,7 +1501,7 @@ namespace mp3dll
 		private System.Windows.Forms.Label label19;
 		private System.Windows.Forms.Button button10;
 		private System.Windows.Forms.TextBox filetowav;
-		private System.Windows.Forms.ListBox morcego_error;
+		internal System.Windows.Forms.ListBox morcego_error;
 		private System.Windows.Forms.MenuStrip menu;
 		private System.Windows.Forms.ToolStripMenuItem aboutToolStripMenuItem;
 		private System.Windows.Forms.Button button1;
@@ -1549,6 +1591,10 @@ namespace mp3dll
 		private System.Windows.Forms.CheckBox i_half;
 		private System.Windows.Forms.TextBox size_i;
 		private System.Windows.Forms.Label label11;
+		private System.Windows.Forms.Button button5;
+		private System.Windows.Forms.Label label23;
+		private System.Windows.Forms.ComboBox comboBox1;
+		private System.Windows.Forms.ToolStripMenuItem tracksToolStripMenuItem;
 	}
 }
 
