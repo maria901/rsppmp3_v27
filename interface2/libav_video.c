@@ -184,6 +184,9 @@ int final_adjust_fuction(morcego___i___instance__a__bucaneiro_engineering *mv___
 
 int adjust_window_position_and_size(morcego___i___instance__a__bucaneiro_engineering *mv_______)
 {
+	int       w_i;
+	int       h_i;
+	double temp_i;
 	__attribute__((unused)) double adjusted_ricardo;
 	int rv = 0;
 	char temp[1024] = {0};
@@ -205,6 +208,31 @@ int adjust_window_position_and_size(morcego___i___instance__a__bucaneiro_enginee
 	{
 	case BE_AUTO_______:
 		mv_______->libav_c___the_real_ratio = (double)mv_______->libav_c___width / ((double)mv_______->libav_c___height);
+				
+		if(0 != pCodecCtx->sample_aspect_ratio.den)
+		{
+			w_i = pCodecCtx->sample_aspect_ratio.num;
+			h_i = pCodecCtx->sample_aspect_ratio.den;
+			
+			temp_i = (double) w_i / (double) h_i    ;
+						
+			sprintf(temp, "%.2f", temp_i * 100.);
+			
+			w_i = atoi(temp);
+												
+			sprintf(temp, "%.2f", mv_______->libav_c___the_real_ratio * 100.);
+						
+			h_i = atoi(temp);
+						
+			if(100 != w_i)
+			{
+				w_i = pCodecCtx->sample_aspect_ratio.num;
+				h_i = pCodecCtx->sample_aspect_ratio.den;
+								
+				mv_______->libav_c___the_real_ratio = ((double) w_i / ((double) h_i)) * mv_______->libav_c___the_real_ratio;
+			}
+		}
+		
 		break;
 	case BE_5x4_______:
 		mv_______->libav_c___the_real_ratio = (double)5.0 / 4.0;
@@ -1198,7 +1226,7 @@ int morcego_vermelho_player_thread_koci(morcego___i___instance__a__bucaneiro_eng
 		
 	}
 
-	pedro_dprintf(0, "found subtitle track at position %d\n", the_subtitle_stream_i);
+	//pedro_dprintf(0, "found subtitle track at position %d\n", the_subtitle_stream_i);
 
 	while (av_read_frame(FormatContext, packet_ptr_pereira_koci_forever) >=0)
 	{
@@ -1223,7 +1251,7 @@ int morcego_vermelho_player_thread_koci(morcego___i___instance__a__bucaneiro_eng
 
 
 
-pedro_dprintf(0, "stream being decoded... %d\n", packet_ptr_pereira_koci_forever->stream_index);
+//pedro_dprintf(0, "stream being decoded... %d\n", packet_ptr_pereira_koci_forever->stream_index);
 
 if(-2 != the_subtitle_stream_i)
 {
@@ -1231,7 +1259,7 @@ if(-2 != the_subtitle_stream_i)
 	//Mr. Do...
 	if (packet_ptr_pereira_koci_forever->stream_index == the_subtitle_stream_i)
 		{
-			pedro_dprintf(0, "THIS packet is mine...\n");
+			pedro_dprintf(0, "1 THIS packet is mine...\n");
 			
 			//aqui para nao haver memory leak...
 			av_packet_unref(packet_ptr_pereira_koci_forever);
@@ -1921,6 +1949,9 @@ return_call_for_one_frame_only_playback_k:      //remenber it
 
 							sws_scale((struct SwsContext *)mv_______->libav_c___sc_kp, (const uint8_t *const *)pFrame_ptr_koci_player->data, pFrame_ptr_koci_player->linesize,
 							          0, pCodecCtx->height, pict.data, pict.linesize);
+							
+							pedro_dprintf(-1, "w w y y %d %d %d %d\n", pCodecCtx->width, pFrame_ptr_koci_player->width,
+							pCodecCtx->height, pFrame_ptr_koci_player->height);
 							
 							pedro_dprintf(-1, "-tempo decorrido %f", (get_bucaneiro_tick() - amanda_timer) * 1000.);
 
