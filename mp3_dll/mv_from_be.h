@@ -81,6 +81,12 @@ extern void pedro_dprintf
 	char *format, ...
 );
 
+enum amanda_enum_sete_de_agosto__
+{
+	I_MODE_IS_AUDIO____ = 1001,
+	I_MODE_IS_SUBTITLE_,
+};
+
 enum be_normalization_flags___
 {
 	BE_CLEAR____,
@@ -778,6 +784,9 @@ typedef struct morcego_instance_be_
 	int       libav_c___system_screen_w_____i                                          ;
 	int       libav_c___system_screen_h_____i                                          ;
 	bool      libav_c___window_was_set______i                                          ;
+	
+	int       libav_c___retrieve_track_and_subtitles_mode_i                            ;
+	int       libav_c___use_subtitles_track_i                                          ;
 		
 }morcego___i___instance__a__bucaneiro_engineering                                      ;
 //#pragma pack(pop)

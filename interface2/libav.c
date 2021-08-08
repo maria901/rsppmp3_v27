@@ -365,7 +365,7 @@ init_decoder2 (morcego___i___instance__a__bucaneiro_engineering *mv_______,be_li
 			if (FormatContext->streams[i]->codecpar->codec_type == AVMEDIA_TYPE_AUDIO)
 			{
 				counter++;
-				if(counter==be_data->track_to_play_or_decode)
+				if(counter == be_data->track_to_play_or_decode)
 				{
 					if(false == already_missing)
 					{
@@ -1376,16 +1376,16 @@ int get_number_of_audio_tracks_internal(morcego___i___instance__a__bucaneiro_eng
 			pedro_dprintf(0, "track %d == AVMEDIA_TYPE_UNKNOWN\n", i + 1);
 			break;
 			case AVMEDIA_TYPE_VIDEO:
-			pedro_dprintf(0, "track %d == AVMEDIA_TYPE_VIDEO\n", i + 1);
+			pedro_dprintf(-1, "track %d == AVMEDIA_TYPE_VIDEO\n", i + 1);
 			break;
 			case AVMEDIA_TYPE_AUDIO:
-			pedro_dprintf(0, "track %d == AVMEDIA_TYPE_AUDIO\n", i + 1);
+			pedro_dprintf(-1, "track %d == AVMEDIA_TYPE_AUDIO\n", i + 1);
 			break;
 			case AVMEDIA_TYPE_DATA:
 			pedro_dprintf(0, "track %d == AVMEDIA_TYPE_DATA\n", i + 1);
 			break;
 			case AVMEDIA_TYPE_SUBTITLE:
-			pedro_dprintf(0, "track %d == AVMEDIA_TYPE_SUBTITLE\n", i + 1);
+			pedro_dprintf(0, "Track %d == AVMEDIA_TYPE_SUBTITLE\n", i + 1);
 			break;
 			case AVMEDIA_TYPE_ATTACHMENT:
 			pedro_dprintf(0, "track %d == AVMEDIA_TYPE_ATTACHMENT\n", i + 1);
@@ -1395,16 +1395,29 @@ int get_number_of_audio_tracks_internal(morcego___i___instance__a__bucaneiro_eng
 			break;			
 		}
 	}
-		
 	 
 	 count = 0;
 	 
-	for (i = 0; i < FormatContext_b->nb_streams; i++)
-		if (FormatContext_b->streams[i]->codecpar->codec_type == /*AVMEDIA_TYPE_AUDIO*/ AVMEDIA_TYPE_AUDIO)
-		{
-			pedro_dprintf(0, "achou audio track %d \n",i+1);
-			count++; //untested, as usual
-		}
+	 if(I_MODE_IS_AUDIO____ == mv_______->libav_c___retrieve_track_and_subtitles_mode_i)
+	 {
+		for (i = 0; i < FormatContext_b->nb_streams; i++)
+			if (FormatContext_b->streams[i]->codecpar->codec_type == /*AVMEDIA_TYPE_AUDIO*/ AVMEDIA_TYPE_AUDIO)
+			{
+				pedro_dprintf(0, "achou audio track %d \n",i+1);
+				count++; //untested, as usual
+			}
+	 }
+	 	 
+	 if(I_MODE_IS_SUBTITLE_ == mv_______->libav_c___retrieve_track_and_subtitles_mode_i)
+	 {
+		for (i = 0; i < FormatContext_b->nb_streams; i++)
+			if (FormatContext_b->streams[i]->codecpar->codec_type == /*AVMEDIA_TYPE_AUDIO*/ AVMEDIA_TYPE_SUBTITLE)
+			{
+				pedro_dprintf(0, "achou subtitle track %d \n",i+1);
+				count++; //untested, as usual
+			}
+	 }
+	 
 saida:
 	;
 

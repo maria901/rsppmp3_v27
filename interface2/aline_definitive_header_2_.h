@@ -1,1 +1,1 @@
-#define AMARIC__VERSION "31.9.8 build 547219"
+#define AMARIC__VERSION "32.0.3 build 547224"

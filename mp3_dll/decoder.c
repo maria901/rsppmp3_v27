@@ -5127,7 +5127,7 @@ int __stdcall GetErrorString(__int64 mv_instance, int value, char *data)
 	return 0;
 }
 /**
- * As the name says it will retrieve how many audio tracks a media file have, not completelly working since 2011...maybe 2022
+ * As the name says it will retrieve how many audio tracks a media file have
  *
  */
 int __stdcall GetNumberOfAudioTracks(__int64 mv_instance, char *utf8_filename,
@@ -5140,6 +5140,30 @@ int __stdcall GetNumberOfAudioTracks(__int64 mv_instance, char *utf8_filename,
 	morcego___i___instance__a__bucaneiro_engineering *mv_______ =
 		(morcego___i___instance__a__bucaneiro_engineering *)(__INT32_OR_INT64)
 		mv_instance;
+		
+	mv_______->libav_c___retrieve_track_and_subtitles_mode_i = I_MODE_IS_AUDIO____;
+		
+	return get_number_of_audio_tracks(mv_______, (char *)utf8_filename,
+	                                  (char *)error_message);
+}
+
+/**
+ * As the name says it will retrieve how many subtitles tracks a media file have
+ *
+ */
+int __stdcall GetNumberOfSubtitles(__int64 mv_instance, char *utf8_filename,
+                                     char *error_message)
+{
+	int
+	get_number_of_audio_tracks(morcego___i___instance__a__bucaneiro_engineering * mv_______,
+	                           char *utf8_filename, char *error_message);
+	check_mv_instance(mv_instance);
+	morcego___i___instance__a__bucaneiro_engineering *mv_______ =
+		(morcego___i___instance__a__bucaneiro_engineering *)(__INT32_OR_INT64)
+		mv_instance;
+		
+	mv_______->libav_c___retrieve_track_and_subtitles_mode_i = I_MODE_IS_SUBTITLE_;
+		
 	return get_number_of_audio_tracks(mv_______, (char *)utf8_filename,
 	                                  (char *)error_message);
 }

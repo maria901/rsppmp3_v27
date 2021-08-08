@@ -19,8 +19,8 @@ namespace mp3dll
 		private System.Windows.Forms.Button audio_get_i;
 		private System.Windows.Forms.Label label13;
 		private System.Windows.Forms.ComboBox track;
-		private System.Windows.Forms.Button button1;
-		private System.Windows.Forms.ComboBox comboBox1;
+		private System.Windows.Forms.Button get_subtitles_i;
+		private System.Windows.Forms.ComboBox subtitle_i;
 		private System.Windows.Forms.Label label1;
 		
 		/// <summary>
@@ -50,8 +50,8 @@ namespace mp3dll
 			this.label13 = new System.Windows.Forms.Label();
 			this.track = new System.Windows.Forms.ComboBox();
 			this.groupBox2 = new System.Windows.Forms.GroupBox();
-			this.button1 = new System.Windows.Forms.Button();
-			this.comboBox1 = new System.Windows.Forms.ComboBox();
+			this.get_subtitles_i = new System.Windows.Forms.Button();
+			this.subtitle_i = new System.Windows.Forms.ComboBox();
 			this.label1 = new System.Windows.Forms.Label();
 			this.groupBox1.SuspendLayout();
 			this.groupBox2.SuspendLayout();
@@ -71,7 +71,7 @@ namespace mp3dll
 			// 
 			// audio_get_i
 			// 
-			this.audio_get_i.Location = new System.Drawing.Point(165, 109);
+			this.audio_get_i.Location = new System.Drawing.Point(198, 109);
 			this.audio_get_i.Name = "audio_get_i";
 			this.audio_get_i.Size = new System.Drawing.Size(88, 20);
 			this.audio_get_i.TabIndex = 76;
@@ -82,17 +82,17 @@ namespace mp3dll
 			// label13
 			// 
 			this.label13.AutoSize = true;
-			this.label13.Location = new System.Drawing.Point(46, 134);
+			this.label13.Location = new System.Drawing.Point(24, 134);
 			this.label13.Name = "label13";
-			this.label13.Size = new System.Drawing.Size(161, 13);
+			this.label13.Size = new System.Drawing.Size(215, 13);
 			this.label13.TabIndex = 75;
-			this.label13.Text = "Play or convert the track number";
+			this.label13.Text = "Play or convert the track number, 0 for none";
 			// 
 			// track
 			// 
 			this.track.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
 			this.track.FormattingEnabled = true;
-			this.track.Location = new System.Drawing.Point(212, 131);
+			this.track.Location = new System.Drawing.Point(245, 131);
 			this.track.Name = "track";
 			this.track.Size = new System.Drawing.Size(40, 21);
 			this.track.TabIndex = 74;
@@ -100,8 +100,8 @@ namespace mp3dll
 			// 
 			// groupBox2
 			// 
-			this.groupBox2.Controls.Add(this.button1);
-			this.groupBox2.Controls.Add(this.comboBox1);
+			this.groupBox2.Controls.Add(this.get_subtitles_i);
+			this.groupBox2.Controls.Add(this.subtitle_i);
 			this.groupBox2.Controls.Add(this.label1);
 			this.groupBox2.Location = new System.Drawing.Point(356, 22);
 			this.groupBox2.Name = "groupBox2";
@@ -110,32 +110,34 @@ namespace mp3dll
 			this.groupBox2.TabStop = false;
 			this.groupBox2.Text = "Subtitles";
 			// 
-			// button1
+			// get_subtitles_i
 			// 
-			this.button1.Location = new System.Drawing.Point(203, 109);
-			this.button1.Name = "button1";
-			this.button1.Size = new System.Drawing.Size(88, 20);
-			this.button1.TabIndex = 76;
-			this.button1.Text = "Retrieve tracks";
-			this.button1.UseVisualStyleBackColor = true;
+			this.get_subtitles_i.Location = new System.Drawing.Point(178, 109);
+			this.get_subtitles_i.Name = "get_subtitles_i";
+			this.get_subtitles_i.Size = new System.Drawing.Size(113, 20);
+			this.get_subtitles_i.TabIndex = 76;
+			this.get_subtitles_i.Text = "Retrieve subtitles";
+			this.get_subtitles_i.UseVisualStyleBackColor = true;
+			this.get_subtitles_i.Click += new System.EventHandler(this.Get_subtitles_iClick);
 			// 
-			// comboBox1
+			// subtitle_i
 			// 
-			this.comboBox1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-			this.comboBox1.FormattingEnabled = true;
-			this.comboBox1.Location = new System.Drawing.Point(250, 131);
-			this.comboBox1.Name = "comboBox1";
-			this.comboBox1.Size = new System.Drawing.Size(40, 21);
-			this.comboBox1.TabIndex = 74;
+			this.subtitle_i.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+			this.subtitle_i.FormattingEnabled = true;
+			this.subtitle_i.Location = new System.Drawing.Point(250, 131);
+			this.subtitle_i.Name = "subtitle_i";
+			this.subtitle_i.Size = new System.Drawing.Size(40, 21);
+			this.subtitle_i.TabIndex = 74;
+			this.subtitle_i.SelectedIndexChanged += new System.EventHandler(this.Subtitle_iSelectedIndexChanged);
 			// 
 			// label1
 			// 
 			this.label1.AutoSize = true;
-			this.label1.Location = new System.Drawing.Point(84, 134);
+			this.label1.Location = new System.Drawing.Point(59, 134);
 			this.label1.Name = "label1";
-			this.label1.Size = new System.Drawing.Size(161, 13);
+			this.label1.Size = new System.Drawing.Size(185, 13);
 			this.label1.TabIndex = 75;
-			this.label1.Text = "Play or convert the track number";
+			this.label1.Text = "Show the subtitles number, 0 for none";
 			// 
 			// tracks_and_subtitles_i
 			// 

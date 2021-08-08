@@ -76,7 +76,6 @@ namespace mp3dll
 			this.button14 = new System.Windows.Forms.Button();
 			this.stereo_as_mono = new System.Windows.Forms.CheckBox();
 			this.bits_per_sample = new System.Windows.Forms.Label();
-			this.button15 = new System.Windows.Forms.Button();
 			this.convert_timer = new System.Windows.Forms.Timer(this.components);
 			this.button16 = new System.Windows.Forms.Button();
 			this.width_t = new System.Windows.Forms.TextBox();
@@ -531,13 +530,6 @@ namespace mp3dll
 			this.bits_per_sample.Size = new System.Drawing.Size(78, 13);
 			this.bits_per_sample.TabIndex = 66;
 			this.bits_per_sample.Text = "Bits per sample";
-			// 
-			// button15
-			// 
-			this.button15.Location = new System.Drawing.Point(0, 0);
-			this.button15.Name = "button15";
-			this.button15.Size = new System.Drawing.Size(75, 23);
-			this.button15.TabIndex = 150;
 			// 
 			// convert_timer
 			// 
@@ -1341,7 +1333,6 @@ namespace mp3dll
 			this.Controls.Add(this.peak);
 			this.Controls.Add(this.wave_out_volume);
 			this.Controls.Add(this.internal_volume);
-			this.Controls.Add(this.button15);
 			this.Controls.Add(this.bits_per_sample);
 			this.Controls.Add(this.stereo_as_mono);
 			this.Controls.Add(this.button14);
@@ -1457,7 +1448,6 @@ namespace mp3dll
 		private System.Windows.Forms.Button button14;
 		private System.Windows.Forms.CheckBox stereo_as_mono;
 		private System.Windows.Forms.Label bits_per_sample;
-		private System.Windows.Forms.Button button15;
 		private System.Windows.Forms.Timer convert_timer;
 		private amanda_progress.progressbar internal_volume;
 		private amanda_progress.progressbar wave_out_volume;

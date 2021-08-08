@@ -128,17 +128,18 @@ namespace mp3dll
 	/// </remarks>
 	public class MP3
 	{
-		internal static sample sample_copy_i      = null;
-		internal static amanda_search search_copy = null;
-		internal static sample sample_copy_ar     = null;
-		internal static spectrum               k  = null;
-		internal static normalize              k2 = null;
-		internal static wave_effects           k3 = null;
-		internal static equalizer              p  = null;
-		internal static id3tag                 p4 = null;
-		internal static DebugInformation       p2 = null;
+		internal static sample sample_copy_i             = null;
+		internal static amanda_search search_copy        = null;
+		internal static sample sample_copy_ar            = null;
+		internal static spectrum               k         = null;
+		internal static normalize              k2        = null;
+		internal static wave_effects           k3        = null;
+		internal static equalizer              p         = null;
+		internal static id3tag                 p4        = null;
+		internal static DebugInformation       p2        = null;
 		
-		internal static int selected_track_i      =    1;
+		internal static int selected_track_i             =    1;
+		internal static int selected_subtitle_track_i    =    1;
 		
 		internal static StringBuilder ricardo_koci_strb = new StringBuilder ((int)Amanda_Constants.MAX_PATH_k_p);
 		internal static bool allow_create_new_instance_k_p = false;
@@ -1279,6 +1280,13 @@ namespace mp3dll
 			int
 			GetNumberOfAudioTracks(long mv_instance, string utf8_filename,
 			                       StringBuilder error_message);
+		
+		[DllImport("rspmp3ocx1.dll")]
+		public extern static
+			int
+			GetNumberOfSubtitles(long mv_instance, string utf8_filename,
+			                       StringBuilder error_message);
+
 		/// <summary>
 		/// it will create a decoder, this is the first function that need to be called
 		/// </summary>

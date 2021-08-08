@@ -56,7 +56,7 @@ namespace mp3dll
 		string old_stringz   = "-1";
 		bool disable_pause_resume = false;
 		int old_value_v27_z = 0;
-		int position_amanda = 0;
+		
 		PictureBox temp_z_pic = new PictureBox();
 		protected bool  mode_is_ricardo_window = false;
 		
@@ -733,9 +733,7 @@ namespace mp3dll
 		public long number = MP3.number;
 		string nome_da_dll;
 		int already=0;
-		
-		int old_value_z = 0;
-		
+				
 		private void my_thread_fullscreen_fix_p()
 		{
 			if(false == mode_is_ricardo_window)
@@ -823,7 +821,8 @@ namespace mp3dll
 			
 			string temp_i;
 			
-			MP3.selected_track_i =    1;
+			MP3.selected_track_i          =    1;
+			MP3.selected_subtitle_track_i =    1;
 			MP3.sample_copy_i    = this;
 			
 			this.WindowState = FormWindowState.Normal;
