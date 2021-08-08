@@ -1143,6 +1143,8 @@ AVFormatContext *FormatContext;
 AVSubtitle sub_amanda_;
 AVSubtitle sub_ricardo;
 
+bool alternating_i = false;
+
 char amandaricardo_koci_deslocador_decoder;
 
 int libav_c____decoder_feline_running;
@@ -1154,7 +1156,10 @@ char maria_decoded_something;
 int morcego_vermelho_player_thread_koci(morcego___i___instance__a__bucaneiro_engineering *mv_______)
 {
 	//int error_value_amanda;
+	int i_i;
+	int count_i = 0;
 	int counter_z = 0;
+	int the_subtitle_stream_i = -2;
 	bool data_used_z = false;
 	double amanda_tempo;
 	int amandaricardo_used = 0;
@@ -1174,6 +1179,27 @@ int morcego_vermelho_player_thread_koci(morcego___i___instance__a__bucaneiro_eng
 
 	mv_______->libav_c___displacement_for_see_adjust_k_p = -1;
 
+
+	if(0 != mv_______->libav_c___use_subtitles_track_i)
+	{
+		for (i_i = 0; i_i < FormatContext->nb_streams; i_i++)
+			if (FormatContext->streams[i_i]->codecpar->codec_type == /*AVMEDIA_TYPE_AUDIO*/ AVMEDIA_TYPE_SUBTITLE)
+			{
+				
+				count_i++; //...
+				
+				if(count_i == mv_______->libav_c___use_subtitles_track_i)
+				{
+					mv_______->libav_c___decode_subtitle = true;
+					the_subtitle_stream_i                =  i_i;
+					break;
+				}
+			}
+		
+	}
+
+	pedro_dprintf(0, "found subtitle track at position %d\n", the_subtitle_stream_i);
+
 	while (av_read_frame(FormatContext, packet_ptr_pereira_koci_forever) >=0)
 	{
 	 
@@ -1184,6 +1210,38 @@ int morcego_vermelho_player_thread_koci(morcego___i___instance__a__bucaneiro_eng
 			pedro_dprintf(-1, "Saiu no erro a %p %p\n", pFrame_ptr_koci, packet_ptr_pereira_koci_forever);
 			goto koci_finish;
 	     }
+
+
+
+
+
+
+
+
+
+
+
+
+
+pedro_dprintf(0, "stream being decoded... %d\n", packet_ptr_pereira_koci_forever->stream_index);
+
+if(-2 != the_subtitle_stream_i)
+{
+	
+	//Mr. Do...
+	if (packet_ptr_pereira_koci_forever->stream_index == the_subtitle_stream_i)
+		{
+			pedro_dprintf(0, "THIS packet is mine...\n");
+			
+			//aqui para nao haver memory leak...
+			av_packet_unref(packet_ptr_pereira_koci_forever);
+			continue;
+		}
+}
+
+
+
+
 
 		if (packet_ptr_pereira_koci_forever->stream_index == mv_______->libav_c___videostream)
 		{
@@ -1387,6 +1445,7 @@ int morcego_vermelho_player_thread(morcego___i___instance__a__bucaneiro_engineer
 
      amanda_locked = 0;
 
+	 mv_______->libav_c___decode_subtitle = false;
 
      mv_______->libav_c___video_thread_running = 1;
 

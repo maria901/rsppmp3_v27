@@ -153,7 +153,7 @@ int stripfilenameandpath(char *path, char *onlypath, char *onlyfilename);
 
 int __stdcall Play(__int64 mv_instance, char *filename___, int loop, int track,
                    __int64 hwnd_, __int64 player_hwnd_, int width_, int heigth_,
-                   int ratio_, int left_, int top_);
+                   int ratio_, int left_, int top_, int);
 
 int is_playlist(morcego___i___instance__a__bucaneiro_engineering *mv_______,
                 char *filename_);
@@ -6207,7 +6207,7 @@ check_mv_instance(number_z);
   */
   Open(number_z, media_file_utf8_z, 0, 1, hwnd_z,
        player_hwnd_z,
-       width__z, height__z, 0, left_z, top_z);
+       width__z, height__z, 0, left_z, top_z, 0);
   /*
   while(-1 == SampleRate(number_z))
     {

@@ -88,7 +88,7 @@ namespace mp3dll
 
 				if (0 == ret)
 				{
-					subtitle_i.Text               = "0";//default to track 1, as you may expect and me too
+					subtitle_i.Text               = "0";//default to track 0 (none), as you may expect and me too
 					MP3.selected_subtitle_track_i =  0 ;
 				}
 				else

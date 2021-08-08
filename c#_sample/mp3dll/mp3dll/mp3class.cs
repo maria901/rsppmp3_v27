@@ -219,6 +219,7 @@ namespace mp3dll
 		/// <param name="ratio_">the ratio of the video, at least the most used, use BE_AUTO_______ if unkown</param>
 		/// <param name="left_">the position on the form of the video window</param>
 		/// <param name="top_">the position on the form for the video window</param>
+		/// <param name="subtitle_i">0 if no usage of subtitle or the subtitle to use, if the file have 3 subtitles the 1 is the first and so on</param>
 		/// <returns>0 if ok, -1 if the decoder is not loaded</returns>
 		[DllImport("rspmp3ocx1.dll")]
 		public static extern int
@@ -228,7 +229,8 @@ namespace mp3dll
 			     int heigth_,
 			     morcego_ratio ratio_,
 			     int left_,
-			     int top_);
+			     int top_,
+			     int subtitle_i);
 
 		
 		[DllImport("rspmp3ocx1.dll")]
@@ -294,6 +296,7 @@ namespace mp3dll
 		/// <param name="ratio_">the ratio of the video, at least the most used, use BE_AUTO_______ if unkown</param>
 		/// <param name="left_">the position on the form of the video window</param>
 		/// <param name="top_">the position on the form for the video window</param>
+		/// <param name="subtitle_i">0 if no usage of subtitle or the subtitle to use, if the file have 3 subtitles the 1 is the first and so on</param>
 		/// <returns>0 if ok, -1 if the decoder is not loaded</returns>
 		[DllImport("rspmp3ocx1.dll")]
 		public static extern int
@@ -303,7 +306,8 @@ namespace mp3dll
 			     int heigth_,
 			     morcego_ratio ratio_,
 			     int left_,
-			     int top_);
+			     int top_,
+			     int subtitle_i);
 
 		[DllImport("rspmp3ocx1.dll")]
 		public static extern int

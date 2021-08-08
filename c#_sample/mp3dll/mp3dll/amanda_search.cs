@@ -1,5 +1,5 @@
 ﻿
- /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
  *                                                                              *
  *        Licensa de Cópia (C) <2021>  <Corporação do Trabalho Binário>         *
  *                                                                              *
@@ -24,7 +24,7 @@
  *     Little_Amanda:    arsoftware10@gmail.com    amanda.@arsoftware.net.br    *
  *                                                                              *
  *     contato imediato(para uma resposta muita rápida) WhatsApp                *
- *     (+55)41 9627 1708 - isto está sempre ligado (eu acho...)                 *      
+ *     (+55)41 9627 1708 - isto está sempre ligado (eu acho...)                 *
  *                                                                              *
  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *  **/
 
@@ -58,7 +58,21 @@ namespace mp3dll
 			// TODO: Add constructor code after the InitializeComponent() call.
 			//
 		}
-		protected int position_amanda;
+		
+		protected int           position_amanda;
+		
+		protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
+		{
+
+			if ("Return" == keyData.ToString())
+			{
+				Next_mariaClick(null, null);
+				return true;
+			}
+			
+			return base.ProcessCmdKey(ref msg, keyData);
+		}
+		
 		void Next_mariaClick(object sender, EventArgs e)
 		{
 			bool containsSearchResult;
@@ -72,7 +86,7 @@ namespace mp3dll
 				for(i_amanda = position_amanda; i_amanda < MP3.sample_copy_ar.playlist.Items.Count; i_amanda++)
 				{
 					containsSearchResult = MP3.sample_copy_ar.playlist.Items[i_amanda].SubItems[0].Text.ToLower().Contains(search_amanda.Text.ToLower());
-				
+					
 					if(containsSearchResult)
 					{
 						//position_amanda = i_amanda + 1;
@@ -88,20 +102,20 @@ namespace mp3dll
 			}
 			
 			//playlist.Focus();
-		
-		
+			
+			
 		}
 		void Ricardo_listDoubleClick(object sender, EventArgs e)
 		{
 			MP3.pedro_dprintf(-1, "Item pego " + ricardo_list.Items[ricardo_list.SelectedIndex].ToString());
 			MP3.sample_copy_ar.playlist_search_amanda_DoubleClick(ricardo_list.Items[ricardo_list.SelectedIndex].ToString());
-		
+			
 			this.WindowState = FormWindowState.Minimized;
 			
 		}
 		void Amanda_searchLoad(object sender, EventArgs e)
 		{
-	
+			
 			if(null != MP3.search_copy)
 			{
 				MP3.search_copy.Close();

@@ -90,7 +90,7 @@ namespace mp3dll
 				{
 					MP3.PlayInDesktop(number, 1, Screen.PrimaryScreen.Bounds.Width, Screen.PrimaryScreen.Bounds.Height, Screen.PrimaryScreen.Bounds.Width / 2, Screen.PrimaryScreen.Bounds.Height / 2, amanda_position.I_CENTER);
 				}
-				*/
+				 */
 				MP3.PlayInDesktop(number, 0, Screen.PrimaryScreen.Bounds.Width, Screen.PrimaryScreen.Bounds.Height, max_width__i, max_height_i,     amanda_position.I_TOP__);
 				if(true == is_amanda_desktop.Checked)
 				{
@@ -102,7 +102,7 @@ namespace mp3dll
 				{
 					MP3.PlayInDesktop(number, 1, Screen.PrimaryScreen.Bounds.Width, Screen.PrimaryScreen.Bounds.Height, Screen.PrimaryScreen.Bounds.Width / 2, Screen.PrimaryScreen.Bounds.Height / 2, amanda_position.I_BOTTOM);
 				}
-				*/
+				 */
 			}
 			else
 			{
@@ -156,7 +156,8 @@ namespace mp3dll
 					         video_p.Height,
 					         the_ratio,
 					         video_p.Left,
-					         video_p.Top);
+					         video_p.Top,
+					         MP3.selected_subtitle_track_i);
 					playlist.Visible = false;
 					main_timer.Enabled = true;
 				}
@@ -680,7 +681,8 @@ namespace mp3dll
 					               video_p.Height,
 					               the_ratio,
 					               video_p.Left,
-					               video_p.Top);
+					               video_p.Top,
+					               MP3.selected_subtitle_track_i);
 					disable_standby.EnableConstantDisplayAndPower(true);
 					
 					main_timer.Enabled = true;
@@ -733,7 +735,7 @@ namespace mp3dll
 		public long number = MP3.number;
 		string nome_da_dll;
 		int already=0;
-				
+		
 		private void my_thread_fullscreen_fix_p()
 		{
 			if(false == mode_is_ricardo_window)
@@ -1193,7 +1195,8 @@ namespace mp3dll
 				               video_p.Height,
 				               the_ratio,
 				               video_p.Left,
-				               video_p.Top);
+				               video_p.Top,
+				               MP3.selected_subtitle_track_i);
 				
 			}
 			else
@@ -1282,7 +1285,8 @@ namespace mp3dll
 				               video_p.Height,
 				               the_ratio,
 				               video_p.Left,
-				               video_p.Top);
+				               video_p.Top,
+				               MP3.selected_subtitle_track_i);
 			}
 
 			main_timer.Enabled = true;
@@ -1354,7 +1358,8 @@ namespace mp3dll
 				               video_p.Height,
 				               the_ratio,
 				               video_p.Left,
-				               video_p.Top);
+				               video_p.Top,
+				               MP3.selected_subtitle_track_i);
 			}
 			else
 			{
@@ -1438,7 +1443,8 @@ namespace mp3dll
 				               video_p.Height,
 				               the_ratio,
 				               video_p.Left,
-				               video_p.Top);
+				               video_p.Top,
+				               MP3.selected_subtitle_track_i);
 			}
 
 			main_timer.Enabled = true;
@@ -3373,7 +3379,9 @@ namespace mp3dll
 			         video_p.Height,
 			         the_ratio,
 			         video_p.Left,
-			         video_p.Top);
+			         video_p.Top,
+			         MP3.selected_subtitle_track_i);
+			
 			playlist.Visible = false;
 			main_timer.Enabled = true;
 			disable_pause_resume = false;
@@ -3829,7 +3837,8 @@ namespace mp3dll
 				         video_p.Height,
 				         the_ratio,
 				         video_p.Left,
-				         video_p.Top);
+				         video_p.Top,
+				         MP3.selected_subtitle_track_i);
 				playlist.Visible = false;
 				main_timer.Enabled = true;
 				disable_pause_resume = false;
