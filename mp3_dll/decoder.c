@@ -2714,7 +2714,7 @@ int __stdcall PlayInDesktop(__int64 mv_instance, int enable_i, int system_screen
  */
 int __stdcall Play(__int64 mv_instance, char *filename, int loop, int track, __attribute__((unused)) __int64 hwnd_,
                    __attribute__((unused)) __int64 player_hwnd_,
-                   int width_, int heigth_, int ratio_, int left_, int top_)
+                   int width_, int heigth_, int ratio_, int left_, int top_, int subtitle_i)
 {
 	
 	check_mv_instance(mv_instance);
@@ -2740,6 +2740,8 @@ int __stdcall Play(__int64 mv_instance, char *filename, int loop, int track, __a
 	}
 			
 	//mv_______->libav_c___show_in_position____i = position_i;
+		
+	mv_______->libav_c___use_subtitles_track_i = subtitle_i;
 		
 	mv_______->libav_c___hwnd = (int64_t)hwnd_;
 	mv_______->libav_c___size_of_window_width = width_;
@@ -2789,7 +2791,8 @@ int __stdcall Play(__int64 mv_instance, char *filename, int loop, int track, __a
  */
 int __stdcall Open(__int64 mv_instance, char *filename, int loop, int track, __int64 hwnd_,
                    __int64 player_hwnd_,
-                   int width_, int heigth_ /* I am brazilian, sorry...*/, int ratio_, int left_, int top_)
+                   int width_, int heigth_ /* I am brazilian, sorry...*/, int ratio_, int left_, int top_,
+				   int subtitle_i)
 {
 	check_mv_instance(mv_instance);
 	morcego___i___instance__a__bucaneiro_engineering *mv_______ =
@@ -2804,6 +2807,8 @@ int __stdcall Open(__int64 mv_instance, char *filename, int loop, int track, __i
 	while (-1 == morcego_cancel(mv_______))
 	{
 	}
+	
+	mv_______->libav_c___use_subtitles_track_i = subtitle_i;
 	
 	mv_______->libav_c___sample_rate_format_string[0] = '\0';
 
