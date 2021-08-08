@@ -46,7 +46,8 @@ namespace mp3dll
 
 				if (0 == ret)
 				{
-					track.Text = "1";//default to track 1
+					track.Text           = "1";//default to track 1, as you may expect and me too
+					MP3.selected_track_i =  1 ;
 				}
 				else
 				{
@@ -56,10 +57,23 @@ namespace mp3dll
 					{
 						track.Items.Add((i + 1).ToString());
 					}
-					track.Text = "1";
+					track.Text           =  "1";
+					MP3.selected_track_i =   1 ;
 				}
 
 			}
+		}
+		void TrackSelectedIndexChanged(object sender, EventArgs e)
+		{
+			try
+			{
+				MP3.selected_track_i =  int.Parse(track.Text);
+			}
+			catch
+			{
+				MP3.selected_track_i = 1;
+			}
+			
 		}
 		
 	}

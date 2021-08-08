@@ -138,6 +138,8 @@ namespace mp3dll
 		internal static id3tag                 p4 = null;
 		internal static DebugInformation       p2 = null;
 		
+		internal static int selected_track_i      =    1;
+		
 		internal static StringBuilder ricardo_koci_strb = new StringBuilder ((int)Amanda_Constants.MAX_PATH_k_p);
 		internal static bool allow_create_new_instance_k_p = false;
 		/// <summary>

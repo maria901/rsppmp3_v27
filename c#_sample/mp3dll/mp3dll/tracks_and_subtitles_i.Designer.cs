@@ -96,6 +96,7 @@ namespace mp3dll
 			this.track.Name = "track";
 			this.track.Size = new System.Drawing.Size(40, 21);
 			this.track.TabIndex = 74;
+			this.track.SelectedIndexChanged += new System.EventHandler(this.TrackSelectedIndexChanged);
 			// 
 			// groupBox2
 			// 

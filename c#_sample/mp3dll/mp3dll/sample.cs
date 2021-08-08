@@ -149,7 +149,7 @@ namespace mp3dll
 					
 					desktop_playback_settings();
 					
-					MP3.Play(number, MP3.wide2utf8(MP3.the_filename), loop_, int.Parse(track.Text),
+					MP3.Play(number, MP3.wide2utf8(MP3.the_filename), loop_, MP3.selected_track_i,
 					         video_p.Handle.ToInt64(),
 					         video_f_p.Handle.ToInt64(),
 					         video_p.Width,
@@ -673,7 +673,7 @@ namespace mp3dll
 					
 					desktop_playback_settings();
 					
-					ret = MP3.Play(number, MP3.wide2utf8(playlist.Items[MP3.playlist_index].SubItems[1].Text), loop_, int.Parse(track.Text),
+					ret = MP3.Play(number, MP3.wide2utf8(playlist.Items[MP3.playlist_index].SubItems[1].Text), loop_, MP3.selected_track_i,
 					               video_p.Handle.ToInt64(),
 					               video_f_p.Handle.ToInt64(),
 					               video_p.Width,
@@ -823,7 +823,8 @@ namespace mp3dll
 			
 			string temp_i;
 			
-			MP3.sample_copy_i = this;
+			MP3.selected_track_i =    1;
+			MP3.sample_copy_i    = this;
 			
 			this.WindowState = FormWindowState.Normal;
 			
@@ -867,8 +868,7 @@ namespace mp3dll
 			video_p.Height = video_p.Height - 2;
 			
 			video_f_p.Image = dummy2_p.Image;
-			track.Items.Add("1");
-			track.Text = "1";
+			
 			
 			MP3.GetSettings("Amanda", Amanda, "27");
 			
@@ -1187,7 +1187,7 @@ namespace mp3dll
 				
 				desktop_playback_settings();
 				
-				ret = MP3.Play(number, MP3.wide2utf8(filename.Text), loop_, int.Parse(track.Text),
+				ret = MP3.Play(number, MP3.wide2utf8(filename.Text), loop_, MP3.selected_track_i,
 				               video_p.Handle.ToInt64(),
 				               video_f_p.Handle.ToInt64(),
 				               video_p.Width,
@@ -1276,7 +1276,7 @@ namespace mp3dll
 				
 				desktop_playback_settings();
 				
-				ret = MP3.Play(number, MP3.wide2utf8(playlist.Items[MP3.playlist_index].SubItems[1].Text), loop_, int.Parse(track.Text),
+				ret = MP3.Play(number, MP3.wide2utf8(playlist.Items[MP3.playlist_index].SubItems[1].Text), loop_, MP3.selected_track_i,
 				               video_p.Handle.ToInt64(),
 				               video_f_p.Handle.ToInt64(),
 				               video_p.Width,
@@ -1348,7 +1348,7 @@ namespace mp3dll
 				desktop_playback_settings();
 				
 				can_scape_z = true;
-				ret = MP3.Open(number, MP3.wide2utf8(filename.Text), loop_, int.Parse(track.Text),
+				ret = MP3.Open(number, MP3.wide2utf8(filename.Text), loop_, MP3.selected_track_i,
 				               video_p.Handle.ToInt64(),
 				               video_f_p.Handle.ToInt64(),
 				               video_p.Width,
@@ -1432,7 +1432,7 @@ namespace mp3dll
 				
 				desktop_playback_settings();
 				
-				ret = MP3.Open(number, MP3.wide2utf8(playlist.Items[MP3.playlist_index].SubItems[1].Text), loop_, int.Parse(track.Text),
+				ret = MP3.Open(number, MP3.wide2utf8(playlist.Items[MP3.playlist_index].SubItems[1].Text), loop_, MP3.selected_track_i,
 				               video_p.Handle.ToInt64(),
 				               video_f_p.Handle.ToInt64(),
 				               video_p.Width,
@@ -1546,7 +1546,7 @@ namespace mp3dll
 			
 			if (0 != MP3.ConvertMP3ToWavExtended(number, MP3.wide2utf8(filename.Text),
 			                                     MP3.wide2utf8(filetowav.Text), MP3.wave_mode,
-			                                     int.Parse(track.Text)))
+			                                     MP3.selected_track_i))
 			{
 
 				morcego_error.Items.Add(5.ToString() + " - Decoder is in use");
@@ -1666,36 +1666,6 @@ namespace mp3dll
 				MP3.BucaneiroPlayStereoAsMono(number, 1);
 			}
 
-		}
-
-		private void button15_Click(object sender, EventArgs e)
-		{
-			int ret;
-			ret = MP3.GetNumberOfAudioTracks(number, MP3.wide2utf8(filename.Text), message);
-			if (ret < 0)
-			{
-				morcego_error.Items.Add(ret + " - " + message.ToString());
-				morcego_error.SelectedIndex = morcego_error.Items.Count - 1;
-			}
-			else
-			{
-
-				if (0 == ret)
-				{
-					track.Text = "1";//default to track 1
-				}
-				else
-				{
-					
-					track.Items.Clear();
-					for (int i = 0; i < ret; i++)
-					{
-						track.Items.Add((i + 1).ToString());
-					}
-					track.Text = "1";
-				}
-
-			}
 		}
 
 		private void convert_timer_Tick(object sender, EventArgs e)
@@ -3397,7 +3367,7 @@ namespace mp3dll
 			
 			desktop_playback_settings();
 			
-			MP3.Play(number, MP3.wide2utf8(coisa.SubItems[1].Text), loop_, int.Parse(track.Text),
+			MP3.Play(number, MP3.wide2utf8(coisa.SubItems[1].Text), loop_, MP3.selected_track_i,
 			         video_p.Handle.ToInt64(),
 			         video_f_p.Handle.ToInt64(),
 			         video_p.Width,
@@ -3853,7 +3823,7 @@ namespace mp3dll
 				
 				desktop_playback_settings();
 				
-				MP3.Play(number, MP3.wide2utf8(coisa.SubItems[1].Text), loop_, int.Parse(track.Text),
+				MP3.Play(number, MP3.wide2utf8(coisa.SubItems[1].Text), loop_, MP3.selected_track_i,
 				         video_p.Handle.ToInt64(),
 				         video_f_p.Handle.ToInt64(),
 				         video_p.Width,
