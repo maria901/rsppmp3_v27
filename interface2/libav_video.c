@@ -108,6 +108,8 @@
 
 #include "amanda_colorspace.h"
 
+#include "SDL_ttf.h"
+
 //defines
 #define WINDOW_FLAG___ HWND_TOP
 #define SHOW_FLAG__    SWP_SHOWWINDOW | SWP_NOCOPYBITS
@@ -721,7 +723,14 @@ void init_video(morcego___i___instance__a__bucaneiro_engineering *mv_______,
 		}
 		else
 		{
-			pedro_dprintf(-1, "Iniciou sdl...");
+			pedro_dprintf(0, "Iniciou sdl...");
+			
+			if(0 != TTF_Init())
+			{
+				pedro_dprintf(0, "falhou na inicializacao de TTF_init\n");
+				exit(27);
+			}
+		
 		}
 	}
 
@@ -1412,6 +1421,8 @@ if(-2 != the_subtitle_stream_i)
                 pedro_dprintf(0, "ASS %s", rect.ass);
             } else if (rect.type == SUBTITLE_TEXT) {;
                 pedro_dprintf(0, "TEXT %s", rect.text);
+            }else if (rect.type == SUBTITLE_BITMAP) {;
+                pedro_dprintf(0, "SUBTITLE_BITMAP\n");
             }
         }
 						
@@ -1694,6 +1705,14 @@ int morcego_vermelho_player_thread(morcego___i___instance__a__bucaneiro_engineer
 
      mislaine_command.junior_last_frame[0] = -1;
      mislaine_command.junior_last_frame[1] = -1;
+		
+	TTF_Font* Sans = TTF_OpenFont("ArchitectsDaughter.ttf", 24);
+			
+	if(!Sans)
+	{
+		pedro_dprintf(0, "cannot load font 'ArchitectsDaughter.ttf' my love\n");
+		exit(27);
+	}
 	
      double time_spent = get_bucaneiro_tick();
 
@@ -2221,10 +2240,50 @@ return_call_for_one_frame_only_playback_k:      //remenber it
 									
 									
 									
-								
+								//this opens a font style and sets a size
+
+
+
+// this is the color in rgb format,
+// maxing out all would give you the color white,
+// and it will be your text's color
+
+/*
+SDL_Color White = {255, 255, 255};
+
+// as TTF_RenderText_Solid could only be used on
+// SDL_Surface then you have to create the surface first
+SDL_Surface* surfaceMessage =
+    TTF_RenderText_Solid(Sans, "Amanda I love you", White); 
+
+// now you can convert it into a texture
+SDL_Texture* Message = SDL_CreateTextureFromSurface((SDL_Renderer *)mv_______->libav_c___renderer_kp, surfaceMessage);
+
+SDL_Rect Message_rect; //create a rect
+Message_rect.x = 0;  //controls the rect's x coordinate 
+Message_rect.y = 0; // controls the rect's y coordinte
+Message_rect.w = 100; // controls the width of the rect
+Message_rect.h = 100; // controls the height of the rect
+
+// (0,0) is on the top left of the window/screen,
+// think a rect as the text's box,
+// that way it would be very simple to understand
+
+// Now since it's a texture, you have to put RenderCopy
+// in your game loop area, the area where the whole code executes
+
+// you put the renderer's name first, the Message,
+// the crop size (you can ignore this if you don't want
+// to dabble with cropping), and the rect which is the size
+// and coordinate of your texture
+SDL_RenderCopy((SDL_Renderer *)mv_______->libav_c___renderer_kp, Message, NULL, &Message_rect);
+
+// Don't forget to free your surface and texture
+SDL_FreeSurface(surfaceMessage);
+SDL_DestroyTexture(Message);
 							
 							
-							
+							*/
 							
 							
 							
