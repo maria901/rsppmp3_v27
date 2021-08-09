@@ -1706,11 +1706,12 @@ int morcego_vermelho_player_thread(morcego___i___instance__a__bucaneiro_engineer
      mislaine_command.junior_last_frame[0] = -1;
      mislaine_command.junior_last_frame[1] = -1;
 		
-	TTF_Font* Sans = TTF_OpenFont("ArchitectsDaughter.ttf", 24);
+	TTF_Font* Sans_i = TTF_OpenFont("ArchitectsDaughter.ttf", 24);
 			
-	if(!Sans)
+	if(!Sans_i)
 	{
-		pedro_dprintf(0, "cannot load font 'ArchitectsDaughter.ttf' my love\n");
+		assert(0 && "Cannot load font 'ArchitectsDaughter.ttf' my love");
+		
 		exit(27);
 	}
 	
@@ -2248,13 +2249,13 @@ return_call_for_one_frame_only_playback_k:      //remenber it
 // maxing out all would give you the color white,
 // and it will be your text's color
 
-/*
+
 SDL_Color White = {255, 255, 255};
 
 // as TTF_RenderText_Solid could only be used on
 // SDL_Surface then you have to create the surface first
 SDL_Surface* surfaceMessage =
-    TTF_RenderText_Solid(Sans, "Amanda I love you", White); 
+    TTF_RenderText_Solid(Sans_i, "Amanda I love you", White); 
 
 // now you can convert it into a texture
 SDL_Texture* Message = SDL_CreateTextureFromSurface((SDL_Renderer *)mv_______->libav_c___renderer_kp, surfaceMessage);
@@ -2276,14 +2277,17 @@ Message_rect.h = 100; // controls the height of the rect
 // the crop size (you can ignore this if you don't want
 // to dabble with cropping), and the rect which is the size
 // and coordinate of your texture
-SDL_RenderCopy((SDL_Renderer *)mv_______->libav_c___renderer_kp, Message, NULL, &Message_rect);
-
+ar_ret = SDL_RenderCopy((SDL_Renderer *)mv_______->libav_c___renderer_kp, Message, NULL, &Message_rect);
+if(0 != ar_ret)
+{
+	pedro_dprintf(2, "Erro de SDL em SDL_RenderCopy : %s - linha: %d", SDL_GetError(), __LINE__);
+}
 // Don't forget to free your surface and texture
 SDL_FreeSurface(surfaceMessage);
 SDL_DestroyTexture(Message);
 							
 							
-							*/
+							
 							
 							
 							
@@ -2842,6 +2846,8 @@ finish:
 	mv_______->libav_c___video_thread_running = 0;
 	mv_______->decoder_c___cancelflag = 0;
 	ar_koci_force_exit = FALSE;
+
+	TTF_CloseFont(Sans_i);
 
 	//amanda_final
 	return 0;
