@@ -788,6 +788,9 @@ typedef struct morcego_instance_be_
 	int       libav_c___retrieve_track_and_subtitles_mode_i                            ;
 	int       libav_c___use_subtitles_track_i                                          ;
 	bool      libav_c___decode_subtitle                                                ;
+	int       libav_c___the_subtitle_stream_i                                          ;
+	void *    libav_c___pCodecCtx_sub_i                                                ;
+	char *    libav_c___the_sub_pointer_____i                                          ;
 		
 }morcego___i___instance__a__bucaneiro_engineering                                      ;
 //#pragma pack(pop)

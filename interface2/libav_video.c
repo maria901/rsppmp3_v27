@@ -106,6 +106,8 @@
 
 #include "../mp3_dll/decoder.h"
 
+#include "amanda_colorspace.h"
+
 //defines
 #define WINDOW_FLAG___ HWND_TOP
 #define SHOW_FLAG__    SWP_SHOWWINDOW | SWP_NOCOPYBITS
@@ -114,6 +116,23 @@
 /////////////////////////////////////////////////////////////////////////////
 
 int amanda_locked = 0;//to avoid a nasty bug in the video initialization
+
+/////////////////////////////////////////////////////////////////////////////
+// Amanda foi dar longe...kkkkkk, nao deu pra resistir....
+
+#define RGBA_IN(r, g, b, a, s)\
+{\
+    unsigned int v = ((const uint32_t *)(s))[0];\
+    a = (v >> 24) & 0xff;\
+    r = (v >> 16) & 0xff;\
+    g = (v >> 8) & 0xff;\
+    b = v & 0xff;\
+}
+
+#define YUVA_OUT(d, y, u, v, a)\
+{\
+    ((uint32_t *)(d))[0] = (a << 24) | (y << 16) | (u << 8) | v;\
+}
 
 /////////////////////////////////////////////////////////////////////////////
 //addef or desktop playback.
@@ -1171,7 +1190,15 @@ AVFormatContext *FormatContext;
 AVSubtitle sub_amanda_;
 AVSubtitle sub_ricardo;
 
-bool alternating_i = false;
+bool alternating_i                     = false;
+bool alternating_player_i              = false;
+
+bool subtitle_1_amanda__decoder_in_use = false;
+bool subtitle_2_ricardo_decoder_in_use = false;
+bool subtitle_1_amanda__player__in_use = false;
+bool subtitle_2_ricardo_player__in_use = false;
+
+bool has_data_and_need_free_sub_i      = false;
 
 char amandaricardo_koci_deslocador_decoder;
 
@@ -1183,15 +1210,27 @@ char maria_decoded_something;
 
 int morcego_vermelho_player_thread_koci(morcego___i___instance__a__bucaneiro_engineering *mv_______)
 {
+	
+	AVCodecContext *pCodecCtx_sub_i = NULL;
+	
+	AVCodec *Codec_i = NULL;
+	
+	int ret_k_p;
+	
 	//int error_value_amanda;
-	int i_i;
-	int count_i = 0;
-	int counter_z = 0;
+	int got_frame_i     ;  
+	__attribute__((unused)) int ret_i           ;
+	int i_i             ;
+	int count_i   =    0;
+	int counter_z =    0;
 	int the_subtitle_stream_i = -2;
 	bool data_used_z = false;
 	double amanda_tempo;
 	int amandaricardo_used = 0;
 	int frameFinished;
+int i;
+	
+	mv_______->libav_c___pCodecCtx_sub_i = NULL;
 
 	amandaricardo_koci_deslocador_decoder = 0;
 	amandaricardo_koci_player_exited_at = 0;
@@ -1218,8 +1257,48 @@ int morcego_vermelho_player_thread_koci(morcego___i___instance__a__bucaneiro_eng
 				
 				if(count_i == mv_______->libav_c___use_subtitles_track_i)
 				{
-					mv_______->libav_c___decode_subtitle = true;
-					the_subtitle_stream_i                =  i_i;
+					mv_______->libav_c___decode_subtitle       =                  true;
+					the_subtitle_stream_i                      =                   i_i;
+					mv_______->libav_c___the_subtitle_stream_i = the_subtitle_stream_i;
+					
+					
+					
+	pCodecCtx_sub_i = avcodec_alloc_context3(NULL);
+
+	if(!pCodecCtx_sub_i)
+	{
+		pedro_dprintf(0, "malloc problem\n");
+		exit(27);
+	}
+	mv_______->libav_c___pCodecCtx_sub_i = pCodecCtx_sub_i;
+					
+					ret_k_p = avcodec_parameters_to_context(pCodecCtx_sub_i, FormatContext->streams[the_subtitle_stream_i]->codecpar);
+	if (ret_k_p < 0)
+	{
+		pedro_dprintf(0, "erro em avcodec_parameters_to_context\n");
+		exit(27);
+	}
+					
+					Codec_i = (void *) avcodec_find_decoder(pCodecCtx_sub_i->codec_id);
+					
+					if(NULL == Codec_i)
+					{
+						pedro_dprintf(0, "Erro em avcodec_find_decoder\n");
+		exit(27);
+					}
+					
+					if (avcodec_open2(pCodecCtx_sub_i, Codec_i, NULL) < 0)
+	{
+		pedro_dprintf(0, "Erro em avcodec_open2\n");
+		exit(27);
+	}
+					
+					
+					pedro_dprintf(0, "Deu amor e o Ucraniano\n");
+					//exit(27);
+					
+					
+					
 					break;
 				}
 			}
@@ -1227,6 +1306,8 @@ int morcego_vermelho_player_thread_koci(morcego___i___instance__a__bucaneiro_eng
 	}
 
 	//pedro_dprintf(0, "found subtitle track at position %d\n", the_subtitle_stream_i);
+
+mv_______->libav_c___the_sub_pointer_____i = (void *) &sub_amanda_;
 
 	while (av_read_frame(FormatContext, packet_ptr_pereira_koci_forever) >=0)
 	{
@@ -1259,7 +1340,118 @@ if(-2 != the_subtitle_stream_i)
 	//Mr. Do...
 	if (packet_ptr_pereira_koci_forever->stream_index == the_subtitle_stream_i)
 		{
-			pedro_dprintf(0, "1 THIS packet is mine...\n");
+			//pedro_dprintf(0, "1 THIS packet is mine...\n");
+			
+			if(has_data_and_need_free_sub_i)
+			{
+				pedro_dprintf(0, "dando free em sub\n");
+				
+				has_data_and_need_free_sub_i = false;
+				
+				while(subtitle_1_amanda__player__in_use)
+				{
+					Sleep(2);
+				}
+				
+				avsubtitle_free(&sub_amanda_);
+			}
+			
+			
+			if(false == alternating_i)
+			{
+				//alternating_i = true;			
+				
+				while(true == subtitle_1_amanda__player__in_use)
+				{
+					Sleep(2);//while playing in video
+				}
+				
+					subtitle_1_amanda__decoder_in_use = true;
+
+					got_frame_i = 0;
+					ret_i = avcodec_decode_subtitle2(pCodecCtx_sub_i, &sub_amanda_, &got_frame_i, packet_ptr_pereira_koci_forever);
+
+					if(0 > ret_i)
+					{
+						;//do nothing
+						pedro_dprintf(0, "erro %d\n", ret_i);
+						
+					}
+					else
+					{
+						if(got_frame_i)
+						{
+							pedro_dprintf(0, "Frame got value %d\n", sub_amanda_.format);
+							//exit(27);
+							
+							
+							/*
+							{
+								AVSubtitleRect *srect = sub_amanda_.rects[0];
+						
+						Uint8 *p = srect->data[0];
+						
+						pedro_dprintf(0, "pegou %p\n", p);
+						//exit(27);
+							}
+							{
+								AVSubtitleRect *srect = sub_amanda_.rects[1];
+						
+						Uint8 *p = srect->data[0];
+						
+						pedro_dprintf(0, "pegou %p\n", p);
+						exit(27);
+							}
+							*/
+							
+
+						AVSubtitleRect **rects = sub_amanda_.rects;
+        for (i = 0; i < sub_amanda_.num_rects; i++) {
+            AVSubtitleRect rect = *rects[i];
+            if (rect.type == SUBTITLE_ASS) {
+                pedro_dprintf(0, "ASS %s", rect.ass);
+            } else if (rect.type == SUBTITLE_TEXT) {;
+                pedro_dprintf(0, "TEXT %s", rect.text);
+            }
+        }
+						
+						
+						
+						
+							
+							has_data_and_need_free_sub_i = true;
+							
+						}
+						else
+						{
+							pedro_dprintf(0, "Frame not got\n");
+						}
+					}
+
+					subtitle_1_amanda__decoder_in_use = false;
+			  
+			}
+			else
+			{
+				alternating_i = false;
+				/*
+				got_frame_i = 0;
+				ret_i = avcodec_decode_subtitle2(pCodecCtx, &sub_ricardo, &got_frame_i, packet_ptr_pereira_koci_forever);
+			  */
+			  
+			}
+			
+			//exit(27);
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
 			
 			//aqui para nao haver memory leak...
 			av_packet_unref(packet_ptr_pereira_koci_forever);
@@ -1472,7 +1664,7 @@ int morcego_vermelho_player_thread(morcego___i___instance__a__bucaneiro_engineer
      DWORD style_kp;
 
      amanda_locked = 0;
-
+	 mv_______->libav_c___the_subtitle_stream_i = -2;
 	 mv_______->libav_c___decode_subtitle = false;
 
      mv_______->libav_c___video_thread_running = 1;
@@ -1510,8 +1702,8 @@ int morcego_vermelho_player_thread(morcego___i___instance__a__bucaneiro_engineer
      double ajuste_de_sincronizacao_second = 0;
 
      int was_paused = 0; //do nothing
-
-     int firstpass = 1; //do nothing
+	                                                                                           //for your pleasure...
+     int firstpass = 1;  //do nothing
      int dcounter3 = 0;
      __int64 ready_to_adjust = 0;
      int dcounter1 = 0;
@@ -1521,7 +1713,7 @@ int morcego_vermelho_player_thread(morcego___i___instance__a__bucaneiro_engineer
 
      int dcounter4 = 0;
      int dcounter5 = 0;
-	
+		
      int e_counter_skip_valquiria = 0;
 
      BOOL disable_playback_delay_k_p = FALSE;
@@ -1996,6 +2188,63 @@ return_call_for_one_frame_only_playback_k:      //remenber it
 							
 							SDL_RenderPresent((SDL_Renderer *)mv_______-> libav_c___renderer_kp);
 							pedro_dprintf(-1, "3 tempo decorrido %f", (get_bucaneiro_tick() - amanda_timer) * 1000.);
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+									
+									
+									
+									
+									
+									
+									
+									
+									
+									
+									
+									
+									
+									
+									
+									
+									
+									
+									
+									
+									
+								
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
 							
 							if(get_device_lost_state_k())
 							{
@@ -2567,12 +2816,25 @@ void deinit2_video(morcego___i___instance__a__bucaneiro_engineering *mv_______)
 	 */
 	if (FormatContext)
 	{
+		
+		
+		
 		if (pCodecCtx)
 		{
 			avcodec_free_context(&pCodecCtx);
 			pCodecCtx = NULL;
 			mv_______->libav_c___pCodecCtx_ptr_video = NULL;
 		}
+		
+		pCodecCtx = (void *) mv_______->libav_c___pCodecCtx_sub_i;
+		
+		if(pCodecCtx)
+		{
+			pedro_dprintf(0, "free on sub\n");
+			avcodec_free_context(&pCodecCtx);
+			mv_______->libav_c___pCodecCtx_sub_i = NULL;
+		}
+		
 		avformat_close_input(&FormatContext);
 
 		FormatContext = NULL;
