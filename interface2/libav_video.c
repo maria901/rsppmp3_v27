@@ -1689,6 +1689,33 @@ koci_finish:
 	libav_c____decoder_feline_running = KOCI_DECODER_THREAD_FINISHED;
 	return 0;
 }
+
+static int realloc_texture_i(SDL_Texture **texture, Uint32 new_format, int new_width, int new_height, SDL_BlendMode blendmode, int init_texture, SDL_Renderer *renderer_i)
+{
+    Uint32 format;
+    int access, w, h;
+    if (!*texture || SDL_QueryTexture(*texture, &format, &access, &w, &h) < 0 || new_width != w || new_height != h || new_format != format) {
+        void *pixels;
+        int pitch;
+        if (*texture)
+            SDL_DestroyTexture(*texture);
+        if (!(*texture = SDL_CreateTexture(renderer_i, new_format, SDL_TEXTUREACCESS_STREAMING, new_width, new_height)))
+            return -1;
+        if (SDL_SetTextureBlendMode(*texture, blendmode) < 0)
+            return -1;
+        if (init_texture) {
+            if (SDL_LockTexture(*texture, NULL, &pixels, &pitch) < 0)
+                return -1;
+            memset(pixels, 0, pitch * new_height);
+            SDL_UnlockTexture(*texture);
+        }
+		/*
+        av_log(NULL, AV_LOG_VERBOSE, "Created %dx%d texture with %s.\n", new_width, new_height, SDL_GetPixelFormatName(new_format));
+    */
+	}
+    return 0;
+}
+
 int morcego_vermelho_player_thread(morcego___i___instance__a__bucaneiro_engineering *mv_______)
 {
     
@@ -1785,6 +1812,8 @@ int morcego_vermelho_player_thread(morcego___i___instance__a__bucaneiro_engineer
      FormatContext  =
 	  (AVFormatContext *)mv_______->libav_c___FormatContext_ptr_video;
      ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	
+	 mv_______->libav_c___texture_kp_sub______i = NULL;
 	
      mv_______->libav_c___skipframes = 0;
      mv_______->libav_c___pause_counter = 0;
@@ -2345,16 +2374,32 @@ SDL_DestroyTexture(Message);
 										sub_amanda_ptr_i = (void *) mv_______->libav_c___the_sub_pointer_____i;	
 
 										ar_ret = 0;
-
+pedro_dprintf(0, "ponto 1..\n");
 
                     if (!mv_______->libav_c___sp_width____________i || !mv_______->libav_c___sp_height___________i)
 					{                       
+				assert(0 && "Missing sp_width\n");
 						SDL_GetWindowSize(mv_______->libav_c___screen_kp, &mv_______->libav_c___sp_width____________i, &mv_______->libav_c___sp_height___________i);						
                     }
+					
+					SDL_Rect target_t_i = {0,};
+					
+					SDL_GetWindowSize(mv_______->libav_c___screen_kp, &target_t_i.w, &target_t_i.h);
+					
+					if (realloc_texture_i((void *) &mv_______->libav_c___texture_kp_sub______i, SDL_PIXELFORMAT_ARGB8888, mv_______->libav_c___sp_width____________i, mv_______->libav_c___sp_height___________i, SDL_BLENDMODE_BLEND, 1, (SDL_Renderer *)mv_______->libav_c___renderer_kp) < 0)
+					{
+						pedro_dprintf(0, "realloc_texture failed\n");
+                            goto pula_agora_amanda_kkk;
+					}
+					
+					
+pedro_dprintf(0, "ponto 2..\n");
 
 						for (i = 0; i < sub_amanda_ptr_i->num_rects; i++) 
 						{
                         AVSubtitleRect *sub_rect = sub_amanda_ptr_i->rects[i];
+
+pedro_dprintf(0, "1 antes %d %d %d %d\n", sub_rect->w, sub_rect->h, sub_rect->x, sub_rect->y);
 
                         sub_rect->x = av_clip(sub_rect->x, 0, mv_______->libav_c___sp_width____________i);
                         sub_rect->y = av_clip(sub_rect->y, 0, mv_______->libav_c___sp_height___________i);
@@ -2367,42 +2412,42 @@ SDL_DestroyTexture(Message);
 							exit(27);
 						}
 */
+
+pedro_dprintf(0, "2 antes %d %d %d %d\n", sub_rect->w, sub_rect->h, sub_rect->x, sub_rect->y);
+
+pedro_dprintf(0, "ponto 2..\n");
                         sub_convert_ctx_i = sws_getCachedContext(sub_convert_ctx_i,
                             sub_rect->w, sub_rect->h, AV_PIX_FMT_PAL8,
-                            sub_rect->w, sub_rect->h, AV_PIX_FMT_YUV420P,
+                            sub_rect->w, sub_rect->h, AV_PIX_FMT_BGRA,
                             VIDEO_CONVERSION_MODE, NULL, NULL, NULL);
                         if (!sub_convert_ctx_i)
 						{
 							pedro_dprintf(0, "pulando porque nao alocou sub_convert_ctx_i\n");
                             goto pula_agora_amanda_kkk;
                         }
-						
+						pedro_dprintf(0, "ponto 3..\n");
 												{
-													//aqui...
-													mv_______->libav_c___yPlaneSz_kp2 = sub_rect->w * sub_rect->h;
-													mv_______->libav_c___uvPlaneSz_kp2 = sub_rect->w * sub_rect->h / 4;
-													mv_______->libav_c___yPlane_kp2 = (Uint8*)malloc(mv_______->libav_c___yPlaneSz_kp2);
-													mv_______->libav_c___uPlane_kp2 = (Uint8*)malloc(mv_______->libav_c___uvPlaneSz_kp2);
-													mv_______->libav_c___vPlane_kp2 = (Uint8*)malloc(mv_______->libav_c___uvPlaneSz_kp2);
-
-													if (!mv_______->libav_c___yPlane_kp2 || !mv_______->libav_c___uPlane_kp2 || !mv_______->libav_c___vPlane_kp2)
-													{
-														exit(27);
-													}
-
-													mv_______->libav_c___uvPitch_kp2 = sub_rect->w / 2;
+												
 												}
-											   pict.data[0] = mv_______->libav_c___yPlane_kp2;
-						pict.data[1] = mv_______->libav_c___uPlane_kp2;
-						pict.data[2] = mv_______->libav_c___vPlane_kp2;
-						pict.linesize[0] = sub_rect->w;
-						pict.linesize[1] = mv_______->libav_c___uvPitch_kp2;
-						pict.linesize[2] = mv_______->libav_c___uvPitch_kp2;
-											   
-											   sws_scale(sub_convert_ctx_i, (const uint8_t * const *)sub_rect->data, sub_rect->linesize,
-                                      0, sub_rect->h, pict.data, pict.linesize);
+												pedro_dprintf(0, "ponto 5..\n");
+											 
+						
+						
+						uint8_t* pixels[4];
+                    int pitch[4];
+					if (!SDL_LockTexture((void *) mv_______->libav_c___texture_kp_sub______i, (SDL_Rect *)sub_rect, (void **)pixels, pitch))
+					{
+						pedro_dprintf(0, "Erro em SDL_LockTexture\n");
+                            sws_scale(sub_convert_ctx_i, (const uint8_t * const *)sub_rect->data, sub_rect->linesize,
+                                      0, sub_rect->h, pixels, pitch);
+                            SDL_UnlockTexture((void *) mv_______->libav_c___texture_kp_sub______i);
+                        }
+				}
+				
+				
 						{
-							pedro_dprintf(0, "vsamos dormir..\n");
+							/*
+							pedro_dprintf(0, "ponto 6antes..\n");
 											ar_ret = SDL_UpdateYUVTexture(
 								(SDL_Texture *)mv_______->libav_c___texture_kp,
 								NULL,
@@ -2414,7 +2459,7 @@ SDL_DestroyTexture(Message);
 								mv_______->libav_c___uvPitch_kp2
 								);
 
-
+pedro_dprintf(0, "ponto 6..\n");
 							if(0 != ar_ret)
 							{
 								pedro_dprintf(2, "Erro de SDL em SDL_UpdateYUVTexture : %s - linha: %d", SDL_GetError(), __LINE__);
@@ -2441,9 +2486,10 @@ SDL_DestroyTexture(Message);
 							{
 								pedro_dprintf(2, "Erro de SDL em SDL_RenderClear : %s - linha: %d", SDL_GetError(), __LINE__);
 							}
-							
+							*/
+														
 							ar_ret = SDL_RenderCopy((SDL_Renderer *)mv_______->libav_c___renderer_kp,
-							                        (SDL_Texture *)mv_______->libav_c___texture_kp, NULL, NULL);
+							                        (SDL_Texture *)mv_______->libav_c___texture_kp_sub______i, NULL, &target_t_i);
 
 							if(0 != ar_ret)
 							{
@@ -2453,9 +2499,6 @@ SDL_DestroyTexture(Message);
 							SDL_RenderPresent((SDL_Renderer *)mv_______-> libav_c___renderer_kp);
 							pedro_dprintf(-1, "3 tempo decorrido %f", (get_bucaneiro_tick() - amanda_timer) * 1000.);
 							
-							free(mv_______->libav_c___yPlane_kp2);
-							free(mv_______->libav_c___vPlane_kp2);
-							free(mv_______->libav_c___uPlane_kp2);	
 								
 										pula_agora_amanda_kkk:
 										;
@@ -2990,6 +3033,10 @@ finish:
 		sws_freeContext((struct SwsContext *)mv_______->libav_c___sc_kp);
 		mv_______->libav_c___sc_kp = NULL;
 	}
+	
+	
+	if(mv_______->libav_c___texture_kp_sub______i)
+		SDL_DestroyTexture((SDL_Texture *)mv_______->libav_c___texture_kp_sub______i), mv_______->libav_c___texture_kp_sub______i = NULL;
 	
 	if(mv_______->libav_c___texture_kp)
 		SDL_DestroyTexture((SDL_Texture *)mv_______->libav_c___texture_kp), mv_______->libav_c___texture_kp = NULL;
