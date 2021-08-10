@@ -1237,8 +1237,7 @@ int morcego_vermelho_player_thread_koci(morcego___i___instance__a__bucaneiro_eng
 	double amanda_tempo;
 	int amandaricardo_used = 0;
 	int frameFinished;
-int i;
-	
+	int i;	
 	mv_______->libav_c___pCodecCtx_sub_i = NULL;
 
 	amandaricardo_koci_deslocador_decoder = 0;
@@ -1254,7 +1253,6 @@ int i;
 	libav_c____decoder_feline_running = KOCI_DECODER_LOADED;
 
 	mv_______->libav_c___displacement_for_see_adjust_k_p = -1;
-
 
 	if(0 != mv_______->libav_c___use_subtitles_track_i)
 	{
@@ -1307,6 +1305,12 @@ int i;
 					//exit(27);
 					
 					
+	{
+		double den = FormatContext->streams[(int)the_subtitle_stream_i]->time_base.den;
+		double num = FormatContext->streams[(int)the_subtitle_stream_i]->time_base.num;
+		mv_______->libav_c___subtitle_timebase___i = num / den;
+		pedro_dprintf(0, "sub timebase %f vid %f \n", mv_______->libav_c___subtitle_timebase___i, mv_______->libav_c___video_timebase);
+	}
 					
 					break;
 				}
@@ -1328,20 +1332,6 @@ mv_______->libav_c___the_sub_pointer_____i = (void *) &sub_amanda_;
 			pedro_dprintf(-1, "Saiu no erro a %p %p\n", pFrame_ptr_koci, packet_ptr_pereira_koci_forever);
 			goto koci_finish;
 	     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-//pedro_dprintf(0, "stream being decoded... %d\n", packet_ptr_pereira_koci_forever->stream_index);
 
 if(-2 != the_subtitle_stream_i)
 {
@@ -1378,6 +1368,12 @@ if(-2 != the_subtitle_stream_i)
 					subtitle_1_amanda__decoder_in_use = true;
 
 					got_frame_i = 0;
+					
+					
+					mv_______->libav_c___subtitle_pts________i = -2;
+					if (packet_ptr_pereira_koci_forever->pts != AV_NOPTS_VALUE)
+					mv_______->libav_c___subtitle_pts________i = mv_______->libav_c___subtitle_timebase___i * packet_ptr_pereira_koci_forever->pts;					
+
 					ret_i = avcodec_decode_subtitle2(pCodecCtx_sub_i, &sub_amanda_, &got_frame_i, packet_ptr_pereira_koci_forever);
 
 					if(0 > ret_i)
@@ -1393,6 +1389,37 @@ if(-2 != the_subtitle_stream_i)
 							pedro_dprintf(0, "Frame got value %d\n", sub_amanda_.format);
 							//exit(27);
 							
+							if(0 == sub_amanda_.format)
+							{
+								mv_______->libav_c___has_bitmap__________i = true;
+								mv_______->libav_c___start_display_time__i = (double) sub_amanda_.start_display_time / 1000.;
+								mv_______->libav_c___end_display_time____i = (double) sub_amanda_.end_display_time / 1000.;
+								
+								/*
+								for (i = 0; i < sub_amanda_.num_rects; i++)
+								{
+									for (j = 0; j < sub_amanda_.rects[i]->nb_colors; j++)
+									{
+										RGBA_IN(r, g, b, a, (uint32_t *)sub_amanda_.rects[i]->data[1] + j);
+										y = RGB_TO_Y_CCIR(r, g, b);
+										u = RGB_TO_U_CCIR(r, g, b, 0);
+										v = RGB_TO_V_CCIR(r, g, b, 0);
+										YUVA_OUT((uint32_t *)sub_amanda_.rects[i]->data[1] + j, y, u, v, a);
+									}
+								}
+								*/
+								
+								mv_______->libav_c___sp_width____________i = pCodecCtx_sub_i->width;
+								mv_______->libav_c___sp_height___________i = pCodecCtx_sub_i->height;
+								mv_______->libav_c___pix_fmt_____________i = pCodecCtx_sub_i->pix_fmt;
+								mv_______->libav_c___the_sub_pointer_____i = (void *) &sub_amanda_;
+								
+								
+							}
+							else
+							{
+								mv_______->libav_c___has_bitmap__________i = false;
+							}
 							
 							/*
 							{
@@ -1413,22 +1440,18 @@ if(-2 != the_subtitle_stream_i)
 							}
 							*/
 							
-
-						AVSubtitleRect **rects = sub_amanda_.rects;
-        for (i = 0; i < sub_amanda_.num_rects; i++) {
-            AVSubtitleRect rect = *rects[i];
-            if (rect.type == SUBTITLE_ASS) {
-                pedro_dprintf(0, "ASS %s", rect.ass);
-            } else if (rect.type == SUBTITLE_TEXT) {;
-                pedro_dprintf(0, "TEXT %s", rect.text);
-            }else if (rect.type == SUBTITLE_BITMAP) {;
-                pedro_dprintf(0, "SUBTITLE_BITMAP\n");
-            }
-        }
-						
-						
-						
-						
+							AVSubtitleRect **rects = sub_amanda_.rects;
+							for (i = 0; i < sub_amanda_.num_rects; i++)
+							{
+								AVSubtitleRect rect = *rects[i];
+								if (rect.type == SUBTITLE_ASS) {
+								pedro_dprintf(0, "ASS %s", rect.ass);
+								} else if (rect.type == SUBTITLE_TEXT) {;
+									pedro_dprintf(0, "TEXT %s", rect.text);
+								}else if (rect.type == SUBTITLE_BITMAP) {;
+									pedro_dprintf(0, "SUBTITLE_BITMAP\n");
+								}
+							}
 							
 							has_data_and_need_free_sub_i = true;
 							
@@ -1715,6 +1738,8 @@ int morcego_vermelho_player_thread(morcego___i___instance__a__bucaneiro_engineer
 		exit(27);
 	}
 	
+	 AVSubtitle * sub_amanda_ptr_i;
+	 struct SwsContext *sub_convert_ctx_i = NULL;
      double time_spent = get_bucaneiro_tick();
 
      double ajuste_de_sincronizacao = 0;
@@ -1733,12 +1758,14 @@ int morcego_vermelho_player_thread(morcego___i___instance__a__bucaneiro_engineer
 
      int dcounter4 = 0;
      int dcounter5 = 0;
-		
+	 		
      int e_counter_skip_valquiria = 0;
 
      BOOL disable_playback_delay_k_p = FALSE;
 
      double K_P_the_time = get_bucaneiro_tick();
+
+	 double current_video_point_my_love_i;
 
      int ar_ret                    =     0;
 
@@ -1749,6 +1776,8 @@ int morcego_vermelho_player_thread(morcego___i___instance__a__bucaneiro_engineer
      int above_counter             =     0;
 
      int below_counter             =     0;
+	 
+	 int i;
      ////////////////////////////////////////////////////////////////////////////////////////////////////////////
      /*as variaveis abaixo devem ser globais */
      pCodecCtx        =
@@ -2186,6 +2215,8 @@ return_call_for_one_frame_only_playback_k:      //remenber it
 								mv_______->libav_c___uvPitch_kp
 								);
 
+pedro_dprintf(0, "i 1 2 3 %d %d %d\n", mv_______->libav_c___adjusted_i_width_for_directx, mv_______->libav_c___uvPitch_kp, mv_______->libav_c___uvPitch_kp);
+
 							if(0 != ar_ret)
 							{
 								pedro_dprintf(2, "Erro de SDL em SDL_UpdateYUVTexture : %s - linha: %d", SDL_GetError(), __LINE__);
@@ -2292,7 +2323,166 @@ SDL_DestroyTexture(Message);
 							{
 								
 								//here ...
+								if(false == subtitle_1_amanda__decoder_in_use && -2 != mv_______->libav_c___the_subtitle_stream_i && has_data_and_need_free_sub_i && mv_______->libav_c___has_bitmap__________i && -1 < mv_______->libav_c___subtitle_pts________i && AV_NOPTS_VALUE != packet_ptr_pereira_koci_forever_player->pts)
+								{
+									static int counter_i;
+									counter_i++;
+									subtitle_1_amanda__player__in_use = true;
+									pedro_dprintf(-1, "show bitmap %d sub pts %f \n", counter_i, mv_______->libav_c___subtitle_pts________i);
+																		
+									pedro_dprintf(-1, "video point %f\n", packet_ptr_pereira_koci_forever_player->pts * mv_______->libav_c___video_timebase);
+									
+									current_video_point_my_love_i = packet_ptr_pereira_koci_forever_player->pts * mv_______->libav_c___video_timebase;
+									
+									pedro_dprintf(-1, "start -> %f\n", mv_______->libav_c___subtitle_pts________i + mv_______->libav_c___start_display_time__i);
+									
+									pedro_dprintf(-1, "end   -> %f\n", mv_______->libav_c___subtitle_pts________i + mv_______->libav_c___end_display_time____i);
+									
+									if(current_video_point_my_love_i > mv_______->libav_c___subtitle_pts________i + mv_______->libav_c___start_display_time__i && /*for your pleasure */ current_video_point_my_love_i < mv_______->libav_c___subtitle_pts________i + mv_______->libav_c___end_display_time____i)
+									{
+										pedro_dprintf(0, "Show my love...\n");
+										
+										sub_amanda_ptr_i = (void *) mv_______->libav_c___the_sub_pointer_____i;	
+
+										ar_ret = 0;
+
+
+                    if (!mv_______->libav_c___sp_width____________i || !mv_______->libav_c___sp_height___________i)
+					{                       
+						SDL_GetWindowSize(mv_______->libav_c___screen_kp, &mv_______->libav_c___sp_width____________i, &mv_______->libav_c___sp_height___________i);						
+                    }
+
+						for (i = 0; i < sub_amanda_ptr_i->num_rects; i++) 
+						{
+                        AVSubtitleRect *sub_rect = sub_amanda_ptr_i->rects[i];
+
+                        sub_rect->x = av_clip(sub_rect->x, 0, mv_______->libav_c___sp_width____________i);
+                        sub_rect->y = av_clip(sub_rect->y, 0, mv_______->libav_c___sp_height___________i);
+                        sub_rect->w = av_clip(sub_rect->w, 0, mv_______->libav_c___sp_width____________i  - sub_rect->x);
+                        sub_rect->h = av_clip(sub_rect->h, 0, mv_______->libav_c___sp_height___________i - sub_rect->y);
+/*
+						if(mv_______->libav_c___pix_fmt_____________i != AV_PIX_FMT_PAL8)
+						{
+							pedro_dprintf(0, "Formatos nao batem %d %d\n", mv_______->libav_c___pix_fmt_____________i, AV_PIX_FMT_PAL8);
+							exit(27);
+						}
+*/
+                        sub_convert_ctx_i = sws_getCachedContext(sub_convert_ctx_i,
+                            sub_rect->w, sub_rect->h, AV_PIX_FMT_PAL8,
+                            sub_rect->w, sub_rect->h, AV_PIX_FMT_YUV420P,
+                            VIDEO_CONVERSION_MODE, NULL, NULL, NULL);
+                        if (!sub_convert_ctx_i)
+						{
+							pedro_dprintf(0, "pulando porque nao alocou sub_convert_ctx_i\n");
+                            goto pula_agora_amanda_kkk;
+                        }
+						
+												{
+													//aqui...
+													mv_______->libav_c___yPlaneSz_kp2 = sub_rect->w * sub_rect->h;
+													mv_______->libav_c___uvPlaneSz_kp2 = sub_rect->w * sub_rect->h / 4;
+													mv_______->libav_c___yPlane_kp2 = (Uint8*)malloc(mv_______->libav_c___yPlaneSz_kp2);
+													mv_______->libav_c___uPlane_kp2 = (Uint8*)malloc(mv_______->libav_c___uvPlaneSz_kp2);
+													mv_______->libav_c___vPlane_kp2 = (Uint8*)malloc(mv_______->libav_c___uvPlaneSz_kp2);
+
+													if (!mv_______->libav_c___yPlane_kp2 || !mv_______->libav_c___uPlane_kp2 || !mv_______->libav_c___vPlane_kp2)
+													{
+														exit(27);
+													}
+
+													mv_______->libav_c___uvPitch_kp2 = sub_rect->w / 2;
+												}
+											   pict.data[0] = mv_______->libav_c___yPlane_kp2;
+						pict.data[1] = mv_______->libav_c___uPlane_kp2;
+						pict.data[2] = mv_______->libav_c___vPlane_kp2;
+						pict.linesize[0] = sub_rect->w;
+						pict.linesize[1] = mv_______->libav_c___uvPitch_kp2;
+						pict.linesize[2] = mv_______->libav_c___uvPitch_kp2;
+											   
+											   sws_scale(sub_convert_ctx_i, (const uint8_t * const *)sub_rect->data, sub_rect->linesize,
+                                      0, sub_rect->h, pict.data, pict.linesize);
+						{
+							pedro_dprintf(0, "vsamos dormir..\n");
+											ar_ret = SDL_UpdateYUVTexture(
+								(SDL_Texture *)mv_______->libav_c___texture_kp,
+								NULL,
+								mv_______->libav_c___yPlane_kp2,
+								sub_rect->w,
+								mv_______->libav_c___uPlane_kp2,
+								mv_______->libav_c___uvPitch_kp2,
+								mv_______->libav_c___vPlane_kp2,
+								mv_______->libav_c___uvPitch_kp2
+								);
+
+
+							if(0 != ar_ret)
+							{
+								pedro_dprintf(2, "Erro de SDL em SDL_UpdateYUVTexture : %s - linha: %d", SDL_GetError(), __LINE__);
+							}
+											
+													
+										
+							if(0 != ar_ret)
+							{
+								pedro_dprintf(2, "Erro de SDL em SDL_UpdateYUVTexture : %s - linha: %d", SDL_GetError(), __LINE__);
+							}
+							else
+							{
+								pedro_dprintf(0, "deu certo texture amor\n");
+							}
+										}
+
+
 								
+							
+							ar_ret = SDL_RenderClear((SDL_Renderer *)mv_______->libav_c___renderer_kp);
+
+							if(0 != ar_ret)
+							{
+								pedro_dprintf(2, "Erro de SDL em SDL_RenderClear : %s - linha: %d", SDL_GetError(), __LINE__);
+							}
+							
+							ar_ret = SDL_RenderCopy((SDL_Renderer *)mv_______->libav_c___renderer_kp,
+							                        (SDL_Texture *)mv_______->libav_c___texture_kp, NULL, NULL);
+
+							if(0 != ar_ret)
+							{
+								pedro_dprintf(2, "Erro de SDL em SDL_RenderCopy : %s - linha: %d", SDL_GetError(), __LINE__);
+							}
+							
+							SDL_RenderPresent((SDL_Renderer *)mv_______-> libav_c___renderer_kp);
+							pedro_dprintf(-1, "3 tempo decorrido %f", (get_bucaneiro_tick() - amanda_timer) * 1000.);
+							
+							free(mv_______->libav_c___yPlane_kp2);
+							free(mv_______->libav_c___vPlane_kp2);
+							free(mv_______->libav_c___uPlane_kp2);	
+								
+										pula_agora_amanda_kkk:
+										;
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+						}
+										
+										
+										
+									}
+									else
+									{
+										pedro_dprintf(-1, "*************...\n");
+									}
+									subtitle_1_amanda__player__in_use = false;
+								}
 							}								
 							
 							
@@ -2851,6 +3041,11 @@ finish:
 
 	TTF_CloseFont(Sans_i);
 
+	if(sub_convert_ctx_i)
+	{
+		sws_freeContext(sub_convert_ctx_i);
+		sub_convert_ctx_i           = NULL;
+	}
 	//amanda_final
 	return 0;
 }

@@ -415,9 +415,15 @@ typedef struct morcego_instance_be_
 	size_t libav_c___yPlaneSz_kp;
 	size_t libav_c___uvPlaneSz_kp;
 	int libav_c___uvPitch_kp;
+		
+	unsigned char *libav_c___yPlane_kp2;
+	unsigned char *libav_c___uPlane_kp2;
+	unsigned char *libav_c___vPlane_kp2;
+	size_t libav_c___yPlaneSz_kp2;
+	size_t libav_c___uvPlaneSz_kp2;
+	int libav_c___uvPitch_kp2;
 
 	void *libav_c___sc_kp;
-
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	//setor de morcego_interface_c___
 	double morcego_interface_c___seek;
@@ -791,7 +797,15 @@ typedef struct morcego_instance_be_
 	int       libav_c___the_subtitle_stream_i                                          ;
 	void *    libav_c___pCodecCtx_sub_i                                                ;
 	char *    libav_c___the_sub_pointer_____i                                          ;
-		
+	double    libav_c___subtitle_timebase___i                                          ;
+	bool      libav_c___has_bitmap__________i                                          ;
+	double    libav_c___subtitle_pts________i                                          ;
+	double    libav_c___start_display_time__i                                          ; /* relative to packet pts, in ms */
+    double    libav_c___end_display_time____i                                          ; /* relative to packet pts, in ms */
+	int       libav_c___sp_width____________i                                          ;
+	int       libav_c___sp_height___________i                                          ;
+	int       libav_c___pix_fmt_____________i	                                       ;
+	
 }morcego___i___instance__a__bucaneiro_engineering                                      ;
 //#pragma pack(pop)
 //morcego_instance_be *mv_______
