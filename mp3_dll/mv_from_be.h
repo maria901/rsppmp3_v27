@@ -806,6 +806,7 @@ typedef struct morcego_instance_be_
 	int       libav_c___sp_height___________i                                          ;
 	int       libav_c___pix_fmt_____________i	                                       ;
 	char *    libav_c___texture_kp_sub______i                                          ;
+	bool      libav_c___draw_again__________i                                          ;
 	
 }morcego___i___instance__a__bucaneiro_engineering                                      ;
 //#pragma pack(pop)
