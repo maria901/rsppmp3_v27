@@ -160,6 +160,11 @@ with different copies of the Libav dlls in the same process running
 
 Changelog:
 
+What is new in 15.5.8  build 667220  'Terça(Tuesday) 10 Agosto 2021  12:06' codename 'Haible'
+First release with full support to subtitles as SUBTITLE_BITMAP, missing
+for the moment SUBTITLE_TEXT and SUBTITLE_ASS, will be added soon, minor
+modifications.
+
 What is new in 14.1.8  build 667080  'Terça(Tuesday)  03 Agosto 2021  10:51' codename 'Brabec'
 First version capable of playing video in the Desktop window, minor modifications.
 
