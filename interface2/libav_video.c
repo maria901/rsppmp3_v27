@@ -301,47 +301,47 @@ int adjust_window_position_and_size(morcego___i___instance__a__bucaneiro_enginee
 		case 125:
 			sprintf(temp +
 			        strlen(temp),
-			        "ratio 5:4 ");
+			        " ratio 5:4 ");
 			break;
 		case 177:
 			sprintf(temp +
 			        strlen(temp),
-			        "ratio 16:9 ");
+			        " ratio 16:9 ");
 			break;
 		case 160:
 			sprintf(temp +
 			        strlen(temp),
-			        "ratio 16:10 ");
+			        " ratio 16:10 ");
 			break;
 		case 133:
 			sprintf(temp +
 			        strlen(temp),
-			        "ratio 4:3 ");
+			        " ratio 4:3 ");
 			break;
 		case 221:
 			sprintf(temp +
 			        strlen(temp),
-			        "ratio 2.21:1 ");
+			        " ratio 2.21:1 ");
 			break;
 		case 235:
 			sprintf(temp +
 			        strlen(temp),
-			        "ratio 2.35:1 ");
+			        " ratio 2.35:1 ");
 			break;
 		case 239:
 			sprintf(temp +
 			        strlen(temp),
-			        "ratio 2.39:1 ");
+			        " ratio 2.39:1 ");
 			break;
 		case 250:
 			sprintf(temp +
 			        strlen(temp),
-			        "ratio 2.50:1 ");
+			        " ratio 2.50:1 ");
 			break;
 		case 100:
 			sprintf(temp +
 			        strlen(temp),
-			        "ratio 1:1 ");
+			        " ratio 1:1 ");
 			break;
 		default:
 		{
@@ -349,7 +349,7 @@ int adjust_window_position_and_size(morcego___i___instance__a__bucaneiro_enginee
 			fixo = fixo / 100;
 			sprintf(temp +
 			        strlen(temp),
-			        "ratio %0.2f:1 ", fixo);
+			        " ratio %0.2f:1 ", fixo);
 		}
 		break;
 		}
@@ -431,7 +431,7 @@ saida:
 	sprintf(
 		mv_______->libav_c___video_information +
 		mv_______->analisys_c___string_position,
-		"%s",
+		" %s ",
 		temp);
 
 	return rv;
@@ -885,7 +885,7 @@ void init_video(morcego___i___instance__a__bucaneiro_engineering *mv_______,
 
 	sprintf(mv_______->libav_c___video_information +
 	        strlen(mv_______->libav_c___video_information),
-	        "rate %0.2f ", mv_______->libav_c___framerate);
+	        " rate %0.2f ", mv_______->libav_c___framerate);
 
 	if (mv_______->decoder_c___cancelflag)
 	{
