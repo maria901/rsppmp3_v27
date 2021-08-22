@@ -28,6 +28,8 @@
 *                                                                              *
 * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *  **/
 
+#define Ricardinho_and_Little_Amanda_THESIZE (300*6)
+
 /*
 
    TODO
@@ -1708,6 +1710,65 @@ static int realloc_texture_i(SDL_Texture **texture, Uint32 new_format, int new_w
 	return 0;
 }
 
+char *__stdcall
+widetoutf8_fixed
+(
+	unicode_large *ul_______,
+        WCHAR * pUSC2
+)
+{
+	if (0 == ul_______->unicode_large_c___position_utf8)
+	{
+		ul_______->unicode_large_c___position_utf8 = 1;
+		WideCharToMultiByte (CP_UTF8, 0, pUSC2, -1, (LPSTR) ul_______->unicode_large_c___pUTF8, Ricardinho_and_Little_Amanda_THESIZE, 0,
+		                     0);
+		return ul_______->unicode_large_c___pUTF8;
+	}
+	else
+	{
+		ul_______->unicode_large_c___position_utf8 = 0;
+		WideCharToMultiByte (CP_UTF8, 0, pUSC2, -1, (LPSTR) ul_______->unicode_large_c___pUTF8_2, Ricardinho_and_Little_Amanda_THESIZE, 0,
+		                     0);
+		return ul_______->unicode_large_c___pUTF8_2;
+	}
+	return NULL;
+}
+
+char * get_ava_name(void)
+{
+					 
+	static char temp_Pk[MAX_PATH] = {
+		               0,
+	                   };
+					 	
+	if(0 == temp_Pk[0])
+	{
+		
+		HMODULE       hmod;
+		hmod = GetModuleHandle("rspmp3ocx1.dll");
+		if (0 ==      hmod)
+		{
+			mprintf("Missing rspmp3ocx1.dll dll \n");
+			exit       (1);
+		}
+		{
+			WCHAR temp_w[300];
+			unicode_large *ul = calloc(sizeof(unicode_large), 1);
+			GetModuleFileNameW(hmod, temp_w, 300);
+
+			strcpy(temp_Pk, widetoutf8_fixed(ul, temp_w));
+
+			free(ul);
+		}
+		temp_Pk[strlen(    temp_Pk) - strlen("rspmp3ocx1.dll")] = 0;
+		strcat(temp_Pk, "ArchitectsDaughter.ttf");//don`t be afraid, it will be replaced with a xml file with extension .mis, later in the code
+	
+	}
+	
+	return temp_Pk;
+	
+}
+
 int morcego_vermelho_player_thread(morcego___i___instance__a__bucaneiro_engineering *mv_______)
 {
 
@@ -1748,7 +1809,7 @@ int morcego_vermelho_player_thread(morcego___i___instance__a__bucaneiro_engineer
 	mislaine_command.junior_last_frame[0] = -1;
 	mislaine_command.junior_last_frame[1] = -1;
 
-	TTF_Font* Sans_i = TTF_OpenFont("ArchitectsDaughter.ttf", 24);
+	TTF_Font* Sans_i = TTF_OpenFont(get_ava_name(), 24);
 
 	if(!Sans_i)
 	{

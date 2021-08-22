@@ -485,7 +485,7 @@ void process_playlist_junior_filho_do_ricardo(morcego___i___instance__a__bucanei
 					  }
 
 					  *ptr__amanda_s_smart_ape = 0;
-					  if (-1 != getfilesize_ar_fixed__(mv_______, media_file_copy__amanda_s_smart_ape))
+					  if (-1 != getfilesize_ar_fixed__(mv_______, media_file_copy__amanda_s_smart_ape))//foi voce que quiz assim..., te pergunto se da pra mudar AGORA..., pode ser modificado mas nao refeito, entendeu....
 					   {
 						  *ptr__amanda_s_smart_ape_init = 0;
 					  }
