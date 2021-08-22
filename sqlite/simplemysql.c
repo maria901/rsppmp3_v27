@@ -9,6 +9,9 @@ rspsoftware@hotmail.com
 http://rspsoftware.com.br
 
 */
+
+#define Ricardinho_and_Little_Amanda_THESIZE (300*6)
+
 #include /* amanda's smart ape */ <windows.h>
 #include /* amanda's smart ape  */ <stdint.h>
 #include /* amanda's smart ape   */ <stdio.h>
@@ -202,6 +205,75 @@ void strncpy_z(char *dest_z, char *src_z, int len)
 
 #endif
 
+typedef struct unicode_large_
+{
+	WCHAR unicode_large_c___pUSC2[300];
+	WCHAR unicode_large_c___pUSC2_2[300];
+	char unicode_large_c___pUTF8[(300*6)];
+	char unicode_large_c___pUTF8_2[(300*6)];
+	int unicode_large_c___position_utf8;
+	int unicode_large_c___position;
+}   unicode_large;
+
+char *__stdcall
+widetoutf8_fixed
+(
+	unicode_large *ul_______,
+        WCHAR * pUSC2
+)
+{
+	if (0 == ul_______->unicode_large_c___position_utf8)
+	{
+		ul_______->unicode_large_c___position_utf8 = 1;
+		WideCharToMultiByte (CP_UTF8, 0, pUSC2, -1, (LPSTR) ul_______->unicode_large_c___pUTF8, Ricardinho_and_Little_Amanda_THESIZE, 0,
+		                     0);
+		return ul_______->unicode_large_c___pUTF8;
+	}
+	else
+	{
+		ul_______->unicode_large_c___position_utf8 = 0;
+		WideCharToMultiByte (CP_UTF8, 0, pUSC2, -1, (LPSTR) ul_______->unicode_large_c___pUTF8_2, Ricardinho_and_Little_Amanda_THESIZE, 0,
+		                     0);
+		return ul_______->unicode_large_c___pUTF8_2;
+	}
+	return NULL;
+}
+
+char * get_ava_name(void)
+{
+					 
+	static char temp_Pk[MAX_PATH] = {
+		               0,
+	                   };
+					 	
+	if(0 == temp_Pk[0])
+	{
+		
+		HMODULE       hmod;
+		hmod = GetModuleHandle("rspmp3ocx1.dll");
+		if (0 ==      hmod)
+		{
+			mprintf("Missing rspmp3ocx1.dll dll \n");
+			exit       (1);
+		}
+		{
+			WCHAR temp_w[300];
+			unicode_large *ul = calloc(sizeof(unicode_large), 1);
+			GetModuleFileNameW(hmod, temp_w, 300);
+
+			strcpy(temp_Pk, widetoutf8_fixed(ul, temp_w));
+
+			free(ul);
+		}
+		temp_Pk[strlen(    temp_Pk) - strlen("rspmp3ocx1.dll")] = 0;
+		strcat(temp_Pk, "amanda_s_smart_ape.DB");//don`t be afraid, it will be replaced with a xml file with extension .mis, later in the code
+	
+	}
+	
+	return temp_Pk;
+	
+}
+
 /**
  * Our amazing function to send SQL commands to SQLite
  * 
@@ -218,7 +290,7 @@ int ar_Mode_Insert_Delete_or_Update_function_amanda_s_smart_ape(char *data__z_am
 	sqlite3 *db;
 	char *err_msg = 0;
 
-	int rc = sqlite3_open(SEU_BANCO_DE_DADOS_MEU_AMOR__AMANDA_S_SMART_APE, &db);
+	int rc = sqlite3_open(get_ava_name(), &db);
 
 	if (message_amanda_s_smart_ape)
 	{
@@ -268,7 +340,7 @@ int create_table_amanda_s_smart_ape(void)
 	sqlite3 *db;
 	char *err_msg = 0;
 
-	int rc = sqlite3_open(SEU_BANCO_DE_DADOS_MEU_AMOR__AMANDA_S_SMART_APE, &db);
+	int rc = sqlite3_open(get_ava_name(), &db);
 
 	if (rc != SQLITE_OK)
 	{
@@ -325,7 +397,7 @@ int ar_Mode_Select_function_amanda_s_smart_ape(__attribute__((unused)) char *dat
 	sqlite3 *db;
 	char *err_msg = 0;
 
-	int rc = sqlite3_open(SEU_BANCO_DE_DADOS_MEU_AMOR__AMANDA_S_SMART_APE, &db);
+	int rc = sqlite3_open(get_ava_name(), &db);
 
 	if (rc != SQLITE_OK)
 	{
