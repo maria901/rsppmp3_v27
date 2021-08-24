@@ -502,7 +502,7 @@ get_debuginformation_multithread(morcego___i___instance__a__bucaneiro_engineerin
 }
 
 /**
- * This will return a string with the time repreentation of the double value, I spent a few minutes trying to figure out how to implement it, it was 2004
+ * This will return a string with the time representation of the double value, I spent a few minutes trying to figure out how to implement it, it was 2004
  */
 static char *
 secondtostring(double value)
@@ -1755,7 +1755,7 @@ int __stdcall interface1(__attribute__((unused)) __INT32_OR_INT64 argumento1, __
 
 /**
 
-   It will copy the src to the destination dest
+   It will copy the src to the destination dest (utf-8 encoded)
    If the function succeeds, the return value is nonzero.
 
    If the function fails, the return value is zero. To get extended error information, call GetLastError.
@@ -1782,10 +1782,11 @@ int rsplink(char *dest, char *src)
 HMODULE instances[1000] = {
 	0,
 };
-extern char *__cdecl rspgettemppath();
+extern char *__cdecl rspgettemppath(void);
 
 /**
- * It will retrieve the ini (now (2021) xml file) file for the application running the mp3 dll
+ * It will retrieve the ini (now (2021) xml file) file for the application running
+ * the mp3 dll, utf-8 encoded as usual.
  *
  */
 void get_ini_name(char *name)
@@ -1794,7 +1795,7 @@ void get_ini_name(char *name)
 		             0,
 	                 };
 	HMODULE       hmod;
-	hmod = GetModuleHandle("rspmp3ocx1.dll");
+	hmod = GetModuleHandle("rspmp3ocx1.dll"); //hardcoded as you may expect
 	if (0 ==      hmod)
 	{
 		mprintf("Missing rspmp3ocx1.dll dll \n");
@@ -1907,7 +1908,7 @@ void BE_CloseDecoder(__int64 *instance_64)
 		free(mv_______->be_real);
 		mv_______->be_real = NULL;
 		free(instance);
-		*instance_64 = 0;
+		*instance_64 = 0;//correct... will crash if used again
 	}
 	else
 	{
@@ -2646,7 +2647,12 @@ void pass_information_to_replay(morcego___i___instance__a__bucaneiro_engineering
 	mv_______->decoder_c___will_loop = loop_;
 	mv_______->decoder_c___track = track_;
 }
-
+/**
+ * It will retrieve the parent of the window passed, it is required in the new
+ * Desktop window playback mode (2021)
+ *
+ *
+ */
 HWND GetRealParent(HWND hWnd)
 {
     HWND hParent;
@@ -2657,7 +2663,13 @@ HWND GetRealParent(HWND hWnd)
 
     return hParent;
 }
-//PlayInDesktop(long mv_instance, int enable, int system_screen_w, int system_screen_h, int desired_w, int desired_h, amanda_position position_i);
+
+/**
+ * Helper function to play the video in the Desktop
+ * window (2021)
+ *
+ *
+ */
 int __stdcall PlayInDesktop(__int64 mv_instance, int enable_i, int system_screen_w,
 							int system_screen_h, int w, int h, int position_i_)
 {
@@ -2710,6 +2722,9 @@ int __stdcall PlayInDesktop(__int64 mv_instance, int enable_i, int system_screen
  *
  * top: the Y position of the window
  *
+ * subtitle_i: the subtitle index to show if one is in the video media file, only Bitmap based
+ * subtitles are supported at this moment
+ * 
  * is the number of audio track to play, starting from 1 (usually 1)
  */
 int __stdcall Play(__int64 mv_instance, char *filename, int loop, int track, __attribute__((unused)) __int64 hwnd_,
@@ -2788,6 +2803,8 @@ int __stdcall Play(__int64 mv_instance, char *filename, int loop, int track, __a
  * @param left        the X position of the window
  *
  * @param top         the Y position of the window
+ *
+ * @param subtitle_i  the subtitles index to show, from 1
  */
 int __stdcall Open(__int64 mv_instance, char *filename, int loop, int track, __int64 hwnd_,
                    __int64 player_hwnd_,
@@ -4361,7 +4378,7 @@ int __stdcall Read_ID3_v2_tag(__int64 mv_instance, char *filename, char *Track,
 	return ret;
 }
 
-extern char *__cdecl rspgettemppath();
+extern char *__cdecl rspgettemppath(void);
 
 /**
  * This fuction will write the id3 v2 tag on the file (support only to version 2.3 for the moment)
@@ -5543,6 +5560,7 @@ int __stdcall GetPlaylistFiles(__int64 mv_instance, char *filename)
 static unsigned long mt[N]; /* the array for the state vector  */
 static int mti = N + 1;         /* mti==N+1 means mt[N] is not initialized */
 /* initializing the array with a NONZERO seed */
+
 void sgenrand(unsigned long seed)
 {
 	/* setting initial seeds to mt[N] using         */
@@ -5554,6 +5572,7 @@ void sgenrand(unsigned long seed)
 		mt[mti] = (69069 * mt[mti - 1]) & 0xffffffff;
 }
 
+//notice that the result is not that really randon, you are warned...
 int genrand()
 {
 	unsigned long y;
@@ -6124,6 +6143,12 @@ int __stdcall init_playlist_z()
   return 0;
 }
 
+/**
+ * It will open the playlist file to use
+ *
+ *
+ *
+ */
 int __stdcall init_jun_playlist_z(char * jun_playlist_z)
 {
 
@@ -6136,19 +6161,29 @@ int __stdcall init_jun_playlist_z(char * jun_playlist_z)
 
  return 1;
 }
-
+/**
+ * To add an item to the playlist
+ *
+ *
+ */
 void __stdcall  add_item_to_playlist_z(char * entry_z)
 {
   fwrite(entry_z, 1, strlen(entry_z), our_jun_playlist_file_z);
   fwrite("\n", 1, 1, our_jun_playlist_file_z                 );
   return                                                      ;
 }
+
+/**
+ * To close the playlist
+ */
 void __stdcall close_playlist_z()
 {
   fclose(our_jun_playlist_file_z                             );
   our_jun_playlist_file_z                               = NULL;
 }
-
+/**
+ * To opan a playlist file for append
+ */
 int __stdcall add_to_jun_playlist_z(char * jun_playlist_z)
 {
 
@@ -6161,7 +6196,9 @@ int __stdcall add_to_jun_playlist_z(char * jun_playlist_z)
 
  return 1;
 }
-
+/**
+ * It will create a decoder required to manipulate the media functions
+ */
 int __stdcall init_data_info_z()
 {
 
@@ -6172,7 +6209,9 @@ int __stdcall init_data_info_z()
     }
   return 0;
 }
-
+/**
+ * It will retrieve video info
+ */
 int __stdcall get_video_size_z(char * media_file_utf8_z,
 			       __int64 hwnd_z,
 			       __int64 player_hwnd_z,
@@ -6187,7 +6226,7 @@ int __stdcall get_video_size_z(char * media_file_utf8_z,
 
   loading_z = true;
 
-check_mv_instance(number_z);
+  check_mv_instance(number_z);
   morcego___i___instance__a__bucaneiro_engineering *mv_______ =
     (morcego___i___instance__a__bucaneiro_engineering *)(__INT32_OR_INT64)
     number_z;
@@ -6264,7 +6303,9 @@ int __stdcall get_video_data(int * width_z, int * height_z, char * ratio_string_
       return 1;
     }
 }
-
+/**
+ * It will close the media file
+ */
 int __stdcall unload_media_file_z()
 {
 
@@ -6319,7 +6360,7 @@ int __stdcall memory_usage__z(char *data_z)
   val_z = val_z / 1024.0;
   sprintf(data_z, "%.3f MB", val_z);
 
-  if(GetTickCount() < (DWORD) oldvalue_Z - 600)//o avoid the 49 days problem...
+  if(GetTickCount() < (DWORD) oldvalue_Z - 600)//o avoid the 49 days problem..., just use 64 version of this function to avoid the problem
   {
 
        oldvalue_Z = GetTickCount();
@@ -6328,7 +6369,9 @@ int __stdcall memory_usage__z(char *data_z)
     
   return 0;
 }
-
+/**
+ * Function required when cache is used, cache will gather information about normalization and duration of files that don't have it available
+ */
 void __stdcall Amanda_s_Smart_Ape_Use_Cache(__int64 mv_instance, int value_amanda_s_smart_ape)
 {
 
