@@ -105,6 +105,7 @@
 #include <libavdevice/avdevice.h>
 #include <libavfilter/avfilter.h>
 #include <libavutil/avutil.h>
+#include <libavutil/cpu.h>
 
 #include "../mp3_dll/decoder.h"
 
@@ -221,6 +222,8 @@ int adjust_window_position_and_size(morcego___i___instance__a__bucaneiro_enginee
 	mv_______->libav_c___width_of_window = pCodecCtx->width;
 	mv_______->libav_c___height_of_window = pCodecCtx->height;
 
+	pedro_dprintf(0, "w h %d %d\n", pCodecCtx->width, pCodecCtx->height);
+
 	sprintf(
 		temp, "bitrate %lld %dx%d ",
 		pCodecCtx->bit_rate,
@@ -235,11 +238,21 @@ int adjust_window_position_and_size(morcego___i___instance__a__bucaneiro_enginee
 		if(0 != pCodecCtx->sample_aspect_ratio.den)
 		{
 			w_i = pCodecCtx->sample_aspect_ratio.num;
+			
+			if(0 == w_i)
+			{
+				w_i = 1;
+			}
+			
 			h_i = pCodecCtx->sample_aspect_ratio.den;
+
+            pedro_dprintf(-1, "1 e 2 %d %d\n", w_i, h_i);
 
 			temp_i = (double) w_i / (double) h_i;
 
 			sprintf(temp, "%.2f", temp_i * 100.);
+
+			pedro_dprintf(-1, "val %s\n", temp);
 
 			w_i = atoi(temp);
 
