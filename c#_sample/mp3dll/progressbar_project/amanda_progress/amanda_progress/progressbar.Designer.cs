@@ -32,19 +32,11 @@ namespace amanda_progress
         	System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(progressbar));
         	this.fixo = new System.Windows.Forms.PictureBox();
         	this.deslizante = new System.Windows.Forms.PictureBox();
-        	this.deslizante_0_z = new System.Windows.Forms.PictureBox();
-        	this.deslizante_1_z = new System.Windows.Forms.PictureBox();
         	this.deslizante_2_z = new System.Windows.Forms.PictureBox();
-        	this.deslizante_3_z = new System.Windows.Forms.PictureBox();
-        	this.deslizante_4_z = new System.Windows.Forms.PictureBox();
         	this.maria_vision_ = new System.Windows.Forms.PictureBox();
         	((System.ComponentModel.ISupportInitialize)(this.fixo)).BeginInit();
         	((System.ComponentModel.ISupportInitialize)(this.deslizante)).BeginInit();
-        	((System.ComponentModel.ISupportInitialize)(this.deslizante_0_z)).BeginInit();
-        	((System.ComponentModel.ISupportInitialize)(this.deslizante_1_z)).BeginInit();
         	((System.ComponentModel.ISupportInitialize)(this.deslizante_2_z)).BeginInit();
-        	((System.ComponentModel.ISupportInitialize)(this.deslizante_3_z)).BeginInit();
-        	((System.ComponentModel.ISupportInitialize)(this.deslizante_4_z)).BeginInit();
         	((System.ComponentModel.ISupportInitialize)(this.maria_vision_)).BeginInit();
         	this.SuspendLayout();
         	// 
@@ -72,26 +64,6 @@ namespace amanda_progress
         	this.deslizante.MouseDown += new System.Windows.Forms.MouseEventHandler(this.deslizante_MouseDown);
         	this.deslizante.MouseEnter += new System.EventHandler(this.deslizante_MouseEnter);
         	// 
-        	// deslizante_0_z
-        	// 
-        	this.deslizante_0_z.BackColor = System.Drawing.Color.RoyalBlue;
-        	this.deslizante_0_z.Location = new System.Drawing.Point(131, 3);
-        	this.deslizante_0_z.Name = "deslizante_0_z";
-        	this.deslizante_0_z.Size = new System.Drawing.Size(90, 22);
-        	this.deslizante_0_z.TabIndex = 2;
-        	this.deslizante_0_z.TabStop = false;
-        	this.deslizante_0_z.MouseDown += new System.Windows.Forms.MouseEventHandler(this.Deslizante_0_zMouseDown);
-        	// 
-        	// deslizante_1_z
-        	// 
-        	this.deslizante_1_z.BackColor = System.Drawing.Color.RoyalBlue;
-        	this.deslizante_1_z.Location = new System.Drawing.Point(323, 3);
-        	this.deslizante_1_z.Name = "deslizante_1_z";
-        	this.deslizante_1_z.Size = new System.Drawing.Size(90, 22);
-        	this.deslizante_1_z.TabIndex = 3;
-        	this.deslizante_1_z.TabStop = false;
-        	this.deslizante_1_z.MouseDown += new System.Windows.Forms.MouseEventHandler(this.Deslizante_1_zMouseDown);
-        	// 
         	// deslizante_2_z
         	// 
         	this.deslizante_2_z.BackColor = System.Drawing.Color.RoyalBlue;
@@ -101,26 +73,6 @@ namespace amanda_progress
         	this.deslizante_2_z.TabIndex = 4;
         	this.deslizante_2_z.TabStop = false;
         	this.deslizante_2_z.MouseDown += new System.Windows.Forms.MouseEventHandler(this.Deslizante_1_zMouseDown);
-        	// 
-        	// deslizante_3_z
-        	// 
-        	this.deslizante_3_z.BackColor = System.Drawing.Color.RoyalBlue;
-        	this.deslizante_3_z.Location = new System.Drawing.Point(174, 60);
-        	this.deslizante_3_z.Name = "deslizante_3_z";
-        	this.deslizante_3_z.Size = new System.Drawing.Size(90, 22);
-        	this.deslizante_3_z.TabIndex = 5;
-        	this.deslizante_3_z.TabStop = false;
-        	this.deslizante_3_z.MouseDown += new System.Windows.Forms.MouseEventHandler(this.Deslizante_1_zMouseDown);
-        	// 
-        	// deslizante_4_z
-        	// 
-        	this.deslizante_4_z.BackColor = System.Drawing.Color.RoyalBlue;
-        	this.deslizante_4_z.Location = new System.Drawing.Point(182, 68);
-        	this.deslizante_4_z.Name = "deslizante_4_z";
-        	this.deslizante_4_z.Size = new System.Drawing.Size(90, 22);
-        	this.deslizante_4_z.TabIndex = 6;
-        	this.deslizante_4_z.TabStop = false;
-        	this.deslizante_4_z.MouseDown += new System.Windows.Forms.MouseEventHandler(this.Deslizante_1_zMouseDown);
         	// 
         	// maria_vision_
         	// 
@@ -137,11 +89,7 @@ namespace amanda_progress
         	this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
         	this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
         	this.Controls.Add(this.maria_vision_);
-        	this.Controls.Add(this.deslizante_4_z);
-        	this.Controls.Add(this.deslizante_3_z);
         	this.Controls.Add(this.deslizante_2_z);
-        	this.Controls.Add(this.deslizante_1_z);
-        	this.Controls.Add(this.deslizante_0_z);
         	this.Controls.Add(this.deslizante);
         	this.Controls.Add(this.fixo);
         	this.Name = "progressbar";
@@ -152,11 +100,7 @@ namespace amanda_progress
         	this.Resize += new System.EventHandler(this.progressbar_Resize);
         	((System.ComponentModel.ISupportInitialize)(this.fixo)).EndInit();
         	((System.ComponentModel.ISupportInitialize)(this.deslizante)).EndInit();
-        	((System.ComponentModel.ISupportInitialize)(this.deslizante_0_z)).EndInit();
-        	((System.ComponentModel.ISupportInitialize)(this.deslizante_1_z)).EndInit();
         	((System.ComponentModel.ISupportInitialize)(this.deslizante_2_z)).EndInit();
-        	((System.ComponentModel.ISupportInitialize)(this.deslizante_3_z)).EndInit();
-        	((System.ComponentModel.ISupportInitialize)(this.deslizante_4_z)).EndInit();
         	((System.ComponentModel.ISupportInitialize)(this.maria_vision_)).EndInit();
         	this.ResumeLayout(false);
 
@@ -166,11 +110,11 @@ namespace amanda_progress
 
         private System.Windows.Forms.PictureBox fixo;
         private System.Windows.Forms.PictureBox deslizante;
-        private System.Windows.Forms.PictureBox deslizante_0_z;
-        private System.Windows.Forms.PictureBox deslizante_1_z;
+        // private System.Windows.Forms.PictureBox deslizante_0_z;
+        // private System.Windows.Forms.PictureBox deslizante_1_z;
         private System.Windows.Forms.PictureBox deslizante_2_z;
-        private System.Windows.Forms.PictureBox deslizante_3_z;
-        private System.Windows.Forms.PictureBox deslizante_4_z;
+        // private System.Windows.Forms.PictureBox deslizante_3_z;
+        // private System.Windows.Forms.PictureBox deslizante_4_z;
         private System.Windows.Forms.PictureBox maria_vision_;
     }
 }

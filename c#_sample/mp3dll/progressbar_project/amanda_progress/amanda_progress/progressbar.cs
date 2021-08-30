@@ -92,54 +92,38 @@ namespace amanda_progress
 			
 			ret_arp_ = (this.Height - 5)      / 2;
 			
-			deslizante.Left         =           0;
-			deslizante.Width        =           0;
-			deslizante.Height       =           1;
-			deslizante.Top          =           3;
 			deslizante.Visible      =       false;
 			
-			deslizante_0_z.Left     =           0;
-			deslizante_0_z.Width    =           0;
-			deslizante_0_z.Height   =           1;
-			deslizante_0_z.Top      =  ret_arp_++;
-			
-			deslizante_1_z.Left     =           0;
-			deslizante_1_z.Width    =           0;
-			deslizante_1_z.Height   =           1;
-			deslizante_1_z.Top      =  ret_arp_++;
+			//ret_arp_++;
+			//ret_arp_++;
 			
 			deslizante_2_z.Left     =           0;
 			deslizante_2_z.Width    =           0;
 			deslizante_2_z.Height   =           1;
 			deslizante_2_z.Top      =  ret_arp_++;
-			
-			deslizante_3_z.Left     =           0;
-			deslizante_3_z.Width    =           0;
-			deslizante_3_z.Height   =           1;
-			deslizante_3_z.Top      =  ret_arp_++;
-
-			deslizante_4_z.Left     =           0;
-			deslizante_4_z.Width    =           0;
-			deslizante_4_z.Height   =           1;
-			deslizante_4_z.Top      =  ret_arp_++;
+			ret_arp_++;
+			ret_arp_++;
 			
 			fixo.Left = 0;
 			fixo.Top = 0;
 			fixo.Width = this.Width;
 			fixo.Height = this.Height;
 
-			maria_vision_.Width = 18;
-			maria_vision_.Height = 18;
+			maria_vision_.Width = 5;
+			maria_vision_.Height = 5;
 			
-			maria_vision_.Top = deslizante_2_z.Top - 8;
-			maria_vision_.Left = 0;
+			//deslizante_2_z.Top = deslizante_2_z.Top + 1;
+			
+			maria_vision_.Top = deslizante_2_z.Top;// - 5;
+			
+			//deslizante_2_z.Top = maria_vision_.Top;
+			
+			deslizante_2_z.Height =  5;
+			maria_vision_ .Left   = -5;
 			
 			maria_vision_ .BringToFront();
 			deslizante_2_z.BringToFront();
-			deslizante_0_z.BringToFront();
-			deslizante_1_z.BringToFront();
-			deslizante_3_z.BringToFront();
-			deslizante_4_z.BringToFront();
+						
 			
 		}
 		private void progressbar_Resize(object sender, EventArgs e)
@@ -243,53 +227,10 @@ namespace amanda_progress
 				temp = getvalf(this.Width, temp);
 				
 				//aqui depois altera
-				deslizante_2_z.Width = (int)temp;
+				deslizante_2_z.Width = (int)temp - 4;
 				
-				maria_vision_.Left = deslizante_2_z.Width - 18;
+				maria_vision_.Left   = (int)temp - 5;//- 10;
 				
-				ret_arp_ = (int) temp - 3;
-				
-				if(ret_arp_ > 0)
-				{
-					deslizante_0_z.Width = ret_arp_;
-				}
-				else
-				{
-					deslizante_0_z.Width = 0;
-				}
-				
-				ret_arp_ = (int) temp - 1;
-				
-				if(ret_arp_ > 0)
-				{
-					deslizante_1_z.Width = ret_arp_;
-				}
-				else
-				{
-					deslizante_1_z.Width = 0;
-				}
-				
-				ret_arp_ = (int) temp - 1;
-				
-				if(ret_arp_ > 0)
-				{
-					deslizante_3_z.Width = ret_arp_;
-				}
-				else
-				{
-					deslizante_3_z.Width = 0;
-				}
-				
-				ret_arp_ = (int) temp - 3;
-				
-				if(ret_arp_ > 0)
-				{
-					deslizante_4_z.Width = ret_arp_;
-				}
-				else
-				{
-					deslizante_4_z.Width = 0;
-				}
 			}
 		}
 		public class ExtendedMouseEvent
