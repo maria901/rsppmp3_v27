@@ -117,4 +117,16 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="maria_vision_.BackgroundImage" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAABIAAAASCAYAAABWzo5XAAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAO
+        wgAADsIBFShKgAAAATtJREFUOE+tVMtqAkEQnE9MLhGjUUHxEVAv8RoV4g+sHlTyDzEK5gM0wYP6A5vd
+        q3tJBMEHXtqpGVxd6F02YQ8Fw3R1Ud0z3WIwtekCi8Zzk4ZfFhl9h+rPa3qqbBRwxh1i44WpuNe5rtC7
+        JHwsTXpp/VD65ki5uwPl7/dUSGjgjDvEmo1fxUWOR0hfWFRIanLxYU+lFA/EcrGD4g4+LVdMCkmrUr2c
+        3VI+zidzOLuFM2gI9ATlZKUTLiEIcI9caIjh7FvVHVSOH5CTuT1qR53X1b/cnAFXRs8hgRdAvRwpDJAL
+        DVGrblTTOFIYIBca0QlFVprRdVTDOFIYuM0eRfX8kX1IqOGbP6Z3f+oVuJ4RcYdWDqAaWjmQQWUi5jO0
+        3jWCFwhaI+gJOOwauUAvLb/F1pZ3bxObWWw2nQAel6QfBPhxrgAAAABJRU5ErkJggg==
+</value>
+  </data>
 </root>

@@ -1,6 +1,6 @@
 ﻿
 
-/****************************************************************************   
+/****************************************************************************
  *                                                                          *
  *                Copyright (C) <202*>  <BinaryWork Corp.>                  *
  *                                                                          *
@@ -90,7 +90,7 @@ namespace amanda_progress
 		private void progressbar_Load(object sender, EventArgs e)
 		{
 			
-			ret_arp_ = (this.Height - 5)      / 2;						
+			ret_arp_ = (this.Height - 5)      / 2;
 			
 			deslizante.Left         =           0;
 			deslizante.Width        =           0;
@@ -126,7 +126,20 @@ namespace amanda_progress
 			fixo.Left = 0;
 			fixo.Top = 0;
 			fixo.Width = this.Width;
-			fixo.Height = this.Height;			
+			fixo.Height = this.Height;
+
+			maria_vision_.Width = 18;
+			maria_vision_.Height = 18;
+			
+			maria_vision_.Top = deslizante_2_z.Top - 8;
+			maria_vision_.Left = 0;
+			
+			maria_vision_ .BringToFront();
+			deslizante_2_z.BringToFront();
+			deslizante_0_z.BringToFront();
+			deslizante_1_z.BringToFront();
+			deslizante_3_z.BringToFront();
+			deslizante_4_z.BringToFront();
 			
 		}
 		private void progressbar_Resize(object sender, EventArgs e)
@@ -232,6 +245,8 @@ namespace amanda_progress
 				//aqui depois altera
 				deslizante_2_z.Width = (int)temp;
 				
+				maria_vision_.Left = deslizante_2_z.Width - 18;
+				
 				ret_arp_ = (int) temp - 3;
 				
 				if(ret_arp_ > 0)
@@ -253,7 +268,7 @@ namespace amanda_progress
 				{
 					deslizante_1_z.Width = 0;
 				}
-								
+				
 				ret_arp_ = (int) temp - 1;
 				
 				if(ret_arp_ > 0)
@@ -264,7 +279,7 @@ namespace amanda_progress
 				{
 					deslizante_3_z.Width = 0;
 				}
-								
+				
 				ret_arp_ = (int) temp - 3;
 				
 				if(ret_arp_ > 0)
@@ -274,7 +289,7 @@ namespace amanda_progress
 				else
 				{
 					deslizante_4_z.Width = 0;
-				}								
+				}
 			}
 		}
 		public class ExtendedMouseEvent
@@ -293,12 +308,12 @@ namespace amanda_progress
 		}
 
 		private void progressbar_MouseEnter(object sender, EventArgs e)
-		{			
+		{
 			//MP3.disabled = true;, remove it someday
 		}
 
 		private void fixo_MouseLeave(object sender, EventArgs e)
-		{			
+		{
 			//MP3.disabled = false;
 		}
 		void Deslizante_1_zMouseDown(object sender, MouseEventArgs e)

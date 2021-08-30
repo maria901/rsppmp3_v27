@@ -29,6 +29,7 @@ namespace amanda_progress
         /// </summary>
         private void InitializeComponent()
         {
+        	System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(progressbar));
         	this.fixo = new System.Windows.Forms.PictureBox();
         	this.deslizante = new System.Windows.Forms.PictureBox();
         	this.deslizante_0_z = new System.Windows.Forms.PictureBox();
@@ -36,6 +37,7 @@ namespace amanda_progress
         	this.deslizante_2_z = new System.Windows.Forms.PictureBox();
         	this.deslizante_3_z = new System.Windows.Forms.PictureBox();
         	this.deslizante_4_z = new System.Windows.Forms.PictureBox();
+        	this.maria_vision_ = new System.Windows.Forms.PictureBox();
         	((System.ComponentModel.ISupportInitialize)(this.fixo)).BeginInit();
         	((System.ComponentModel.ISupportInitialize)(this.deslizante)).BeginInit();
         	((System.ComponentModel.ISupportInitialize)(this.deslizante_0_z)).BeginInit();
@@ -43,6 +45,7 @@ namespace amanda_progress
         	((System.ComponentModel.ISupportInitialize)(this.deslizante_2_z)).BeginInit();
         	((System.ComponentModel.ISupportInitialize)(this.deslizante_3_z)).BeginInit();
         	((System.ComponentModel.ISupportInitialize)(this.deslizante_4_z)).BeginInit();
+        	((System.ComponentModel.ISupportInitialize)(this.maria_vision_)).BeginInit();
         	this.SuspendLayout();
         	// 
         	// fixo
@@ -98,7 +101,6 @@ namespace amanda_progress
         	this.deslizante_2_z.TabIndex = 4;
         	this.deslizante_2_z.TabStop = false;
         	this.deslizante_2_z.MouseDown += new System.Windows.Forms.MouseEventHandler(this.Deslizante_1_zMouseDown);
-        	
         	// 
         	// deslizante_3_z
         	// 
@@ -120,10 +122,21 @@ namespace amanda_progress
         	this.deslizante_4_z.TabStop = false;
         	this.deslizante_4_z.MouseDown += new System.Windows.Forms.MouseEventHandler(this.Deslizante_1_zMouseDown);
         	// 
+        	// maria_vision_
+        	// 
+        	this.maria_vision_.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("maria_vision_.BackgroundImage")));
+        	this.maria_vision_.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+        	this.maria_vision_.Location = new System.Drawing.Point(3, 0);
+        	this.maria_vision_.Name = "maria_vision_";
+        	this.maria_vision_.Size = new System.Drawing.Size(19, 19);
+        	this.maria_vision_.TabIndex = 7;
+        	this.maria_vision_.TabStop = false;
+        	// 
         	// progressbar
         	// 
         	this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
         	this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+        	this.Controls.Add(this.maria_vision_);
         	this.Controls.Add(this.deslizante_4_z);
         	this.Controls.Add(this.deslizante_3_z);
         	this.Controls.Add(this.deslizante_2_z);
@@ -144,6 +157,7 @@ namespace amanda_progress
         	((System.ComponentModel.ISupportInitialize)(this.deslizante_2_z)).EndInit();
         	((System.ComponentModel.ISupportInitialize)(this.deslizante_3_z)).EndInit();
         	((System.ComponentModel.ISupportInitialize)(this.deslizante_4_z)).EndInit();
+        	((System.ComponentModel.ISupportInitialize)(this.maria_vision_)).EndInit();
         	this.ResumeLayout(false);
 
         }
@@ -157,5 +171,6 @@ namespace amanda_progress
         private System.Windows.Forms.PictureBox deslizante_2_z;
         private System.Windows.Forms.PictureBox deslizante_3_z;
         private System.Windows.Forms.PictureBox deslizante_4_z;
+        private System.Windows.Forms.PictureBox maria_vision_;
     }
 }
