@@ -182,18 +182,18 @@ namespace mp3dll
         StringBuilder settings = new StringBuilder(300*6);
         private void wave_effects_Load(object sender, EventArgs e)
         {
-            MP3.GetSettings("be_effect", settings, "0");
+            MP3.GetSettings("be_effect", settings, "1");
             surround2.CheckState = CheckState.Checked;
             if ("1" == settings.ToString())
             {                
-                MP3.GetSettings("be_effect_val", settings, "0");
+                MP3.GetSettings("be_effect_val", settings, "32");
                 MP3.BE_Special_Wav_Effect(number, 1, int.Parse(settings.ToString()));
                 svalue.Value = int.Parse(settings.ToString());
             }
             else
             {
                 surround2.CheckState = CheckState.Unchecked;
-                MP3.GetSettings("be_effect_val", settings, "0");
+                MP3.GetSettings("be_effect_val", settings, "32");
                 MP3.BE_Special_Wav_Effect(number, 0, int.Parse(settings.ToString()));
                 svalue.Value = int.Parse(settings.ToString());
             }

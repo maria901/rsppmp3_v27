@@ -222,7 +222,7 @@ int adjust_window_position_and_size(morcego___i___instance__a__bucaneiro_enginee
 	mv_______->libav_c___width_of_window = pCodecCtx->width;
 	mv_______->libav_c___height_of_window = pCodecCtx->height;
 
-	pedro_dprintf(0, "w h %d %d\n", pCodecCtx->width, pCodecCtx->height);
+	pedro_dprintf(-1, "w h %d %d\n", pCodecCtx->width, pCodecCtx->height);
 
 	sprintf(
 		temp, "bitrate %lld %dx%d ",

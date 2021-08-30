@@ -952,18 +952,23 @@ namespace mp3dll
 			                      (s14000 * 10),
 			                      (s16000 * 10));
 			
-			MP3.GetSettings("be_effect", settings, "0");
+			MP3.GetSettings("be_effect", settings, "1");
+			
+			MP3.SaveSettings("be_effect", settings.ToString());
+			
 			if ("1"==settings.ToString())
 			{
-				MP3.GetSettings("be_effect_val", settings, "0");
+				MP3.GetSettings("be_effect_val", settings, "32");
 				MP3.BE_Special_Wav_Effect(number, 1, int.Parse(settings.ToString ()));
 			}
 			else
 			{
-				MP3.GetSettings("be_effect_val", settings, "0");
+				MP3.GetSettings("be_effect_val", settings, "32");
 				MP3.BE_Special_Wav_Effect(number, 0, int.Parse(settings.ToString()));
 			}
 
+			MP3.SaveSettings("be_effect_val", settings.ToString());
+			
 			MP3.GetSettings("randon", settings, "0");
 
 			MP3.is_shuffle = true;
@@ -978,10 +983,12 @@ namespace mp3dll
 
 			width_t.Text = settings.ToString();
 
-			MP3.GetSettings("replaygain", settings, "0");
+			MP3.GetSettings("replaygain", settings, "3");
 
 			MP3.EnableOnTheFlyVolumeNormalization(number, int.Parse(settings.ToString()));
 
+			MP3.SaveSettings("replaygain", settings.ToString());
+			
 			MP3.GetSettings("wav_out_vol", settings, "100");
 			int value = int.Parse(settings.ToString());
 			MP3.SetVolumeGain(number, value);
@@ -1013,7 +1020,6 @@ namespace mp3dll
 
 			MP3.GetSettings("encryption", settings, "0");
 
-
 			StringBuilder euo = new StringBuilder(300);
 
 			MP3.ControlName(euo);
@@ -1030,7 +1036,7 @@ namespace mp3dll
 			
 			this.Text = copia + " - Path: " + Application.StartupPath;
 			
-			MP3.GetSettings("filename", settings, "");
+			MP3.GetSettings("filename", settings, "<none>");
 			filename.Text = MP3.utf82wide(settings.ToString());
 
 			MP3.GetSettings("loop", settings, "0");

@@ -1365,15 +1365,13 @@ int get_number_of_audio_tracks_internal(morcego___i___instance__a__bucaneiro_eng
 	        codecpar;
 
 	 */
-	 
-	 
-	 
+	 	 
 	for (i = 0; i < FormatContext_b->nb_streams; i++)
 	{
 		switch(FormatContext_b->streams[i]->codecpar->codec_type)
 		{
 			case AVMEDIA_TYPE_UNKNOWN:
-			pedro_dprintf(0, "track %d == AVMEDIA_TYPE_UNKNOWN\n", i + 1);
+			pedro_dprintf(1001, "track %d == AVMEDIA_TYPE_UNKNOWN\n", i + 1);
 			break;
 			case AVMEDIA_TYPE_VIDEO:
 			pedro_dprintf(-1, "track %d == AVMEDIA_TYPE_VIDEO\n", i + 1);
@@ -1382,16 +1380,16 @@ int get_number_of_audio_tracks_internal(morcego___i___instance__a__bucaneiro_eng
 			pedro_dprintf(-1, "track %d == AVMEDIA_TYPE_AUDIO\n", i + 1);
 			break;
 			case AVMEDIA_TYPE_DATA:
-			pedro_dprintf(0, "track %d == AVMEDIA_TYPE_DATA\n", i + 1);
+			pedro_dprintf(1001, "track %d == AVMEDIA_TYPE_DATA\n", i + 1);
 			break;
 			case AVMEDIA_TYPE_SUBTITLE:
-			pedro_dprintf(0, "Track %d == AVMEDIA_TYPE_SUBTITLE\n", i + 1);
+			pedro_dprintf(1001, "Track %d == AVMEDIA_TYPE_SUBTITLE\n", i + 1);
 			break;
 			case AVMEDIA_TYPE_ATTACHMENT:
-			pedro_dprintf(0, "track %d == AVMEDIA_TYPE_ATTACHMENT\n", i + 1);
+			pedro_dprintf(1001, "track %d == AVMEDIA_TYPE_ATTACHMENT\n", i + 1);
 			break;
 			case AVMEDIA_TYPE_NB:
-			pedro_dprintf(0, "track %d == AVMEDIA_TYPE_NB\n", i + 1);
+			pedro_dprintf(1001, "track %d == AVMEDIA_TYPE_NB\n", i + 1);
 			break;			
 		}
 	}
@@ -1403,7 +1401,7 @@ int get_number_of_audio_tracks_internal(morcego___i___instance__a__bucaneiro_eng
 		for (i = 0; i < FormatContext_b->nb_streams; i++)
 			if (FormatContext_b->streams[i]->codecpar->codec_type == /*AVMEDIA_TYPE_AUDIO*/ AVMEDIA_TYPE_AUDIO)
 			{
-				pedro_dprintf(0, "achou audio track %d \n",i+1);
+				pedro_dprintf(1001, "found audio track %d \n",i+1);
 				count++; //untested, as usual
 			}
 	 }
@@ -1413,7 +1411,7 @@ int get_number_of_audio_tracks_internal(morcego___i___instance__a__bucaneiro_eng
 		for (i = 0; i < FormatContext_b->nb_streams; i++)
 			if (FormatContext_b->streams[i]->codecpar->codec_type == /*AVMEDIA_TYPE_AUDIO*/ AVMEDIA_TYPE_SUBTITLE)
 			{
-				pedro_dprintf(0, "achou subtitle track %d \n",i+1);
+				pedro_dprintf(1001, "found subtitle track %d \n",i+1);
 				count++; //untested, as usual
 			}
 	 }
