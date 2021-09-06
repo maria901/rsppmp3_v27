@@ -149,6 +149,12 @@ namespace mp3dll
 					
 					desktop_playback_settings();
 					
+					if("-1" != new_waveout_settings_Pk)
+					{
+						MP3.SaveSettings("waveout", new_waveout_settings_Pk);
+						new_waveout_settings_Pk = "-1";
+					}
+					
 					MP3.Play(number, MP3.wide2utf8(MP3.the_filename), loop_, MP3.selected_track_i,
 					         video_p.Handle.ToInt64(),
 					         video_f_p.Handle.ToInt64(),
@@ -673,6 +679,12 @@ namespace mp3dll
 					MP3.clean_up_memory_p();
 					
 					desktop_playback_settings();
+										
+					if("-1" != new_waveout_settings_Pk)
+					{
+						MP3.SaveSettings("waveout", new_waveout_settings_Pk);
+						new_waveout_settings_Pk = "-1";
+					}
 					
 					ret = MP3.Play(number, MP3.wide2utf8(playlist.Items[MP3.playlist_index].SubItems[1].Text), loop_, MP3.selected_track_i,
 					               video_p.Handle.ToInt64(),
@@ -703,6 +715,8 @@ namespace mp3dll
 		}
 
 		int disable = 0;
+		
+		string new_waveout_settings_Pk = "-1";
 
 		StringBuilder Amanda   = new StringBuilder(8);
 		
@@ -1076,6 +1090,7 @@ namespace mp3dll
 					MP3.GetWaveOutDevicesName(number, l, settings);
 					waveout.Items.Add(settings.ToString());
 				}
+				
 				MP3.GetSettings("waveout", settings, "0");
 				
 				try
@@ -1124,8 +1139,11 @@ namespace mp3dll
 				return;
 			}
 			
-			MP3.SaveSettings("waveout", waveout.SelectedIndex.ToString());
-
+			//MP3.SaveSettings("waveout", waveout.SelectedIndex.ToString());
+			
+			//fixes a bug when saving waveout settings
+			new_waveout_settings_Pk = waveout.SelectedIndex.ToString();
+			
 		}
 
 		private void loop_MouseUp(object sender, MouseEventArgs e)
@@ -1146,6 +1164,12 @@ namespace mp3dll
 			bool did_it_d = false;
 			int ret;
 			
+			if("-1" != new_waveout_settings_Pk)
+			{
+				MP3.SaveSettings("waveout", new_waveout_settings_Pk);
+				new_waveout_settings_Pk = "-1";
+			}
+			
 			lvwColumnSorter = new ListViewColumnSorter();
 			this.playlist.ListViewItemSorter = lvwColumnSorter;
 			
@@ -1162,7 +1186,6 @@ namespace mp3dll
 			label10.Text = "Playing";
 			MP3.GetSettings("replaygain", settings, "0");
 			MP3.EnableOnTheFlyVolumeNormalization(number, int.Parse(settings.ToString()));
-
 
 			MP3.SetWaveOutDevice(number, waveout.SelectedIndex);
 			MP3.is_playlist = false;
@@ -1311,6 +1334,12 @@ namespace mp3dll
 		{
 			bool did_it_d = false;
 			int ret;
+						
+			if("-1" != new_waveout_settings_Pk)
+			{
+				MP3.SaveSettings("waveout", new_waveout_settings_Pk);
+				new_waveout_settings_Pk = "-1";
+			}
 			
 			lvwColumnSorter = new ListViewColumnSorter();
 			this.playlist.ListViewItemSorter = lvwColumnSorter;
@@ -1738,6 +1767,13 @@ namespace mp3dll
 
 		private void sample_FormClosing(object sender, FormClosingEventArgs e)
 		{
+			
+			if("-1" != new_waveout_settings_Pk)
+			{
+				MP3.SaveSettings("waveout", new_waveout_settings_Pk);
+				new_waveout_settings_Pk = "-1";
+			}
+			
 			main_timer.Enabled = false;
 			MP3.PlaybackCancel(number);
 			MP3.BE_CloseDecoder(ref number);
@@ -3346,6 +3382,12 @@ namespace mp3dll
 			ListViewItem coisa = playlist.SelectedItems[0];
 			MP3.playlist_index = playlist.SelectedItems[0].Index;
 			
+			if("-1" != new_waveout_settings_Pk)
+			{
+				MP3.SaveSettings("waveout", new_waveout_settings_Pk);
+				new_waveout_settings_Pk = "-1";
+			}
+			
 			MP3.set_played_item_z(MP3.playlist_index);
 			
 			int loop_ = 0;
@@ -3783,6 +3825,12 @@ namespace mp3dll
 		public void playlist_search_amanda_DoubleClick(string filename_ricardo)
 		{
 			int amanda_i;
+			
+			if("-1" != new_waveout_settings_Pk)
+			{
+				MP3.SaveSettings("waveout", new_waveout_settings_Pk);
+				new_waveout_settings_Pk = "-1";
+			}
 			
 			try
 			{

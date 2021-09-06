@@ -4,7 +4,7 @@
   <description asmv2:iconFile="amanda &amp; ricardo_new icon.ico" xmlns="urn:schemas-microsoft-com:asm.v1" />
   <application />
   <entryPoint>
-    <assemblyIdentity name="mp3dll" version="3.4.4.349" language="neutral" processorArchitecture="amd64" />
+    <assemblyIdentity name="mp3dll" version="3.4.5.350" language="neutral" processorArchitecture="amd64" />
     <commandLine file="mp3dll.exe" parameters="" />
   </entryPoint>
   <trustInfo>
@@ -94,25 +94,25 @@
   </dependency>
   <dependency>
     <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="amanda_progress.dll" size="24576">
-      <assemblyIdentity name="amanda_progress" version="1.0.7783.8174" language="neutral" processorArchitecture="msil" />
+      <assemblyIdentity name="amanda_progress" version="1.0.7912.29221" language="neutral" processorArchitecture="msil" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>tuRBjAR5I0Dc/BIP0cUXffMdEO1EPuumYjIlDbMsLKc=</dsig:DigestValue>
+        <dsig:DigestValue>uH4ZmyD7C3yyJxhtGlW/kJfZg8YqQ7sLw81RwOCL574=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="mp3dll.exe" size="2186240">
-      <assemblyIdentity name="mp3dll" version="3.4.4.349" language="neutral" processorArchitecture="amd64" />
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="mp3dll.exe" size="2186752">
+      <assemblyIdentity name="mp3dll" version="3.4.5.350" language="neutral" processorArchitecture="amd64" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>AVhVvdR5hf3sc7l0iWJEWoc0GesEPceqA0WBUqRKzjY=</dsig:DigestValue>
+        <dsig:DigestValue>7XYNBEqL69H9DCdj+Zbm9xo9xxa1yF+G+rP7eBPzmxo=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
