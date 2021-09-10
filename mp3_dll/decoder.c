@@ -1,33 +1,33 @@
 
- /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
- *                                                                              *
- *        Licensa de Cópia (C) <2021>  <Corporação do Trabalho Binário>         *
- *                                                                              *
- *     Este  programa  é software livre: você pode redistribuir isto e/ou       *
- *     modificar  isto sobre os termos do  GNU Licensa Geral Pública como       8
- *     publicado  pela Fundação  de Software  Livre, tanto a versão 3  da       *
- *     Licensa, ou (dependendo da sua opção) qualquer versão posterior.         *
- *                                                                              *
- *     Este  programa é distribuído na  esperança que isto vai  ser útil,       *
- *     mas SEM  QUALQUER GARANTIA; sem  até mesmo a implicada garantia de       *
- *     COMERCIALIZAÇÃO ou CABIMENTO PARA UM FIM PARTICULAR.  Veja a             *
- *     Licensa Geral Pública para mais detalhes.                                *
- *                                                                              *
- *     Você deve ter recebido uma  cópia da LICENSA GERAL PUBLICA e a GNU       *
- *     Licensa Pública Menor junto com este programa                            *
- *     Se não, veja <http://www.gnu.org/licenses/>.                             *
- *                                                                              *
- *     Suporte: https://nomade.sourceforge.io/                                  *
- *                                                                              *
- *     E-mails direto dos felizes programadores:                                *
- *     O Ricardinho :    arsoftware25@gmail.com    ricardo@arsoftware.net.br    *
- *     Little_Amanda:    arsoftware10@gmail.com    amanda.@arsoftware.net.br    *
- *                                                                              *
- *     contato imediato(para uma resposta muita rápida) WhatsApp                *
- *     (+55)41 9627 1708 - isto está sempre ligado (eu acho...)                 *      
- *                                                                              *
- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *  **/
- 
+/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+*                                                                              *
+*        Licensa de Cópia (C) <2021>  <Corporação do Trabalho Binário>         *
+*                                                                              *
+*     Este  programa  é software livre: você pode redistribuir isto e/ou       *
+*     modificar  isto sobre os termos do  GNU Licensa Geral Pública como       8
+*     publicado  pela Fundação  de Software  Livre, tanto a versão 3  da       *
+*     Licensa, ou (dependendo da sua opção) qualquer versão posterior.         *
+*                                                                              *
+*     Este  programa é distribuído na  esperança que isto vai  ser útil,       *
+*     mas SEM  QUALQUER GARANTIA; sem  até mesmo a implicada garantia de       *
+*     COMERCIALIZAÇÃO ou CABIMENTO PARA UM FIM PARTICULAR.  Veja a             *
+*     Licensa Geral Pública para mais detalhes.                                *
+*                                                                              *
+*     Você deve ter recebido uma  cópia da LICENSA GERAL PUBLICA e a GNU       *
+*     Licensa Pública Menor junto com este programa                            *
+*     Se não, veja <http://www.gnu.org/licenses/>.                             *
+*                                                                              *
+*     Suporte: https://nomade.sourceforge.io/                                  *
+*                                                                              *
+*     E-mails direto dos felizes programadores:                                *
+*     O Ricardinho :    arsoftware25@gmail.com    ricardo@arsoftware.net.br    *
+*     Little_Amanda:    arsoftware10@gmail.com    amanda.@arsoftware.net.br    *
+*                                                                              *
+*     contato imediato(para uma resposta muita rápida) WhatsApp                *
+*     (+55)41 9627 1708 - isto está sempre ligado (eu acho...)                 *
+*                                                                              *
+* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *  **/
+
 #define _WIN32_WINNT 0x500
 #include "mv_from_be.h"
 #include "nome_da_companhia.h"
@@ -52,10 +52,10 @@
 
 #ifndef INCLUDEUCHAR
 #ifndef uchar
-#define uchar  unsigned   char
-#define uint   unsigned    int
-#define ulong  unsigned   long
-#define ushort unsigned  short
+#define uchar  unsigned char
+#define uint   unsigned int
+#define ulong  unsigned long
+#define ushort unsigned short
 #endif
 #endif
 
@@ -90,7 +90,7 @@
 #include /* amanda's smart ape  */ <assert.h>
 #include /* amanda's smart ape */ <stdbool.h>
 #include /* amanda's smart ape */ <process.h>
-#include /* amanda's smart ape */   <psapi.h>
+#include /* amanda's smart ape */ <psapi.h>
 
 #include <MmSystem.h>
 
@@ -122,7 +122,7 @@ int ret_arp_;
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // Added 2021/04/16 21:21
 
-static int   oldvalue_Z =  0;
+static int oldvalue_Z =  0;
 static int last_value_Z = -1;
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //playlist debug mode
@@ -147,6 +147,9 @@ bool enable_desktop_i = 0;
 
 int w_i;
 int h_i;
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+bool need_to_add_char_n_m_;
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 int stripfilenameandpath(char *path, char *onlypath, char *onlyfilename);
@@ -508,11 +511,11 @@ static char *
 secondtostring(double value)
 {
 
-	static char fixo  [255];
-	uint                ret;
-	uint                seg;
-	uint                min;
-	uint               hour;
+	static char fixo[255];
+	uint ret;
+	uint seg;
+	uint min;
+	uint hour;
 
 	ret = (uint)      value;
 	seg = ret %          60;
@@ -530,9 +533,9 @@ secondtostring(double value)
  */
 int getdev()
 {
-	uint                  numdev;
+	uint numdev;
 	numdev = waveOutGetNumDevs();
-	return                numdev;
+	return numdev;
 }
 
 /**
@@ -712,16 +715,16 @@ int play_number_1_26_june_2011(morcego___i___instance__a__bucaneiro_engineering 
 		}
 		memcpy(mv_______->decoder_c____play_1_copia_1, buf, len);
 		mv_______->decoder_c____play_1WaveHdr.lpData = (char *)
-			mv_______->decoder_c____play_1_copia_1;
+		                                               mv_______->decoder_c____play_1_copia_1;
 		mv_______->decoder_c____play_1WaveHdr.dwBufferLength = len;
 		mv_______->decoder_c____play_1WaveHdr.dwUser = 1;
 		mv_______->decoder_c____play_1WaveHdr.dwFlags = 0;
 		waveOutPrepareHeader(mv_______->decoder_c___phwo,
-			                     &mv_______->decoder_c____play_1WaveHdr,
-			                     sizeof(WAVEHDR));
+		                     &mv_______->decoder_c____play_1WaveHdr,
+		                     sizeof(WAVEHDR));
 		waveOutWrite(mv_______->decoder_c___phwo,
-			             &mv_______->decoder_c____play_1WaveHdr,
-			             sizeof(WAVEHDR));
+		             &mv_______->decoder_c____play_1WaveHdr,
+		             sizeof(WAVEHDR));
 
 		if(mv_______->decodec_c___last_pcm_slice_to_play_k_p)
 		{
@@ -761,16 +764,16 @@ int play_number_1_26_june_2011(morcego___i___instance__a__bucaneiro_engineering 
 		memcpy(mv_______->decoder_c____play_1_copia_2_24_june_2011__14_12_PM,
 		       buf, len);
 		mv_______->decoder_c____play_1WaveHdr1.lpData = (char *)
-			mv_______->decoder_c____play_1_copia_2_24_june_2011__14_12_PM;
+		                                                mv_______->decoder_c____play_1_copia_2_24_june_2011__14_12_PM;
 		mv_______->decoder_c____play_1WaveHdr1.dwBufferLength = len;
 		mv_______->decoder_c____play_1WaveHdr1.dwUser = 2;
 		mv_______->decoder_c____play_1WaveHdr1.dwFlags = 0;
 		waveOutPrepareHeader(mv_______->decoder_c___phwo,
-			                     &mv_______->decoder_c____play_1WaveHdr1,
-			                     sizeof(WAVEHDR));
+		                     &mv_______->decoder_c____play_1WaveHdr1,
+		                     sizeof(WAVEHDR));
 		waveOutWrite(mv_______->decoder_c___phwo,
-			             &mv_______->decoder_c____play_1WaveHdr1,
-			             sizeof(WAVEHDR));
+		             &mv_______->decoder_c____play_1WaveHdr1,
+		             sizeof(WAVEHDR));
 
 		if(mv_______->decodec_c___last_pcm_slice_to_play_k_p)
 		{
@@ -809,16 +812,16 @@ int play_number_1_26_june_2011(morcego___i___instance__a__bucaneiro_engineering 
 		memcpy(mv_______->decoder_c____play_1_copia_3_24_june_2011__14_19_PM,
 		       buf, len);
 		mv_______->decoder_c____play_1WaveHdr2.lpData = (char *)
-			mv_______->decoder_c____play_1_copia_3_24_june_2011__14_19_PM;
+		                                                mv_______->decoder_c____play_1_copia_3_24_june_2011__14_19_PM;
 		mv_______->decoder_c____play_1WaveHdr2.dwBufferLength = len;
 		mv_______->decoder_c____play_1WaveHdr2.dwUser = 3;
 		mv_______->decoder_c____play_1WaveHdr2.dwFlags = 0;
 		waveOutPrepareHeader(mv_______->decoder_c___phwo,
-			                     &mv_______->decoder_c____play_1WaveHdr2,
-			                     sizeof(WAVEHDR));
+		                     &mv_______->decoder_c____play_1WaveHdr2,
+		                     sizeof(WAVEHDR));
 		waveOutWrite(mv_______->decoder_c___phwo,
-			             &mv_______->decoder_c____play_1WaveHdr2,
-			             sizeof(WAVEHDR));
+		             &mv_______->decoder_c____play_1WaveHdr2,
+		             sizeof(WAVEHDR));
 
 		if(mv_______->decodec_c___last_pcm_slice_to_play_k_p)
 		{
@@ -857,16 +860,16 @@ int play_number_1_26_june_2011(morcego___i___instance__a__bucaneiro_engineering 
 		memcpy(mv_______->decoder_c____play_1_copia_4_24_june_2011__14_26_PM,
 		       buf, len);
 		mv_______->decoder_c____play_1WaveHdr3.lpData = (char *)
-			mv_______->decoder_c____play_1_copia_4_24_june_2011__14_26_PM;
+		                                                mv_______->decoder_c____play_1_copia_4_24_june_2011__14_26_PM;
 		mv_______->decoder_c____play_1WaveHdr3.dwBufferLength = len;
 		mv_______->decoder_c____play_1WaveHdr3.dwUser = 3;
 		mv_______->decoder_c____play_1WaveHdr3.dwFlags = 0;
 		(void)waveOutPrepareHeader(mv_______->decoder_c___phwo,
-			                     &mv_______->decoder_c____play_1WaveHdr3,
-			                     sizeof(WAVEHDR));
+		                           &mv_______->decoder_c____play_1WaveHdr3,
+		                           sizeof(WAVEHDR));
 		waveOutWrite(mv_______->decoder_c___phwo,
-			             &mv_______->decoder_c____play_1WaveHdr3,
-			             sizeof(WAVEHDR));
+		             &mv_______->decoder_c____play_1WaveHdr3,
+		             sizeof(WAVEHDR));
 		if(mv_______->decodec_c___last_pcm_slice_to_play_k_p)
 		{
 			while (WAVERR_STILLPLAYING ==
@@ -903,16 +906,16 @@ int play_number_1_26_june_2011(morcego___i___instance__a__bucaneiro_engineering 
 		memcpy(mv_______->decoder_c____play_1_copia_5_24_june_2011__14_46_PM,
 		       buf, len);
 		mv_______->decoder_c____play_1WaveHdr4.lpData = (char *)
-			mv_______->decoder_c____play_1_copia_5_24_june_2011__14_46_PM;
+		                                                mv_______->decoder_c____play_1_copia_5_24_june_2011__14_46_PM;
 		mv_______->decoder_c____play_1WaveHdr4.dwBufferLength = len;
 		mv_______->decoder_c____play_1WaveHdr4.dwUser = 3;
 		mv_______->decoder_c____play_1WaveHdr4.dwFlags = 0;
 		waveOutPrepareHeader(mv_______->decoder_c___phwo,
-			                     &mv_______->decoder_c____play_1WaveHdr4,
-			                     sizeof(WAVEHDR));
+		                     &mv_______->decoder_c____play_1WaveHdr4,
+		                     sizeof(WAVEHDR));
 		waveOutWrite(mv_______->decoder_c___phwo,
-			             &mv_______->decoder_c____play_1WaveHdr4,
-			             sizeof(WAVEHDR));
+		             &mv_______->decoder_c____play_1WaveHdr4,
+		             sizeof(WAVEHDR));
 
 		if(mv_______->decodec_c___last_pcm_slice_to_play_k_p)
 		{
@@ -974,16 +977,16 @@ int play_number_2_26_june_2011(morcego___i___instance__a__bucaneiro_engineering 
 		}
 		memcpy(mv_______->decoder_c____play_2_copia_1, buf, len);
 		mv_______->decoder_c____play_2WaveHdr.lpData = (char *)
-			mv_______->decoder_c____play_2_copia_1;
+		                                               mv_______->decoder_c____play_2_copia_1;
 		mv_______->decoder_c____play_2WaveHdr.dwBufferLength = len;
 		mv_______->decoder_c____play_2WaveHdr.dwUser = 1;
 		mv_______->decoder_c____play_2WaveHdr.dwFlags = 0;
 		waveOutPrepareHeader(mv_______->decoder_c___phwo,
-			                     &mv_______->decoder_c____play_2WaveHdr,
-			                     sizeof(WAVEHDR));
+		                     &mv_______->decoder_c____play_2WaveHdr,
+		                     sizeof(WAVEHDR));
 		waveOutWrite(mv_______->decoder_c___phwo,
-			             &mv_______->decoder_c____play_2WaveHdr,
-			             sizeof(WAVEHDR));
+		             &mv_______->decoder_c____play_2WaveHdr,
+		             sizeof(WAVEHDR));
 		if(mv_______->decodec_c___last_pcm_slice_to_play_k_p)
 		{
 			while (WAVERR_STILLPLAYING ==
@@ -1000,7 +1003,7 @@ int play_number_2_26_june_2011(morcego___i___instance__a__bucaneiro_engineering 
 	break;
 	case 1:
 	{
-		
+
 		analize_fft(mv_______, &mv_______->decoder_c___spec,
 		            (char *) mv_______->decoder_c____play_2_copia_2_24_june_2011__14_12_PM, 2,
 		            mv_______->decoder_c___inttamanho, 1);
@@ -1020,16 +1023,16 @@ int play_number_2_26_june_2011(morcego___i___instance__a__bucaneiro_engineering 
 		memcpy(mv_______->decoder_c____play_2_copia_2_24_june_2011__14_12_PM,
 		       buf, len);
 		mv_______->decoder_c____play_2WaveHdr1.lpData = (char *)
-			mv_______->decoder_c____play_2_copia_2_24_june_2011__14_12_PM;
+		                                                mv_______->decoder_c____play_2_copia_2_24_june_2011__14_12_PM;
 		mv_______->decoder_c____play_2WaveHdr1.dwBufferLength = len;
 		mv_______->decoder_c____play_2WaveHdr1.dwUser = 2;
 		mv_______->decoder_c____play_2WaveHdr1.dwFlags = 0;
 		waveOutPrepareHeader(mv_______->decoder_c___phwo,
-			                     &mv_______->decoder_c____play_2WaveHdr1,
-			                     sizeof(WAVEHDR));
+		                     &mv_______->decoder_c____play_2WaveHdr1,
+		                     sizeof(WAVEHDR));
 		waveOutWrite(mv_______->decoder_c___phwo,
-			             &mv_______->decoder_c____play_2WaveHdr1,
-			             sizeof(WAVEHDR));
+		             &mv_______->decoder_c____play_2WaveHdr1,
+		             sizeof(WAVEHDR));
 
 		if(mv_______->decodec_c___last_pcm_slice_to_play_k_p)
 		{
@@ -1068,16 +1071,16 @@ int play_number_2_26_june_2011(morcego___i___instance__a__bucaneiro_engineering 
 		memcpy(mv_______->decoder_c____play_2_copia_3_24_june_2011__14_19_PM,
 		       buf, len);
 		mv_______->decoder_c____play_2WaveHdr2.lpData = (char *)
-			mv_______->decoder_c____play_2_copia_3_24_june_2011__14_19_PM;
+		                                                mv_______->decoder_c____play_2_copia_3_24_june_2011__14_19_PM;
 		mv_______->decoder_c____play_2WaveHdr2.dwBufferLength = len;
 		mv_______->decoder_c____play_2WaveHdr2.dwUser = 3;
 		mv_______->decoder_c____play_2WaveHdr2.dwFlags = 0;
 		waveOutPrepareHeader(mv_______->decoder_c___phwo,
-			                     &mv_______->decoder_c____play_2WaveHdr2,
-			                     sizeof(WAVEHDR));
+		                     &mv_______->decoder_c____play_2WaveHdr2,
+		                     sizeof(WAVEHDR));
 		waveOutWrite(mv_______->decoder_c___phwo,
-			             &mv_______->decoder_c____play_2WaveHdr2,
-			             sizeof(WAVEHDR));
+		             &mv_______->decoder_c____play_2WaveHdr2,
+		             sizeof(WAVEHDR));
 
 		if(mv_______->decodec_c___last_pcm_slice_to_play_k_p)
 		{
@@ -1115,16 +1118,16 @@ int play_number_2_26_june_2011(morcego___i___instance__a__bucaneiro_engineering 
 		memcpy(mv_______->decoder_c____play_2_copia_4_24_june_2011__14_26_PM,
 		       buf, len);
 		mv_______->decoder_c____play_2WaveHdr3.lpData = (char *)
-			mv_______->decoder_c____play_2_copia_4_24_june_2011__14_26_PM;
+		                                                mv_______->decoder_c____play_2_copia_4_24_june_2011__14_26_PM;
 		mv_______->decoder_c____play_2WaveHdr3.dwBufferLength = len;
 		mv_______->decoder_c____play_2WaveHdr3.dwUser = 3;
 		mv_______->decoder_c____play_2WaveHdr3.dwFlags = 0;
 		waveOutPrepareHeader(mv_______->decoder_c___phwo,
-			                     &mv_______->decoder_c____play_2WaveHdr3,
-			                     sizeof(WAVEHDR));
+		                     &mv_______->decoder_c____play_2WaveHdr3,
+		                     sizeof(WAVEHDR));
 		waveOutWrite(mv_______->decoder_c___phwo,
-			             &mv_______->decoder_c____play_2WaveHdr3,
-			             sizeof(WAVEHDR));
+		             &mv_______->decoder_c____play_2WaveHdr3,
+		             sizeof(WAVEHDR));
 
 		if(mv_______->decodec_c___last_pcm_slice_to_play_k_p)
 		{
@@ -1162,16 +1165,16 @@ int play_number_2_26_june_2011(morcego___i___instance__a__bucaneiro_engineering 
 		memcpy(mv_______->decoder_c____play_2_copia_5_24_june_2011__14_46_PM,
 		       buf, len);
 		mv_______->decoder_c____play_2WaveHdr4.lpData = (char *)
-			mv_______->decoder_c____play_2_copia_5_24_june_2011__14_46_PM;
+		                                                mv_______->decoder_c____play_2_copia_5_24_june_2011__14_46_PM;
 		mv_______->decoder_c____play_2WaveHdr4.dwBufferLength = len;
 		mv_______->decoder_c____play_2WaveHdr4.dwUser = 3;
 		mv_______->decoder_c____play_2WaveHdr4.dwFlags = 0;
 		waveOutPrepareHeader(mv_______->decoder_c___phwo,
-			                     &mv_______->decoder_c____play_2WaveHdr4,
-			                     sizeof(WAVEHDR));
+		                     &mv_______->decoder_c____play_2WaveHdr4,
+		                     sizeof(WAVEHDR));
 		waveOutWrite(mv_______->decoder_c___phwo,
-			             &mv_______->decoder_c____play_2WaveHdr4,
-			             sizeof(WAVEHDR));
+		             &mv_______->decoder_c____play_2WaveHdr4,
+		             sizeof(WAVEHDR));
 
 		if(mv_______->decodec_c___last_pcm_slice_to_play_k_p)
 		{
@@ -1234,16 +1237,16 @@ int play_number_3_26_june_2011(morcego___i___instance__a__bucaneiro_engineering 
 		}
 		memcpy(mv_______->decoder_c____play_3_copia_1, buf, len);
 		mv_______->decoder_c____play_3WaveHdr.lpData = (char *)
-			mv_______->decoder_c____play_3_copia_1;
+		                                               mv_______->decoder_c____play_3_copia_1;
 		mv_______->decoder_c____play_3WaveHdr.dwBufferLength = len;
 		mv_______->decoder_c____play_3WaveHdr.dwUser = 1;
 		mv_______->decoder_c____play_3WaveHdr.dwFlags = 0;
 		waveOutPrepareHeader(mv_______->decoder_c___phwo,
-			                     &mv_______->decoder_c____play_3WaveHdr,
-			                     sizeof(WAVEHDR));
+		                     &mv_______->decoder_c____play_3WaveHdr,
+		                     sizeof(WAVEHDR));
 		waveOutWrite(mv_______->decoder_c___phwo,
-			             &mv_______->decoder_c____play_3WaveHdr,
-			             sizeof(WAVEHDR));
+		             &mv_______->decoder_c____play_3WaveHdr,
+		             sizeof(WAVEHDR));
 
 		if(mv_______->decodec_c___last_pcm_slice_to_play_k_p)
 		{
@@ -1281,16 +1284,16 @@ int play_number_3_26_june_2011(morcego___i___instance__a__bucaneiro_engineering 
 		memcpy(mv_______->decoder_c____play_3_copia_2_24_june_2011__14_12_PM,
 		       buf, len);
 		mv_______->decoder_c____play_3WaveHdr1.lpData = (char *)
-			mv_______->decoder_c____play_3_copia_2_24_june_2011__14_12_PM;
+		                                                mv_______->decoder_c____play_3_copia_2_24_june_2011__14_12_PM;
 		mv_______->decoder_c____play_3WaveHdr1.dwBufferLength = len;
 		mv_______->decoder_c____play_3WaveHdr1.dwUser = 2;
 		mv_______->decoder_c____play_3WaveHdr1.dwFlags = 0;
 		waveOutPrepareHeader(mv_______->decoder_c___phwo,
-			                     &mv_______->decoder_c____play_3WaveHdr1,
-			                     sizeof(WAVEHDR));
+		                     &mv_______->decoder_c____play_3WaveHdr1,
+		                     sizeof(WAVEHDR));
 		waveOutWrite(mv_______->decoder_c___phwo,
-			             &mv_______->decoder_c____play_3WaveHdr1,
-			             sizeof(WAVEHDR));
+		             &mv_______->decoder_c____play_3WaveHdr1,
+		             sizeof(WAVEHDR));
 
 
 		if(mv_______->decodec_c___last_pcm_slice_to_play_k_p)
@@ -1329,16 +1332,16 @@ int play_number_3_26_june_2011(morcego___i___instance__a__bucaneiro_engineering 
 		memcpy(mv_______->decoder_c____play_3_copia_3_24_june_2011__14_19_PM,
 		       buf, len);
 		mv_______->decoder_c____play_3WaveHdr2.lpData = (char *)
-			mv_______->decoder_c____play_3_copia_3_24_june_2011__14_19_PM;
+		                                                mv_______->decoder_c____play_3_copia_3_24_june_2011__14_19_PM;
 		mv_______->decoder_c____play_3WaveHdr2.dwBufferLength = len;
 		mv_______->decoder_c____play_3WaveHdr2.dwUser = 3;
 		mv_______->decoder_c____play_3WaveHdr2.dwFlags = 0;
 		waveOutPrepareHeader(mv_______->decoder_c___phwo,
-			                     &mv_______->decoder_c____play_3WaveHdr2,
-			                     sizeof(WAVEHDR));
+		                     &mv_______->decoder_c____play_3WaveHdr2,
+		                     sizeof(WAVEHDR));
 		waveOutWrite(mv_______->decoder_c___phwo,
-			             &mv_______->decoder_c____play_3WaveHdr2,
-			             sizeof(WAVEHDR));
+		             &mv_______->decoder_c____play_3WaveHdr2,
+		             sizeof(WAVEHDR));
 
 		if(mv_______->decodec_c___last_pcm_slice_to_play_k_p)
 		{
@@ -1376,16 +1379,16 @@ int play_number_3_26_june_2011(morcego___i___instance__a__bucaneiro_engineering 
 		memcpy(mv_______->decoder_c____play_3_copia_4_24_june_2011__14_26_PM,
 		       buf, len);
 		mv_______->decoder_c____play_3WaveHdr3.lpData = (char *)
-			mv_______->decoder_c____play_3_copia_4_24_june_2011__14_26_PM;
+		                                                mv_______->decoder_c____play_3_copia_4_24_june_2011__14_26_PM;
 		mv_______->decoder_c____play_3WaveHdr3.dwBufferLength = len;
 		mv_______->decoder_c____play_3WaveHdr3.dwUser = 3;
 		mv_______->decoder_c____play_3WaveHdr3.dwFlags = 0;
 		waveOutPrepareHeader(mv_______->decoder_c___phwo,
-			                     &mv_______->decoder_c____play_3WaveHdr3,
-			                     sizeof(WAVEHDR));
+		                     &mv_______->decoder_c____play_3WaveHdr3,
+		                     sizeof(WAVEHDR));
 		waveOutWrite(mv_______->decoder_c___phwo,
-			             &mv_______->decoder_c____play_3WaveHdr3,
-			             sizeof(WAVEHDR));
+		             &mv_______->decoder_c____play_3WaveHdr3,
+		             sizeof(WAVEHDR));
 
 		if(mv_______->decodec_c___last_pcm_slice_to_play_k_p)
 		{
@@ -1423,16 +1426,16 @@ int play_number_3_26_june_2011(morcego___i___instance__a__bucaneiro_engineering 
 		memcpy(mv_______->decoder_c____play_3_copia_5_24_june_2011__14_46_PM,
 		       buf, len);
 		mv_______->decoder_c____play_3WaveHdr4.lpData = (char *)
-			mv_______->decoder_c____play_3_copia_5_24_june_2011__14_46_PM;
+		                                                mv_______->decoder_c____play_3_copia_5_24_june_2011__14_46_PM;
 		mv_______->decoder_c____play_3WaveHdr4.dwBufferLength = len;
 		mv_______->decoder_c____play_3WaveHdr4.dwUser = 3;
 		mv_______->decoder_c____play_3WaveHdr4.dwFlags = 0;
 		waveOutPrepareHeader(mv_______->decoder_c___phwo,
-			                     &mv_______->decoder_c____play_3WaveHdr4,
-			                     sizeof(WAVEHDR));
+		                     &mv_______->decoder_c____play_3WaveHdr4,
+		                     sizeof(WAVEHDR));
 		waveOutWrite(mv_______->decoder_c___phwo,
-			             &mv_______->decoder_c____play_3WaveHdr4,
-			             sizeof(WAVEHDR));
+		             &mv_______->decoder_c____play_3WaveHdr4,
+		             sizeof(WAVEHDR));
 
 		if(mv_______->decodec_c___last_pcm_slice_to_play_k_p)
 		{
@@ -1514,12 +1517,12 @@ id3v2tag_multithread(morcego___i___instance__a__bucaneiro_engineering *mv_______
 {
 
 	FILE *astdin    = NULL;
-	int                ret;
+	int ret;
 	static uchar item[255];
-	uint            fatia1;
-	uint             fatia2;
-	uint            fatia3;
-	uint            fatia4;
+	uint fatia1;
+	uint fatia2;
+	uint fatia3;
+	uint fatia4;
 	__int64 mv_instance = (__int64)(__INT32_OR_INT64)mv_______;
 	if ((astdin =
 		     _wfopen(utf8towide_multithread(mv_instance, filename),
@@ -1565,9 +1568,9 @@ void setvolume2(morcego___i___instance__a__bucaneiro_engineering *mv_______,
                 uchar *buf, uint len)
 {
 	signed short  *fatia; // notice that it is ´signed´ no matter what it means
-	int            tempo;
+	int tempo;
 	int *fatia2 = &tempo;
-	float           temp;
+	float temp;
 	int i;
 	fatia = (signed short *)buf;
 	for (i = 0; i < (int) len; i = i + 2)
@@ -1575,18 +1578,18 @@ void setvolume2(morcego___i___instance__a__bucaneiro_engineering *mv_______,
 		*fatia2 = (int)*fatia;
 		temp = (float)*fatia2;
 		temp = temp * mv_______->decoder_c___intvolume;
-		*fatia2 = (int)temp       ;
+		*fatia2 = (int)temp;
 		if (*fatia2 > 32767       )
 		{
-			*fatia2 = 32767       ;
+			*fatia2 = 32767;
 		}
 		if (*fatia2 < -32768      )
 		{
 
-			*fatia2 = -32768      ;
+			*fatia2 = -32768;
 		}
 		*fatia = (signed short)*
-		                    fatia2;
+		         fatia2;
 		fatia++;
 	}
 }
@@ -1597,11 +1600,11 @@ void setvolume2(morcego___i___instance__a__bucaneiro_engineering *mv_______,
 int setvolume3(morcego___i___instance__a__bucaneiro_engineering *mv_______,
                uchar *buf, uint len)
 {
-	signed short            *fatia;	
-	int                      tempo;
+	signed short            *fatia;
+	int tempo;
 	int *fatia2           = &tempo;
-	float                     temp;
-	int                          i;
+	float temp;
+	int i;
 	fatia = (signed short *)   buf;
 	for (i = 0; i < (int) len; i = i + 2)
 	{
@@ -1621,11 +1624,11 @@ int setvolume3(morcego___i___instance__a__bucaneiro_engineering *mv_______,
 		}
 
 		*fatia =       (signed
-		        short)*fatia2;
+		                short)*fatia2;
 
 		fatia++;
 	}
-	return    0;
+	return 0;
 }
 
 /**
@@ -1654,13 +1657,13 @@ int __stdcall startapi2(morcego___i___instance__a__bucaneiro_engineering *mv____
 	//thinktwice1);
 
 	int ret;
-	
+
 	ret =
 		morcego_play(mv_______,
 		             (unsigned char *) mv_______->decoder_c___intfilename, mv_______->decoder_c___the_track);
 
 	mv_______->decoder_c___intreturn2 = mv_______->decoder_c___intreturn = ret;
-	
+
 	return 0;
 }
 
@@ -1692,7 +1695,7 @@ int setvolume(morcego___i___instance__a__bucaneiro_engineering *mv_______,
 {
 	int first;
 	int second;
-	
+
 	if (mv_______->decoder_c___phwo == 0)
 	{
 		return 0;
@@ -1750,7 +1753,7 @@ int __stdcall interface1(__attribute__((unused)) __INT32_OR_INT64 argumento1, __
                          __attribute__((unused)) __INT32_OR_INT64 argumento3, __attribute__((unused)) __INT32_OR_INT64 argumento4)
 {
 	assert(0 && "Not in use anymore, unfortunatelly...\n");
-	return                            0;
+	return 0;
 }
 
 /**
@@ -1791,10 +1794,10 @@ extern char *__cdecl rspgettemppath(void);
  */
 void get_ini_name(char *name)
 {
-	char temp [300] = {
-		             0,
-	                 };
-	HMODULE       hmod;
+	char temp[300] = {
+		0,
+	};
+	HMODULE hmod;
 	hmod = GetModuleHandle("rspmp3ocx1.dll"); //hardcoded as you may expect
 	if (0 ==      hmod)
 	{
@@ -1878,9 +1881,9 @@ BE_CreateDecoder()
 		mv_______->libav_c___uvPitch_kp                        =    0;
 		mv_______->libav_c___sc_kp                             = NULL;
 		/*
-			dprintf_z("allocated memory %08x size %d\n",        mv_______,
-			sizeof(morcego___i___instance__a__bucaneiro_engineering));
-		*/
+		        dprintf_z("allocated memory %08x size %d\n",        mv_______,
+		        sizeof(morcego___i___instance__a__bucaneiro_engineering));
+		 */
 	}
 	else
 		mprintf("Cannot allocate memory\n"),                 exit(23);
@@ -1922,7 +1925,7 @@ void BE_CloseDecoder(__int64 *instance_64)
  */
 int __stdcall GetSettings(char *key, char *data, char *defaulT)
 {
-	char filename    [300] = {0};
+	char filename[300] = {0};
 	char filename_mis[300] = {0};
 	int len = 300;
 	data[0] = 0;
@@ -1935,307 +1938,307 @@ int __stdcall GetSettings(char *key, char *data, char *defaulT)
 		filename_mis[strlen(filename_mis) - 1] = 's';
 	}
 	data[0] = 0;
-	ret_arp_ = feline_read_xml(filename_mis ,
-		    "impxmlv2 settings, from 2021, by z",
-		    key                                 ,
-		    NULL                                ,
-		    data);
+	ret_arp_ = feline_read_xml(filename_mis,
+	                           "impxmlv2 settings, from 2021, by z",
+	                           key,
+	                           NULL,
+	                           data);
 
 	pedro_dprintf(-1, "ret_arp_ %d mis file %s\n", ret_arp_,
-		      filename_mis);
-	
+	              filename_mis);
+
 	//read_ini("impxmlv2 settings, from 2011", key, data, len, filename, 1);
 
 	if(1 == ret_arp_)
 	{
-	     char * data_v27 = malloc(1027);
-	     char key_27[1027];
-	     
-	     strcpy(key_27, "priority");
-	     data_v27[0] = 0;
-	     read_ini("impxmlv2 settings, from 2011", key_27, data_v27, len, filename, 1);
-	     
-	     feline_write_xml(filename_mis        ,
-			      "impxmlv2 settings, from 2021, by z"  ,
-			      key_27  ,
-			      NULL  ,
-			      data_v27);
-     
-	     strcpy(key_27, "filename");
-	     data_v27[0] = 0;
-	     read_ini("impxmlv2 settings, from 2011", key_27, data_v27, len, filename, 1);
-	     
-	     feline_write_xml(filename_mis        ,
-			      "impxmlv2 settings, from 2021, by z"  ,
-			      key_27  ,
-			      NULL  ,
-			      data_v27);
-	     
-	     strcpy(key_27, "be_effect");
-	     data_v27[0] = 0;
-	     read_ini("impxmlv2 settings, from 2011", key_27, data_v27, len, filename, 1);
-	     
-	     feline_write_xml(filename_mis        ,
-			      "impxmlv2 settings, from 2021, by z"  ,
-			      key_27  ,
-			      NULL  ,
-			      data_v27);
-	     
-	     strcpy(key_27, "be_effect_val");
-	     data_v27[0] = 0;
-	     read_ini("impxmlv2 settings, from 2011", key_27, data_v27, len, filename, 1);
-	     
-	     feline_write_xml(filename_mis        ,
-			      "impxmlv2 settings, from 2021, by z"  ,
-			      key_27  ,
-			      NULL  ,
-			      data_v27);
-	     
-	     strcpy(key_27, "replaygain");
-	     data_v27[0] = 0;
-	     read_ini("impxmlv2 settings, from 2011", key_27, data_v27, len, filename, 1);
-	     
-	     feline_write_xml(filename_mis        ,
-			      "impxmlv2 settings, from 2021, by z"  ,
-			      key_27  ,
-			      NULL  ,
-			      data_v27);
-	     
-	     strcpy(key_27, "volume_v11");
-	     data_v27[0] = 0;
-	     read_ini("impxmlv2 settings, from 2011", key_27, data_v27, len, filename, 1);
-	     
-	     feline_write_xml(filename_mis        ,
-			      "impxmlv2 settings, from 2021, by z"  ,
-			      key_27  ,
-			      NULL  ,
-			      data_v27);
-	     
-	     strcpy(key_27, "loop");
-	     data_v27[0] = 0;
-	     read_ini("impxmlv2 settings, from 2011", key_27, data_v27, len, filename, 1);
-	     
-	     feline_write_xml(filename_mis        ,
-			      "impxmlv2 settings, from 2021, by z"  ,
-			      key_27  ,
-			      NULL  ,
-			      data_v27);
-	     
-	     strcpy(key_27, "stereo_as_mono");
-	     data_v27[0] = 0;
-	     read_ini("impxmlv2 settings, from 2011", key_27, data_v27, len, filename, 1);
-	     
-	     feline_write_xml(filename_mis        ,
-			      "impxmlv2 settings, from 2021, by z"  ,
-			      key_27  ,
-			      NULL  ,
-			      data_v27);
-	     
-	     strcpy(key_27, "equalizer");
-	     data_v27[0] = 0;
-	     read_ini("impxmlv2 settings, from 2011", key_27, data_v27, len, filename, 1);
-	     
-	     feline_write_xml(filename_mis        ,
-			      "impxmlv2 settings, from 2021, by z"  ,
-			      key_27  ,
-			      NULL  ,
-			      data_v27);
-	     
-	     strcpy(key_27, "s60");
-	     data_v27[0] = 0;
-	     read_ini("impxmlv2 settings, from 2011", key_27, data_v27, len, filename, 1);
-	     
-	     feline_write_xml(filename_mis        ,
-			      "impxmlv2 settings, from 2021, by z"  ,
-			      key_27  ,
-			      NULL  ,
-			      data_v27);
-	     
-	     strcpy(key_27, "s170");
-	     data_v27[0] = 0;
-	     read_ini("impxmlv2 settings, from 2011", key_27, data_v27, len, filename, 1);
-	     
-	     feline_write_xml(filename_mis        ,
-			      "impxmlv2 settings, from 2021, by z"  ,
-			      key_27  ,
-			      NULL  ,
-			      data_v27);
-	     
-	     strcpy(key_27, "s310");
-	     data_v27[0] = 0;
-	     read_ini("impxmlv2 settings, from 2011", key_27, data_v27, len, filename, 1);
-	     
-	     feline_write_xml(filename_mis        ,
-			      "impxmlv2 settings, from 2021, by z"  ,
-			      key_27  ,
-			      NULL  ,
-			      data_v27);
-	     
-	     strcpy(key_27, "s12000");
-	     data_v27[0] = 0;
-	     read_ini("impxmlv2 settings, from 2011", key_27, data_v27, len, filename, 1);
-	     
-	     feline_write_xml(filename_mis        ,
-			      "impxmlv2 settings, from 2021, by z"  ,
-			      key_27  ,
-			      NULL  ,
-			      data_v27);
-	     
-	     strcpy(key_27, "s14000");
-	     data_v27[0] = 0;
-	     read_ini("impxmlv2 settings, from 2011", key_27, data_v27, len, filename, 1);
-	     
-	     feline_write_xml(filename_mis        ,
-			      "impxmlv2 settings, from 2021, by z"  ,
-			      key_27  ,
-			      NULL  ,
-			      data_v27);
-    
-	     strcpy(key_27, "s16000");
-	     data_v27[0] = 0;
-	     read_ini("impxmlv2 settings, from 2011", key_27, data_v27, len, filename, 1);
-	     
-	     feline_write_xml(filename_mis        ,
-			      "impxmlv2 settings, from 2021, by z"  ,
-			      key_27  ,
-			      NULL  ,
-			      data_v27);
-	     
-	     strcpy(key_27, "waveout");
-	     data_v27[0] = 0;
-	     read_ini("impxmlv2 settings, from 2011", key_27, data_v27, len, filename, 1);
-	     
-	     feline_write_xml(filename_mis        ,
-			      "impxmlv2 settings, from 2021, by z"  ,
-			      key_27  ,
-			      NULL  ,
-			      data_v27);
-	     
-	     strcpy(key_27, "double");
-	     data_v27[0] = 0;
-	     read_ini("impxmlv2 settings, from 2011", key_27, data_v27, len, filename, 1);
-	     
-	     feline_write_xml(filename_mis        ,
-			      "impxmlv2 settings, from 2021, by z"  ,
-			      key_27  ,
-			      NULL  ,
-			      data_v27);
-	     
-	     strcpy(key_27, "pre");
-	     data_v27[0] = 0;
-	     read_ini("impxmlv2 settings, from 2011", key_27, data_v27, len, filename, 1);
-	     
-	     feline_write_xml(filename_mis        ,
-			      "impxmlv2 settings, from 2021, by z"  ,
-			      key_27  ,
-			      NULL  ,
-			      data_v27);
-	     
-	     strcpy(key_27, "pre_val");
-	     data_v27[0] = 0;
-	     read_ini("impxmlv2 settings, from 2011", key_27, data_v27, len, filename, 1);
-	     
-	     feline_write_xml(filename_mis        ,
-			      "impxmlv2 settings, from 2021, by z"  ,
-			      key_27  ,
-			      NULL  ,
-			      data_v27);
-     
-	     strcpy(key_27, "s600");
-	     data_v27[0] = 0;
-	     read_ini("impxmlv2 settings, from 2011", key_27, data_v27, len, filename, 1);
-	     
-	     feline_write_xml(filename_mis        ,
-			      "impxmlv2 settings, from 2021, by z"  ,
-			      key_27  ,
-			      NULL  ,
-			      data_v27);
-	     
-	     strcpy(key_27, "s1000");
-	     data_v27[0] = 0;
-	     read_ini("impxmlv2 settings, from 2011", key_27, data_v27, len, filename, 1);
-	     
-	     feline_write_xml(filename_mis        ,
-			      "impxmlv2 settings, from 2021, by z"  ,
-			      key_27  ,
-			      NULL  ,
-			      data_v27);
-	     
-	     strcpy(key_27, "s3000");
-	     data_v27[0] = 0;
-	     read_ini("impxmlv2 settings, from 2011", key_27, data_v27, len, filename, 1);
-	     
-	     feline_write_xml(filename_mis        ,
-			      "impxmlv2 settings, from 2021, by z"  ,
-			      key_27  ,
-			      NULL  ,
-			      data_v27);
-	     
-	     strcpy(key_27, "s6000");
-	     data_v27[0] = 0;
-	     read_ini("impxmlv2 settings, from 2011", key_27, data_v27, len, filename, 1);
-	     
-	     feline_write_xml(filename_mis        ,
-			      "impxmlv2 settings, from 2021, by z"  ,
-			      key_27  ,
-			      NULL  ,
-			      data_v27);
-	     
-	     strcpy(key_27, "wav_out_vol");
-	     data_v27[0] = 0;
-	     read_ini("impxmlv2 settings, from 2011", key_27, data_v27, len, filename, 1);
-	     
-	     feline_write_xml(filename_mis        ,
-			      "impxmlv2 settings, from 2021, by z"  ,
-			      key_27  ,
-			      NULL  ,
-			      data_v27);
-	     
-	     strcpy(key_27, "randon");
-	     data_v27[0] = 0;
-	     read_ini("impxmlv2 settings, from 2011", key_27, data_v27, len, filename, 1);
-	     
-	     feline_write_xml(filename_mis        ,
-			      "impxmlv2 settings, from 2021, by z"  ,
-			      key_27  ,
-			      NULL  ,
-			      data_v27);
-	     
-	     strcpy(key_27, "slow_computers_hack_k_p");
-	     data_v27[0] = 0;
-	     read_ini("impxmlv2 settings, from 2011", key_27, data_v27, len, filename, 1);
-	     
-	     feline_write_xml(filename_mis        ,
-			      "impxmlv2 settings, from 2021, by z"  ,
-			      key_27  ,
-			      NULL  ,
-			      data_v27);
-	     
-	     strcpy(key_27, "new_filename_k_p");
-	     data_v27[0] = 0;
-	     read_ini("impxmlv2 settings, from 2011", key_27, data_v27, len, filename, 1);
-	     
-	     feline_write_xml(filename_mis        ,
-			      "impxmlv2 settings, from 2021, by z"  ,
-			      key_27  ,
-			      NULL  ,
-			      data_v27);
+		char * data_v27 = malloc(1027);
+		char key_27[1027];
 
-	     unlink("rspmp3ocx1.ini");
-	     free (data_v27);
+		strcpy(key_27, "priority");
+		data_v27[0] = 0;
+		read_ini("impxmlv2 settings, from 2011", key_27, data_v27, len, filename, 1);
 
-	     ret_arp_ = feline_read_xml(filename_mis ,
-		    "impxmlv2 settings, from 2021, by z",
-		    key                                 ,
-		    NULL                                ,
-		    data);
+		feline_write_xml(filename_mis,
+		                 "impxmlv2 settings, from 2021, by z",
+		                 key_27,
+		                 NULL,
+		                 data_v27);
+
+		strcpy(key_27, "filename");
+		data_v27[0] = 0;
+		read_ini("impxmlv2 settings, from 2011", key_27, data_v27, len, filename, 1);
+
+		feline_write_xml(filename_mis,
+		                 "impxmlv2 settings, from 2021, by z",
+		                 key_27,
+		                 NULL,
+		                 data_v27);
+
+		strcpy(key_27, "be_effect");
+		data_v27[0] = 0;
+		read_ini("impxmlv2 settings, from 2011", key_27, data_v27, len, filename, 1);
+
+		feline_write_xml(filename_mis,
+		                 "impxmlv2 settings, from 2021, by z",
+		                 key_27,
+		                 NULL,
+		                 data_v27);
+
+		strcpy(key_27, "be_effect_val");
+		data_v27[0] = 0;
+		read_ini("impxmlv2 settings, from 2011", key_27, data_v27, len, filename, 1);
+
+		feline_write_xml(filename_mis,
+		                 "impxmlv2 settings, from 2021, by z",
+		                 key_27,
+		                 NULL,
+		                 data_v27);
+
+		strcpy(key_27, "replaygain");
+		data_v27[0] = 0;
+		read_ini("impxmlv2 settings, from 2011", key_27, data_v27, len, filename, 1);
+
+		feline_write_xml(filename_mis,
+		                 "impxmlv2 settings, from 2021, by z",
+		                 key_27,
+		                 NULL,
+		                 data_v27);
+
+		strcpy(key_27, "volume_v11");
+		data_v27[0] = 0;
+		read_ini("impxmlv2 settings, from 2011", key_27, data_v27, len, filename, 1);
+
+		feline_write_xml(filename_mis,
+		                 "impxmlv2 settings, from 2021, by z",
+		                 key_27,
+		                 NULL,
+		                 data_v27);
+
+		strcpy(key_27, "loop");
+		data_v27[0] = 0;
+		read_ini("impxmlv2 settings, from 2011", key_27, data_v27, len, filename, 1);
+
+		feline_write_xml(filename_mis,
+		                 "impxmlv2 settings, from 2021, by z",
+		                 key_27,
+		                 NULL,
+		                 data_v27);
+
+		strcpy(key_27, "stereo_as_mono");
+		data_v27[0] = 0;
+		read_ini("impxmlv2 settings, from 2011", key_27, data_v27, len, filename, 1);
+
+		feline_write_xml(filename_mis,
+		                 "impxmlv2 settings, from 2021, by z",
+		                 key_27,
+		                 NULL,
+		                 data_v27);
+
+		strcpy(key_27, "equalizer");
+		data_v27[0] = 0;
+		read_ini("impxmlv2 settings, from 2011", key_27, data_v27, len, filename, 1);
+
+		feline_write_xml(filename_mis,
+		                 "impxmlv2 settings, from 2021, by z",
+		                 key_27,
+		                 NULL,
+		                 data_v27);
+
+		strcpy(key_27, "s60");
+		data_v27[0] = 0;
+		read_ini("impxmlv2 settings, from 2011", key_27, data_v27, len, filename, 1);
+
+		feline_write_xml(filename_mis,
+		                 "impxmlv2 settings, from 2021, by z",
+		                 key_27,
+		                 NULL,
+		                 data_v27);
+
+		strcpy(key_27, "s170");
+		data_v27[0] = 0;
+		read_ini("impxmlv2 settings, from 2011", key_27, data_v27, len, filename, 1);
+
+		feline_write_xml(filename_mis,
+		                 "impxmlv2 settings, from 2021, by z",
+		                 key_27,
+		                 NULL,
+		                 data_v27);
+
+		strcpy(key_27, "s310");
+		data_v27[0] = 0;
+		read_ini("impxmlv2 settings, from 2011", key_27, data_v27, len, filename, 1);
+
+		feline_write_xml(filename_mis,
+		                 "impxmlv2 settings, from 2021, by z",
+		                 key_27,
+		                 NULL,
+		                 data_v27);
+
+		strcpy(key_27, "s12000");
+		data_v27[0] = 0;
+		read_ini("impxmlv2 settings, from 2011", key_27, data_v27, len, filename, 1);
+
+		feline_write_xml(filename_mis,
+		                 "impxmlv2 settings, from 2021, by z",
+		                 key_27,
+		                 NULL,
+		                 data_v27);
+
+		strcpy(key_27, "s14000");
+		data_v27[0] = 0;
+		read_ini("impxmlv2 settings, from 2011", key_27, data_v27, len, filename, 1);
+
+		feline_write_xml(filename_mis,
+		                 "impxmlv2 settings, from 2021, by z",
+		                 key_27,
+		                 NULL,
+		                 data_v27);
+
+		strcpy(key_27, "s16000");
+		data_v27[0] = 0;
+		read_ini("impxmlv2 settings, from 2011", key_27, data_v27, len, filename, 1);
+
+		feline_write_xml(filename_mis,
+		                 "impxmlv2 settings, from 2021, by z",
+		                 key_27,
+		                 NULL,
+		                 data_v27);
+
+		strcpy(key_27, "waveout");
+		data_v27[0] = 0;
+		read_ini("impxmlv2 settings, from 2011", key_27, data_v27, len, filename, 1);
+
+		feline_write_xml(filename_mis,
+		                 "impxmlv2 settings, from 2021, by z",
+		                 key_27,
+		                 NULL,
+		                 data_v27);
+
+		strcpy(key_27, "double");
+		data_v27[0] = 0;
+		read_ini("impxmlv2 settings, from 2011", key_27, data_v27, len, filename, 1);
+
+		feline_write_xml(filename_mis,
+		                 "impxmlv2 settings, from 2021, by z",
+		                 key_27,
+		                 NULL,
+		                 data_v27);
+
+		strcpy(key_27, "pre");
+		data_v27[0] = 0;
+		read_ini("impxmlv2 settings, from 2011", key_27, data_v27, len, filename, 1);
+
+		feline_write_xml(filename_mis,
+		                 "impxmlv2 settings, from 2021, by z",
+		                 key_27,
+		                 NULL,
+		                 data_v27);
+
+		strcpy(key_27, "pre_val");
+		data_v27[0] = 0;
+		read_ini("impxmlv2 settings, from 2011", key_27, data_v27, len, filename, 1);
+
+		feline_write_xml(filename_mis,
+		                 "impxmlv2 settings, from 2021, by z",
+		                 key_27,
+		                 NULL,
+		                 data_v27);
+
+		strcpy(key_27, "s600");
+		data_v27[0] = 0;
+		read_ini("impxmlv2 settings, from 2011", key_27, data_v27, len, filename, 1);
+
+		feline_write_xml(filename_mis,
+		                 "impxmlv2 settings, from 2021, by z",
+		                 key_27,
+		                 NULL,
+		                 data_v27);
+
+		strcpy(key_27, "s1000");
+		data_v27[0] = 0;
+		read_ini("impxmlv2 settings, from 2011", key_27, data_v27, len, filename, 1);
+
+		feline_write_xml(filename_mis,
+		                 "impxmlv2 settings, from 2021, by z",
+		                 key_27,
+		                 NULL,
+		                 data_v27);
+
+		strcpy(key_27, "s3000");
+		data_v27[0] = 0;
+		read_ini("impxmlv2 settings, from 2011", key_27, data_v27, len, filename, 1);
+
+		feline_write_xml(filename_mis,
+		                 "impxmlv2 settings, from 2021, by z",
+		                 key_27,
+		                 NULL,
+		                 data_v27);
+
+		strcpy(key_27, "s6000");
+		data_v27[0] = 0;
+		read_ini("impxmlv2 settings, from 2011", key_27, data_v27, len, filename, 1);
+
+		feline_write_xml(filename_mis,
+		                 "impxmlv2 settings, from 2021, by z",
+		                 key_27,
+		                 NULL,
+		                 data_v27);
+
+		strcpy(key_27, "wav_out_vol");
+		data_v27[0] = 0;
+		read_ini("impxmlv2 settings, from 2011", key_27, data_v27, len, filename, 1);
+
+		feline_write_xml(filename_mis,
+		                 "impxmlv2 settings, from 2021, by z",
+		                 key_27,
+		                 NULL,
+		                 data_v27);
+
+		strcpy(key_27, "randon");
+		data_v27[0] = 0;
+		read_ini("impxmlv2 settings, from 2011", key_27, data_v27, len, filename, 1);
+
+		feline_write_xml(filename_mis,
+		                 "impxmlv2 settings, from 2021, by z",
+		                 key_27,
+		                 NULL,
+		                 data_v27);
+
+		strcpy(key_27, "slow_computers_hack_k_p");
+		data_v27[0] = 0;
+		read_ini("impxmlv2 settings, from 2011", key_27, data_v27, len, filename, 1);
+
+		feline_write_xml(filename_mis,
+		                 "impxmlv2 settings, from 2021, by z",
+		                 key_27,
+		                 NULL,
+		                 data_v27);
+
+		strcpy(key_27, "new_filename_k_p");
+		data_v27[0] = 0;
+		read_ini("impxmlv2 settings, from 2011", key_27, data_v27, len, filename, 1);
+
+		feline_write_xml(filename_mis,
+		                 "impxmlv2 settings, from 2021, by z",
+		                 key_27,
+		                 NULL,
+		                 data_v27);
+
+		unlink("rspmp3ocx1.ini");
+		free (data_v27);
+
+		ret_arp_ = feline_read_xml(filename_mis,
+		                           "impxmlv2 settings, from 2021, by z",
+		                           key,
+		                           NULL,
+		                           data);
 	}
-	
+
 	if (0 == strlen(data))
 	{
 		strcpy(data, defaulT);
 	}
-	
+
 	return 0;
 }
 
@@ -2245,312 +2248,312 @@ int __stdcall GetSettings(char *key, char *data, char *defaulT)
  */
 int __stdcall SaveSettings(char *key, char *data)
 {
-     int len = 300;
-     char filename_mis[300] = {0};
-     char filename    [300] = {0};
-     char temp_z      [300] = {0};
-     {
-	 
-	  get_ini_name(filename_mis);
-	  get_ini_name(filename    );
+	int len = 300;
+	char filename_mis[300] = {0};
+	char filename[300] = {0};
+	char temp_z[300] = {0};
+	{
 
-	  filename_mis[strlen(filename_mis) - 3] = 'm';
-	  filename_mis[strlen(filename_mis) - 2] = 'i';
-	  filename_mis[strlen(filename_mis) - 1] = 's';
-     }
+		get_ini_name(filename_mis);
+		get_ini_name(filename    );
 
-     ret_arp_ = feline_read_xml(filename_mis                        ,
-				"impxmlv2 settings, from 2021, by z",
-				key                                 ,
-				NULL                                ,
-				temp_z                             );
-	
-     if(1 == ret_arp_)
-     {
-	  char * data_v27 = malloc(1027);
-	  char key_27[1027];
-	     
-	  strcpy(key_27, "priority");
-	  data_v27[0] = 0;
-	  read_ini("impxmlv2 settings, from 2011", key_27, data_v27, len, filename, 1);
-	     
-	  feline_write_xml(filename_mis        ,
-			   "impxmlv2 settings, from 2021, by z"  ,
-			   key_27  ,
-			   NULL  ,
-			   data_v27);
-     
-	  strcpy(key_27, "filename");
-	  data_v27[0] = 0;
-	  read_ini("impxmlv2 settings, from 2011", key_27, data_v27, len, filename, 1);
-	     
-	  feline_write_xml(filename_mis        ,
-			   "impxmlv2 settings, from 2021, by z"  ,
-			   key_27  ,
-			   NULL  ,
-			   data_v27);
-	     
-	  strcpy(key_27, "be_effect");
-	  data_v27[0] = 0;
-	  read_ini("impxmlv2 settings, from 2011", key_27, data_v27, len, filename, 1);
-	     
-	  feline_write_xml(filename_mis        ,
-			   "impxmlv2 settings, from 2021, by z"  ,
-			   key_27  ,
-			   NULL  ,
-			   data_v27);
-	     
-	  strcpy(key_27, "be_effect_val");
-	  data_v27[0] = 0;
-	  read_ini("impxmlv2 settings, from 2011", key_27, data_v27, len, filename, 1);
-	     
-	  feline_write_xml(filename_mis        ,
-			   "impxmlv2 settings, from 2021, by z"  ,
-			   key_27  ,
-			   NULL  ,
-			   data_v27);
-	     
-	  strcpy(key_27, "replaygain");
-	  data_v27[0] = 0;
-	  read_ini("impxmlv2 settings, from 2011", key_27, data_v27, len, filename, 1);
-	     
-	  feline_write_xml(filename_mis        ,
-			   "impxmlv2 settings, from 2021, by z"  ,
-			   key_27  ,
-			   NULL  ,
-			   data_v27);
-	     
-	  strcpy(key_27, "volume_v11");
-	  data_v27[0] = 0;
-	  read_ini("impxmlv2 settings, from 2011", key_27, data_v27, len, filename, 1);
-	     
-	  feline_write_xml(filename_mis        ,
-			   "impxmlv2 settings, from 2021, by z"  ,
-			   key_27  ,
-			   NULL  ,
-			   data_v27);
-	     
-	  strcpy(key_27, "loop");
-	  data_v27[0] = 0;
-	  read_ini("impxmlv2 settings, from 2011", key_27, data_v27, len, filename, 1);
-	     
-	  feline_write_xml(filename_mis        ,
-			   "impxmlv2 settings, from 2021, by z"  ,
-			   key_27  ,
-			   NULL  ,
-			   data_v27);
-	     
-	  strcpy(key_27, "stereo_as_mono");
-	  data_v27[0] = 0;
-	  read_ini("impxmlv2 settings, from 2011", key_27, data_v27, len, filename, 1);
-	     
-	  feline_write_xml(filename_mis        ,
-			   "impxmlv2 settings, from 2021, by z"  ,
-			   key_27  ,
-			   NULL  ,
-			   data_v27);
-	     
-	  strcpy(key_27, "equalizer");
-	  data_v27[0] = 0;
-	  read_ini("impxmlv2 settings, from 2011", key_27, data_v27, len, filename, 1);
-	     
-	  feline_write_xml(filename_mis        ,
-			   "impxmlv2 settings, from 2021, by z"  ,
-			   key_27  ,
-			   NULL  ,
-			   data_v27);
-	     
-	  strcpy(key_27, "s60");
-	  data_v27[0] = 0;
-	  read_ini("impxmlv2 settings, from 2011", key_27, data_v27, len, filename, 1);
-	     
-	  feline_write_xml(filename_mis        ,
-			   "impxmlv2 settings, from 2021, by z"  ,
-			   key_27  ,
-			   NULL  ,
-			   data_v27);
-	     
-	  strcpy(key_27, "s170");
-	  data_v27[0] = 0;
-	  read_ini("impxmlv2 settings, from 2011", key_27, data_v27, len, filename, 1);
-	     
-	  feline_write_xml(filename_mis        ,
-			   "impxmlv2 settings, from 2021, by z"  ,
-			   key_27  ,
-			   NULL  ,
-			   data_v27);
-	     
-	  strcpy(key_27, "s310");
-	  data_v27[0] = 0;
-	  read_ini("impxmlv2 settings, from 2011", key_27, data_v27, len, filename, 1);
-	     
-	  feline_write_xml(filename_mis        ,
-			   "impxmlv2 settings, from 2021, by z"  ,
-			   key_27  ,
-			   NULL  ,
-			   data_v27);
-	     
-	  strcpy(key_27, "s12000");
-	  data_v27[0] = 0;
-	  read_ini("impxmlv2 settings, from 2011", key_27, data_v27, len, filename, 1);
-	     
-	  feline_write_xml(filename_mis        ,
-			   "impxmlv2 settings, from 2021, by z"  ,
-			   key_27  ,
-			   NULL  ,
-			   data_v27);
-	     
-	  strcpy(key_27, "s14000");
-	  data_v27[0] = 0;
-	  read_ini("impxmlv2 settings, from 2011", key_27, data_v27, len, filename, 1);
-	     
-	  feline_write_xml(filename_mis        ,
-			   "impxmlv2 settings, from 2021, by z"  ,
-			   key_27  ,
-			   NULL  ,
-			   data_v27);
-    
-	  strcpy(key_27, "s16000");
-	  data_v27[0] = 0;
-	  read_ini("impxmlv2 settings, from 2011", key_27, data_v27, len, filename, 1);
-	     
-	  feline_write_xml(filename_mis        ,
-			   "impxmlv2 settings, from 2021, by z"  ,
-			   key_27  ,
-			   NULL  ,
-			   data_v27);
-	     
-	  strcpy(key_27, "waveout");
-	  data_v27[0] = 0;
-	  read_ini("impxmlv2 settings, from 2011", key_27, data_v27, len, filename, 1);
-	     
-	  feline_write_xml(filename_mis        ,
-			   "impxmlv2 settings, from 2021, by z"  ,
-			   key_27  ,
-			   NULL  ,
-			   data_v27);
-	     
-	  strcpy(key_27, "double");
-	  data_v27[0] = 0;
-	  read_ini("impxmlv2 settings, from 2011", key_27, data_v27, len, filename, 1);
-	     
-	  feline_write_xml(filename_mis        ,
-			   "impxmlv2 settings, from 2021, by z"  ,
-			   key_27  ,
-			   NULL  ,
-			   data_v27);
-	     
-	  strcpy(key_27, "pre");
-	  data_v27[0] = 0;
-	  read_ini("impxmlv2 settings, from 2011", key_27, data_v27, len, filename, 1);
-	     
-	  feline_write_xml(filename_mis        ,
-			   "impxmlv2 settings, from 2021, by z"  ,
-			   key_27  ,
-			   NULL  ,
-			   data_v27);
-	     
-	  strcpy(key_27, "pre_val");
-	  data_v27[0] = 0;
-	  read_ini("impxmlv2 settings, from 2011", key_27, data_v27, len, filename, 1);
-	     
-	  feline_write_xml(filename_mis        ,
-			   "impxmlv2 settings, from 2021, by z"  ,
-			   key_27  ,
-			   NULL  ,
-			   data_v27);
-     
-	  strcpy(key_27, "s600");
-	  data_v27[0] = 0;
-	  read_ini("impxmlv2 settings, from 2011", key_27, data_v27, len, filename, 1);
-	     
-	  feline_write_xml(filename_mis        ,
-			   "impxmlv2 settings, from 2021, by z"  ,
-			   key_27  ,
-			   NULL  ,
-			   data_v27);
-	     
-	  strcpy(key_27, "s1000");
-	  data_v27[0] = 0;
-	  read_ini("impxmlv2 settings, from 2011", key_27, data_v27, len, filename, 1);
-	     
-	  feline_write_xml(filename_mis        ,
-			   "impxmlv2 settings, from 2021, by z"  ,
-			   key_27  ,
-			   NULL  ,
-			   data_v27);
-	     
-	  strcpy(key_27, "s3000");
-	  data_v27[0] = 0;
-	  read_ini("impxmlv2 settings, from 2011", key_27, data_v27, len, filename, 1);
-	     
-	  feline_write_xml(filename_mis        ,
-			   "impxmlv2 settings, from 2021, by z"  ,
-			   key_27  ,
-			   NULL  ,
-			   data_v27);
-	     
-	  strcpy(key_27, "s6000");
-	  data_v27[0] = 0;
-	  read_ini("impxmlv2 settings, from 2011", key_27, data_v27, len, filename, 1);
-	     
-	  feline_write_xml(filename_mis        ,
-			   "impxmlv2 settings, from 2021, by z"  ,
-			   key_27  ,
-			   NULL  ,
-			   data_v27);
-	     
-	  strcpy(key_27, "wav_out_vol");
-	  data_v27[0] = 0;
-	  read_ini("impxmlv2 settings, from 2011", key_27, data_v27, len, filename, 1);
-	     
-	  feline_write_xml(filename_mis        ,
-			   "impxmlv2 settings, from 2021, by z"  ,
-			   key_27  ,
-			   NULL  ,
-			   data_v27);
-	     
-	  strcpy(key_27, "randon");
-	  data_v27[0] = 0;
-	  read_ini("impxmlv2 settings, from 2011", key_27, data_v27, len, filename, 1);
-	     
-	  feline_write_xml(filename_mis        ,
-			   "impxmlv2 settings, from 2021, by z"  ,
-			   key_27  ,
-			   NULL  ,
-			   data_v27);
-	     
-	  strcpy(key_27, "slow_computers_hack_k_p");
-	  data_v27[0] = 0;
-	  read_ini("impxmlv2 settings, from 2011", key_27, data_v27, len, filename, 1);
-	     
-	  feline_write_xml(filename_mis        ,
-			   "impxmlv2 settings, from 2021, by z"  ,
-			   key_27  ,
-			   NULL  ,
-			   data_v27);
-	     
-	  strcpy(key_27, "new_filename_k_p");
-	  data_v27[0] = 0;
-	  read_ini("impxmlv2 settings, from 2011", key_27, data_v27, len, filename, 1);
-	     
-	  feline_write_xml(filename_mis        ,
-			   "impxmlv2 settings, from 2021, by z"  ,
-			   key_27  ,
-			   NULL  ,
-			   data_v27);
+		filename_mis[strlen(filename_mis) - 3] = 'm';
+		filename_mis[strlen(filename_mis) - 2] = 'i';
+		filename_mis[strlen(filename_mis) - 1] = 's';
+	}
 
-	  free (data_v27);
-	  unlink("rspmp3ocx1.ini");
-     }
+	ret_arp_ = feline_read_xml(filename_mis,
+	                           "impxmlv2 settings, from 2021, by z",
+	                           key,
+	                           NULL,
+	                           temp_z                             );
 
-     feline_write_xml(filename_mis        ,
-		      "impxmlv2 settings, from 2021, by z"  ,
-		      key  ,
-		      NULL  ,
-		      data);
-	
-     return 0;
+	if(1 == ret_arp_)
+	{
+		char * data_v27 = malloc(1027);
+		char key_27[1027];
+
+		strcpy(key_27, "priority");
+		data_v27[0] = 0;
+		read_ini("impxmlv2 settings, from 2011", key_27, data_v27, len, filename, 1);
+
+		feline_write_xml(filename_mis,
+		                 "impxmlv2 settings, from 2021, by z",
+		                 key_27,
+		                 NULL,
+		                 data_v27);
+
+		strcpy(key_27, "filename");
+		data_v27[0] = 0;
+		read_ini("impxmlv2 settings, from 2011", key_27, data_v27, len, filename, 1);
+
+		feline_write_xml(filename_mis,
+		                 "impxmlv2 settings, from 2021, by z",
+		                 key_27,
+		                 NULL,
+		                 data_v27);
+
+		strcpy(key_27, "be_effect");
+		data_v27[0] = 0;
+		read_ini("impxmlv2 settings, from 2011", key_27, data_v27, len, filename, 1);
+
+		feline_write_xml(filename_mis,
+		                 "impxmlv2 settings, from 2021, by z",
+		                 key_27,
+		                 NULL,
+		                 data_v27);
+
+		strcpy(key_27, "be_effect_val");
+		data_v27[0] = 0;
+		read_ini("impxmlv2 settings, from 2011", key_27, data_v27, len, filename, 1);
+
+		feline_write_xml(filename_mis,
+		                 "impxmlv2 settings, from 2021, by z",
+		                 key_27,
+		                 NULL,
+		                 data_v27);
+
+		strcpy(key_27, "replaygain");
+		data_v27[0] = 0;
+		read_ini("impxmlv2 settings, from 2011", key_27, data_v27, len, filename, 1);
+
+		feline_write_xml(filename_mis,
+		                 "impxmlv2 settings, from 2021, by z",
+		                 key_27,
+		                 NULL,
+		                 data_v27);
+
+		strcpy(key_27, "volume_v11");
+		data_v27[0] = 0;
+		read_ini("impxmlv2 settings, from 2011", key_27, data_v27, len, filename, 1);
+
+		feline_write_xml(filename_mis,
+		                 "impxmlv2 settings, from 2021, by z",
+		                 key_27,
+		                 NULL,
+		                 data_v27);
+
+		strcpy(key_27, "loop");
+		data_v27[0] = 0;
+		read_ini("impxmlv2 settings, from 2011", key_27, data_v27, len, filename, 1);
+
+		feline_write_xml(filename_mis,
+		                 "impxmlv2 settings, from 2021, by z",
+		                 key_27,
+		                 NULL,
+		                 data_v27);
+
+		strcpy(key_27, "stereo_as_mono");
+		data_v27[0] = 0;
+		read_ini("impxmlv2 settings, from 2011", key_27, data_v27, len, filename, 1);
+
+		feline_write_xml(filename_mis,
+		                 "impxmlv2 settings, from 2021, by z",
+		                 key_27,
+		                 NULL,
+		                 data_v27);
+
+		strcpy(key_27, "equalizer");
+		data_v27[0] = 0;
+		read_ini("impxmlv2 settings, from 2011", key_27, data_v27, len, filename, 1);
+
+		feline_write_xml(filename_mis,
+		                 "impxmlv2 settings, from 2021, by z",
+		                 key_27,
+		                 NULL,
+		                 data_v27);
+
+		strcpy(key_27, "s60");
+		data_v27[0] = 0;
+		read_ini("impxmlv2 settings, from 2011", key_27, data_v27, len, filename, 1);
+
+		feline_write_xml(filename_mis,
+		                 "impxmlv2 settings, from 2021, by z",
+		                 key_27,
+		                 NULL,
+		                 data_v27);
+
+		strcpy(key_27, "s170");
+		data_v27[0] = 0;
+		read_ini("impxmlv2 settings, from 2011", key_27, data_v27, len, filename, 1);
+
+		feline_write_xml(filename_mis,
+		                 "impxmlv2 settings, from 2021, by z",
+		                 key_27,
+		                 NULL,
+		                 data_v27);
+
+		strcpy(key_27, "s310");
+		data_v27[0] = 0;
+		read_ini("impxmlv2 settings, from 2011", key_27, data_v27, len, filename, 1);
+
+		feline_write_xml(filename_mis,
+		                 "impxmlv2 settings, from 2021, by z",
+		                 key_27,
+		                 NULL,
+		                 data_v27);
+
+		strcpy(key_27, "s12000");
+		data_v27[0] = 0;
+		read_ini("impxmlv2 settings, from 2011", key_27, data_v27, len, filename, 1);
+
+		feline_write_xml(filename_mis,
+		                 "impxmlv2 settings, from 2021, by z",
+		                 key_27,
+		                 NULL,
+		                 data_v27);
+
+		strcpy(key_27, "s14000");
+		data_v27[0] = 0;
+		read_ini("impxmlv2 settings, from 2011", key_27, data_v27, len, filename, 1);
+
+		feline_write_xml(filename_mis,
+		                 "impxmlv2 settings, from 2021, by z",
+		                 key_27,
+		                 NULL,
+		                 data_v27);
+
+		strcpy(key_27, "s16000");
+		data_v27[0] = 0;
+		read_ini("impxmlv2 settings, from 2011", key_27, data_v27, len, filename, 1);
+
+		feline_write_xml(filename_mis,
+		                 "impxmlv2 settings, from 2021, by z",
+		                 key_27,
+		                 NULL,
+		                 data_v27);
+
+		strcpy(key_27, "waveout");
+		data_v27[0] = 0;
+		read_ini("impxmlv2 settings, from 2011", key_27, data_v27, len, filename, 1);
+
+		feline_write_xml(filename_mis,
+		                 "impxmlv2 settings, from 2021, by z",
+		                 key_27,
+		                 NULL,
+		                 data_v27);
+
+		strcpy(key_27, "double");
+		data_v27[0] = 0;
+		read_ini("impxmlv2 settings, from 2011", key_27, data_v27, len, filename, 1);
+
+		feline_write_xml(filename_mis,
+		                 "impxmlv2 settings, from 2021, by z",
+		                 key_27,
+		                 NULL,
+		                 data_v27);
+
+		strcpy(key_27, "pre");
+		data_v27[0] = 0;
+		read_ini("impxmlv2 settings, from 2011", key_27, data_v27, len, filename, 1);
+
+		feline_write_xml(filename_mis,
+		                 "impxmlv2 settings, from 2021, by z",
+		                 key_27,
+		                 NULL,
+		                 data_v27);
+
+		strcpy(key_27, "pre_val");
+		data_v27[0] = 0;
+		read_ini("impxmlv2 settings, from 2011", key_27, data_v27, len, filename, 1);
+
+		feline_write_xml(filename_mis,
+		                 "impxmlv2 settings, from 2021, by z",
+		                 key_27,
+		                 NULL,
+		                 data_v27);
+
+		strcpy(key_27, "s600");
+		data_v27[0] = 0;
+		read_ini("impxmlv2 settings, from 2011", key_27, data_v27, len, filename, 1);
+
+		feline_write_xml(filename_mis,
+		                 "impxmlv2 settings, from 2021, by z",
+		                 key_27,
+		                 NULL,
+		                 data_v27);
+
+		strcpy(key_27, "s1000");
+		data_v27[0] = 0;
+		read_ini("impxmlv2 settings, from 2011", key_27, data_v27, len, filename, 1);
+
+		feline_write_xml(filename_mis,
+		                 "impxmlv2 settings, from 2021, by z",
+		                 key_27,
+		                 NULL,
+		                 data_v27);
+
+		strcpy(key_27, "s3000");
+		data_v27[0] = 0;
+		read_ini("impxmlv2 settings, from 2011", key_27, data_v27, len, filename, 1);
+
+		feline_write_xml(filename_mis,
+		                 "impxmlv2 settings, from 2021, by z",
+		                 key_27,
+		                 NULL,
+		                 data_v27);
+
+		strcpy(key_27, "s6000");
+		data_v27[0] = 0;
+		read_ini("impxmlv2 settings, from 2011", key_27, data_v27, len, filename, 1);
+
+		feline_write_xml(filename_mis,
+		                 "impxmlv2 settings, from 2021, by z",
+		                 key_27,
+		                 NULL,
+		                 data_v27);
+
+		strcpy(key_27, "wav_out_vol");
+		data_v27[0] = 0;
+		read_ini("impxmlv2 settings, from 2011", key_27, data_v27, len, filename, 1);
+
+		feline_write_xml(filename_mis,
+		                 "impxmlv2 settings, from 2021, by z",
+		                 key_27,
+		                 NULL,
+		                 data_v27);
+
+		strcpy(key_27, "randon");
+		data_v27[0] = 0;
+		read_ini("impxmlv2 settings, from 2011", key_27, data_v27, len, filename, 1);
+
+		feline_write_xml(filename_mis,
+		                 "impxmlv2 settings, from 2021, by z",
+		                 key_27,
+		                 NULL,
+		                 data_v27);
+
+		strcpy(key_27, "slow_computers_hack_k_p");
+		data_v27[0] = 0;
+		read_ini("impxmlv2 settings, from 2011", key_27, data_v27, len, filename, 1);
+
+		feline_write_xml(filename_mis,
+		                 "impxmlv2 settings, from 2021, by z",
+		                 key_27,
+		                 NULL,
+		                 data_v27);
+
+		strcpy(key_27, "new_filename_k_p");
+		data_v27[0] = 0;
+		read_ini("impxmlv2 settings, from 2011", key_27, data_v27, len, filename, 1);
+
+		feline_write_xml(filename_mis,
+		                 "impxmlv2 settings, from 2021, by z",
+		                 key_27,
+		                 NULL,
+		                 data_v27);
+
+		free (data_v27);
+		unlink("rspmp3ocx1.ini");
+	}
+
+	feline_write_xml(filename_mis,
+	                 "impxmlv2 settings, from 2021, by z",
+	                 key,
+	                 NULL,
+	                 data);
+
+	return 0;
 }
 
 /**
@@ -2612,7 +2615,7 @@ int morcego_cancel(morcego___i___instance__a__bucaneiro_engineering *mv_______)
 
 		return -1;
 	}
-	
+
 	mv_______->decoder_c___leftvalf = 0;
 	mv_______->decoder_c___rightvalf = 0;
 	mv_______->decoder_c___spec.peak = 0;
@@ -2655,13 +2658,13 @@ void pass_information_to_replay(morcego___i___instance__a__bucaneiro_engineering
  */
 HWND GetRealParent(HWND hWnd)
 {
-    HWND hParent;
+	HWND hParent;
 
-    hParent = GetAncestor(hWnd, GA_PARENT);
-    if(!hParent || hParent == GetDesktopWindow())
-        return NULL;
+	hParent = GetAncestor(hWnd, GA_PARENT);
+	if(!hParent || hParent == GetDesktopWindow())
+		return NULL;
 
-    return hParent;
+	return hParent;
 }
 
 /**
@@ -2671,32 +2674,32 @@ HWND GetRealParent(HWND hWnd)
  *
  */
 int __stdcall PlayInDesktop(__int64 mv_instance, int enable_i, int system_screen_w,
-							int system_screen_h, int w, int h, int position_i_)
+                            int system_screen_h, int w, int h, int position_i_)
 {
-	
-	
+
+
 	check_mv_instance(mv_instance);
 
 	morcego___i___instance__a__bucaneiro_engineering *mv_______ =
 		(morcego___i___instance__a__bucaneiro_engineering *)(__INT32_OR_INT64)
 		mv_instance;
-		
+
 	enable_desktop_i = false;
 	if(enable_i)
 	{
 		enable_desktop_i = true;
 	}
-	
+
 	mv_______->libav_c___show_in_position____i = position_i_;
-	
+
 	mv_______->libav_c___system_screen_w_____i = system_screen_w;
 	mv_______->libav_c___system_screen_h_____i = system_screen_h;
 
 	w_i = w;
-	h_i = h;	
-	
+	h_i = h;
+
 	return 0;
-	
+
 }
 
 /**
@@ -2724,14 +2727,14 @@ int __stdcall PlayInDesktop(__int64 mv_instance, int enable_i, int system_screen
  *
  * subtitle_i: the subtitle index to show if one is in the video media file, only Bitmap based
  * subtitles are supported at this moment
- * 
+ *
  * is the number of audio track to play, starting from 1 (usually 1)
  */
 int __stdcall Play(__int64 mv_instance, char *filename, int loop, int track, __attribute__((unused)) __int64 hwnd_,
                    __attribute__((unused)) __int64 player_hwnd_,
                    int width_, int heigth_, int ratio_, int left_, int top_, int subtitle_i)
 {
-	
+
 	check_mv_instance(mv_instance);
 
 	pedro_dprintf(-1, "Dentro de play");
@@ -2749,25 +2752,25 @@ int __stdcall Play(__int64 mv_instance, char *filename, int loop, int track, __a
 	{
 		return -1;
 	}
-	
+
 	while (-1 == morcego_cancel(mv_______))
 	{
 	}
-			
+
 	//mv_______->libav_c___show_in_position____i = position_i;
-		
+
 	mv_______->libav_c___use_subtitles_track_i = subtitle_i;
-		
+
 	mv_______->libav_c___hwnd = (int64_t)hwnd_;
 	mv_______->libav_c___size_of_window_width = width_;
 	mv_______->libav_c___size_of_window_height = heigth_;
-	mv_______->libav_c___player_hwnd = (int64_t) player_hwnd_; 
+	mv_______->libav_c___player_hwnd = (int64_t) player_hwnd_;
 	mv_______->libav_c___the_ratio = ratio_;
 	mv_______->libav_c___adjust_top = top_;
 	mv_______->libav_c___adjust_left = left_;
 
 	pass_information_to_replay(mv_______, filename, loop, track);
-	
+
 	//mv_______->decoder_c___phwo = 0;//fix
 	if (loop)
 	{
@@ -2809,7 +2812,7 @@ int __stdcall Play(__int64 mv_instance, char *filename, int loop, int track, __a
 int __stdcall Open(__int64 mv_instance, char *filename, int loop, int track, __int64 hwnd_,
                    __int64 player_hwnd_,
                    int width_, int heigth_ /* I am brazilian, sorry...*/, int ratio_, int left_, int top_,
-				   int subtitle_i)
+                   int subtitle_i)
 {
 	check_mv_instance(mv_instance);
 	morcego___i___instance__a__bucaneiro_engineering *mv_______ =
@@ -2824,9 +2827,9 @@ int __stdcall Open(__int64 mv_instance, char *filename, int loop, int track, __i
 	while (-1 == morcego_cancel(mv_______))
 	{
 	}
-	
+
 	mv_______->libav_c___use_subtitles_track_i = subtitle_i;
-	
+
 	mv_______->libav_c___sample_rate_format_string[0] = '\0';
 
 	mv_______->libav_c___hwnd = hwnd_;
@@ -2930,9 +2933,9 @@ int morcego_resume(morcego___i___instance__a__bucaneiro_engineering *mv_______)
 
 	mv_______->decoder_c___pauseflag = 0;
 	mv_______->decoder_c___flag_de_pause = 0;
-	
+
 	waveOutRestart(mv_______->decoder_c___phwo);
-	
+
 	static int flag = 0;  // for debug purposes
 	if (0 == flag)
 	{
@@ -3129,11 +3132,11 @@ int morcego_gettimestring(morcego___i___instance__a__bucaneiro_engineering *
                           mv_______,
                           __INT32_OR_INT64 argumento2)
 {
-	char fixo                [255]; //cannot be static anymore
-	uint                       ret;
-	uint                       seg;
-	uint                       min;
-	uint                      hour;
+	char fixo[255];                 //cannot be static anymore
+	uint ret;
+	uint seg;
+	uint min;
+	uint hour;
 	if (checkinit(mv_______))
 	{
 		return -1;
@@ -3570,8 +3573,8 @@ int __stdcall SetWaveOutDevice(__int64 mv_instance, int device)
 int __stdcall GetWaveOutDevicesName(__int64 mv_instance, int device, char *data)
 {
 	if(0 != mv_instance)
-	check_mv_instance(mv_instance);
-	
+		check_mv_instance(mv_instance);
+
 	getdevicename((unsigned char *)data, device);
 	return 0;
 }
@@ -3712,7 +3715,7 @@ int __stdcall ConvertMP3ToWavExtended(__int64 mv_instance, char *input, char *ou
 
 	morcego___i___instance__a__bucaneiro_engineering *mv_______ =
 		(morcego___i___instance__a__bucaneiro_engineering *)(__INT32_OR_INT64)
-			mv_instance;
+		mv_instance;
 
 	if (mv_______->libav_c___amanda_s_smart_ape__is_open)
 	{
@@ -3728,8 +3731,8 @@ int __stdcall ConvertMP3ToWavExtended(__int64 mv_instance, char *input, char *ou
 	pb->int64_2 = tipo_de_wav;
 	morcego_converttowav_be(mv_______, (__INT32_OR_INT64)pb);
 	free(pb);
-	
-	saida_amanda_s_smart_ape:
+
+saida_amanda_s_smart_ape:
 
 	return returnvalue_amanda_s_smart_ape;//always 0...weird...
 }
@@ -3757,10 +3760,10 @@ int __stdcall EqualizerSettings(__int64 mv_instance,
                                 int Band600,
                                 int Band1000,
                                 int Band3000,
-								int Band6000,
-								int Band12000,
-								int Band14000,
-								int Band16000)
+                                int Band6000,
+                                int Band12000,
+                                int Band14000,
+                                int Band16000)
 {
 	check_mv_instance(mv_instance);
 	morcego___i___instance__a__bucaneiro_engineering *mv_______ =
@@ -4036,7 +4039,7 @@ int __stdcall Read_ID3_v1_tag(__int64 mv_instance, char *filename, int *Track,
 int __stdcall Generate_ID3v1Genre(__int64 mv_instance, int pos, char *data)
 {
 	check_mv_instance(mv_instance);
-	
+
 	if (pos >= 148)
 	{
 		strcpy(data, "Invalid value");
@@ -4880,7 +4883,7 @@ int __stdcall EnableSoundTouch(__int64 mv_instance, int enable, int tempo, int p
 int __stdcall GetNumberofWaveOutDevices(__int64 mv_instance) //not really necessary but we are tring to follow standards
 {
 	if(0 != mv_instance)
-	check_mv_instance(mv_instance);
+		check_mv_instance(mv_instance);
 	return waveOutGetNumDevs();
 }
 
@@ -4894,27 +4897,27 @@ int __stdcall DetectChangeInSoundCards_i(__int64 mv_instance) //not really neces
 	int l_i;
 
 	check_mv_instance(mv_instance);
-	
-	static char signature_phones    [1027] = {0};
-	char        signature_phones_cur[1027] = {0};
-	char        data_i              [1027] = {0};
-	
+
+	static char signature_phones[1027] = {0};
+	char signature_phones_cur[1027] = {0};
+	char data_i[1027] = {0};
+
 	ret_i = GetNumberofWaveOutDevices(mv_instance);
 
-			if (0 == ret_i)
-			{
-				return 0;
-			}
-			else
-			{
-				for (l_i = 0; l_i < ret_i; l_i++)
-				{
-					memset(data_i, 0, sizeof(data_i));
-					GetWaveOutDevicesName(mv_instance, l_i, data_i);
-					strcat(signature_phones_cur, data_i);
-				}
-			}
-	
+	if (0 == ret_i)
+	{
+		return 0;
+	}
+	else
+	{
+		for (l_i = 0; l_i < ret_i; l_i++)
+		{
+			memset(data_i, 0, sizeof(data_i));
+			GetWaveOutDevicesName(mv_instance, l_i, data_i);
+			strcat(signature_phones_cur, data_i);
+		}
+	}
+
 	if(0 != strcmp(signature_phones, signature_phones_cur))
 	{
 		if(0 == strlen(signature_phones))
@@ -4933,7 +4936,7 @@ int __stdcall DetectChangeInSoundCards_i(__int64 mv_instance) //not really neces
 	{
 		return 0;
 	}
-	
+
 }
 
 /**
@@ -4944,27 +4947,27 @@ int __fastcall DetectChangeInSoundCards_i_internal(void) //not really necessary 
 {
 	int ret_i;
 	int l_i;
-	
-	static char signature_phones    [1027] = {0};
-	char        signature_phones_cur[1027] = {0};
-	char        data_i              [1027] = {0};
-	
+
+	static char signature_phones[1027] = {0};
+	char signature_phones_cur[1027] = {0};
+	char data_i[1027] = {0};
+
 	ret_i = GetNumberofWaveOutDevices(0);
 
-			if (0 == ret_i)
-			{
-				return 0;
-			}
-			else
-			{
-				for (l_i = 0; l_i < ret_i; l_i++)
-				{
-					memset(data_i, 0, sizeof(data_i));
-					GetWaveOutDevicesName(0, l_i, data_i);
-					strcat(signature_phones_cur, data_i);
-				}
-			}
-	
+	if (0 == ret_i)
+	{
+		return 0;
+	}
+	else
+	{
+		for (l_i = 0; l_i < ret_i; l_i++)
+		{
+			memset(data_i, 0, sizeof(data_i));
+			GetWaveOutDevicesName(0, l_i, data_i);
+			strcat(signature_phones_cur, data_i);
+		}
+	}
+
 	if(0 != strcmp(signature_phones, signature_phones_cur))
 	{
 		if(0 == strlen(signature_phones))
@@ -4983,7 +4986,7 @@ int __fastcall DetectChangeInSoundCards_i_internal(void) //not really necessary 
 	{
 		return 0;
 	}
-	
+
 }
 
 ////////////////////////////////////////////////////////////////////////
@@ -5162,9 +5165,9 @@ int __stdcall GetNumberOfAudioTracks(__int64 mv_instance, char *utf8_filename,
 	morcego___i___instance__a__bucaneiro_engineering *mv_______ =
 		(morcego___i___instance__a__bucaneiro_engineering *)(__INT32_OR_INT64)
 		mv_instance;
-		
+
 	mv_______->libav_c___retrieve_track_and_subtitles_mode_i = I_MODE_IS_AUDIO____;
-		
+
 	return get_number_of_audio_tracks(mv_______, (char *)utf8_filename,
 	                                  (char *)error_message);
 }
@@ -5174,7 +5177,7 @@ int __stdcall GetNumberOfAudioTracks(__int64 mv_instance, char *utf8_filename,
  *
  */
 int __stdcall GetNumberOfSubtitles(__int64 mv_instance, char *utf8_filename,
-                                     char *error_message)
+                                   char *error_message)
 {
 	int
 	get_number_of_audio_tracks(morcego___i___instance__a__bucaneiro_engineering * mv_______,
@@ -5183,9 +5186,9 @@ int __stdcall GetNumberOfSubtitles(__int64 mv_instance, char *utf8_filename,
 	morcego___i___instance__a__bucaneiro_engineering *mv_______ =
 		(morcego___i___instance__a__bucaneiro_engineering *)(__INT32_OR_INT64)
 		mv_instance;
-		
+
 	mv_______->libav_c___retrieve_track_and_subtitles_mode_i = I_MODE_IS_SUBTITLE_;
-		
+
 	return get_number_of_audio_tracks(mv_______, (char *)utf8_filename,
 	                                  (char *)error_message);
 }
@@ -5208,13 +5211,13 @@ int __stdcall BucaneiroPlayStereoAsMono(__int64 mv_instance, int enable)
  */
 void mprintf_about(char *format,     ...)
 {
-	va_list tua_amanda                  ;
-	char buffer                   [1024];
+	va_list tua_amanda;
+	char buffer[1024];
 	va_start(tua_amanda,         format);
 	vsprintf(buffer, format, tua_amanda);
 	va_end(tua_amanda                  );
-	MessageBox(0,                 buffer, 
-	   O_NOME_ATUAL, MB_OK | MB_TOPMOST);
+	MessageBox(0,                 buffer,
+	           O_NOME_ATUAL, MB_OK | MB_TOPMOST);
 }
 /**
  * To show the About box of the DLL
@@ -5254,7 +5257,7 @@ int __stdcall Alladin_GetRemainingTime(__int64 mv_instance, char *data)
  */
 void calc(int val, int *bytes, int *kbs, char *mb, char *gb)
 {
-	double       a;
+	double a;
 	a =        val;
 	*bytes   = val;
 	a = val / 1024;
@@ -5263,7 +5266,7 @@ void calc(int val, int *bytes, int *kbs, char *mb, char *gb)
 	*mb =        a;
 	a = a   / 1024;
 	*gb =        a;
-	return        ;
+	return;
 }
 /**
  * It is required because the player was adapted to only play two channels and it make
@@ -5293,7 +5296,7 @@ int PCM16MonoToPCM16Stereo(char *inSamples_b, unsigned int b_len,
 		outSamples[2 * index    ] = inSamples[index];
 		outSamples[2 * index + 1] = inSamples[index];
 	}
-	
+
 	return b_len * 2;
 }
 /**
@@ -5613,99 +5616,99 @@ int genrand()
  */
 int __stdcall get_rand(int min, int max)
 {
-   
-     int range = max - min;
-     int ret;
-     int genrand();
-     void sgenrand(unsigned long seed);
-     static int already = 0;
-     if (0 == already)
-     {
-	  sgenrand(GetTickCount());
-	  already = 1;
-     }
 
-     /*
-       BOOLEAN RtlGenRandom(
-       PVOID RandomBuffer,
-       ULONG RandomBufferLength
-       );
-     */
-	     
-     typedef BOOLEAN (__stdcall * RtlGenRandom)(PVOID RandomBuffer,
-						ULONG RandomBufferLength);
+	int range = max - min;
+	int ret;
+	int genrand();
+	void sgenrand(unsigned long seed);
+	static int already = 0;
+	if (0 == already)
+	{
+		sgenrand(GetTickCount());
+		already = 1;
+	}
+
+	/*
+	   BOOLEAN RtlGenRandom(
+	   PVOID RandomBuffer,
+	   ULONG RandomBufferLength
+	   );
+	 */
+
+	typedef BOOLEAN (__stdcall * RtlGenRandom)(PVOID RandomBuffer,
+	                                           ULONG RandomBufferLength);
 
 
-     static HMODULE my_i____dll = NULL;
-     static RtlGenRandom RtlGenRandom_func = NULL;
+	static HMODULE my_i____dll = NULL;
+	static RtlGenRandom RtlGenRandom_func = NULL;
 
-     ret = genrand() + GetTickCount();
- 
-     if(RtlGenRandom_func)
-     {
-	  assert(TRUE == RtlGenRandom_func(& ret, 4));
-	  goto already_i;
-     }
-	     
-     if(NULL == my_i____dll)
-     {	  
-		  
-	  my_i____dll = LoadLibraryA
-	       (
-		    "Advapi32.dll"
-		    );
+	ret = genrand() + GetTickCount();
 
-	  if(NULL == my_i____dll)
-	  {
-	       ;	
-	  }
-	  else
-	  {
+	if(RtlGenRandom_func)
+	{
+		assert(TRUE == RtlGenRandom_func(&ret, 4));
+		goto already_i;
+	}
 
-	       RtlGenRandom_func = (void *) GetProcAddress(
-		    my_i____dll,
-		    "SystemFunction036"
-		    );
-	     
-	       if(NULL == RtlGenRandom_func)
-	       {
-		    ;
-	       }
-	       else
-	       {		    
+	if(NULL == my_i____dll)
+	{
 
-		    assert(TRUE == RtlGenRandom_func(& ret, 4));
-			    
-	       }
-		       
-	  }
+		my_i____dll = LoadLibraryA
+			      (
+			"Advapi32.dll"
+		              );
 
-     }
+		if(NULL == my_i____dll)
+		{
+			;
+		}
+		else
+		{
+
+			RtlGenRandom_func = (void *) GetProcAddress(
+				my_i____dll,
+				"SystemFunction036"
+				);
+
+			if(NULL == RtlGenRandom_func)
+			{
+				;
+			}
+			else
+			{
+
+				assert(TRUE == RtlGenRandom_func(&ret, 4));
+
+			}
+
+		}
+
+	}
 
 already_i:;
 
-     if(/*1 || */ NULL == RtlGenRandom_func)
-     {
-	  pedro_dprintf(1001, "Important!!! Cannot use the function SystemFunction036\n");
-	  Beep(1000, 1000);
-     }
+	if(/*1 || */ NULL == RtlGenRandom_func)
+	{
+		pedro_dprintf(1001, "Important!!! Cannot use the function SystemFunction036\n");
+		Beep(1000, 1000);
+	}
 
-     //ret = -2147483648;
-     
-     ret = abs(ret);
-     ret = ret % (range + 1);
-     ret += min;
+	//ret = -2147483648;
 
-     pedro_dprintf(-1, "valor de ret antes do fix %d\n", ret);
-     
-     if(ret < min)
-     {
-	  ret = min;//fix for the abs problem
-	  
-	  pedro_dprintf(-1, "valor de ret depois do fix %d\n", ret);
-     
-     }
-     return ret;
+	ret = abs(ret);
+	ret = ret % (range + 1);
+	ret += min;
+
+	pedro_dprintf(-1, "valor de ret antes do fix %d\n", ret);
+
+	if(ret < min)
+	{
+		ret = min;//fix for the abs problem
+
+		pedro_dprintf(-1, "valor de ret depois do fix %d\n", ret);
+
+	}
+	return ret;
 }
 /**
  * To retrieve the filename from the path, please use the System.IO methods instead
@@ -5734,19 +5737,19 @@ void __stdcall AdjustSync(__int64 mv_instance, double value)
 	if(-27 == value)
 	{
 
-	     pedro_dprintf(1001, "Playlist debug mode enabled, to disable pass -28\n");
-	     enable_playlist_debug = true;
-	     
+		pedro_dprintf(1001, "Playlist debug mode enabled, to disable pass -28\n");
+		enable_playlist_debug = true;
+
 	}
-	
+
 	if(-28 == value)
 	{
 
-	     pedro_dprintf(1001, "Playlist debug mode disabled\n");
-	     enable_playlist_debug = false;
-	     
+		pedro_dprintf(1001, "Playlist debug mode disabled\n");
+		enable_playlist_debug = false;
+
 	}
-	
+
 }
 /**
  * To know whether the audio and video sync was lost, just informative for the moment and
@@ -5821,10 +5824,10 @@ void __stdcall GetSampleFormatInfo
 	return;
 }
 /**
-* Return 1 if the waveout was not ready yet, the player need to wait for
-* this value to be 0 in order to call resume, it was added to the fullscreen code.
-*
-*/
+ * Return 1 if the waveout was not ready yet, the player need to wait for
+ * this value to be 0 in order to call resume, it was added to the fullscreen code.
+ *
+ */
 int __stdcall GetWaveOutStatus_arp
 (
 	__int64 mv_instance
@@ -5852,11 +5855,11 @@ bool active_z = false;
 struct my_struct_for_list_ar_is_amanda_update_//for list only
 {
 
-  bool    nodata_z   ;
-  bool    played_z   ;
-  int64_t position   ;
-  
-  struct    my_struct_for_list_ar_is_amanda_update_ * next_ar;
+	bool nodata_z;
+	bool played_z;
+	int64_t position;
+
+	struct    my_struct_for_list_ar_is_amanda_update_ * next_ar;
 };
 
 struct my_struct_for_list_ar_is_amanda_update_ *aak_is_amanda_update_        = NULL;
@@ -5876,36 +5879,36 @@ void __stdcall add_more_one_z
 (
 )
 {
-  struct my_struct_for_list_ar_is_amanda_update_ *aak_ptr;
-  if(!has_itens_is_amanda_update_)
-    {
-      aak_is_amanda_update_ = calloc(1, sizeof(struct my_struct_for_list_ar_is_amanda_update_));
-      aak_inicio_is_amanda_update_    =  aak_is_amanda_update_;
-      aak_pointer_is_amanda_update_   = aak_is_amanda_update_ ;
-      aak_is_amanda_update_->next_ar  = calloc(1, sizeof(struct my_struct_for_list_ar_is_amanda_update_));
+	struct my_struct_for_list_ar_is_amanda_update_ *aak_ptr;
+	if(!has_itens_is_amanda_update_)
+	{
+		aak_is_amanda_update_ = calloc(1, sizeof(struct my_struct_for_list_ar_is_amanda_update_));
+		aak_inicio_is_amanda_update_    =  aak_is_amanda_update_;
+		aak_pointer_is_amanda_update_   = aak_is_amanda_update_;
+		aak_is_amanda_update_->next_ar  = calloc(1, sizeof(struct my_struct_for_list_ar_is_amanda_update_));
 
-      aak_is_amanda_update_->next_ar->nodata_z = true;
-      
-      aak_is_amanda_update_->position = 0;
+		aak_is_amanda_update_->next_ar->nodata_z = true;
 
-      aak_is_amanda_update_->nodata_z = false;
-      
-      has_itens_is_amanda_update_ = 1;
-      has_itens_copy_is_amanda_update_ = has_itens_is_amanda_update_;
-      aak_is_amanda_update_ = aak_is_amanda_update_->next_ar;
-    }
-  else
-    {
-      aak_ptr = aak_is_amanda_update_;
-      assert(aak_ptr);
-      aak_ptr->next_ar = calloc(1, sizeof(struct my_struct_for_list_ar_is_amanda_update_));
-      aak_ptr->next_ar->nodata_z = true;
-      aak_is_amanda_update_ = aak_ptr->next_ar;
-      aak_ptr->position = has_itens_is_amanda_update_;
-      aak_ptr->nodata_z = false;
-      has_itens_is_amanda_update_++;
-      has_itens_copy_is_amanda_update_ = has_itens_is_amanda_update_;
-    }
+		aak_is_amanda_update_->position = 0;
+
+		aak_is_amanda_update_->nodata_z = false;
+
+		has_itens_is_amanda_update_ = 1;
+		has_itens_copy_is_amanda_update_ = has_itens_is_amanda_update_;
+		aak_is_amanda_update_ = aak_is_amanda_update_->next_ar;
+	}
+	else
+	{
+		aak_ptr = aak_is_amanda_update_;
+		assert(aak_ptr);
+		aak_ptr->next_ar = calloc(1, sizeof(struct my_struct_for_list_ar_is_amanda_update_));
+		aak_ptr->next_ar->nodata_z = true;
+		aak_is_amanda_update_ = aak_ptr->next_ar;
+		aak_ptr->position = has_itens_is_amanda_update_;
+		aak_ptr->nodata_z = false;
+		has_itens_is_amanda_update_++;
+		has_itens_copy_is_amanda_update_ = has_itens_is_amanda_update_;
+	}
 	active_z = true;
 }
 
@@ -5917,18 +5920,18 @@ int clean_list__ar_is_amanda_update_(void);
  */
 int clean_list_itens_is_amanda_update_(void)
 {
- 
-  if(!has_itens_copy_is_amanda_update_)
-    {
-      clean_list__ar_is_amanda_update_();
-      return 0;
-    }
-	
-  aak_pointer_is_amanda_update_ = aak_pointer_is_amanda_update_->next_ar;
-  has_itens_copy_is_amanda_update_--;
-  assert(has_itens_copy_is_amanda_update_ >= 0);
-	
-  return 1;
+
+	if(!has_itens_copy_is_amanda_update_)
+	{
+		clean_list__ar_is_amanda_update_();
+		return 0;
+	}
+
+	aak_pointer_is_amanda_update_ = aak_pointer_is_amanda_update_->next_ar;
+	has_itens_copy_is_amanda_update_--;
+	assert(has_itens_copy_is_amanda_update_ >= 0);
+
+	return 1;
 }
 
 /**
@@ -5937,30 +5940,30 @@ int clean_list_itens_is_amanda_update_(void)
  */
 int clean_list__ar_is_amanda_update_(void)
 {
-  struct my_struct_for_list_ar_is_amanda_update_ *my_ptr_ar ;
-  struct my_struct_for_list_ar_is_amanda_update_ *my_ptr2_ar;
-  my_ptr2_ar = aak_inicio_is_amanda_update_;
-  my_ptr_ar  = aak_inicio_is_amanda_update_;
- inicio_ar:;
-  if(!has_itens_is_amanda_update_)
-    {
-      has_itens_copy_is_amanda_update_ = 0;
-      return 0;
-    }
-  my_ptr2_ar = my_ptr_ar;
-  my_ptr_ar = my_ptr_ar->next_ar;
+	struct my_struct_for_list_ar_is_amanda_update_ *my_ptr_ar;
+	struct my_struct_for_list_ar_is_amanda_update_ *my_ptr2_ar;
+	my_ptr2_ar = aak_inicio_is_amanda_update_;
+	my_ptr_ar  = aak_inicio_is_amanda_update_;
+inicio_ar:;
+	if(!has_itens_is_amanda_update_)
+	{
+		has_itens_copy_is_amanda_update_ = 0;
+		return 0;
+	}
+	my_ptr2_ar = my_ptr_ar;
+	my_ptr_ar = my_ptr_ar->next_ar;
 
-  if(1 == has_itens_is_amanda_update_)
-    {      
-      free(my_ptr2_ar->next_ar);
-    }
+	if(1 == has_itens_is_amanda_update_)
+	{
+		free(my_ptr2_ar->next_ar);
+	}
 
-  free(my_ptr2_ar);
+	free(my_ptr2_ar);
 
-  has_itens_is_amanda_update_--;
+	has_itens_is_amanda_update_--;
 
-  goto inicio_ar;
-  return 1;
+	goto inicio_ar;
+	return 1;
 }
 
 /**
@@ -5974,123 +5977,123 @@ int clean_list__ar_is_amanda_update_(void)
 int __stdcall get_next_item_z(int64_t * item_got_z, int64_t * item_number_z)
 {
 
-     int items_skipped_i = 0;
-     int i_z;
-     int item_randomico_z = get_rand(0, has_itens_is_amanda_update_ - 1) ;
+	int items_skipped_i = 0;
+	int i_z;
+	int item_randomico_z = get_rand(0, has_itens_is_amanda_update_ - 1);
 
-     * item_got_z    = 0;
-     * item_number_z = 0;
+	*item_got_z    = 0;
+	*item_number_z = 0;
 
-     if(enable_playlist_debug)
-	  pedro_dprintf(1001, "Randomic item got %d\n", item_randomico_z);
-     
-     if(0 == item_randomico_z && 1 == item_randomico_z)//compiler happy...
-     {
-	  exit(27);
-     }
+	if(enable_playlist_debug)
+		pedro_dprintf(1001, "Randomic item got %d\n", item_randomico_z);
 
-     if(false == active_z)
-     {
-		
-	  if(enable_playlist_debug)
-	       pedro_dprintf(1001, "No items in playlist yet\n");
-	  return 0;
-		
-     }
+	if(0 == item_randomico_z && 1 == item_randomico_z)//compiler happy...
+	{
+		exit(27);
+	}
 
-     struct my_struct_for_list_ar_is_amanda_update_ *my_ptr_ar ;  
-     my_ptr_ar  = aak_inicio_is_amanda_update_;
+	if(false == active_z)
+	{
+
+		if(enable_playlist_debug)
+			pedro_dprintf(1001, "No items in playlist yet\n");
+		return 0;
+
+	}
+
+	struct my_struct_for_list_ar_is_amanda_update_ *my_ptr_ar;
+	my_ptr_ar  = aak_inicio_is_amanda_update_;
 
 
-      if(enable_playlist_debug)
-	   pedro_dprintf(1001, "Items to search in the playlist -> %d\n",
-		(has_itens_is_amanda_update_ * 2 ) + 5);
-     
-     for(i_z = 0; i_z < (has_itens_is_amanda_update_ * 2 ) + 5; i_z++)
-     {
-            
-	  if(i_z >= item_randomico_z)
-	  {
+	if(enable_playlist_debug)
+		pedro_dprintf(1001, "Items to search in the playlist -> %d\n",
+		              (has_itens_is_amanda_update_ * 2 ) + 5);
 
-	       if(false == my_ptr_ar->played_z)
-	       {
-		    item_number_z_ ++;
-		    * item_number_z = item_number_z_;
-		    my_ptr_ar->played_z = true;
-		    *item_got_z = my_ptr_ar->position;		  
-		    pedro_dprintf(-1, "saiu de get_next_item_z, pegou %lld\n", *item_got_z);
-		    
-		    if(enable_playlist_debug)
-		    {
-			 pedro_dprintf(1001, "Items skipped to get a file that was not played yet -> %d\n", items_skipped_i);
-		    
-			 pedro_dprintf(1001, "Item got in the first try item got %lld item number %lld\n", *item_got_z, * item_number_z);
-		    }
+	for(i_z = 0; i_z < (has_itens_is_amanda_update_ * 2 ) + 5; i_z++)
+	{
 
-		    return 0;
-	      
-	       }
-	       else
-	       {
-		    items_skipped_i ++; 
-	       }
-	  
-	  }
+		if(i_z >= item_randomico_z)
+		{
 
-	  my_ptr_ar = my_ptr_ar->next_ar;
-      
-	  if(true == my_ptr_ar->nodata_z)
-	  {	  
-	       my_ptr_ar = aak_inicio_is_amanda_update_;
-	  }
-     }
+			if(false == my_ptr_ar->played_z)
+			{
+				item_number_z_++;
+				*item_number_z = item_number_z_;
+				my_ptr_ar->played_z = true;
+				*item_got_z = my_ptr_ar->position;
+				pedro_dprintf(-1, "saiu de get_next_item_z, pegou %lld\n", *item_got_z);
 
-     if(enable_playlist_debug)
-	  pedro_dprintf(1001, "Cannot find an item in the first try, cleanning\n");
-     
-     my_ptr_ar = aak_inicio_is_amanda_update_;
-     for(i_z = 0; i_z < has_itens_is_amanda_update_; i_z++)
-     {
+				if(enable_playlist_debug)
+				{
+					pedro_dprintf(1001, "Items skipped to get a file that was not played yet -> %d\n", items_skipped_i);
 
-	  my_ptr_ar->played_z = false;
-	  my_ptr_ar = my_ptr_ar->next_ar;
-      
-     }
+					pedro_dprintf(1001, "Item got in the first try item got %lld item number %lld\n", *item_got_z, *item_number_z);
+				}
 
-     item_randomico_z = get_rand(0, has_itens_is_amanda_update_ - 1);
+				return 0;
 
-      if(enable_playlist_debug)
-	   pedro_dprintf(1001, "New randomic number got %d\n", item_randomico_z);
-     
-     my_ptr_ar = aak_inicio_is_amanda_update_;
-     for(i_z = 0; i_z < (has_itens_is_amanda_update_ * 2 ) + 1; i_z++)
-     {
-            
-	  if(i_z >= item_randomico_z)
-	  {
+			}
+			else
+			{
+				items_skipped_i++;
+			}
 
-	       if(false == my_ptr_ar->played_z)
-	       {
-		    item_number_z_ = 0;
-		    * item_number_z = item_number_z_;
-		    *item_got_z = my_ptr_ar->position;
-		        if(enable_playlist_debug)
-			     pedro_dprintf(1001, "Item got after cleaning, in i_z position %d, item got %lld item number %lld\n",i_z, *item_got_z, * item_number_z);
-		    return 1;
-	      
-	       }
-	  
-	  }
+		}
 
-	  my_ptr_ar = my_ptr_ar->next_ar;
-      
-	  if(true == my_ptr_ar->nodata_z)
-	  {	  
-	       my_ptr_ar = aak_inicio_is_amanda_update_;
-	  }
-     }
-  
-     return 1;    
+		my_ptr_ar = my_ptr_ar->next_ar;
+
+		if(true == my_ptr_ar->nodata_z)
+		{
+			my_ptr_ar = aak_inicio_is_amanda_update_;
+		}
+	}
+
+	if(enable_playlist_debug)
+		pedro_dprintf(1001, "Cannot find an item in the first try, cleanning\n");
+
+	my_ptr_ar = aak_inicio_is_amanda_update_;
+	for(i_z = 0; i_z < has_itens_is_amanda_update_; i_z++)
+	{
+
+		my_ptr_ar->played_z = false;
+		my_ptr_ar = my_ptr_ar->next_ar;
+
+	}
+
+	item_randomico_z = get_rand(0, has_itens_is_amanda_update_ - 1);
+
+	if(enable_playlist_debug)
+		pedro_dprintf(1001, "New randomic number got %d\n", item_randomico_z);
+
+	my_ptr_ar = aak_inicio_is_amanda_update_;
+	for(i_z = 0; i_z < (has_itens_is_amanda_update_ * 2 ) + 1; i_z++)
+	{
+
+		if(i_z >= item_randomico_z)
+		{
+
+			if(false == my_ptr_ar->played_z)
+			{
+				item_number_z_ = 0;
+				*item_number_z = item_number_z_;
+				*item_got_z = my_ptr_ar->position;
+				if(enable_playlist_debug)
+					pedro_dprintf(1001, "Item got after cleaning, in i_z position %d, item got %lld item number %lld\n",i_z, *item_got_z, *item_number_z);
+				return 1;
+
+			}
+
+		}
+
+		my_ptr_ar = my_ptr_ar->next_ar;
+
+		if(true == my_ptr_ar->nodata_z)
+		{
+			my_ptr_ar = aak_inicio_is_amanda_update_;
+		}
+	}
+
+	return 1;
 }
 /**
  * To tell to the DLL that the selected item already played, then don`t play again until
@@ -6100,29 +6103,29 @@ int __stdcall get_next_item_z(int64_t * item_got_z, int64_t * item_number_z)
 int __stdcall set_played_item_z(int64_t item_z)
 {
 
-  int i_z;
-  struct my_struct_for_list_ar_is_amanda_update_ *my_ptr_ar ;  
-  my_ptr_ar  = aak_inicio_is_amanda_update_;
+	int i_z;
+	struct my_struct_for_list_ar_is_amanda_update_ *my_ptr_ar;
+	my_ptr_ar  = aak_inicio_is_amanda_update_;
 
 	if(false == active_z)
 	{
-		
+
 		return 0;
-		
+
 	}
 
-  for(i_z = 0; i_z < has_itens_is_amanda_update_; i_z++)
-    {
-
-      if(my_ptr_ar->position == item_z)
+	for(i_z = 0; i_z < has_itens_is_amanda_update_; i_z++)
 	{
-	  my_ptr_ar->played_z = true;
+
+		if(my_ptr_ar->position == item_z)
+		{
+			my_ptr_ar->played_z = true;
+		}
+
+		my_ptr_ar = my_ptr_ar->next_ar;
+
 	}
-      
-      my_ptr_ar = my_ptr_ar->next_ar;
-      
-    }
-  return 0;
+	return 0;
 }
 /**
  * To clean-up and make it ready to the new process
@@ -6132,15 +6135,15 @@ int __stdcall set_played_item_z(int64_t item_z)
 int __stdcall init_playlist_z()
 {
 
-  while(clean_list_itens_is_amanda_update_())
-    {
-      ;
-    }
-  assert(0 == has_itens_is_amanda_update_);
+	while(clean_list_itens_is_amanda_update_())
+	{
+		;
+	}
+	assert(0 == has_itens_is_amanda_update_);
 
-  item_number_z_ = 0;
-  active_z = false;
-  return 0;
+	item_number_z_ = 0;
+	active_z = false;
+	return 0;
 }
 
 /**
@@ -6152,14 +6155,14 @@ int __stdcall init_playlist_z()
 int __stdcall init_jun_playlist_z(char * jun_playlist_z)
 {
 
- our_jun_playlist_file_z =  _wfopen(utf8towide(jun_playlist_z), L"wb");
+	our_jun_playlist_file_z =  _wfopen(utf8towide(jun_playlist_z), L"wb");
 
- if(our_jun_playlist_file_z)
-   {
-     return 0;
-   }
+	if(our_jun_playlist_file_z)
+	{
+		return 0;
+	}
 
- return 1;
+	return 1;
 }
 /**
  * To add an item to the playlist
@@ -6168,9 +6171,9 @@ int __stdcall init_jun_playlist_z(char * jun_playlist_z)
  */
 void __stdcall  add_item_to_playlist_z(char * entry_z)
 {
-  fwrite(entry_z, 1, strlen(entry_z), our_jun_playlist_file_z);
-  fwrite("\n", 1, 1, our_jun_playlist_file_z                 );
-  return                                                      ;
+	fwrite(entry_z, 1, strlen(entry_z), our_jun_playlist_file_z);
+	fwrite("\n", 1, 1, our_jun_playlist_file_z                 );
+	return;
 }
 
 /**
@@ -6178,23 +6181,60 @@ void __stdcall  add_item_to_playlist_z(char * entry_z)
  */
 void __stdcall close_playlist_z()
 {
-  fclose(our_jun_playlist_file_z                             );
-  our_jun_playlist_file_z                               = NULL;
+	fclose(our_jun_playlist_file_z                             );
+	our_jun_playlist_file_z                               = NULL;
 }
+
+
 /**
- * To opan a playlist file for append
+ * To open a playlist file for append
  */
 int __stdcall add_to_jun_playlist_z(char * jun_playlist_z)
 {
+/*
 
- our_jun_playlist_file_z =  _wfopen(utf8towide(jun_playlist_z), L"ab");
+   here...
 
- if(our_jun_playlist_file_z)
-   {
-     return 0;
-   }
+ */
+	char buf_m_[3] = {0,};
+	int size_of_file_m;
 
- return 1;
+	need_to_add_char_n_m_ = false;
+
+	our_jun_playlist_file_z = _wfopen(utf8towide(jun_playlist_z), L"rb");
+
+	if(our_jun_playlist_file_z)
+	{
+		fseek(our_jun_playlist_file_z, 0, SEEK_END);
+
+		size_of_file_m = ftell(our_jun_playlist_file_z);
+
+		if(1 < size_of_file_m)
+		{
+			fseek(our_jun_playlist_file_z, size_of_file_m - 1, SEEK_SET);
+			fread(buf_m_, 1, 1, our_jun_playlist_file_z);
+
+			if('\n' != buf_m_[0])
+			{
+				need_to_add_char_n_m_ = true;
+			}
+		}
+
+		fclose(our_jun_playlist_file_z);
+	}
+
+	our_jun_playlist_file_z =  _wfopen(utf8towide(jun_playlist_z), L"ab");
+
+	if(our_jun_playlist_file_z)
+	{
+		if(need_to_add_char_n_m_)
+		{
+			fwrite("\n", 1, 1, our_jun_playlist_file_z);
+		}
+		return 0;
+	}
+
+	return 1;
 }
 /**
  * It will create a decoder required to manipulate the media functions
@@ -6202,61 +6242,61 @@ int __stdcall add_to_jun_playlist_z(char * jun_playlist_z)
 int __stdcall init_data_info_z()
 {
 
-  if(0 == number_z)
-    {
-      number_z = BE_CreateDecoder();
-      pedro_dprintf(-1, "Value of init %lld\n", number_z);
-    }
-  return 0;
+	if(0 == number_z)
+	{
+		number_z = BE_CreateDecoder();
+		pedro_dprintf(-1, "Value of init %lld\n", number_z);
+	}
+	return 0;
 }
 /**
  * It will retrieve video info
  */
 int __stdcall get_video_size_z(char * media_file_utf8_z,
-			       __int64 hwnd_z,
-			       __int64 player_hwnd_z,
-			       int width__z,
-			       int height__z,
-			       int left_z,
-			       int top_z,
-			       __attribute__((unused)) int * width_z, __attribute__((unused)) int * height_z)
+                               __int64 hwnd_z,
+                               __int64 player_hwnd_z,
+                               int width__z,
+                               int height__z,
+                               int left_z,
+                               int top_z,
+                               __attribute__((unused)) int * width_z, __attribute__((unused)) int * height_z)
 {
 
-  init_data_info_z();
+	init_data_info_z();
 
-  loading_z = true;
+	loading_z = true;
 
-  check_mv_instance(number_z);
-  morcego___i___instance__a__bucaneiro_engineering *mv_______ =
-    (morcego___i___instance__a__bucaneiro_engineering *)(__INT32_OR_INT64)
-    number_z;
-  
-  mv_______->libav_c___width_of_window  = -1;
-  mv_______->libav_c___height_of_window = -1;
-  
-  /*
-    ret = MP3.Open(number, MP3.wide2utf8(filename.Text), loop_, int.Parse(track.Text),
-    video_p.Handle.ToInt64(),
-    video_f_p.Handle.ToInt64(),
-    video_p.Width,
-    video_p.Height,
-    the_ratio,
-    video_p.Left,
-    video_p.Top);
-  */
-  Open(number_z, media_file_utf8_z, 0, 1, hwnd_z,
-       player_hwnd_z,
-       width__z, height__z, 0, left_z, top_z, 0);
-  /*
-  while(-1 == SampleRate(number_z))
-    {
-      Sleep(50);
-    }
-  */
+	check_mv_instance(number_z);
+	morcego___i___instance__a__bucaneiro_engineering *mv_______ =
+		(morcego___i___instance__a__bucaneiro_engineering *)(__INT32_OR_INT64)
+		number_z;
 
-  //PlaybackCancel(number_z);
-	
-  return 0;
+	mv_______->libav_c___width_of_window  = -1;
+	mv_______->libav_c___height_of_window = -1;
+
+	/*
+	   ret = MP3.Open(number, MP3.wide2utf8(filename.Text), loop_, int.Parse(track.Text),
+	   video_p.Handle.ToInt64(),
+	   video_f_p.Handle.ToInt64(),
+	   video_p.Width,
+	   video_p.Height,
+	   the_ratio,
+	   video_p.Left,
+	   video_p.Top);
+	 */
+	Open(number_z, media_file_utf8_z, 0, 1, hwnd_z,
+	     player_hwnd_z,
+	     width__z, height__z, 0, left_z, top_z, 0);
+	/*
+	   while(-1 == SampleRate(number_z))
+	   {
+	    Sleep(50);
+	   }
+	 */
+
+	//PlaybackCancel(number_z);
+
+	return 0;
 }
 /**
  * This function is required by the project rspanyenc an ffmpeg based encoder...
@@ -6265,43 +6305,43 @@ int __stdcall get_video_size_z(char * media_file_utf8_z,
  */
 int __stdcall get_video_data(int * width_z, int * height_z, char * ratio_string_z, double * ratio_double_z)
 {
-  
-  if(number_z)
-    {
-      check_mv_instance(number_z);
-      morcego___i___instance__a__bucaneiro_engineering *mv_______ =
-	(morcego___i___instance__a__bucaneiro_engineering *)(__INT32_OR_INT64)
-	number_z;
 
-      pedro_dprintf(-1, "width  %d\n", 	mv_______->libav_c___width_of_window);
-      pedro_dprintf(-1, "height %d\n", 	mv_______->libav_c___height_of_window);
-
-      * width_z  =  mv_______->libav_c___width_of_window ;
-      * height_z =  mv_______->libav_c___height_of_window;
-
-      if(!loading_z)
+	if(number_z)
 	{
+		check_mv_instance(number_z);
+		morcego___i___instance__a__bucaneiro_engineering *mv_______ =
+			(morcego___i___instance__a__bucaneiro_engineering *)(__INT32_OR_INT64)
+			number_z;
 
-	  if(0 != * height_z)
-	    {
-	      * ratio_double_z = (double)* width_z / (double) * height_z;	  
-	    }
-	  else
-	    {
-	      * ratio_double_z = 1.0;
-	    }
-      
-	  sprintf(ratio_string_z, "%.4f",  * ratio_double_z);
-	      
-	  return 0;
+		pedro_dprintf(-1, "width  %d\n",  mv_______->libav_c___width_of_window);
+		pedro_dprintf(-1, "height %d\n",  mv_______->libav_c___height_of_window);
+
+		*width_z  =  mv_______->libav_c___width_of_window;
+		*height_z =  mv_______->libav_c___height_of_window;
+
+		if(!loading_z)
+		{
+
+			if(0 != *height_z)
+			{
+				*ratio_double_z = (double)*width_z / (double) *height_z;
+			}
+			else
+			{
+				*ratio_double_z = 1.0;
+			}
+
+			sprintf(ratio_string_z, "%.4f",  *ratio_double_z);
+
+			return 0;
+		}
+
+		return 1;
 	}
-  
-      return 1;
-    }
-  else
-    {
-      return 1;
-    }
+	else
+	{
+		return 1;
+	}
 }
 /**
  * It will close the media file
@@ -6309,12 +6349,12 @@ int __stdcall get_video_data(int * width_z, int * height_z, char * ratio_string_
 int __stdcall unload_media_file_z()
 {
 
-  if(number_z)
-    {
-      PlaybackCancel(number_z);
-    }
-  
-  return 0;
+	if(number_z)
+	{
+		PlaybackCancel(number_z);
+	}
+
+	return 0;
 }
 /**
  * This function will retrieve the actual memory usage of
@@ -6325,49 +6365,49 @@ int __stdcall unload_media_file_z()
  */
 int __stdcall memory_usage__z(char *data_z)
 {
-  //#pragma message "amanda & MathMan compiling Tar DLL at " __TIME__ "..."
-  /*
-                                                                                                                                                                                  ¯\_(^^)_/¯
-   */
-  double val_z;
-  PROCESS_MEMORY_COUNTERS_EX memory;
+	//#pragma message "amanda & MathMan compiling Tar DLL at " __TIME__ "..."
+	/*
+	                                                                                                                                                                                ¯\_(^^)_/¯
+	 */
+	double val_z;
+	PROCESS_MEMORY_COUNTERS_EX memory;
 
-  if(-1 == last_value_Z)
-  {
+	if(-1 == last_value_Z)
+	{
 
-       goto inside_Z;       
-       
-  }
-  
-  if(GetTickCount() > (DWORD) oldvalue_Z)
-  {
+		goto inside_Z;
 
-  inside_Z:;
-       pedro_dprintf(-1, "vai %d\n", GetTickCount());
-       /* Mr Do. */ GetProcessMemoryInfo(GetCurrentProcess(), (void *)&memory, sizeof(memory));
+	}
 
-       oldvalue_Z =  GetTickCount() + 500;
+	if(GetTickCount() > (DWORD) oldvalue_Z)
+	{
 
-       last_value_Z = memory.WorkingSetSize;
+inside_Z:       ;
+		pedro_dprintf(-1, "vai %d\n", GetTickCount());
+		/* Mr Do. */ GetProcessMemoryInfo(GetCurrentProcess(), (void *)&memory, sizeof(memory));
 
-  }
-  else
-  {
-       memory.WorkingSetSize = last_value_Z;
-  }
-  val_z = memory.WorkingSetSize;
-  val_z = val_z / 1024.0;
-  val_z = val_z / 1024.0;
-  sprintf(data_z, "%.3f MB", val_z);
+		oldvalue_Z =  GetTickCount() + 500;
 
-  if(GetTickCount() < (DWORD) oldvalue_Z - 600)//o avoid the 49 days problem..., just use 64 version of this function to avoid the problem
-  {
+		last_value_Z = memory.WorkingSetSize;
 
-       oldvalue_Z = GetTickCount();
-       
-  }
-    
-  return 0;
+	}
+	else
+	{
+		memory.WorkingSetSize = last_value_Z;
+	}
+	val_z = memory.WorkingSetSize;
+	val_z = val_z / 1024.0;
+	val_z = val_z / 1024.0;
+	sprintf(data_z, "%.3f MB", val_z);
+
+	if(GetTickCount() < (DWORD) oldvalue_Z - 600)//o avoid the 49 days problem..., just use 64 version of this function to avoid the problem
+	{
+
+		oldvalue_Z = GetTickCount();
+
+	}
+
+	return 0;
 }
 /**
  * Function required when cache is used, cache will gather information about normalization and duration of files that don't have it available
@@ -6378,7 +6418,7 @@ void __stdcall Amanda_s_Smart_Ape_Use_Cache(__int64 mv_instance, int value_amand
 	check_mv_instance(mv_instance);
 	morcego___i___instance__a__bucaneiro_engineering *mv_______ =
 		(morcego___i___instance__a__bucaneiro_engineering *)(__INT32_OR_INT64)
-			mv_instance;
+		mv_instance;
 
 	if (27 == value_amanda_s_smart_ape)
 	{
