@@ -1,32 +1,32 @@
 
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
-*                                                                              *
-*        Licensa de Cópia (C) <2021>  <Corporação do Trabalho Binário>         *
-*                                                                              *
-*     Este  programa  é software livre: você pode redistribuir isto e/ou       *
-*     modificar  isto sobre os termos do  GNU Licensa Geral Pública como       8
-*     publicado  pela Fundação  de Software  Livre, tanto a versão 3  da       *
-*     Licensa, ou (dependendo da sua opção) qualquer versão posterior.         *
-*                                                                              *
-*     Este  programa é distribuído na  esperança que isto vai  ser útil,       *
-*     mas SEM  QUALQUER GARANTIA; sem  até mesmo a implicada garantia de       *
-*     COMERCIALIZAÇÃO ou CABIMENTO PARA UM FIM PARTICULAR.  Veja a             *
-*     Licensa Geral Pública para mais detalhes.                                *
-*                                                                              *
-*     Você deve ter recebido uma  cópia da LICENSA GERAL PUBLICA e a GNU       *
-*     Licensa Pública Menor junto com este programa                            *
-*     Se não, veja <http://www.gnu.org/licenses/>.                             *
-*                                                                              *
-*     Suporte: https://nomade.sourceforge.io/                                  *
-*                                                                              *
-*     E-mails direto dos felizes programadores:                                *
-*     O Ricardinho :    arsoftware25@gmail.com    ricardo@arsoftware.net.br    *
-*     Little_Amanda:    arsoftware10@gmail.com    amanda.@arsoftware.net.br    *
-*                                                                              *
-*     contato imediato(para uma resposta muita rápida) WhatsApp                *
-*     (+55)41 9627 1708 - isto está sempre ligado (eu acho...)                 *
-*                                                                              *
-* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *  **/
+ *                                                                              *
+ *        Licensa de Cópia (C) <2021>  <Corporação do Trabalho Binário>         *
+ *                                                                              *
+ *     Este  programa  é software livre: você pode redistribuir isto e/ou       *
+ *     modificar  isto sobre os termos do  GNU Licensa Geral Pública como       8
+ *     publicado  pela Fundação  de Software  Livre, tanto a versão 3  da       *
+ *     Licensa, ou (dependendo da sua opção) qualquer versão posterior.         *
+ *                                                                              *
+ *     Este  programa é distribuído na  esperança que isto vai  ser útil,       *
+ *     mas SEM  QUALQUER GARANTIA; sem  até mesmo a implicada garantia de       *
+ *     COMERCIALIZAÇÃO ou CABIMENTO PARA UM FIM PARTICULAR.  Veja a             *
+ *     Licensa Geral Pública para mais detalhes.                                *
+ *                                                                              *
+ *     Você deve ter recebido uma  cópia da LICENSA GERAL PUBLICA e a GNU       *
+ *     Licensa Pública Menor junto com este programa                            *
+ *     Se não, veja <http://www.gnu.org/licenses/>.                             *
+ *                                                                              *
+ *     Suporte: https://nomade.sourceforge.io/                                  *
+ *                                                                              *
+ *     E-mails:                                                                 *
+ *     maria@arsoftware.net.br                                                  *
+ *     pedro@locacaodiaria.com.br                                               *
+ *                                                                              *
+ *     contato imediato(para uma resposta muito rápida) WhatsApp                *
+ *     (+55)41 9627 1708 - isto está sempre ligado (eu acho...)                 *      
+ *                                                                              *
+ * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *  **/
 
 #define _WIN32_WINNT 0x500
 #include "mv_from_be.h"
@@ -100,6 +100,8 @@
 
 #include "be_xml.c"
 
+WINBASEAPI ULONGLONG WINAPI GetTickCount64 (VOID);
+
 //tag1
 #define tamanho ((100000 * 2))
 #define tamanho2 (tamanho)
@@ -122,7 +124,7 @@ int ret_arp_;
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // Added 2021/04/16 21:21
 
-static int oldvalue_Z =  0;
+static ULONGLONG oldvalue_Z =  0;
 static int last_value_Z = -1;
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //playlist debug mode
@@ -5463,16 +5465,17 @@ void __stdcall GetPixelFormat____(__int64 mv_instance, char *format)
 		(morcego___i___instance__a__bucaneiro_engineering *)(__INT32_OR_INT64)
 		mv_instance;
 
-	if (mv_______->decoder_c___tm < (int) GetTickCount())
+	if (mv_______->decoder_c___tm < GetTickCount64())
 	{
-		mv_______->decoder_c___tm = GetTickCount() + 500;
+		mv_______->decoder_c___tm = GetTickCount64() + 500;
 		mv_______->decoder_c___tm_value = mv_______->analisys_c___sync;
 	}
-	sprintf(format, "%s rate %0.2f audio %0.2f video %0.2f",
+	sprintf(format, "%s rate %0.2f audio %0.2f viideo %0.2f",
 	        get_pixel_format_info___(mv_______),
 	        mv_______->libav_c___ajusted_frame_rate,
 	        mv_______->decoder_c___valor_de_deslocamento_de_audio * 1000,
 	        mv_______->decoder_c___tm_value);
+
 }
 /**
  * To adjust the ratio of the video player
@@ -6379,14 +6382,14 @@ int __stdcall memory_usage__z(char *data_z)
 
 	}
 
-	if(GetTickCount() > (DWORD) oldvalue_Z)
+	if(GetTickCount64() > oldvalue_Z)
 	{
 
 inside_Z:       ;
-		pedro_dprintf(-1, "vai %d\n", GetTickCount());
+		pedro_dprintf(-1, "vai %d\n", GetTickCount64());
 		/* Mr Do. */ GetProcessMemoryInfo(GetCurrentProcess(), (void *)&memory, sizeof(memory));
 
-		oldvalue_Z =  GetTickCount() + 500;
+		oldvalue_Z =  GetTickCount64() + 500;
 
 		last_value_Z = memory.WorkingSetSize;
 
@@ -6399,13 +6402,6 @@ inside_Z:       ;
 	val_z = val_z / 1024.0;
 	val_z = val_z / 1024.0;
 	sprintf(data_z, "%.3f MB", val_z);
-
-	if(GetTickCount() < (DWORD) oldvalue_Z - 600)//o avoid the 49 days problem..., just use 64 version of this function to avoid the problem
-	{
-
-		oldvalue_Z = GetTickCount();
-
-	}
 
 	return 0;
 }

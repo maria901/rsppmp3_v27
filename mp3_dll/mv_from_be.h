@@ -615,7 +615,7 @@ typedef struct morcego_instance_be_
 
 	//sector decoder.c       decoder_c___
 	double decoder_c___tm_value;
-	int decoder_c___tm;
+	ULONGLONG decoder_c___tm;
 	char decoder_c___filename[300*6];
 	int decoder_c___will_loop;
 	int decoder_c___track;
