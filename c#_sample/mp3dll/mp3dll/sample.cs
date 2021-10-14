@@ -546,10 +546,21 @@ namespace mp3dll
 
 			if(0 == MP3.GetBitrate_Video(number))
 			{
-				label7.Text = "Audio Bitrate: " + ((double)MP3.GetBitrate(number) / 1000.0).ToString() + " kbits";
+				/*
+				*  Console.Write(String.Format("{0:0.00}", 123.456789));
+				Console.Write(String.Format("{0:0.00}", 12345.6));
+				Console.Write(String.Format("{0:0.00}", 123456));
+				Output
+				
+				123.46
+				12345.60
+				123456.00
+				*/
+				label7.Text = "Audio Bitrate: " + String.Format("{0:0.0000}", ((double)MP3.GetBitrate(number) / 1000.0)) + " kbits";
 			}
 			else
-				label7.Text = "Audio Bitrate: " + ((double)MP3.GetBitrate(number) / 1000.0).ToString() + " kbits   -   Video Bitrate: " + ((double)MP3.GetBitrate_Video(number) / 1000.0).ToString()  + " kbits";
+				label7.Text = "Audio Bitrate: " + String.Format("{0:0.0000}", ((double)MP3.GetBitrate(number) / 1000.0)) + 
+					" kbits   -   Video Bitrate: " + String.Format("{0:0.0000}", ((double)MP3.GetBitrate_Video(number) / 1000.0))  + " kbits";
 
 			MP3.GetMpegMode(number, time);
 			label6.Text = "Mode: " + time.ToString();
