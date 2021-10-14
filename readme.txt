@@ -179,6 +179,14 @@ with different copies of the Libav dlls in the same process running
 
 Changelog: 
 
+What is new in 16.0.9  build 667271  'Thu 14/October/2021 06:19:45' codename 'Daly'
+Small modifications and added a new function to show the video bitrate,
+if available of course, notice that some webm files don't report a video bitrate
+but includes all in the audio bitrate, also a bug occurs sometimes when the 
+media files are assiciated with the mp3dll.exe application, it is hard to occur 
+and we will fix it when we figure out how to reproduce the problem, next release 
+will use the new Libav libraries available 
+
 What is new in 15.5.8  build 667220  'Terça(Tuesday) 10 Agosto 2021  12:06' codename 'Haible'
 First release with full support to subtitles as SUBTITLE_BITMAP, missing
 for the moment SUBTITLE_TEXT and SUBTITLE_ASS, will be added soon, minor
