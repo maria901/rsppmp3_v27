@@ -167,7 +167,7 @@ with different copies of the Libav dlls in the same process running
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Changelog:
+Changelog: 
 
 What is new in 15.5.8  build 667220  'Terça(Tuesday) 10 Agosto 2021  12:06' codename 'Haible'
 First release with full support to subtitles as SUBTITLE_BITMAP, missing
