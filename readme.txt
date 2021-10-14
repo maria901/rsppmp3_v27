@@ -1,5 +1,4 @@
-
- /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+/********************************************************************************
  *                                                                              *
  *        Licensa de Cópia (C) <2021>  <Corporação do Trabalho Binário>         *
  *                                                                              *
@@ -19,18 +18,20 @@
  *                                                                              *
  *     Suporte: https://nomade.sourceforge.io/                                  *
  *                                                                              *
- *     E-mails direto dos felizes programadores:                                *
- *     O Ricardinho :    arsoftware25@gmail.com    ricardo@arsoftware.net.br    *
- *     Little_Amanda:    arsoftware10@gmail.com    amanda.@arsoftware.net.br    *
+ ********************************************************************************
+ 
+      E-mails:                                                                 
+      maria@arsoftware.net.br                                                  
+      pedro@locacaodiaria.com.br                                               
+
+ ********************************************************************************
  *                                                                              *
- *     contato imediato(para uma resposta muita rápida) WhatsApp                *
+ *     contato imediato(para uma resposta muito rápida) WhatsApp                *
  *     (+55)41 9627 1708 - isto está sempre ligado (eu acho...)                 *      
  *                                                                              *
- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *  **/
-  
+ *******************************************************************************/
   
   The codenames in the changelog are very important GNU contributors...
-  
   
 First of all: thanks to the developers of:
 
@@ -44,8 +45,12 @@ https://stackoverflow.com/
 http://equ.sourceforge.net/
 
 Second: in 01/01/2020 the license of our portions of the code have changed from GPL3
-to LGPL, read the files gpl-3.0.txt and lgpl-3.0.txt for more information, then it
-can be used in open source projects or commercial applications, ok?
+to LGPL, read the file:
+https://www.gnu.org/licenses/gpl-3.0.txt
+and:
+https://www.gnu.org/licenses/lgpl-3.0.txt
+for more information, then it can be used in open source projects or commercial
+applications, ok?
 
 Now back to the technical information...
 
