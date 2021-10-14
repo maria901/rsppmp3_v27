@@ -152,17 +152,18 @@ Libav version information:
 BEGIN:
 {
 
-  libavutil      57.  0.100 / 57.  0.100
-  libavcodec     59.  3.100 / 59.  3.100
-  libavformat    59.  3.101 / 59.  3.101
-  libavdevice    59.  0.100 / 59.  0.100
-  libavfilter     8.  0.103 /  8.  0.103
-  libswscale      6.  0.100 /  6.  0.100
+ffmpeg version N-104333-g13141339c1-20211013 Copyright (c) 2000-2021 the FFmpeg developers
+
+  built with gcc 10-win32 (GCC) 20210408
+  configuration: --prefix=/ffbuild/prefix --pkg-config-flags=--static --pkg-config=pkg-config --cross-prefix=x86_64-w64-mingw32- --arch=x86_64 --target-os=mingw32 --enable-gpl --enable-version3 --disable-debug --enable-shared --disable-static --disable-w32threads --enable-pthreads --enable-iconv --enable-libxml2 --enable-zlib --enable-libfreetype --enable-libfribidi --enable-gmp --enable-lzma --enable-fontconfig --enable-libvorbis --enable-opencl --enable-libvmaf --enable-vulkan --disable-libxcb --disable-xlib --enable-amf --enable-libaom --enable-avisynth --enable-libdav1d --enable-libdavs2 --disable-libfdk-aac --enable-ffnvcodec --enable-cuda-llvm --enable-frei0r --enable-libglslang --enable-libgme --enable-libass --enable-libbluray --enable-libmp3lame --enable-libopus --enable-libtheora --enable-libvpx --enable-libwebp --enable-lv2 --enable-libmfx --enable-libopencore-amrnb --enable-libopencore-amrwb --enable-libopenjpeg --enable-librav1e --enable-librubberband --enable-schannel --enable-sdl2 --enable-libsoxr --enable-libsrt --enable-libsvtav1 --enable-libtwolame --enable-libuavs3d --disable-libdrm --disable-vaapi --enable-libvidstab --enable-libx264 --enable-libx265 --enable-libxavs2 --enable-libxvid --enable-libzimg --enable-libzvbi --extra-cflags=-DLIBTWOLAME_STATIC --extra-cxxflags= --extra-ldflags=-pthread --extra-ldexeflags= --extra-libs=-lgomp --extra-version=20211013
+  libavutil      57.  7.100 / 57.  7.100
+  libavcodec     59. 12.100 / 59. 12.100
+  libavformat    59.  6.100 / 59.  6.100
+  libavdevice    59.  0.101 / 59.  0.101
+  libavfilter     8. 12.100 /  8. 12.100
+  libswscale      6.  1.100 /  6.  1.100
   libswresample   4.  0.100 /  4.  0.100
   libpostproc    56.  0.100 / 56.  0.100
-
-  ffmpeg version N-102810-gda0abbbb01-20210702
-  Copyright (c) 2000-2021 the FFmpeg developers
 
 }
 END:
@@ -185,7 +186,7 @@ if available of course, notice that some webm files don't report a video bitrate
 but includes all in the audio bitrate, also a bug occurs sometimes when the 
 media files are assiciated with the mp3dll.exe application, it is hard to occur 
 and we will fix it when we figure out how to reproduce the problem, next release 
-will use the new Libav libraries available 
+will use the new Libav libraries available (15/October/2021)
 
 What is new in 15.5.8  build 667220  'Terça(Tuesday) 10 Agosto 2021  12:06' codename 'Haible'
 First release with full support to subtitles as SUBTITLE_BITMAP, missing
