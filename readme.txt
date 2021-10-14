@@ -41,6 +41,12 @@ Rabbit MP3 DLL
 Dialog Medien MP3 OCX
 Maplay 1.2, sorry Jeff...
 Netshow 2.0
+
+(NetShow was Microsoft's original framework for Internet network
+broadcasting, intended to compete with RealNetworks RealMedia &
+Vivo (acquired in 1998 by RealNetworks). It was later renamed
+and marketed under the Windows Media umbrella.)
+
 https://stackoverflow.com/
 http://equ.sourceforge.net/
 
