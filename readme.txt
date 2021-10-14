@@ -93,6 +93,8 @@ Documentation of the version 15.6.4 available online at:
 https://arsoftware.net.br/binarywork/Amanda_Ava_Pereira/rsppmp3_doc_8.9.9/html/decoder_8c.html
                 http://nomade.sf.net/Amanda_Ava_Pereira/rsppmp3_doc_8.9.9/html/decoder_8c.html
 				
+It says 8.9.9 but is the latest available
+
 The documentation will be updated soon...				
 
 Description
@@ -103,18 +105,20 @@ advanced rsp format (.ricardo4) (:-)) and many many more)
 - It has a high quality (we supose) graphical equalizer (copied (as usual) from the XMMS project), as
 far as we know it is optimized for 44100 (soon 48000) sample rate, we will be using the Shibatch version later,
 because some people say that it is a real high quality version)
-- It has a spectrum analyzer (now working) with 10 bands 
+- It has a spectrum analyzer (now working) with 10 bands (but limited to 44100 sample rate)
 - The decoder engine is loaded dynamically in the process(sic...)
 - You can define what wave out device ( soundcard ) will play the MP3 file (in case you have twenty soundcards installed, 
 but for BlueTooth phones it is handy, the sample project waits for your selection to return the playback if the Phone
-is close)
-- The control has support to Xing and VBRI based VBR files 
+is close (it was modified to work like Edge))
+- Not support to next file playback in a playlist for EarPhones command, but
+soon it will (code will be borrowed from Edge)
+- The control has support to Xing and VBRI based VBR files (by Libav)
 - The control can retrieve bitrate, samplerate, layer, stereo 
 mode and the time of the media file as formatted string or milliseconds 
 - Several wave effects, the Amanda wav effect can make a mono file play as stereo, give it a try
 - ReplayGain and the new and recommended BENormalize normalization method
 - Ability to extract to wav pcm in 16, 24 and 32 bits and FLOAT (soon to all formats too)
-- Future versions will be able to play backwards.
+- Future versions will be able to play backwards. (in a few years from now)
 - Future versions will have more features (at least this is what everyone is expecting we supose)
 
 			~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -126,7 +130,7 @@ All problems related to Libav are related also to this dll
 If you want to see a Libav problem that can crash our DLL just try to play a flv file with an id3 v2 tag, soon we will
 fix it or create a workaround (how Ricardo?)
 
-No subtitles support for the moment ( we need free time to add this, then wait)
+Partial subtitles support for the moment (we need free time to add this, then wait)
 
 Can select any audio track for playback (sic..., don't believe on it) but only the first video
 track for the moment, it will be extended soon
