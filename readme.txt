@@ -52,9 +52,13 @@ http://equ.sourceforge.net/
 
 Second: in 01/01/2020 the license of our portions of the code have changed from GPL3
 to LGPL, read the file:
+
 https://www.gnu.org/licenses/gpl-3.0.txt
+
 and:
+
 https://www.gnu.org/licenses/lgpl-3.0.txt
+
 for more information, then it can be used in open source projects or commercial
 applications, ok?
 
