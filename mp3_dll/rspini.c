@@ -1,5 +1,5 @@
 
- /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
  *                                                                              *
  *        Licensa de Cópia (C) <2021>  <Corporação do Trabalho Binário>         *
  *                                                                              *
@@ -19,11 +19,11 @@
  *                                                                              *
  *     Suporte: https://nomade.sourceforge.io/                                  *
  *                                                                              *
- *     E-mails direto dos felizes programadores:                                *
- *     O Ricardinho :    arsoftware25@gmail.com    ricardo@arsoftware.net.br    *
- *     Little_Amanda:    arsoftware10@gmail.com    amanda.@arsoftware.net.br    *
+ *     E-mails:                                                                 *
+ *     maria@arsoftware.net.br                                                  *
+ *     pedro@locacaodiaria.com.br                                               *
  *                                                                              *
- *     contato imediato(para uma resposta muita rápida) WhatsApp                *
+ *     contato imediato(para uma resposta muito rápida) WhatsApp                *
  *     (+55)41 9627 1708 - isto está sempre ligado (eu acho...)                 *      
  *                                                                              *
  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *  **/
@@ -121,7 +121,7 @@ int __stdcall write_ini_binary (char *app_name, char *key_name, char *data,
                                 int len, char *ini_file,int filename_is_utf8);
 /*
 
-   impxmlv2 based function http://impxmlv2.sourceforge.net/
+   impxmlv2 based function http://impxmlv2.sourceforge.net/ (after 2021 the project includes real very fast xml based code in only 45 kb source file)
 
    xml like based database storage with a faster approuch,
    it was created with the idea in mind of a faster
@@ -733,7 +733,7 @@ getfilesize_v2 (char *infile, int *error,int filename_is_utf8)
 	unicode_large *ul=calloc(sizeof(unicode_large),1);
 	if(filename_is_utf8)
 	{
-		myfile = _wfopen (utf8towide_fixed(ul,infile), L"rb");
+		myfile = _wfopen (permissive_name_m_(amanda_utf8towide_3_(infile)), L"rb");
 	}
 	else
 	{
@@ -1891,9 +1891,9 @@ internal_write_ini (char *app_name, char *key_name, char *data,
 
 		if(filename_is_utf8)
 		{
-			unicode_large *ul=calloc(sizeof(unicode_large),1);
-			myfile2 = _wfopen (utf8towide_fixed(ul,ini_file), L"rb");
-			free(ul);
+			
+			myfile2 = _wfopen (permissive_name_m_(amanda_utf8towide_3_(ini_file)), L"rb");
+			
 		}
 		else
 		{
@@ -1966,9 +1966,9 @@ noerror:
 		{
 			if(filename_is_utf8)
 			{
-				unicode_large *ul=calloc(sizeof(unicode_large),1);
-				myfile = _wfopen (utf8towide_fixed(ul,ini_file), L"wb");
-				free(ul);
+				
+				myfile = _wfopen (permissive_name_m_(amanda_utf8towide_3_(ini_file)), L"wb");
+				
 			}
 			else
 			{

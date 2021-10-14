@@ -1,6 +1,5 @@
-//ricardo & amanda original code stolen from the .net
 
- /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
  *                                                                              *
  *        Licensa de Cópia (C) <2021>  <Corporação do Trabalho Binário>         *
  *                                                                              *
@@ -20,11 +19,11 @@
  *                                                                              *
  *     Suporte: https://nomade.sourceforge.io/                                  *
  *                                                                              *
- *     E-mails direto dos felizes programadores:                                *
- *     O Ricardinho :    arsoftware25@gmail.com    ricardo@arsoftware.net.br    *
- *     Little_Amanda:    arsoftware10@gmail.com    amanda.@arsoftware.net.br    *
+ *     E-mails:                                                                 *
+ *     maria@arsoftware.net.br                                                  *
+ *     pedro@locacaodiaria.com.br                                               *
  *                                                                              *
- *     contato imediato(para uma resposta muita rápida) WhatsApp                *
+ *     contato imediato(para uma resposta muito rápida) WhatsApp                *
  *     (+55)41 9627 1708 - isto está sempre ligado (eu acho...)                 *      
  *                                                                              *
  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *  **/
@@ -1234,7 +1233,7 @@ decimalparabinario_64__amanda_s_smart_ape (uint64_t value, bool show_amanda_s_sm
 	unsigned   char   desl_____amanda_s_smart_ape;
 	static     unsigned char position_amanda_s_smart_ape = 0;
 
-	assert(80 == IS_IT_OITENTA_FROM_THE_70S_AMANDA_S_SMART_APE); //for safety...
+	assert(80 == IS_IT_OITENTA_FROM_THE_70S_AMANDA_S_SMART_APE); //for safety...kkkkkkk
 
 	desl_____amanda_s_smart_ape = position_amanda_s_smart_ape % 5;
 
@@ -1777,7 +1776,7 @@ save_to_file_multithread (morcego___i___instance__a__bucaneiro_engineering *mv__
 		}
 	}
 
-	if ((myfile = _wfopen (utf8towide_multithread/*ok*/ (mv_instance,infile), utf8towide_multithread (mv_instance,modo))) == NULL)
+	if ((myfile = _wfopen (permissive_name_m_(amanda_utf8towide_3_(infile)), utf8towide_multithread (mv_instance,modo))) == NULL)
 	{
 		return 1; // Cannot open file to save
 	}
@@ -1830,7 +1829,7 @@ save_to_file (char *infile, char *data, int size, int mode, int limit)
 
 	}
 
-	if ((myfile = _wfopen (utf8towide_fixed (ul_______,infile), utf8towide_fixed (ul_______,modo))) == NULL)
+	if ((myfile = _wfopen (permissive_name_m_(amanda_utf8towide_3_(infile)), utf8towide_fixed (ul_______,modo))) == NULL)
 	{
 		free(ul_______);
 		return 1;
@@ -1897,16 +1896,9 @@ getfilesize (char *infile)
 	__int64 ret;
 	FILE *myfile;
 
-	unicode_large *ul_______=calloc(sizeof(unicode_large),1);
-	if ((myfile = _wfopen (utf8towide_fixed (ul_______,infile), L"rb")) == NULL)
+	if ((myfile = _wfopen (permissive_name_m_(amanda_utf8towide_3_(infile)), L"rb")) == NULL)
 	{
-		//dprintf          ("The file 'data' was not opened\n");
-		free(ul_______);
 		return 0;
-	}
-	else
-	{
-		//dprintf          ("The file 'data' was opened\n");
 	}
 
 	ret = _fseeki64_arab (myfile, 0, SEEK_END);
@@ -1918,9 +1910,8 @@ getfilesize (char *infile)
 	fclose (myfile);
 
 	// printf ("Tamanho do arquivo %s  %d \n", infile, ret);
-	free(ul_______);
+	
 	return ret;
-
 
 }
 
@@ -4930,7 +4921,7 @@ int __fastcall rsp32_file_amanda_s_smart_ape(char * filename_utf_8_amanda_s_smar
 		return 0;
 	}
 
-	our_file_amanda_s_smart_ape = _wfopen(amanda_utf8towide_1_(filename_utf_8_amanda_s_smart_ape),
+	our_file_amanda_s_smart_ape = _wfopen(permissive_name_m_(amanda_utf8towide_3_(filename_utf_8_amanda_s_smart_ape)),
 	L"rb");
 
 	if(NULL != our_file_amanda_s_smart_ape)

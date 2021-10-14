@@ -1,5 +1,5 @@
 
- /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
  *                                                                              *
  *        Licensa de Cópia (C) <2021>  <Corporação do Trabalho Binário>         *
  *                                                                              *
@@ -19,11 +19,11 @@
  *                                                                              *
  *     Suporte: https://nomade.sourceforge.io/                                  *
  *                                                                              *
- *     E-mails direto dos felizes programadores:                                *
- *     O Ricardinho :    arsoftware25@gmail.com    ricardo@arsoftware.net.br    *
- *     Little_Amanda:    arsoftware10@gmail.com    amanda.@arsoftware.net.br    *
+ *     E-mails:                                                                 *
+ *     maria@arsoftware.net.br                                                  *
+ *     pedro@locacaodiaria.com.br                                               *
  *                                                                              *
- *     contato imediato(para uma resposta muita rápida) WhatsApp                *
+ *     contato imediato(para uma resposta muito rápida) WhatsApp                *
  *     (+55)41 9627 1708 - isto está sempre ligado (eu acho...)                 *      
  *                                                                              *
  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *  **/
@@ -1370,7 +1370,7 @@ final:
 
 	if (tempfilegerado)
 	{
-		unlink (tempname);// bug found no utf-8 support
+		_wunlink (permissive_name_m_(amanda_utf8towide_3_(tempname)));// bug found no utf-8 support
 	}
 	
 	mv_______->decoder_c___spec.peak = 0;//why it is not always working my love?...

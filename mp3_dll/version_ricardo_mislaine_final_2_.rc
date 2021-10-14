@@ -30,8 +30,8 @@ LANGUAGE LANG_PORTUGUESE, SUBLANG_PORTUGUESE_BRAZILIAN
 IDR_MAINFRAME           ICON                                   "../sqlite/new icon july_i.ico"
 
 VS_VERSION_INFO VERSIONINFO
- FILEVERSION 15,8,1,667243
- PRODUCTVERSION 15,8,1,667243
+ FILEVERSION 16,0,9,667271
+ PRODUCTVERSION 16,0,9,667271
  FILEFLAGSMASK 0x3fL
 #ifdef _DEBUG
  FILEFLAGS 0x1L
@@ -49,14 +49,14 @@ BEGIN
             VALUE "Comments", "BinaryWork Corp \0"
             VALUE "CompanyName", "http://ARsoftware.net.br/bw \0"
             VALUE "FileDescription", "The walking development... 64 bits \0"
-            VALUE "FileVersion", "15, 8, 1, 667243 \0"
+            VALUE "FileVersion", "16, 0, 9, 667271 \0"
             VALUE "InternalName", "rspmp3ocx1.dll \0"
             VALUE "LegalCopyright", "Copyleft BW © 2021 \0"
             VALUE "LegalTrademarks", "Copyleft BW © 2021 \0"
             VALUE "OriginalFilename", "rspmp3ocx1.dll \0"
-            VALUE "PrivateBuild", "667243 \0"
-            VALUE "ProductName", "BW MP3 DLL 15, 8, 1, 667243 64 bits \0"
-            VALUE "ProductVersion", "15, 8, 1, 667243 \0"
+            VALUE "PrivateBuild", "667271 \0"
+            VALUE "ProductName", "BW MP3 DLL 16, 0, 9, 667271 64 bits \0"
+            VALUE "ProductVersion", "16, 0, 9, 667271 \0"
             VALUE "SpecialBuild", "amandaricardo_koci\0"
         END
     END

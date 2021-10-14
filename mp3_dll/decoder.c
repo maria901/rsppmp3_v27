@@ -1,5 +1,4 @@
-
-/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+/********************************************************************************
  *                                                                              *
  *        Licensa de Cópia (C) <2021>  <Corporação do Trabalho Binário>         *
  *                                                                              *
@@ -19,14 +18,18 @@
  *                                                                              *
  *     Suporte: https://nomade.sourceforge.io/                                  *
  *                                                                              *
- *     E-mails:                                                                 *
- *     maria@arsoftware.net.br                                                  *
- *     pedro@locacaodiaria.com.br                                               *
+ ********************************************************************************
+ 
+      E-mails:                                                                 
+      maria@arsoftware.net.br                                                  
+      pedro@locacaodiaria.com.br                                               
+
+ ********************************************************************************
  *                                                                              *
  *     contato imediato(para uma resposta muito rápida) WhatsApp                *
  *     (+55)41 9627 1708 - isto está sempre ligado (eu acho...)                 *      
  *                                                                              *
- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *  **/
+ *******************************************************************************/
 
 #define _WIN32_WINNT 0x500
 #include "mv_from_be.h"
@@ -107,6 +110,150 @@ WINBASEAPI ULONGLONG WINAPI GetTickCount64 (VOID);
 #define tamanho2 (tamanho)
 
 #include "decoder.h"
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+/**
+ * The maximum size of an utf-8 encoded filename with the max limit of a file in Windows
+ */
+#define AMANDA__SIZE ((32767 * 6) + 2)
+/**
+ * The maximum size of Unicode characters in a path in Windows, Linux is 1024 characters as far I know 
+ * 
+ */
+#define AMANDA__SIZE_w (32767)
+
+/**
+ * To convert an utf-8 encoded filename to a wide string (WCHAR *), we 
+ *  . provide two functions that are exactly the same because someone may 
+ * use it in multi-thread code 
+ *
+ * @param pUTF8 the input utf-8 encoded filename 
+ *
+ * @return the static allocated WCHAR array with the filename as wide string 
+ *
+ */
+WCHAR *amanda_utf8towide_3_(char *pUTF8)
+{
+	static WCHAR ricardo_k[AMANDA__SIZE_w + 1];
+
+	MultiByteToWideChar(CP_UTF8, 0, (LPCSTR)pUTF8, -1, ricardo_k, AMANDA__SIZE_w);
+	return ricardo_k;
+}
+
+/**
+ * To convert an input wide string to a utf-8 encoded filename on return
+ *
+ * @param pUSC2_maria the wide string to be converted
+ *
+ * @return it will return the static allocated char * string with the utf-8 encoded filename
+ *
+ */
+char *valquiria_wide_to_utf8_3_(WCHAR *pUSC2_maria)
+{
+	static char saida_utf8[AMANDA__SIZE];
+
+	WideCharToMultiByte(CP_UTF8, 0, pUSC2_maria, -1, (LPSTR)saida_utf8, AMANDA__SIZE, 0, 0);
+	return saida_utf8;
+}
+
+/**
+ * To make the path wide mode aware, stolen from libarchive
+ * 
+ * 15/september/2021 10:14, last visit 16/09/2021 22:36 by bhond..., last visit 21/sep/2021 03:57...
+ *
+ */
+wchar_t *
+permissive_name_m_(const wchar_t *wname)
+{
+
+     static wchar_t *wnp = NULL;
+     wchar_t *wn;
+     wchar_t *ws, *wsp;
+     DWORD len, slen;
+     int unc;
+
+     if (NULL == wnp)
+     {
+          wnp = calloc((AMANDA__SIZE_w * 2) + 2, 1);
+     }
+
+     //wnp = malloc(AMANDA__SIZE * 2);
+
+     wcscpy(wnp, wname);
+
+     len = wcslen(wname);
+
+     wn = wnp;
+
+     if (wnp[0] == L'\\' && wnp[1] == L'\\' && // access to the wrong position in memory, fixed now
+         wnp[2] == L'?' && wnp[3] == L'\\')
+          /* We have already a permissive name. */
+          return (wn);
+
+     if (wnp[0] == L'\\' && wnp[1] == L'\\' &&
+         wnp[2] == L'.' && wnp[3] == L'\\')
+     {
+          /* This is a device name */
+          if (((wnp[4] >= L'a' && wnp[4] <= L'z') ||
+               (wnp[4] >= L'A' && wnp[4] <= L'Z')) &&
+              wnp[5] == L':' && wnp[6] == L'\\')
+               wnp[2] = L'?'; /* Not device name. */
+          return (wn);
+     }
+
+     unc = 0;
+     if (wnp[0] == L'\\' && wnp[1] == L'\\' && wnp[2] != L'\\')
+     {
+          wchar_t *p = &wnp[2];
+
+          /* Skip server-name letters. */
+          while (*p != L'\\' && *p != L'\0')
+               ++p;
+          if (*p == L'\\')
+          {
+               wchar_t *rp = ++p;
+               /* Skip share-name letters. */
+               while (*p != L'\\' && *p != L'\0')
+                    ++p;
+               if (*p == L'\\' && p != rp)
+               {
+                    /* Now, match patterns such as
+				 * "\\server-name\share-name\" */
+                    wnp += 2;
+                    len -= 2;
+                    unc = 1;
+               }
+          }
+     }
+
+     slen = 4 + (unc * 4) + len + 1;
+     ws = wsp = malloc(slen * sizeof(wchar_t));
+     if (ws == NULL)
+     {
+          //free(wn);
+          return (NULL);
+     }
+     /* prepend "\\?\" */
+     wcsncpy(wsp, L"\\\\?\\", 4);
+     wsp += 4;
+     slen -= 4;
+     if (unc)
+     {
+          /* append "UNC\" ---> "\\?\UNC\" */
+          wcsncpy(wsp, L"UNC\\", 4);
+          wsp += 4;
+          slen -= 4;
+     }
+     wcsncpy(wsp, wnp, slen);
+     wsp[slen - 1] = L'\0'; /* Ensure null termination. */
+     //free(wn);
+
+     wcscpy(wnp, ws);
+
+     free(ws);
+
+     return (wnp);
+}
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////2021 z
 // added december 2020, 01
@@ -1525,9 +1672,9 @@ id3v2tag_multithread(morcego___i___instance__a__bucaneiro_engineering *mv_______
 	uint fatia2;
 	uint fatia3;
 	uint fatia4;
-	__int64 mv_instance = (__int64)(__INT32_OR_INT64)mv_______;
+	(void) mv_______;
 	if ((astdin =
-		     _wfopen(utf8towide_multithread(mv_instance, filename),
+		     _wfopen(permissive_name_m_(amanda_utf8towide_3_(filename)),
 		             L"rb")) == NULL)
 	{
 		return 0;
@@ -3619,6 +3766,22 @@ int __stdcall GetBitrate(__int64 mv_instance)
 		return -1;
 	}
 	return mv_______->decoder_c___bitrate;
+}
+/**
+ * To get the bitrate of the media file, may include not only the audio but video bitrate too
+ *
+ */
+int __stdcall GetBitrate_Video(__int64 mv_instance)
+{
+	check_mv_instance(mv_instance);
+	morcego___i___instance__a__bucaneiro_engineering *mv_______ =
+		(morcego___i___instance__a__bucaneiro_engineering *)(__INT32_OR_INT64)
+		mv_instance;
+	if (checkinit(mv_______))
+	{
+		return -1;
+	}
+	return mv_______->libav_c___video_bitrate_m;
 }
 /**
  * Not in use these days anymore, we keep it for compatibility with older software
@@ -6204,7 +6367,7 @@ int __stdcall add_to_jun_playlist_z(char * jun_playlist_z)
 
 	need_to_add_char_n_m_ = false;
 
-	our_jun_playlist_file_z = _wfopen(utf8towide(jun_playlist_z), L"rb");
+	our_jun_playlist_file_z = _wfopen(permissive_name_m_(amanda_utf8towide_3_(jun_playlist_z)), L"rb");
 
 	if(our_jun_playlist_file_z)
 	{
@@ -6226,7 +6389,7 @@ int __stdcall add_to_jun_playlist_z(char * jun_playlist_z)
 		fclose(our_jun_playlist_file_z);
 	}
 
-	our_jun_playlist_file_z =  _wfopen(utf8towide(jun_playlist_z), L"ab");
+	our_jun_playlist_file_z =  _wfopen(permissive_name_m_(amanda_utf8towide_3_(jun_playlist_z)), L"ab");
 
 	if(our_jun_playlist_file_z)
 	{

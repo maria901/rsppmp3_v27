@@ -162,7 +162,7 @@ stripfilenameandpath (char *path, char *onlypath, char *onlyfilename)
 	int ret;
 	int i;
 	int p;
-	char temp[300*6];
+	static char temp[AMANDA__SIZE];
 	char *fixo;
 	const int separator = '\\';
 	fixo = path;
@@ -257,7 +257,7 @@ continua:
 int
 strip_extension_alladin (char *data, char *ext)
 {
-	char temp[300*6];
+	static char temp[AMANDA__SIZE];
 	char *ptr = NULL;
 	stripfilenameandpath (data, NULL, temp);
 	ptr = strrstr (temp, ".");
@@ -282,9 +282,7 @@ void process_playlist(morcego___i___instance__a__bucaneiro_engineering * mv_____
 	)
 	;
 
-	char playlist_path[300*6];
-
-	__int64 mv_instance=(__int64)(__INT32_OR_INT64)mv_______;
+	static char playlist_path[AMANDA__SIZE];
 
 /*
    char *mv_______->playlist_c___media_files[50000];
@@ -311,7 +309,7 @@ void process_playlist(morcego___i___instance__a__bucaneiro_engineering * mv_____
 	{
 		FILE *myfile=NULL;
 
-		myfile=_wfopen (utf8towide_multithread(mv_instance,mv_______->playlist_c___playlist_filename),L"rb");
+		myfile=_wfopen (permissive_name_m_(amanda_utf8towide_3_(mv_______->playlist_c___playlist_filename)),L"rb");
 		if(myfile)
 		{
 
@@ -385,9 +383,8 @@ getfilesize_ar_fixed__(morcego___i___instance__a__bucaneiro_engineering * mv____
 {
 	__int64 ret;
 	FILE *myfile;
-	__int64 mv_instance = (__int64)(__INT32_OR_INT64)mv_______;
-
-	if ((myfile = _wfopen(utf8towide_multithread(mv_instance, infile_ar), L"rb")) == NULL)
+	
+	if ((myfile = _wfopen(permissive_name_m_(amanda_utf8towide_3_(infile_ar)), L"rb")) == NULL)
 	{
 		return -1;
 	}
@@ -407,8 +404,6 @@ void process_playlist_junior_filho_do_ricardo(morcego___i___instance__a__bucanei
      const char *pUTF8
      )
     ;
-
-  __int64 mv_instance=(__int64)(__INT32_OR_INT64)mv_______;
 
   /*
     char *mv_______->playlist_c___media_files[50000];
@@ -433,7 +428,7 @@ void process_playlist_junior_filho_do_ricardo(morcego___i___instance__a__bucanei
   {
     FILE *myfile=NULL;
 
-    myfile=_wfopen (utf8towide_multithread(mv_instance,mv_______->playlist_c___playlist_filename),L"rb");
+    myfile=_wfopen (permissive_name_m_(amanda_utf8towide_3_(mv_______->playlist_c___playlist_filename)),L"rb");
     if(myfile)
       {
 
@@ -533,4 +528,137 @@ int is_playlist(morcego___i___instance__a__bucaneiro_engineering * mv_______,cha
 	}
 	mv_______->playlist_c___is_playlist=0;
 	return 0;
+}
+
+/**
+ * To convert an utf-8 encoded filename to a wide string (WCHAR *), we 
+ *  . provide two functions that are exactly the same because someone may 
+ * use it in multi-thread code 
+ *
+ * @param pUTF8 the input utf-8 encoded filename 
+ *
+ * @return the static allocated WCHAR array with the filename as wide string 
+ *
+ */
+WCHAR *amanda_utf8towide_3_(char *pUTF8)
+{
+	static WCHAR ricardo_k[AMANDA__SIZE_w + 1];
+
+	MultiByteToWideChar(CP_UTF8, 0, (LPCSTR)pUTF8, -1, ricardo_k, AMANDA__SIZE_w);
+	return ricardo_k;
+}
+
+/**
+ * To convert an input wide string to a utf-8 encoded filename on return
+ *
+ * @param pUSC2_maria the wide string to be converted
+ *
+ * @return it will return the static allocated char * string with the utf-8 encoded filename
+ *
+ */
+char *valquiria_wide_to_utf8_3_(WCHAR *pUSC2_maria)
+{
+	static char saida_utf8[AMANDA__SIZE];
+
+	WideCharToMultiByte(CP_UTF8, 0, pUSC2_maria, -1, (LPSTR)saida_utf8, AMANDA__SIZE, 0, 0);
+	return saida_utf8;
+}
+
+/**
+ * To make the path wide mode aware, stolen from libarchive
+ * 
+ * 15/september/2021 10:14, last visit 16/09/2021 22:36 by bhond..., last visit 21/sep/2021 03:57...
+ *
+ */
+wchar_t *
+permissive_name_m_(const wchar_t *wname)
+{
+
+     static wchar_t *wnp = NULL;
+     wchar_t *wn;
+     wchar_t *ws, *wsp;
+     DWORD len, slen;
+     int unc;
+
+     if (NULL == wnp)
+     {
+          wnp = calloc((AMANDA__SIZE_w * 2) + 2, 1);
+     }
+
+     //wnp = malloc(AMANDA__SIZE * 2);
+
+     wcscpy(wnp, wname);
+
+     len = wcslen(wname);
+
+     wn = wnp;
+
+     if (wnp[0] == L'\\' && wnp[1] == L'\\' && // access to the wrong position in memory, fixed now
+         wnp[2] == L'?' && wnp[3] == L'\\')
+          /* We have already a permissive name. */
+          return (wn);
+
+     if (wnp[0] == L'\\' && wnp[1] == L'\\' &&
+         wnp[2] == L'.' && wnp[3] == L'\\')
+     {
+          /* This is a device name */
+          if (((wnp[4] >= L'a' && wnp[4] <= L'z') ||
+               (wnp[4] >= L'A' && wnp[4] <= L'Z')) &&
+              wnp[5] == L':' && wnp[6] == L'\\')
+               wnp[2] = L'?'; /* Not device name. */
+          return (wn);
+     }
+
+     unc = 0;
+     if (wnp[0] == L'\\' && wnp[1] == L'\\' && wnp[2] != L'\\')
+     {
+          wchar_t *p = &wnp[2];
+
+          /* Skip server-name letters. */
+          while (*p != L'\\' && *p != L'\0')
+               ++p;
+          if (*p == L'\\')
+          {
+               wchar_t *rp = ++p;
+               /* Skip share-name letters. */
+               while (*p != L'\\' && *p != L'\0')
+                    ++p;
+               if (*p == L'\\' && p != rp)
+               {
+                    /* Now, match patterns such as
+				 * "\\server-name\share-name\" */
+                    wnp += 2;
+                    len -= 2;
+                    unc = 1;
+               }
+          }
+     }
+
+     slen = 4 + (unc * 4) + len + 1;
+     ws = wsp = malloc(slen * sizeof(wchar_t));
+     if (ws == NULL)
+     {
+          //free(wn);
+          return (NULL);
+     }
+     /* prepend "\\?\" */
+     wcsncpy(wsp, L"\\\\?\\", 4);
+     wsp += 4;
+     slen -= 4;
+     if (unc)
+     {
+          /* append "UNC\" ---> "\\?\UNC\" */
+          wcsncpy(wsp, L"UNC\\", 4);
+          wsp += 4;
+          slen -= 4;
+     }
+     wcsncpy(wsp, wnp, slen);
+     wsp[slen - 1] = L'\0'; /* Ensure null termination. */
+     //free(wn);
+
+     wcscpy(wnp, ws);
+
+     free(ws);
+
+     return (wnp);
 }

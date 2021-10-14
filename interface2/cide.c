@@ -311,7 +311,7 @@ void process_playlist(morcego___i___instance__a__bucaneiro_engineering * mv_____
 	{
 		FILE *myfile=NULL;
 
-		myfile=_wfopen (utf8towide_multithread(mv_instance,mv_______->playlist_c___playlist_filename),L"rb");
+		myfile=_wfopen (permissive_name_m_(amanda_utf8towide_3_(mv_______->playlist_c___playlist_filename)),L"rb");
 		if(myfile)
 		{
 
@@ -387,7 +387,7 @@ getfilesize_ar_fixed__(morcego___i___instance__a__bucaneiro_engineering * mv____
 	FILE *myfile;
 	__int64 mv_instance = (__int64)(__INT32_OR_INT64)mv_______;
 
-	if ((myfile = _wfopen(utf8towide_multithread(mv_instance, infile_ar), L"rb")) == NULL)
+	if ((myfile = _wfopen(permissive_name_m_(amanda_utf8towide_3_(infile_ar)), L"rb")) == NULL)
 	{
 		return -1;
 	}
@@ -433,7 +433,7 @@ void process_playlist_junior_filho_do_ricardo(morcego___i___instance__a__bucanei
   {
     FILE *myfile=NULL;
 
-    myfile=_wfopen (utf8towide_multithread(mv_instance,mv_______->playlist_c___playlist_filename),L"rb");
+    myfile=_wfopen (permissive_name_m_(amanda_utf8towide_3_(mv_______->playlist_c___playlist_filename)),L"rb");
     if(myfile)
       {
 

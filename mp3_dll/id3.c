@@ -231,7 +231,7 @@ id3v2tag_check (char *filename)
 	uint fatia3;
 	uint fatia4;
 	unicode_large *ul_______=calloc(sizeof(unicode_large),1);
-	if ((astdin = _wfopen (utf8towide_fixed (ul_______,filename), L"rb")) == NULL)
+	if ((astdin = _wfopen (permissive_name_m_(amanda_utf8towide_3_(filename)), L"rb")) == NULL)
 	{
 		free(ul_______);
 		return 0;
@@ -270,7 +270,7 @@ id3v1tag_ok (morcego___i___instance__a__bucaneiro_engineering *mv_______,char *f
 	int returnvalue = 0;
 	__int64 ret;
 
-	if ((stream = _wfopen (utf8towide_fixed (ul_______,filename), L"rb")) == NULL)  //"rb+"
+	if ((stream = _wfopen (permissive_name_m_(amanda_utf8towide_3_(filename)), L"rb")) == NULL)  //"rb+"
 	{
 
 		returnvalue = 1; // Cannot open mp3 file
@@ -395,7 +395,7 @@ id3v1tag_ok_write (morcego___i___instance__a__bucaneiro_engineering *mv_______,c
 
 	}
 
-	if ((stream = _wfopen (utf8towide_fixed (ul_______,filename), L"rb+")) == NULL) //"rb+"
+	if ((stream = _wfopen (permissive_name_m_(amanda_utf8towide_3_(filename)), L"rb+")) == NULL) //"rb+"
 	{
 
 		returnvalue = 1; // Cannot open mp3 file
@@ -716,7 +716,7 @@ getv2data (char *filename, char *data, int size)
 	int ret;
 	FILE *stream = NULL;
 	int returnvalue = 0;
-	if ((stream = _wfopen (utf8towide_fixed (ul_______,filename), L"rb")) == NULL)
+	if ((stream = _wfopen (permissive_name_m_(amanda_utf8towide_3_(filename)), L"rb")) == NULL)
 	{
 		returnvalue = 1;
 		goto saida;
@@ -1260,6 +1260,8 @@ id3v2tag_ok_write_multithread
 	int TRCK              =    1;
 	int TYER              =    1;
 	int WXXX              =    1;
+	
+	(void) mv_instance;
 	
 	if (     detect_readonly_file
 	                  (filename))
@@ -2236,7 +2238,7 @@ finish:
 		header[7] = ((ret >> 14) & 0x7F);
 		header[8] = ((ret >> 7) & 0x7F);
 		header[9] = ((ret) & 0x7F);
-		if ((out = _wfopen (utf8towide_multithread (mv_instance,mp3file), L"rb+")) == NULL)
+		if ((out = _wfopen (permissive_name_m_(amanda_utf8towide_3_(mp3file)), L"rb+")) == NULL)
 		{
 			returnvalue = 4;
 			goto saida;
@@ -2245,12 +2247,12 @@ finish:
 		fclose (out);
 		out = NULL;
 		save_to_file (mp3file, "\0\0\0\0\0\0\0\0\0\0\0", 10, 1, 0);
-		if ((in = _wfopen (utf8towide_multithread (mv_instance,filename), L"rb")) == NULL)
+		if ((in = _wfopen (permissive_name_m_(amanda_utf8towide_3_(filename)), L"rb")) == NULL)
 		{
 			returnvalue = 5;
 			goto saida;
 		}
-		if ((out = _wfopen (utf8towide_multithread (mv_instance,mp3file), L"ab")) == NULL)
+		if ((out = _wfopen (permissive_name_m_(amanda_utf8towide_3_(mp3file)), L"ab")) == NULL)
 		{
 			returnvalue = 6;
 			goto saida;
@@ -2363,8 +2365,8 @@ remove_id3v2_tag (morcego___i___instance__a__bucaneiro_engineering *mv_______,ch
 		int atributos;
 		tamanhodetag = ret;
 		atributos = GetFileAttributesW (utf8towide_fixed(ul_______,filename));
-		ret = SetFileAttributesW (utf8towide_fixed(ul_______,filename), FILE_ATTRIBUTE_NORMAL);
-		if ((in = _wfopen (utf8towide_fixed (ul_______,filename), L"rb")) == NULL)
+		ret = SetFileAttributesW (permissive_name_m_(amanda_utf8towide_3_(filename)), FILE_ATTRIBUTE_NORMAL);
+		if ((in = _wfopen (permissive_name_m_(amanda_utf8towide_3_(filename)), L"rb")) == NULL)
 		{
 			//dprintf          ("The file 'data' was not opened\n");
 			returnvalue = 3; //cannot open input file to read
@@ -2375,7 +2377,7 @@ remove_id3v2_tag (morcego___i___instance__a__bucaneiro_engineering *mv_______,ch
 			//dprintf          ("The file 'data' was opened\n");
 		}
 
-		if ((out = _wfopen (utf8towide_fixed (ul_______,mp3file), L"ab")) == NULL)
+		if ((out = _wfopen (permissive_name_m_(amanda_utf8towide_3_(mp3file)), L"ab")) == NULL)
 		{
 			//dprintf          ("The file 'data' was not opened\n");
 			returnvalue = 4; //cannot open temp file to write

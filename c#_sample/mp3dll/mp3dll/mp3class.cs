@@ -568,6 +568,14 @@ namespace mp3dll
 		[DllImport("rspmp3ocx1.dll")]
 		public static extern int
 			GetBitrate(long mv_instance);
+		
+		/// <summary>
+		///It will retrieve the bitrate of the media file (if applicable)
+		///
+		/// </summary>
+		[DllImport("rspmp3ocx1.dll")]
+		public static extern int
+			GetBitrate_Video(long mv_instance);
 
 		/// <summary>
 		/// After release 1.9.38 this function has no effect

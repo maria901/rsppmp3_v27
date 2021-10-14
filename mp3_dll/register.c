@@ -198,7 +198,7 @@ main (int argc, char **argv)
 	}
 
 	{
-		FILE *output = fopen ("lic.txt", "wb");
+		FILE *output = fopen ("lic.txt", "wb");//to never forget 1996...and Patrick
 
 		if (output)
 		{

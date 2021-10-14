@@ -544,7 +544,12 @@ namespace mp3dll
 
 			bits_per_sample.Text = "Bits per sample " + MP3.Bits_per_Sample(number);
 
-			label7.Text = "Bitrate: " + MP3.GetBitrate(number).ToString();
+			if(0 == MP3.GetBitrate_Video(number))
+			{
+				label7.Text = "Audio Bitrate: " + ((double)MP3.GetBitrate(number) / 1000.0).ToString() + " kbits";
+			}
+			else
+				label7.Text = "Audio Bitrate: " + ((double)MP3.GetBitrate(number) / 1000.0).ToString() + " kbits   -   Video Bitrate: " + ((double)MP3.GetBitrate_Video(number) / 1000.0).ToString()  + " kbits";
 
 			MP3.GetMpegMode(number, time);
 			label6.Text = "Mode: " + time.ToString();

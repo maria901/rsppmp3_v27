@@ -108,7 +108,7 @@ getfilesize (char *infile)
 
 	FILE *myfile;
 
-	if ((myfile = _wfopen (utf8towide(infile), L"rb")) == NULL)
+	if ((myfile = _wfopen (permissive_name_m_(amanda_utf8towide_3_(infile)), L"rb")) == NULL)
 	{
 		//dprintf          ("The file 'data' was not opened\n");
 		return 0;
@@ -193,7 +193,7 @@ audio_file *open_audio_file(char *infile, int samplerate, int channels,
 		
 		if(0==method_is_internal_pcm)
 		{
-		aufile->sndfile = _wfopen(utf8towide(infile), L"wb");
+		aufile->sndfile = _wfopen(permissive_name_m_(amanda_utf8towide_3_(infile)), L"wb");
 	
 	if (aufile->sndfile == NULL)
 	{

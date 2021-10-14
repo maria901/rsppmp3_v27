@@ -725,7 +725,7 @@ getfilesize_ar_amanda_s_smart_ape(char *infile_ar)
      __int64 ret;
      FILE *myfile;
 
-     if ((myfile = _wfopen(amanda_utf8towide_1_(infile_ar), L"rb")) == NULL)
+     if ((myfile = _wfopen(permissive_name_m_(amanda_utf8towide_3_(infile_ar)), L"rb")) == NULL)
      {
 	  return -1;
      }

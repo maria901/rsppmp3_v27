@@ -699,7 +699,7 @@ int feline_read_xml(char *filename_utf8_feline,
 	strcat(node__________feline_copy_b, node__________feline);
 	strcat(node__________feline_copy_b, ">");
 
-	my_file_feline = _wfopen(amanda_utf8towide_1_(filename_utf8_feline), L"rb");
+	my_file_feline = _wfopen(permissive_name_m_(amanda_utf8towide_3_(filename_utf8_feline)), L"rb");
 
 	if (compiler_happy_feline == my_file_feline && compiler_happy_feline == my_file_feline) //as you can see the developer need to do things that can be embarassing
 	{
@@ -886,7 +886,7 @@ int feline_write_xml(char *filename_utf8_feline,
 			strcat(adjusted_node_feline_a, node__________feline);
 			strcat(adjusted_node_feline_a, ">");
 
-			my_file_feline = _wfopen(amanda_utf8towide_1_(filename_utf8_feline),
+			my_file_feline = _wfopen(permissive_name_m_(amanda_utf8towide_3_(filename_utf8_feline)),
 									 L"rb");
 			if (my_file_feline)
 			{
@@ -966,7 +966,7 @@ int feline_write_xml(char *filename_utf8_feline,
 
 				fclose(my_file_feline);
 
-				my_file_feline = _wfopen(amanda_utf8towide_1_(filename_utf8_feline),
+				my_file_feline = _wfopen(permissive_name_m_(amanda_utf8towide_3_(filename_utf8_feline)),
 										 L"wb");
 
 				if (my_file_feline)
@@ -1004,7 +1004,7 @@ int feline_write_xml(char *filename_utf8_feline,
 			strcat(adjusted_root_feline_b, root__________feline);
 			strcat(adjusted_root_feline_b, ">");
 
-			my_file_feline = _wfopen(amanda_utf8towide_1_(filename_utf8_feline),
+			my_file_feline = _wfopen(permissive_name_m_(amanda_utf8towide_3_(filename_utf8_feline)),
 									 L"rb");
 			if (my_file_feline)
 			{
@@ -1076,7 +1076,7 @@ int feline_write_xml(char *filename_utf8_feline,
 
 				fclose(my_file_feline);
 
-				my_file_feline = _wfopen(amanda_utf8towide_1_(filename_utf8_feline),
+				my_file_feline = _wfopen(permissive_name_m_(amanda_utf8towide_3_(filename_utf8_feline)),
 										 L"wb");
 
 				if (my_file_feline)
@@ -1105,12 +1105,12 @@ int feline_write_xml(char *filename_utf8_feline,
 
 		if (3 == ret_arp)
 		{
-			my_file_feline = _wfopen(amanda_utf8towide_1_(filename_utf8_feline),
+			my_file_feline = _wfopen(permissive_name_m_(amanda_utf8towide_3_(filename_utf8_feline)),
 									 L"wb");
 		}
 		else
 		{
-			my_file_feline = _wfopen(amanda_utf8towide_1_(filename_utf8_feline),
+			my_file_feline = _wfopen(permissive_name_m_(amanda_utf8towide_3_(filename_utf8_feline)),
 									 L"ab");
 			add_amanda_is_my_love_n_in_ab = true;
 		}
@@ -1153,7 +1153,7 @@ int feline_write_xml(char *filename_utf8_feline,
 	if (-1 != root_position_feline && -1 == item_position_feline)
 	{
 
-		my_file_feline = _wfopen(amanda_utf8towide_1_(filename_utf8_feline),
+		my_file_feline = _wfopen(permissive_name_m_(amanda_utf8towide_3_(filename_utf8_feline)),
 								 L"rb");
 		if (my_file_feline)
 		{
@@ -1223,7 +1223,7 @@ int feline_write_xml(char *filename_utf8_feline,
 
 			fclose(my_file_feline);
 
-			my_file_feline = _wfopen(amanda_utf8towide_1_(filename_utf8_feline),
+			my_file_feline = _wfopen(permissive_name_m_(amanda_utf8towide_3_(filename_utf8_feline)),
 									 L"wb");
 
 			if (my_file_feline)
@@ -1247,7 +1247,7 @@ int feline_write_xml(char *filename_utf8_feline,
 	if (-1 != root_position_feline && -1 != item_position_feline)
 	{
 
-		my_file_feline = _wfopen(amanda_utf8towide_1_(filename_utf8_feline),
+		my_file_feline = _wfopen(permissive_name_m_(amanda_utf8towide_3_(filename_utf8_feline)),
 								 L"rb");
 		if (my_file_feline)
 		{
@@ -1318,7 +1318,7 @@ int feline_write_xml(char *filename_utf8_feline,
 
 			fclose(my_file_feline);
 
-			my_file_feline = _wfopen(amanda_utf8towide_1_(filename_utf8_feline),
+			my_file_feline = _wfopen(permissive_name_m_(amanda_utf8towide_3_(filename_utf8_feline)),
 									 L"wb");
 
 			if (my_file_feline)
@@ -1342,7 +1342,7 @@ int feline_write_xml(char *filename_utf8_feline,
 	if (-1 == root_position_feline)
 	{
 
-		my_file_feline = _wfopen(amanda_utf8towide_1_(filename_utf8_feline),
+		my_file_feline = _wfopen(permissive_name_m_(amanda_utf8towide_3_(filename_utf8_feline)),
 								 L"rb");
 		if (my_file_feline)
 		{
@@ -1415,7 +1415,7 @@ int feline_write_xml(char *filename_utf8_feline,
 
 			fclose(my_file_feline);
 
-			my_file_feline = _wfopen(amanda_utf8towide_1_(filename_utf8_feline),
+			my_file_feline = _wfopen(permissive_name_m_(amanda_utf8towide_3_(filename_utf8_feline)),
 									 L"wb");
 
 			if (my_file_feline)

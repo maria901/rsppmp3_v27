@@ -75,7 +75,7 @@ enum morcego_decoder_state
 typedef struct be_libav_struct_
 {
 	morcego_property_bag property_bag;
-	char sourcefile[1024];
+	char sourcefile[5000];
 	int be_channels;
 	int be_samplerate;
 	int be_bits_per_sample;
