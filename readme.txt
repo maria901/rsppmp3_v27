@@ -99,7 +99,7 @@ The files are available in the following folders:
 /sqlite           <- sources for the Amanda_27.DLL, it is just a wrapper for SQLite, recommended the latest SQLite library
 /touch            <- sources for the C++ library SoundTouch that allows the change in playback speed in many modes
 
-Documentation of the version 15.6.4 available online at:
+Documentation of the version 16.1.1 available online at:
 https://arsoftware.net.br/binarywork/Amanda_Ava_Pereira/rsppmp3_doc_8.9.9/html/decoder_8c.html
                 http://nomade.sf.net/Amanda_Ava_Pereira/rsppmp3_doc_8.9.9/html/decoder_8c.html
 				

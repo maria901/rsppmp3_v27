@@ -2009,7 +2009,7 @@ BE_CreateDecoder()
 		mv_______->libav_c___adjusted_ratio                 =       0;
 		mv_______->libav_c___sync_adjust                    =     0.0;
 
-		mv_______->libav_c___enable_slow_computers_hack_k_p =       1;
+		mv_______->libav_c___enable_slow_computers_hack_k_p =       1;//default enabled, I am not sure it is a great idea...
 
 		//added October 2020
 		mv_______->libav_c___sample_rate_format_string = malloc(1024);
@@ -2069,7 +2069,7 @@ void BE_CloseDecoder(__int64 *instance_64)
 
 }
 /**
- * It will retrieve the information from the ini file
+ * It will retrieve the information from the ini (now xml) file
  *
  */
 int __stdcall GetSettings(char *key, char *data, char *defaulT)
@@ -3752,7 +3752,7 @@ int __stdcall GetVBR(__int64 mv_instance)
 	return morcego_isvbr(mv_______);
 }
 /**
- * To get the bitrate of the media file, may include not only the audio but video bitrate too
+ * To get the bitrate of the media file, may include not only the audio but video bitrate too in some cases
  *
  */
 int __stdcall GetBitrate(__int64 mv_instance)
@@ -3768,7 +3768,7 @@ int __stdcall GetBitrate(__int64 mv_instance)
 	return mv_______->decoder_c___bitrate;
 }
 /**
- * To get the bitrate of the media file, may include not only the audio but video bitrate too
+ * (Added October 2021) To get the video bitrate of the media file
  *
  */
 int __stdcall GetBitrate_Video(__int64 mv_instance)
