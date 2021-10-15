@@ -4,3 +4,4 @@ EXPORTS
 svc_init_opus_m                                @1003
 morcego_deinit_libav_svc_deinit_opus_m         @1004
 morcego_decode_libav_svc_process_opus_m        @1005
+svc_seek_opus_m                                @1006

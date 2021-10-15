@@ -166,6 +166,14 @@ typedef float Float_t; /* Type used for filtering */
 #define BE_FIRST_SIZE (9644 / sizeof(Float_t))
 #define BE_SECOND_SIZE (48000 / sizeof(Uint32_t)) /*protected*/
 
+typedef struct pedro_27_
+{
+     int64_t duracao_feline;
+     int64_t raw_total_ric;
+     int64_t sample_rate_v;
+     int64_t channels_p;
+} juliete_struct;
+
 typedef struct
 {
      int band_num;
@@ -438,6 +446,7 @@ typedef struct morcego_instance_be_
 
      int error_code_aline_;
      char *libav_c___thalia_stand_alone_player_;
+     juliete_struct dados_do_audio_v27;
 
      ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
      char libav_c___amanda_video_thread_error_message_kp[8 * 8];
@@ -1059,5 +1068,10 @@ void morcego_encoder_amanda_s_smart_ape(char *morcego_in_amanda_s_smart_ape);
 // added at 01:34
 
 int analize(morcego___i___instance__a__bucaneiro_engineering *mv_______, __attribute__((unused)) char *filename, float *globalff, int *aanalized);
+
+int __stdcall morcego_decode_libav_svc_process_opus_m(char *struct_opus_m,
+                                                      __attribute__((unused)) int bytes_to_decode_m,
+                                                      __attribute__((unused)) char *bufout_m,
+                                                      __attribute__((unused)) int *size_out);
 
 #endif

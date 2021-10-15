@@ -1,5 +1,4 @@
-
- /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+/********************************************************************************
  *                                                                              *
  *        Licensa de Cópia (C) <2021>  <Corporação do Trabalho Binário>         *
  *                                                                              *
@@ -19,14 +18,18 @@
  *                                                                              *
  *     Suporte: https://nomade.sourceforge.io/                                  *
  *                                                                              *
- *     E-mails direto dos felizes programadores:                                *
- *     O Ricardinho :    arsoftware25@gmail.com    ricardo@arsoftware.net.br    *
- *     Little_Amanda:    arsoftware10@gmail.com    amanda.@arsoftware.net.br    *
+ ********************************************************************************
+ 
+      E-mails:                                                                 
+      maria@arsoftware.net.br                                                  
+      pedro@locacaodiaria.com.br                                               
+
+ ********************************************************************************
  *                                                                              *
- *     contato imediato(para uma resposta muita rápida) WhatsApp                *
+ *     contato imediato(para uma resposta muito rápida) WhatsApp                *
  *     (+55)41 9627 1708 - isto está sempre ligado (eu acho...)                 *      
  *                                                                              *
- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *  **/
+ *******************************************************************************/
  
 #ifndef INCLUDEUCHAR
 #ifndef uchar
@@ -130,6 +133,7 @@ mygain (uchar * buf, uint len, float factor)
 int
 analize (morcego___i___instance__a__bucaneiro_engineering *mv_______, __attribute__((unused)) char *filename, float *globalff, int *aanalized)
 {
+	pedro_dprintf(-15102021, "7.0");
 	be_libav_struct *be_real_real=(be_libav_struct *)mv_______->be_real; //fast
 	*aanalized                               =          0;
 	*globalff                                =     1.0005;
@@ -146,7 +150,7 @@ analize (morcego___i___instance__a__bucaneiro_engineering *mv_______, __attribut
 	assert(be_real_real);
 
 //agora checa se da ou nao
-
+pedro_dprintf(-15102021, "7.1");
 amanda_s_smart_ape_timestamp = get_bucaneiro_tick();
 
 if (mv_______->libav_c___amanda_s_smart_ape_use_cache)
@@ -202,9 +206,9 @@ if (mv_______->libav_c___amanda_s_smart_ape_use_cache)
 
 
 
-
+pedro_dprintf(-15102021, "7");
 	ret = morcego_init_libav (mv_______,be_real_real, 0);
-
+pedro_dprintf(-15102021, "8");
 	if (ret)
 	{
 		*globalff=1.0123;
@@ -246,9 +250,16 @@ if (mv_______->libav_c___amanda_s_smart_ape_use_cache)
 			break;
 		}
 		int isize=0;
+		
+		
+#ifndef THALIA_NEW_STANDALONE_AUDIO_PLAYER__
 		player_decoder_status =
 			morcego_decode_libav (mv_______, 4608, mv_______->analisys_c___out, &isize);
-
+#else
+		player_decoder_status =
+			morcego_decode_libav_svc_process_opus_m(mv_______->libav_c___thalia_stand_alone_player_,
+                                                                      4608, mv_______->analisys_c___out, &isize);
+#endif
 		if (BE_ERROR_DURING_DECODE == player_decoder_status)
 		{
 			*globalff       =  1.0123;

@@ -1525,7 +1525,7 @@ int main()
 								  "feline_node_test",
 								  NULL /*for the moment*/,
 								  out_data_feline);
-		pedro_dprintf(0, "antes3\n");
+		pedro_dprintf(1001, "antes3\n");
 		printf("Saida .%s. return %d\n", out_data_feline, ret_arp);
 
 		printf("Linhas %d posicao do item nas linhas, linha: %d, root position line: %d valid xml position line: %d\n",
@@ -1557,7 +1557,7 @@ int main()
 						out_data_feline);
 		printf("Saiu .%s.\n", out_data_feline);
 
-		pedro_dprintf(0, "saiu armadilhas .%s.\n", out_data_feline);
+		pedro_dprintf(1001, "saiu armadilhas .%s.\n", out_data_feline);
 	}
 	return 0;
 }

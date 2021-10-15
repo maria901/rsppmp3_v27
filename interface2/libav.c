@@ -38,7 +38,7 @@
  *****************************************************************************/
 #define AR_K_P_ATTENUATION_LEVEL 1.0
 
-#define THALIA_NEW_STANDALONE_AUDIO_PLAYER__
+//#define THALIA_NEW_STANDALONE_AUDIO_PLAYER__
 
 /*
 
@@ -77,11 +77,6 @@
 #undef NDEBUG
 #include <assert.h>
 
-#ifdef THALIA_NEW_STANDALONE_AUDIO_PLAYER__
-char *__stdcall svc_init_opus_m(char *filename_utf_8_v,
-                                int *error_code_aline_);
-#endif
-
 // com calma
 #include "../mp3_dll/mv_from_be.h"
 #include "../morcego/be_constants.h"
@@ -97,6 +92,12 @@ char *__stdcall svc_init_opus_m(char *filename_utf_8_v,
 #include <libavutil/avutil.h>
 /////////////////////////////////////////////////////////////////////////////
 // the main struct that holds the media information
+
+#ifdef THALIA_NEW_STANDALONE_AUDIO_PLAYER__
+char *__stdcall svc_init_opus_m(char *filename_utf_8_v,
+                                int *error_code_aline_,
+                                juliete_struct *dados_m);
+#endif
 
 /*
 
@@ -180,6 +181,8 @@ getval_100(double max, double por)
 void av_log_windebug_callback(void *ptr, int level, const char *fmt, va_list vl)
 {
 
+#ifndef THALIA_NEW_STANDALONE_AUDIO_PLAYER__
+
      char line[1024];
      // AVClass *avc = ptr ? *(AVClass **) ptr : NULL;
      if (level > av_log_get_level())
@@ -190,34 +193,35 @@ void av_log_windebug_callback(void *ptr, int level, const char *fmt, va_list vl)
 #ifndef MINHA_AMANDA
      // dprintf_z ("-%s-  debugfixo", line);
 #endif
-     /*
-        if(copy)
-        {
-               dprintf_z("copy here debugfixo\n");
-        }
-        if(0== strcmp(line, "Missing reference picture "))
-        {
-               copy->libav_c___error_in_decode=1;
-        }
-        if(0== strcmp(line, "mmco: unref short failure "))
-        {
-               copy->libav_c___error_in_decode=1;
-        }
-        if(0== strcmp(line, "number of reference frames (0+4) exceeds max (3; probably corrupt input), discarding one  "))
-        {
-               copy->libav_c___error_in_decode=1;
-        }
-      */
+/*
+   if(copy)
+   {
+          dprintf_z("copy here debugfixo\n");
+   }
+   if(0== strcmp(line, "Missing reference picture "))
+   {
+          copy->libav_c___error_in_decode=1;
+   }
+   if(0== strcmp(line, "mmco: unref short failure "))
+   {
+          copy->libav_c___error_in_decode=1;
+   }
+   if(0== strcmp(line, "number of reference frames (0+4) exceeds max (3; probably corrupt input), discarding one  "))
+   {
+          copy->libav_c___error_in_decode=1;
+   }
+ */
 
-     /*[5004] reference picture missing during reorder -  debugfixo
+/*[5004] reference picture missing during reorder -  debugfixo
 
-        [5004] Missing reference picture -  debugfixo
-        [5004] mmco: unref short failure -  debugfixo
-        [2612] -mmco: unref short failure -  debugfixo
-        [2612] -number of reference frames (0+4) exceeds max (3; probably corrupt input), discarding one -  debugfixo
+   [5004] Missing reference picture -  debugfixo
+   [5004] mmco: unref short failure -  debugfixo
+   [2612] -mmco: unref short failure -  debugfixo
+   [2612] -number of reference frames (0+4) exceeds max (3; probably corrupt input), discarding one -  debugfixo
 
 
-      */
+ */
+#endif
 }
 
 #endif
@@ -275,9 +279,17 @@ const char *find_codec_override(int codec)
 
 int init_decoder2(morcego___i___instance__a__bucaneiro_engineering *mv_______, be_libav_struct *be_data)
 {
+
+#ifndef THALIA_NEW_STANDALONE_AUDIO_PLAYER__
      AVCodecContext *pCodecCtx = avcodec_alloc_context3(NULL);
+#else
+     AVCodecContext *pCodecCtx = NULL;
+#endif
+
      AVFormatContext *FormatContext = NULL;
      AVCodec *Codec = NULL;
+
+     (void)Codec;
 
      static bool already_missing = false;
 
@@ -285,23 +297,29 @@ int init_decoder2(morcego___i___instance__a__bucaneiro_engineering *mv_______, b
      int returnvalue = 0;
      int ret_k_p;
 
+     (void)ret_k_p;
+     (void)i;
+     (void)already_missing;
      init(mv_______);
 
      // avcodec_register_all();
-
+(void)pCodecCtx;
+#ifndef THALIA_NEW_STANDALONE_AUDIO_PLAYER__
      /* here...my love*/
      pCodecCtx->thread_count = 0;
-
+#endif
      mv_______->libav_c___audiostream = -1;
-
-     pedro_dprintf(-1, "dentro de init_decoder2 entrada ");
 
 #if 0
 	av_log_set_callback (av_log_windebug_callback);
 	av_log_set_level (AV_LOG_ERROR);
 #else
      pedro_dprintf(-1, "log quiet");
+
+#ifndef THALIA_NEW_STANDALONE_AUDIO_PLAYER__
      av_log_set_level(AV_LOG_QUIET);
+#endif
+
 #endif
 
      pedro_dprintf(-1, "dentro de init_decoder2 saida");
@@ -325,9 +343,14 @@ int init_decoder2(morcego___i___instance__a__bucaneiro_engineering *mv_______, b
      if (!mv_______->libav_c___dont_do_video)
      {
 
+#ifndef THALIA_NEW_STANDALONE_AUDIO_PLAYER__
           init_video(mv_______, be_data);
+#endif
      }
      pedro_dprintf(-1, "passou de init_video");
+
+#ifndef THALIA_NEW_STANDALONE_AUDIO_PLAYER__
+
      if (avformat_open_input(&FormatContext, be_data->sourcefile, NULL, (AVDictionary **)(NULL)) != 0)
      {
           strcpy(be_data->be_error_message, "Can't open the media file");
@@ -335,7 +358,7 @@ int init_decoder2(morcego___i___instance__a__bucaneiro_engineering *mv_______, b
           goto saida;
      }
 
-     pedro_dprintf(0, "passou de avformat_open_input");
+#endif
 
 /*
      {
@@ -343,21 +366,42 @@ int init_decoder2(morcego___i___instance__a__bucaneiro_engineering *mv_______, b
 
           if (NULL == thalia)
           {
-               pedro_dprintf(0, "nao deu");
+               pedro_dprintf(-1, "nao deu");
           }
           else
           {
-               pedro_dprintf(0, "deu");
+               pedro_dprintf(-1, "deu");
           }
      }
-*/ 
+*/
+#ifdef THALIA_NEW_STANDALONE_AUDIO_PLAYER__
 
-     mv_______->libav_c___thalia_stand_alone_player_ = svc_init_opus_m(be_data->sourcefile, &(mv_______->error_code_aline_));
+     mv_______->dados_do_audio_v27.duracao_feline = 0;
 
-     //assert(0 && "no lbav");
+     mv_______->libav_c___thalia_stand_alone_player_ = svc_init_opus_m(be_data->sourcefile,
+                                                                       &(mv_______->error_code_aline_),
+                                                                       &mv_______->dados_do_audio_v27);
 
-     //exit(27);
+     pedro_dprintf(-1, "tamanho %lld\n", mv_______->dados_do_audio_v27.duracao_feline);
+
+#ifdef THALIA_NEW_STANDALONE_AUDIO_PLAYER__
+
+     if (NULL == mv_______->libav_c___thalia_stand_alone_player_ || 10004 == mv_______->error_code_aline_)
+     {
+          returnvalue = 10;
+          goto saida;
+     }
+
+#endif
+
+#endif
+     // assert(0 && "no lbav");
+
+     // exit(27);
      mv_______->libav_c___FormatContext_ptr = (void *)FormatContext;
+
+#ifndef THALIA_NEW_STANDALONE_AUDIO_PLAYER__
+
      if (avformat_find_stream_info(FormatContext, (AVDictionary **)(NULL)) < 0)
      {
           if (mv_______->libav_c___video_ready_to_play)
@@ -408,8 +452,12 @@ int init_decoder2(morcego___i___instance__a__bucaneiro_engineering *mv_______, b
      achou:;
      }
 
+#endif
+
      if (!mv_______->libav_c___mode_is_free_play)
      {
+
+#ifndef THALIA_NEW_STANDALONE_AUDIO_PLAYER__
           if (-1 == mv_______->libav_c___audiostream)
           {
                strcpy(be_data->be_error_message, "Audio stream not found");
@@ -418,7 +466,13 @@ int init_decoder2(morcego___i___instance__a__bucaneiro_engineering *mv_______, b
           }
 
           mv_______->libav_c___duracao = FormatContext->duration;
+#else
+          mv_______->libav_c___audiostream = 0;
+          mv_______->libav_c___duracao = mv_______->dados_do_audio_v27.duracao_feline;
 
+#endif
+          
+          // exit(27);
           if (0x8000000000000000 ==
               (uint64_t)(mv_______->libav_c___duracao))
           {
@@ -431,6 +485,7 @@ int init_decoder2(morcego___i___instance__a__bucaneiro_engineering *mv_______, b
           {
           }
 
+#ifndef THALIA_NEW_STANDALONE_AUDIO_PLAYER__
           if (mv_______->libav_c___amanda_s_smart_ape_is_new_webm)
           {
                mv_______->libav_c___duracao = mv_______->libav_c___amanda_s_smart_ape_new_generated_duration;
@@ -447,7 +502,14 @@ int init_decoder2(morcego___i___instance__a__bucaneiro_engineering *mv_______, b
                returnvalue = 9000;
                goto saida;
           }
+#else
 
+          be_data->length = mv_______->dados_do_audio_v27.duracao_feline;
+          mv_______->libav_c___seconds = (double)((double)(mv_______->dados_do_audio_v27.duracao_feline) / 1000000.0);
+
+#endif
+
+#ifndef THALIA_NEW_STANDALONE_AUDIO_PLAYER__
           ret_k_p = avcodec_parameters_to_context(pCodecCtx, FormatContext->streams[mv_______->libav_c___audiostream]->codecpar);
           if (ret_k_p < 0)
           {
@@ -461,12 +523,22 @@ int init_decoder2(morcego___i___instance__a__bucaneiro_engineering *mv_______, b
           strcpy(be_data->be__magic_value__format_name,
                  FormatContext->iformat->long_name);
 
+          pedro_dprintf(-1, "data amor -> %s", be_data->be__magic_value__format_name);
+
           {
                double den = FormatContext->streams[(int)mv_______->libav_c___audiostream]->time_base.den;
                double num = FormatContext->streams[(int)mv_______->libav_c___audiostream]->time_base.num;
                mv_______->libav_c___audio_timebase = num / den;
-          }
 
+               // pedro_dprintf(-1, "timebase %f", mv_______->libav_c___audio_timebase);
+               // exit(27);
+          }
+#else
+          strcpy(be_data->be__magic_value__format_name, "Ogg ;-)");
+
+          mv_______->libav_c___audio_timebase = 0.000021;
+
+#endif
           /*
 
              const char *codec_override = find_codec_override(pCodecCtx->codec_id);
@@ -479,6 +551,7 @@ int init_decoder2(morcego___i___instance__a__bucaneiro_engineering *mv_______, b
 
            */
 
+#ifndef THALIA_NEW_STANDALONE_AUDIO_PLAYER__
           Codec = (void *)avcodec_find_decoder(pCodecCtx->codec_id);
           pedro_dprintf(-1, "passou de avcodec_find_decoder");
           if (NULL == Codec)
@@ -491,6 +564,10 @@ int init_decoder2(morcego___i___instance__a__bucaneiro_engineering *mv_______, b
           strcpy(be_data->be_codec_name, Codec->name ? Codec->name : "unknown");
 
           strcpy(be_data->be_media_information, be_data->be_codec_name);
+
+          pedro_dprintf(-1, "data -> %s", be_data->be_codec_name);
+
+          // exit(27);
 
           if (mv_______->libav_c___video_ready_to_play)
           {
@@ -505,6 +582,33 @@ int init_decoder2(morcego___i___instance__a__bucaneiro_engineering *mv_______, b
                strcat(be_data->be_media_information,
                       be_data->be__magic_value__format_name);
           }
+#else
+
+          strcpy(be_data->be_codec_name, "opus");
+
+          strcpy(be_data->be_media_information, be_data->be_codec_name);
+
+          pedro_dprintf(-1, "data -> %s", be_data->be_codec_name);
+
+          // exit(27);
+
+          if (mv_______->libav_c___video_ready_to_play)
+          {
+               strcat(be_data->be_media_information, " - ");
+               strcat(be_data->be_media_information, mv_______->libav_c___video_codec);
+          }
+/*
+          if (0 !=
+              strcmp(be_data->be_codec_name, be_data->be__magic_value__format_name))
+          {
+               strcat(be_data->be_media_information, " - ");
+               strcat(be_data->be_media_information,
+                      be_data->be__magic_value__format_name);
+          }
+          */
+#endif
+
+#ifndef THALIA_NEW_STANDALONE_AUDIO_PLAYER__
 
           if (Codec->capabilities & AV_CODEC_CAP_TRUNCATED)
           {
@@ -539,7 +643,6 @@ int init_decoder2(morcego___i___instance__a__bucaneiro_engineering *mv_______, b
                mv_______->libav_c___BitsPerSample = pCodecCtx->bits_per_raw_sample;
            */
           // hack again
-          pedro_dprintf(-1, "2 Bits per sample %d", mv_______->libav_c___BitsPerSample);
 
           be_data->be_bitrate = pCodecCtx->bit_rate;
 
@@ -565,9 +668,36 @@ int init_decoder2(morcego___i___instance__a__bucaneiro_engineering *mv_______, b
           be_data->be_bits_per_sample = mv_______->libav_c___BitsPerSample;
 
           be_data->be_seconds = mv_______->libav_c___seconds;
+
+// exit(27);
+#else
+
+          mv_______->libav_c___BitsPerSample = 32;
+          mv_______->libav_c___original_bitrate_k_p = 32;
+          mv_______->libav_c___BitsPerSample = 16;
+          be_data->be_bitrate = 0;
+          mv_______->libav_c___original_number_of_channels_k_p = mv_______->dados_do_audio_v27.channels_p;
+          mv_______->libav_c___channels_ = mv_______->dados_do_audio_v27.channels_p;
+          be_data->be_channels = mv_______->dados_do_audio_v27.channels_p;
+          mv_______->libav_c___sample_rate = mv_______->dados_do_audio_v27.sample_rate_v; // for opus only, mp3 and others need to retrieve from data
+          mv_______->libav_c___sample_fmt_ = 8;
+          be_data->sample_format = 8;
+          be_data->be_samplerate = mv_______->dados_do_audio_v27.sample_rate_v;
+          be_data->be_bits_per_sample = 16;
+          be_data->be_seconds = mv_______->libav_c___seconds;
+
+#endif
      }
      else
      {
+
+#ifdef THALIA_NEW_STANDALONE_AUDIO_PLAYER__
+          pedro_dprintf(1001, "cannot occur, error 564756...\n");
+          exit(-27);
+#endif
+
+#ifndef THALIA_NEW_STANDALONE_AUDIO_PLAYER__
+
           mv_______->libav_c___audio_frame = -1;
 
           AVFormatContext *FormatContext =
@@ -635,6 +765,7 @@ int init_decoder2(morcego___i___instance__a__bucaneiro_engineering *mv_______, b
           be_data->be_bits_per_sample = 16;
 
           be_data->be_seconds = mv_______->libav_c___seconds;
+#endif
      }
 
      {
@@ -648,7 +779,7 @@ int init_decoder2(morcego___i___instance__a__bucaneiro_engineering *mv_______, b
                assert(2 == mv_______->libav_c___sample_fmt_);
           }
 
-          assert(2 >= mv_______->libav_c___channels_ && 538 && "libav.c");
+          assert(2 >= mv_______->libav_c___channels_ && 778 && "libav.c");
 
           if (mv_______->libav_c___channels_ > 2)
           {
@@ -806,6 +937,8 @@ int decode2(morcego___i___instance__a__bucaneiro_engineering *mv_______, char *b
 {
 
      // mv_______->libav_c___mode_is_free_play=1; //for debug
+
+#ifndef THALIA_NEW_STANDALONE_AUDIO_PLAYER__
 
      if (mv_______->libav_c___mode_is_free_play)
      {
@@ -1121,6 +1254,8 @@ final_ha_ha_ha_ha_ha:;
 
      av_packet_free(&packet_ptr);
      //("saiu de decode audio");
+
+#endif
      return BE_DECODED_BUT_NO_MORE_SAMPLES_AVAILABLE;
 }
 // to remember how to adjust structs size on the compiler, do not remove it
@@ -1128,6 +1263,7 @@ final_ha_ha_ha_ha_ha:;
 void deinit2(morcego___i___instance__a__bucaneiro_engineering *mv_______)
 {
 
+#ifndef THALIA_NEW_STANDALONE_AUDIO_PLAYER__
      deinit2_video(mv_______);
      AVCodecContext *pCodecCtx = (void *)mv_______->libav_c___pCodecCtx_ptr;
      AVFormatContext *FormatContext = (AVFormatContext *)mv_______->libav_c___FormatContext_ptr;
@@ -1147,6 +1283,7 @@ void deinit2(morcego___i___instance__a__bucaneiro_engineering *mv_______)
           FormatContext = NULL;
           mv_______->libav_c___FormatContext_ptr = NULL;
      }
+#endif
 }
 
 #pragma pack(pop)
@@ -1258,6 +1395,8 @@ int ffms_wchar_open(const char *fname, WCHAR *mode)
  */
 void seek2(morcego___i___instance__a__bucaneiro_engineering *mv_______, double value)
 {
+
+#ifndef THALIA_NEW_STANDALONE_AUDIO_PLAYER__
      /**
 
       */
@@ -1316,10 +1455,24 @@ void seek2(morcego___i___instance__a__bucaneiro_engineering *mv_______, double v
           }
           mv_______->libav_c___is_seeking = 0;
      }
+#else
+
+     mv_______->libav_c___reinit_uf = 0;
+     mv_______->libav_c___reinit_uf2 = 0;
+
+pedro_dprintf(0, "raw max %lld\n", mv_______->dados_do_audio_v27.raw_total_ric);
+
+     mv_______->libav_c___is_seeking = 0;
+     pedro_dprintf(0, "opus seek running\n");
+
+#endif
      //("deu seek");
 }
 int get_number_of_audio_tracks_internal(morcego___i___instance__a__bucaneiro_engineering *mv_______, char *utf8_filename, char *error_message)
 {
+
+#ifndef THALIA_NEW_STANDALONE_AUDIO_PLAYER__
+
      AVFormatContext *FormatContext_b = NULL;
      int i;
      int count = 0;
@@ -1418,4 +1571,9 @@ saida:;
           return returnvalue;
 
      return count;
+#else
+
+     return 1;
+
+#endif
 }

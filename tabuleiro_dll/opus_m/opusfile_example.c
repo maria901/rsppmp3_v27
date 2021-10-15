@@ -77,7 +77,7 @@ void pedro_dprintf(int amanda_level,
 #define fileno _fileno
 #endif
 
-static void print_duration(FILE *_fp, ogg_int64_t _nsamples, int _frac)
+static void print_duration(FILE *_fp, ogg_int64_t _nsamples, int _frac, int64_t *duracao_f)
 {
      ogg_int64_t seconds;
      ogg_int64_t minutes;
@@ -89,7 +89,11 @@ static void print_duration(FILE *_fp, ogg_int64_t _nsamples, int _frac)
      _nsamples += _frac ? 24 : 24000;
      seconds = _nsamples / 48000;
 
-     pedro_dprintf(0, " seconds %0.2f _nsamples %lld", sec_ok_m * 1000.0, (int64_t)_nsamples);
+     pedro_dprintf(-15, " seconds %0.2f _nsamples %lld", sec_ok_m * 1000.0, (int64_t)_nsamples);
+
+     sec_ok_m = sec_ok_m * 1000.0 * 1000.0;
+
+     *duracao_f = (int64_t)sec_ok_m;
 
      _nsamples -= seconds * 48000;
      minutes = seconds / 60;
@@ -254,6 +258,14 @@ enum Amanda_Status
 
 };
 
+typedef struct pedro_27_
+{
+     int64_t duracao_feline;
+     int64_t raw_total_ric;
+     int64_t sample_rate_v;
+     int64_t channels_p;
+} juliete_struct;
+
 typedef struct pedro_k_
 {
      OggOpusFile *of;
@@ -267,6 +279,7 @@ typedef struct pedro_k_
      int64_t bytes_in_the_buffer_paul;
      char buffer_junior[192000];
      char *ptr_data_position_douglas;
+     juliete_struct dados_do_audio_ar;
 } pedro_k;
 
 void main_old_p(pedro_k *maria_struct_);
@@ -340,7 +353,7 @@ void main_old_p(pedro_k *maria_struct_)
 #else
           if (NULL == maria_struct_->of)
           {
-               pedro_dprintf(0, "open em %s\n", maria_struct_->filename_utf_8_m);
+               pedro_dprintf(-15, "open em %s\n", maria_struct_->filename_utf_8_m);
                maria_struct_->of = op_open_file(maria_struct_->filename_utf_8_m, &maria_struct_->ret_m);
           }
 #endif
@@ -356,6 +369,9 @@ void main_old_p(pedro_k *maria_struct_)
           return;
      }
      duration = 0;
+     maria_struct_->dados_do_audio_ar.duracao_feline = 0;
+
+     maria_struct_->dados_do_audio_ar.raw_total_ric = 1;
      // output_seekable = fseek(stdout, 0, SEEK_CUR) != -1;
      if (op_seekable(maria_struct_->of))
      {
@@ -363,12 +379,13 @@ void main_old_p(pedro_k *maria_struct_)
           pedro_dprintf(-14, "Total number of links: %i\n", op_link_count(maria_struct_->of));
           duration = op_pcm_total(maria_struct_->of, -1);
           pedro_dprintf(-14, "Total duration: ");
-          print_duration(stderr, duration, 3);
+          print_duration(stderr, duration, 3, &maria_struct_->dados_do_audio_ar.duracao_feline);
           pedro_dprintf(-14, " (%li samples @ 48 kHz)\n", (long)duration);
           size = op_raw_total(maria_struct_->of, -1);
           pedro_dprintf(-14, "Total size: ");
           print_size(stderr, size, 0, "");
           pedro_dprintf(-14, "\n");
+          maria_struct_->dados_do_audio_ar.raw_total_ric = op_raw_total(maria_struct_->of, -1);
      }
      /*
      else if (!output_seekable)
@@ -622,14 +639,16 @@ void main_old_p(pedro_k *maria_struct_)
           }
           */
      }
-     pedro_dprintf(0, "Vai fechar o opus\n");
+     pedro_dprintf(-15, "Vai fechar o opus\n");
      op_free(maria_struct_->of);
-     pedro_dprintf(0, "fechou o opus\n");
+     maria_struct_->of = NULL;
+     pedro_dprintf(-15, "fechou o opus\n");
      return;
 }
 
 char *__stdcall svc_init_opus_m(char *filename_utf_8_v,
-                                int *error_code_aline_);
+                                int *error_code_aline_,
+                                juliete_struct *dados_m);
 
 /**
  * Funcion to open a Opus file and load it to play
@@ -637,10 +656,11 @@ char *__stdcall svc_init_opus_m(char *filename_utf_8_v,
  *
  */
 char *__stdcall svc_init_opus_m(char *filename_utf_8_v,
-                                int *error_code_aline_)
+                                int *error_code_aline_,
+                                juliete_struct *dados_m)
 {
 
-     pedro_dprintf(0, "svc_init_opus_m\n");
+     pedro_dprintf(-15, "svc_init_opus_m\n");
      pedro_k *feline_p = calloc(sizeof(pedro_k), 1);
      // assert(0);
      if (NULL == feline_p)
@@ -669,6 +689,12 @@ char *__stdcall svc_init_opus_m(char *filename_utf_8_v,
           free(feline_p);
           return NULL;
      }
+
+     // if opus
+     feline_p->dados_do_audio_ar.sample_rate_v = 48000;
+     feline_p->dados_do_audio_ar.channels_p = 2;
+
+     *dados_m = feline_p->dados_do_audio_ar;
      pedro_dprintf(-14, "debug 3\n");
      return (char *)feline_p;
 }
@@ -687,6 +713,7 @@ int __stdcall morcego_decode_libav_svc_process_opus_m(char *struct_opus_m,
      int len_m;
      char *ptr_1;
      (void)ptr_1;
+     pedro_dprintf(-15, "svc_process_m\n");
      if (NULL == struct_opus_m)
      {
           *size_out = 0;
@@ -697,6 +724,12 @@ int __stdcall morcego_decode_libav_svc_process_opus_m(char *struct_opus_m,
      (void)feline_p;
 
      *size_out = 0;
+
+     //*maria_struct_->error_code_aline_ = 10005; // Error decoding Opus file
+     if (10005 == *feline_p->error_code_aline_)
+     {
+          return BE_ERROR_DURING_DECODE;
+     }
 
 again_amanda:;
 
@@ -738,7 +771,7 @@ again_amanda:;
           bufout_m += len_m;
           feline_p->ptr_data_position_douglas += len_m;
 
-          pedro_dprintf(0, "val %lld\n", feline_p->ptr_data_position_douglas - feline_p->buffer_junior);
+          pedro_dprintf(-15, "val %lld\n", feline_p->ptr_data_position_douglas - feline_p->buffer_junior);
 
           feline_p->bytes_in_the_buffer_paul -= len_m;
           *size_out += len_m;
@@ -756,17 +789,18 @@ again_amanda:;
                goto again_amanda;
           }
 
-          pedro_dprintf(0, "passou e vai sair");
+          pedro_dprintf(-15, "passou e vai sair");
           exit(27);
      }
 
-     pedro_dprintf(0, "passou e vai sair2");
+     pedro_dprintf(-15, "passou e vai sair2");
      exit(27);
      return -27;
 }
 void morcego_deinit_libav_svc_deinit_opus_m(char *struct_opus_m);
 void morcego_deinit_libav_svc_deinit_opus_m(char *struct_opus_m)
 {
+     pedro_dprintf(-15, "svc_deinit_opus_m\n");
      if (NULL == struct_opus_m)
      {
           return;
@@ -780,7 +814,61 @@ void morcego_deinit_libav_svc_deinit_opus_m(char *struct_opus_m)
 
      free(feline_p->filename_utf_8_m);
      free(feline_p);
-     pedro_dprintf(0, "morcego_deinit_libav_svc_deinit_opus_m\n");
+     pedro_dprintf(-15, "morcego_deinit_libav_svc_deinit_opus_m\n");
+     return;
+}
+
+double
+getval_100(double max, double por);
+double
+getval_100(double max, double por)
+{
+
+     // a formula aqui �
+     // max / 100 * por
+
+     double maxa;
+     double porr;
+
+     maxa = (double)max;
+     porr = (double)por;
+
+     maxa = (maxa / 100.0) * porr;
+
+     return maxa;
+}
+
+void __stdcall svc_seek_opus_m(char *struct_opus_m,
+                               __attribute__((unused)) double maquisistem_value);
+void __stdcall svc_seek_opus_m(char *struct_opus_m,
+                               __attribute__((unused)) double maquisistem_value)
+{
+     int ret_m;
+     double val_m;
+     if (NULL == struct_opus_m)
+     {
+          return;
+     }
+
+     pedro_k *feline_p = (void *)struct_opus_m;
+     (void)feline_p;
+
+     val_m = getval_100(feline_p->dados_do_audio_ar.raw_total_ric, maquisistem_value);
+
+     if (NULL == feline_p->of)
+     {
+          return;
+     }
+
+     ret_m = op_raw_seek(feline_p->of, (int64_t)val_m);
+     if (ret_m < 0)
+     {
+          pedro_dprintf(1001, "\nSeek failed: -> %i.\n", ret_m);
+     }
+
+     feline_p->ptr_data_position_douglas = feline_p->buffer_junior;
+     feline_p->bytes_in_the_buffer_paul = 0;
+
      return;
 }
 BOOL WINAPI DllMain(__attribute__((unused)) HINSTANCE hModule,

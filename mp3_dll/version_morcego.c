@@ -41,6 +41,12 @@ ControlName (char *data)
 #else
 	  " 32 bits"
 #endif
+
+#ifdef THALIA_NEW_STANDALONE_AUDIO_PLAYER__
+"      Standalone      "
+#else
+"      Libav      "
+#endif
     );
   return 0;
 }

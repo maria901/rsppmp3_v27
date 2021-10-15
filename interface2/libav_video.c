@@ -123,6 +123,8 @@ WINBASEAPI ULONGLONG WINAPI GetTickCount64(VOID);
 #define SHOW_FLAG__ SWP_SHOWWINDOW | SWP_NOCOPYBITS
 #define NO_SHOW_FLAG__ SWP_HIDEWINDOW | SWP_NOCOPYBITS
 
+#ifndef THALIA_NEW_STANDALONE_AUDIO_PLAYER__
+
 /////////////////////////////////////////////////////////////////////////////
 
 int amanda_locked = 0; // to avoid a nasty bug in the video initialization
@@ -2712,7 +2714,7 @@ final:;
 
                                    mv_______->analisys_c___sync = dif;
 
-                                   // pedro_dprintf(0, "dif %f", mv_______->analisys_c___sync);
+                                   // pedro_dprintf(-1, "dif %f", mv_______->analisys_c___sync);
 
                                    // tag1
                                    /*
@@ -3337,7 +3339,17 @@ char *get_pixel_format_info___(morcego___i___instance__a__bucaneiro_engineering 
      }
      return "unknown";
 }
+#else
+
+char *get_pixel_format_info___(morcego___i___instance__a__bucaneiro_engineering *mv_______)
+{
+     return "unkonwn";
+}
+
+#endif
 #include "playlist.c"
+
+#ifndef THALIA_NEW_STANDALONE_AUDIO_PLAYER__
 /*
    double frame_rate(morcego___i___instance__a__bucaneiro_engineering * mv_______,
                   be_libav_struct * be_data, int video_stream_)
@@ -3424,3 +3436,5 @@ char *get_pixel_format_info___(morcego___i___instance__a__bucaneiro_engineering 
         return fr;
    }
  */
+
+#endif

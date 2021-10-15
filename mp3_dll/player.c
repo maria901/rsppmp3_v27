@@ -35,6 +35,9 @@
 #define SHOW_FLAG__ SWP_SHOWWINDOW | SWP_NOCOPYBITS
 #define NO_SHOW_FLAG__ SWP_HIDEWINDOW | SWP_NOCOPYBITS
 
+void __stdcall svc_seek_opus_m(char *struct_opus_m,
+                               __attribute__((unused)) double maquisistem_value);
+
 int __fastcall DetectChangeInSoundCards_i_internal(void);
 
 void get_sha_512_as_string_k(char *buffer_k, unsigned int len_k, char *digest_k);
@@ -101,7 +104,7 @@ reinicia_z:;
      unsigned char out[4096];
      unsigned int returnvalue;
      int64_t converted_long_int_amanda_s_smart_ape;
-
+     pedro_dprintf(-15102021, "1");
      mv_______->libav_c___is_desktop_playback_amanda = false;
 
      mv_______->libav_c___window_was_set______i = false;
@@ -171,7 +174,7 @@ reinicia_z:;
                }
           }
      }
-
+     pedro_dprintf(-15102021, "2");
 no_use_i:;
 
      pedro_dprintf(-1, "em player, file %s\n", filename);
@@ -214,7 +217,7 @@ no_use_i:;
      mv_______->decoder_c___bits_per_sample = 0;
 
      pedro_dprintf(-1, "dentro de playogg");
-
+     pedro_dprintf(-15102021, "3");
      if (mv_______->decoder_c___usandoencrypt)
      {
           char temp[MAXPATH_UTF_8_MODE_AMANDA_S_SMART_APE];
@@ -252,7 +255,7 @@ no_use_i:;
 
      pedro_dprintf(-1, "OI");
      mv_______->libav_c___player_ar_only_one_frame_flag = 0;
-
+     pedro_dprintf(-15102021, "4");
      void
          init_iir_60(morcego___i___instance__a__bucaneiro_engineering * mv_______);
      init_iir_60(mv_______);
@@ -301,21 +304,23 @@ no_use_i:;
      mv_______->libav_c___normalization_BENOR_amanda_s_smart_ape[0] = 0;
 
      mv_______->libav_c___normalization_repla_amanda_s_smart_ape[0] = 0;
-
+     pedro_dprintf(-15102021, "5");
      (void)ConvertMP3ToWavExtended(converted_long_int_amanda_s_smart_ape, (void *)filename,
                                    (void *)"lpt1", 1,
                                    mv_______->decoder_c___track);
      while (1 != 0)
      {
+          pedro_dprintf(-15102021, "entrando no loop len_m %d", strlen(message_amanda_s_smart_ape));
           Sleep(38); // correct...
           GetConversionInfo(converted_long_int_amanda_s_smart_ape, &percent_amanda_s_smart_ape, &finished_amanda_s_smart_ape, &returnvalue_amanda_s_smart_ape, message_amanda_s_smart_ape);
-
+          pedro_dprintf(-15102021, "b.1");
           if (0 != finished_amanda_s_smart_ape)
           {
+               pedro_dprintf(-15102021, "b.2");
                break;
           }
      }
-
+     pedro_dprintf(-15102021, "6");
      /////////////////////////////////////////////////////////////////////////////////
 
      {
@@ -324,7 +329,7 @@ no_use_i:;
 
      /////////////////////////////////////////////////////////////////////////////////
 
-     pedro_dprintf(-1, "never appear here a");
+     pedro_dprintf(-15102021, "never appear here a");
      ret = morcego_init_libav(mv_______, be_real_real, play_as_mp3);
      pedro_dprintf(-1, "never appear here b");
      pedro_dprintf(-1, "Passou de morcego_init_libav");
@@ -622,7 +627,14 @@ no_use_i:;
                     {
                          double retf;
                          didfixmp3 = 1;
+
+#ifndef THALIA_NEW_STANDALONE_AUDIO_PLAYER__
+
                          morcego_seek_100_libav(mv_______, mv_______->decoder_c___seekto);
+#else
+
+                         svc_seek_opus_m(mv_______->libav_c___thalia_stand_alone_player_, mv_______->decoder_c___seekto);
+#endif
                          retf = getvalf(fixotime,
                                         mv_______->decoder_c___seekto);
                          deslocamento = retf;
@@ -656,15 +668,17 @@ no_use_i:;
                          // for MathMan pleasure...
                          goto saida;
                     }
-                    /*
-                                        player_decoder_status =
-                                             morcego_decode_libav (mv_______, 4096, (char *) out, &isize);
-                    */
+
+#ifndef THALIA_NEW_STANDALONE_AUDIO_PLAYER__
+
+                    player_decoder_status =
+                        morcego_decode_libav(mv_______, 4096, (char *)out, &isize);
+#else
                     player_decoder_status = morcego_decode_libav_svc_process_opus_m(mv_______->libav_c___thalia_stand_alone_player_,
                                                                                     4096,
                                                                                     (char *)out,
                                                                                     &isize);
-
+#endif
                     pedro_dprintf(-1, "ret %d isize %d", player_decoder_status, isize);
 
                     if (BE_ERROR_DURING_DECODE == player_decoder_status)

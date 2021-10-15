@@ -2737,7 +2737,7 @@ int morcego_cancel(morcego___i___instance__a__bucaneiro_engineering *mv_______)
 {
 
 
-//pedro_dprintf(0, "in cancel 1\n");
+//pedro_dprintf(-1, "in cancel 1\n");
 
 	mv_______->syncstatus                     = 0;
 
@@ -2748,7 +2748,7 @@ int morcego_cancel(morcego___i___instance__a__bucaneiro_engineering *mv_______)
 
 	}
 
-//pedro_dprintf(0, "in cancel 2\n");
+//pedro_dprintf(-1, "in cancel 2\n");
 
 	mv_______->decoder_c___intloop = 0;
 	mv_______->decoder_c___cancelflag = 1;
@@ -3024,12 +3024,16 @@ int __stdcall IntReturn(__int64 mv_instance)
 void __stdcall GetConversionInfo(__int64 mv_instance, int *percent, int *finished,
                                  int *returnvalue_, char *___message)
 {
+	pedro_dprintf(-15102021, "aa1. %lld", mv_instance);
 	check_mv_instance(mv_instance);
 	morcego___i___instance__a__bucaneiro_engineering *mv_______ =
 		(morcego___i___instance__a__bucaneiro_engineering *)(__INT32_OR_INT64)
 		mv_instance;
+		
+	pedro_dprintf(-15102021, "a.1");
 	get_wav_progress_information(mv_______, percent, returnvalue_, finished,
 	                             ___message);
+								 pedro_dprintf(-15102021, "a.2");
 	return;
 }
 /**
@@ -3875,6 +3879,7 @@ int morcego_converttowav_be(morcego___i___instance__a__bucaneiro_engineering *
  */
 int __stdcall ConvertMP3ToWavExtended(__int64 mv_instance, char *input, char *output, int tipo_de_wav, int track)
 {
+	pedro_dprintf(-15102021, "6.1");
 	int returnvalue_amanda_s_smart_ape = 0;
 	check_mv_instance(mv_instance);
 
@@ -3882,12 +3887,14 @@ int __stdcall ConvertMP3ToWavExtended(__int64 mv_instance, char *input, char *ou
 		(morcego___i___instance__a__bucaneiro_engineering *)(__INT32_OR_INT64)
 		mv_instance;
 
+	pedro_dprintf(-15102021, "6.2");
 	if (mv_______->libav_c___amanda_s_smart_ape__is_open)
 	{
 		returnvalue_amanda_s_smart_ape = 1;
 		goto saida_amanda_s_smart_ape;
 	}
 
+	pedro_dprintf(-15102021, "6.3");
 	morcego_property_bag *pb = malloc(sizeof(morcego_property_bag));
 	memset(pb, 0, sizeof(morcego_property_bag));
 	pb->int64_1 = track; //track
@@ -3899,6 +3906,7 @@ int __stdcall ConvertMP3ToWavExtended(__int64 mv_instance, char *input, char *ou
 
 saida_amanda_s_smart_ape:
 
+	pedro_dprintf(-15102021, "6.4");
 	return returnvalue_amanda_s_smart_ape;//always 0...weird...
 }
 /**
