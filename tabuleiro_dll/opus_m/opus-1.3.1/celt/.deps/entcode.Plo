@@ -1,0 +1,39 @@
+celt/entcode.lo: celt/entcode.c config.h celt/entcode.h \
+ include/opus_types.h /usr/lib/gcc/i686-w64-mingw32/11/include/stdint.h \
+ /usr/i686-w64-mingw32/sys-root/mingw/include/stdint.h \
+ /usr/i686-w64-mingw32/sys-root/mingw/include/crtdefs.h \
+ /usr/i686-w64-mingw32/sys-root/mingw/include/corecrt.h \
+ /usr/i686-w64-mingw32/sys-root/mingw/include/_mingw.h \
+ /usr/i686-w64-mingw32/sys-root/mingw/include/_mingw_mac.h \
+ /usr/i686-w64-mingw32/sys-root/mingw/include/_mingw_secapi.h \
+ /usr/i686-w64-mingw32/sys-root/mingw/include/vadefs.h \
+ /usr/i686-w64-mingw32/sys-root/mingw/include/sdks/_mingw_ddk.h \
+ /usr/lib/gcc/i686-w64-mingw32/11/include/stddef.h \
+ /usr/i686-w64-mingw32/sys-root/mingw/include/stddef.h \
+ include/opus_defines.h include/opus_types.h \
+ /usr/lib/gcc/i686-w64-mingw32/11/include-fixed/limits.h \
+ /usr/lib/gcc/i686-w64-mingw32/11/include-fixed/syslimits.h \
+ /usr/i686-w64-mingw32/sys-root/mingw/include/limits.h celt/ecintrin.h \
+ /usr/i686-w64-mingw32/sys-root/mingw/include/math.h celt/arch.h
+config.h:
+celt/entcode.h:
+include/opus_types.h:
+/usr/lib/gcc/i686-w64-mingw32/11/include/stdint.h:
+/usr/i686-w64-mingw32/sys-root/mingw/include/stdint.h:
+/usr/i686-w64-mingw32/sys-root/mingw/include/crtdefs.h:
+/usr/i686-w64-mingw32/sys-root/mingw/include/corecrt.h:
+/usr/i686-w64-mingw32/sys-root/mingw/include/_mingw.h:
+/usr/i686-w64-mingw32/sys-root/mingw/include/_mingw_mac.h:
+/usr/i686-w64-mingw32/sys-root/mingw/include/_mingw_secapi.h:
+/usr/i686-w64-mingw32/sys-root/mingw/include/vadefs.h:
+/usr/i686-w64-mingw32/sys-root/mingw/include/sdks/_mingw_ddk.h:
+/usr/lib/gcc/i686-w64-mingw32/11/include/stddef.h:
+/usr/i686-w64-mingw32/sys-root/mingw/include/stddef.h:
+include/opus_defines.h:
+include/opus_types.h:
+/usr/lib/gcc/i686-w64-mingw32/11/include-fixed/limits.h:
+/usr/lib/gcc/i686-w64-mingw32/11/include-fixed/syslimits.h:
+/usr/i686-w64-mingw32/sys-root/mingw/include/limits.h:
+celt/ecintrin.h:
+/usr/i686-w64-mingw32/sys-root/mingw/include/math.h:
+celt/arch.h:

@@ -1,0 +1,86 @@
+celt/modes.lo: celt/modes.c config.h celt/celt.h include/opus_types.h \
+ /usr/lib/gcc/i686-w64-mingw32/11/include/stdint.h \
+ /usr/i686-w64-mingw32/sys-root/mingw/include/stdint.h \
+ /usr/i686-w64-mingw32/sys-root/mingw/include/crtdefs.h \
+ /usr/i686-w64-mingw32/sys-root/mingw/include/corecrt.h \
+ /usr/i686-w64-mingw32/sys-root/mingw/include/_mingw.h \
+ /usr/i686-w64-mingw32/sys-root/mingw/include/_mingw_mac.h \
+ /usr/i686-w64-mingw32/sys-root/mingw/include/_mingw_secapi.h \
+ /usr/i686-w64-mingw32/sys-root/mingw/include/vadefs.h \
+ /usr/i686-w64-mingw32/sys-root/mingw/include/sdks/_mingw_ddk.h \
+ /usr/lib/gcc/i686-w64-mingw32/11/include/stddef.h \
+ /usr/i686-w64-mingw32/sys-root/mingw/include/stddef.h \
+ include/opus_defines.h include/opus_types.h include/opus_custom.h \
+ include/opus_defines.h celt/entenc.h celt/entcode.h \
+ /usr/lib/gcc/i686-w64-mingw32/11/include-fixed/limits.h \
+ /usr/lib/gcc/i686-w64-mingw32/11/include-fixed/syslimits.h \
+ /usr/i686-w64-mingw32/sys-root/mingw/include/limits.h celt/ecintrin.h \
+ /usr/i686-w64-mingw32/sys-root/mingw/include/math.h celt/arch.h \
+ celt/entdec.h celt/modes.h celt/mdct.h celt/kiss_fft.h \
+ /usr/i686-w64-mingw32/sys-root/mingw/include/stdlib.h \
+ /usr/i686-w64-mingw32/sys-root/mingw/include/corecrt_wstdlib.h \
+ /usr/i686-w64-mingw32/sys-root/mingw/include/sec_api/stdlib_s.h \
+ /usr/i686-w64-mingw32/sys-root/mingw/include/malloc.h \
+ /usr/lib/gcc/i686-w64-mingw32/11/include/mm_malloc.h \
+ /usr/i686-w64-mingw32/sys-root/mingw/include/errno.h celt/cpu_support.h \
+ celt/x86/x86cpu.h celt/rate.h celt/cwrs.h celt/stack_alloc.h \
+ celt/os_support.h /usr/i686-w64-mingw32/sys-root/mingw/include/string.h \
+ /usr/i686-w64-mingw32/sys-root/mingw/include/sec_api/string_s.h \
+ /usr/i686-w64-mingw32/sys-root/mingw/include/stdio.h \
+ /usr/i686-w64-mingw32/sys-root/mingw/include/corecrt_stdio_config.h \
+ /usr/i686-w64-mingw32/sys-root/mingw/include/_mingw_off_t.h \
+ /usr/i686-w64-mingw32/sys-root/mingw/include/swprintf.inl \
+ /usr/i686-w64-mingw32/sys-root/mingw/include/sec_api/stdio_s.h \
+ celt/quant_bands.h celt/mathops.h celt/static_modes_float.h
+config.h:
+celt/celt.h:
+include/opus_types.h:
+/usr/lib/gcc/i686-w64-mingw32/11/include/stdint.h:
+/usr/i686-w64-mingw32/sys-root/mingw/include/stdint.h:
+/usr/i686-w64-mingw32/sys-root/mingw/include/crtdefs.h:
+/usr/i686-w64-mingw32/sys-root/mingw/include/corecrt.h:
+/usr/i686-w64-mingw32/sys-root/mingw/include/_mingw.h:
+/usr/i686-w64-mingw32/sys-root/mingw/include/_mingw_mac.h:
+/usr/i686-w64-mingw32/sys-root/mingw/include/_mingw_secapi.h:
+/usr/i686-w64-mingw32/sys-root/mingw/include/vadefs.h:
+/usr/i686-w64-mingw32/sys-root/mingw/include/sdks/_mingw_ddk.h:
+/usr/lib/gcc/i686-w64-mingw32/11/include/stddef.h:
+/usr/i686-w64-mingw32/sys-root/mingw/include/stddef.h:
+include/opus_defines.h:
+include/opus_types.h:
+include/opus_custom.h:
+include/opus_defines.h:
+celt/entenc.h:
+celt/entcode.h:
+/usr/lib/gcc/i686-w64-mingw32/11/include-fixed/limits.h:
+/usr/lib/gcc/i686-w64-mingw32/11/include-fixed/syslimits.h:
+/usr/i686-w64-mingw32/sys-root/mingw/include/limits.h:
+celt/ecintrin.h:
+/usr/i686-w64-mingw32/sys-root/mingw/include/math.h:
+celt/arch.h:
+celt/entdec.h:
+celt/modes.h:
+celt/mdct.h:
+celt/kiss_fft.h:
+/usr/i686-w64-mingw32/sys-root/mingw/include/stdlib.h:
+/usr/i686-w64-mingw32/sys-root/mingw/include/corecrt_wstdlib.h:
+/usr/i686-w64-mingw32/sys-root/mingw/include/sec_api/stdlib_s.h:
+/usr/i686-w64-mingw32/sys-root/mingw/include/malloc.h:
+/usr/lib/gcc/i686-w64-mingw32/11/include/mm_malloc.h:
+/usr/i686-w64-mingw32/sys-root/mingw/include/errno.h:
+celt/cpu_support.h:
+celt/x86/x86cpu.h:
+celt/rate.h:
+celt/cwrs.h:
+celt/stack_alloc.h:
+celt/os_support.h:
+/usr/i686-w64-mingw32/sys-root/mingw/include/string.h:
+/usr/i686-w64-mingw32/sys-root/mingw/include/sec_api/string_s.h:
+/usr/i686-w64-mingw32/sys-root/mingw/include/stdio.h:
+/usr/i686-w64-mingw32/sys-root/mingw/include/corecrt_stdio_config.h:
+/usr/i686-w64-mingw32/sys-root/mingw/include/_mingw_off_t.h:
+/usr/i686-w64-mingw32/sys-root/mingw/include/swprintf.inl:
+/usr/i686-w64-mingw32/sys-root/mingw/include/sec_api/stdio_s.h:
+celt/quant_bands.h:
+celt/mathops.h:
+celt/static_modes_float.h:

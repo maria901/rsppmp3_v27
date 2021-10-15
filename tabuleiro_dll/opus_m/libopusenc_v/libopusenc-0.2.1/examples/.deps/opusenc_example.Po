@@ -1,0 +1,40 @@
+examples/opusenc_example.o: examples/opusenc_example.c \
+ /usr/x86_64-w64-mingw32/sys-root/mingw/include/stdio.h \
+ /usr/x86_64-w64-mingw32/sys-root/mingw/include/corecrt_stdio_config.h \
+ /usr/x86_64-w64-mingw32/sys-root/mingw/include/corecrt.h \
+ /usr/x86_64-w64-mingw32/sys-root/mingw/include/_mingw.h \
+ /usr/x86_64-w64-mingw32/sys-root/mingw/include/_mingw_mac.h \
+ /usr/x86_64-w64-mingw32/sys-root/mingw/include/_mingw_secapi.h \
+ /usr/x86_64-w64-mingw32/sys-root/mingw/include/vadefs.h \
+ /usr/x86_64-w64-mingw32/sys-root/mingw/include/sdks/_mingw_ddk.h \
+ /usr/x86_64-w64-mingw32/sys-root/mingw/include/_mingw_off_t.h \
+ /usr/x86_64-w64-mingw32/sys-root/mingw/include/swprintf.inl \
+ /usr/x86_64-w64-mingw32/sys-root/mingw/include/sec_api/stdio_s.h \
+ include/opusenc.h /usr/lib/gcc/x86_64-w64-mingw32/11/include/stddef.h \
+ /usr/x86_64-w64-mingw32/sys-root/mingw/include/stddef.h \
+ /usr/x86_64-w64-mingw32/sys-root/mingw/include/crtdefs.h \
+ /usr/x86_64-w64-mingw32/sys-root/mingw/include/opus/opus.h \
+ /usr/x86_64-w64-mingw32/sys-root/mingw/include/opus/opus_types.h \
+ /usr/lib/gcc/x86_64-w64-mingw32/11/include/stdint.h \
+ /usr/x86_64-w64-mingw32/sys-root/mingw/include/stdint.h \
+ /usr/x86_64-w64-mingw32/sys-root/mingw/include/opus/opus_defines.h
+/usr/x86_64-w64-mingw32/sys-root/mingw/include/stdio.h:
+/usr/x86_64-w64-mingw32/sys-root/mingw/include/corecrt_stdio_config.h:
+/usr/x86_64-w64-mingw32/sys-root/mingw/include/corecrt.h:
+/usr/x86_64-w64-mingw32/sys-root/mingw/include/_mingw.h:
+/usr/x86_64-w64-mingw32/sys-root/mingw/include/_mingw_mac.h:
+/usr/x86_64-w64-mingw32/sys-root/mingw/include/_mingw_secapi.h:
+/usr/x86_64-w64-mingw32/sys-root/mingw/include/vadefs.h:
+/usr/x86_64-w64-mingw32/sys-root/mingw/include/sdks/_mingw_ddk.h:
+/usr/x86_64-w64-mingw32/sys-root/mingw/include/_mingw_off_t.h:
+/usr/x86_64-w64-mingw32/sys-root/mingw/include/swprintf.inl:
+/usr/x86_64-w64-mingw32/sys-root/mingw/include/sec_api/stdio_s.h:
+include/opusenc.h:
+/usr/lib/gcc/x86_64-w64-mingw32/11/include/stddef.h:
+/usr/x86_64-w64-mingw32/sys-root/mingw/include/stddef.h:
+/usr/x86_64-w64-mingw32/sys-root/mingw/include/crtdefs.h:
+/usr/x86_64-w64-mingw32/sys-root/mingw/include/opus/opus.h:
+/usr/x86_64-w64-mingw32/sys-root/mingw/include/opus/opus_types.h:
+/usr/lib/gcc/x86_64-w64-mingw32/11/include/stdint.h:
+/usr/x86_64-w64-mingw32/sys-root/mingw/include/stdint.h:
+/usr/x86_64-w64-mingw32/sys-root/mingw/include/opus/opus_defines.h:
