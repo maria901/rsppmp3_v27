@@ -1,0 +1,111 @@
+vorbisenc.lo: vorbisenc.c \
+ /usr/x86_64-w64-mingw32/sys-root/mingw/include/stdlib.h \
+ /usr/x86_64-w64-mingw32/sys-root/mingw/include/corecrt.h \
+ /usr/x86_64-w64-mingw32/sys-root/mingw/include/_mingw.h \
+ /usr/x86_64-w64-mingw32/sys-root/mingw/include/_mingw_mac.h \
+ /usr/x86_64-w64-mingw32/sys-root/mingw/include/_mingw_secapi.h \
+ /usr/x86_64-w64-mingw32/sys-root/mingw/include/vadefs.h \
+ /usr/x86_64-w64-mingw32/sys-root/mingw/include/sdks/_mingw_ddk.h \
+ /usr/x86_64-w64-mingw32/sys-root/mingw/include/corecrt_wstdlib.h \
+ /usr/lib/gcc/x86_64-w64-mingw32/11/include-fixed/limits.h \
+ /usr/lib/gcc/x86_64-w64-mingw32/11/include-fixed/syslimits.h \
+ /usr/x86_64-w64-mingw32/sys-root/mingw/include/limits.h \
+ /usr/x86_64-w64-mingw32/sys-root/mingw/include/crtdefs.h \
+ /usr/x86_64-w64-mingw32/sys-root/mingw/include/sec_api/stdlib_s.h \
+ /usr/x86_64-w64-mingw32/sys-root/mingw/include/malloc.h \
+ /usr/lib/gcc/x86_64-w64-mingw32/11/include/mm_malloc.h \
+ /usr/x86_64-w64-mingw32/sys-root/mingw/include/errno.h \
+ /usr/x86_64-w64-mingw32/sys-root/mingw/include/string.h \
+ /usr/x86_64-w64-mingw32/sys-root/mingw/include/sec_api/string_s.h \
+ /usr/x86_64-w64-mingw32/sys-root/mingw/include/math.h \
+ ../include/vorbis/codec.h \
+ /usr/x86_64-w64-mingw32/sys-root/mingw/include/ogg/ogg.h \
+ /usr/lib/gcc/x86_64-w64-mingw32/11/include/stddef.h \
+ /usr/x86_64-w64-mingw32/sys-root/mingw/include/stddef.h \
+ /usr/x86_64-w64-mingw32/sys-root/mingw/include/ogg/os_types.h \
+ /usr/x86_64-w64-mingw32/sys-root/mingw/include/sys/types.h \
+ /usr/x86_64-w64-mingw32/sys-root/mingw/include/_mingw_off_t.h \
+ ../include/vorbis/vorbisenc.h ../include/vorbis/codec.h codec_internal.h \
+ envelope.h mdct.h codebook.h psy.h smallft.h backends.h bitrate.h os.h \
+ ../config.h misc.h \
+ /usr/x86_64-w64-mingw32/sys-root/mingw/include/memory.h \
+ /usr/lib/gcc/x86_64-w64-mingw32/11/include/emmintrin.h \
+ /usr/lib/gcc/x86_64-w64-mingw32/11/include/xmmintrin.h \
+ /usr/lib/gcc/x86_64-w64-mingw32/11/include/mmintrin.h highlevel.h \
+ modes/setup_44.h modes/floor_all.h backends.h books/floor/floor_books.h \
+ codebook.h modes/residue_44.h books/coupled/res_books_stereo.h \
+ modes/psych_44.h modes/setup_44u.h modes/residue_44u.h \
+ books/uncoupled/res_books_uncoupled.h modes/setup_44p51.h \
+ modes/residue_44p51.h books/coupled/res_books_51.h modes/setup_32.h \
+ modes/setup_8.h modes/psych_8.h modes/residue_8.h modes/setup_11.h \
+ modes/psych_11.h modes/setup_16.h modes/psych_16.h modes/residue_16.h \
+ modes/setup_22.h modes/setup_X.h
+/usr/x86_64-w64-mingw32/sys-root/mingw/include/stdlib.h:
+/usr/x86_64-w64-mingw32/sys-root/mingw/include/corecrt.h:
+/usr/x86_64-w64-mingw32/sys-root/mingw/include/_mingw.h:
+/usr/x86_64-w64-mingw32/sys-root/mingw/include/_mingw_mac.h:
+/usr/x86_64-w64-mingw32/sys-root/mingw/include/_mingw_secapi.h:
+/usr/x86_64-w64-mingw32/sys-root/mingw/include/vadefs.h:
+/usr/x86_64-w64-mingw32/sys-root/mingw/include/sdks/_mingw_ddk.h:
+/usr/x86_64-w64-mingw32/sys-root/mingw/include/corecrt_wstdlib.h:
+/usr/lib/gcc/x86_64-w64-mingw32/11/include-fixed/limits.h:
+/usr/lib/gcc/x86_64-w64-mingw32/11/include-fixed/syslimits.h:
+/usr/x86_64-w64-mingw32/sys-root/mingw/include/limits.h:
+/usr/x86_64-w64-mingw32/sys-root/mingw/include/crtdefs.h:
+/usr/x86_64-w64-mingw32/sys-root/mingw/include/sec_api/stdlib_s.h:
+/usr/x86_64-w64-mingw32/sys-root/mingw/include/malloc.h:
+/usr/lib/gcc/x86_64-w64-mingw32/11/include/mm_malloc.h:
+/usr/x86_64-w64-mingw32/sys-root/mingw/include/errno.h:
+/usr/x86_64-w64-mingw32/sys-root/mingw/include/string.h:
+/usr/x86_64-w64-mingw32/sys-root/mingw/include/sec_api/string_s.h:
+/usr/x86_64-w64-mingw32/sys-root/mingw/include/math.h:
+../include/vorbis/codec.h:
+/usr/x86_64-w64-mingw32/sys-root/mingw/include/ogg/ogg.h:
+/usr/lib/gcc/x86_64-w64-mingw32/11/include/stddef.h:
+/usr/x86_64-w64-mingw32/sys-root/mingw/include/stddef.h:
+/usr/x86_64-w64-mingw32/sys-root/mingw/include/ogg/os_types.h:
+/usr/x86_64-w64-mingw32/sys-root/mingw/include/sys/types.h:
+/usr/x86_64-w64-mingw32/sys-root/mingw/include/_mingw_off_t.h:
+../include/vorbis/vorbisenc.h:
+../include/vorbis/codec.h:
+codec_internal.h:
+envelope.h:
+mdct.h:
+codebook.h:
+psy.h:
+smallft.h:
+backends.h:
+bitrate.h:
+os.h:
+../config.h:
+misc.h:
+/usr/x86_64-w64-mingw32/sys-root/mingw/include/memory.h:
+/usr/lib/gcc/x86_64-w64-mingw32/11/include/emmintrin.h:
+/usr/lib/gcc/x86_64-w64-mingw32/11/include/xmmintrin.h:
+/usr/lib/gcc/x86_64-w64-mingw32/11/include/mmintrin.h:
+highlevel.h:
+modes/setup_44.h:
+modes/floor_all.h:
+backends.h:
+books/floor/floor_books.h:
+codebook.h:
+modes/residue_44.h:
+books/coupled/res_books_stereo.h:
+modes/psych_44.h:
+modes/setup_44u.h:
+modes/residue_44u.h:
+books/uncoupled/res_books_uncoupled.h:
+modes/setup_44p51.h:
+modes/residue_44p51.h:
+books/coupled/res_books_51.h:
+modes/setup_32.h:
+modes/setup_8.h:
+modes/psych_8.h:
+modes/residue_8.h:
+modes/setup_11.h:
+modes/psych_11.h:
+modes/setup_16.h:
+modes/psych_16.h:
+modes/residue_16.h:
+modes/setup_22.h:
+modes/setup_X.h:

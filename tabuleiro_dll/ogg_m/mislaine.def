@@ -1,0 +1,7 @@
+EXPORTS
+
+
+svc_init_ogg_m                                @1007
+morcego_deinit_libav_svc_deinit_ogg_m         @1008
+morcego_decode_libav_svc_process_ogg_m        @1009
+svc_seek_ogg_m                                @1010

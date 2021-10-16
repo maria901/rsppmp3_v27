@@ -5301,7 +5301,14 @@ int morcego_geterrorstring(morcego___i___instance__a__bucaneiro_engineering *mv_
 		strcpy((char *)argumento3, "Unknown event");
 		break;
 	case 901:
+	
+	
+#ifndef THALIA_NEW_STANDALONE_AUDIO_PLAYER__
 		strcpy((char *)argumento3, "Libav error: ");
+		#else
+			strcpy((char *)argumento3, "Tabuleiro error: ");
+		#endif
+		
 		strcat((char *)argumento3,
 		       mv_______->decoder_c___morcego_libav_error);
 		break;

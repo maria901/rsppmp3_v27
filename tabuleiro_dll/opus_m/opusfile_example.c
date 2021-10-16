@@ -258,6 +258,12 @@ enum Amanda_Status
 
 };
 
+enum decoder_id_maria
+{
+     AMANDA_OPUS__ = 1001,
+     AMANDA_OGG_VORBIS,
+};
+
 typedef struct pedro_27_
 {
      int64_t duracao_feline;
@@ -271,6 +277,7 @@ typedef struct pedro_k_
      OggOpusFile *of;
      char *filename_utf_8_m;
      int *error_code_aline_;
+     int current_decoder_pedro;
      int current_bitrate_juliete;
      int the_andrea_command;
      int decoder_status_mislaine;
@@ -281,6 +288,20 @@ typedef struct pedro_k_
      char *ptr_data_position_douglas;
      juliete_struct dados_do_audio_ar;
 } pedro_k;
+
+char *__stdcall svc_init_ogg_m(__attribute__((unused)) char *filename_utf_8_v,
+                               __attribute__((unused)) int *error_code_aline_,
+                               __attribute__((unused)) juliete_struct *dados_m);
+
+int __stdcall morcego_decode_libav_svc_process_ogg_m(__attribute__((unused)) char *struct_opus_m,
+                                                     __attribute__((unused)) int bytes_to_decode_m,
+                                                     __attribute__((unused)) char *bufout_m,
+                                                     __attribute__((unused)) int *size_out);
+
+void morcego_deinit_libav_svc_deinit_ogg_m(char *struct_opus_m);
+
+void __stdcall svc_seek_ogg_m(__attribute__((unused)) char *struct_opus_m,
+                              __attribute__((unused)) double maquisistem_value);
 
 void main_old_p(pedro_k *maria_struct_);
 void main_old_p(pedro_k *maria_struct_)
@@ -659,7 +680,7 @@ char *__stdcall svc_init_opus_m(char *filename_utf_8_v,
                                 int *error_code_aline_,
                                 juliete_struct *dados_m)
 {
-
+     char *ptr_shinkal;
      pedro_dprintf(-15, "svc_init_opus_m\n");
      pedro_k *feline_p = calloc(sizeof(pedro_k), 1);
      // assert(0);
@@ -668,7 +689,7 @@ char *__stdcall svc_init_opus_m(char *filename_utf_8_v,
           *error_code_aline_ = 10001; // Cannot allocate memory
           return NULL;
      }
-
+     feline_p->current_decoder_pedro = AMANDA_OPUS__;
      feline_p->error_code_aline_ = error_code_aline_;
      assert(feline_p->error_code_aline_);
      feline_p->filename_utf_8_m = calloc(AMANDA__SIZE, 1);
@@ -684,7 +705,36 @@ char *__stdcall svc_init_opus_m(char *filename_utf_8_v,
      assert(feline_p->error_code_aline_);
      if (10004 == *feline_p->error_code_aline_)
      {
-          pedro_dprintf(-14, "debug 2.1\n");
+          pedro_dprintf(0, "vai tentar ogg\n");
+
+          ptr_shinkal = svc_init_ogg_m(filename_utf_8_v,
+                                       error_code_aline_,
+                                       dados_m);
+
+          if (ptr_shinkal)
+          {
+               free(feline_p->filename_utf_8_m);
+               free(feline_p);
+
+               feline_p = (void *)ptr_shinkal;
+          }
+
+          if (NULL == ptr_shinkal)
+          {
+               pedro_dprintf(0, "ogg returns NULL \n");
+               ; // do nothing
+          }
+          else if (10004 == *feline_p->error_code_aline_)
+          {
+               pedro_dprintf(0, "file isnot ogg \n");
+               // here handle mp4 or AAC
+          }
+          else
+          {
+               pedro_dprintf(0, "file is ogg my love...\n");
+               return (char *)feline_p;
+          }
+
           free(feline_p->filename_utf_8_m);
           free(feline_p);
           return NULL;
@@ -883,7 +933,7 @@ BOOL WINAPI DllMain(__attribute__((unused)) HINSTANCE hModule,
      case DLL_PROCESS_ATTACH:
           OutputDebugString("svc DLL Interface "
                             " - DLL_PROCESS_ATTACH (" __TIME__ " " __DATE__
-                            ") _amanda_debug_ \n");
+                            ") \n");
           break;
      case DLL_THREAD_ATTACH:
 

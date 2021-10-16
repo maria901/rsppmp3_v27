@@ -124,7 +124,7 @@ aline_clean:
 
 smartape:
 
-	x86_64-w64-mingw32-gcc.exe -o /bw_tmp/amandaricardo_mvbuild26_33.exe smartape.c $(AMANDA_FLAGS__) $(JULIET_FLAGS) $(FELINE_FLAGS__) -DAMANDA_S_SMART_APE_ENABLE_WIDE_FUNCTION_
+#x86_64-w64-mingw32-gcc.exe -o /bw_tmp/amandaricardo_mvbuild26_33.exe smartape.c $(AMANDA_FLAGS__) $(JULIET_FLAGS) $(FELINE_FLAGS__) -DAMANDA_S_SMART_APE_ENABLE_WIDE_FUNCTION_
 	$(LICAO_DE_VIDA_DO_MEU_AMOR)
 
 	@/bw_tmp/amandaricardo_mvbuild26_33.exe amanda_s_smart_ape__counter.ini AssemblyInfo.smartape AssemblyInfo.cs AssemblyInfo.hh "1024 bits" 	AssemblyInfo.viu.cs increase
