@@ -162,7 +162,7 @@ typedef unsigned int Uint32_t;
 typedef signed int Int32_t;
 
 typedef float Float_t; /* Type used for filtering */
-
+ 
 #define BE_FIRST_SIZE (9644 / sizeof(Float_t))
 #define BE_SECOND_SIZE (48000 / sizeof(Uint32_t)) /*protected*/
 
@@ -172,6 +172,7 @@ typedef struct pedro_27_
      int64_t raw_total_ric;
      int64_t sample_rate_v;
      int64_t channels_p;
+     char media_description_m[1024];
 } juliete_struct;
 
 typedef struct

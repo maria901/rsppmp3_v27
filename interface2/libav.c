@@ -303,7 +303,7 @@ int init_decoder2(morcego___i___instance__a__bucaneiro_engineering *mv_______, b
      init(mv_______);
 
      // avcodec_register_all();
-(void)pCodecCtx;
+     (void)pCodecCtx;
 #ifndef THALIA_NEW_STANDALONE_AUDIO_PLAYER__
      /* here...my love*/
      pCodecCtx->thread_count = 0;
@@ -382,7 +382,7 @@ int init_decoder2(morcego___i___instance__a__bucaneiro_engineering *mv_______, b
                                                                        &(mv_______->error_code_aline_),
                                                                        &mv_______->dados_do_audio_v27);
 
-     pedro_dprintf(-1, "tamanho %lld\n", mv_______->dados_do_audio_v27.duracao_feline);
+     pedro_dprintf(0, "tamanho %lld\n", mv_______->dados_do_audio_v27.duracao_feline);
 
 #ifdef THALIA_NEW_STANDALONE_AUDIO_PLAYER__
 
@@ -472,7 +472,7 @@ int init_decoder2(morcego___i___instance__a__bucaneiro_engineering *mv_______, b
           mv_______->libav_c___duracao = mv_______->dados_do_audio_v27.duracao_feline;
 
 #endif
-          
+
           // exit(27);
           if (0x8000000000000000 ==
               (uint64_t)(mv_______->libav_c___duracao))
@@ -585,7 +585,7 @@ int init_decoder2(morcego___i___instance__a__bucaneiro_engineering *mv_______, b
           }
 #else
 
-          strcpy(be_data->be_codec_name, "opus");
+          strcpy(be_data->be_codec_name, mv_______->dados_do_audio_v27.media_description_m);
 
           strcpy(be_data->be_media_information, be_data->be_codec_name);
 
@@ -1461,7 +1461,7 @@ void seek2(morcego___i___instance__a__bucaneiro_engineering *mv_______, double v
      mv_______->libav_c___reinit_uf = 0;
      mv_______->libav_c___reinit_uf2 = 0;
 
-pedro_dprintf(0, "raw max %lld\n", mv_______->dados_do_audio_v27.raw_total_ric);
+     pedro_dprintf(0, "raw max %lld\n", mv_______->dados_do_audio_v27.raw_total_ric);
 
      mv_______->libav_c___is_seeking = 0;
      pedro_dprintf(0, "opus seek running\n");

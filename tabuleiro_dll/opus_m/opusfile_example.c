@@ -270,6 +270,7 @@ typedef struct pedro_27_
      int64_t raw_total_ric;
      int64_t sample_rate_v;
      int64_t channels_p;
+     char media_description_m[1024];
 } juliete_struct;
 
 typedef struct pedro_k_
@@ -287,6 +288,11 @@ typedef struct pedro_k_
      char buffer_junior[192000];
      char *ptr_data_position_douglas;
      juliete_struct dados_do_audio_ar;
+
+     // for Ogg Vorbis only but required also in Opus
+     int open_m;
+     FILE *in_m;
+
 } pedro_k;
 
 char *__stdcall svc_init_ogg_m(__attribute__((unused)) char *filename_utf_8_v,
@@ -390,6 +396,7 @@ void main_old_p(pedro_k *maria_struct_)
           return;
      }
      duration = 0;
+     strcpy(maria_struct_->dados_do_audio_ar.media_description_m, "Opus ;-)");
      maria_struct_->dados_do_audio_ar.duracao_feline = 0;
 
      maria_struct_->dados_do_audio_ar.raw_total_ric = 1;
@@ -731,7 +738,8 @@ char *__stdcall svc_init_opus_m(char *filename_utf_8_v,
           }
           else
           {
-               pedro_dprintf(0, "file is ogg my love...\n");
+               pedro_dprintf(0, "file is ogg my love...%p\n", feline_p);
+
                return (char *)feline_p;
           }
 
@@ -763,7 +771,7 @@ int __stdcall morcego_decode_libav_svc_process_opus_m(char *struct_opus_m,
      int len_m;
      char *ptr_1;
      (void)ptr_1;
-     pedro_dprintf(-15, "svc_process_m\n");
+     pedro_dprintf(0, "svc_process_m\n");
      if (NULL == struct_opus_m)
      {
           *size_out = 0;
@@ -772,6 +780,25 @@ int __stdcall morcego_decode_libav_svc_process_opus_m(char *struct_opus_m,
 
      pedro_k *feline_p = (void *)struct_opus_m;
      (void)feline_p;
+
+     if (AMANDA_OPUS__ == feline_p->current_decoder_pedro)
+     {
+          ; // just pass by
+     }
+     else if (AMANDA_OGG_VORBIS == feline_p->current_decoder_pedro)
+     {
+
+          pedro_dprintf(0, "vai chamar decoder de Ogg");
+          return morcego_decode_libav_svc_process_ogg_m((char *)feline_p,
+                                                        bytes_to_decode_m,
+                                                        bufout_m,
+                                                        size_out);
+     }
+     else
+     {
+          pedro_dprintf(0, "Error 4657563548");
+          exit(27);
+     }
 
      *size_out = 0;
 
@@ -850,7 +877,7 @@ again_amanda:;
 void morcego_deinit_libav_svc_deinit_opus_m(char *struct_opus_m);
 void morcego_deinit_libav_svc_deinit_opus_m(char *struct_opus_m)
 {
-     pedro_dprintf(-15, "svc_deinit_opus_m\n");
+     pedro_dprintf(0, "svc_deinit_opus_m\n");
      if (NULL == struct_opus_m)
      {
           return;
@@ -859,12 +886,20 @@ void morcego_deinit_libav_svc_deinit_opus_m(char *struct_opus_m)
      pedro_k *feline_p = (void *)struct_opus_m;
      (void)feline_p;
 
-     feline_p->the_andrea_command = KOCI_FINISH__;
-     main_old_p(feline_p);
+     if (AMANDA_OPUS__ == feline_p->current_decoder_pedro)
+     {
+          feline_p->the_andrea_command = KOCI_FINISH__;
+          main_old_p(feline_p);
+     }
+
+     if (AMANDA_OGG_VORBIS == feline_p->current_decoder_pedro)
+     {
+          return morcego_deinit_libav_svc_deinit_ogg_m(struct_opus_m);
+     }
 
      free(feline_p->filename_utf_8_m);
      free(feline_p);
-     pedro_dprintf(-15, "morcego_deinit_libav_svc_deinit_opus_m\n");
+     pedro_dprintf(0, "morcego_deinit_libav_svc_deinit_opus_m\n");
      return;
 }
 
@@ -902,6 +937,21 @@ void __stdcall svc_seek_opus_m(char *struct_opus_m,
 
      pedro_k *feline_p = (void *)struct_opus_m;
      (void)feline_p;
+
+     if (AMANDA_OPUS__ == feline_p->current_decoder_pedro)
+     {
+          ; // just pass by
+     }
+     else if (AMANDA_OGG_VORBIS == feline_p->current_decoder_pedro)
+     {
+          svc_seek_ogg_m(struct_opus_m, maquisistem_value);
+          return;
+     }
+     else
+     {
+          pedro_dprintf(1001, "Error 98574658");
+          exit(27);
+     }
 
      val_m = getval_100(feline_p->dados_do_audio_ar.raw_total_ric, maquisistem_value);
 
