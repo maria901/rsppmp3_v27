@@ -196,17 +196,7 @@ if (mv_______->libav_c___amanda_s_smart_ape_use_cache)
 
 }
 
-
-
-
-
-
-
-
-
-
-
-pedro_dprintf(-15102021, "7");
+pedro_dprintf(-16102021, "Decoding the file...analisis");
 	ret = morcego_init_libav (mv_______,be_real_real, 0);
 pedro_dprintf(-15102021, "8");
 	if (ret)

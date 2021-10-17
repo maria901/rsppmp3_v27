@@ -304,7 +304,7 @@ no_use_i:;
      mv_______->libav_c___normalization_BENOR_amanda_s_smart_ape[0] = 0;
 
      mv_______->libav_c___normalization_repla_amanda_s_smart_ape[0] = 0;
-     pedro_dprintf(-15102021, "5");
+     pedro_dprintf(-1, "Antes 1");
      (void)ConvertMP3ToWavExtended(converted_long_int_amanda_s_smart_ape, (void *)filename,
                                    (void *)"lpt1", 1,
                                    mv_______->decoder_c___track);
@@ -320,7 +320,7 @@ no_use_i:;
                break;
           }
      }
-     pedro_dprintf(-15102021, "6");
+     pedro_dprintf(-1, "depois 1");
      /////////////////////////////////////////////////////////////////////////////////
 
      {

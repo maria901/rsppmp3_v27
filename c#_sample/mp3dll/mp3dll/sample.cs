@@ -501,7 +501,7 @@ namespace mp3dll
 				file_l.Text = "";
 			}
 			MP3.GetPixelFormat____(number, message);
-			pixel_l.Text = "Pixel Format: " + message.ToString();
+			pixel_l.Text = "Secret values: " + message.ToString();
 
 			if(MP3.GetTickCount() > old_value_v27_z)
 			{
@@ -3922,6 +3922,10 @@ namespace mp3dll
 		{
 			tracks_and_subtitles_i amandinha = new tracks_and_subtitles_i();
 			amandinha.ShowDialog();
+		}
+		void Button5Click(object sender, EventArgs e)
+		{
+			filename.Text = "C:\\cygwin64_amandaricardo_koci_10.2.0\\Amandinha\\Amanda.jun";
 		}
 		
 	}

@@ -1,3 +1,8 @@
+#ifndef CEZINHA
+#define CEZINHA
+long long int nosso_ricardinho_bunda_mole;
+#endif
+
 /********************************************************************************
  *                                                                              *
  *        Licensa de Cópia (C) <2021>  <Corporação do Trabalho Binário>         *
@@ -98,6 +103,8 @@ char *__stdcall svc_init_opus_m(char *filename_utf_8_v,
                                 int *error_code_aline_,
                                 juliete_struct *dados_m);
 #endif
+
+int __fastcall kkk_get_damaged_webm_duration_by_bhond(FILE *amanda_file);
 
 /*
 
@@ -472,25 +479,42 @@ int init_decoder2(morcego___i___instance__a__bucaneiro_engineering *mv_______, b
           mv_______->libav_c___duracao = mv_______->dados_do_audio_v27.duracao_feline;
 
 #endif
-
+#ifndef THALIA_NEW_STANDALONE_AUDIO_PLAYER__
           // exit(27);
           if (0x8000000000000000 ==
               (uint64_t)(mv_______->libav_c___duracao))
           {
+               pedro_dprintf(1001, "Libav not fixed the no duration WebM files yet (16/oct/2021)\n");
                mv_______->libav_c___amanda_s_smart_ape_is_new_webm = true;
                // FormatContext->duration = 1000000 * 300;
+               {
+                    FILE *ar_bw_maquisistem_bucaneiro_engineering_aurora_boreal_eletronica_som_video_cor_digipower_rsp_companhias;;
+
+                    ar_bw_maquisistem_bucaneiro_engineering_aurora_boreal_eletronica_som_video_cor_digipower_rsp_companhias = _wfopen(permissive_name_m_(amanda_utf8towide_3_(be_data->sourcefile)), L"rb");
+
+                    nosso_ricardinho_bunda_mole = kkk_get_damaged_webm_duration_by_bhond(ar_bw_maquisistem_bucaneiro_engineering_aurora_boreal_eletronica_som_video_cor_digipower_rsp_companhias);
+
+                    if (ar_bw_maquisistem_bucaneiro_engineering_aurora_boreal_eletronica_som_video_cor_digipower_rsp_companhias)
+                         fclose(ar_bw_maquisistem_bucaneiro_engineering_aurora_boreal_eletronica_som_video_cor_digipower_rsp_companhias);
+               }
 
                // mv_______->libav_c___duracao =
           }
-          else
-          {
-          }
+         
+#endif
 
 #ifndef THALIA_NEW_STANDALONE_AUDIO_PLAYER__
           if (mv_______->libav_c___amanda_s_smart_ape_is_new_webm)
           {
                mv_______->libav_c___duracao = mv_______->libav_c___amanda_s_smart_ape_new_generated_duration;
                FormatContext->duration = mv_______->libav_c___duracao;
+               pedro_dprintf(-1, "value of duration %lld\n", mv_______->libav_c___duracao);
+               //[8272] value of duration 212683187  _amanda_debug_
+               /*
+
+               C:\Users\User\Downloads\sample_960x540.webm
+
+               */
           }
 
           be_data->length = (double)mv_______->libav_c___duracao;
@@ -535,7 +559,7 @@ int init_decoder2(morcego___i___instance__a__bucaneiro_engineering *mv_______, b
                // exit(27);
           }
 #else
-          strcpy(be_data->be__magic_value__format_name, "Ogg ;-)");
+          strcpy(be_data->be__magic_value__format_name, mv_______->dados_do_audio_v27.media_description_m);
 
           mv_______->libav_c___audio_timebase = 0.000021;
 
@@ -646,6 +670,8 @@ int init_decoder2(morcego___i___instance__a__bucaneiro_engineering *mv_______, b
           // hack again
 
           be_data->be_bitrate = pCodecCtx->bit_rate;
+
+          pedro_dprintf(-1, "audio bitrate %d\n", pCodecCtx->bit_rate);
 
           mv_______->libav_c___channels_ = pCodecCtx->channels;
 

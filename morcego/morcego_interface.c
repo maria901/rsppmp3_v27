@@ -790,7 +790,7 @@ pedro_dprintf(-15102021, "achei 4");
 
      strcpy(mv_______->libav_c___signature___________amanda_s_smart_ape, signature_amanda_s_smart_ape);
 
-pedro_dprintf(-15102021, "achei 5");
+pedro_dprintf(0, "Antes de init libav ");
      if (morcego_init_libav(mv_______, be, 0))
      {
           strcpy(mv_______->morcego_interface_c___message___, be->be_error_message);
@@ -798,7 +798,7 @@ pedro_dprintf(-15102021, "achei 5");
           goto saida_amanda_s_smart_ape;
      }
 
-pedro_dprintf(-15102021, "achei 6");
+pedro_dprintf(0, "Depois de init libav ");
      amanda_s_smart_ape_timestamp = get_bucaneiro_tick();
 
      if (false == mv_______->libav_c___amanda_s_smart_ape_is_new_webm)
@@ -832,6 +832,7 @@ pedro_dprintf(-15102021, "achei 7 kkkk");
 
                if ('\0' == mv_______->libav_c___webm________________amanda_s_smart_ape[0])
                {
+				   ;//vai decodificar se nao tiver aqui entra a modificacao...
                }
                else
                {
@@ -881,6 +882,8 @@ again:;
           por = 0;
 
      mv_______->morcego_interface_c___porcentagem = por;
+     
+pedro_dprintf(0, "Decoding the file...morcego");
 
 #ifndef THALIA_NEW_STANDALONE_AUDIO_PLAYER__
      ret_amanda_s_smart_ape = morcego_decode_libav(mv_______, sizeof(int_buffer), int_buffer, &size_out);

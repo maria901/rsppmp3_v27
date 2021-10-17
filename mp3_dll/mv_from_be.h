@@ -30,6 +30,8 @@
  *     (+55)41 9627 1708 - isto está sempre ligado (eu acho...)                 *
  *                                                                              *
  *******************************************************************************/
+#include "stdio.h"
+extern FILE *ar_bw_maquisistem_bucaneiro_engineering_aurora_boreal_eletronica_som_video_cor_digipower_rsp_companhias;
 
 #include "humble_respect_amandinha_do_ricardo.h"
 

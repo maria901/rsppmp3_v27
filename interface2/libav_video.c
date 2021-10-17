@@ -229,13 +229,13 @@ int adjust_window_position_and_size(morcego___i___instance__a__bucaneiro_enginee
      mv_______->libav_c___height_of_window = pCodecCtx->height;
 
      pedro_dprintf(-1, "w h %d %d\n", pCodecCtx->width, pCodecCtx->height);
-
-     sprintf(
-         temp, "bitrate %lld %dx%d ",
-         pCodecCtx->bit_rate,
-         mv_______->libav_c___width,
-         mv_______->libav_c___height);
-
+     /*
+          sprintf(
+              temp, "bitrate %lld %dx%d ",
+              pCodecCtx->bit_rate,
+              mv_______->libav_c___width,
+              mv_______->libav_c___height);
+     */
      switch (mv_______->libav_c___the_ratio)
      {
      case BE_AUTO_______:
@@ -262,7 +262,7 @@ int adjust_window_position_and_size(morcego___i___instance__a__bucaneiro_enginee
 
                w_i = atoi(temp);
 
-               sprintf(temp, "%.2f", mv_______->libav_c___the_real_ratio * 100.);
+               sprintf(temp, " ratio %.2f", mv_______->libav_c___the_real_ratio);
 
                h_i = atoi(temp);
 
@@ -320,47 +320,47 @@ int adjust_window_position_and_size(morcego___i___instance__a__bucaneiro_enginee
           case 125:
                sprintf(temp +
                            strlen(temp),
-                       " ratio 5:4 ");
+                       "  ratio 5:4 ");
                break;
           case 177:
                sprintf(temp +
                            strlen(temp),
-                       " ratio 16:9 ");
+                       "  ratio 16:9 ");
                break;
           case 160:
                sprintf(temp +
                            strlen(temp),
-                       " ratio 16:10 ");
+                       "  ratio 16:10 ");
                break;
           case 133:
                sprintf(temp +
                            strlen(temp),
-                       " ratio 4:3 ");
+                       "  ratio 4:3 ");
                break;
           case 221:
                sprintf(temp +
                            strlen(temp),
-                       " ratio 2.21:1 ");
+                       "  ratio 2.21:1 ");
                break;
           case 235:
                sprintf(temp +
                            strlen(temp),
-                       " ratio 2.35:1 ");
+                       "  ratio 2.35:1 ");
                break;
           case 239:
                sprintf(temp +
                            strlen(temp),
-                       " ratio 2.39:1 ");
+                       "  ratio 2.39:1 ");
                break;
           case 250:
                sprintf(temp +
                            strlen(temp),
-                       " ratio 2.50:1 ");
+                       "  ratio 2.50:1 ");
                break;
           case 100:
                sprintf(temp +
                            strlen(temp),
-                       " ratio 1:1 ");
+                       "  ratio 1:1 ");
                break;
           default:
           {
@@ -449,7 +449,7 @@ saida:
      sprintf(
          mv_______->libav_c___video_information +
              mv_______->analisys_c___string_position,
-         " %s ",
+         "%s",
          temp);
 
      return rv;
@@ -910,6 +910,10 @@ void init_video(morcego___i___instance__a__bucaneiro_engineering *mv_______,
      // aqui...
 
      mv_______->libav_c___video_bitrate_m = pCodecCtx->bit_rate;
+
+     pedro_dprintf(-1, "video bitrate %d\n", mv_______->libav_c___video_bitrate_m);
+
+     sprintf(mv_______->libav_c___video_information + strlen(mv_______->libav_c___video_information), " %dx%d ", pCodecCtx->width, pCodecCtx->height);
 
      mv_______->analisys_c___string_position = strlen(mv_______->libav_c___video_information);
 

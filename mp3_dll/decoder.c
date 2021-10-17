@@ -19,15 +19,15 @@
  *     Suporte: https://nomade.sourceforge.io/                                  *
  *                                                                              *
  ********************************************************************************
- 
-      E-mails:                                                                 
-      maria@arsoftware.net.br                                                  
-      pedro@locacaodiaria.com.br                                               
+
+	  E-mails:
+	  maria@arsoftware.net.br
+	  pedro@locacaodiaria.com.br
 
  ********************************************************************************
  *                                                                              *
  *     contato imediato(para uma resposta muito rápida) WhatsApp                *
- *     (+55)41 9627 1708 - isto está sempre ligado (eu acho...)                 *      
+ *     (+55)41 9627 1708 - isto está sempre ligado (eu acho...)                 *
  *                                                                              *
  *******************************************************************************/
 
@@ -46,18 +46,18 @@
 #endif
 /*
 
-     http://en.wikipedia.org/wiki/Boolean_algebra
+	 http://en.wikipedia.org/wiki/Boolean_algebra
 
-     thy computer's book:
-     The TTL Data Book for Design Engineers. 1st Ed. Dallas: Texas Instruments Semiconductor. 1973
+	 thy computer's book:
+	 The TTL Data Book for Design Engineers. 1st Ed. Dallas: Texas Instruments Semiconductor. 1973
 
  */
 
 #ifndef INCLUDEUCHAR
 #ifndef uchar
-#define uchar  unsigned char
-#define uint   unsigned int
-#define ulong  unsigned long
+#define uchar unsigned char
+#define uint unsigned int
+#define ulong unsigned long
 #define ushort unsigned short
 #endif
 #endif
@@ -68,32 +68,7 @@
  * Functions that don't start with a capitalized character are for internal use only, even if documented
  */
 
-#include /* amanda's smart ape */ <windows.h>
-#include /* amanda's smart ape  */ <stdint.h>
-#include /* amanda's smart ape   */ <stdio.h>
-#include /* amanda's smart ape  */ <stdlib.h>
-#include /* amanda's smart ape  */ <string.h>
-#include /* amanda's smart ape    */ <time.h>
-#include /* amanda's smart ape   */ <errno.h>
-#include /* amanda's smart ape   */ <fcntl.h>
-#include /* amanda's smart ape   */ <ctype.h>
-#include /* amanda's smart ape    */ <math.h>
-#include /* amanda's smart ape  */ <wctype.h>
-#include /* amanda's smart ape   */ <wchar.h>
-#include /* amanda's smart ape  */ <stdarg.h>
-#include /* amanda's smart ape  */ <stddef.h>
-#include /* amanda's smart ape  */ <setjmp.h>
-#include /* amanda's smart ape  */ <locale.h>
-#include /* amanda's smart ape  */ <signal.h>
-#include /* amanda's smart ape  */ <limits.h>
-#include /* amanda's smart ape   */ <float.h>
-#include /* amanda's smart ape  */ <iso646.h>
-
-#undef NDEBUG
-#include /* amanda's smart ape  */ <assert.h>
-#include /* amanda's smart ape */ <stdbool.h>
-#include /* amanda's smart ape */ <process.h>
-#include /* amanda's smart ape */ <psapi.h>
+#include "shinkal.h"
 
 #include <MmSystem.h>
 
@@ -103,9 +78,9 @@
 
 #include "be_xml.c"
 
-WINBASEAPI ULONGLONG WINAPI GetTickCount64 (VOID);
+WINBASEAPI ULONGLONG WINAPI GetTickCount64(VOID);
 
-//tag1
+// tag1
 #define tamanho ((100000 * 2))
 #define tamanho2 (tamanho)
 
@@ -117,19 +92,19 @@ WINBASEAPI ULONGLONG WINAPI GetTickCount64 (VOID);
  */
 #define AMANDA__SIZE ((32767 * 6) + 2)
 /**
- * The maximum size of Unicode characters in a path in Windows, Linux is 1024 characters as far I know 
- * 
+ * The maximum size of Unicode characters in a path in Windows, Linux is 1024 characters as far I know
+ *
  */
 #define AMANDA__SIZE_w (32767)
 
 /**
- * To convert an utf-8 encoded filename to a wide string (WCHAR *), we 
- *  . provide two functions that are exactly the same because someone may 
- * use it in multi-thread code 
+ * To convert an utf-8 encoded filename to a wide string (WCHAR *), we
+ *  . provide two functions that are exactly the same because someone may
+ * use it in multi-thread code
  *
- * @param pUTF8 the input utf-8 encoded filename 
+ * @param pUTF8 the input utf-8 encoded filename
  *
- * @return the static allocated WCHAR array with the filename as wide string 
+ * @return the static allocated WCHAR array with the filename as wide string
  *
  */
 WCHAR *amanda_utf8towide_3_(char *pUTF8)
@@ -158,7 +133,7 @@ char *valquiria_wide_to_utf8_3_(WCHAR *pUSC2_maria)
 
 /**
  * To make the path wide mode aware, stolen from libarchive
- * 
+ *
  * 15/september/2021 10:14, last visit 16/09/2021 22:36 by bhond..., last visit 21/sep/2021 03:57...
  *
  */
@@ -166,93 +141,93 @@ wchar_t *
 permissive_name_m_(const wchar_t *wname)
 {
 
-     static wchar_t *wnp = NULL;
-     wchar_t *wn;
-     wchar_t *ws, *wsp;
-     DWORD len, slen;
-     int unc;
+	static wchar_t *wnp = NULL;
+	wchar_t *wn;
+	wchar_t *ws, *wsp;
+	DWORD len, slen;
+	int unc;
 
-     if (NULL == wnp)
-     {
-          wnp = calloc((AMANDA__SIZE_w * 2) + 2, 1);
-     }
+	if (NULL == wnp)
+	{
+		wnp = calloc((AMANDA__SIZE_w * 2) + 2, 1);
+	}
 
-     //wnp = malloc(AMANDA__SIZE * 2);
+	// wnp = malloc(AMANDA__SIZE * 2);
 
-     wcscpy(wnp, wname);
+	wcscpy(wnp, wname);
 
-     len = wcslen(wname);
+	len = wcslen(wname);
 
-     wn = wnp;
+	wn = wnp;
 
-     if (wnp[0] == L'\\' && wnp[1] == L'\\' && // access to the wrong position in memory, fixed now
-         wnp[2] == L'?' && wnp[3] == L'\\')
-          /* We have already a permissive name. */
-          return (wn);
+	if (wnp[0] == L'\\' && wnp[1] == L'\\' && // access to the wrong position in memory, fixed now
+		wnp[2] == L'?' && wnp[3] == L'\\')
+		/* We have already a permissive name. */
+		return (wn);
 
-     if (wnp[0] == L'\\' && wnp[1] == L'\\' &&
-         wnp[2] == L'.' && wnp[3] == L'\\')
-     {
-          /* This is a device name */
-          if (((wnp[4] >= L'a' && wnp[4] <= L'z') ||
-               (wnp[4] >= L'A' && wnp[4] <= L'Z')) &&
-              wnp[5] == L':' && wnp[6] == L'\\')
-               wnp[2] = L'?'; /* Not device name. */
-          return (wn);
-     }
+	if (wnp[0] == L'\\' && wnp[1] == L'\\' &&
+		wnp[2] == L'.' && wnp[3] == L'\\')
+	{
+		/* This is a device name */
+		if (((wnp[4] >= L'a' && wnp[4] <= L'z') ||
+			 (wnp[4] >= L'A' && wnp[4] <= L'Z')) &&
+			wnp[5] == L':' && wnp[6] == L'\\')
+			wnp[2] = L'?'; /* Not device name. */
+		return (wn);
+	}
 
-     unc = 0;
-     if (wnp[0] == L'\\' && wnp[1] == L'\\' && wnp[2] != L'\\')
-     {
-          wchar_t *p = &wnp[2];
+	unc = 0;
+	if (wnp[0] == L'\\' && wnp[1] == L'\\' && wnp[2] != L'\\')
+	{
+		wchar_t *p = &wnp[2];
 
-          /* Skip server-name letters. */
-          while (*p != L'\\' && *p != L'\0')
-               ++p;
-          if (*p == L'\\')
-          {
-               wchar_t *rp = ++p;
-               /* Skip share-name letters. */
-               while (*p != L'\\' && *p != L'\0')
-                    ++p;
-               if (*p == L'\\' && p != rp)
-               {
-                    /* Now, match patterns such as
+		/* Skip server-name letters. */
+		while (*p != L'\\' && *p != L'\0')
+			++p;
+		if (*p == L'\\')
+		{
+			wchar_t *rp = ++p;
+			/* Skip share-name letters. */
+			while (*p != L'\\' && *p != L'\0')
+				++p;
+			if (*p == L'\\' && p != rp)
+			{
+				/* Now, match patterns such as
 				 * "\\server-name\share-name\" */
-                    wnp += 2;
-                    len -= 2;
-                    unc = 1;
-               }
-          }
-     }
+				wnp += 2;
+				len -= 2;
+				unc = 1;
+			}
+		}
+	}
 
-     slen = 4 + (unc * 4) + len + 1;
-     ws = wsp = malloc(slen * sizeof(wchar_t));
-     if (ws == NULL)
-     {
-          //free(wn);
-          return (NULL);
-     }
-     /* prepend "\\?\" */
-     wcsncpy(wsp, L"\\\\?\\", 4);
-     wsp += 4;
-     slen -= 4;
-     if (unc)
-     {
-          /* append "UNC\" ---> "\\?\UNC\" */
-          wcsncpy(wsp, L"UNC\\", 4);
-          wsp += 4;
-          slen -= 4;
-     }
-     wcsncpy(wsp, wnp, slen);
-     wsp[slen - 1] = L'\0'; /* Ensure null termination. */
-     //free(wn);
+	slen = 4 + (unc * 4) + len + 1;
+	ws = wsp = malloc(slen * sizeof(wchar_t));
+	if (ws == NULL)
+	{
+		// free(wn);
+		return (NULL);
+	}
+	/* prepend "\\?\" */
+	wcsncpy(wsp, L"\\\\?\\", 4);
+	wsp += 4;
+	slen -= 4;
+	if (unc)
+	{
+		/* append "UNC\" ---> "\\?\UNC\" */
+		wcsncpy(wsp, L"UNC\\", 4);
+		wsp += 4;
+		slen -= 4;
+	}
+	wcsncpy(wsp, wnp, slen);
+	wsp[slen - 1] = L'\0'; /* Ensure null termination. */
+	// free(wn);
 
-     wcscpy(wnp, ws);
+	wcscpy(wnp, ws);
 
-     free(ws);
+	free(ws);
 
-     return (wnp);
+	return (wnp);
 }
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////2021 z
@@ -261,9 +236,9 @@ permissive_name_m_(const wchar_t *wname)
 void amanda_fix_dithering(char *d_kp, int length_kp);
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////z
-//Added 2021/03/23 10:45
+// Added 2021/03/23 10:45
 
-FILE * our_jun_playlist_file_z;
+FILE *our_jun_playlist_file_z;
 int64_t number_z = 0;
 bool loading_z = true;
 // Added 2021/04/08 10:56
@@ -271,15 +246,15 @@ int ret_arp_;
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // Added 2021/04/16 21:21
 
-static ULONGLONG oldvalue_Z =  0;
+static ULONGLONG oldvalue_Z = 0;
 static int last_value_Z = -1;
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-//playlist debug mode
+// playlist debug mode
 
 bool enable_playlist_debug = false;
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-//unused anymore...
+// unused anymore...
 #define limite_i 1
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -304,89 +279,90 @@ bool need_to_add_char_n_m_;
 int stripfilenameandpath(char *path, char *onlypath, char *onlyfilename);
 
 int __stdcall Play(__int64 mv_instance, char *filename___, int loop, int track,
-                   __int64 hwnd_, __int64 player_hwnd_, int width_, int heigth_,
-                   int ratio_, int left_, int top_, int);
+				   __int64 hwnd_, __int64 player_hwnd_, int width_, int heigth_,
+				   int ratio_, int left_, int top_, int);
 
 int is_playlist(morcego___i___instance__a__bucaneiro_engineering *mv_______,
-                char *filename_);
+				char *filename_);
 
 char
-*
-get_pixel_format_info___(morcego___i___instance__a__bucaneiro_engineering
-                         *mv_______);
+	*
+	get_pixel_format_info___(morcego___i___instance__a__bucaneiro_engineering
+								 *mv_______);
 
 void freeverbinit(morcego___i___instance__a__bucaneiro_engineering *mv_______);
 int freeverb(morcego___i___instance__a__bucaneiro_engineering *mv_______,
-             char *d, int length, int srate, int nch, int bits, int channels);
+			 char *d, int length, int srate, int nch, int bits, int channels);
 
 int reset_fft(morcego___i___instance__a__bucaneiro_engineering *mv_______);
 void analize_fft(morcego___i___instance__a__bucaneiro_engineering *mv_______,
-                 spectrum *spec, char *buffer2, int canais, int len, int mult);
+				 spectrum *spec, char *buffer2, int canais, int len, int mult);
 ////////////////////////////////////////////////////////////////////////////
 int __stdcall read_ini(char *app_name, char *key_name, char *data, int len,
-                       char *ini_file, int filename_is_utf8);
+					   char *ini_file, int filename_is_utf8);
 int __stdcall write_ini_unix(char *app_name, char *key_name, char *data,
-                             char *ini_file, int filename_is_utf8);
+							 char *ini_file, int filename_is_utf8);
 int __stdcall write_ini_mac(char *app_name, char *key_name, char *data,
-                            char *ini_file, int filename_is_utf8);
+							char *ini_file, int filename_is_utf8);
 int __stdcall write_ini_windows(char *app_name, char *key_name, char *data,
-                                char *ini_file, int filename_is_utf8);
+								char *ini_file, int filename_is_utf8);
 int __stdcall get_error_string(int val, char *data);
 int __stdcall read_ini_binary(char *app_name, char *key_name, char *data,
-                              int *out_len, char *ini_file,
-                              int filename_is_utf8);
+							  int *out_len, char *ini_file,
+							  int filename_is_utf8);
 int __stdcall write_ini_binary(char *app_name, char *key_name, char *data,
-                               int len, char *ini_file,
-                               int filename_is_utf8);
+							   int len, char *ini_file,
+							   int filename_is_utf8);
 /////////////////////////////////////////////////////////////////////////////
 
 void rspgettemppath_multithread(char *path);
 
 void morcego_seek_100_libav(morcego___i___instance__a__bucaneiro_engineering *
-                            mv_______,
-                            double valor);
+								mv_______,
+							double valor);
 
-//int just_clean_buffers;
+// int just_clean_buffers;
 
 void convertmp3towav_extended(morcego___i___instance__a__bucaneiro_engineering *
-                              mv_______,
-                              char *filename, char *outname,
-                              int wav_mode, int track);
+								  mv_______,
+							  char *filename, char *outname,
+							  int wav_mode, int track);
 
 int convertmp3towav(morcego___i___instance__a__bucaneiro_engineering *mv_______,
-                    char *filename, char *outname, int wav_mode, int track);
+					char *filename, char *outname, int wav_mode, int track);
 
 void get_wav_progress_information(morcego___i___instance__a__bucaneiro_engineering
-                                  *mv_______,
-                                  int *por, int *ret, int *fin,
-                                  char *);
+									  *mv_______,
+								  int *por, int *ret, int *fin,
+								  char *);
 
 /** Some of my old nicks */
-typedef union pastor {
+typedef union pastor
+{
 
 	struct
 	{
-		int cardo; //primeiro apelido
+		int cardo; // primeiro apelido
 		int bond;
 	} carolco; /**< Na realidade era caroço e não carolco */
 
 	double seth;
-} morcego_vermelho51; //ultimo apelido
+} morcego_vermelho51; // ultimo apelido
 
 const int play_as_mp3 = 0;
 
 /////////////////////////////////////////////////////////////////////////////
 int remove_id3v1_tag(morcego___i___instance__a__bucaneiro_engineering *
-                     mv_______,
-                     char *filename);
+						 mv_______,
+					 char *filename);
 void BucaneiroStereoToMono(char *buffer, int len);
 int PCM16MonoToPCM16Stereo(char *inSamples_b, unsigned int b_len,
-                           char *outSamples_b);
+						   char *outSamples_b);
 int __stdcall my_timer(int val, char *filter);
 __int64 _ftelli64_arab(FILE *stream);
 int _fseeki64_arab(FILE *stream, __int64 offset, int origin);
 WCHAR *__stdcall utf8towide(const char *pUTF8);
-//definicaodefuncoes
+// definicaodefuncoes
 int strip_extension_alladin(char *data, char *ext);
 char *strrstr(char *s1, char *s2);
 int initiatedownload(char *filename, char *url);
@@ -435,7 +411,7 @@ extern int __cdecl ispathfile(char *path);
 extern int __cdecl ispathfolder(char *path);
 extern int __cdecl ispathreadonly(char *path);
 extern int __cdecl newsetbits(unsigned int value, unsigned int bit,
-                              unsigned int bitvalue);
+							  unsigned int bitvalue);
 extern int __cdecl octaltoint(char *p);
 extern int __cdecl pathappearsvalid(char *path);
 extern int __cdecl pathexists(char *path);
@@ -445,24 +421,24 @@ extern int __cdecl pegaposicaosensitive(char *comando, char *string);
 extern int __cdecl pegaposicaosensitive_new(char *comando, char *string);
 extern int __cdecl pegaposicaosensitivefinal(char *comando, char *string);
 extern int __cdecl pegaposicaosensitivefinal_new(char *comando,
-                                                 char *string);
+												 char *string);
 extern int __cdecl procuradordestringinsensitive(char *comando,
-                                                 char *string);
+												 char *string);
 extern int __cdecl procuradordestringsensitive(char *comando, char *string);
 extern int __cdecl rsp_get_error(char *buffer);
 extern int __cdecl rspgetdrivetype(char *path1);
 extern int __cdecl rspmakedir(char *path);
 extern int __cdecl rspmakedirUNIX(char *destination, char *path);
 extern int __cdecl rspparser(char *instring, char *delimiter,
-                             char *returnstring, int comand);
+							 char *returnstring, int comand);
 extern int __cdecl rspposicaofixa(int mode, int value);
 extern int __cdecl rspsetcurrentdirectory(char *path);
 extern int __cdecl save_to_file(char *infile, char *data, int size, int mode,
-                                int limit);
+								int limit);
 extern int __cdecl setbits(unsigned int value, unsigned int bit,
-                           unsigned int bitvalue);
+						   unsigned int bitvalue);
 extern int __cdecl stripfilenameandpath(char *path, char *onlypath,
-                                        char *onlyfilename);
+										char *onlyfilename);
 extern int __cdecl testdirectory(char *path);
 extern int __cdecl validanomedearquivo(char *path);
 extern int __cdecl validatefoldertocreate(char *path);
@@ -479,7 +455,7 @@ extern void _VDBG_dump(void);
 extern void __cdecl adicionadordebackslashfrente(char *path);
 extern void __cdecl adicionadordebackslashtras(char *path);
 extern void __cdecl changecharacter(char *path, char itemtosearch,
-                                    char finalcharacter);
+									char finalcharacter);
 extern void __cdecl geterrorstringrspmakedir(int errorcode, char *path);
 extern void __cdecl mprintf(char *format, ...);
 extern void __cdecl removedordecaracternofinal(char *path, char caracter);
@@ -487,12 +463,12 @@ extern void __cdecl removedordecaracternoinicio(char *path, char caracter);
 extern void __cdecl removedordeespaconofinal(char *path);
 extern void __cdecl removedordeespaconoinicio(char *path);
 extern void __cdecl replace_char_binary(char *temp, char init, char out,
-                                        int len);
+										int len);
 extern void __cdecl rsp_error_print();
 extern void __cdecl sgenrand(unsigned long seed);
 extern void __cdecl stripchar(char *intcomando, char caracter);
 extern void __cdecl stripfilenameandpath_url(char *path, char *onlypath,
-                                             char *onlyfilename);
+											 char *onlyfilename);
 extern void __cdecl stripspace(char *intcomando);
 extern void __cdecl strtolower(char *path);
 extern void __cdecl strtoupper(char *path);
@@ -503,57 +479,57 @@ int buffer_fclose(FILE *stream);
 int buffer_fseek(FILE *stream, __int64 offset, int origin);
 int cancel_winsock(void);
 int configequalizer(morcego___i___instance__a__bucaneiro_engineering *
-                    mv_______,
-                    int b60, int b170, int b310, int b600,
-                    int b1000, int b3000, int b6000, int b12000, int b14000,
-                    int b16000);
+						mv_______,
+					int b60, int b170, int b310, int b600,
+					int b1000, int b3000, int b6000, int b12000, int b14000,
+					int b16000);
 int configequalizer2(morcego___i___instance__a__bucaneiro_engineering *
-                     mv_______,
-                     int b60, int b170, int b310, int b600,
-                     int b1000, int b3000, int b6000, int b12000, int b14000,
-                     int b16000);
+						 mv_______,
+					 int b60, int b170, int b310, int b600,
+					 int b1000, int b3000, int b6000, int b12000, int b14000,
+					 int b16000);
 int debug_rede(char *url);
 int detect(char *filename, __int64 *seekpoint);
 int disablefilebuffer(void);
 int disablefilebuffernoinfo(void);
 int echo(morcego___i___instance__a__bucaneiro_engineering *mv_______,
-         char *buf, int bytes, int bps, int nch);
+		 char *buf, int bytes, int bps, int nch);
 int echofinal(morcego___i___instance__a__bucaneiro_engineering *mv_______,
-              int multiplier, int enableecho, int ponto, char *globalbuf,
-              int inttamanho, int wav_bitspersample, int intchannels);
+			  int multiplier, int enableecho, int ponto, char *globalbuf,
+			  int inttamanho, int wav_bitspersample, int intchannels);
 int pitch_control(morcego___i___instance__a__bucaneiro_engineering *
-                  mv_______,
-                  int enabledpitchcontrol, char *buf, int bytes,
-                  int bps, int nch, int pitchi);
+					  mv_______,
+				  int enabledpitchcontrol, char *buf, int bytes,
+				  int bps, int nch, int pitchi);
 int soundtouch(morcego___i___instance__a__bucaneiro_engineering *mv_______,
-               int reset, int enable, int samplerate, int channels, int size,
-               char *buf, int tempoDelta, int pitchDelta, int rateDelta);
+			   int reset, int enable, int samplerate, int channels, int size,
+			   char *buf, int tempoDelta, int pitchDelta, int rateDelta);
 
 int finalize_effects_memory(morcego___i___instance__a__bucaneiro_engineering *
-                            mv_______);
+								mv_______);
 
 int enable_fft_ok(morcego___i___instance__a__bucaneiro_engineering *
-                  mv_______,
-                  int val);
+					  mv_______,
+				  int val);
 int enablefilebuffer();
 int enablefilebuffersmart();
 int finalize_effects_memory();
 int finalizeplayer();
 int genrand();
 int id3tag(morcego___i___instance__a__bucaneiro_engineering *mv_______,
-           char *filename, int mode, float *iglobalfloat, int *ianalized,
-           int convertmode);
+		   char *filename, int mode, float *iglobalfloat, int *ianalized,
+		   int convertmode);
 int id3tagcheck(char *filename);
 int invertbits32(int value);
 int id3v1tag_ok_write(morcego___i___instance__a__bucaneiro_engineering *
-                      mv_______,
-                      char *filename);
+						  mv_______,
+					  char *filename);
 int isclosed(void);
 int ispathfile(char *path);
 int ispathfolder(char *path);
 int liberleitor(void);
 int surround(morcego___i___instance__a__bucaneiro_engineering *mv_______,
-             char *buf, int bytes, int bps, int nch);
+			 char *buf, int bytes, int bps, int nch);
 int minbuffersize(int size);
 int mygain(uchar *buf, uint len, float factor);
 int pause_winsock(void);
@@ -568,7 +544,7 @@ int set_port(int port);
 int set_sendmessage_nwnd(int value);
 int set_user(char *url);
 int setvolume(morcego___i___instance__a__bucaneiro_engineering *mv_______,
-              int newvalue);
+			  int newvalue);
 int travaleitor();
 int v2cleanup();
 int voiceremoval(char *buf, int bytes, int bps, int nch);
@@ -576,23 +552,23 @@ __int64 buffer_ftell(FILE *stream);
 short invertbits16(short value);
 static int __cdecl getbits(unsigned int value, unsigned int bit);
 unsigned int buffer_fread(void *buffer, unsigned int size,
-                          unsigned int count, FILE *stream);
+						  unsigned int count, FILE *stream);
 size_t fread_unbuffered(void *ptr, size_t size, size_t nelem, FILE *stream);
 size_t fwrite_unbuffered(const void *ptr, size_t size, size_t nelem,
-                         FILE *stream);
+						 FILE *stream);
 int remove_id3v2_tag(morcego___i___instance__a__bucaneiro_engineering *
-                     mv_______,
-                     char *filename);
+						 mv_______,
+					 char *filename);
 void *rmalloc(int size);
 
 int id3v1tag_ok(morcego___i___instance__a__bucaneiro_engineering *mv_______,
-                char *filename);
+				char *filename);
 int id3v2tag_ok(morcego___i___instance__a__bucaneiro_engineering *mv_______,
-                char *filename);
+				char *filename);
 void analize_fft(morcego___i___instance__a__bucaneiro_engineering *
-                 mv_______,
-                 spectrum *spec, char *buffer2, int canais,
-                 int len, int mult);
+					 mv_______,
+				 spectrum *spec, char *buffer2, int canais,
+				 int len, int mult);
 void dprintf_z(const char *format, ...);
 void indprintff(const char *format, ...);
 void mprintf(char *format, ...);
@@ -617,13 +593,13 @@ int setdebuginformation_multithread(morcego___i___instance__a__bucaneiro_enginee
 	if (300 < mv_______->decoder_c___hasdebuginfo)
 	{
 		strcpy(mv_______->decoder_c___debugstring[mv_______->decoder_c___hasdebuginfo -
-		                                          1],
-		       "Debug information above limit");
+												  1],
+			   "Debug information above limit");
 
 		return 0;
 	}
 	strncpy(mv_______->decoder_c___debugstring[mv_______->decoder_c___hasdebuginfo++],
-	        string, 253);
+			string, 253);
 	return 0;
 }
 
@@ -638,11 +614,11 @@ get_debuginformation_multithread(morcego___i___instance__a__bucaneiro_engineerin
 	if (mv_______->decoder_c___hasdebuginfo)
 	{
 		strcpy(mv_______->decoder_c___current_string,
-		       mv_______->decoder_c___debugstring[0]);
+			   mv_______->decoder_c___debugstring[0]);
 		for (i = 0; i < mv_______->decoder_c___hasdebuginfo; i++)
 		{
 			strcpy(mv_______->decoder_c___debugstring[i],
-			       mv_______->decoder_c___debugstring[i + 1]);
+				   mv_______->decoder_c___debugstring[i + 1]);
 		}
 		mv_______->decoder_c___hasdebuginfo--;
 		return mv_______->decoder_c___current_string;
@@ -666,13 +642,13 @@ secondtostring(double value)
 	uint min;
 	uint hour;
 
-	ret = (uint)      value;
-	seg = ret %          60;
-	ret = ret /          60; // minutos
-	min = ret %          60;
-	ret = ret /          60; // horas
-	hour = ret %        100;
-	sprintf(fixo, "%02d:%02d:%02d", hour, min, seg);//limited to 99 hours, above it will wrap to below to 99
+	ret = (uint)value;
+	seg = ret % 60;
+	ret = ret / 60; // minutos
+	min = ret % 60;
+	ret = ret / 60; // horas
+	hour = ret % 100;
+	sprintf(fixo, "%02d:%02d:%02d", hour, min, seg); // limited to 99 hours, above it will wrap to below to 99
 
 	return fixo; // single thread only for the moment
 }
@@ -692,7 +668,7 @@ int getdev()
  */
 static void CALLBACK
 callback(__attribute__((unused)) HWAVEOUT handle, UINT message, __attribute__((unused)) DWORD data, __attribute__((unused)) DWORD param1,
-         __attribute__((unused)) DWORD param2)
+		 __attribute__((unused)) DWORD param2)
 {
 	switch (message)
 	{
@@ -718,9 +694,9 @@ int initplayer(morcego___i___instance__a__bucaneiro_engineering *mv_______)
 
 	mv_______->decoder_c___pwfx.wFormatTag = WAVE_FORMAT_PCM;
 
-	mv_______->decoder_c___pwfx.nChannels = 2;  /*
-	                                               hardcoded because even mono files are converted to stereo in order to play and multichannel files are mixed to play using only two channels (October/2020).
-	                                             */
+	mv_______->decoder_c___pwfx.nChannels = 2; /*
+												  hardcoded because even mono files are converted to stereo in order to play and multichannel files are mixed to play using only two channels (October/2020).
+												*/
 
 	mv_______->decoder_c___pwfx.nSamplesPerSec =
 		mv_______->decoder_c___intsamplerate;
@@ -729,7 +705,7 @@ int initplayer(morcego___i___instance__a__bucaneiro_engineering *mv_______)
 	mv_______->decoder_c___pwfx.nAvgBytesPerSec =
 		mv_______->decoder_c___wav.avebytespersec;
 	mv_______->decoder_c___pwfx.nBlockAlign = 4;
-	mv_______->decoder_c___pwfx.wBitsPerSample = 16; //hardcoded because even other values are converted to signed 16 bits in order to play at this moment, may change in the future, I am not sure...
+	mv_______->decoder_c___pwfx.wBitsPerSample = 16; // hardcoded because even other values are converted to signed 16 bits in order to play at this moment, may change in the future, I am not sure...
 	mv_______->decoder_c___pwfx.cbSize = 0;
 
 	if (mv_______->decoder_c___phwo)
@@ -746,32 +722,32 @@ int initplayer(morcego___i___instance__a__bucaneiro_engineering *mv_______)
 			switch (ret)
 			{
 			case MMSYSERR_INVALHANDLE:
-				//dprintf("MMSYSERR_INVALHANDLE\n");
+				// dprintf("MMSYSERR_INVALHANDLE\n");
 				break;
 			case WAVERR_STILLPLAYING:
 
-				//dprintf("WAVERR_STILLPLAYING\n");
+				// dprintf("WAVERR_STILLPLAYING\n");
 				break;
 			case MMSYSERR_NOERROR:
-				//dprintf("MMSYSERR_NOERROR\n");
+				// dprintf("MMSYSERR_NOERROR\n");
 				break;
 			case WAVERR_SYNC:
-				//dprintf("WAVERR_SYNC\n");
+				// dprintf("WAVERR_SYNC\n");
 				break;
 			case WAVERR_BADFORMAT:
-				//dprintf("WAVERR_BADFORMAT\n");
+				// dprintf("WAVERR_BADFORMAT\n");
 				break;
 			case MMSYSERR_NOMEM:
-				//dprintf("MMSYSERR_NOMEM\n");
+				// dprintf("MMSYSERR_NOMEM\n");
 				break;
 			case MMSYSERR_NODRIVER:
-				//dprintf("MMSYSERR_NODRIVER\n");
+				// dprintf("MMSYSERR_NODRIVER\n");
 				break;
 			case MMSYSERR_BADDEVICEID:
-				//dprintf("MMSYSERR_BADDEVICEID\n");
+				// dprintf("MMSYSERR_BADDEVICEID\n");
 				break;
 			default:
-				//dprintf("UNKNOWN\n");
+				// dprintf("UNKNOWN\n");
 				break;
 			}
 		}
@@ -779,12 +755,12 @@ int initplayer(morcego___i___instance__a__bucaneiro_engineering *mv_______)
 
 	if (0 == mv_______->decoder_c___phwo)
 	{
-		//dprintf("waveOutOpen init\n");
+		// dprintf("waveOutOpen init\n");
 		ret =
 			waveOutOpen(&mv_______->decoder_c___phwo,
-			            mv_______->decoder_c___intwaveout,
-			            &mv_______->decoder_c___pwfx, (DWORD_PTR)callback, 0,
-			            CALLBACK_FUNCTION);
+						mv_______->decoder_c___intwaveout,
+						&mv_______->decoder_c___pwfx, (DWORD_PTR)callback, 0,
+						CALLBACK_FUNCTION);
 		mv_______->decoder_c___flag_de_pause = 1;
 		if (ret)
 		{
@@ -820,19 +796,19 @@ int initplayer(morcego___i___instance__a__bucaneiro_engineering *mv_______)
  * @param len the size of the data to play in bytes
  */
 int play_number_1_26_june_2011(morcego___i___instance__a__bucaneiro_engineering *mv_______,
-                               uchar *buf, uint len)
+							   uchar *buf, uint len)
 {
 	if (mv_______->decoder_c___just_clean_buffers)
 	{
 		memset(mv_______->decoder_c____play_1_copia_1, 0, 100000);
 		memset(mv_______->decoder_c____play_1_copia_2_24_june_2011__14_12_PM,
-		       0, 100000);
+			   0, 100000);
 		memset(mv_______->decoder_c____play_1_copia_3_24_june_2011__14_19_PM,
-		       0, 100000);
+			   0, 100000);
 		memset(mv_______->decoder_c____play_1_copia_4_24_june_2011__14_26_PM,
-		       0, 100000);
+			   0, 100000);
 		memset(mv_______->decoder_c____play_1_copia_5_24_june_2011__14_46_PM,
-		       0, 100000);
+			   0, 100000);
 		return 0;
 	}
 	switch (mv_______->decoder_c____play_1_position)
@@ -843,8 +819,8 @@ int play_number_1_26_june_2011(morcego___i___instance__a__bucaneiro_engineering 
 		double amanda_tempo;
 		amanda_tempo = get_bucaneiro_tick();
 		analize_fft(mv_______, &mv_______->decoder_c___spec,
-		            (char *) mv_______->decoder_c____play_1_copia_1, 2,
-		            mv_______->decoder_c___inttamanho, 1);
+					(char *)mv_______->decoder_c____play_1_copia_1, 2,
+					mv_______->decoder_c___inttamanho, 1);
 
 		pedro_dprintf(-1, "2 tempo decorrido amanda... %f %d", (get_bucaneiro_tick() - amanda_tempo) * 1000., mv_______->decoder_c___inttamanho);
 
@@ -852,9 +828,9 @@ int play_number_1_26_june_2011(morcego___i___instance__a__bucaneiro_engineering 
 		mv_______->decoder_c___leftval = mv_______->decoder_c___spec.peak;
 
 		while (WAVERR_STILLPLAYING ==
-		       waveOutUnprepareHeader(mv_______->decoder_c___phwo,
-		                              &mv_______->decoder_c____play_1WaveHdr,
-		                              sizeof(WAVEHDR)))
+			   waveOutUnprepareHeader(mv_______->decoder_c___phwo,
+									  &mv_______->decoder_c____play_1WaveHdr,
+									  sizeof(WAVEHDR)))
 		{
 			Sleep(TEST_1);
 		}
@@ -864,27 +840,26 @@ int play_number_1_26_june_2011(morcego___i___instance__a__bucaneiro_engineering 
 		}
 		memcpy(mv_______->decoder_c____play_1_copia_1, buf, len);
 		mv_______->decoder_c____play_1WaveHdr.lpData = (char *)
-		                                               mv_______->decoder_c____play_1_copia_1;
+														   mv_______->decoder_c____play_1_copia_1;
 		mv_______->decoder_c____play_1WaveHdr.dwBufferLength = len;
 		mv_______->decoder_c____play_1WaveHdr.dwUser = 1;
 		mv_______->decoder_c____play_1WaveHdr.dwFlags = 0;
 		waveOutPrepareHeader(mv_______->decoder_c___phwo,
-		                     &mv_______->decoder_c____play_1WaveHdr,
-		                     sizeof(WAVEHDR));
+							 &mv_______->decoder_c____play_1WaveHdr,
+							 sizeof(WAVEHDR));
 		waveOutWrite(mv_______->decoder_c___phwo,
-		             &mv_______->decoder_c____play_1WaveHdr,
-		             sizeof(WAVEHDR));
+					 &mv_______->decoder_c____play_1WaveHdr,
+					 sizeof(WAVEHDR));
 
-		if(mv_______->decodec_c___last_pcm_slice_to_play_k_p)
+		if (mv_______->decodec_c___last_pcm_slice_to_play_k_p)
 		{
 			while (WAVERR_STILLPLAYING ==
-			       waveOutUnprepareHeader(mv_______->decoder_c___phwo,
-			                              &mv_______->decoder_c____play_1WaveHdr,
-			                              sizeof(WAVEHDR)))
+				   waveOutUnprepareHeader(mv_______->decoder_c___phwo,
+										  &mv_______->decoder_c____play_1WaveHdr,
+										  sizeof(WAVEHDR)))
 			{
 				Sleep(TEST_1);
 			}
-
 		}
 
 		mv_______->decoder_c____play_1_position = 1;
@@ -895,14 +870,14 @@ int play_number_1_26_june_2011(morcego___i___instance__a__bucaneiro_engineering 
 	{
 
 		analize_fft(mv_______, &mv_______->decoder_c___spec,
-		            (char *) mv_______->decoder_c____play_1_copia_2_24_june_2011__14_12_PM, 2,
-		            mv_______->decoder_c___inttamanho, 1);
+					(char *)mv_______->decoder_c____play_1_copia_2_24_june_2011__14_12_PM, 2,
+					mv_______->decoder_c___inttamanho, 1);
 		mv_______->decoder_c___rightval = mv_______->decoder_c___spec.peak;
 		mv_______->decoder_c___leftval = mv_______->decoder_c___spec.peak;
 		while (WAVERR_STILLPLAYING ==
-		       waveOutUnprepareHeader(mv_______->decoder_c___phwo,
-		                              &mv_______->decoder_c____play_1WaveHdr1,
-		                              sizeof(WAVEHDR)))
+			   waveOutUnprepareHeader(mv_______->decoder_c___phwo,
+									  &mv_______->decoder_c____play_1WaveHdr1,
+									  sizeof(WAVEHDR)))
 		{
 			Sleep(TEST_1);
 		}
@@ -911,25 +886,25 @@ int play_number_1_26_june_2011(morcego___i___instance__a__bucaneiro_engineering 
 			return 0;
 		}
 		memcpy(mv_______->decoder_c____play_1_copia_2_24_june_2011__14_12_PM,
-		       buf, len);
+			   buf, len);
 		mv_______->decoder_c____play_1WaveHdr1.lpData = (char *)
-		                                                mv_______->decoder_c____play_1_copia_2_24_june_2011__14_12_PM;
+															mv_______->decoder_c____play_1_copia_2_24_june_2011__14_12_PM;
 		mv_______->decoder_c____play_1WaveHdr1.dwBufferLength = len;
 		mv_______->decoder_c____play_1WaveHdr1.dwUser = 2;
 		mv_______->decoder_c____play_1WaveHdr1.dwFlags = 0;
 		waveOutPrepareHeader(mv_______->decoder_c___phwo,
-		                     &mv_______->decoder_c____play_1WaveHdr1,
-		                     sizeof(WAVEHDR));
+							 &mv_______->decoder_c____play_1WaveHdr1,
+							 sizeof(WAVEHDR));
 		waveOutWrite(mv_______->decoder_c___phwo,
-		             &mv_______->decoder_c____play_1WaveHdr1,
-		             sizeof(WAVEHDR));
+					 &mv_______->decoder_c____play_1WaveHdr1,
+					 sizeof(WAVEHDR));
 
-		if(mv_______->decodec_c___last_pcm_slice_to_play_k_p)
+		if (mv_______->decodec_c___last_pcm_slice_to_play_k_p)
 		{
 			while (WAVERR_STILLPLAYING ==
-			       waveOutUnprepareHeader(mv_______->decoder_c___phwo,
-			                              &mv_______->decoder_c____play_1WaveHdr1,
-			                              sizeof(WAVEHDR)))
+				   waveOutUnprepareHeader(mv_______->decoder_c___phwo,
+										  &mv_______->decoder_c____play_1WaveHdr1,
+										  sizeof(WAVEHDR)))
 			{
 				Sleep(TEST_1);
 			}
@@ -943,14 +918,14 @@ int play_number_1_26_june_2011(morcego___i___instance__a__bucaneiro_engineering 
 	{
 
 		analize_fft(mv_______, &mv_______->decoder_c___spec,
-		            (char *) mv_______->decoder_c____play_1_copia_3_24_june_2011__14_19_PM, 2,
-		            mv_______->decoder_c___inttamanho, 1);
+					(char *)mv_______->decoder_c____play_1_copia_3_24_june_2011__14_19_PM, 2,
+					mv_______->decoder_c___inttamanho, 1);
 		mv_______->decoder_c___rightval = mv_______->decoder_c___spec.peak;
 		mv_______->decoder_c___leftval = mv_______->decoder_c___spec.peak;
 		while (WAVERR_STILLPLAYING ==
-		       waveOutUnprepareHeader(mv_______->decoder_c___phwo,
-		                              &mv_______->decoder_c____play_1WaveHdr2,
-		                              sizeof(WAVEHDR)))
+			   waveOutUnprepareHeader(mv_______->decoder_c___phwo,
+									  &mv_______->decoder_c____play_1WaveHdr2,
+									  sizeof(WAVEHDR)))
 		{
 			Sleep(TEST_1);
 		}
@@ -959,25 +934,25 @@ int play_number_1_26_june_2011(morcego___i___instance__a__bucaneiro_engineering 
 			return 0;
 		}
 		memcpy(mv_______->decoder_c____play_1_copia_3_24_june_2011__14_19_PM,
-		       buf, len);
+			   buf, len);
 		mv_______->decoder_c____play_1WaveHdr2.lpData = (char *)
-		                                                mv_______->decoder_c____play_1_copia_3_24_june_2011__14_19_PM;
+															mv_______->decoder_c____play_1_copia_3_24_june_2011__14_19_PM;
 		mv_______->decoder_c____play_1WaveHdr2.dwBufferLength = len;
 		mv_______->decoder_c____play_1WaveHdr2.dwUser = 3;
 		mv_______->decoder_c____play_1WaveHdr2.dwFlags = 0;
 		waveOutPrepareHeader(mv_______->decoder_c___phwo,
-		                     &mv_______->decoder_c____play_1WaveHdr2,
-		                     sizeof(WAVEHDR));
+							 &mv_______->decoder_c____play_1WaveHdr2,
+							 sizeof(WAVEHDR));
 		waveOutWrite(mv_______->decoder_c___phwo,
-		             &mv_______->decoder_c____play_1WaveHdr2,
-		             sizeof(WAVEHDR));
+					 &mv_______->decoder_c____play_1WaveHdr2,
+					 sizeof(WAVEHDR));
 
-		if(mv_______->decodec_c___last_pcm_slice_to_play_k_p)
+		if (mv_______->decodec_c___last_pcm_slice_to_play_k_p)
 		{
 			while (WAVERR_STILLPLAYING ==
-			       waveOutUnprepareHeader(mv_______->decoder_c___phwo,
-			                              &mv_______->decoder_c____play_1WaveHdr2,
-			                              sizeof(WAVEHDR)))
+				   waveOutUnprepareHeader(mv_______->decoder_c___phwo,
+										  &mv_______->decoder_c____play_1WaveHdr2,
+										  sizeof(WAVEHDR)))
 			{
 				Sleep(TEST_1);
 			}
@@ -991,14 +966,14 @@ int play_number_1_26_june_2011(morcego___i___instance__a__bucaneiro_engineering 
 	{
 
 		analize_fft(mv_______, &mv_______->decoder_c___spec,
-		            (char *) mv_______->decoder_c____play_1_copia_4_24_june_2011__14_26_PM, 2,
-		            mv_______->decoder_c___inttamanho, 1);
+					(char *)mv_______->decoder_c____play_1_copia_4_24_june_2011__14_26_PM, 2,
+					mv_______->decoder_c___inttamanho, 1);
 		mv_______->decoder_c___rightval = mv_______->decoder_c___spec.peak;
 		mv_______->decoder_c___leftval = mv_______->decoder_c___spec.peak;
 		while (WAVERR_STILLPLAYING ==
-		       waveOutUnprepareHeader(mv_______->decoder_c___phwo,
-		                              &mv_______->decoder_c____play_1WaveHdr3,
-		                              sizeof(WAVEHDR)))
+			   waveOutUnprepareHeader(mv_______->decoder_c___phwo,
+									  &mv_______->decoder_c____play_1WaveHdr3,
+									  sizeof(WAVEHDR)))
 		{
 			Sleep(TEST_1);
 		}
@@ -1007,24 +982,24 @@ int play_number_1_26_june_2011(morcego___i___instance__a__bucaneiro_engineering 
 			return 0;
 		}
 		memcpy(mv_______->decoder_c____play_1_copia_4_24_june_2011__14_26_PM,
-		       buf, len);
+			   buf, len);
 		mv_______->decoder_c____play_1WaveHdr3.lpData = (char *)
-		                                                mv_______->decoder_c____play_1_copia_4_24_june_2011__14_26_PM;
+															mv_______->decoder_c____play_1_copia_4_24_june_2011__14_26_PM;
 		mv_______->decoder_c____play_1WaveHdr3.dwBufferLength = len;
 		mv_______->decoder_c____play_1WaveHdr3.dwUser = 3;
 		mv_______->decoder_c____play_1WaveHdr3.dwFlags = 0;
 		(void)waveOutPrepareHeader(mv_______->decoder_c___phwo,
-		                           &mv_______->decoder_c____play_1WaveHdr3,
-		                           sizeof(WAVEHDR));
+								   &mv_______->decoder_c____play_1WaveHdr3,
+								   sizeof(WAVEHDR));
 		waveOutWrite(mv_______->decoder_c___phwo,
-		             &mv_______->decoder_c____play_1WaveHdr3,
-		             sizeof(WAVEHDR));
-		if(mv_______->decodec_c___last_pcm_slice_to_play_k_p)
+					 &mv_______->decoder_c____play_1WaveHdr3,
+					 sizeof(WAVEHDR));
+		if (mv_______->decodec_c___last_pcm_slice_to_play_k_p)
 		{
 			while (WAVERR_STILLPLAYING ==
-			       waveOutUnprepareHeader(mv_______->decoder_c___phwo,
-			                              &mv_______->decoder_c____play_1WaveHdr3,
-			                              sizeof(WAVEHDR)))
+				   waveOutUnprepareHeader(mv_______->decoder_c___phwo,
+										  &mv_______->decoder_c____play_1WaveHdr3,
+										  sizeof(WAVEHDR)))
 			{
 				Sleep(TEST_1);
 			}
@@ -1037,14 +1012,14 @@ int play_number_1_26_june_2011(morcego___i___instance__a__bucaneiro_engineering 
 	{
 
 		analize_fft(mv_______, &mv_______->decoder_c___spec,
-		            (char *) mv_______->decoder_c____play_1_copia_5_24_june_2011__14_46_PM, 2,
-		            mv_______->decoder_c___inttamanho, 1);
+					(char *)mv_______->decoder_c____play_1_copia_5_24_june_2011__14_46_PM, 2,
+					mv_______->decoder_c___inttamanho, 1);
 		mv_______->decoder_c___rightval = mv_______->decoder_c___spec.peak;
 		mv_______->decoder_c___leftval = mv_______->decoder_c___spec.peak;
 		while (WAVERR_STILLPLAYING ==
-		       waveOutUnprepareHeader(mv_______->decoder_c___phwo,
-		                              &mv_______->decoder_c____play_1WaveHdr4,
-		                              sizeof(WAVEHDR)))
+			   waveOutUnprepareHeader(mv_______->decoder_c___phwo,
+									  &mv_______->decoder_c____play_1WaveHdr4,
+									  sizeof(WAVEHDR)))
 		{
 			Sleep(TEST_1);
 		}
@@ -1053,25 +1028,25 @@ int play_number_1_26_june_2011(morcego___i___instance__a__bucaneiro_engineering 
 			return 0;
 		}
 		memcpy(mv_______->decoder_c____play_1_copia_5_24_june_2011__14_46_PM,
-		       buf, len);
+			   buf, len);
 		mv_______->decoder_c____play_1WaveHdr4.lpData = (char *)
-		                                                mv_______->decoder_c____play_1_copia_5_24_june_2011__14_46_PM;
+															mv_______->decoder_c____play_1_copia_5_24_june_2011__14_46_PM;
 		mv_______->decoder_c____play_1WaveHdr4.dwBufferLength = len;
 		mv_______->decoder_c____play_1WaveHdr4.dwUser = 3;
 		mv_______->decoder_c____play_1WaveHdr4.dwFlags = 0;
 		waveOutPrepareHeader(mv_______->decoder_c___phwo,
-		                     &mv_______->decoder_c____play_1WaveHdr4,
-		                     sizeof(WAVEHDR));
+							 &mv_______->decoder_c____play_1WaveHdr4,
+							 sizeof(WAVEHDR));
 		waveOutWrite(mv_______->decoder_c___phwo,
-		             &mv_______->decoder_c____play_1WaveHdr4,
-		             sizeof(WAVEHDR));
+					 &mv_______->decoder_c____play_1WaveHdr4,
+					 sizeof(WAVEHDR));
 
-		if(mv_______->decodec_c___last_pcm_slice_to_play_k_p)
+		if (mv_______->decodec_c___last_pcm_slice_to_play_k_p)
 		{
 			while (WAVERR_STILLPLAYING ==
-			       waveOutUnprepareHeader(mv_______->decoder_c___phwo,
-			                              &mv_______->decoder_c____play_1WaveHdr4,
-			                              sizeof(WAVEHDR)))
+				   waveOutUnprepareHeader(mv_______->decoder_c___phwo,
+										  &mv_______->decoder_c____play_1WaveHdr4,
+										  sizeof(WAVEHDR)))
 			{
 				Sleep(TEST_1);
 			}
@@ -1086,20 +1061,20 @@ int play_number_1_26_june_2011(morcego___i___instance__a__bucaneiro_engineering 
 }
 
 int play_number_2_26_june_2011(morcego___i___instance__a__bucaneiro_engineering *
-                               mv_______,
-                               uchar *buf, uint len)
+								   mv_______,
+							   uchar *buf, uint len)
 {
 	if (mv_______->decoder_c___just_clean_buffers)
 	{
 		memset(mv_______->decoder_c____play_2_copia_1, 0, 100000);
 		memset(mv_______->decoder_c____play_2_copia_2_24_june_2011__14_12_PM,
-		       0, 100000);
+			   0, 100000);
 		memset(mv_______->decoder_c____play_2_copia_3_24_june_2011__14_19_PM,
-		       0, 100000);
+			   0, 100000);
 		memset(mv_______->decoder_c____play_2_copia_4_24_june_2011__14_26_PM,
-		       0, 100000);
+			   0, 100000);
 		memset(mv_______->decoder_c____play_2_copia_5_24_june_2011__14_46_PM,
-		       0, 100000);
+			   0, 100000);
 		return 0;
 	}
 	switch (mv_______->decoder_c____play_2_position)
@@ -1108,15 +1083,15 @@ int play_number_2_26_june_2011(morcego___i___instance__a__bucaneiro_engineering 
 	{
 
 		analize_fft(mv_______, &mv_______->decoder_c___spec,
-		            (char *) mv_______->decoder_c____play_2_copia_1, 2,
-		            mv_______->decoder_c___inttamanho, 1);
+					(char *)mv_______->decoder_c____play_2_copia_1, 2,
+					mv_______->decoder_c___inttamanho, 1);
 		mv_______->decoder_c___rightval = mv_______->decoder_c___spec.peak;
 		mv_______->decoder_c___leftval = mv_______->decoder_c___spec.peak;
 
 		while (WAVERR_STILLPLAYING ==
-		       waveOutUnprepareHeader(mv_______->decoder_c___phwo,
-		                              &mv_______->decoder_c____play_2WaveHdr,
-		                              sizeof(WAVEHDR)))
+			   waveOutUnprepareHeader(mv_______->decoder_c___phwo,
+									  &mv_______->decoder_c____play_2WaveHdr,
+									  sizeof(WAVEHDR)))
 		{
 			Sleep(TEST_1);
 		}
@@ -1126,22 +1101,22 @@ int play_number_2_26_june_2011(morcego___i___instance__a__bucaneiro_engineering 
 		}
 		memcpy(mv_______->decoder_c____play_2_copia_1, buf, len);
 		mv_______->decoder_c____play_2WaveHdr.lpData = (char *)
-		                                               mv_______->decoder_c____play_2_copia_1;
+														   mv_______->decoder_c____play_2_copia_1;
 		mv_______->decoder_c____play_2WaveHdr.dwBufferLength = len;
 		mv_______->decoder_c____play_2WaveHdr.dwUser = 1;
 		mv_______->decoder_c____play_2WaveHdr.dwFlags = 0;
 		waveOutPrepareHeader(mv_______->decoder_c___phwo,
-		                     &mv_______->decoder_c____play_2WaveHdr,
-		                     sizeof(WAVEHDR));
+							 &mv_______->decoder_c____play_2WaveHdr,
+							 sizeof(WAVEHDR));
 		waveOutWrite(mv_______->decoder_c___phwo,
-		             &mv_______->decoder_c____play_2WaveHdr,
-		             sizeof(WAVEHDR));
-		if(mv_______->decodec_c___last_pcm_slice_to_play_k_p)
+					 &mv_______->decoder_c____play_2WaveHdr,
+					 sizeof(WAVEHDR));
+		if (mv_______->decodec_c___last_pcm_slice_to_play_k_p)
 		{
 			while (WAVERR_STILLPLAYING ==
-			       waveOutUnprepareHeader(mv_______->decoder_c___phwo,
-			                              &mv_______->decoder_c____play_2WaveHdr,
-			                              sizeof(WAVEHDR)))
+				   waveOutUnprepareHeader(mv_______->decoder_c___phwo,
+										  &mv_______->decoder_c____play_2WaveHdr,
+										  sizeof(WAVEHDR)))
 			{
 				Sleep(TEST_1);
 			}
@@ -1154,14 +1129,14 @@ int play_number_2_26_june_2011(morcego___i___instance__a__bucaneiro_engineering 
 	{
 
 		analize_fft(mv_______, &mv_______->decoder_c___spec,
-		            (char *) mv_______->decoder_c____play_2_copia_2_24_june_2011__14_12_PM, 2,
-		            mv_______->decoder_c___inttamanho, 1);
+					(char *)mv_______->decoder_c____play_2_copia_2_24_june_2011__14_12_PM, 2,
+					mv_______->decoder_c___inttamanho, 1);
 		mv_______->decoder_c___rightval = mv_______->decoder_c___spec.peak;
 		mv_______->decoder_c___leftval = mv_______->decoder_c___spec.peak;
 		while (WAVERR_STILLPLAYING ==
-		       waveOutUnprepareHeader(mv_______->decoder_c___phwo,
-		                              &mv_______->decoder_c____play_2WaveHdr1,
-		                              sizeof(WAVEHDR)))
+			   waveOutUnprepareHeader(mv_______->decoder_c___phwo,
+									  &mv_______->decoder_c____play_2WaveHdr1,
+									  sizeof(WAVEHDR)))
 		{
 			Sleep(TEST_1);
 		}
@@ -1170,29 +1145,28 @@ int play_number_2_26_june_2011(morcego___i___instance__a__bucaneiro_engineering 
 			return 0;
 		}
 		memcpy(mv_______->decoder_c____play_2_copia_2_24_june_2011__14_12_PM,
-		       buf, len);
+			   buf, len);
 		mv_______->decoder_c____play_2WaveHdr1.lpData = (char *)
-		                                                mv_______->decoder_c____play_2_copia_2_24_june_2011__14_12_PM;
+															mv_______->decoder_c____play_2_copia_2_24_june_2011__14_12_PM;
 		mv_______->decoder_c____play_2WaveHdr1.dwBufferLength = len;
 		mv_______->decoder_c____play_2WaveHdr1.dwUser = 2;
 		mv_______->decoder_c____play_2WaveHdr1.dwFlags = 0;
 		waveOutPrepareHeader(mv_______->decoder_c___phwo,
-		                     &mv_______->decoder_c____play_2WaveHdr1,
-		                     sizeof(WAVEHDR));
+							 &mv_______->decoder_c____play_2WaveHdr1,
+							 sizeof(WAVEHDR));
 		waveOutWrite(mv_______->decoder_c___phwo,
-		             &mv_______->decoder_c____play_2WaveHdr1,
-		             sizeof(WAVEHDR));
+					 &mv_______->decoder_c____play_2WaveHdr1,
+					 sizeof(WAVEHDR));
 
-		if(mv_______->decodec_c___last_pcm_slice_to_play_k_p)
+		if (mv_______->decodec_c___last_pcm_slice_to_play_k_p)
 		{
 			while (WAVERR_STILLPLAYING ==
-			       waveOutUnprepareHeader(mv_______->decoder_c___phwo,
-			                              &mv_______->decoder_c____play_2WaveHdr1,
-			                              sizeof(WAVEHDR)))
+				   waveOutUnprepareHeader(mv_______->decoder_c___phwo,
+										  &mv_______->decoder_c____play_2WaveHdr1,
+										  sizeof(WAVEHDR)))
 			{
 				Sleep(TEST_1);
 			}
-
 		}
 		mv_______->decoder_c____play_2_position = 2;
 		return 0;
@@ -1202,14 +1176,14 @@ int play_number_2_26_june_2011(morcego___i___instance__a__bucaneiro_engineering 
 	{
 
 		analize_fft(mv_______, &mv_______->decoder_c___spec,
-		            (char *) mv_______->decoder_c____play_2_copia_3_24_june_2011__14_19_PM, 2,
-		            mv_______->decoder_c___inttamanho, 1);
+					(char *)mv_______->decoder_c____play_2_copia_3_24_june_2011__14_19_PM, 2,
+					mv_______->decoder_c___inttamanho, 1);
 		mv_______->decoder_c___rightval = mv_______->decoder_c___spec.peak;
 		mv_______->decoder_c___leftval = mv_______->decoder_c___spec.peak;
 		while (WAVERR_STILLPLAYING ==
-		       waveOutUnprepareHeader(mv_______->decoder_c___phwo,
-		                              &mv_______->decoder_c____play_2WaveHdr2,
-		                              sizeof(WAVEHDR)))
+			   waveOutUnprepareHeader(mv_______->decoder_c___phwo,
+									  &mv_______->decoder_c____play_2WaveHdr2,
+									  sizeof(WAVEHDR)))
 		{
 			Sleep(TEST_1);
 		}
@@ -1218,25 +1192,25 @@ int play_number_2_26_june_2011(morcego___i___instance__a__bucaneiro_engineering 
 			return 0;
 		}
 		memcpy(mv_______->decoder_c____play_2_copia_3_24_june_2011__14_19_PM,
-		       buf, len);
+			   buf, len);
 		mv_______->decoder_c____play_2WaveHdr2.lpData = (char *)
-		                                                mv_______->decoder_c____play_2_copia_3_24_june_2011__14_19_PM;
+															mv_______->decoder_c____play_2_copia_3_24_june_2011__14_19_PM;
 		mv_______->decoder_c____play_2WaveHdr2.dwBufferLength = len;
 		mv_______->decoder_c____play_2WaveHdr2.dwUser = 3;
 		mv_______->decoder_c____play_2WaveHdr2.dwFlags = 0;
 		waveOutPrepareHeader(mv_______->decoder_c___phwo,
-		                     &mv_______->decoder_c____play_2WaveHdr2,
-		                     sizeof(WAVEHDR));
+							 &mv_______->decoder_c____play_2WaveHdr2,
+							 sizeof(WAVEHDR));
 		waveOutWrite(mv_______->decoder_c___phwo,
-		             &mv_______->decoder_c____play_2WaveHdr2,
-		             sizeof(WAVEHDR));
+					 &mv_______->decoder_c____play_2WaveHdr2,
+					 sizeof(WAVEHDR));
 
-		if(mv_______->decodec_c___last_pcm_slice_to_play_k_p)
+		if (mv_______->decodec_c___last_pcm_slice_to_play_k_p)
 		{
 			while (WAVERR_STILLPLAYING ==
-			       waveOutUnprepareHeader(mv_______->decoder_c___phwo,
-			                              &mv_______->decoder_c____play_2WaveHdr2,
-			                              sizeof(WAVEHDR)))
+				   waveOutUnprepareHeader(mv_______->decoder_c___phwo,
+										  &mv_______->decoder_c____play_2WaveHdr2,
+										  sizeof(WAVEHDR)))
 			{
 				Sleep(TEST_1);
 			}
@@ -1249,14 +1223,14 @@ int play_number_2_26_june_2011(morcego___i___instance__a__bucaneiro_engineering 
 	{
 
 		analize_fft(mv_______, &mv_______->decoder_c___spec,
-		            (char *) mv_______->decoder_c____play_2_copia_4_24_june_2011__14_26_PM, 2,
-		            mv_______->decoder_c___inttamanho, 1);
+					(char *)mv_______->decoder_c____play_2_copia_4_24_june_2011__14_26_PM, 2,
+					mv_______->decoder_c___inttamanho, 1);
 		mv_______->decoder_c___rightval = mv_______->decoder_c___spec.peak;
 		mv_______->decoder_c___leftval = mv_______->decoder_c___spec.peak;
 		while (WAVERR_STILLPLAYING ==
-		       waveOutUnprepareHeader(mv_______->decoder_c___phwo,
-		                              &mv_______->decoder_c____play_2WaveHdr3,
-		                              sizeof(WAVEHDR)))
+			   waveOutUnprepareHeader(mv_______->decoder_c___phwo,
+									  &mv_______->decoder_c____play_2WaveHdr3,
+									  sizeof(WAVEHDR)))
 		{
 			Sleep(TEST_1);
 		}
@@ -1265,25 +1239,25 @@ int play_number_2_26_june_2011(morcego___i___instance__a__bucaneiro_engineering 
 			return 0;
 		}
 		memcpy(mv_______->decoder_c____play_2_copia_4_24_june_2011__14_26_PM,
-		       buf, len);
+			   buf, len);
 		mv_______->decoder_c____play_2WaveHdr3.lpData = (char *)
-		                                                mv_______->decoder_c____play_2_copia_4_24_june_2011__14_26_PM;
+															mv_______->decoder_c____play_2_copia_4_24_june_2011__14_26_PM;
 		mv_______->decoder_c____play_2WaveHdr3.dwBufferLength = len;
 		mv_______->decoder_c____play_2WaveHdr3.dwUser = 3;
 		mv_______->decoder_c____play_2WaveHdr3.dwFlags = 0;
 		waveOutPrepareHeader(mv_______->decoder_c___phwo,
-		                     &mv_______->decoder_c____play_2WaveHdr3,
-		                     sizeof(WAVEHDR));
+							 &mv_______->decoder_c____play_2WaveHdr3,
+							 sizeof(WAVEHDR));
 		waveOutWrite(mv_______->decoder_c___phwo,
-		             &mv_______->decoder_c____play_2WaveHdr3,
-		             sizeof(WAVEHDR));
+					 &mv_______->decoder_c____play_2WaveHdr3,
+					 sizeof(WAVEHDR));
 
-		if(mv_______->decodec_c___last_pcm_slice_to_play_k_p)
+		if (mv_______->decodec_c___last_pcm_slice_to_play_k_p)
 		{
 			while (WAVERR_STILLPLAYING ==
-			       waveOutUnprepareHeader(mv_______->decoder_c___phwo,
-			                              &mv_______->decoder_c____play_2WaveHdr3,
-			                              sizeof(WAVEHDR)))
+				   waveOutUnprepareHeader(mv_______->decoder_c___phwo,
+										  &mv_______->decoder_c____play_2WaveHdr3,
+										  sizeof(WAVEHDR)))
 			{
 				Sleep(TEST_1);
 			}
@@ -1296,14 +1270,14 @@ int play_number_2_26_june_2011(morcego___i___instance__a__bucaneiro_engineering 
 	{
 
 		analize_fft(mv_______, &mv_______->decoder_c___spec,
-		            (char *) mv_______->decoder_c____play_2_copia_5_24_june_2011__14_46_PM, 2,
-		            mv_______->decoder_c___inttamanho, 1);
+					(char *)mv_______->decoder_c____play_2_copia_5_24_june_2011__14_46_PM, 2,
+					mv_______->decoder_c___inttamanho, 1);
 		mv_______->decoder_c___rightval = mv_______->decoder_c___spec.peak;
 		mv_______->decoder_c___leftval = mv_______->decoder_c___spec.peak;
 		while (WAVERR_STILLPLAYING ==
-		       waveOutUnprepareHeader(mv_______->decoder_c___phwo,
-		                              &mv_______->decoder_c____play_2WaveHdr4,
-		                              sizeof(WAVEHDR)))
+			   waveOutUnprepareHeader(mv_______->decoder_c___phwo,
+									  &mv_______->decoder_c____play_2WaveHdr4,
+									  sizeof(WAVEHDR)))
 		{
 			Sleep(TEST_1);
 		}
@@ -1312,29 +1286,28 @@ int play_number_2_26_june_2011(morcego___i___instance__a__bucaneiro_engineering 
 			return 0;
 		}
 		memcpy(mv_______->decoder_c____play_2_copia_5_24_june_2011__14_46_PM,
-		       buf, len);
+			   buf, len);
 		mv_______->decoder_c____play_2WaveHdr4.lpData = (char *)
-		                                                mv_______->decoder_c____play_2_copia_5_24_june_2011__14_46_PM;
+															mv_______->decoder_c____play_2_copia_5_24_june_2011__14_46_PM;
 		mv_______->decoder_c____play_2WaveHdr4.dwBufferLength = len;
 		mv_______->decoder_c____play_2WaveHdr4.dwUser = 3;
 		mv_______->decoder_c____play_2WaveHdr4.dwFlags = 0;
 		waveOutPrepareHeader(mv_______->decoder_c___phwo,
-		                     &mv_______->decoder_c____play_2WaveHdr4,
-		                     sizeof(WAVEHDR));
+							 &mv_______->decoder_c____play_2WaveHdr4,
+							 sizeof(WAVEHDR));
 		waveOutWrite(mv_______->decoder_c___phwo,
-		             &mv_______->decoder_c____play_2WaveHdr4,
-		             sizeof(WAVEHDR));
+					 &mv_______->decoder_c____play_2WaveHdr4,
+					 sizeof(WAVEHDR));
 
-		if(mv_______->decodec_c___last_pcm_slice_to_play_k_p)
+		if (mv_______->decodec_c___last_pcm_slice_to_play_k_p)
 		{
 			while (WAVERR_STILLPLAYING ==
-			       waveOutUnprepareHeader(mv_______->decoder_c___phwo,
-			                              &mv_______->decoder_c____play_2WaveHdr4,
-			                              sizeof(WAVEHDR)))
+				   waveOutUnprepareHeader(mv_______->decoder_c___phwo,
+										  &mv_______->decoder_c____play_2WaveHdr4,
+										  sizeof(WAVEHDR)))
 			{
 				Sleep(TEST_1);
 			}
-
 		}
 		mv_______->decoder_c____play_2_position = 0;
 		return 0;
@@ -1346,20 +1319,20 @@ int play_number_2_26_june_2011(morcego___i___instance__a__bucaneiro_engineering 
 }
 
 int play_number_3_26_june_2011(morcego___i___instance__a__bucaneiro_engineering *
-                               mv_______,
-                               uchar *buf, uint len)
+								   mv_______,
+							   uchar *buf, uint len)
 {
 	if (mv_______->decoder_c___just_clean_buffers)
 	{
 		memset(mv_______->decoder_c____play_3_copia_1, 0, 100000);
 		memset(mv_______->decoder_c____play_3_copia_2_24_june_2011__14_12_PM,
-		       0, 100000);
+			   0, 100000);
 		memset(mv_______->decoder_c____play_3_copia_3_24_june_2011__14_19_PM,
-		       0, 100000);
+			   0, 100000);
 		memset(mv_______->decoder_c____play_3_copia_4_24_june_2011__14_26_PM,
-		       0, 100000);
+			   0, 100000);
 		memset(mv_______->decoder_c____play_3_copia_5_24_june_2011__14_46_PM,
-		       0, 100000);
+			   0, 100000);
 		return 0;
 	}
 	switch (mv_______->decoder_c____play_3_position)
@@ -1368,15 +1341,15 @@ int play_number_3_26_june_2011(morcego___i___instance__a__bucaneiro_engineering 
 	{
 
 		analize_fft(mv_______, &mv_______->decoder_c___spec,
-		            (char *)mv_______->decoder_c____play_3_copia_1, 2,
-		            mv_______->decoder_c___inttamanho, 1);
+					(char *)mv_______->decoder_c____play_3_copia_1, 2,
+					mv_______->decoder_c___inttamanho, 1);
 		mv_______->decoder_c___rightval = mv_______->decoder_c___spec.peak;
 		mv_______->decoder_c___leftval = mv_______->decoder_c___spec.peak;
 
 		while (WAVERR_STILLPLAYING ==
-		       waveOutUnprepareHeader(mv_______->decoder_c___phwo,
-		                              &mv_______->decoder_c____play_3WaveHdr,
-		                              sizeof(WAVEHDR)))
+			   waveOutUnprepareHeader(mv_______->decoder_c___phwo,
+									  &mv_______->decoder_c____play_3WaveHdr,
+									  sizeof(WAVEHDR)))
 		{
 			Sleep(TEST_1);
 		}
@@ -1386,23 +1359,23 @@ int play_number_3_26_june_2011(morcego___i___instance__a__bucaneiro_engineering 
 		}
 		memcpy(mv_______->decoder_c____play_3_copia_1, buf, len);
 		mv_______->decoder_c____play_3WaveHdr.lpData = (char *)
-		                                               mv_______->decoder_c____play_3_copia_1;
+														   mv_______->decoder_c____play_3_copia_1;
 		mv_______->decoder_c____play_3WaveHdr.dwBufferLength = len;
 		mv_______->decoder_c____play_3WaveHdr.dwUser = 1;
 		mv_______->decoder_c____play_3WaveHdr.dwFlags = 0;
 		waveOutPrepareHeader(mv_______->decoder_c___phwo,
-		                     &mv_______->decoder_c____play_3WaveHdr,
-		                     sizeof(WAVEHDR));
+							 &mv_______->decoder_c____play_3WaveHdr,
+							 sizeof(WAVEHDR));
 		waveOutWrite(mv_______->decoder_c___phwo,
-		             &mv_______->decoder_c____play_3WaveHdr,
-		             sizeof(WAVEHDR));
+					 &mv_______->decoder_c____play_3WaveHdr,
+					 sizeof(WAVEHDR));
 
-		if(mv_______->decodec_c___last_pcm_slice_to_play_k_p)
+		if (mv_______->decodec_c___last_pcm_slice_to_play_k_p)
 		{
 			while (WAVERR_STILLPLAYING ==
-			       waveOutUnprepareHeader(mv_______->decoder_c___phwo,
-			                              &mv_______->decoder_c____play_3WaveHdr,
-			                              sizeof(WAVEHDR)))
+				   waveOutUnprepareHeader(mv_______->decoder_c___phwo,
+										  &mv_______->decoder_c____play_3WaveHdr,
+										  sizeof(WAVEHDR)))
 			{
 				Sleep(TEST_1);
 			}
@@ -1415,14 +1388,14 @@ int play_number_3_26_june_2011(morcego___i___instance__a__bucaneiro_engineering 
 	{
 
 		analize_fft(mv_______, &mv_______->decoder_c___spec,
-		            (char *) mv_______->decoder_c____play_3_copia_2_24_june_2011__14_12_PM, 2,
-		            mv_______->decoder_c___inttamanho, 1);
+					(char *)mv_______->decoder_c____play_3_copia_2_24_june_2011__14_12_PM, 2,
+					mv_______->decoder_c___inttamanho, 1);
 		mv_______->decoder_c___rightval = mv_______->decoder_c___spec.peak;
 		mv_______->decoder_c___leftval = mv_______->decoder_c___spec.peak;
 		while (WAVERR_STILLPLAYING ==
-		       waveOutUnprepareHeader(mv_______->decoder_c___phwo,
-		                              &mv_______->decoder_c____play_3WaveHdr1,
-		                              sizeof(WAVEHDR)))
+			   waveOutUnprepareHeader(mv_______->decoder_c___phwo,
+									  &mv_______->decoder_c____play_3WaveHdr1,
+									  sizeof(WAVEHDR)))
 		{
 			Sleep(TEST_1);
 		}
@@ -1431,26 +1404,25 @@ int play_number_3_26_june_2011(morcego___i___instance__a__bucaneiro_engineering 
 			return 0;
 		}
 		memcpy(mv_______->decoder_c____play_3_copia_2_24_june_2011__14_12_PM,
-		       buf, len);
+			   buf, len);
 		mv_______->decoder_c____play_3WaveHdr1.lpData = (char *)
-		                                                mv_______->decoder_c____play_3_copia_2_24_june_2011__14_12_PM;
+															mv_______->decoder_c____play_3_copia_2_24_june_2011__14_12_PM;
 		mv_______->decoder_c____play_3WaveHdr1.dwBufferLength = len;
 		mv_______->decoder_c____play_3WaveHdr1.dwUser = 2;
 		mv_______->decoder_c____play_3WaveHdr1.dwFlags = 0;
 		waveOutPrepareHeader(mv_______->decoder_c___phwo,
-		                     &mv_______->decoder_c____play_3WaveHdr1,
-		                     sizeof(WAVEHDR));
+							 &mv_______->decoder_c____play_3WaveHdr1,
+							 sizeof(WAVEHDR));
 		waveOutWrite(mv_______->decoder_c___phwo,
-		             &mv_______->decoder_c____play_3WaveHdr1,
-		             sizeof(WAVEHDR));
+					 &mv_______->decoder_c____play_3WaveHdr1,
+					 sizeof(WAVEHDR));
 
-
-		if(mv_______->decodec_c___last_pcm_slice_to_play_k_p)
+		if (mv_______->decodec_c___last_pcm_slice_to_play_k_p)
 		{
 			while (WAVERR_STILLPLAYING ==
-			       waveOutUnprepareHeader(mv_______->decoder_c___phwo,
-			                              &mv_______->decoder_c____play_3WaveHdr1,
-			                              sizeof(WAVEHDR)))
+				   waveOutUnprepareHeader(mv_______->decoder_c___phwo,
+										  &mv_______->decoder_c____play_3WaveHdr1,
+										  sizeof(WAVEHDR)))
 			{
 				Sleep(TEST_1);
 			}
@@ -1463,14 +1435,14 @@ int play_number_3_26_june_2011(morcego___i___instance__a__bucaneiro_engineering 
 	{
 
 		analize_fft(mv_______, &mv_______->decoder_c___spec,
-		            (char *) mv_______->decoder_c____play_3_copia_3_24_june_2011__14_19_PM, 2,
-		            mv_______->decoder_c___inttamanho, 1);
+					(char *)mv_______->decoder_c____play_3_copia_3_24_june_2011__14_19_PM, 2,
+					mv_______->decoder_c___inttamanho, 1);
 		mv_______->decoder_c___rightval = mv_______->decoder_c___spec.peak;
 		mv_______->decoder_c___leftval = mv_______->decoder_c___spec.peak;
 		while (WAVERR_STILLPLAYING ==
-		       waveOutUnprepareHeader(mv_______->decoder_c___phwo,
-		                              &mv_______->decoder_c____play_3WaveHdr2,
-		                              sizeof(WAVEHDR)))
+			   waveOutUnprepareHeader(mv_______->decoder_c___phwo,
+									  &mv_______->decoder_c____play_3WaveHdr2,
+									  sizeof(WAVEHDR)))
 		{
 			Sleep(TEST_1);
 		}
@@ -1479,25 +1451,25 @@ int play_number_3_26_june_2011(morcego___i___instance__a__bucaneiro_engineering 
 			return 0;
 		}
 		memcpy(mv_______->decoder_c____play_3_copia_3_24_june_2011__14_19_PM,
-		       buf, len);
+			   buf, len);
 		mv_______->decoder_c____play_3WaveHdr2.lpData = (char *)
-		                                                mv_______->decoder_c____play_3_copia_3_24_june_2011__14_19_PM;
+															mv_______->decoder_c____play_3_copia_3_24_june_2011__14_19_PM;
 		mv_______->decoder_c____play_3WaveHdr2.dwBufferLength = len;
 		mv_______->decoder_c____play_3WaveHdr2.dwUser = 3;
 		mv_______->decoder_c____play_3WaveHdr2.dwFlags = 0;
 		waveOutPrepareHeader(mv_______->decoder_c___phwo,
-		                     &mv_______->decoder_c____play_3WaveHdr2,
-		                     sizeof(WAVEHDR));
+							 &mv_______->decoder_c____play_3WaveHdr2,
+							 sizeof(WAVEHDR));
 		waveOutWrite(mv_______->decoder_c___phwo,
-		             &mv_______->decoder_c____play_3WaveHdr2,
-		             sizeof(WAVEHDR));
+					 &mv_______->decoder_c____play_3WaveHdr2,
+					 sizeof(WAVEHDR));
 
-		if(mv_______->decodec_c___last_pcm_slice_to_play_k_p)
+		if (mv_______->decodec_c___last_pcm_slice_to_play_k_p)
 		{
 			while (WAVERR_STILLPLAYING ==
-			       waveOutUnprepareHeader(mv_______->decoder_c___phwo,
-			                              &mv_______->decoder_c____play_3WaveHdr2,
-			                              sizeof(WAVEHDR)))
+				   waveOutUnprepareHeader(mv_______->decoder_c___phwo,
+										  &mv_______->decoder_c____play_3WaveHdr2,
+										  sizeof(WAVEHDR)))
 			{
 				Sleep(TEST_1);
 			}
@@ -1510,14 +1482,14 @@ int play_number_3_26_june_2011(morcego___i___instance__a__bucaneiro_engineering 
 	{
 
 		analize_fft(mv_______, &mv_______->decoder_c___spec,
-		            (char *) mv_______->decoder_c____play_3_copia_4_24_june_2011__14_26_PM, 2,
-		            mv_______->decoder_c___inttamanho, 1);
+					(char *)mv_______->decoder_c____play_3_copia_4_24_june_2011__14_26_PM, 2,
+					mv_______->decoder_c___inttamanho, 1);
 		mv_______->decoder_c___rightval = mv_______->decoder_c___spec.peak;
 		mv_______->decoder_c___leftval = mv_______->decoder_c___spec.peak;
 		while (WAVERR_STILLPLAYING ==
-		       waveOutUnprepareHeader(mv_______->decoder_c___phwo,
-		                              &mv_______->decoder_c____play_3WaveHdr3,
-		                              sizeof(WAVEHDR)))
+			   waveOutUnprepareHeader(mv_______->decoder_c___phwo,
+									  &mv_______->decoder_c____play_3WaveHdr3,
+									  sizeof(WAVEHDR)))
 		{
 			Sleep(TEST_1);
 		}
@@ -1526,25 +1498,25 @@ int play_number_3_26_june_2011(morcego___i___instance__a__bucaneiro_engineering 
 			return 0;
 		}
 		memcpy(mv_______->decoder_c____play_3_copia_4_24_june_2011__14_26_PM,
-		       buf, len);
+			   buf, len);
 		mv_______->decoder_c____play_3WaveHdr3.lpData = (char *)
-		                                                mv_______->decoder_c____play_3_copia_4_24_june_2011__14_26_PM;
+															mv_______->decoder_c____play_3_copia_4_24_june_2011__14_26_PM;
 		mv_______->decoder_c____play_3WaveHdr3.dwBufferLength = len;
 		mv_______->decoder_c____play_3WaveHdr3.dwUser = 3;
 		mv_______->decoder_c____play_3WaveHdr3.dwFlags = 0;
 		waveOutPrepareHeader(mv_______->decoder_c___phwo,
-		                     &mv_______->decoder_c____play_3WaveHdr3,
-		                     sizeof(WAVEHDR));
+							 &mv_______->decoder_c____play_3WaveHdr3,
+							 sizeof(WAVEHDR));
 		waveOutWrite(mv_______->decoder_c___phwo,
-		             &mv_______->decoder_c____play_3WaveHdr3,
-		             sizeof(WAVEHDR));
+					 &mv_______->decoder_c____play_3WaveHdr3,
+					 sizeof(WAVEHDR));
 
-		if(mv_______->decodec_c___last_pcm_slice_to_play_k_p)
+		if (mv_______->decodec_c___last_pcm_slice_to_play_k_p)
 		{
 			while (WAVERR_STILLPLAYING ==
-			       waveOutUnprepareHeader(mv_______->decoder_c___phwo,
-			                              &mv_______->decoder_c____play_3WaveHdr3,
-			                              sizeof(WAVEHDR)))
+				   waveOutUnprepareHeader(mv_______->decoder_c___phwo,
+										  &mv_______->decoder_c____play_3WaveHdr3,
+										  sizeof(WAVEHDR)))
 			{
 				Sleep(TEST_1);
 			}
@@ -1557,14 +1529,14 @@ int play_number_3_26_june_2011(morcego___i___instance__a__bucaneiro_engineering 
 	{
 
 		analize_fft(mv_______, &mv_______->decoder_c___spec,
-		            (char *) mv_______->decoder_c____play_3_copia_5_24_june_2011__14_46_PM, 2,
-		            mv_______->decoder_c___inttamanho, 1);
+					(char *)mv_______->decoder_c____play_3_copia_5_24_june_2011__14_46_PM, 2,
+					mv_______->decoder_c___inttamanho, 1);
 		mv_______->decoder_c___rightval = mv_______->decoder_c___spec.peak;
 		mv_______->decoder_c___leftval = mv_______->decoder_c___spec.peak;
 		while (WAVERR_STILLPLAYING ==
-		       waveOutUnprepareHeader(mv_______->decoder_c___phwo,
-		                              &mv_______->decoder_c____play_3WaveHdr4,
-		                              sizeof(WAVEHDR)))
+			   waveOutUnprepareHeader(mv_______->decoder_c___phwo,
+									  &mv_______->decoder_c____play_3WaveHdr4,
+									  sizeof(WAVEHDR)))
 		{
 			Sleep(TEST_1);
 		}
@@ -1573,25 +1545,25 @@ int play_number_3_26_june_2011(morcego___i___instance__a__bucaneiro_engineering 
 			return 0;
 		}
 		memcpy(mv_______->decoder_c____play_3_copia_5_24_june_2011__14_46_PM,
-		       buf, len);
+			   buf, len);
 		mv_______->decoder_c____play_3WaveHdr4.lpData = (char *)
-		                                                mv_______->decoder_c____play_3_copia_5_24_june_2011__14_46_PM;
+															mv_______->decoder_c____play_3_copia_5_24_june_2011__14_46_PM;
 		mv_______->decoder_c____play_3WaveHdr4.dwBufferLength = len;
 		mv_______->decoder_c____play_3WaveHdr4.dwUser = 3;
 		mv_______->decoder_c____play_3WaveHdr4.dwFlags = 0;
 		waveOutPrepareHeader(mv_______->decoder_c___phwo,
-		                     &mv_______->decoder_c____play_3WaveHdr4,
-		                     sizeof(WAVEHDR));
+							 &mv_______->decoder_c____play_3WaveHdr4,
+							 sizeof(WAVEHDR));
 		waveOutWrite(mv_______->decoder_c___phwo,
-		             &mv_______->decoder_c____play_3WaveHdr4,
-		             sizeof(WAVEHDR));
+					 &mv_______->decoder_c____play_3WaveHdr4,
+					 sizeof(WAVEHDR));
 
-		if(mv_______->decodec_c___last_pcm_slice_to_play_k_p)
+		if (mv_______->decodec_c___last_pcm_slice_to_play_k_p)
 		{
 			while (WAVERR_STILLPLAYING ==
-			       waveOutUnprepareHeader(mv_______->decoder_c___phwo,
-			                              &mv_______->decoder_c____play_3WaveHdr4,
-			                              sizeof(WAVEHDR)))
+				   waveOutUnprepareHeader(mv_______->decoder_c___phwo,
+										  &mv_______->decoder_c____play_3WaveHdr4,
+										  sizeof(WAVEHDR)))
 			{
 				Sleep(TEST_1);
 			}
@@ -1609,7 +1581,7 @@ int play_number_3_26_june_2011(morcego___i___instance__a__bucaneiro_engineering 
  * It will send in sequence perfectly the pcm data to the soundcard
  */
 int play(morcego___i___instance__a__bucaneiro_engineering *mv_______,
-         uchar *buf, uint len)
+		 uchar *buf, uint len)
 {
 	pedro_dprintf(-1, "size em play len %d", len);
 	if (mv_______->decoder_c___cancelflag)
@@ -1662,20 +1634,20 @@ int finalizeplayer(morcego___i___instance__a__bucaneiro_engineering *mv_______)
  */
 __int64
 id3v2tag_multithread(morcego___i___instance__a__bucaneiro_engineering *mv_______,
-                     char *filename)
+					 char *filename)
 {
 
-	FILE *astdin    = NULL;
+	FILE *astdin = NULL;
 	int ret;
 	static uchar item[255];
 	uint fatia1;
 	uint fatia2;
 	uint fatia3;
 	uint fatia4;
-	(void) mv_______;
+	(void)mv_______;
 	if ((astdin =
-		     _wfopen(permissive_name_m_(amanda_utf8towide_3_(filename)),
-		             L"rb")) == NULL)
+			 _wfopen(permissive_name_m_(amanda_utf8towide_3_(filename)),
+					 L"rb")) == NULL)
 	{
 		return 0;
 	}
@@ -1714,31 +1686,30 @@ id3v2tag_multithread(morcego___i___instance__a__bucaneiro_engineering *mv_______
  * len is the whole size of the bytes in the signed short samples
  */
 void setvolume2(morcego___i___instance__a__bucaneiro_engineering *mv_______,
-                uchar *buf, uint len)
+				uchar *buf, uint len)
 {
-	signed short  *fatia; // notice that it is ´signed´ no matter what it means
+	signed short *fatia; // notice that it is ´signed´ no matter what it means
 	int tempo;
 	int *fatia2 = &tempo;
 	float temp;
 	int i;
 	fatia = (signed short *)buf;
-	for (i = 0; i < (int) len; i = i + 2)
+	for (i = 0; i < (int)len; i = i + 2)
 	{
 		*fatia2 = (int)*fatia;
 		temp = (float)*fatia2;
 		temp = temp * mv_______->decoder_c___intvolume;
 		*fatia2 = (int)temp;
-		if (*fatia2 > 32767       )
+		if (*fatia2 > 32767)
 		{
 			*fatia2 = 32767;
 		}
-		if (*fatia2 < -32768      )
+		if (*fatia2 < -32768)
 		{
 
 			*fatia2 = -32768;
 		}
-		*fatia = (signed short)*
-		         fatia2;
+		*fatia = (signed short)*fatia2;
 		fatia++;
 	}
 }
@@ -1747,33 +1718,32 @@ void setvolume2(morcego___i___instance__a__bucaneiro_engineering *mv_______,
  * volume is set here
  */
 int setvolume3(morcego___i___instance__a__bucaneiro_engineering *mv_______,
-               uchar *buf, uint len)
+			   uchar *buf, uint len)
 {
-	signed short            *fatia;
+	signed short *fatia;
 	int tempo;
-	int *fatia2           = &tempo;
+	int *fatia2 = &tempo;
 	float temp;
 	int i;
-	fatia = (signed short *)   buf;
-	for (i = 0; i < (int) len; i = i + 2)
+	fatia = (signed short *)buf;
+	for (i = 0; i < (int)len; i = i + 2)
 	{
 
 		*fatia2 = (int)*fatia;
 		temp = (float)*fatia2;
 		temp = temp * mv_______->decoder_c___intvolume2;
-		*fatia2 =   (int)temp;
-		if (*fatia2 >   32767)
+		*fatia2 = (int)temp;
+		if (*fatia2 > 32767)
 		{
-			*fatia2 =   32767;
+			*fatia2 = 32767;
 		}
-		if (*fatia2 <  -32768)
+		if (*fatia2 < -32768)
 		{
 
-			*fatia2 =  -32768; //this is the smallest short value
+			*fatia2 = -32768; // this is the smallest short value
 		}
 
-		*fatia =       (signed
-		                short)*fatia2;
+		*fatia = (signed short)*fatia2;
 
 		fatia++;
 	}
@@ -1785,15 +1755,12 @@ int setvolume3(morcego___i___instance__a__bucaneiro_engineering *mv_______,
  * \param filename the file to play as a utf-8 encoded C string
  * \return 0 if no error or the error value<br>
  */
-int
-morcego_play
-(
+int morcego_play(
 	morcego___i___instance__a__bucaneiro_engineering *mv_______,
-	unsigned
-	char
-	*filename, int track
-);
-//this is where the magic occurs
+	unsigned char
+		*filename,
+	int track);
+// this is where the magic occurs
 #include "player.c"
 
 /**
@@ -1803,13 +1770,13 @@ int __stdcall startapi2(morcego___i___instance__a__bucaneiro_engineering *mv____
 {
 	mv_______->decoder_c___flagdewave = 0;
 	mv_______->decoder_c___intreturn2 = 0;
-	//thinktwice1);
+	// thinktwice1);
 
 	int ret;
 
 	ret =
 		morcego_play(mv_______,
-		             (unsigned char *) mv_______->decoder_c___intfilename, mv_______->decoder_c___the_track);
+					 (unsigned char *)mv_______->decoder_c___intfilename, mv_______->decoder_c___the_track);
 
 	mv_______->decoder_c___intreturn2 = mv_______->decoder_c___intreturn = ret;
 
@@ -1827,8 +1794,8 @@ int __stdcall playogg /* because this code was borrowed from Ogg Vorbis code 20 
 
 	myhandle =
 		CreateThread((LPSECURITY_ATTRIBUTES)0, 0,
-		             (LPTHREAD_START_ROUTINE)startapi2,
-		             (LPVOID)mv_______, 0, (LPDWORD)&ThreadId);
+					 (LPTHREAD_START_ROUTINE)startapi2,
+					 (LPVOID)mv_______, 0, (LPDWORD)&ThreadId);
 	CloseHandle(myhandle);
 	return 0;
 }
@@ -1840,7 +1807,7 @@ int __stdcall playogg /* because this code was borrowed from Ogg Vorbis code 20 
  *
  */
 int setvolume(morcego___i___instance__a__bucaneiro_engineering *mv_______,
-              int newvalue)
+			  int newvalue)
 {
 	int first;
 	int second;
@@ -1853,14 +1820,14 @@ int setvolume(morcego___i___instance__a__bucaneiro_engineering *mv_______,
 	{
 		return 0;
 	}
-	newvalue = newvalue * 0x28f;//I dont remember what is it, kkkk, but works..., this volume set API is just weird, low 16 bits set one channel and high 16 bits set the other channel
+	newvalue = newvalue * 0x28f; // I dont remember what is it, kkkk, but works..., this volume set API is just weird, low 16 bits set one channel and high 16 bits set the other channel
 	if (newvalue > 0xffff)
 	{
 		newvalue = 0xffff;
 	}
 	first = newvalue;
 	second = (first << 16) + newvalue;
-	(void) waveOutSetVolume(mv_______->decoder_c___phwo, second);
+	(void)waveOutSetVolume(mv_______->decoder_c___phwo, second);
 	mv_______->decoder_c___valuetoset = -1;
 	return 0;
 }
@@ -1873,8 +1840,8 @@ int __stdcall getdevicename(uchar *nome, uint devicenumber)
 	WAVEOUTCAPS pwoc;
 	memset(&pwoc, 0, sizeof(pwoc));
 	waveOutGetDevCaps(devicenumber, &pwoc, sizeof(WAVEOUTCAPS));
-	strcpy( (char *) nome, pwoc.szPname);
-	sprintf((char *) nome + strlen((char *) nome), " (wMid:%d wPid:%d)", pwoc.wMid, pwoc.wPid);
+	strcpy((char *)nome, pwoc.szPname);
+	sprintf((char *)nome + strlen((char *)nome), " (wMid:%d wPid:%d)", pwoc.wMid, pwoc.wPid);
 	return 0;
 }
 
@@ -1882,8 +1849,7 @@ int __stdcall getdevicename(uchar *nome, uint devicenumber)
  * It will return the status of the player, if 0 the player is running
  *
  */
-int
-checkinit(morcego___i___instance__a__bucaneiro_engineering *mv_______)
+int checkinit(morcego___i___instance__a__bucaneiro_engineering *mv_______)
 {
 	if (mv_______->decoder_c___notloaded)
 	{
@@ -1899,7 +1865,7 @@ checkinit(morcego___i___instance__a__bucaneiro_engineering *mv_______)
  *
  */
 int __stdcall interface1(__attribute__((unused)) __INT32_OR_INT64 argumento1, __attribute__((unused)) __INT32_OR_INT64 argumento2,
-                         __attribute__((unused)) __INT32_OR_INT64 argumento3, __attribute__((unused)) __INT32_OR_INT64 argumento4)
+						 __attribute__((unused)) __INT32_OR_INT64 argumento3, __attribute__((unused)) __INT32_OR_INT64 argumento4)
 {
 	assert(0 && "Not in use anymore, unfortunatelly...\n");
 	return 0;
@@ -1930,7 +1896,7 @@ int rsplink(char *dest, char *src)
  *******************************************************************************
  *******************************************************************************
  ******************************************************************************/
-//funcoes_tag
+// funcoes_tag
 HMODULE instances[1000] = {
 	0,
 };
@@ -1947,11 +1913,11 @@ void get_ini_name(char *name)
 		0,
 	};
 	HMODULE hmod;
-	hmod = GetModuleHandle("rspmp3ocx1.dll"); //hardcoded as you may expect
-	if (0 ==      hmod)
+	hmod = GetModuleHandle("rspmp3ocx1.dll"); // hardcoded as you may expect
+	if (0 == hmod)
 	{
 		mprintf("Missing rspmp3ocx1.dll dll \n");
-		exit       (1);
+		exit(1);
 	}
 	{
 		WCHAR temp_w[300];
@@ -1963,14 +1929,14 @@ void get_ini_name(char *name)
 		free(ul);
 	}
 	temp[strlen(temp) - 4] = 0;
-	strcat(temp, ".ini");//don`t be afraid, it will be replaced with a xml file with extension .mis, later in the code
+	strcat(temp, ".ini"); // don`t be afraid, it will be replaced with a xml file with extension .mis, later in the code
 	strcpy(name, temp);
 }
 
 int __stdcall write_ini_xml(char *app_name, char *key_name, char *data,
-                            int len, char *ini_file);
+							int len, char *ini_file);
 int __stdcall read_ini_xml(char *app_name, char *key_name, char *data,
-                           int *out_len, char *ini_file);
+						   int *out_len, char *ini_file);
 /**
  * It will create a new instance of the decoder, this is the first function that need to be called
  */
@@ -1980,62 +1946,62 @@ BE_CreateDecoder()
 	morcego___i___instance__a__bucaneiro_engineering *mv_______;
 	mv_______ =
 		(morcego___i___instance__a__bucaneiro_engineering *)(__INT32_OR_INT64)
-		calloc(sizeof(morcego___i___instance__a__bucaneiro_engineering), 1);
+			calloc(sizeof(morcego___i___instance__a__bucaneiro_engineering), 1);
 	if (mv_______)
 	{
-		mv_______->sIgnature =                              0xbadc0da;
-		mv_______->decoder_c___the_track                    =       1;
-		mv_______->decoder_c___morcego_channels             =       2;
-		mv_______->decoder_c___globalrange                  =      50;
-		mv_______->decoder_c___seekto                       =      -1;
-		mv_______->decoder_c___intvolume                    =     1.0;
-		mv_______->decoder_c___intvolume2                   =     1.0;
-		mv_______->decoder_c___liberafft                    =       1;
-		mv_______->decoder_c___valuetoset                   =      -1;
-		mv_______->decoder_c___intpriority                  =       2;
-		mv_______->decoder_c___intwaveout               = WAVE_MAPPER;
-		mv_______->be_real = calloc      (sizeof(be_libav_struct), 1);
-		mv_______->be_ptr = calloc       (sizeof(be_libav_struct), 1);
-		mv_______->fourier_c___fftenabled                   =       1;
-		mv_______->fourier_c___enable                       =       1;
-		mv_______->freeverb_plugin___attenuation            =    0.65; // magic value
-		mv_______->iir_c___j                                =       2;
-		mv_______->iir_c___k                                =       1;
-		mv_______->iir_c_2__j                               =       2;
-		mv_______->iir_c_2__k                               =       1;
-		mv_______->iir_c_60__k                              =       1;
-		mv_______->iir_c_60__j                              =       2;
-		mv_______->morcego_interface_c___seek               =      -1;
-		mv_______->libav_c___adjusted_ratio                 =       0;
-		mv_______->libav_c___sync_adjust                    =     0.0;
+		mv_______->sIgnature = 0xbadc0da;
+		mv_______->decoder_c___the_track = 1;
+		mv_______->decoder_c___morcego_channels = 2;
+		mv_______->decoder_c___globalrange = 50;
+		mv_______->decoder_c___seekto = -1;
+		mv_______->decoder_c___intvolume = 1.0;
+		mv_______->decoder_c___intvolume2 = 1.0;
+		mv_______->decoder_c___liberafft = 1;
+		mv_______->decoder_c___valuetoset = -1;
+		mv_______->decoder_c___intpriority = 2;
+		mv_______->decoder_c___intwaveout = WAVE_MAPPER;
+		mv_______->be_real = calloc(sizeof(be_libav_struct), 1);
+		mv_______->be_ptr = calloc(sizeof(be_libav_struct), 1);
+		mv_______->fourier_c___fftenabled = 1;
+		mv_______->fourier_c___enable = 1;
+		mv_______->freeverb_plugin___attenuation = 0.65; // magic value
+		mv_______->iir_c___j = 2;
+		mv_______->iir_c___k = 1;
+		mv_______->iir_c_2__j = 2;
+		mv_______->iir_c_2__k = 1;
+		mv_______->iir_c_60__k = 1;
+		mv_______->iir_c_60__j = 2;
+		mv_______->morcego_interface_c___seek = -1;
+		mv_______->libav_c___adjusted_ratio = 0;
+		mv_______->libav_c___sync_adjust = 0.0;
 
-		mv_______->libav_c___enable_slow_computers_hack_k_p =       1;//default enabled, I am not sure it is a great idea...
+		mv_______->libav_c___enable_slow_computers_hack_k_p = 1; // default enabled, I am not sure it is a great idea...
 
-		//added October 2020
+		// added October 2020
 		mv_______->libav_c___sample_rate_format_string = malloc(1024);
 
 		assert(mv_______->libav_c___sample_rate_format_string);
 
-		//added November 2020
-		memset(mv_______->libav_c___amanda_video_thread_error_message_kp, 0, 8*8);
-		mv_______->libav_c___amanda_video_thread_error_value_kp   = 0;
-		mv_______->libav_c___screen_kp                         = NULL;
-		mv_______->libav_c___renderer_kp                       = NULL;
-		mv_______->libav_c___texture_kp                        = NULL;
-		mv_______->libav_c___yPlane_kp                         = NULL;
-		mv_______->libav_c___uPlane_kp                         = NULL;
-		mv_______->libav_c___vPlane_kp                         = NULL;
-		mv_______->/*bom dia amor...*/ libav_c___yPlaneSz_kp   =    0;
-		mv_______->libav_c___uvPlaneSz_kp                      =    0;
-		mv_______->libav_c___uvPitch_kp                        =    0;
-		mv_______->libav_c___sc_kp                             = NULL;
+		// added November 2020
+		memset(mv_______->libav_c___amanda_video_thread_error_message_kp, 0, 8 * 8);
+		mv_______->libav_c___amanda_video_thread_error_value_kp = 0;
+		mv_______->libav_c___screen_kp = NULL;
+		mv_______->libav_c___renderer_kp = NULL;
+		mv_______->libav_c___texture_kp = NULL;
+		mv_______->libav_c___yPlane_kp = NULL;
+		mv_______->libav_c___uPlane_kp = NULL;
+		mv_______->libav_c___vPlane_kp = NULL;
+		mv_______->/*bom dia amor...*/ libav_c___yPlaneSz_kp = 0;
+		mv_______->libav_c___uvPlaneSz_kp = 0;
+		mv_______->libav_c___uvPitch_kp = 0;
+		mv_______->libav_c___sc_kp = NULL;
 		/*
-		        dprintf_z("allocated memory %08x size %d\n",        mv_______,
-		        sizeof(morcego___i___instance__a__bucaneiro_engineering));
+				dprintf_z("allocated memory %08x size %d\n",        mv_______,
+				sizeof(morcego___i___instance__a__bucaneiro_engineering));
 		 */
 	}
 	else
-		mprintf("Cannot allocate memory\n"),                 exit(23);
+		mprintf("Cannot allocate memory\n"), exit(23);
 	return (__int64)(__INT32_OR_INT64)mv_______;
 }
 
@@ -2044,29 +2010,28 @@ BE_CreateDecoder()
  */
 void BE_CloseDecoder(__int64 *instance_64)
 {
-	//protected
+	// protected
 	int *instance = (int *)(__INT32_OR_INT64)*instance_64;
 
 	if (instance)
 	{
-		//dprintf_z("freeing memory %p\n", instance);
+		// dprintf_z("freeing memory %p\n", instance);
 
-		morcego___i___instance__a__bucaneiro_engineering     *mv_______ =
+		morcego___i___instance__a__bucaneiro_engineering *mv_______ =
 			(morcego___i___instance__a__bucaneiro_engineering *)instance;
-		free(mv_______->libav_c___sample_rate_format_string            );
-		mv_______->libav_c___sample_rate_format_string            = NULL;
+		free(mv_______->libav_c___sample_rate_format_string);
+		mv_______->libav_c___sample_rate_format_string = NULL;
 		free(mv_______->be_ptr);
 		mv_______->be_ptr = NULL;
 		free(mv_______->be_real);
 		mv_______->be_real = NULL;
 		free(instance);
-		*instance_64 = 0;//correct... will crash if used again
+		*instance_64 = 0; // correct... will crash if used again
 	}
 	else
 	{
 		pedro_dprintf(1001, "tentando dar free em endereco 0\n");
 	}
-
 }
 /**
  * It will retrieve the information from the ini (now xml) file
@@ -2082,25 +2047,25 @@ int __stdcall GetSettings(char *key, char *data, char *defaulT)
 		get_ini_name(filename);
 		get_ini_name(filename_mis);
 
-		filename_mis[strlen(filename_mis) - 3] = 'm';//.mis == xml file as you will see :  Mislaine my first daughther
+		filename_mis[strlen(filename_mis) - 3] = 'm'; //.mis == xml file as you will see :  Mislaine my first daughther
 		filename_mis[strlen(filename_mis) - 2] = 'i';
 		filename_mis[strlen(filename_mis) - 1] = 's';
 	}
 	data[0] = 0;
 	ret_arp_ = feline_read_xml(filename_mis,
-	                           "impxmlv2 settings, from 2021, by z",
-	                           key,
-	                           NULL,
-	                           data);
+							   "impxmlv2 settings, from 2021, by z",
+							   key,
+							   NULL,
+							   data);
 
 	pedro_dprintf(-1, "ret_arp_ %d mis file %s\n", ret_arp_,
-	              filename_mis);
+				  filename_mis);
 
-	//read_ini("impxmlv2 settings, from 2011", key, data, len, filename, 1);
+	// read_ini("impxmlv2 settings, from 2011", key, data, len, filename, 1);
 
-	if(1 == ret_arp_)
+	if (1 == ret_arp_)
 	{
-		char * data_v27 = malloc(1027);
+		char *data_v27 = malloc(1027);
 		char key_27[1027];
 
 		strcpy(key_27, "priority");
@@ -2108,279 +2073,279 @@ int __stdcall GetSettings(char *key, char *data, char *defaulT)
 		read_ini("impxmlv2 settings, from 2011", key_27, data_v27, len, filename, 1);
 
 		feline_write_xml(filename_mis,
-		                 "impxmlv2 settings, from 2021, by z",
-		                 key_27,
-		                 NULL,
-		                 data_v27);
+						 "impxmlv2 settings, from 2021, by z",
+						 key_27,
+						 NULL,
+						 data_v27);
 
 		strcpy(key_27, "filename");
 		data_v27[0] = 0;
 		read_ini("impxmlv2 settings, from 2011", key_27, data_v27, len, filename, 1);
 
 		feline_write_xml(filename_mis,
-		                 "impxmlv2 settings, from 2021, by z",
-		                 key_27,
-		                 NULL,
-		                 data_v27);
+						 "impxmlv2 settings, from 2021, by z",
+						 key_27,
+						 NULL,
+						 data_v27);
 
 		strcpy(key_27, "be_effect");
 		data_v27[0] = 0;
 		read_ini("impxmlv2 settings, from 2011", key_27, data_v27, len, filename, 1);
 
 		feline_write_xml(filename_mis,
-		                 "impxmlv2 settings, from 2021, by z",
-		                 key_27,
-		                 NULL,
-		                 data_v27);
+						 "impxmlv2 settings, from 2021, by z",
+						 key_27,
+						 NULL,
+						 data_v27);
 
 		strcpy(key_27, "be_effect_val");
 		data_v27[0] = 0;
 		read_ini("impxmlv2 settings, from 2011", key_27, data_v27, len, filename, 1);
 
 		feline_write_xml(filename_mis,
-		                 "impxmlv2 settings, from 2021, by z",
-		                 key_27,
-		                 NULL,
-		                 data_v27);
+						 "impxmlv2 settings, from 2021, by z",
+						 key_27,
+						 NULL,
+						 data_v27);
 
 		strcpy(key_27, "replaygain");
 		data_v27[0] = 0;
 		read_ini("impxmlv2 settings, from 2011", key_27, data_v27, len, filename, 1);
 
 		feline_write_xml(filename_mis,
-		                 "impxmlv2 settings, from 2021, by z",
-		                 key_27,
-		                 NULL,
-		                 data_v27);
+						 "impxmlv2 settings, from 2021, by z",
+						 key_27,
+						 NULL,
+						 data_v27);
 
 		strcpy(key_27, "volume_v11");
 		data_v27[0] = 0;
 		read_ini("impxmlv2 settings, from 2011", key_27, data_v27, len, filename, 1);
 
 		feline_write_xml(filename_mis,
-		                 "impxmlv2 settings, from 2021, by z",
-		                 key_27,
-		                 NULL,
-		                 data_v27);
+						 "impxmlv2 settings, from 2021, by z",
+						 key_27,
+						 NULL,
+						 data_v27);
 
 		strcpy(key_27, "loop");
 		data_v27[0] = 0;
 		read_ini("impxmlv2 settings, from 2011", key_27, data_v27, len, filename, 1);
 
 		feline_write_xml(filename_mis,
-		                 "impxmlv2 settings, from 2021, by z",
-		                 key_27,
-		                 NULL,
-		                 data_v27);
+						 "impxmlv2 settings, from 2021, by z",
+						 key_27,
+						 NULL,
+						 data_v27);
 
 		strcpy(key_27, "stereo_as_mono");
 		data_v27[0] = 0;
 		read_ini("impxmlv2 settings, from 2011", key_27, data_v27, len, filename, 1);
 
 		feline_write_xml(filename_mis,
-		                 "impxmlv2 settings, from 2021, by z",
-		                 key_27,
-		                 NULL,
-		                 data_v27);
+						 "impxmlv2 settings, from 2021, by z",
+						 key_27,
+						 NULL,
+						 data_v27);
 
 		strcpy(key_27, "equalizer");
 		data_v27[0] = 0;
 		read_ini("impxmlv2 settings, from 2011", key_27, data_v27, len, filename, 1);
 
 		feline_write_xml(filename_mis,
-		                 "impxmlv2 settings, from 2021, by z",
-		                 key_27,
-		                 NULL,
-		                 data_v27);
+						 "impxmlv2 settings, from 2021, by z",
+						 key_27,
+						 NULL,
+						 data_v27);
 
 		strcpy(key_27, "s60");
 		data_v27[0] = 0;
 		read_ini("impxmlv2 settings, from 2011", key_27, data_v27, len, filename, 1);
 
 		feline_write_xml(filename_mis,
-		                 "impxmlv2 settings, from 2021, by z",
-		                 key_27,
-		                 NULL,
-		                 data_v27);
+						 "impxmlv2 settings, from 2021, by z",
+						 key_27,
+						 NULL,
+						 data_v27);
 
 		strcpy(key_27, "s170");
 		data_v27[0] = 0;
 		read_ini("impxmlv2 settings, from 2011", key_27, data_v27, len, filename, 1);
 
 		feline_write_xml(filename_mis,
-		                 "impxmlv2 settings, from 2021, by z",
-		                 key_27,
-		                 NULL,
-		                 data_v27);
+						 "impxmlv2 settings, from 2021, by z",
+						 key_27,
+						 NULL,
+						 data_v27);
 
 		strcpy(key_27, "s310");
 		data_v27[0] = 0;
 		read_ini("impxmlv2 settings, from 2011", key_27, data_v27, len, filename, 1);
 
 		feline_write_xml(filename_mis,
-		                 "impxmlv2 settings, from 2021, by z",
-		                 key_27,
-		                 NULL,
-		                 data_v27);
+						 "impxmlv2 settings, from 2021, by z",
+						 key_27,
+						 NULL,
+						 data_v27);
 
 		strcpy(key_27, "s12000");
 		data_v27[0] = 0;
 		read_ini("impxmlv2 settings, from 2011", key_27, data_v27, len, filename, 1);
 
 		feline_write_xml(filename_mis,
-		                 "impxmlv2 settings, from 2021, by z",
-		                 key_27,
-		                 NULL,
-		                 data_v27);
+						 "impxmlv2 settings, from 2021, by z",
+						 key_27,
+						 NULL,
+						 data_v27);
 
 		strcpy(key_27, "s14000");
 		data_v27[0] = 0;
 		read_ini("impxmlv2 settings, from 2011", key_27, data_v27, len, filename, 1);
 
 		feline_write_xml(filename_mis,
-		                 "impxmlv2 settings, from 2021, by z",
-		                 key_27,
-		                 NULL,
-		                 data_v27);
+						 "impxmlv2 settings, from 2021, by z",
+						 key_27,
+						 NULL,
+						 data_v27);
 
 		strcpy(key_27, "s16000");
 		data_v27[0] = 0;
 		read_ini("impxmlv2 settings, from 2011", key_27, data_v27, len, filename, 1);
 
 		feline_write_xml(filename_mis,
-		                 "impxmlv2 settings, from 2021, by z",
-		                 key_27,
-		                 NULL,
-		                 data_v27);
+						 "impxmlv2 settings, from 2021, by z",
+						 key_27,
+						 NULL,
+						 data_v27);
 
 		strcpy(key_27, "waveout");
 		data_v27[0] = 0;
 		read_ini("impxmlv2 settings, from 2011", key_27, data_v27, len, filename, 1);
 
 		feline_write_xml(filename_mis,
-		                 "impxmlv2 settings, from 2021, by z",
-		                 key_27,
-		                 NULL,
-		                 data_v27);
+						 "impxmlv2 settings, from 2021, by z",
+						 key_27,
+						 NULL,
+						 data_v27);
 
 		strcpy(key_27, "double");
 		data_v27[0] = 0;
 		read_ini("impxmlv2 settings, from 2011", key_27, data_v27, len, filename, 1);
 
 		feline_write_xml(filename_mis,
-		                 "impxmlv2 settings, from 2021, by z",
-		                 key_27,
-		                 NULL,
-		                 data_v27);
+						 "impxmlv2 settings, from 2021, by z",
+						 key_27,
+						 NULL,
+						 data_v27);
 
 		strcpy(key_27, "pre");
 		data_v27[0] = 0;
 		read_ini("impxmlv2 settings, from 2011", key_27, data_v27, len, filename, 1);
 
 		feline_write_xml(filename_mis,
-		                 "impxmlv2 settings, from 2021, by z",
-		                 key_27,
-		                 NULL,
-		                 data_v27);
+						 "impxmlv2 settings, from 2021, by z",
+						 key_27,
+						 NULL,
+						 data_v27);
 
 		strcpy(key_27, "pre_val");
 		data_v27[0] = 0;
 		read_ini("impxmlv2 settings, from 2011", key_27, data_v27, len, filename, 1);
 
 		feline_write_xml(filename_mis,
-		                 "impxmlv2 settings, from 2021, by z",
-		                 key_27,
-		                 NULL,
-		                 data_v27);
+						 "impxmlv2 settings, from 2021, by z",
+						 key_27,
+						 NULL,
+						 data_v27);
 
 		strcpy(key_27, "s600");
 		data_v27[0] = 0;
 		read_ini("impxmlv2 settings, from 2011", key_27, data_v27, len, filename, 1);
 
 		feline_write_xml(filename_mis,
-		                 "impxmlv2 settings, from 2021, by z",
-		                 key_27,
-		                 NULL,
-		                 data_v27);
+						 "impxmlv2 settings, from 2021, by z",
+						 key_27,
+						 NULL,
+						 data_v27);
 
 		strcpy(key_27, "s1000");
 		data_v27[0] = 0;
 		read_ini("impxmlv2 settings, from 2011", key_27, data_v27, len, filename, 1);
 
 		feline_write_xml(filename_mis,
-		                 "impxmlv2 settings, from 2021, by z",
-		                 key_27,
-		                 NULL,
-		                 data_v27);
+						 "impxmlv2 settings, from 2021, by z",
+						 key_27,
+						 NULL,
+						 data_v27);
 
 		strcpy(key_27, "s3000");
 		data_v27[0] = 0;
 		read_ini("impxmlv2 settings, from 2011", key_27, data_v27, len, filename, 1);
 
 		feline_write_xml(filename_mis,
-		                 "impxmlv2 settings, from 2021, by z",
-		                 key_27,
-		                 NULL,
-		                 data_v27);
+						 "impxmlv2 settings, from 2021, by z",
+						 key_27,
+						 NULL,
+						 data_v27);
 
 		strcpy(key_27, "s6000");
 		data_v27[0] = 0;
 		read_ini("impxmlv2 settings, from 2011", key_27, data_v27, len, filename, 1);
 
 		feline_write_xml(filename_mis,
-		                 "impxmlv2 settings, from 2021, by z",
-		                 key_27,
-		                 NULL,
-		                 data_v27);
+						 "impxmlv2 settings, from 2021, by z",
+						 key_27,
+						 NULL,
+						 data_v27);
 
 		strcpy(key_27, "wav_out_vol");
 		data_v27[0] = 0;
 		read_ini("impxmlv2 settings, from 2011", key_27, data_v27, len, filename, 1);
 
 		feline_write_xml(filename_mis,
-		                 "impxmlv2 settings, from 2021, by z",
-		                 key_27,
-		                 NULL,
-		                 data_v27);
+						 "impxmlv2 settings, from 2021, by z",
+						 key_27,
+						 NULL,
+						 data_v27);
 
 		strcpy(key_27, "randon");
 		data_v27[0] = 0;
 		read_ini("impxmlv2 settings, from 2011", key_27, data_v27, len, filename, 1);
 
 		feline_write_xml(filename_mis,
-		                 "impxmlv2 settings, from 2021, by z",
-		                 key_27,
-		                 NULL,
-		                 data_v27);
+						 "impxmlv2 settings, from 2021, by z",
+						 key_27,
+						 NULL,
+						 data_v27);
 
 		strcpy(key_27, "slow_computers_hack_k_p");
 		data_v27[0] = 0;
 		read_ini("impxmlv2 settings, from 2011", key_27, data_v27, len, filename, 1);
 
 		feline_write_xml(filename_mis,
-		                 "impxmlv2 settings, from 2021, by z",
-		                 key_27,
-		                 NULL,
-		                 data_v27);
+						 "impxmlv2 settings, from 2021, by z",
+						 key_27,
+						 NULL,
+						 data_v27);
 
 		strcpy(key_27, "new_filename_k_p");
 		data_v27[0] = 0;
 		read_ini("impxmlv2 settings, from 2011", key_27, data_v27, len, filename, 1);
 
 		feline_write_xml(filename_mis,
-		                 "impxmlv2 settings, from 2021, by z",
-		                 key_27,
-		                 NULL,
-		                 data_v27);
+						 "impxmlv2 settings, from 2021, by z",
+						 key_27,
+						 NULL,
+						 data_v27);
 
 		unlink("rspmp3ocx1.ini");
-		free (data_v27);
+		free(data_v27);
 
 		ret_arp_ = feline_read_xml(filename_mis,
-		                           "impxmlv2 settings, from 2021, by z",
-		                           key,
-		                           NULL,
-		                           data);
+								   "impxmlv2 settings, from 2021, by z",
+								   key,
+								   NULL,
+								   data);
 	}
 
 	if (0 == strlen(data))
@@ -2404,7 +2369,7 @@ int __stdcall SaveSettings(char *key, char *data)
 	{
 
 		get_ini_name(filename_mis);
-		get_ini_name(filename    );
+		get_ini_name(filename);
 
 		filename_mis[strlen(filename_mis) - 3] = 'm';
 		filename_mis[strlen(filename_mis) - 2] = 'i';
@@ -2412,14 +2377,14 @@ int __stdcall SaveSettings(char *key, char *data)
 	}
 
 	ret_arp_ = feline_read_xml(filename_mis,
-	                           "impxmlv2 settings, from 2021, by z",
-	                           key,
-	                           NULL,
-	                           temp_z                             );
+							   "impxmlv2 settings, from 2021, by z",
+							   key,
+							   NULL,
+							   temp_z);
 
-	if(1 == ret_arp_)
+	if (1 == ret_arp_)
 	{
-		char * data_v27 = malloc(1027);
+		char *data_v27 = malloc(1027);
 		char key_27[1027];
 
 		strcpy(key_27, "priority");
@@ -2427,280 +2392,280 @@ int __stdcall SaveSettings(char *key, char *data)
 		read_ini("impxmlv2 settings, from 2011", key_27, data_v27, len, filename, 1);
 
 		feline_write_xml(filename_mis,
-		                 "impxmlv2 settings, from 2021, by z",
-		                 key_27,
-		                 NULL,
-		                 data_v27);
+						 "impxmlv2 settings, from 2021, by z",
+						 key_27,
+						 NULL,
+						 data_v27);
 
 		strcpy(key_27, "filename");
 		data_v27[0] = 0;
 		read_ini("impxmlv2 settings, from 2011", key_27, data_v27, len, filename, 1);
 
 		feline_write_xml(filename_mis,
-		                 "impxmlv2 settings, from 2021, by z",
-		                 key_27,
-		                 NULL,
-		                 data_v27);
+						 "impxmlv2 settings, from 2021, by z",
+						 key_27,
+						 NULL,
+						 data_v27);
 
 		strcpy(key_27, "be_effect");
 		data_v27[0] = 0;
 		read_ini("impxmlv2 settings, from 2011", key_27, data_v27, len, filename, 1);
 
 		feline_write_xml(filename_mis,
-		                 "impxmlv2 settings, from 2021, by z",
-		                 key_27,
-		                 NULL,
-		                 data_v27);
+						 "impxmlv2 settings, from 2021, by z",
+						 key_27,
+						 NULL,
+						 data_v27);
 
 		strcpy(key_27, "be_effect_val");
 		data_v27[0] = 0;
 		read_ini("impxmlv2 settings, from 2011", key_27, data_v27, len, filename, 1);
 
 		feline_write_xml(filename_mis,
-		                 "impxmlv2 settings, from 2021, by z",
-		                 key_27,
-		                 NULL,
-		                 data_v27);
+						 "impxmlv2 settings, from 2021, by z",
+						 key_27,
+						 NULL,
+						 data_v27);
 
 		strcpy(key_27, "replaygain");
 		data_v27[0] = 0;
 		read_ini("impxmlv2 settings, from 2011", key_27, data_v27, len, filename, 1);
 
 		feline_write_xml(filename_mis,
-		                 "impxmlv2 settings, from 2021, by z",
-		                 key_27,
-		                 NULL,
-		                 data_v27);
+						 "impxmlv2 settings, from 2021, by z",
+						 key_27,
+						 NULL,
+						 data_v27);
 
 		strcpy(key_27, "volume_v11");
 		data_v27[0] = 0;
 		read_ini("impxmlv2 settings, from 2011", key_27, data_v27, len, filename, 1);
 
 		feline_write_xml(filename_mis,
-		                 "impxmlv2 settings, from 2021, by z",
-		                 key_27,
-		                 NULL,
-		                 data_v27);
+						 "impxmlv2 settings, from 2021, by z",
+						 key_27,
+						 NULL,
+						 data_v27);
 
 		strcpy(key_27, "loop");
 		data_v27[0] = 0;
 		read_ini("impxmlv2 settings, from 2011", key_27, data_v27, len, filename, 1);
 
 		feline_write_xml(filename_mis,
-		                 "impxmlv2 settings, from 2021, by z",
-		                 key_27,
-		                 NULL,
-		                 data_v27);
+						 "impxmlv2 settings, from 2021, by z",
+						 key_27,
+						 NULL,
+						 data_v27);
 
 		strcpy(key_27, "stereo_as_mono");
 		data_v27[0] = 0;
 		read_ini("impxmlv2 settings, from 2011", key_27, data_v27, len, filename, 1);
 
 		feline_write_xml(filename_mis,
-		                 "impxmlv2 settings, from 2021, by z",
-		                 key_27,
-		                 NULL,
-		                 data_v27);
+						 "impxmlv2 settings, from 2021, by z",
+						 key_27,
+						 NULL,
+						 data_v27);
 
 		strcpy(key_27, "equalizer");
 		data_v27[0] = 0;
 		read_ini("impxmlv2 settings, from 2011", key_27, data_v27, len, filename, 1);
 
 		feline_write_xml(filename_mis,
-		                 "impxmlv2 settings, from 2021, by z",
-		                 key_27,
-		                 NULL,
-		                 data_v27);
+						 "impxmlv2 settings, from 2021, by z",
+						 key_27,
+						 NULL,
+						 data_v27);
 
 		strcpy(key_27, "s60");
 		data_v27[0] = 0;
 		read_ini("impxmlv2 settings, from 2011", key_27, data_v27, len, filename, 1);
 
 		feline_write_xml(filename_mis,
-		                 "impxmlv2 settings, from 2021, by z",
-		                 key_27,
-		                 NULL,
-		                 data_v27);
+						 "impxmlv2 settings, from 2021, by z",
+						 key_27,
+						 NULL,
+						 data_v27);
 
 		strcpy(key_27, "s170");
 		data_v27[0] = 0;
 		read_ini("impxmlv2 settings, from 2011", key_27, data_v27, len, filename, 1);
 
 		feline_write_xml(filename_mis,
-		                 "impxmlv2 settings, from 2021, by z",
-		                 key_27,
-		                 NULL,
-		                 data_v27);
+						 "impxmlv2 settings, from 2021, by z",
+						 key_27,
+						 NULL,
+						 data_v27);
 
 		strcpy(key_27, "s310");
 		data_v27[0] = 0;
 		read_ini("impxmlv2 settings, from 2011", key_27, data_v27, len, filename, 1);
 
 		feline_write_xml(filename_mis,
-		                 "impxmlv2 settings, from 2021, by z",
-		                 key_27,
-		                 NULL,
-		                 data_v27);
+						 "impxmlv2 settings, from 2021, by z",
+						 key_27,
+						 NULL,
+						 data_v27);
 
 		strcpy(key_27, "s12000");
 		data_v27[0] = 0;
 		read_ini("impxmlv2 settings, from 2011", key_27, data_v27, len, filename, 1);
 
 		feline_write_xml(filename_mis,
-		                 "impxmlv2 settings, from 2021, by z",
-		                 key_27,
-		                 NULL,
-		                 data_v27);
+						 "impxmlv2 settings, from 2021, by z",
+						 key_27,
+						 NULL,
+						 data_v27);
 
 		strcpy(key_27, "s14000");
 		data_v27[0] = 0;
 		read_ini("impxmlv2 settings, from 2011", key_27, data_v27, len, filename, 1);
 
 		feline_write_xml(filename_mis,
-		                 "impxmlv2 settings, from 2021, by z",
-		                 key_27,
-		                 NULL,
-		                 data_v27);
+						 "impxmlv2 settings, from 2021, by z",
+						 key_27,
+						 NULL,
+						 data_v27);
 
 		strcpy(key_27, "s16000");
 		data_v27[0] = 0;
 		read_ini("impxmlv2 settings, from 2011", key_27, data_v27, len, filename, 1);
 
 		feline_write_xml(filename_mis,
-		                 "impxmlv2 settings, from 2021, by z",
-		                 key_27,
-		                 NULL,
-		                 data_v27);
+						 "impxmlv2 settings, from 2021, by z",
+						 key_27,
+						 NULL,
+						 data_v27);
 
 		strcpy(key_27, "waveout");
 		data_v27[0] = 0;
 		read_ini("impxmlv2 settings, from 2011", key_27, data_v27, len, filename, 1);
 
 		feline_write_xml(filename_mis,
-		                 "impxmlv2 settings, from 2021, by z",
-		                 key_27,
-		                 NULL,
-		                 data_v27);
+						 "impxmlv2 settings, from 2021, by z",
+						 key_27,
+						 NULL,
+						 data_v27);
 
 		strcpy(key_27, "double");
 		data_v27[0] = 0;
 		read_ini("impxmlv2 settings, from 2011", key_27, data_v27, len, filename, 1);
 
 		feline_write_xml(filename_mis,
-		                 "impxmlv2 settings, from 2021, by z",
-		                 key_27,
-		                 NULL,
-		                 data_v27);
+						 "impxmlv2 settings, from 2021, by z",
+						 key_27,
+						 NULL,
+						 data_v27);
 
 		strcpy(key_27, "pre");
 		data_v27[0] = 0;
 		read_ini("impxmlv2 settings, from 2011", key_27, data_v27, len, filename, 1);
 
 		feline_write_xml(filename_mis,
-		                 "impxmlv2 settings, from 2021, by z",
-		                 key_27,
-		                 NULL,
-		                 data_v27);
+						 "impxmlv2 settings, from 2021, by z",
+						 key_27,
+						 NULL,
+						 data_v27);
 
 		strcpy(key_27, "pre_val");
 		data_v27[0] = 0;
 		read_ini("impxmlv2 settings, from 2011", key_27, data_v27, len, filename, 1);
 
 		feline_write_xml(filename_mis,
-		                 "impxmlv2 settings, from 2021, by z",
-		                 key_27,
-		                 NULL,
-		                 data_v27);
+						 "impxmlv2 settings, from 2021, by z",
+						 key_27,
+						 NULL,
+						 data_v27);
 
 		strcpy(key_27, "s600");
 		data_v27[0] = 0;
 		read_ini("impxmlv2 settings, from 2011", key_27, data_v27, len, filename, 1);
 
 		feline_write_xml(filename_mis,
-		                 "impxmlv2 settings, from 2021, by z",
-		                 key_27,
-		                 NULL,
-		                 data_v27);
+						 "impxmlv2 settings, from 2021, by z",
+						 key_27,
+						 NULL,
+						 data_v27);
 
 		strcpy(key_27, "s1000");
 		data_v27[0] = 0;
 		read_ini("impxmlv2 settings, from 2011", key_27, data_v27, len, filename, 1);
 
 		feline_write_xml(filename_mis,
-		                 "impxmlv2 settings, from 2021, by z",
-		                 key_27,
-		                 NULL,
-		                 data_v27);
+						 "impxmlv2 settings, from 2021, by z",
+						 key_27,
+						 NULL,
+						 data_v27);
 
 		strcpy(key_27, "s3000");
 		data_v27[0] = 0;
 		read_ini("impxmlv2 settings, from 2011", key_27, data_v27, len, filename, 1);
 
 		feline_write_xml(filename_mis,
-		                 "impxmlv2 settings, from 2021, by z",
-		                 key_27,
-		                 NULL,
-		                 data_v27);
+						 "impxmlv2 settings, from 2021, by z",
+						 key_27,
+						 NULL,
+						 data_v27);
 
 		strcpy(key_27, "s6000");
 		data_v27[0] = 0;
 		read_ini("impxmlv2 settings, from 2011", key_27, data_v27, len, filename, 1);
 
 		feline_write_xml(filename_mis,
-		                 "impxmlv2 settings, from 2021, by z",
-		                 key_27,
-		                 NULL,
-		                 data_v27);
+						 "impxmlv2 settings, from 2021, by z",
+						 key_27,
+						 NULL,
+						 data_v27);
 
 		strcpy(key_27, "wav_out_vol");
 		data_v27[0] = 0;
 		read_ini("impxmlv2 settings, from 2011", key_27, data_v27, len, filename, 1);
 
 		feline_write_xml(filename_mis,
-		                 "impxmlv2 settings, from 2021, by z",
-		                 key_27,
-		                 NULL,
-		                 data_v27);
+						 "impxmlv2 settings, from 2021, by z",
+						 key_27,
+						 NULL,
+						 data_v27);
 
 		strcpy(key_27, "randon");
 		data_v27[0] = 0;
 		read_ini("impxmlv2 settings, from 2011", key_27, data_v27, len, filename, 1);
 
 		feline_write_xml(filename_mis,
-		                 "impxmlv2 settings, from 2021, by z",
-		                 key_27,
-		                 NULL,
-		                 data_v27);
+						 "impxmlv2 settings, from 2021, by z",
+						 key_27,
+						 NULL,
+						 data_v27);
 
 		strcpy(key_27, "slow_computers_hack_k_p");
 		data_v27[0] = 0;
 		read_ini("impxmlv2 settings, from 2011", key_27, data_v27, len, filename, 1);
 
 		feline_write_xml(filename_mis,
-		                 "impxmlv2 settings, from 2021, by z",
-		                 key_27,
-		                 NULL,
-		                 data_v27);
+						 "impxmlv2 settings, from 2021, by z",
+						 key_27,
+						 NULL,
+						 data_v27);
 
 		strcpy(key_27, "new_filename_k_p");
 		data_v27[0] = 0;
 		read_ini("impxmlv2 settings, from 2011", key_27, data_v27, len, filename, 1);
 
 		feline_write_xml(filename_mis,
-		                 "impxmlv2 settings, from 2021, by z",
-		                 key_27,
-		                 NULL,
-		                 data_v27);
+						 "impxmlv2 settings, from 2021, by z",
+						 key_27,
+						 NULL,
+						 data_v27);
 
-		free (data_v27);
+		free(data_v27);
 		unlink("rspmp3ocx1.ini");
 	}
 
 	feline_write_xml(filename_mis,
-	                 "impxmlv2 settings, from 2021, by z",
-	                 key,
-	                 NULL,
-	                 data);
+					 "impxmlv2 settings, from 2021, by z",
+					 key,
+					 NULL,
+					 data);
 
 	return 0;
 }
@@ -2721,7 +2686,7 @@ void check_mv_instance(__int64 mv_instance)
 
 	mv_______ =
 		(morcego___i___instance__a__bucaneiro_engineering *)(__INT32_OR_INT64)
-		mv_instance;
+			mv_instance;
 
 	if (0xbadc0da != mv_______->sIgnature)
 	{
@@ -2736,19 +2701,17 @@ void check_mv_instance(__int64 mv_instance)
 int morcego_cancel(morcego___i___instance__a__bucaneiro_engineering *mv_______)
 {
 
+	// pedro_dprintf(-1, "in cancel 1\n");
 
-//pedro_dprintf(-1, "in cancel 1\n");
+	mv_______->syncstatus = 0;
 
-	mv_______->syncstatus                     = 0;
-
-	if (mv_______->decoder_c___phwo              )
+	if (mv_______->decoder_c___phwo)
 	{
 
 		waveOutReset(mv_______->decoder_c___phwo);
-
 	}
 
-//pedro_dprintf(-1, "in cancel 2\n");
+	// pedro_dprintf(-1, "in cancel 2\n");
 
 	mv_______->decoder_c___intloop = 0;
 	mv_______->decoder_c___cancelflag = 1;
@@ -2776,7 +2739,7 @@ int morcego_cancel(morcego___i___instance__a__bucaneiro_engineering *mv_______)
  * Internal function to initiate the playback
  */
 int morcego_open(morcego___i___instance__a__bucaneiro_engineering *mv_______,
-                 __INT32_OR_INT64 argumento2, __INT32_OR_INT64 argumento3)
+				 __INT32_OR_INT64 argumento2, __INT32_OR_INT64 argumento3)
 {
 	mv_______->decoder_c___wave_out_open_flag = 1;
 	mv_______->decoder_c___intreturn = 1000;
@@ -2793,7 +2756,7 @@ int morcego_open(morcego___i___instance__a__bucaneiro_engineering *mv_______,
  * track (soon we will be fixing it (November/2020))
  */
 void pass_information_to_replay(morcego___i___instance__a__bucaneiro_engineering *mv_______,
-                                char *file, int loop_, int track_)
+								char *file, int loop_, int track_)
 {
 	strcpy(mv_______->decoder_c___filename, file);
 	mv_______->decoder_c___will_loop = loop_;
@@ -2810,7 +2773,7 @@ HWND GetRealParent(HWND hWnd)
 	HWND hParent;
 
 	hParent = GetAncestor(hWnd, GA_PARENT);
-	if(!hParent || hParent == GetDesktopWindow())
+	if (!hParent || hParent == GetDesktopWindow())
 		return NULL;
 
 	return hParent;
@@ -2823,18 +2786,17 @@ HWND GetRealParent(HWND hWnd)
  *
  */
 int __stdcall PlayInDesktop(__int64 mv_instance, int enable_i, int system_screen_w,
-                            int system_screen_h, int w, int h, int position_i_)
+							int system_screen_h, int w, int h, int position_i_)
 {
-
 
 	check_mv_instance(mv_instance);
 
 	morcego___i___instance__a__bucaneiro_engineering *mv_______ =
 		(morcego___i___instance__a__bucaneiro_engineering *)(__INT32_OR_INT64)
-		mv_instance;
+			mv_instance;
 
 	enable_desktop_i = false;
-	if(enable_i)
+	if (enable_i)
 	{
 		enable_desktop_i = true;
 	}
@@ -2848,7 +2810,6 @@ int __stdcall PlayInDesktop(__int64 mv_instance, int enable_i, int system_screen
 	h_i = h;
 
 	return 0;
-
 }
 
 /**
@@ -2880,8 +2841,8 @@ int __stdcall PlayInDesktop(__int64 mv_instance, int enable_i, int system_screen
  * is the number of audio track to play, starting from 1 (usually 1)
  */
 int __stdcall Play(__int64 mv_instance, char *filename, int loop, int track, __attribute__((unused)) __int64 hwnd_,
-                   __attribute__((unused)) __int64 player_hwnd_,
-                   int width_, int heigth_, int ratio_, int left_, int top_, int subtitle_i)
+				   __attribute__((unused)) __int64 player_hwnd_,
+				   int width_, int heigth_, int ratio_, int left_, int top_, int subtitle_i)
 {
 
 	check_mv_instance(mv_instance);
@@ -2890,12 +2851,11 @@ int __stdcall Play(__int64 mv_instance, char *filename, int loop, int track, __a
 
 	morcego___i___instance__a__bucaneiro_engineering *mv_______ =
 		(morcego___i___instance__a__bucaneiro_engineering *)(__INT32_OR_INT64)
-		mv_instance;
+			mv_instance;
 
 	mv_______->libav_c___sample_rate_format_string[0] = '\0';
 
 	pedro_dprintf(-1, "veja %s", mv_______->libav_c___sample_rate_format_string);
-
 
 	if (mv_______->decoder_c___notloaded)
 	{
@@ -2906,21 +2866,21 @@ int __stdcall Play(__int64 mv_instance, char *filename, int loop, int track, __a
 	{
 	}
 
-	//mv_______->libav_c___show_in_position____i = position_i;
+	// mv_______->libav_c___show_in_position____i = position_i;
 
 	mv_______->libav_c___use_subtitles_track_i = subtitle_i;
 
 	mv_______->libav_c___hwnd = (int64_t)hwnd_;
 	mv_______->libav_c___size_of_window_width = width_;
 	mv_______->libav_c___size_of_window_height = heigth_;
-	mv_______->libav_c___player_hwnd = (int64_t) player_hwnd_;
+	mv_______->libav_c___player_hwnd = (int64_t)player_hwnd_;
 	mv_______->libav_c___the_ratio = ratio_;
 	mv_______->libav_c___adjust_top = top_;
 	mv_______->libav_c___adjust_left = left_;
 
 	pass_information_to_replay(mv_______, filename, loop, track);
 
-	//mv_______->decoder_c___phwo = 0;//fix
+	// mv_______->decoder_c___phwo = 0;//fix
 	if (loop)
 	{
 		mv_______->decoder_c___intloop = 1;
@@ -2928,8 +2888,8 @@ int __stdcall Play(__int64 mv_instance, char *filename, int loop, int track, __a
 	mv_______->decoder_c___intplayback = 1;
 	mv_______->decoder_c___initial_init_playback_value = 1;
 	morcego_open((morcego___i___instance__a__bucaneiro_engineering
-	              *)(__INT32_OR_INT64)mv_instance,
-	             (__INT32_OR_INT64)filename, (__INT32_OR_INT64)track);
+					  *)(__INT32_OR_INT64)mv_instance,
+				 (__INT32_OR_INT64)filename, (__INT32_OR_INT64)track);
 	pedro_dprintf(-1, "Sai de play");
 	return 0;
 }
@@ -2959,14 +2919,14 @@ int __stdcall Play(__int64 mv_instance, char *filename, int loop, int track, __a
  * @param subtitle_i  the subtitles index to show, from 1
  */
 int __stdcall Open(__int64 mv_instance, char *filename, int loop, int track, __int64 hwnd_,
-                   __int64 player_hwnd_,
-                   int width_, int heigth_ /* I am brazilian, sorry...*/, int ratio_, int left_, int top_,
-                   int subtitle_i)
+				   __int64 player_hwnd_,
+				   int width_, int heigth_ /* I am brazilian, sorry...*/, int ratio_, int left_, int top_,
+				   int subtitle_i)
 {
 	check_mv_instance(mv_instance);
 	morcego___i___instance__a__bucaneiro_engineering *mv_______ =
 		(morcego___i___instance__a__bucaneiro_engineering *)(__INT32_OR_INT64)
-		mv_instance;
+			mv_instance;
 
 	if (mv_______->decoder_c___notloaded)
 	{
@@ -2990,7 +2950,7 @@ int __stdcall Open(__int64 mv_instance, char *filename, int loop, int track, __i
 	mv_______->libav_c___adjust_left = left_;
 
 	pass_information_to_replay(mv_______, filename, loop, track);
-	//mv_______->decoder_c___phwo = 0;
+	// mv_______->decoder_c___phwo = 0;
 	if (loop)
 	{
 		mv_______->decoder_c___intloop = 1;
@@ -2999,8 +2959,8 @@ int __stdcall Open(__int64 mv_instance, char *filename, int loop, int track, __i
 	mv_______->decoder_c___initial_init_playback_value = 0;
 
 	morcego_open((morcego___i___instance__a__bucaneiro_engineering
-	              *)(__INT32_OR_INT64)mv_instance,
-	             (__INT32_OR_INT64)filename, (__INT32_OR_INT64)track);
+					  *)(__INT32_OR_INT64)mv_instance,
+				 (__INT32_OR_INT64)filename, (__INT32_OR_INT64)track);
 	return 0;
 }
 
@@ -3014,7 +2974,7 @@ int __stdcall IntReturn(__int64 mv_instance)
 	check_mv_instance(mv_instance);
 	morcego___i___instance__a__bucaneiro_engineering *mv_______ =
 		(morcego___i___instance__a__bucaneiro_engineering *)(__INT32_OR_INT64)
-		mv_instance;
+			mv_instance;
 	return mv_______->decoder_c___intreturn + mv_______->decoder_c___pauseflag;
 }
 /**
@@ -3022,18 +2982,18 @@ int __stdcall IntReturn(__int64 mv_instance)
  *
  */
 void __stdcall GetConversionInfo(__int64 mv_instance, int *percent, int *finished,
-                                 int *returnvalue_, char *___message)
+								 int *returnvalue_, char *___message)
 {
 	pedro_dprintf(-15102021, "aa1. %lld", mv_instance);
 	check_mv_instance(mv_instance);
 	morcego___i___instance__a__bucaneiro_engineering *mv_______ =
 		(morcego___i___instance__a__bucaneiro_engineering *)(__INT32_OR_INT64)
-		mv_instance;
-		
+			mv_instance;
+
 	pedro_dprintf(-15102021, "a.1");
 	get_wav_progress_information(mv_______, percent, returnvalue_, finished,
-	                             ___message);
-								 pedro_dprintf(-15102021, "a.2");
+								 ___message);
+	pedro_dprintf(-15102021, "a.2");
 	return;
 }
 /**
@@ -3064,7 +3024,7 @@ int __stdcall PlaybackPause(__int64 mv_instance)
 	check_mv_instance(mv_instance);
 	morcego___i___instance__a__bucaneiro_engineering *mv_______ =
 		(morcego___i___instance__a__bucaneiro_engineering *)(__INT32_OR_INT64)
-		mv_instance;
+			mv_instance;
 
 	mv_______->libav_c___pause_video_thread = 1;
 	mv_______->libav_c___audio_position_real = get_bucaneiro_tick();
@@ -3089,16 +3049,16 @@ int morcego_resume(morcego___i___instance__a__bucaneiro_engineering *mv_______)
 
 	waveOutRestart(mv_______->decoder_c___phwo);
 
-	static int flag = 0;  // for debug purposes
+	static int flag = 0; // for debug purposes
 	if (0 == flag)
 	{
 		flag = 1;
-		//mv_______->decoder_c___debug_flag=2;
+		// mv_______->decoder_c___debug_flag=2;
 	}
 	else
 	{
 		flag = 0;
-		//mv_______->decoder_c___debug_flag=1; // if 1 it will simulate a delay in the audio, if 2 in the video
+		// mv_______->decoder_c___debug_flag=1; // if 1 it will simulate a delay in the audio, if 2 in the video
 	}
 	return 0;
 }
@@ -3111,7 +3071,7 @@ int __stdcall PlaybackResume(__int64 mv_instance)
 	check_mv_instance(mv_instance);
 	morcego___i___instance__a__bucaneiro_engineering *mv_______ =
 		(morcego___i___instance__a__bucaneiro_engineering *)(__INT32_OR_INT64)
-		mv_instance;
+			mv_instance;
 	mv_______->libav_c___pause_video_thread = 0;
 	mv_______->libav_c___audio_position_real = get_bucaneiro_tick();
 	mv_______->libav_c___posicaoinicial_do_audio =
@@ -3129,7 +3089,7 @@ int __stdcall PlaybackCancel(__int64 mv_instance)
 	check_mv_instance(mv_instance);
 	morcego___i___instance__a__bucaneiro_engineering *mv_______ =
 		(morcego___i___instance__a__bucaneiro_engineering *)(__INT32_OR_INT64)
-		mv_instance;
+			mv_instance;
 	int ret;
 
 	while (-1 == (ret = morcego_cancel(mv_______)))
@@ -3143,7 +3103,7 @@ int __stdcall PlaybackCancel(__int64 mv_instance)
  *
  */
 int morcego_samplerate(morcego___i___instance__a__bucaneiro_engineering *
-                       mv_______)
+						   mv_______)
 {
 	if (checkinit(mv_______))
 	{
@@ -3161,7 +3121,7 @@ int __stdcall SampleRate(__int64 mv_instance)
 	check_mv_instance(mv_instance);
 	morcego___i___instance__a__bucaneiro_engineering *mv_______ =
 		(morcego___i___instance__a__bucaneiro_engineering *)(__INT32_OR_INT64)
-		mv_instance;
+			mv_instance;
 	ret = morcego_samplerate(mv_______);
 	return ret;
 }
@@ -3170,7 +3130,7 @@ int __stdcall SampleRate(__int64 mv_instance)
  *
  */
 int morcego_channels_(morcego___i___instance__a__bucaneiro_engineering *
-                      mv_______)
+						  mv_______)
 {
 
 	if (checkinit(mv_______))
@@ -3191,7 +3151,7 @@ int __stdcall Channels(__int64 mv_instance)
 	check_mv_instance(mv_instance);
 	morcego___i___instance__a__bucaneiro_engineering *mv_______ =
 		(morcego___i___instance__a__bucaneiro_engineering *)(__INT32_OR_INT64)
-		mv_instance;
+			mv_instance;
 	ret = morcego_channels_(mv_______);
 	return ret;
 }
@@ -3205,7 +3165,7 @@ int __stdcall Bits_per_Sample(__int64 mv_instance)
 	check_mv_instance(mv_instance);
 	morcego___i___instance__a__bucaneiro_engineering *mv_______ =
 		(morcego___i___instance__a__bucaneiro_engineering *)(__INT32_OR_INT64)
-		mv_instance;
+			mv_instance;
 	if (checkinit(mv_______))
 	{
 
@@ -3245,7 +3205,7 @@ int __stdcall GetTimeMilliseconds(__int64 mv_instance)
 	check_mv_instance(mv_instance);
 	morcego___i___instance__a__bucaneiro_engineering *mv_______ =
 		(morcego___i___instance__a__bucaneiro_engineering *)(__INT32_OR_INT64)
-		mv_instance;
+			mv_instance;
 	return morcego_gettime(mv_______);
 }
 /**
@@ -3253,7 +3213,7 @@ int __stdcall GetTimeMilliseconds(__int64 mv_instance)
  *
  */
 int morcego_gettimes(morcego___i___instance__a__bucaneiro_engineering *
-                     mv_______)
+						 mv_______)
 {
 	uint ret;
 
@@ -3274,7 +3234,7 @@ int __stdcall GetTime(__int64 mv_instance)
 	check_mv_instance(mv_instance);
 	morcego___i___instance__a__bucaneiro_engineering *mv_______ =
 		(morcego___i___instance__a__bucaneiro_engineering *)(__INT32_OR_INT64)
-		mv_instance;
+			mv_instance;
 	return morcego_gettimes(mv_______);
 }
 /**
@@ -3282,10 +3242,10 @@ int __stdcall GetTime(__int64 mv_instance)
  *
  */
 int morcego_gettimestring(morcego___i___instance__a__bucaneiro_engineering *
-                          mv_______,
-                          __INT32_OR_INT64 argumento2)
+							  mv_______,
+						  __INT32_OR_INT64 argumento2)
 {
-	char fixo[255];                 //cannot be static anymore
+	char fixo[255]; // cannot be static anymore
 	uint ret;
 	uint seg;
 	uint min;
@@ -3295,11 +3255,11 @@ int morcego_gettimestring(morcego___i___instance__a__bucaneiro_engineering *
 		return -1;
 	}
 	ret = mv_______->decoder_c___newsecond;
-	seg =                 ret % 60;
-	ret =                 ret / 60;
-	min =                 ret % 60;
-	ret =                 ret / 60;
-	hour =               ret % 100;
+	seg = ret % 60;
+	ret = ret / 60;
+	min = ret % 60;
+	ret = ret / 60;
+	hour = ret % 100;
 	sprintf(fixo, "%02d:%02d:%02d", hour, min, seg);
 	strcpy((char *)argumento2, fixo);
 	return 0;
@@ -3313,7 +3273,7 @@ int __stdcall GetTimeString(__int64 mv_instance, char *time)
 	check_mv_instance(mv_instance);
 	morcego___i___instance__a__bucaneiro_engineering *mv_______ =
 		(morcego___i___instance__a__bucaneiro_engineering *)(__INT32_OR_INT64)
-		mv_instance;
+			mv_instance;
 	return morcego_gettimestring(mv_______, (__INT32_OR_INT64)time);
 }
 /**
@@ -3321,8 +3281,8 @@ int __stdcall GetTimeString(__int64 mv_instance, char *time)
  *
  */
 int morcego_getsecondsstring(morcego___i___instance__a__bucaneiro_engineering *
-                             mv_______,
-                             __INT32_OR_INT64 argumento2)
+								 mv_______,
+							 __INT32_OR_INT64 argumento2)
 {
 	char fixo[255];
 	uint ret;
@@ -3352,7 +3312,7 @@ int __stdcall GetLengthString(__int64 mv_instance, char *time)
 	check_mv_instance(mv_instance);
 	morcego___i___instance__a__bucaneiro_engineering *mv_______ =
 		(morcego___i___instance__a__bucaneiro_engineering *)(__INT32_OR_INT64)
-		mv_instance;
+			mv_instance;
 	return morcego_getsecondsstring(mv_______, (__INT32_OR_INT64)time);
 }
 /**
@@ -3360,7 +3320,7 @@ int __stdcall GetLengthString(__int64 mv_instance, char *time)
  *
  */
 int morcego_getseconds(morcego___i___instance__a__bucaneiro_engineering *
-                       mv_______)
+						   mv_______)
 {
 	if (checkinit(mv_______))
 	{
@@ -3378,7 +3338,7 @@ int __stdcall GetLengthMilliseconds(__int64 mv_instance)
 	check_mv_instance(mv_instance);
 	morcego___i___instance__a__bucaneiro_engineering *mv_______ =
 		(morcego___i___instance__a__bucaneiro_engineering *)(__INT32_OR_INT64)
-		mv_instance;
+			mv_instance;
 	return morcego_getseconds(mv_______);
 }
 /**
@@ -3386,7 +3346,7 @@ int __stdcall GetLengthMilliseconds(__int64 mv_instance)
  *
  */
 int morcego_getsecondss(morcego___i___instance__a__bucaneiro_engineering *
-                        mv_______)
+							mv_______)
 {
 	if (checkinit(mv_______))
 	{
@@ -3404,7 +3364,7 @@ int __stdcall GetLength(__int64 mv_instance)
 	check_mv_instance(mv_instance);
 	morcego___i___instance__a__bucaneiro_engineering *mv_______ =
 		(morcego___i___instance__a__bucaneiro_engineering *)(__INT32_OR_INT64)
-		mv_instance;
+			mv_instance;
 	return morcego_getsecondss(mv_______);
 }
 /**
@@ -3412,7 +3372,7 @@ int __stdcall GetLength(__int64 mv_instance)
  *
  */
 int morcego_closeplayer(morcego___i___instance__a__bucaneiro_engineering *
-                        mv_______)
+							mv_______)
 {
 	finalizeplayer(mv_______);
 	return 0;
@@ -3426,12 +3386,12 @@ int __stdcall ClosePlayer(__int64 mv_instance)
 	check_mv_instance(mv_instance);
 	morcego___i___instance__a__bucaneiro_engineering *mv_______ =
 		(morcego___i___instance__a__bucaneiro_engineering *)(__INT32_OR_INT64)
-		mv_instance;
+			mv_instance;
 	return morcego_closeplayer(mv_______);
 }
 
 int morcego_seekto(morcego___i___instance__a__bucaneiro_engineering *mv_______,
-                   __INT32_OR_INT64 argumento2)
+				   __INT32_OR_INT64 argumento2)
 {
 	mv_______->decoder_c___seekto = (double)argumento2 / (double)1000;
 	return 0;
@@ -3446,7 +3406,7 @@ void __stdcall SeekTo(__int64 mv_instance, double seek)
 	check_mv_instance(mv_instance);
 	morcego___i___instance__a__bucaneiro_engineering *mv_______ =
 		(morcego___i___instance__a__bucaneiro_engineering *)(__INT32_OR_INT64)
-		mv_instance;
+			mv_instance;
 	seek = seek * 1000;
 	val = (__INT32_OR_INT64)seek;
 	morcego_seekto(mv_______, (__INT32_OR_INT64)val);
@@ -3468,7 +3428,7 @@ void __stdcall ShowCursor_(int enable)
 	{
 
 		ret = ShowCursor(1);
-volta:          ;
+	volta:;
 		if (ret > 0)
 		{
 			ret = ShowCursor(0);
@@ -3477,16 +3437,16 @@ volta:          ;
 	}
 	else
 	{
-denovo:         ;
+	denovo:;
 		ret = ShowCursor(0);
 
 		if (ret > 0)
 		{
 			goto denovo;
 		}
-denovo2:
+	denovo2:
 
-		if (ret < -1)//looks weird but works...
+		if (ret < -1) // looks weird but works...
 		{
 			ret = ShowCursor(1);
 			goto denovo2;
@@ -3504,15 +3464,15 @@ void __stdcall SeekTo_10000(__int64 mv_instance, double seek)
 	check_mv_instance(mv_instance);
 	morcego___i___instance__a__bucaneiro_engineering *mv_______ =
 		(morcego___i___instance__a__bucaneiro_engineering *)(__INT32_OR_INT64)
-		mv_instance;
+			mv_instance;
 	seek = seek / 100.;
-	if (seek >     100)
+	if (seek > 100)
 	{
-		seek     = 100;
+		seek = 100;
 	}
-	if (seek       < 0)
+	if (seek < 0)
 	{
-		seek       = 0;
+		seek = 0;
 	}
 	mv_______->decoder_c___seekto = seek;
 	return;
@@ -3526,7 +3486,7 @@ void __stdcall SeekTo_AV_TIME_BASE(__int64 mv_instance, double seek)
 	check_mv_instance(mv_instance);
 	morcego___i___instance__a__bucaneiro_engineering *mv_______ =
 		(morcego___i___instance__a__bucaneiro_engineering *)(__INT32_OR_INT64)
-		mv_instance;
+			mv_instance;
 
 	seek = getporf((double)mv_______->libav_c___duracao, seek);
 
@@ -3546,7 +3506,7 @@ void __stdcall SeekTo_AV_TIME_BASE(__int64 mv_instance, double seek)
  *
  */
 int morcego_getplaybackposition(morcego___i___instance__a__bucaneiro_engineering
-                                *mv_______)
+									*mv_______)
 {
 	if (checkinit(mv_______))
 	{
@@ -3558,7 +3518,7 @@ int morcego_getplaybackposition(morcego___i___instance__a__bucaneiro_engineering
 		int ret;
 		ret =
 			getporf(mv_______->decoder_c___newtime,
-			        mv_______->decoder_c___newsecond);
+					mv_______->decoder_c___newsecond);
 		if (ret < 0)
 		{
 			ret = 0;
@@ -3581,7 +3541,7 @@ int __stdcall PlayBackPosition(__int64 mv_instance)
 	check_mv_instance(mv_instance);
 	morcego___i___instance__a__bucaneiro_engineering *mv_______ =
 		(morcego___i___instance__a__bucaneiro_engineering *)(__INT32_OR_INT64)
-		mv_instance;
+			mv_instance;
 	ret = morcego_getplaybackposition(mv_______);
 	if (-1 == ret)
 	{
@@ -3591,7 +3551,7 @@ int __stdcall PlayBackPosition(__int64 mv_instance)
 }
 
 int morcego_be_getplaybackposition_2(morcego___i___instance__a__bucaneiro_engineering *mv_______,
-                                     __INT32_OR_INT64 argumento2)
+									 __INT32_OR_INT64 argumento2)
 {
 	double *valor = (double *)argumento2;
 	if (checkinit(mv_______))
@@ -3608,7 +3568,7 @@ int morcego_be_getplaybackposition_2(morcego___i___instance__a__bucaneiro_engine
 	else
 		ret =
 			getporf(mv_______->decoder_c___newtime,
-			        mv_______->decoder_c___newsecond);
+					mv_______->decoder_c___newsecond);
 
 	if (ret < 0)
 	{
@@ -3632,7 +3592,7 @@ int __stdcall PlayBackPosition_10000(__int64 mv_instance)
 	check_mv_instance(mv_instance);
 	morcego___i___instance__a__bucaneiro_engineering *mv_______ =
 		(morcego___i___instance__a__bucaneiro_engineering *)(__INT32_OR_INT64)
-		mv_instance;
+			mv_instance;
 	morcego_be_getplaybackposition_2(mv_______, (__INT32_OR_INT64)&valor);
 	if (-1 == valor)
 	{
@@ -3659,7 +3619,7 @@ double __stdcall PlayBackPosition_AV_TIME_BASE(__int64 mv_instance)
 	check_mv_instance(mv_instance);
 	morcego___i___instance__a__bucaneiro_engineering *mv_______ =
 		(morcego___i___instance__a__bucaneiro_engineering *)(__INT32_OR_INT64)
-		mv_instance;
+			mv_instance;
 
 	val = mv_______->decoder_c___newsecond * 1000000.0;
 
@@ -3682,7 +3642,7 @@ int __stdcall SetPriority(__int64 mv_instance, int priority)
 	check_mv_instance(mv_instance);
 	morcego___i___instance__a__bucaneiro_engineering *mv_______ =
 		(morcego___i___instance__a__bucaneiro_engineering *)(__INT32_OR_INT64)
-		mv_instance;
+			mv_instance;
 	mv_______->decoder_c___intpriority = priority;
 	return 0;
 }
@@ -3702,7 +3662,7 @@ int __stdcall SetVolumeGain(__int64 mv_instance, int value)
 	check_mv_instance(mv_instance);
 	morcego___i___instance__a__bucaneiro_engineering *mv_______ =
 		(morcego___i___instance__a__bucaneiro_engineering *)(__INT32_OR_INT64)
-		mv_instance;
+			mv_instance;
 	mv_______->decoder_c___valuetoset = value;
 	return 0;
 }
@@ -3715,7 +3675,7 @@ int __stdcall SetWaveOutDevice(__int64 mv_instance, int device)
 	check_mv_instance(mv_instance);
 	morcego___i___instance__a__bucaneiro_engineering *mv_______ =
 		(morcego___i___instance__a__bucaneiro_engineering *)(__INT32_OR_INT64)
-		mv_instance;
+			mv_instance;
 	mv_______->decoder_c___intwaveout = device;
 	return 0;
 }
@@ -3725,7 +3685,7 @@ int __stdcall SetWaveOutDevice(__int64 mv_instance, int device)
  */
 int __stdcall GetWaveOutDevicesName(__int64 mv_instance, int device, char *data)
 {
-	if(0 != mv_instance)
+	if (0 != mv_instance)
 		check_mv_instance(mv_instance);
 
 	getdevicename((unsigned char *)data, device);
@@ -3752,7 +3712,7 @@ int __stdcall GetVBR(__int64 mv_instance)
 	check_mv_instance(mv_instance);
 	morcego___i___instance__a__bucaneiro_engineering *mv_______ =
 		(morcego___i___instance__a__bucaneiro_engineering *)(__INT32_OR_INT64)
-		mv_instance;
+			mv_instance;
 	return morcego_isvbr(mv_______);
 }
 /**
@@ -3764,7 +3724,7 @@ int __stdcall GetBitrate(__int64 mv_instance)
 	check_mv_instance(mv_instance);
 	morcego___i___instance__a__bucaneiro_engineering *mv_______ =
 		(morcego___i___instance__a__bucaneiro_engineering *)(__INT32_OR_INT64)
-		mv_instance;
+			mv_instance;
 	if (checkinit(mv_______))
 	{
 		return -1;
@@ -3780,7 +3740,7 @@ int __stdcall GetBitrate_Video(__int64 mv_instance)
 	check_mv_instance(mv_instance);
 	morcego___i___instance__a__bucaneiro_engineering *mv_______ =
 		(morcego___i___instance__a__bucaneiro_engineering *)(__INT32_OR_INT64)
-		mv_instance;
+			mv_instance;
 	if (checkinit(mv_______))
 	{
 		return -1;
@@ -3796,7 +3756,7 @@ int __stdcall GetMpegVersion(__int64 mv_instance, char *version)
 	check_mv_instance(mv_instance);
 	morcego___i___instance__a__bucaneiro_engineering *mv_______ =
 		(morcego___i___instance__a__bucaneiro_engineering *)(__INT32_OR_INT64)
-		mv_instance;
+			mv_instance;
 	if (checkinit(mv_______))
 	{
 		return -1;
@@ -3813,7 +3773,7 @@ int __stdcall GetMediaInformation(__int64 mv_instance, char *layer_)
 	check_mv_instance(mv_instance);
 	morcego___i___instance__a__bucaneiro_engineering *mv_______ =
 		(morcego___i___instance__a__bucaneiro_engineering *)(__INT32_OR_INT64)
-		mv_instance;
+			mv_instance;
 	if (checkinit(mv_______))
 	{
 		return -1;
@@ -3830,7 +3790,7 @@ int __stdcall GetMpegMode(__int64 mv_instance, char *mode_)
 	check_mv_instance(mv_instance);
 	morcego___i___instance__a__bucaneiro_engineering *mv_______ =
 		(morcego___i___instance__a__bucaneiro_engineering *)(__INT32_OR_INT64)
-		mv_instance;
+			mv_instance;
 	if (checkinit(mv_______))
 	{
 		return -1;
@@ -3843,26 +3803,26 @@ int __stdcall GetMpegMode(__int64 mv_instance, char *mode_)
  *
  */
 int __stdcall ConvertMP3ToWav(__int64 mv_instance, char *input, char *output,
-                              int tipo, __attribute__((unused)) char *mess, int track)
+							  int tipo, __attribute__((unused)) char *mess, int track)
 {
 	int ret;
 	check_mv_instance(mv_instance);
 	morcego___i___instance__a__bucaneiro_engineering *mv_______ =
 		(morcego___i___instance__a__bucaneiro_engineering *)(__INT32_OR_INT64)
-		mv_instance;
+			mv_instance;
 	return convertmp3towav(mv_______, input, output, tipo, track);
 	return ret;
 }
 
 int morcego_converttowav_be(morcego___i___instance__a__bucaneiro_engineering *
-                            mv_______,
-                            __INT32_OR_INT64 argumento2)
+								mv_______,
+							__INT32_OR_INT64 argumento2)
 {
 	morcego_property_bag *ptr_pb = (morcego_property_bag *)argumento2;
 	convertmp3towav_extended(mv_______,
-	                         (char *)ptr_pb->string_1,
-	                         (char *)ptr_pb->string_2,
-	                         (int)(ptr_pb->int64_2), (int)(ptr_pb->int64_1));
+							 (char *)ptr_pb->string_1,
+							 (char *)ptr_pb->string_2,
+							 (int)(ptr_pb->int64_2), (int)(ptr_pb->int64_1));
 	return 0;
 }
 /**
@@ -3885,7 +3845,7 @@ int __stdcall ConvertMP3ToWavExtended(__int64 mv_instance, char *input, char *ou
 
 	morcego___i___instance__a__bucaneiro_engineering *mv_______ =
 		(morcego___i___instance__a__bucaneiro_engineering *)(__INT32_OR_INT64)
-		mv_instance;
+			mv_instance;
 
 	pedro_dprintf(-15102021, "6.2");
 	if (mv_______->libav_c___amanda_s_smart_ape__is_open)
@@ -3897,7 +3857,7 @@ int __stdcall ConvertMP3ToWavExtended(__int64 mv_instance, char *input, char *ou
 	pedro_dprintf(-15102021, "6.3");
 	morcego_property_bag *pb = malloc(sizeof(morcego_property_bag));
 	memset(pb, 0, sizeof(morcego_property_bag));
-	pb->int64_1 = track; //track
+	pb->int64_1 = track; // track
 	strcpy(pb->string_1, input);
 	strcpy(pb->string_2, output);
 	pb->int64_2 = tipo_de_wav;
@@ -3907,7 +3867,7 @@ int __stdcall ConvertMP3ToWavExtended(__int64 mv_instance, char *input, char *ou
 saida_amanda_s_smart_ape:
 
 	pedro_dprintf(-15102021, "6.4");
-	return returnvalue_amanda_s_smart_ape;//always 0...weird...
+	return returnvalue_amanda_s_smart_ape; // always 0...weird...
 }
 /**
  * It will enable or disable the equalizer
@@ -3918,7 +3878,7 @@ int __stdcall EnableEqualizer(__int64 mv_instance, int enable)
 	check_mv_instance(mv_instance);
 	morcego___i___instance__a__bucaneiro_engineering *mv_______ =
 		(morcego___i___instance__a__bucaneiro_engineering *)(__INT32_OR_INT64)
-		mv_instance;
+			mv_instance;
 	mv_______->decoder_c___enableequalizer = enable;
 	return 0;
 }
@@ -3927,26 +3887,26 @@ int __stdcall EnableEqualizer(__int64 mv_instance, int enable)
  *
  */
 int __stdcall EqualizerSettings(__int64 mv_instance,
-                                int Band60,
-                                int Band170,
-                                int Band310,
-                                int Band600,
-                                int Band1000,
-                                int Band3000,
-                                int Band6000,
-                                int Band12000,
-                                int Band14000,
-                                int Band16000)
+								int Band60,
+								int Band170,
+								int Band310,
+								int Band600,
+								int Band1000,
+								int Band3000,
+								int Band6000,
+								int Band12000,
+								int Band14000,
+								int Band16000)
 {
 	check_mv_instance(mv_instance);
 	morcego___i___instance__a__bucaneiro_engineering *mv_______ =
 		(morcego___i___instance__a__bucaneiro_engineering *)(__INT32_OR_INT64)
-		mv_instance;
+			mv_instance;
 	configequalizer(mv_______, Band60, Band170, Band310, Band600, Band1000,
-	                Band3000, Band6000, Band12000, Band14000, Band16000);
+					Band3000, Band6000, Band12000, Band14000, Band16000);
 	configequalizer____2(mv_______, Band60, Band170, Band310, Band600,
-	                     Band1000, Band3000, Band6000, Band12000, Band14000,
-	                     Band16000);
+						 Band1000, Band3000, Band6000, Band12000, Band14000,
+						 Band16000);
 	return 0;
 }
 /**
@@ -3958,7 +3918,7 @@ int __stdcall EnablePreamplifier(__int64 mv_instance, int enable)
 	check_mv_instance(mv_instance);
 	morcego___i___instance__a__bucaneiro_engineering *mv_______ =
 		(morcego___i___instance__a__bucaneiro_engineering *)(__INT32_OR_INT64)
-		mv_instance;
+			mv_instance;
 	mv_______->decoder_c___enablepreamp = enable;
 	return 0;
 }
@@ -3971,7 +3931,7 @@ int __stdcall PreamplifierValue(__int64 mv_instance, int value)
 	check_mv_instance(mv_instance);
 	morcego___i___instance__a__bucaneiro_engineering *mv_______ =
 		(morcego___i___instance__a__bucaneiro_engineering *)(__INT32_OR_INT64)
-		mv_instance;
+			mv_instance;
 	mv_______->decoder_c___intvolume = (float)value / (float)50;
 	return 0;
 }
@@ -3982,8 +3942,8 @@ int __stdcall PreamplifierValue(__int64 mv_instance, int value)
  *
  */
 int morcego_internalvolume(morcego___i___instance__a__bucaneiro_engineering *
-                           mv_______,
-                           __INT32_OR_INT64 argumento2)
+							   mv_______,
+						   __INT32_OR_INT64 argumento2)
 {
 	float vol2int;
 	vol2int = (float)argumento2 / (float)100;
@@ -4009,7 +3969,7 @@ int __stdcall InternalVolume(__int64 mv_instance, int value)
 	check_mv_instance(mv_instance);
 	morcego___i___instance__a__bucaneiro_engineering *mv_______ =
 		(morcego___i___instance__a__bucaneiro_engineering *)(__INT32_OR_INT64)
-		mv_instance;
+			mv_instance;
 	morcego_internalvolume(mv_______, value);
 	return 0;
 }
@@ -4032,7 +3992,7 @@ int __stdcall EnableOnTheFlyVolumeNormalization(__int64 mv_instance, int mode)
 	check_mv_instance(mv_instance);
 	morcego___i___instance__a__bucaneiro_engineering *mv_______ =
 		(morcego___i___instance__a__bucaneiro_engineering *)(__INT32_OR_INT64)
-		mv_instance;
+			mv_instance;
 	mv_______->decoder_c___internal_replaygain_fast_mode = mode;
 
 	assert(0 == mode || 1 == mode || 2 == mode || 3 == mode);
@@ -4059,7 +4019,7 @@ int __stdcall DoubleBuffer(__int64 mv_instance, int enable)
 	check_mv_instance(mv_instance);
 	morcego___i___instance__a__bucaneiro_engineering *mv_______ =
 		(morcego___i___instance__a__bucaneiro_engineering *)(__INT32_OR_INT64)
-		mv_instance;
+			mv_instance;
 	mv_______->decoder_c___doublebuffer = enable;
 	return 0;
 }
@@ -4072,7 +4032,7 @@ int __stdcall PauseState(__int64 mv_instance)
 	check_mv_instance(mv_instance);
 	morcego___i___instance__a__bucaneiro_engineering *mv_______ =
 		(morcego___i___instance__a__bucaneiro_engineering *)(__INT32_OR_INT64)
-		mv_instance;
+			mv_instance;
 	return mv_______->decoder_c___pauseflag;
 }
 /**
@@ -4084,7 +4044,7 @@ int __stdcall IsUsingNormalization(__int64 mv_instance)
 	check_mv_instance(mv_instance);
 	morcego___i___instance__a__bucaneiro_engineering *mv_______ =
 		(morcego___i___instance__a__bucaneiro_engineering *)(__INT32_OR_INT64)
-		mv_instance;
+			mv_instance;
 	if (mv_______->decoder_c___internal_replaygain_fast_mode)
 	{
 		return 1;
@@ -4097,8 +4057,8 @@ int __stdcall IsUsingNormalization(__int64 mv_instance)
  *
  */
 int morcego_normalizationdata(morcego___i___instance__a__bucaneiro_engineering *
-                              mv_______,
-                              __INT32_OR_INT64 argumento2)
+								  mv_______,
+							  __INT32_OR_INT64 argumento2)
 {
 	char thedata[255];
 	if (mv_______->decoder_c___internal_replaygain_fast_mode)
@@ -4124,8 +4084,8 @@ int __stdcall NormalizationFactor(__int64 mv_instance, char *value)
 {
 	check_mv_instance(mv_instance);
 	morcego_normalizationdata((morcego___i___instance__a__bucaneiro_engineering *)(__INT32_OR_INT64)
-	                          mv_instance,
-	                          (__INT32_OR_INT64)value);
+								  mv_instance,
+							  (__INT32_OR_INT64)value);
 	return 0;
 }
 /**
@@ -4133,7 +4093,7 @@ int __stdcall NormalizationFactor(__int64 mv_instance, char *value)
  *
  */
 int morcego_getleftchannel(morcego___i___instance__a__bucaneiro_engineering *
-                           mv_______)
+							   mv_______)
 {
 	int ret;
 	ret = mv_______->decoder_c___rightval;
@@ -4160,9 +4120,9 @@ int __stdcall GetPeak(__int64 mv_instance)
 	check_mv_instance(mv_instance);
 	morcego___i___instance__a__bucaneiro_engineering *mv_______ =
 		(morcego___i___instance__a__bucaneiro_engineering *)(__INT32_OR_INT64)
-		mv_instance;
+			mv_instance;
 
-	if(mv_______->decodec_c___last_pcm_slice_to_play_k_p)
+	if (mv_______->decodec_c___last_pcm_slice_to_play_k_p)
 	{
 		return 0;
 	}
@@ -4174,13 +4134,13 @@ int __stdcall GetPeak(__int64 mv_instance)
  *
  */
 int __stdcall Read_ID3_v1_tag(__int64 mv_instance, char *filename, int *Track,
-                              char *Title, char *Artist, char *Album,
-                              char *Year, int *Genre, char *Comment)
+							  char *Title, char *Artist, char *Album,
+							  char *Year, int *Genre, char *Comment)
 {
 	check_mv_instance(mv_instance);
 	morcego___i___instance__a__bucaneiro_engineering *mv_______ =
 		(morcego___i___instance__a__bucaneiro_engineering *)(__INT32_OR_INT64)
-		mv_instance;
+			mv_instance;
 	int ret;
 	ret = id3v1tag_ok(mv_______, filename);
 	if (0 == ret)
@@ -4222,7 +4182,7 @@ int __stdcall Generate_ID3v1Genre(__int64 mv_instance, int pos, char *data)
 	{
 		return 0;
 	}
-	strcpy(data, ID3v1_genre[pos]); //constantes nao tem problema
+	strcpy(data, ID3v1_genre[pos]); // constantes nao tem problema
 	return 0;
 }
 /**
@@ -4230,8 +4190,8 @@ int __stdcall Generate_ID3v1Genre(__int64 mv_instance, int pos, char *data)
  *
  */
 int morcego_wv1Comment(morcego___i___instance__a__bucaneiro_engineering *
-                       mv_______,
-                       __INT32_OR_INT64 argumento2)
+						   mv_______,
+					   __INT32_OR_INT64 argumento2)
 {
 	char v1temp[100];
 	memset(mv_______->id3_c___v1Comment, 0, 100);
@@ -4268,14 +4228,14 @@ int morcego_wv1Comment(morcego___i___instance__a__bucaneiro_engineering *
  *
  */
 int __stdcall Write_ID3_v1_tag(__int64 mv_instance, char *filename, int Track, char *Title,
-                               char *Artist, char *Album, char *Year, int Genre,
-                               char *Comment)
+							   char *Artist, char *Album, char *Year, int Genre,
+							   char *Comment)
 {
 	check_mv_instance(mv_instance);
 	char v1temp[100];
 	morcego___i___instance__a__bucaneiro_engineering *mv_______ =
 		(morcego___i___instance__a__bucaneiro_engineering *)(__INT32_OR_INT64)
-		mv_instance;
+			mv_instance;
 	memset(mv_______->id3_c___v1Title, 0, 100);
 	strncpy(v1temp, ((char *)Title), 30);
 	v1temp[30] = 0;
@@ -4306,7 +4266,7 @@ int __stdcall Remove_ID3V1_tag(__int64 mv_instance, char *filename)
 	check_mv_instance(mv_instance);
 	morcego___i___instance__a__bucaneiro_engineering *mv_______ =
 		(morcego___i___instance__a__bucaneiro_engineering *)(__INT32_OR_INT64)
-		mv_instance;
+			mv_instance;
 	return remove_id3v1_tag(mv_______, filename);
 }
 /**
@@ -4314,8 +4274,8 @@ int __stdcall Remove_ID3V1_tag(__int64 mv_instance, char *filename)
  *
  */
 int morcego_v2Composer(morcego___i___instance__a__bucaneiro_engineering *
-                       mv_______,
-                       __INT32_OR_INT64 argumento2)
+						   mv_______,
+					   __INT32_OR_INT64 argumento2)
 {
 	if (mv_______->id3_c___v2Composer)
 	{
@@ -4332,8 +4292,8 @@ int morcego_v2Composer(morcego___i___instance__a__bucaneiro_engineering *
  *
  */
 int morcego_v2OriginalArtist(morcego___i___instance__a__bucaneiro_engineering *
-                             mv_______,
-                             __INT32_OR_INT64 argumento2)
+								 mv_______,
+							 __INT32_OR_INT64 argumento2)
 {
 	if (mv_______->id3_c___v2OriginalArtist)
 	{
@@ -4350,8 +4310,8 @@ int morcego_v2OriginalArtist(morcego___i___instance__a__bucaneiro_engineering *
  *
  */
 int morcego_v2Copyright(morcego___i___instance__a__bucaneiro_engineering *
-                        mv_______,
-                        __INT32_OR_INT64 argumento2)
+							mv_______,
+						__INT32_OR_INT64 argumento2)
 {
 	if (mv_______->id3_c___v2Copyright)
 	{
@@ -4368,7 +4328,7 @@ int morcego_v2Copyright(morcego___i___instance__a__bucaneiro_engineering *
  *
  */
 int morcego_v2URL(morcego___i___instance__a__bucaneiro_engineering *mv_______,
-                  __INT32_OR_INT64 argumento2)
+				  __INT32_OR_INT64 argumento2)
 {
 	if (mv_______->id3_c___v2URL)
 	{
@@ -4385,8 +4345,8 @@ int morcego_v2URL(morcego___i___instance__a__bucaneiro_engineering *mv_______,
  *
  */
 int morcego_v2EncodedBy(morcego___i___instance__a__bucaneiro_engineering *
-                        mv_______,
-                        __INT32_OR_INT64 argumento2)
+							mv_______,
+						__INT32_OR_INT64 argumento2)
 {
 	if (mv_______->id3_c___v2EncodedBy)
 	{
@@ -4403,8 +4363,8 @@ int morcego_v2EncodedBy(morcego___i___instance__a__bucaneiro_engineering *
  *
  */
 int morcego_v2Comment(morcego___i___instance__a__bucaneiro_engineering *
-                      mv_______,
-                      __INT32_OR_INT64 argumento2)
+						  mv_______,
+					  __INT32_OR_INT64 argumento2)
 {
 	if (mv_______->id3_c___v2Comment)
 	{
@@ -4421,7 +4381,7 @@ int morcego_v2Comment(morcego___i___instance__a__bucaneiro_engineering *
  *
  */
 int morcego_v2Genre(morcego___i___instance__a__bucaneiro_engineering *mv_______,
-                    __INT32_OR_INT64 argumento2)
+					__INT32_OR_INT64 argumento2)
 {
 	if (mv_______->id3_c___v2Genre)
 	{
@@ -4438,7 +4398,7 @@ int morcego_v2Genre(morcego___i___instance__a__bucaneiro_engineering *mv_______,
  *
  */
 int morcego_v2Year(morcego___i___instance__a__bucaneiro_engineering *mv_______,
-                   __INT32_OR_INT64 argumento2)
+				   __INT32_OR_INT64 argumento2)
 {
 	if (mv_______->id3_c___v2Year)
 	{
@@ -4455,7 +4415,7 @@ int morcego_v2Year(morcego___i___instance__a__bucaneiro_engineering *mv_______,
  *
  */
 int morcego_v2Album(morcego___i___instance__a__bucaneiro_engineering *mv_______,
-                    __INT32_OR_INT64 argumento2)
+					__INT32_OR_INT64 argumento2)
 {
 	if (mv_______->id3_c___v2Album)
 	{
@@ -4472,8 +4432,8 @@ int morcego_v2Album(morcego___i___instance__a__bucaneiro_engineering *mv_______,
  *
  */
 int morcego_v2Artist(morcego___i___instance__a__bucaneiro_engineering *
-                     mv_______,
-                     __INT32_OR_INT64 argumento2)
+						 mv_______,
+					 __INT32_OR_INT64 argumento2)
 {
 	if (mv_______->id3_c___v2Artist)
 	{
@@ -4490,7 +4450,7 @@ int morcego_v2Artist(morcego___i___instance__a__bucaneiro_engineering *
  *
  */
 int morcego_v2Title(morcego___i___instance__a__bucaneiro_engineering *mv_______,
-                    __INT32_OR_INT64 argumento2)
+					__INT32_OR_INT64 argumento2)
 {
 	if (mv_______->id3_c___v2Title)
 	{
@@ -4507,7 +4467,7 @@ int morcego_v2Title(morcego___i___instance__a__bucaneiro_engineering *mv_______,
  *
  */
 int morcego_v2Track(morcego___i___instance__a__bucaneiro_engineering *mv_______,
-                    __INT32_OR_INT64 argumento2)
+					__INT32_OR_INT64 argumento2)
 {
 	if (mv_______->id3_c___v2Track)
 	{
@@ -4524,15 +4484,15 @@ int morcego_v2Track(morcego___i___instance__a__bucaneiro_engineering *mv_______,
  *
  */
 int __stdcall Read_ID3_v2_tag(__int64 mv_instance, char *filename, char *Track,
-                              char *Title, char *Artist, char *Album,
-                              char *Year, char *Genre, char *Comment,
-                              char *EncodedBy, char *URL, char *Copyright,
-                              char *OriginalArtist, char *Composer)
+							  char *Title, char *Artist, char *Album,
+							  char *Year, char *Genre, char *Comment,
+							  char *EncodedBy, char *URL, char *Copyright,
+							  char *OriginalArtist, char *Composer)
 {
 	check_mv_instance(mv_instance);
 	morcego___i___instance__a__bucaneiro_engineering *mv_______ =
 		(morcego___i___instance__a__bucaneiro_engineering *)(__INT32_OR_INT64)
-		mv_instance;
+			mv_instance;
 	int ret;
 	ret = id3v2tag_ok(mv_______, (char *)filename);
 	if (0 == ret)
@@ -4583,10 +4543,10 @@ extern char *__cdecl rspgettemppath(void);
  *
  */
 int __stdcall Write_ID3_v2_tag(__int64 mv_instance, char *filename, char *Track,
-                               char *Title, char *Artist, char *Album,
-                               char *Year, char *Genre, char *Comment,
-                               char *EncodedBy, char *URL, char *Copyright,
-                               char *OriginalArtist, char *Composer)
+							   char *Title, char *Artist, char *Album,
+							   char *Year, char *Genre, char *Comment,
+							   char *EncodedBy, char *URL, char *Copyright,
+							   char *OriginalArtist, char *Composer)
 {
 
 	char temp[(300 * 6)];
@@ -4594,7 +4554,7 @@ int __stdcall Write_ID3_v2_tag(__int64 mv_instance, char *filename, char *Track,
 	check_mv_instance(mv_instance);
 	morcego___i___instance__a__bucaneiro_engineering *mv_______ =
 		(morcego___i___instance__a__bucaneiro_engineering *)(__INT32_OR_INT64)
-		mv_instance;
+			mv_instance;
 	rspgettemppath_multithread(temp);
 	strcpy(mv_______->id3_c___tempfolder, (char *)temp);
 	v2cleanup(mv_______);
@@ -4654,7 +4614,7 @@ int __stdcall Remove_ID3V2_tag(__int64 mv_instance, char *filename)
 	check_mv_instance(mv_instance);
 	morcego___i___instance__a__bucaneiro_engineering *mv_______ =
 		(morcego___i___instance__a__bucaneiro_engineering *)(__INT32_OR_INT64)
-		mv_instance;
+			mv_instance;
 	rspgettemppath_multithread(temp);
 	strcpy(mv_______->id3_c___tempfolder, (char *)temp);
 	return remove_id3v2_tag(mv_______, (char *)filename);
@@ -4664,7 +4624,7 @@ int __stdcall Remove_ID3V2_tag(__int64 mv_instance, char *filename)
  *
  */
 int morcego_getfft60(morcego___i___instance__a__bucaneiro_engineering *
-                     mv_______)
+						 mv_______)
 {
 	if (mv_______->decoder_c___liberafft || mv_______->decoder_c___flag_de_pause)
 	{
@@ -4677,7 +4637,7 @@ int morcego_getfft60(morcego___i___instance__a__bucaneiro_engineering *
  *
  */
 int morcego_getfft170(morcego___i___instance__a__bucaneiro_engineering *
-                      mv_______)
+						  mv_______)
 {
 	if (mv_______->decoder_c___liberafft || mv_______->decoder_c___flag_de_pause)
 	{
@@ -4690,7 +4650,7 @@ int morcego_getfft170(morcego___i___instance__a__bucaneiro_engineering *
  *
  */
 int morcego_getfft310(morcego___i___instance__a__bucaneiro_engineering *
-                      mv_______)
+						  mv_______)
 {
 	if (mv_______->decoder_c___liberafft || mv_______->decoder_c___flag_de_pause)
 	{
@@ -4703,7 +4663,7 @@ int morcego_getfft310(morcego___i___instance__a__bucaneiro_engineering *
  *
  */
 int morcego_getfft600(morcego___i___instance__a__bucaneiro_engineering *
-                      mv_______)
+						  mv_______)
 {
 	if (mv_______->decoder_c___liberafft || mv_______->decoder_c___flag_de_pause)
 	{
@@ -4716,7 +4676,7 @@ int morcego_getfft600(morcego___i___instance__a__bucaneiro_engineering *
  *
  */
 int morcego_getfft1000(morcego___i___instance__a__bucaneiro_engineering *
-                       mv_______)
+						   mv_______)
 {
 	if (mv_______->decoder_c___liberafft || mv_______->decoder_c___flag_de_pause)
 	{
@@ -4729,7 +4689,7 @@ int morcego_getfft1000(morcego___i___instance__a__bucaneiro_engineering *
  *
  */
 int morcego_getfft3000(morcego___i___instance__a__bucaneiro_engineering *
-                       mv_______)
+						   mv_______)
 {
 	if (mv_______->decoder_c___liberafft || mv_______->decoder_c___flag_de_pause)
 	{
@@ -4742,7 +4702,7 @@ int morcego_getfft3000(morcego___i___instance__a__bucaneiro_engineering *
  *
  */
 int morcego_getfft6000(morcego___i___instance__a__bucaneiro_engineering *
-                       mv_______)
+						   mv_______)
 {
 	if (mv_______->decoder_c___liberafft || mv_______->decoder_c___flag_de_pause)
 	{
@@ -4755,7 +4715,7 @@ int morcego_getfft6000(morcego___i___instance__a__bucaneiro_engineering *
  *
  */
 int morcego_getfft12000(morcego___i___instance__a__bucaneiro_engineering *
-                        mv_______)
+							mv_______)
 {
 	if (mv_______->decoder_c___liberafft || mv_______->decoder_c___flag_de_pause)
 	{
@@ -4768,7 +4728,7 @@ int morcego_getfft12000(morcego___i___instance__a__bucaneiro_engineering *
  *
  */
 int morcego_getfft14000(morcego___i___instance__a__bucaneiro_engineering *
-                        mv_______)
+							mv_______)
 {
 	if (mv_______->decoder_c___liberafft || mv_______->decoder_c___flag_de_pause)
 	{
@@ -4781,7 +4741,7 @@ int morcego_getfft14000(morcego___i___instance__a__bucaneiro_engineering *
  *
  */
 int morcego_getfft16000(morcego___i___instance__a__bucaneiro_engineering *
-                        mv_______)
+							mv_______)
 {
 	if (mv_______->decoder_c___liberafft || mv_______->decoder_c___flag_de_pause)
 	{
@@ -4794,7 +4754,7 @@ int morcego_getfft16000(morcego___i___instance__a__bucaneiro_engineering *
  *
  */
 int morcego_getfftpeak(morcego___i___instance__a__bucaneiro_engineering *
-                       mv_______)
+						   mv_______)
 {
 	if (mv_______->decoder_c___liberafft || mv_______->decoder_c___flag_de_pause)
 	{
@@ -4807,14 +4767,14 @@ int morcego_getfftpeak(morcego___i___instance__a__bucaneiro_engineering *
  *
  */
 int __stdcall GetSpectrumAnalyzer(__int64 mv_instance, int *f60, int *f170,
-                                  int *f310, int *f600, int *f1000,
-                                  int *f3000, int *f6000, int *f12000,
-                                  int *f14000, int *f16000, int *fpeak)
+								  int *f310, int *f600, int *f1000,
+								  int *f3000, int *f6000, int *f12000,
+								  int *f14000, int *f16000, int *fpeak)
 {
 	check_mv_instance(mv_instance);
 	morcego___i___instance__a__bucaneiro_engineering *mv_______ =
 		(morcego___i___instance__a__bucaneiro_engineering *)(__INT32_OR_INT64)
-		mv_instance;
+			mv_instance;
 	*f60 = morcego_getfft60(mv_______);
 	*f170 = morcego_getfft170(mv_______);
 	*f310 = morcego_getfft310(mv_______);
@@ -4837,7 +4797,7 @@ int __stdcall EnableSpectrumAnalyzer(__int64 mv_instance, int enable)
 	check_mv_instance(mv_instance);
 	morcego___i___instance__a__bucaneiro_engineering *mv_______ =
 		(morcego___i___instance__a__bucaneiro_engineering *)(__INT32_OR_INT64)
-		mv_instance;
+			mv_instance;
 	enable_fft_ok(mv_______, enable);
 	return 0;
 }
@@ -4868,7 +4828,7 @@ int __stdcall DebugInformation(__int64 mv_instance, char *debug)
 	check_mv_instance(mv_instance);
 	morcego___i___instance__a__bucaneiro_engineering *mv_______ =
 		(morcego___i___instance__a__bucaneiro_engineering *)(__INT32_OR_INT64)
-		mv_instance;
+			mv_instance;
 	debug[0] = 0;
 	if (mv_______->decoder_c___hasdebuginfo)
 	{
@@ -4882,7 +4842,7 @@ int __stdcall DebugInformation(__int64 mv_instance, char *debug)
  *
  */
 int morcego_enablevoiceremoval(morcego___i___instance__a__bucaneiro_engineering *mv,
-                               __INT32_OR_INT64 argumento2)
+							   __INT32_OR_INT64 argumento2)
 {
 	mv->decoder_c___enablevoiceremoval = argumento2;
 	return 0;
@@ -4901,7 +4861,7 @@ int __stdcall EnableVoiceRemoval(__int64 mv_instance, int enable)
  *
  */
 int morcego_enableecho(morcego___i___instance__a__bucaneiro_engineering *mv_______,
-                       int argumento2, int argumento3)
+					   int argumento2, int argumento3)
 {
 	mv_______->decoder_c___enableecho = argumento2;
 	mv_______->decoder_c___multiplier = argumento3;
@@ -4916,8 +4876,8 @@ int __stdcall EnableEcho(__int64 mv_instance, int enable, int delay)
 {
 	check_mv_instance(mv_instance);
 	return morcego_enableecho((morcego___i___instance__a__bucaneiro_engineering
-	                           *)(__INT32_OR_INT64)mv_instance,
-	                          enable, delay);
+								   *)(__INT32_OR_INT64)mv_instance,
+							  enable, delay);
 }
 /**
  * To enable the surround wav effect, very simple, give it a try
@@ -4928,7 +4888,7 @@ int __stdcall EnableSurround(__int64 mv_instance, int enable)
 	check_mv_instance(mv_instance);
 	morcego___i___instance__a__bucaneiro_engineering *mv_______ =
 		(morcego___i___instance__a__bucaneiro_engineering *)(__INT32_OR_INT64)
-		mv_instance;
+			mv_instance;
 	mv_______->decoder_c___enablesurround = enable;
 	return 0;
 }
@@ -4941,9 +4901,9 @@ int __stdcall BE_Special_Wav_Effect(__int64 mv_instance, int enable, int range)
 	check_mv_instance(mv_instance);
 	morcego___i___instance__a__bucaneiro_engineering *mv_______ =
 		(morcego___i___instance__a__bucaneiro_engineering *)(__INT32_OR_INT64)
-		mv_instance;
+			mv_instance;
 	mv_______->decoder_c___enablesurround2 = enable;
-	mv_______->decoder_c___globalrange =      range;
+	mv_______->decoder_c___globalrange = range;
 	return 0;
 }
 /**
@@ -4951,9 +4911,9 @@ int __stdcall BE_Special_Wav_Effect(__int64 mv_instance, int enable, int range)
  *
  */
 int morcego_useencryption(morcego___i___instance__a__bucaneiro_engineering *
-                          mv_______,
-                          __INT32_OR_INT64 argumento2,
-                          __INT32_OR_INT64 argumento3)
+							  mv_______,
+						  __INT32_OR_INT64 argumento2,
+						  __INT32_OR_INT64 argumento3)
 {
 	if (!memcmp((char *)argumento3, "yes", 3))
 	{
@@ -4976,16 +4936,16 @@ int __stdcall UseEncryption(__int64 mv_instance, int enable, char *pass)
 	check_mv_instance(mv_instance);
 	morcego___i___instance__a__bucaneiro_engineering *mv_______ =
 		(morcego___i___instance__a__bucaneiro_engineering *)(__INT32_OR_INT64)
-		mv_instance;
+			mv_instance;
 	if (enable)
 	{
 		return morcego_useencryption(mv_______, (__INT32_OR_INT64)pass,
-		                             (__INT32_OR_INT64) "yes");
+									 (__INT32_OR_INT64) "yes");
 	}
 	else
 	{
 		return morcego_useencryption(mv_______, (__INT32_OR_INT64)pass,
-		                             (__INT32_OR_INT64) "no");
+									 (__INT32_OR_INT64) "no");
 	}
 	return 0;
 }
@@ -5007,7 +4967,7 @@ int __stdcall EnableFreeverb(__int64 mv_instance, int enable)
 	check_mv_instance(mv_instance);
 	morcego___i___instance__a__bucaneiro_engineering *mv_______ =
 		(morcego___i___instance__a__bucaneiro_engineering *)(__INT32_OR_INT64)
-		mv_instance;
+			mv_instance;
 	mv_______->decoder_c___enablefreeverb = enable;
 	return 0;
 }
@@ -5029,13 +4989,13 @@ int __stdcall EnableFreeverb(__int64 mv_instance, int enable)
  * \return always 0
  */
 int __stdcall EnableSoundTouch(__int64 mv_instance, int enable, int tempo, int pitch,
-                               int rate)
+							   int rate)
 {
 	check_mv_instance(mv_instance);
 	morcego___i___instance__a__bucaneiro_engineering *mv_______ =
 		(morcego___i___instance__a__bucaneiro_engineering *)(__INT32_OR_INT64)
-		mv_instance;
-	if (tempo < -45)//need to check it later...
+			mv_instance;
+	if (tempo < -45) // need to check it later...
 	{
 		tempo = -45;
 	}
@@ -5053,9 +5013,9 @@ int __stdcall EnableSoundTouch(__int64 mv_instance, int enable, int tempo, int p
  * Simple wrapper to waveOutGetNumDevs windows function
  *
  */
-int __stdcall GetNumberofWaveOutDevices(__int64 mv_instance) //not really necessary but we are tring to follow standards
+int __stdcall GetNumberofWaveOutDevices(__int64 mv_instance) // not really necessary but we are tring to follow standards
 {
-	if(0 != mv_instance)
+	if (0 != mv_instance)
 		check_mv_instance(mv_instance);
 	return waveOutGetNumDevs();
 }
@@ -5064,7 +5024,7 @@ int __stdcall GetNumberofWaveOutDevices(__int64 mv_instance) //not really necess
  * To detect whether a new Phone or soundcard appeared to the system
  *
  */
-int __stdcall DetectChangeInSoundCards_i(__int64 mv_instance) //not really necessary but we are tring to follow standards
+int __stdcall DetectChangeInSoundCards_i(__int64 mv_instance) // not really necessary but we are tring to follow standards
 {
 	int ret_i;
 	int l_i;
@@ -5091,32 +5051,30 @@ int __stdcall DetectChangeInSoundCards_i(__int64 mv_instance) //not really neces
 		}
 	}
 
-	if(0 != strcmp(signature_phones, signature_phones_cur))
+	if (0 != strcmp(signature_phones, signature_phones_cur))
 	{
-		if(0 == strlen(signature_phones))
+		if (0 == strlen(signature_phones))
 		{
 			strcpy(signature_phones, signature_phones_cur);
-			return 1; //first change
+			return 1; // first change
 		}
 		else
 		{
 			strcpy(signature_phones, signature_phones_cur);
-			return 2; //real change
+			return 2; // real change
 		}
-
 	}
 	else
 	{
 		return 0;
 	}
-
 }
 
 /**
  * To detect whether a new Phone or soundcard appeared to the system, internal use
  *
  */
-int __fastcall DetectChangeInSoundCards_i_internal(void) //not really necessary but we are tring to follow standards
+int __fastcall DetectChangeInSoundCards_i_internal(void) // not really necessary but we are tring to follow standards
 {
 	int ret_i;
 	int l_i;
@@ -5141,25 +5099,23 @@ int __fastcall DetectChangeInSoundCards_i_internal(void) //not really necessary 
 		}
 	}
 
-	if(0 != strcmp(signature_phones, signature_phones_cur))
+	if (0 != strcmp(signature_phones, signature_phones_cur))
 	{
-		if(0 == strlen(signature_phones))
+		if (0 == strlen(signature_phones))
 		{
 			strcpy(signature_phones, signature_phones_cur);
-			return 1; //first change
+			return 1; // first change
 		}
 		else
 		{
 			strcpy(signature_phones, signature_phones_cur);
-			return 2; //real change
+			return 2; // real change
 		}
-
 	}
 	else
 	{
 		return 0;
 	}
-
 }
 
 ////////////////////////////////////////////////////////////////////////
@@ -5222,14 +5178,14 @@ void removespace(char *data)
 	removespace_begin(data);
 	removespace_end(data);
 }
-//needs updates
+// needs updates
 
 /**
  * To return a string with the error description
  *
  */
 int morcego_geterrorstring(morcego___i___instance__a__bucaneiro_engineering *mv_______,
-                           __INT32_OR_INT64 argumento2, __INT32_OR_INT64 argumento3)
+						   __INT32_OR_INT64 argumento2, __INT32_OR_INT64 argumento3)
 {
 	((char *)argumento3)[0] = 0;
 	switch (argumento2)
@@ -5238,48 +5194,48 @@ int morcego_geterrorstring(morcego___i___instance__a__bucaneiro_engineering *mv_
 		strcpy((char *)argumento3, "No error");
 		break;
 	case 1000:
-		strcpy((char *)argumento3, "Playing..."); //20
+		strcpy((char *)argumento3, "Playing..."); // 20
 		break;
 	case 1001:
-		strcpy((char *)argumento3, "Playback paused"); //20
+		strcpy((char *)argumento3, "Playback paused"); // 20
 		break;
 	case 10:
-		strcpy((char *)argumento3, "Cannot open media file"); //20
+		strcpy((char *)argumento3, "Cannot open media file"); // 20
 		break;
 	case 9:
 		strcpy((char *)argumento3, "No valid devices in the system");
 		break;
 	case 3:
-		strcpy((char *)argumento3, "Input does not appear to be a mv_______->decoder_c___wav file"); //23
+		strcpy((char *)argumento3, "Input does not appear to be a mv_______->decoder_c___wav file"); // 23
 		break;
 	case 4:
 		strcpy((char *)argumento3,
-		       "Error reading first page of Ogg bitstream data");
+			   "Error reading first page of Ogg bitstream data");
 		break;
 	case 5:
 		strcpy((char *)argumento3, "Error reading initial header packet");
 		break;
 	case 6:
 		strcpy((char *)argumento3,
-		       "This Ogg bitstream does not contain Vorbis");
+			   "This Ogg bitstream does not contain Vorbis");
 		break;
 	case 7:
 		strcpy((char *)argumento3, "Corrupt secondary header");
 		break;
 	case 8:
 		strcpy((char *)argumento3,
-		       "End of file before finding all Vorbis headers!");
+			   "End of file before finding all Vorbis headers!");
 		break;
 	case 2:
 		strcpy((char *)argumento3, "Error opening waveout");
 		break;
 	case 20:
 		strcpy((char *)argumento3,
-		       "Input does not appear to be a wav file");
+			   "Input does not appear to be a wav file");
 		break;
 	case 21:
 		strcpy((char *)argumento3,
-		       "Only PCM wav files can play");
+			   "Only PCM wav files can play");
 		break;
 	case 22:
 		strcpy((char *)argumento3, "Invalid number of bits per sample");
@@ -5295,22 +5251,21 @@ int morcego_geterrorstring(morcego___i___instance__a__bucaneiro_engineering *mv_
 		break;
 	case 300:
 		strcpy((char *)argumento3,
-		       "Tampering detected , please reinstall the component");
+			   "Tampering detected , please reinstall the component");
 		break;
 	case 900:
 		strcpy((char *)argumento3, "Unknown event");
 		break;
 	case 901:
-	
-	
+
 #ifndef THALIA_NEW_STANDALONE_AUDIO_PLAYER__
 		strcpy((char *)argumento3, "Libav error: ");
-		#else
-			strcpy((char *)argumento3, "Tabuleiro error: ");
-		#endif
-		
+#else
+		strcpy((char *)argumento3, "Tabuleiro error: ");
+#endif
+
 		strcat((char *)argumento3,
-		       mv_______->decoder_c___morcego_libav_error);
+			   mv_______->decoder_c___morcego_libav_error);
 		break;
 	default:
 		strcpy((char *)argumento3, "Unknown error");
@@ -5327,7 +5282,7 @@ int __stdcall GetErrorString(__int64 mv_instance, int value, char *data)
 	check_mv_instance(mv_instance);
 	morcego___i___instance__a__bucaneiro_engineering *mv_______ =
 		(morcego___i___instance__a__bucaneiro_engineering *)(__INT32_OR_INT64)
-		mv_instance;
+			mv_instance;
 	morcego_geterrorstring(mv_______, (__INT32_OR_INT64)value, (__INT32_OR_INT64)data);
 	return 0;
 }
@@ -5336,20 +5291,20 @@ int __stdcall GetErrorString(__int64 mv_instance, int value, char *data)
  *
  */
 int __stdcall GetNumberOfAudioTracks(__int64 mv_instance, char *utf8_filename,
-                                     char *error_message)
+									 char *error_message)
 {
 	int
 	get_number_of_audio_tracks(morcego___i___instance__a__bucaneiro_engineering * mv_______,
-	                           char *utf8_filename, char *error_message);
+							   char *utf8_filename, char *error_message);
 	check_mv_instance(mv_instance);
 	morcego___i___instance__a__bucaneiro_engineering *mv_______ =
 		(morcego___i___instance__a__bucaneiro_engineering *)(__INT32_OR_INT64)
-		mv_instance;
+			mv_instance;
 
 	mv_______->libav_c___retrieve_track_and_subtitles_mode_i = I_MODE_IS_AUDIO____;
 
 	return get_number_of_audio_tracks(mv_______, (char *)utf8_filename,
-	                                  (char *)error_message);
+									  (char *)error_message);
 }
 
 /**
@@ -5357,20 +5312,20 @@ int __stdcall GetNumberOfAudioTracks(__int64 mv_instance, char *utf8_filename,
  *
  */
 int __stdcall GetNumberOfSubtitles(__int64 mv_instance, char *utf8_filename,
-                                   char *error_message)
+								   char *error_message)
 {
 	int
 	get_number_of_audio_tracks(morcego___i___instance__a__bucaneiro_engineering * mv_______,
-	                           char *utf8_filename, char *error_message);
+							   char *utf8_filename, char *error_message);
 	check_mv_instance(mv_instance);
 	morcego___i___instance__a__bucaneiro_engineering *mv_______ =
 		(morcego___i___instance__a__bucaneiro_engineering *)(__INT32_OR_INT64)
-		mv_instance;
+			mv_instance;
 
 	mv_______->libav_c___retrieve_track_and_subtitles_mode_i = I_MODE_IS_SUBTITLE_;
 
 	return get_number_of_audio_tracks(mv_______, (char *)utf8_filename,
-	                                  (char *)error_message);
+									  (char *)error_message);
 }
 /**
  * To play a media file as if it was mono channel
@@ -5381,7 +5336,7 @@ int __stdcall BucaneiroPlayStereoAsMono(__int64 mv_instance, int enable)
 	check_mv_instance(mv_instance);
 	morcego___i___instance__a__bucaneiro_engineering *mv_______ =
 		(morcego___i___instance__a__bucaneiro_engineering *)(__INT32_OR_INT64)
-		mv_instance;
+			mv_instance;
 	mv_______->decoder_c___bucaneiro_play_as_mono = enable;
 	return 0;
 }
@@ -5389,15 +5344,15 @@ int __stdcall BucaneiroPlayStereoAsMono(__int64 mv_instance, int enable)
  * To show an informative Message Box
  *
  */
-void mprintf_about(char *format,     ...)
+void mprintf_about(char *format, ...)
 {
 	va_list tua_amanda;
 	char buffer[1024];
-	va_start(tua_amanda,         format);
+	va_start(tua_amanda, format);
 	vsprintf(buffer, format, tua_amanda);
-	va_end(tua_amanda                  );
-	MessageBox(0,                 buffer,
-	           O_NOME_ATUAL, MB_OK | MB_TOPMOST);
+	va_end(tua_amanda);
+	MessageBox(0, buffer,
+			   O_NOME_ATUAL, MB_OK | MB_TOPMOST);
 }
 /**
  * To show the About box of the DLL
@@ -5407,8 +5362,8 @@ int __stdcall About()
 {
 	void mprintf_about(char *format, ...);
 	mprintf_about("Brazilian GPL 3 DLL to play and decode"
-	              " any media file"
-	              " supported by ffmpeg (Libav) with some wave effects and equalizer");
+				  " any media file"
+				  " supported by ffmpeg (Libav) with some wave effects and equalizer");
 	return 0xdeadbeef;
 }
 /**
@@ -5423,7 +5378,7 @@ int __stdcall Alladin_GetRemainingTime(__int64 mv_instance, char *data)
 	check_mv_instance(mv_instance);
 	morcego___i___instance__a__bucaneiro_engineering *mv_______ =
 		(morcego___i___instance__a__bucaneiro_engineering *)(__INT32_OR_INT64)
-		mv_instance;
+			mv_instance;
 	lenght = morcego_getseconds(mv_______);
 	position = morcego_gettime(mv_______);
 	a = lenght - position;
@@ -5438,14 +5393,14 @@ int __stdcall Alladin_GetRemainingTime(__int64 mv_instance, char *data)
 void calc(int val, int *bytes, int *kbs, char *mb, char *gb)
 {
 	double a;
-	a =        val;
-	*bytes   = val;
+	a = val;
+	*bytes = val;
 	a = val / 1024;
-	*kbs =       a;
-	a = a   / 1024;
-	*mb =        a;
-	a = a   / 1024;
-	*gb =        a;
+	*kbs = a;
+	a = a / 1024;
+	*mb = a;
+	a = a / 1024;
+	*gb = a;
 	return;
 }
 /**
@@ -5454,7 +5409,7 @@ void calc(int val, int *bytes, int *kbs, char *mb, char *gb)
  *
  */
 int PCM16MonoToPCM16Stereo(char *inSamples_b, unsigned int b_len,
-                           char *outSamples_b)
+						   char *outSamples_b)
 {
 
 	/*
@@ -5464,7 +5419,6 @@ int PCM16MonoToPCM16Stereo(char *inSamples_b, unsigned int b_len,
 	   Spend a few minutes trying to figure how it works and you will see how clever these original developers was
 	 */
 
-
 	short *inSamples = (short *)inSamples_b;
 	short *outSamples = (short *)outSamples_b;
 	unsigned int i;
@@ -5473,7 +5427,7 @@ int PCM16MonoToPCM16Stereo(char *inSamples_b, unsigned int b_len,
 	for (i = 1; i <= b_len / 2; i++)
 	{
 		index = b_len / 2 - i;
-		outSamples[2 * index    ] = inSamples[index];
+		outSamples[2 * index] = inSamples[index];
 		outSamples[2 * index + 1] = inSamples[index];
 	}
 
@@ -5516,7 +5470,7 @@ void __stdcall IsMultiplayer(__int64 mv_instance, int multiplayer_or_not)
 	check_mv_instance(mv_instance);
 	morcego___i___instance__a__bucaneiro_engineering *mv_______ =
 		(morcego___i___instance__a__bucaneiro_engineering *)(__INT32_OR_INT64)
-		mv_instance;
+			mv_instance;
 	mv_______->decoder_c___multiplayer_or_not = multiplayer_or_not;
 }
 /**
@@ -5528,7 +5482,7 @@ void __stdcall SetVideoWidth(__int64 mv_instance, int width)
 	check_mv_instance(mv_instance);
 	morcego___i___instance__a__bucaneiro_engineering *mv_______ =
 		(morcego___i___instance__a__bucaneiro_engineering *)(__INT32_OR_INT64)
-		mv_instance;
+			mv_instance;
 	mv_______->libav_c___inputwidth = width;
 }
 
@@ -5551,16 +5505,16 @@ void __stdcall SetVideoWidth(__int64 mv_instance, int width)
  *
  */
 void __stdcall PassWindowInformation(__int64 mv_instance,
-                                     __int64 hwnd,
-                                     __int64 player_hwnd, int width, int heigth, int ratio, int left, int top)
+									 __int64 hwnd,
+									 __int64 player_hwnd, int width, int heigth, int ratio, int left, int top)
 {
 
 	check_mv_instance(mv_instance);
 	morcego___i___instance__a__bucaneiro_engineering *mv_______ =
 		(morcego___i___instance__a__bucaneiro_engineering *)(__INT32_OR_INT64)
-		mv_instance;
+			mv_instance;
 
-	if(enable_desktop_i)
+	if (enable_desktop_i)
 	{
 		return;
 	}
@@ -5584,7 +5538,7 @@ void __stdcall GetVideoInfo(__int64 mv_instance, char *data)
 	check_mv_instance(mv_instance);
 	morcego___i___instance__a__bucaneiro_engineering *mv_______ =
 		(morcego___i___instance__a__bucaneiro_engineering *)(__INT32_OR_INT64)
-		mv_instance;
+			mv_instance;
 	strcpy(data, mv_______->libav_c___video_information);
 }
 /**
@@ -5596,7 +5550,7 @@ void __stdcall DisableVideo(__int64 mv_instance, int disable)
 	check_mv_instance(mv_instance);
 	morcego___i___instance__a__bucaneiro_engineering *mv_______ =
 		(morcego___i___instance__a__bucaneiro_engineering *)(__INT32_OR_INT64)
-		mv_instance;
+			mv_instance;
 	mv_______->libav_c___disable_video = disable;
 }
 /**
@@ -5608,7 +5562,7 @@ void __stdcall Don_t_Draw_Video(__int64 mv_instance, int do_not_draw)
 	check_mv_instance(mv_instance);
 	morcego___i___instance__a__bucaneiro_engineering *mv_______ =
 		(morcego___i___instance__a__bucaneiro_engineering *)(__INT32_OR_INT64)
-		mv_instance;
+			mv_instance;
 	mv_______->libav_c___donot_draw_video = do_not_draw;
 }
 /**
@@ -5624,7 +5578,7 @@ void __stdcall GetWindowSize(__int64 mv_instance, int *w, int *h)
 	check_mv_instance(mv_instance);
 	morcego___i___instance__a__bucaneiro_engineering *mv_______ =
 		(morcego___i___instance__a__bucaneiro_engineering *)(__INT32_OR_INT64)
-		mv_instance;
+			mv_instance;
 
 	*w = mv_______->libav_c___width_of_window;
 	*h = mv_______->libav_c___height_of_window;
@@ -5641,19 +5595,16 @@ void __stdcall GetPixelFormat____(__int64 mv_instance, char *format)
 	check_mv_instance(mv_instance);
 	morcego___i___instance__a__bucaneiro_engineering *mv_______ =
 		(morcego___i___instance__a__bucaneiro_engineering *)(__INT32_OR_INT64)
-		mv_instance;
+			mv_instance;
 
 	if (mv_______->decoder_c___tm < GetTickCount64())
 	{
 		mv_______->decoder_c___tm = GetTickCount64() + 500;
 		mv_______->decoder_c___tm_value = mv_______->analisys_c___sync;
 	}
-	sprintf(format, "%s rate %0.2f audio %0.2f viideo %0.2f",
-	        get_pixel_format_info___(mv_______),
-	        mv_______->libav_c___ajusted_frame_rate,
-	        mv_______->decoder_c___valor_de_deslocamento_de_audio * 1000,
-	        mv_______->decoder_c___tm_value);
-
+	sprintf(format, "audio %0.2f video %0.2f",
+			mv_______->decoder_c___valor_de_deslocamento_de_audio * 1000,
+			mv_______->decoder_c___tm_value);
 }
 /**
  * To adjust the ratio of the video player
@@ -5665,7 +5616,7 @@ void __stdcall AdjustRatio(__int64 mv_instance, double adjust)
 	check_mv_instance(mv_instance);
 	morcego___i___instance__a__bucaneiro_engineering *mv_______ =
 		(morcego___i___instance__a__bucaneiro_engineering *)(__INT32_OR_INT64)
-		mv_instance;
+			mv_instance;
 
 	mv_______->libav_c___adjusted_ratio = adjust;
 	mv_______->libav_c___request_for_adjust = 1;
@@ -5682,7 +5633,7 @@ void __stdcall DisableWidthLimit(__int64 mv_instance)
 	check_mv_instance(mv_instance);
 	morcego___i___instance__a__bucaneiro_engineering *mv_______ =
 		(morcego___i___instance__a__bucaneiro_engineering *)(__INT32_OR_INT64)
-		mv_instance;
+			mv_instance;
 	mv_______->libav_c___disable_width_limit = 1;
 }
 /**
@@ -5697,7 +5648,7 @@ int __stdcall Is_WPL_Playlist(__int64 mv_instance, char *filename_utf8)
 	check_mv_instance(mv_instance);
 	morcego___i___instance__a__bucaneiro_engineering *mv_______ =
 		(morcego___i___instance__a__bucaneiro_engineering *)(__INT32_OR_INT64)
-		mv_instance;
+			mv_instance;
 
 	is_playlist(mv_______, filename_utf8);
 	if (mv_______->playlist_c___is_playlist)
@@ -5715,15 +5666,15 @@ int __stdcall GetPlaylistFiles(__int64 mv_instance, char *filename)
 	check_mv_instance(mv_instance);
 	morcego___i___instance__a__bucaneiro_engineering *mv_______ =
 		(morcego___i___instance__a__bucaneiro_engineering *)(__INT32_OR_INT64)
-		mv_instance;
+			mv_instance;
 
 	if (mv_______->playlist_c___player_index ==
-	    mv_______->playlist_c___media_files_count)
+		mv_______->playlist_c___media_files_count)
 	{
 		return 0;
 	}
 	strcpy(filename,
-	       mv_______->playlist_c___media_files[mv_______->playlist_c___player_index++]);
+		   mv_______->playlist_c___media_files[mv_______->playlist_c___player_index++]);
 	return 1;
 }
 
@@ -5731,7 +5682,7 @@ int __stdcall GetPlaylistFiles(__int64 mv_instance, char *filename)
 /* Period parameters */
 #define N 624
 #define M 397
-#define MATRIX_A 0x9908b0df       /* constant vector a */
+#define MATRIX_A 0x9908b0df	  /* constant vector a */
 #define UPPER_MASK 0x80000000 /* most significant w-r bits */
 #define LOWER_MASK 0x7fffffff /* least significant r bits */
 /* Tempering parameters */
@@ -5742,7 +5693,7 @@ int __stdcall GetPlaylistFiles(__int64 mv_instance, char *filename)
 #define TEMPERING_SHIFT_T(y) (y << 15)
 #define TEMPERING_SHIFT_L(y) (y >> 18)
 static unsigned long mt[N]; /* the array for the state vector  */
-static int mti = N + 1;         /* mti==N+1 means mt[N] is not initialized */
+static int mti = N + 1;		/* mti==N+1 means mt[N] is not initialized */
 /* initializing the array with a NONZERO seed */
 
 void sgenrand(unsigned long seed)
@@ -5756,7 +5707,7 @@ void sgenrand(unsigned long seed)
 		mt[mti] = (69069 * mt[mti - 1]) & 0xffffffff;
 }
 
-//notice that the result is not that really randon, you are warned...
+// notice that the result is not that really randon, you are warned...
 int genrand()
 {
 	unsigned long y;
@@ -5765,7 +5716,7 @@ int genrand()
 	if (mti >= N)
 	{ /* generate N words at one time */
 		int kk;
-		if (mti == N + 1)       /* if sgenrand() has not been called, */
+		if (mti == N + 1)	/* if sgenrand() has not been called, */
 			sgenrand(4357); /* a default initial seed is used   */
 		for (kk = 0; kk < N - M; kk++)
 		{
@@ -5787,7 +5738,7 @@ int genrand()
 	y ^= TEMPERING_SHIFT_S(y) & TEMPERING_MASK_B;
 	y ^= TEMPERING_SHIFT_T(y) & TEMPERING_MASK_C;
 	y ^= TEMPERING_SHIFT_L(y);
-	//return ((double) y / (unsigned long) 0xffffffff);  /* reals */
+	// return ((double) y / (unsigned long) 0xffffffff);  /* reals */
 	return (int)y; /* for integer generation */
 }
 
@@ -5816,42 +5767,38 @@ int __stdcall get_rand(int min, int max)
 	   );
 	 */
 
-	typedef BOOLEAN (__stdcall * RtlGenRandom)(PVOID RandomBuffer,
-	                                           ULONG RandomBufferLength);
-
+	typedef BOOLEAN(__stdcall * RtlGenRandom)(PVOID RandomBuffer,
+											  ULONG RandomBufferLength);
 
 	static HMODULE my_i____dll = NULL;
 	static RtlGenRandom RtlGenRandom_func = NULL;
 
 	ret = genrand() + GetTickCount();
 
-	if(RtlGenRandom_func)
+	if (RtlGenRandom_func)
 	{
 		assert(TRUE == RtlGenRandom_func(&ret, 4));
 		goto already_i;
 	}
 
-	if(NULL == my_i____dll)
+	if (NULL == my_i____dll)
 	{
 
-		my_i____dll = LoadLibraryA
-			      (
-			"Advapi32.dll"
-		              );
+		my_i____dll = LoadLibraryA(
+			"Advapi32.dll");
 
-		if(NULL == my_i____dll)
+		if (NULL == my_i____dll)
 		{
 			;
 		}
 		else
 		{
 
-			RtlGenRandom_func = (void *) GetProcAddress(
+			RtlGenRandom_func = (void *)GetProcAddress(
 				my_i____dll,
-				"SystemFunction036"
-				);
+				"SystemFunction036");
 
-			if(NULL == RtlGenRandom_func)
+			if (NULL == RtlGenRandom_func)
 			{
 				;
 			}
@@ -5859,22 +5806,19 @@ int __stdcall get_rand(int min, int max)
 			{
 
 				assert(TRUE == RtlGenRandom_func(&ret, 4));
-
 			}
-
 		}
-
 	}
 
 already_i:;
 
-	if(/*1 || */ NULL == RtlGenRandom_func)
+	if (/*1 || */ NULL == RtlGenRandom_func)
 	{
 		pedro_dprintf(1001, "Important!!! Cannot use the function SystemFunction036\n");
 		Beep(1000, 1000);
 	}
 
-	//ret = -2147483648;
+	// ret = -2147483648;
 
 	ret = abs(ret);
 	ret = ret % (range + 1);
@@ -5882,12 +5826,11 @@ already_i:;
 
 	pedro_dprintf(-1, "valor de ret antes do fix %d\n", ret);
 
-	if(ret < min)
+	if (ret < min)
 	{
-		ret = min;//fix for the abs problem
+		ret = min; // fix for the abs problem
 
 		pedro_dprintf(-1, "valor de ret depois do fix %d\n", ret);
-
 	}
 	return ret;
 }
@@ -5912,25 +5855,22 @@ void __stdcall AdjustSync(__int64 mv_instance, double value)
 	check_mv_instance(mv_instance);
 	morcego___i___instance__a__bucaneiro_engineering *mv_______ =
 		(morcego___i___instance__a__bucaneiro_engineering *)(__INT32_OR_INT64)
-		mv_instance;
+			mv_instance;
 	mv_______->libav_c___sync_adjust = value;
 
-	if(-27 == value)
+	if (-27 == value)
 	{
 
 		pedro_dprintf(1001, "Playlist debug mode enabled, to disable pass -28\n");
 		enable_playlist_debug = true;
-
 	}
 
-	if(-28 == value)
+	if (-28 == value)
 	{
 
 		pedro_dprintf(1001, "Playlist debug mode disabled\n");
 		enable_playlist_debug = false;
-
 	}
-
 }
 /**
  * To know whether the audio and video sync was lost, just informative for the moment and
@@ -5944,7 +5884,7 @@ int __stdcall GetSyncStatus(__int64 mv_instance)
 	check_mv_instance(mv_instance);
 	morcego___i___instance__a__bucaneiro_engineering *mv_______ =
 		(morcego___i___instance__a__bucaneiro_engineering *)(__INT32_OR_INT64)
-		mv_instance;
+			mv_instance;
 	return mv_______->syncstatus;
 }
 /**
@@ -5961,12 +5901,11 @@ void __stdcall SlowComputersCommand_k_p(__int64 mv_instance, int enable_slow_com
 	check_mv_instance(mv_instance);
 	morcego___i___instance__a__bucaneiro_engineering *mv_______ =
 		(morcego___i___instance__a__bucaneiro_engineering *)(__INT32_OR_INT64)
-		mv_instance;
+			mv_instance;
 
 	mv_______->libav_c___enable_slow_computers_hack_k_p = enable_slow_computers_hack;
 
 	return;
-
 }
 /**
  * It will retrieve the real number of channels in the media file.
@@ -5981,8 +5920,7 @@ int __stdcall GetOriginalNumberofChannels(__int64 mv_instance)
 	check_mv_instance(mv_instance);
 	morcego___i___instance__a__bucaneiro_engineering *mv_______ =
 		(morcego___i___instance__a__bucaneiro_engineering *)(__INT32_OR_INT64)
-		mv_instance;
-
+			mv_instance;
 
 	return mv_______->libav_c___original_number_of_channels_k_p;
 }
@@ -5990,17 +5928,15 @@ int __stdcall GetOriginalNumberofChannels(__int64 mv_instance)
  * It will return the information about the sample format of the media file loaded, with description
  *
  */
-void __stdcall GetSampleFormatInfo
-(
+void __stdcall GetSampleFormatInfo(
 	__int64 mv_instance,
-	char    * sample_format_string_k_p
-)
+	char *sample_format_string_k_p)
 {
 
 	check_mv_instance(mv_instance);
 	morcego___i___instance__a__bucaneiro_engineering *mv_______ =
 		(morcego___i___instance__a__bucaneiro_engineering *)(__INT32_OR_INT64)
-		mv_instance;
+			mv_instance;
 	strcpy(sample_format_string_k_p, mv_______->libav_c___sample_rate_format_string);
 	return;
 }
@@ -6009,16 +5945,14 @@ void __stdcall GetSampleFormatInfo
  * this value to be 0 in order to call resume, it was added to the fullscreen code.
  *
  */
-int __stdcall GetWaveOutStatus_arp
-(
-	__int64 mv_instance
-)
+int __stdcall GetWaveOutStatus_arp(
+	__int64 mv_instance)
 {
 
 	check_mv_instance(mv_instance);
 	morcego___i___instance__a__bucaneiro_engineering *mv_______ =
 		(morcego___i___instance__a__bucaneiro_engineering *)(__INT32_OR_INT64)
-		mv_instance;
+			mv_instance;
 
 	return mv_______->decoder_c___wave_out_open_flag;
 }
@@ -6033,17 +5967,17 @@ int64_t item_number_z_;
 
 bool active_z = false;
 
-struct my_struct_for_list_ar_is_amanda_update_//for list only
+struct my_struct_for_list_ar_is_amanda_update_ // for list only
 {
 
 	bool nodata_z;
 	bool played_z;
 	int64_t position;
 
-	struct    my_struct_for_list_ar_is_amanda_update_ * next_ar;
+	struct my_struct_for_list_ar_is_amanda_update_ *next_ar;
 };
 
-struct my_struct_for_list_ar_is_amanda_update_ *aak_is_amanda_update_        = NULL;
+struct my_struct_for_list_ar_is_amanda_update_ *aak_is_amanda_update_ = NULL;
 struct my_struct_for_list_ar_is_amanda_update_ *aak_inicio_is_amanda_update_ = NULL;
 
 struct my_struct_for_list_ar_is_amanda_update_ *aak_pointer_is_amanda_update_;
@@ -6056,17 +5990,15 @@ int has_itens_copy_is_amanda_update_ = 0;
  * To add a new item to the linked list
  *
  */
-void __stdcall add_more_one_z
-(
-)
+void __stdcall add_more_one_z()
 {
 	struct my_struct_for_list_ar_is_amanda_update_ *aak_ptr;
-	if(!has_itens_is_amanda_update_)
+	if (!has_itens_is_amanda_update_)
 	{
 		aak_is_amanda_update_ = calloc(1, sizeof(struct my_struct_for_list_ar_is_amanda_update_));
-		aak_inicio_is_amanda_update_    =  aak_is_amanda_update_;
-		aak_pointer_is_amanda_update_   = aak_is_amanda_update_;
-		aak_is_amanda_update_->next_ar  = calloc(1, sizeof(struct my_struct_for_list_ar_is_amanda_update_));
+		aak_inicio_is_amanda_update_ = aak_is_amanda_update_;
+		aak_pointer_is_amanda_update_ = aak_is_amanda_update_;
+		aak_is_amanda_update_->next_ar = calloc(1, sizeof(struct my_struct_for_list_ar_is_amanda_update_));
 
 		aak_is_amanda_update_->next_ar->nodata_z = true;
 
@@ -6102,7 +6034,7 @@ int clean_list__ar_is_amanda_update_(void);
 int clean_list_itens_is_amanda_update_(void)
 {
 
-	if(!has_itens_copy_is_amanda_update_)
+	if (!has_itens_copy_is_amanda_update_)
 	{
 		clean_list__ar_is_amanda_update_();
 		return 0;
@@ -6124,9 +6056,9 @@ int clean_list__ar_is_amanda_update_(void)
 	struct my_struct_for_list_ar_is_amanda_update_ *my_ptr_ar;
 	struct my_struct_for_list_ar_is_amanda_update_ *my_ptr2_ar;
 	my_ptr2_ar = aak_inicio_is_amanda_update_;
-	my_ptr_ar  = aak_inicio_is_amanda_update_;
+	my_ptr_ar = aak_inicio_is_amanda_update_;
 inicio_ar:;
-	if(!has_itens_is_amanda_update_)
+	if (!has_itens_is_amanda_update_)
 	{
 		has_itens_copy_is_amanda_update_ = 0;
 		return 0;
@@ -6134,7 +6066,7 @@ inicio_ar:;
 	my_ptr2_ar = my_ptr_ar;
 	my_ptr_ar = my_ptr_ar->next_ar;
 
-	if(1 == has_itens_is_amanda_update_)
+	if (1 == has_itens_is_amanda_update_)
 	{
 		free(my_ptr2_ar->next_ar);
 	}
@@ -6155,48 +6087,46 @@ inicio_ar:;
  * playing or keep playing randonly
  */
 
-int __stdcall get_next_item_z(int64_t * item_got_z, int64_t * item_number_z)
+int __stdcall get_next_item_z(int64_t *item_got_z, int64_t *item_number_z)
 {
 
 	int items_skipped_i = 0;
 	int i_z;
 	int item_randomico_z = get_rand(0, has_itens_is_amanda_update_ - 1);
 
-	*item_got_z    = 0;
+	*item_got_z = 0;
 	*item_number_z = 0;
 
-	if(enable_playlist_debug)
+	if (enable_playlist_debug)
 		pedro_dprintf(1001, "Randomic item got %d\n", item_randomico_z);
 
-	if(0 == item_randomico_z && 1 == item_randomico_z)//compiler happy...
+	if (0 == item_randomico_z && 1 == item_randomico_z) // compiler happy...
 	{
 		exit(27);
 	}
 
-	if(false == active_z)
+	if (false == active_z)
 	{
 
-		if(enable_playlist_debug)
+		if (enable_playlist_debug)
 			pedro_dprintf(1001, "No items in playlist yet\n");
 		return 0;
-
 	}
 
 	struct my_struct_for_list_ar_is_amanda_update_ *my_ptr_ar;
-	my_ptr_ar  = aak_inicio_is_amanda_update_;
+	my_ptr_ar = aak_inicio_is_amanda_update_;
 
-
-	if(enable_playlist_debug)
+	if (enable_playlist_debug)
 		pedro_dprintf(1001, "Items to search in the playlist -> %d\n",
-		              (has_itens_is_amanda_update_ * 2 ) + 5);
+					  (has_itens_is_amanda_update_ * 2) + 5);
 
-	for(i_z = 0; i_z < (has_itens_is_amanda_update_ * 2 ) + 5; i_z++)
+	for (i_z = 0; i_z < (has_itens_is_amanda_update_ * 2) + 5; i_z++)
 	{
 
-		if(i_z >= item_randomico_z)
+		if (i_z >= item_randomico_z)
 		{
 
-			if(false == my_ptr_ar->played_z)
+			if (false == my_ptr_ar->played_z)
 			{
 				item_number_z_++;
 				*item_number_z = item_number_z_;
@@ -6204,7 +6134,7 @@ int __stdcall get_next_item_z(int64_t * item_got_z, int64_t * item_number_z)
 				*item_got_z = my_ptr_ar->position;
 				pedro_dprintf(-1, "saiu de get_next_item_z, pegou %lld\n", *item_got_z);
 
-				if(enable_playlist_debug)
+				if (enable_playlist_debug)
 				{
 					pedro_dprintf(1001, "Items skipped to get a file that was not played yet -> %d\n", items_skipped_i);
 
@@ -6212,63 +6142,58 @@ int __stdcall get_next_item_z(int64_t * item_got_z, int64_t * item_number_z)
 				}
 
 				return 0;
-
 			}
 			else
 			{
 				items_skipped_i++;
 			}
-
 		}
 
 		my_ptr_ar = my_ptr_ar->next_ar;
 
-		if(true == my_ptr_ar->nodata_z)
+		if (true == my_ptr_ar->nodata_z)
 		{
 			my_ptr_ar = aak_inicio_is_amanda_update_;
 		}
 	}
 
-	if(enable_playlist_debug)
+	if (enable_playlist_debug)
 		pedro_dprintf(1001, "Cannot find an item in the first try, cleanning\n");
 
 	my_ptr_ar = aak_inicio_is_amanda_update_;
-	for(i_z = 0; i_z < has_itens_is_amanda_update_; i_z++)
+	for (i_z = 0; i_z < has_itens_is_amanda_update_; i_z++)
 	{
 
 		my_ptr_ar->played_z = false;
 		my_ptr_ar = my_ptr_ar->next_ar;
-
 	}
 
 	item_randomico_z = get_rand(0, has_itens_is_amanda_update_ - 1);
 
-	if(enable_playlist_debug)
+	if (enable_playlist_debug)
 		pedro_dprintf(1001, "New randomic number got %d\n", item_randomico_z);
 
 	my_ptr_ar = aak_inicio_is_amanda_update_;
-	for(i_z = 0; i_z < (has_itens_is_amanda_update_ * 2 ) + 1; i_z++)
+	for (i_z = 0; i_z < (has_itens_is_amanda_update_ * 2) + 1; i_z++)
 	{
 
-		if(i_z >= item_randomico_z)
+		if (i_z >= item_randomico_z)
 		{
 
-			if(false == my_ptr_ar->played_z)
+			if (false == my_ptr_ar->played_z)
 			{
 				item_number_z_ = 0;
 				*item_number_z = item_number_z_;
 				*item_got_z = my_ptr_ar->position;
-				if(enable_playlist_debug)
-					pedro_dprintf(1001, "Item got after cleaning, in i_z position %d, item got %lld item number %lld\n",i_z, *item_got_z, *item_number_z);
+				if (enable_playlist_debug)
+					pedro_dprintf(1001, "Item got after cleaning, in i_z position %d, item got %lld item number %lld\n", i_z, *item_got_z, *item_number_z);
 				return 1;
-
 			}
-
 		}
 
 		my_ptr_ar = my_ptr_ar->next_ar;
 
-		if(true == my_ptr_ar->nodata_z)
+		if (true == my_ptr_ar->nodata_z)
 		{
 			my_ptr_ar = aak_inicio_is_amanda_update_;
 		}
@@ -6286,25 +6211,23 @@ int __stdcall set_played_item_z(int64_t item_z)
 
 	int i_z;
 	struct my_struct_for_list_ar_is_amanda_update_ *my_ptr_ar;
-	my_ptr_ar  = aak_inicio_is_amanda_update_;
+	my_ptr_ar = aak_inicio_is_amanda_update_;
 
-	if(false == active_z)
+	if (false == active_z)
 	{
 
 		return 0;
-
 	}
 
-	for(i_z = 0; i_z < has_itens_is_amanda_update_; i_z++)
+	for (i_z = 0; i_z < has_itens_is_amanda_update_; i_z++)
 	{
 
-		if(my_ptr_ar->position == item_z)
+		if (my_ptr_ar->position == item_z)
 		{
 			my_ptr_ar->played_z = true;
 		}
 
 		my_ptr_ar = my_ptr_ar->next_ar;
-
 	}
 	return 0;
 }
@@ -6316,7 +6239,7 @@ int __stdcall set_played_item_z(int64_t item_z)
 int __stdcall init_playlist_z()
 {
 
-	while(clean_list_itens_is_amanda_update_())
+	while (clean_list_itens_is_amanda_update_())
 	{
 		;
 	}
@@ -6333,12 +6256,12 @@ int __stdcall init_playlist_z()
  *
  *
  */
-int __stdcall init_jun_playlist_z(char * jun_playlist_z)
+int __stdcall init_jun_playlist_z(char *jun_playlist_z)
 {
 
-	our_jun_playlist_file_z =  _wfopen(utf8towide(jun_playlist_z), L"wb");
+	our_jun_playlist_file_z = _wfopen(utf8towide(jun_playlist_z), L"wb");
 
-	if(our_jun_playlist_file_z)
+	if (our_jun_playlist_file_z)
 	{
 		return 0;
 	}
@@ -6350,10 +6273,10 @@ int __stdcall init_jun_playlist_z(char * jun_playlist_z)
  *
  *
  */
-void __stdcall  add_item_to_playlist_z(char * entry_z)
+void __stdcall add_item_to_playlist_z(char *entry_z)
 {
 	fwrite(entry_z, 1, strlen(entry_z), our_jun_playlist_file_z);
-	fwrite("\n", 1, 1, our_jun_playlist_file_z                 );
+	fwrite("\n", 1, 1, our_jun_playlist_file_z);
 	return;
 }
 
@@ -6362,40 +6285,41 @@ void __stdcall  add_item_to_playlist_z(char * entry_z)
  */
 void __stdcall close_playlist_z()
 {
-	fclose(our_jun_playlist_file_z                             );
-	our_jun_playlist_file_z                               = NULL;
+	fclose(our_jun_playlist_file_z);
+	our_jun_playlist_file_z = NULL;
 }
-
 
 /**
  * To open a playlist file for append
  */
-int __stdcall add_to_jun_playlist_z(char * jun_playlist_z)
+int __stdcall add_to_jun_playlist_z(char *jun_playlist_z)
 {
-/*
+	/*
 
-   here...
+	   here...
 
- */
-	char buf_m_[3] = {0,};
+	 */
+	char buf_m_[3] = {
+		0,
+	};
 	int size_of_file_m;
 
 	need_to_add_char_n_m_ = false;
 
 	our_jun_playlist_file_z = _wfopen(permissive_name_m_(amanda_utf8towide_3_(jun_playlist_z)), L"rb");
 
-	if(our_jun_playlist_file_z)
+	if (our_jun_playlist_file_z)
 	{
 		fseek(our_jun_playlist_file_z, 0, SEEK_END);
 
 		size_of_file_m = ftell(our_jun_playlist_file_z);
 
-		if(1 < size_of_file_m)
+		if (1 < size_of_file_m)
 		{
 			fseek(our_jun_playlist_file_z, size_of_file_m - 1, SEEK_SET);
 			fread(buf_m_, 1, 1, our_jun_playlist_file_z);
 
-			if('\n' != buf_m_[0])
+			if ('\n' != buf_m_[0])
 			{
 				need_to_add_char_n_m_ = true;
 			}
@@ -6404,11 +6328,11 @@ int __stdcall add_to_jun_playlist_z(char * jun_playlist_z)
 		fclose(our_jun_playlist_file_z);
 	}
 
-	our_jun_playlist_file_z =  _wfopen(permissive_name_m_(amanda_utf8towide_3_(jun_playlist_z)), L"ab");
+	our_jun_playlist_file_z = _wfopen(permissive_name_m_(amanda_utf8towide_3_(jun_playlist_z)), L"ab");
 
-	if(our_jun_playlist_file_z)
+	if (our_jun_playlist_file_z)
 	{
-		if(need_to_add_char_n_m_)
+		if (need_to_add_char_n_m_)
 		{
 			fwrite("\n", 1, 1, our_jun_playlist_file_z);
 		}
@@ -6423,7 +6347,7 @@ int __stdcall add_to_jun_playlist_z(char * jun_playlist_z)
 int __stdcall init_data_info_z()
 {
 
-	if(0 == number_z)
+	if (0 == number_z)
 	{
 		number_z = BE_CreateDecoder();
 		pedro_dprintf(-1, "Value of init %lld\n", number_z);
@@ -6433,14 +6357,14 @@ int __stdcall init_data_info_z()
 /**
  * It will retrieve video info
  */
-int __stdcall get_video_size_z(char * media_file_utf8_z,
-                               __int64 hwnd_z,
-                               __int64 player_hwnd_z,
-                               int width__z,
-                               int height__z,
-                               int left_z,
-                               int top_z,
-                               __attribute__((unused)) int * width_z, __attribute__((unused)) int * height_z)
+int __stdcall get_video_size_z(char *media_file_utf8_z,
+							   __int64 hwnd_z,
+							   __int64 player_hwnd_z,
+							   int width__z,
+							   int height__z,
+							   int left_z,
+							   int top_z,
+							   __attribute__((unused)) int *width_z, __attribute__((unused)) int *height_z)
 {
 
 	init_data_info_z();
@@ -6450,9 +6374,9 @@ int __stdcall get_video_size_z(char * media_file_utf8_z,
 	check_mv_instance(number_z);
 	morcego___i___instance__a__bucaneiro_engineering *mv_______ =
 		(morcego___i___instance__a__bucaneiro_engineering *)(__INT32_OR_INT64)
-		number_z;
+			number_z;
 
-	mv_______->libav_c___width_of_window  = -1;
+	mv_______->libav_c___width_of_window = -1;
 	mv_______->libav_c___height_of_window = -1;
 
 	/*
@@ -6466,16 +6390,16 @@ int __stdcall get_video_size_z(char * media_file_utf8_z,
 	   video_p.Top);
 	 */
 	Open(number_z, media_file_utf8_z, 0, 1, hwnd_z,
-	     player_hwnd_z,
-	     width__z, height__z, 0, left_z, top_z, 0);
+		 player_hwnd_z,
+		 width__z, height__z, 0, left_z, top_z, 0);
 	/*
 	   while(-1 == SampleRate(number_z))
 	   {
-	    Sleep(50);
+		Sleep(50);
 	   }
 	 */
 
-	//PlaybackCancel(number_z);
+	// PlaybackCancel(number_z);
 
 	return 0;
 }
@@ -6484,35 +6408,35 @@ int __stdcall get_video_size_z(char * media_file_utf8_z,
  *
  *
  */
-int __stdcall get_video_data(int * width_z, int * height_z, char * ratio_string_z, double * ratio_double_z)
+int __stdcall get_video_data(int *width_z, int *height_z, char *ratio_string_z, double *ratio_double_z)
 {
 
-	if(number_z)
+	if (number_z)
 	{
 		check_mv_instance(number_z);
 		morcego___i___instance__a__bucaneiro_engineering *mv_______ =
 			(morcego___i___instance__a__bucaneiro_engineering *)(__INT32_OR_INT64)
-			number_z;
+				number_z;
 
-		pedro_dprintf(-1, "width  %d\n",  mv_______->libav_c___width_of_window);
-		pedro_dprintf(-1, "height %d\n",  mv_______->libav_c___height_of_window);
+		pedro_dprintf(-1, "width  %d\n", mv_______->libav_c___width_of_window);
+		pedro_dprintf(-1, "height %d\n", mv_______->libav_c___height_of_window);
 
-		*width_z  =  mv_______->libav_c___width_of_window;
-		*height_z =  mv_______->libav_c___height_of_window;
+		*width_z = mv_______->libav_c___width_of_window;
+		*height_z = mv_______->libav_c___height_of_window;
 
-		if(!loading_z)
+		if (!loading_z)
 		{
 
-			if(0 != *height_z)
+			if (0 != *height_z)
 			{
-				*ratio_double_z = (double)*width_z / (double) *height_z;
+				*ratio_double_z = (double)*width_z / (double)*height_z;
 			}
 			else
 			{
 				*ratio_double_z = 1.0;
 			}
 
-			sprintf(ratio_string_z, "%.4f",  *ratio_double_z);
+			sprintf(ratio_string_z, "%.4f", *ratio_double_z);
 
 			return 0;
 		}
@@ -6530,7 +6454,7 @@ int __stdcall get_video_data(int * width_z, int * height_z, char * ratio_string_
 int __stdcall unload_media_file_z()
 {
 
-	if(number_z)
+	if (number_z)
 	{
 		PlaybackCancel(number_z);
 	}
@@ -6548,29 +6472,27 @@ int __stdcall memory_usage__z(char *data_z)
 {
 	//#pragma message "amanda & MathMan compiling Tar DLL at " __TIME__ "..."
 	/*
-	                                                                                                                                                                                ¯\_(^^)_/¯
+																																													¯\_(^^)_/¯
 	 */
 	double val_z;
 	PROCESS_MEMORY_COUNTERS_EX memory;
 
-	if(-1 == last_value_Z)
+	if (-1 == last_value_Z)
 	{
 
 		goto inside_Z;
-
 	}
 
-	if(GetTickCount64() > oldvalue_Z)
+	if (GetTickCount64() > oldvalue_Z)
 	{
 
-inside_Z:       ;
+	inside_Z:;
 		pedro_dprintf(-1, "vai %d\n", GetTickCount64());
 		/* Mr Do. */ GetProcessMemoryInfo(GetCurrentProcess(), (void *)&memory, sizeof(memory));
 
-		oldvalue_Z =  GetTickCount64() + 500;
+		oldvalue_Z = GetTickCount64() + 500;
 
 		last_value_Z = memory.WorkingSetSize;
-
 	}
 	else
 	{
@@ -6592,7 +6514,7 @@ void __stdcall Amanda_s_Smart_Ape_Use_Cache(__int64 mv_instance, int value_amand
 	check_mv_instance(mv_instance);
 	morcego___i___instance__a__bucaneiro_engineering *mv_______ =
 		(morcego___i___instance__a__bucaneiro_engineering *)(__INT32_OR_INT64)
-		mv_instance;
+			mv_instance;
 
 	if (27 == value_amanda_s_smart_ape)
 	{

@@ -1,0 +1,21 @@
+#Amanda and Smart Ape 2021
+
+shinkal_480:
+	x86_64-w64-mingw32-g++ -Iinclude -I. -std=c++11 \
+	-o parse_espirita.dll demo.cc libwebm.a -static \
+	kkk_amanda.c mislaine.def -shared 
+	
+#	x86_64-w64-mingw32-strip.exe parse_espirita.dll
+
+	cp --preserve=timestamps *.cc *.c *makefile* *.a *.def 'C:\cygwin64_amandaricardo_koci_10.2.0\aoprojeto\parse_webm_m'
+
+	cp --preserve=timestamps parse_espirita.dll 'C:\cygwin64_amandaricardo_koci_10.2.0\bin\mp3dll'
+
+shinkal_libs:
+	x86_64-w64-mingw32-g++ -Iinclude -I. -std=c++11 -c src/*.cc
+	x86_64-w64-mingw32-ar rcs libwebm.a *.o
+
+exec_shinkal:
+	./parse_shinkal.exe file_m.webm
+exec_shinkal2:
+	./parse_shinkal.exe sample_960x540.webm
