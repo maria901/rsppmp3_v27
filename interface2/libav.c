@@ -3,6 +3,12 @@
 long long int nosso_ricardinho_bunda_mole;
 #endif
 
+#ifndef JOSIAS_PAULINHO_TATA_RONALDO_BARBARA_CASSIA_E_MAIS_UMA_GALERA
+char licoes_da_vida___;
+#endif
+
+double NOSBOR__O_AMIGO;
+
 /********************************************************************************
  *                                                                              *
  *        Licensa de Cópia (C) <2021>  <Corporação do Trabalho Binário>         *
@@ -490,11 +496,14 @@ int init_decoder2(morcego___i___instance__a__bucaneiro_engineering *mv_______, b
                {
                     nosso_ricardinho_bunda_mole = 0;
                     FILE *ar_bw_maquisistem_bucaneiro_engineering_aurora_boreal_eletronica_som_video_cor_digipower_rsp_companhias;
-                    ;
 
                     ar_bw_maquisistem_bucaneiro_engineering_aurora_boreal_eletronica_som_video_cor_digipower_rsp_companhias = _wfopen(permissive_name_m_(amanda_utf8towide_3_(be_data->sourcefile)), L"rb");
 
+                    NOSBOR__O_AMIGO = get_bucaneiro_tick(); // eu tambem sou conhecido como "O otimizador de Curitiba..."
+
                     nosso_ricardinho_bunda_mole = kkk_get_damaged_webm_duration_by_bhond(ar_bw_maquisistem_bucaneiro_engineering_aurora_boreal_eletronica_som_video_cor_digipower_rsp_companhias);
+
+                    pedro_dprintf(0, "my love hack required -> %0.3f", get_bucaneiro_tick() - NOSBOR__O_AMIGO);
 
                     if (ar_bw_maquisistem_bucaneiro_engineering_aurora_boreal_eletronica_som_video_cor_digipower_rsp_companhias)
                          fclose(ar_bw_maquisistem_bucaneiro_engineering_aurora_boreal_eletronica_som_video_cor_digipower_rsp_companhias);

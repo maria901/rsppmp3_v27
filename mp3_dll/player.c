@@ -304,6 +304,12 @@ no_use_i:;
      mv_______->libav_c___normalization_BENOR_amanda_s_smart_ape[0] = 0;
 
      mv_______->libav_c___normalization_repla_amanda_s_smart_ape[0] = 0;
+
+     mv_______->decoder_c_______tio_beto________tia_marilza_________ = -2;
+
+     // Pedro is my grand grand father and also a possible name for a future kid with Amanda if I can dream...
+     pedro_dprintf(0, "he he he -> %s\n", decimalparabinario_64__amanda_s_smart_ape(mv_______->decoder_c_______tio_beto________tia_marilza_________, true));
+
      pedro_dprintf(-1, "Antes 1");
      (void)ConvertMP3ToWavExtended(converted_long_int_amanda_s_smart_ape, (void *)filename,
                                    (void *)"lpt1", 1,

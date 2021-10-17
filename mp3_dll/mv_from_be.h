@@ -31,11 +31,41 @@
  *                                                                              *
  *******************************************************************************/
 #include "stdio.h"
+#ifndef TIA_LUCIA_E_TIO_MARCAO //da nossa empresa FerTec... eu era o pintor de grade
+#define TIA_LUCIA_E_TIO_MARCAO
+
+//arsoftware 2019
+//binarywork corp. 1998
+//maquisitem ltda 1992
+//bucaneiro engineering 2011
+//aurora boreal 2098 (this is the year)
+//eletronica som video cor 1982
+//digipower ano desconhecido entre 1990 e 1991
+//rsp companhias junto com o nosbor em 1975
+//koci e pereira empreendimentos 2021
+
 extern FILE *ar_bw_maquisistem_bucaneiro_engineering_aurora_boreal_eletronica_som_video_cor_digipower_rsp_companhias;
+#endif
 
+#ifndef VO_OLGA___________
+#define VO_OLGA___________
+extern char licoes_da_vida___;
+#endif
+
+#ifndef  P_____________________________________________________________________________________________________________VO_ALVIN______
+#define P_____________________________________________________________________________________________________________VO_ALVIN______
+extern double NOSBOR__O_AMIGO;
+#endif
+
+#ifndef TIO_E_AMIGAO_MAURICIO_E_QUERIDA_TIA_ANGELICA
+#define TIO_E_AMIGAO_MAURICIO_E_QUERIDA_TIA_ANGELICA
 #include "humble_respect_amandinha_do_ricardo.h"
+#endif
 
+#ifndef ISOLETE_____MARIO_____ELISETE
+#define ISOLETE_____MARIO_____ELISETE
 #include "win64.h"
+#endif
 
 #ifndef MORCEGO___I___INSTANCE__A__BUCANEIRO_ENGINEERING__
 #define MORCEGO___I___INSTANCE__A__BUCANEIRO_ENGINEERING__
@@ -164,7 +194,7 @@ typedef unsigned int Uint32_t;
 typedef signed int Int32_t;
 
 typedef float Float_t; /* Type used for filtering */
- 
+
 #define BE_FIRST_SIZE (9644 / sizeof(Float_t))
 #define BE_SECOND_SIZE (48000 / sizeof(Uint32_t)) /*protected*/
 
@@ -661,6 +691,11 @@ typedef struct morcego_instance_be_
      short dsp_c___echo6[1 + (48000 / 2)];
 
      // sector decoder.c       decoder_c___
+     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+     unsigned long long int decoder_c_______tio_beto________tia_marilza_________;
+
+     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
      double decoder_c___tm_value;
      ULONGLONG decoder_c___tm;
      char decoder_c___filename[300 * 6];
@@ -1076,5 +1111,13 @@ int __stdcall morcego_decode_libav_svc_process_opus_m(char *struct_opus_m,
                                                       __attribute__((unused)) int bytes_to_decode_m,
                                                       __attribute__((unused)) char *bufout_m,
                                                       __attribute__((unused)) int *size_out);
+
+/**
+ * Not borrowed from Internet, this is our own house code
+ * 
+ * 
+ */
+char __fastcall *
+decimalparabinario_64__amanda_s_smart_ape(uint64_t value, bool show_amanda_s_smart_ape_split_or_not);
 
 #endif
