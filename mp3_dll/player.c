@@ -308,8 +308,107 @@ no_use_i:;
      mv_______->decoder_c_________tio_beto_________tia_marilza_________ = -2;
      /*
 
-
-
+        Braulio Zanotto, professor de educação fisica
+        Vinicus, filho do Braulio
+        Vladinei
+        Magnani
+        Pereira
+        Xu
+        Eduardo, me ensinou sobre encryptação em 82 a encryptacao se chamava Zenit Polar
+        Adriana
+        Andreia
+        Maciel
+        Tabushi
+        Viviane
+        Aercio
+        Débora
+        Célio
+        China
+        Testa
+        Nilson
+        Sirlei
+        Elvis
+        Marcelo
+        Paulo
+        Paulo
+        Paulo
+        Dito
+        Luiz
+        Cide
+        Side
+        Sanderson
+        Silvia
+        Vitória
+        Renata
+        Carlinhos
+        Carlinhos
+        Jota
+        Edson
+        Rubinho
+        Helinho
+        Lurdes
+        Lurdes
+        Waldemar
+        Robson
+        Robson
+        Romel
+        Regina
+        Regina
+        Filomena
+        Siri
+        Edenei
+        Elcio
+        Arliuze
+        Julio
+        Luiz
+        Raul
+        Hermano
+        Andreia
+        Thalia
+        Aline
+        Ericsson
+        Marquinhos
+        Arthur
+        Arthur
+        Rejane
+        Julia
+        Julia
+        Maria
+        Barbara
+        Cassia
+        Paulinho
+        Cezinha
+        Tata
+        Ale
+        MIslaine
+        Marlene
+        Soeli
+        Maristela
+        Toninho
+        Celso
+        Boi
+        Negrinho
+        Doca
+        Linho
+        Zezinha
+        Denise
+        Diva
+        Dilson
+        MAriane
+        Cleyton
+        Marilda
+        MAriane
+        Marilene
+        Selma
+        Edinho
+        Edinho
+        Elzinha
+        Douglas
+        Lucrecia
+        Eliza
+        Célia
+        Célia
+        
 
 
 
@@ -326,7 +425,7 @@ no_use_i:;
      */
 
      // Pedro is my grand grand father and also a possible name for a future kid with Amanda if I can dream...
-     pedro_dprintf(0, "he he he -> %s\n", decimalparabinario_64__amanda_s_smart_ape(mv_______->decoder_c_________tio_beto_________tia_marilza_________, true));
+     pedro_dprintf(-1, "he he he -> %s\n", decimalparabinario_64__amanda_s_smart_ape(mv_______->decoder_c_________tio_beto_________tia_marilza_________, true));
      /*
 
 
