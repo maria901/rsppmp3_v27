@@ -305,7 +305,7 @@ no_use_i:;
 
      mv_______->libav_c___normalization_repla_amanda_s_smart_ape[0] = 0;
 
-     mv_______->decoder_c_________tio_beto_________tia_marilza_________ = -2;
+     mv_______->decoder_c___tio = -2;
      /*
 
         Braulio Zanotto, professor de educação fisica
@@ -478,8 +478,8 @@ no_use_i:;
 
      */
 
-     // Pedro is my grand grand father and also a possible name for a future kid with Amanda if I can dream...
-     pedro_dprintf(-1, "he he he -> %s\n", decimalparabinario_64__amanda_s_smart_ape(mv_______->decoder_c_________tio_beto_________tia_marilza_________, true));
+     // Pedro is my grand grand father ...
+     pedro_dprintf(-1, "he he he -> %s\n", decimalparabinario_64__amanda_s_smart_ape(mv_______->decoder_c___tio, true));
      /*
 
 

@@ -1,6 +1,6 @@
 #ifndef douglas_
 #define douglas_
-#ifndef lucrecia_ // sorry mom...
+#ifndef lucrecia_
 #define lucrecia_
 /********************************************************************************
  *                                                                              *
@@ -35,19 +35,8 @@
  *                                                                              *
  *******************************************************************************/
 #include "stdio.h"
-#ifndef TIA_LUCIA_E_TIO_MARCAO // da nossa empresa FerTec... eu era o pintor de grade
+#ifndef TIA_LUCIA_E_TIO_MARCAO 
 #define TIA_LUCIA_E_TIO_MARCAO
-
-// arsoftware 2019
-// binarywork corp. 1998
-// maquisitem ltda 1992
-// bucaneiro engineering 2011
-// aurora boreal 2098 (this is the year)
-// eletronica som video cor 1982
-// digipower ano desconhecido entre 1990 e 1991
-// rsp companhias junto com o nosbor em 1975
-// koci e pereira empreendimentos 2021
-// FerTec  1980
 
 extern FILE *ar_bw_maquisistem_bucaneiro_engineering_aurora_boreal_eletronica_som_video_cor_digipower_rsp_companhias;
 #endif
@@ -698,7 +687,7 @@ typedef struct morcego_instance_be_
      // sector decoder.c       decoder_c___
      ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-     unsigned long long int decoder_c_________tio_beto_________tia_marilza_________;
+     unsigned long long int decoder_c___tio;
 
      ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
      double decoder_c___tm_value;

@@ -262,6 +262,7 @@ enum decoder_id_maria
 {
      AMANDA_OPUS__ = 1001,
      AMANDA_OGG_VORBIS,
+     AMANDA_MP4_AAC,
 };
 
 typedef struct pedro_27_
