@@ -499,12 +499,24 @@ int init_decoder2(morcego___i___instance__a__bucaneiro_engineering *mv_______, b
 
                     ar_bw_maquisistem_bucaneiro_engineering_aurora_boreal_eletronica_som_video_cor_digipower_rsp_companhias = _wfopen(permissive_name_m_(amanda_utf8towide_3_(be_data->sourcefile)), L"rb");
 
-                    NOSBOR__O_AMIGO = get_bucaneiro_tick(); // eu tambem sou conhecido como "O otimizador de Curitiba..."
+                    if (-2 == mv_______->decoder_c_________tio_beto_________tia_marilza_________)
+                    {
+                         NOSBOR__O_AMIGO = get_bucaneiro_tick(); // eu tambem sou conhecido como "O otimizador de Curitiba..."
 
-                    nosso_ricardinho_bunda_mole = kkk_get_damaged_webm_duration_by_bhond(ar_bw_maquisistem_bucaneiro_engineering_aurora_boreal_eletronica_som_video_cor_digipower_rsp_companhias);
+                         nosso_ricardinho_bunda_mole = kkk_get_damaged_webm_duration_by_bhond(ar_bw_maquisistem_bucaneiro_engineering_aurora_boreal_eletronica_som_video_cor_digipower_rsp_companhias);
 
-                    pedro_dprintf(0, "my love hack required -> %0.3f", get_bucaneiro_tick() - NOSBOR__O_AMIGO);
+                         pedro_dprintf(0, "my love hack required -> %0.3f", get_bucaneiro_tick() - NOSBOR__O_AMIGO);
 
+                         if (1 != nosso_ricardinho_bunda_mole)//vai passar 3 vezes se nao der certo, ok?...só que nunca vai acontecer...
+                         {
+                              mv_______->decoder_c_________tio_beto_________tia_marilza_________ = nosso_ricardinho_bunda_mole;
+                         }
+
+                    }
+                    else
+                    {
+                         nosso_ricardinho_bunda_mole = mv_______->decoder_c_________tio_beto_________tia_marilza_________;
+                    }
                     if (ar_bw_maquisistem_bucaneiro_engineering_aurora_boreal_eletronica_som_video_cor_digipower_rsp_companhias)
                          fclose(ar_bw_maquisistem_bucaneiro_engineering_aurora_boreal_eletronica_som_video_cor_digipower_rsp_companhias);
 

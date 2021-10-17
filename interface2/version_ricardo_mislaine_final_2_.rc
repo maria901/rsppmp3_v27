@@ -30,8 +30,8 @@ LANGUAGE LANG_PORTUGUESE, SUBLANG_PORTUGUESE_BRAZILIAN
 IDR_MAINFRAME           ICON                                   "amandaricardo_koci_qualquer coisa.ico"
 
 VS_VERSION_INFO VERSIONINFO
- FILEVERSION 36,0,2,547623
- PRODUCTVERSION 36,0,2,547623
+ FILEVERSION 36,0,4,547625
+ PRODUCTVERSION 36,0,4,547625
  FILEFLAGSMASK 0x3fL
 #ifdef _DEBUG
  FILEFLAGS 0x1L
@@ -49,14 +49,14 @@ BEGIN
             VALUE "Comments", "BinaryWork Corp. \0"
             VALUE "CompanyName", "BinaryWork Corp. 2021 © CopyLeft \0"
             VALUE "FileDescription", "BW Interface2.dll 64 bits \0"
-            VALUE "FileVersion", "36, 0, 2, 547623 \0"
+            VALUE "FileVersion", "36, 0, 4, 547625 \0"
             VALUE "InternalName", "interface2.dll \0"
             VALUE "LegalCopyright", "Copyright © 2021 BW \0"
             VALUE "LegalTrademarks", "https://nomade.sourceforge.io/ \0"
             VALUE "OriginalFilename", "interface2.dll \0"
-            VALUE "PrivateBuild", "547623 \0"
-            VALUE "ProductName", "BW Interface2.dll 36, 0, 2, 547623 64 bits \0"
-            VALUE "ProductVersion", "36, 0, 2, 547623 \0"
+            VALUE "PrivateBuild", "547625 \0"
+            VALUE "ProductName", "BW Interface2.dll 36, 0, 4, 547625 64 bits \0"
+            VALUE "ProductVersion", "36, 0, 4, 547625 \0"
             VALUE "SpecialBuild", "amandaricardo_koci\0"
         END
     END
