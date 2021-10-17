@@ -749,6 +749,7 @@ pedro_dprintf(-15102021, "achei 1");
      __int64 processed = 0;
      // int64_t            file_size_
      audio_file *wav_stream = NULL;
+	 bool already_achincalhar = false;
      char int_buffer[4096];
      char signature_amanda_s_smart_ape[MAXPATH_UTF_8_MODE_AMANDA_S_SMART_APE] = {
          0,
@@ -883,7 +884,8 @@ again:;
 
      mv_______->morcego_interface_c___porcentagem = por;
      
-pedro_dprintf(0, "Decoding the file...morcego");
+	 if(!already_achincalhar)
+pedro_dprintf(0, "*******Decoding the file for webm...morcego"), already_achincalhar = true;
 
 #ifndef THALIA_NEW_STANDALONE_AUDIO_PLAYER__
      ret_amanda_s_smart_ape = morcego_decode_libav(mv_______, sizeof(int_buffer), int_buffer, &size_out);

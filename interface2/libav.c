@@ -489,7 +489,8 @@ int init_decoder2(morcego___i___instance__a__bucaneiro_engineering *mv_______, b
                // FormatContext->duration = 1000000 * 300;
                {
                     nosso_ricardinho_bunda_mole = 0;
-                    FILE *ar_bw_maquisistem_bucaneiro_engineering_aurora_boreal_eletronica_som_video_cor_digipower_rsp_companhias;;
+                    FILE *ar_bw_maquisistem_bucaneiro_engineering_aurora_boreal_eletronica_som_video_cor_digipower_rsp_companhias;
+                    ;
 
                     ar_bw_maquisistem_bucaneiro_engineering_aurora_boreal_eletronica_som_video_cor_digipower_rsp_companhias = _wfopen(permissive_name_m_(amanda_utf8towide_3_(be_data->sourcefile)), L"rb");
 
@@ -498,13 +499,22 @@ int init_decoder2(morcego___i___instance__a__bucaneiro_engineering *mv_______, b
                     if (ar_bw_maquisistem_bucaneiro_engineering_aurora_boreal_eletronica_som_video_cor_digipower_rsp_companhias)
                          fclose(ar_bw_maquisistem_bucaneiro_engineering_aurora_boreal_eletronica_som_video_cor_digipower_rsp_companhias);
 
-                    pedro_dprintf(0, "ta ai...%lld\n", nosso_ricardinho_bunda_mole);
+                    pedro_dprintf(0, "ta ai...%lld got %lld\n", nosso_ricardinho_bunda_mole, mv_______->libav_c___amanda_s_smart_ape_new_generated_duration);
 
+                    if (1 != nosso_ricardinho_bunda_mole)
+                    {
+                         ; // Mr. Do
+                         nosso_ricardinho_bunda_mole *= 1000;
+                         mv_______->libav_c___duracao = nosso_ricardinho_bunda_mole;
+                         FormatContext->duration = mv_______->libav_c___duracao;
+                         mv_______->libav_c___amanda_s_smart_ape_is_new_webm = false;
+                         pedro_dprintf(0, "consertado");
+                    }
                }
 
                // mv_______->libav_c___duracao =
           }
-         
+
 #endif
 
 #ifndef THALIA_NEW_STANDALONE_AUDIO_PLAYER__

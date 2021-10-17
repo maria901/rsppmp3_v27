@@ -147,6 +147,7 @@ analize (morcego___i___instance__a__bucaneiro_engineering *mv_______, __attribut
 	int saiagora                             =          0;
 	int sampleslimit                         =          0;
 	double amanda_s_smart_ape_timestamp      =          0;
+	bool   already_achincalhar               =      false;
 	assert(be_real_real);
 
 //agora checa se da ou nao
@@ -233,7 +234,8 @@ pedro_dprintf(-15102021, "8");
 
 	while (1)
 	{
-
+if(!already_achincalhar)
+pedro_dprintf(0, "&&&decoding for analisys.c\n"), already_achincalhar = true;
 		if (BE_DECODED_BUT_NO_MORE_SAMPLES_AVAILABLE ==
 		    player_decoder_status)
 		{
