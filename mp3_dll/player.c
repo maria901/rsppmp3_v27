@@ -323,6 +323,11 @@ no_use_i:;
         Aercio
         Débora
         Célio
+        Célia
+        Paola
+        Edna
+        Sil
+        Ícaro
         China
         Testa
         Nilson
@@ -452,8 +457,12 @@ no_use_i:;
         Patrick
         Natália
         Jefinho
+        Ariel, esta é inesquecivel...
         Tentci
-        
+        Leoni
+        Vera
+        Vinicius
+
 
 
 

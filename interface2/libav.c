@@ -505,7 +505,7 @@ int init_decoder2(morcego___i___instance__a__bucaneiro_engineering *mv_______, b
 
                          nosso_ricardinho_bunda_mole = kkk_get_damaged_webm_duration_by_bhond(ar_bw_maquisistem_bucaneiro_engineering_aurora_boreal_eletronica_som_video_cor_digipower_rsp_companhias);
 
-                         pedro_dprintf(0, "my love hack required -> %0.3f", get_bucaneiro_tick() - NOSBOR__O_AMIGO);
+                         pedro_dprintf(-1, "my love hack required -> %0.3f", get_bucaneiro_tick() - NOSBOR__O_AMIGO);
 
                          if (1 != nosso_ricardinho_bunda_mole)//vai passar 3 vezes se nao der certo, ok?...só que nunca vai acontecer...
                          {
