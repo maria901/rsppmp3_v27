@@ -1,3 +1,7 @@
+#ifndef douglas_
+#define douglas_
+#ifndef lucrecia_ // sorry mom...
+#define lucrecia_
 /********************************************************************************
  *                                                                              *
  *        Licensa de Cópia (C) <2021>  <Corporação do Trabalho Binário>         *
@@ -31,18 +35,19 @@
  *                                                                              *
  *******************************************************************************/
 #include "stdio.h"
-#ifndef TIA_LUCIA_E_TIO_MARCAO //da nossa empresa FerTec... eu era o pintor de grade
+#ifndef TIA_LUCIA_E_TIO_MARCAO // da nossa empresa FerTec... eu era o pintor de grade
 #define TIA_LUCIA_E_TIO_MARCAO
 
-//arsoftware 2019
-//binarywork corp. 1998
-//maquisitem ltda 1992
-//bucaneiro engineering 2011
-//aurora boreal 2098 (this is the year)
-//eletronica som video cor 1982
-//digipower ano desconhecido entre 1990 e 1991
-//rsp companhias junto com o nosbor em 1975
-//koci e pereira empreendimentos 2021
+// arsoftware 2019
+// binarywork corp. 1998
+// maquisitem ltda 1992
+// bucaneiro engineering 2011
+// aurora boreal 2098 (this is the year)
+// eletronica som video cor 1982
+// digipower ano desconhecido entre 1990 e 1991
+// rsp companhias junto com o nosbor em 1975
+// koci e pereira empreendimentos 2021
+// FerTec  1980
 
 extern FILE *ar_bw_maquisistem_bucaneiro_engineering_aurora_boreal_eletronica_som_video_cor_digipower_rsp_companhias;
 #endif
@@ -52,7 +57,7 @@ extern FILE *ar_bw_maquisistem_bucaneiro_engineering_aurora_boreal_eletronica_so
 extern char licoes_da_vida___;
 #endif
 
-#ifndef  P_____________________________________________________________________________________________________________VO_ALVIN______
+#ifndef P_____________________________________________________________________________________________________________VO_ALVIN______
 #define P_____________________________________________________________________________________________________________VO_ALVIN______
 extern double NOSBOR__O_AMIGO;
 #endif
@@ -693,7 +698,7 @@ typedef struct morcego_instance_be_
      // sector decoder.c       decoder_c___
      ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-     unsigned long long int decoder_c_______tio_beto________tia_marilza_________;
+     unsigned long long int decoder_c_________tio_beto_________tia_marilza_________;
 
      ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
      double decoder_c___tm_value;
@@ -1114,10 +1119,13 @@ int __stdcall morcego_decode_libav_svc_process_opus_m(char *struct_opus_m,
 
 /**
  * Not borrowed from Internet, this is our own house code
- * 
- * 
+ *
+ *
  */
 char __fastcall *
 decimalparabinario_64__amanda_s_smart_ape(uint64_t value, bool show_amanda_s_smart_ape_split_or_not);
 
+#endif
+
+#endif
 #endif
