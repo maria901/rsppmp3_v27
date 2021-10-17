@@ -675,6 +675,19 @@ void main_old_p(pedro_k *maria_struct_)
      return;
 }
 
+char *__stdcall svc_init_mp4_m(char *filename_utf_8_v,
+							   int *error_code_aline_,
+							   juliete_struct *dados_m);
+int __stdcall morcego_decode_libav_svc_process_mp4_m(__attribute__((unused)) char *struct_opus_m,
+													 __attribute__((unused)) int bytes_to_decode_m,
+													 __attribute__((unused)) char *bufout_m,
+													 __attribute__((unused)) int *size_out);
+
+void __stdcall svc_seek_mp4_m(__attribute__((unused)) char *struct_opus_m,
+							  __attribute__((unused)) double maquisistem_value);
+
+void morcego_deinit_libav_svc_deinit_mp4_m(char *struct_opus_m);
+
 char *__stdcall svc_init_opus_m(char *filename_utf_8_v,
                                 int *error_code_aline_,
                                 juliete_struct *dados_m);
@@ -730,12 +743,41 @@ char *__stdcall svc_init_opus_m(char *filename_utf_8_v,
           if (NULL == ptr_shinkal)
           {
                pedro_dprintf(0, "ogg returns NULL \n");
-               ; // do nothing
+               ; // do nothing, no memory, I supose...
           }
           else if (10004 == *feline_p->error_code_aline_)
           {
                pedro_dprintf(0, "file isnot ogg \n");
                // here handle mp4 or AAC
+
+               ptr_shinkal = svc_init_mp4_m(filename_utf_8_v,
+                                            error_code_aline_,
+                                            dados_m);
+
+               if (ptr_shinkal)
+               {
+                    free(feline_p->filename_utf_8_m);
+                    free(feline_p);
+
+                    feline_p = (void *)ptr_shinkal;
+               }
+
+               if (NULL == ptr_shinkal)
+               {
+                    pedro_dprintf(0, "MP4/AAC returns NULL \n");
+                    ; // do nothing
+               }
+               else if (10004 == *feline_p->error_code_aline_)
+               {
+                    pedro_dprintf(0, "file isnot MP4/AAC \n");
+                    // here mp3 now or free and exit
+               }
+               else
+               {
+                    pedro_dprintf(0, "file is MP4 or AAC my  love...%p\n", feline_p);
+
+                    return (char *)feline_p;
+               }
           }
           else
           {
@@ -910,7 +952,7 @@ double
 getval_100(double max, double por)
 {
 
-     // a formula aqui ï¿½
+     // a formula aqui é
      // max / 100 * por
 
      double maxa;

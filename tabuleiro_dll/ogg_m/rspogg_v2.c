@@ -360,6 +360,7 @@ enum decoder_id_maria
 {
      AMANDA_OPUS__ = 1001,
      AMANDA_OGG_VORBIS,
+     AMANDA_MP4_AAC,
 };
 
 typedef struct pedro_27_
@@ -692,10 +693,9 @@ char *__stdcall svc_init_ogg_m(__attribute__((unused)) char *filename_utf_8_v,
      assert(feline_p->error_code_aline_);
      if (10004 == *feline_p->error_code_aline_)
      {
-          pedro_dprintf(0, "debug 3\n");
-          free(feline_p->filename_utf_8_m);
-          free(feline_p);
-          return NULL;
+          pedro_dprintf(0, "file isnot ogg will return and try MP4/AAC\n");
+          // free(feline_p);
+          return (char *)feline_p;
      }
 
      // if opus
@@ -958,4 +958,31 @@ void __stdcall svc_seek_ogg_m(__attribute__((unused)) char *struct_opus_m,
      feline_p->bytes_in_the_buffer_paul = 0;
      // for your pleasure...
      return;
+}
+
+BOOL WINAPI DllMain(__attribute__((unused)) HINSTANCE hModule,
+                    __attribute__((unused)) DWORD ul_reason_for_call,
+                    __attribute__((unused)) LPVOID lpReserved);
+BOOL WINAPI DllMain(__attribute__((unused)) HINSTANCE hModule,
+                    __attribute__((unused)) DWORD ul_reason_for_call,
+                    __attribute__((unused)) LPVOID lpReserved)
+{
+     switch (ul_reason_for_call)
+     {
+     case DLL_PROCESS_ATTACH:
+          OutputDebugString("svc OGG Vorbis DLL Interface "
+                            " - DLL_PROCESS_ATTACH (" __TIME__ " " __DATE__
+                            ") \n");
+          break;
+     case DLL_THREAD_ATTACH:
+
+          break;
+     case DLL_THREAD_DETACH:
+
+          break;
+     case DLL_PROCESS_DETACH:
+
+          break;
+     }
+     return TRUE;
 }

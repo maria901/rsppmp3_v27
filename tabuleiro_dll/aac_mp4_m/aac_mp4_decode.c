@@ -24,14 +24,47 @@
 #define __INT32_OR_INT64 __int64
 #else
 #define __INT32_OR_INT64 int
-#endif
+#endif // 2021 MathMan and amanda
 #include <windows.h>
-
-#include <fcntl.h>
+//#include   <stdint.h>
 #include <stdio.h>
-#include <stdarg.h>
 #include <stdlib.h>
 #include <string.h>
+#include <time.h>
+#include <errno.h>
+#include <fcntl.h>
+#include <ctype.h>
+#include <math.h>
+#include <wctype.h>
+#include <wchar.h>
+#include <stdarg.h>
+#include <stddef.h>
+#include <setjmp.h>
+#include <locale.h>
+#include <signal.h>
+#include <limits.h>
+#include <float.h>
+#include <iso646.h>
+
+#undef NDEBUG
+#include <assert.h>
+
+#include <stdbool.h>
+
+#include <process.h>
+
+#ifndef uchar
+#define uchar unsigned char
+#endif
+
+#ifndef uint
+#define uint unsigned int
+#endif
+
+#ifndef ushort
+#define ushort unsigned short
+#endif
+
 #include <getopt.h>
 
 #include <neaacdec.h>
@@ -39,6 +72,10 @@
 #include "aac_decode_enums.h"
 #include "audio.h"
 WCHAR *__stdcall utf8towide(const char *pUTF8);
+
+void pedro_dprintf(int amanda_level,
+				   char *format, ...);
+
 #ifndef min
 #define min(a, b) ((a) < (b) ? (a) : (b))
 #endif
@@ -48,6 +85,215 @@ extern int written;
 int method_is_internal_pcm = 1;
 
 FILE *outfile;
+
+/**
+ * To make the path wide mode aware, stolen from libarchive
+ *
+ * 15/september/2021 10:14, last visit 16/09/2021 22:36 by bhond...
+ *
+ */
+wchar_t *
+permissive_name_m_(const wchar_t *wname, WCHAR *ar_temp);
+/**
+ * To make the path wide mode aware, stolen from libarchive
+ *
+ * 15/september/2021 10:14, last visit 16/09/2021 22:36 by bhond...
+ *
+ */
+wchar_t *
+permissive_name_m_(const wchar_t *wname, WCHAR *ar_temp)
+{
+
+	wchar_t *wnp = NULL;
+	wchar_t *wn;
+	wchar_t *ws, *wsp;
+	DWORD len, slen;
+	int unc;
+
+	wnp = ar_temp;
+
+	// wnp = malloc(AMANDA__SIZE * 2);
+
+	wcscpy(wnp, wname);
+
+	len = wcslen(wname);
+
+	wn = wnp;
+
+	if (wnp[0] == L'\\' && wnp[1] == L'\\' && // access to the wrong position in memory, fixed now
+		wnp[2] == L'?' && wnp[3] == L'\\')
+		/* We have already a permissive name. */
+		return (wn);
+
+	if (wnp[0] == L'\\' && wnp[1] == L'\\' &&
+		wnp[2] == L'.' && wnp[3] == L'\\')
+	{
+		/* This is a device name */
+		if (((wnp[4] >= L'a' && wnp[4] <= L'z') ||
+			 (wnp[4] >= L'A' && wnp[4] <= L'Z')) &&
+			wnp[5] == L':' && wnp[6] == L'\\')
+			wnp[2] = L'?'; /* Not device name. */
+		return (wn);
+	}
+
+	unc = 0;
+	if (wnp[0] == L'\\' && wnp[1] == L'\\' && wnp[2] != L'\\')
+	{
+		wchar_t *p = &wnp[2];
+
+		/* Skip server-name letters. */
+		while (*p != L'\\' && *p != L'\0')
+			++p;
+		if (*p == L'\\')
+		{
+			wchar_t *rp = ++p;
+			/* Skip share-name letters. */
+			while (*p != L'\\' && *p != L'\0')
+				++p;
+			if (*p == L'\\' && p != rp)
+			{
+				/* Now, match patterns such as
+				 * "\\server-name\share-name\" */
+				wnp += 2;
+				len -= 2;
+				unc = 1;
+			}
+		}
+	}
+
+	slen = 4 + (unc * 4) + len + 1;
+	ws = wsp = malloc(slen * sizeof(wchar_t));
+	if (ws == NULL)
+	{
+		// free(wn);
+		return (NULL);
+	}
+	/* prepend "\\?\" */
+	wcsncpy(wsp, L"\\\\?\\", 4);
+	wsp += 4;
+	slen -= 4;
+	if (unc)
+	{
+		/* append "UNC\" ---> "\\?\UNC\" */
+		wcsncpy(wsp, L"UNC\\", 4);
+		wsp += 4;
+		slen -= 4;
+	}
+	wcsncpy(wsp, wnp, slen);
+	wsp[slen - 1] = L'\0'; /* Ensure null termination. */
+	// free(wn);
+
+	wcscpy(wnp, ws);
+
+	free(ws);
+
+	return (wnp);
+}
+
+WCHAR *amanda_utf8towide_1_(char *pUTF8, WCHAR *ar_temp);
+
+/**
+ * To convert an utf-8 encoded filename to a wide string (WCHAR *), we
+ *  . provide two functions that are exactly the same because someone may
+ * use it in multi-thread code
+ *
+ * @param pUTF8 the input utf-8 encoded filename
+ *
+ * @return the static allocated WCHAR array with the filename as wide string
+ *
+ */
+WCHAR *amanda_utf8towide_1_(char *pUTF8, WCHAR *ar_temp)
+{
+	WCHAR *ricardo_k = ar_temp;
+
+	MultiByteToWideChar(CP_UTF8, 0, (LPCSTR)pUTF8, -1, ricardo_k, AMANDA__SIZE_w);
+	return ricardo_k;
+}
+#define BucaneiroMin(a, b) ((a) < (b) ? (a) : (b))
+
+enum morcego_decoder_constants
+{
+
+	BE_INITIAL_STATE,
+	BE_DECODED,
+	BE_DECODED_BUT_NO_MORE_SAMPLES_AVAILABLE,
+	BE_ERROR_DURING_DECODE,
+	BE_DECODER_NOT_LOADED,
+
+};
+
+enum Amanda_Command
+{
+
+	KOCI_INIT__ = 1001,
+	KOCI_PROCESS__,
+	KOCI_FINISH__,
+
+};
+enum Amanda_Status
+{
+
+	PEREIRA_HAS_DATA = 1002,
+	PEREIRA_NO_MORE_DATA,
+
+};
+
+enum decoder_id_maria
+{
+	AMANDA_OPUS__ = 1001,
+	AMANDA_OGG_VORBIS,
+	AMANDA_MP4_AAC,
+};
+
+typedef struct pedro_27_
+{
+	int64_t duracao_feline;
+	int64_t raw_total_ric;
+	int64_t sample_rate_v;
+	int64_t channels_p;
+	char media_description_m[1024];
+} juliete_struct;
+
+typedef struct pedro_k_
+{
+	char *vf;
+	char *filename_utf_8_m;
+	int *error_code_aline_;
+	int current_decoder_pedro;
+	int current_bitrate_juliete;
+	int the_andrea_command;
+	int decoder_status_mislaine;
+	int ret_m;
+	int prev_li_j;
+	int64_t bytes_in_the_buffer_paul;
+	char buffer_junior[192000];
+	char *ptr_data_position_douglas;
+	juliete_struct dados_do_audio_ar;
+	/*
+
+
+
+
+
+
+
+	*/
+	// for your pleasure...
+
+	bool is_MP4_m;
+
+	/*
+
+
+
+
+
+
+
+
+	*/
+
+} pedro_k;
 
 #define VERSIONSTRING "OggDec 1.0\n"
 
@@ -462,7 +708,7 @@ static unsigned char *MakeAdtsHeader(int *dataSize, NeAACDecFrameInfo *hInfo, in
 /* globals */
 char *progName;
 
-static const char *file_ext[] =
+static const char __attribute__((unused)) * file_ext[] =
 	{
 		NULL,
 		".wav",
@@ -834,7 +1080,7 @@ static int GetAACTrack(mp4ff_t *infile)
 	return -1;
 }
 
-static int decodeMP4file(char *mp4file, char *sndfile, char *adts_fn, int to_stdout,
+static int decodeMP4file(pedro_k *feline_p, char *mp4file, char *sndfile, char *adts_fn, int to_stdout,
 						 int outputFormat, int fileType, int downMatrix, int noGapless,
 						 int infoOnly, int adts_out, float *song_length)
 {
@@ -871,6 +1117,8 @@ static int decodeMP4file(char *mp4file, char *sndfile, char *adts_fn, int to_std
 	unsigned int initial = 1;
 	unsigned int framesize;
 	unsigned long timescale;
+
+(void) feline_p;
 
 	/* initialise the callback structure */
 	mp4ff_callback_t *mp4cb = malloc(sizeof(mp4ff_callback_t));
@@ -1166,145 +1414,127 @@ static int decodeMP4file(char *mp4file, char *sndfile, char *adts_fn, int to_std
 }
 int the_info_only = 0;
 
-int the_aac_decoder(int argc, char *argv[]);
+int the_aac_decoder(int argc, char *argv[], pedro_k *feline_p);
 
-int the_aac_decoder(int argc, char *argv[])
+int the_aac_decoder(__attribute__((unused)) int argc, __attribute__((unused)) char *argv[], pedro_k *feline_p)
 {
 	int result;
-	int infoOnly = the_info_only;
+	int infoOnly = 0;
 	int writeToStdio = 0;
 	int object_type = LC;
 	int def_srate = 0;
 	int downMatrix = 0;
 	int format = 1;
 	int outputFormat = FAAD_FMT_16BIT;
-	int outfile_set = 1;
+	// int outfile_set = 1;
 	int adts_out = 0;
 	int old_format = 0;
 	int mp4file = 0;
 	int noGapless = 0;
-	char *fnp;
-	char aacFileName[255];
-	char audioFileName[255];
-	char adtsFileName[255];
-	unsigned char header[8];
+
+	static char adtsFileName[AMANDA__SIZE];
+	unsigned char header[8] = {0};
 	float length = 0;
 	FILE *hMP4File;
 
-/* System dependant types */
-#ifdef _WIN32
-	long begin;
-#else
-	clock_t begin;
-#endif
+	/* System dependant types */
 
 	(void)argc;
 
-	strcpy(audioFileName, argv[2]);
-
 	outputFormat = FAAD_FMT_16BIT; /* just use default */
 
-#if 0
-	/* only allow raw data on stdio */
-	if (writeToStdio == 1)
+	if (KOCI_INIT__ == feline_p->the_andrea_command)
 	{
-		format = 2;
+		feline_p->ptr_data_position_douglas = feline_p->buffer_junior;
+
+		feline_p->bytes_in_the_buffer_paul = 0;
+		; // do nothing it is ok...
+
+		feline_p->is_MP4_m = 0;
 	}
-#endif
 
-	/* point to the specified file name */
-	strcpy(aacFileName, argv[3]);
-
-#ifdef _WIN32
-	begin = GetTickCount();
-#else
-	begin = clock();
-#endif
-
-	/* Only calculate the path and open the file for writing if
-	   we are not writing to stdout.
-	 */
-	if (!writeToStdio && !outfile_set)
+	if (KOCI_PROCESS__ == feline_p->the_andrea_command)
 	{
-		strcpy(audioFileName, aacFileName);
+		goto entering_position_in_the_code_m;
+	}
 
-		fnp = (char *)strrchr(audioFileName, '.');
-
-		if (fnp)
-			fnp[0] = '\0';
-
-		strcat(audioFileName, file_ext[format]);
-		// dprintf("lixo\n");
+	if (KOCI_FINISH__ == feline_p->the_andrea_command)
+	{
+		goto entering_position_in_the_code_m;
 	}
 
 	/* check for mp4 file */
 	mp4file = 0;
-	hMP4File = fopen((aacFileName), "rb");
+	{
+		WCHAR *temp_a = malloc(AMANDA__SIZE_ww);
+		WCHAR *temp_a2 = malloc(AMANDA__SIZE_ww);
+		hMP4File = _wfopen(permissive_name_m_(amanda_utf8towide_1_(feline_p->filename_utf_8_m, temp_a), temp_a2), L"rb");
+		free(temp_a);
+		free(temp_a2);
+	}
 	if (!hMP4File)
 	{
-		faad_fprintf(stderr, "Error opening file: %s\n", aacFileName);
+		pedro_dprintf(0, "cannot open %s my love...\n", feline_p->filename_utf_8_m);
+		*feline_p->error_code_aline_ = 10003; // if cannot open
 		return 30;
 	}
+
 	fread(header, 1, 8, hMP4File);
 	fclose(hMP4File);
+
 	if (header[4] == 'f' && header[5] == 't' && header[6] == 'y' && header[7] == 'p')
 		mp4file = 1;
 
-	if (mp4file)
+	feline_p->is_MP4_m = mp4file;
+
+entering_position_in_the_code_m:;
+
+	//pedro_dprintf(0, "file is mp4 ? %d\n", mp4file);
+
+	if (0 == 1)
 	{
-		result = decodeMP4file(aacFileName, audioFileName, adtsFileName, writeToStdio,
+		goto entering_position_in_the_code_m;
+	}
+
+	if (feline_p->is_MP4_m)
+	{
+		pedro_dprintf(0, "vai chamar mp4\n");
+
+		exit(27);
+		result = decodeMP4file(feline_p, feline_p->filename_utf_8_m, "nul", adtsFileName, writeToStdio,
 							   outputFormat, format, downMatrix, noGapless, infoOnly, adts_out, &length);
 	}
 	else
 	{
-		result = decodeAACfile(aacFileName, audioFileName, adtsFileName, writeToStdio,
+		pedro_dprintf(0, "vai chamar aac\n");
+
+		exit(27);
+		result = decodeAACfile(feline_p->filename_utf_8_m, "nul", adtsFileName, writeToStdio,
 							   def_srate, object_type, outputFormat, format, downMatrix, infoOnly, adts_out,
 							   old_format, &length);
 	}
 
-	if (!result && !infoOnly)
-	{
-#ifdef _WIN32
-		float dec_length = (float)(GetTickCount() - begin) / 1000.0;
-		SetConsoleTitle("FAAD");
-#else
-		/* clock() grabs time since the start of the app but when we decode
-		   multiple files, each file has its own starttime (begin).
-		 */
-		float dec_length = (float)(clock() - begin) / (float)CLOCKS_PER_SEC;
-#endif
-		faad_fprintf(stderr, "Decoding %s took: %5.2f sec. %5.2fx real-time.\n", aacFileName,
-					 dec_length, length / dec_length);
-	}
-
-	if (0 == the_info_only)
-	{
-		// is_decoding=0;
-	}
-	printf("aacmp4 decoder finished\n");
-
 	return result;
 }
-int decode_aac_file(char *in_filename,
-					char *out_filename);
+int decode_aac_file(pedro_k *feline_p);
 
-int decode_aac_file(char *in_filename,
-					char *out_filename)
+int decode_aac_file(pedro_k *feline_p)
 {
-	int ret;
+	// int ret;
+	/*
 	char *arguments[5];
 
 	arguments[0] = "rsp_aac_decoder.exe";
 	arguments[1] = "-o";
 	arguments[2] = out_filename;
 	arguments[3] = in_filename;
+*/
+	the_aac_decoder(0, NULL, feline_p);
 
-	ret = the_aac_decoder(4, arguments);
-	printf("ret %d\n", ret);
-	return ret;
+	return -1994;
 }
 
-int aac_mp4_decode_file_28_june_2011_08_46_am_real_decode(char *infile,
+int aac_mp4_decode_file_28_june_2011_08_46_am_real_decode(pedro_k *feline_p,
 														  double *seconds_,
 														  int *channels_,
 														  int *samplerate_,
@@ -1312,7 +1542,7 @@ int aac_mp4_decode_file_28_june_2011_08_46_am_real_decode(char *infile,
 														  char *media_description,
 														  int *bitrate);
 
-int aac_mp4_decode_file_28_june_2011_08_46_am_real_decode(char *infile,
+int aac_mp4_decode_file_28_june_2011_08_46_am_real_decode(pedro_k *feline_p,
 														  double *seconds_,
 														  int *channels_,
 														  int *samplerate_,
@@ -1323,9 +1553,7 @@ int aac_mp4_decode_file_28_june_2011_08_46_am_real_decode(char *infile,
 	int ret;
 
 	the_info_only = 0;
-	ret = decode_aac_file(
-		infile,
-		"");
+	ret = decode_aac_file(feline_p);
 
 	*bitrate = aac_bitrate;
 	*channels_ = aac_channels;
@@ -1335,7 +1563,7 @@ int aac_mp4_decode_file_28_june_2011_08_46_am_real_decode(char *infile,
 	(void)only_retrieve_info;
 	return ret;
 }
-
+/*
 int aac_mp4_decode_file_28_june_2011_08_46_am(char *infile,
 											  double *seconds_,
 											  int *channels_,
@@ -1367,7 +1595,7 @@ int aac_mp4_decode_file_28_june_2011_08_46_am(char *infile,
 	(void)only_retrieve_info;
 	return ret;
 }
-
+*/
 #include "win64.h"
 /*
 		aac_mp4_decode_file_28_june_2011_08_46_am_real_decode (
@@ -1380,9 +1608,9 @@ int aac_mp4_decode_file_28_june_2011_08_46_am(char *infile,
 				&bitrate);
  */
 
-int uncompress_aac_mp4(char *inputfile, char *outputwav);
+int uncompress_aac_mp4(pedro_k *feline_p); // char *inputfile, char *outputwav);
 
-int uncompress_aac_mp4(char *inputfile, char *outputwav)
+int uncompress_aac_mp4(pedro_k *feline_p) // ok Amanda
 {
 	double seconds;
 	int channels;
@@ -1393,15 +1621,8 @@ int uncompress_aac_mp4(char *inputfile, char *outputwav)
 	int ret;
 	written = 0;
 
-	outfile = fopen(outputwav, "wb");
-
-	if (NULL == outfile)
-	{
-		return -1;
-	}
-
 	ret = aac_mp4_decode_file_28_june_2011_08_46_am_real_decode(
-		inputfile,
+		feline_p,
 		&seconds,
 		&channels,
 		&samplerate,
@@ -1409,16 +1630,9 @@ int uncompress_aac_mp4(char *inputfile, char *outputwav)
 		media_description,
 		&bitrate);
 
-	rewrite_header(outfile, written);
-
-	if (outfile)
-	{
-		fclose(outfile);
-	}
-
 	return ret;
 }
-
+/*
 int main()
 
 {
@@ -1430,7 +1644,7 @@ int main()
 
 	return 0;
 }
-
+*/
 BOOL WINAPI DllMain(__attribute__((unused)) HINSTANCE hModule,
 					__attribute__((unused)) DWORD ul_reason_for_call,
 					__attribute__((unused)) LPVOID lpReserved);
@@ -1458,191 +1672,6 @@ BOOL WINAPI DllMain(__attribute__((unused)) HINSTANCE hModule,
 	return TRUE;
 }
 
-/**
- * To make the path wide mode aware, stolen from libarchive
- *
- * 15/september/2021 10:14, last visit 16/09/2021 22:36 by bhond...
- *
- */
-wchar_t *
-permissive_name_m_(const wchar_t *wname, WCHAR *ar_temp);
-/**
- * To make the path wide mode aware, stolen from libarchive
- *
- * 15/september/2021 10:14, last visit 16/09/2021 22:36 by bhond...
- *
- */
-wchar_t *
-permissive_name_m_(const wchar_t *wname, WCHAR *ar_temp)
-{
-
-	wchar_t *wnp = NULL;
-	wchar_t *wn;
-	wchar_t *ws, *wsp;
-	DWORD len, slen;
-	int unc;
-
-	wnp = ar_temp;
-
-	// wnp = malloc(AMANDA__SIZE * 2);
-
-	wcscpy(wnp, wname);
-
-	len = wcslen(wname);
-
-	wn = wnp;
-
-	if (wnp[0] == L'\\' && wnp[1] == L'\\' && // access to the wrong position in memory, fixed now
-		wnp[2] == L'?' && wnp[3] == L'\\')
-		/* We have already a permissive name. */
-		return (wn);
-
-	if (wnp[0] == L'\\' && wnp[1] == L'\\' &&
-		wnp[2] == L'.' && wnp[3] == L'\\')
-	{
-		/* This is a device name */
-		if (((wnp[4] >= L'a' && wnp[4] <= L'z') ||
-			 (wnp[4] >= L'A' && wnp[4] <= L'Z')) &&
-			wnp[5] == L':' && wnp[6] == L'\\')
-			wnp[2] = L'?'; /* Not device name. */
-		return (wn);
-	}
-
-	unc = 0;
-	if (wnp[0] == L'\\' && wnp[1] == L'\\' && wnp[2] != L'\\')
-	{
-		wchar_t *p = &wnp[2];
-
-		/* Skip server-name letters. */
-		while (*p != L'\\' && *p != L'\0')
-			++p;
-		if (*p == L'\\')
-		{
-			wchar_t *rp = ++p;
-			/* Skip share-name letters. */
-			while (*p != L'\\' && *p != L'\0')
-				++p;
-			if (*p == L'\\' && p != rp)
-			{
-				/* Now, match patterns such as
-				 * "\\server-name\share-name\" */
-				wnp += 2;
-				len -= 2;
-				unc = 1;
-			}
-		}
-	}
-
-	slen = 4 + (unc * 4) + len + 1;
-	ws = wsp = malloc(slen * sizeof(wchar_t));
-	if (ws == NULL)
-	{
-		// free(wn);
-		return (NULL);
-	}
-	/* prepend "\\?\" */
-	wcsncpy(wsp, L"\\\\?\\", 4);
-	wsp += 4;
-	slen -= 4;
-	if (unc)
-	{
-		/* append "UNC\" ---> "\\?\UNC\" */
-		wcsncpy(wsp, L"UNC\\", 4);
-		wsp += 4;
-		slen -= 4;
-	}
-	wcsncpy(wsp, wnp, slen);
-	wsp[slen - 1] = L'\0'; /* Ensure null termination. */
-	// free(wn);
-
-	wcscpy(wnp, ws);
-
-	free(ws);
-
-	return (wnp);
-}
-
-WCHAR *amanda_utf8towide_1_(char *pUTF8, WCHAR *ar_temp);
-
-/**
- * To convert an utf-8 encoded filename to a wide string (WCHAR *), we
- *  . provide two functions that are exactly the same because someone may
- * use it in multi-thread code
- *
- * @param pUTF8 the input utf-8 encoded filename
- *
- * @return the static allocated WCHAR array with the filename as wide string
- *
- */
-WCHAR *amanda_utf8towide_1_(char *pUTF8, WCHAR *ar_temp)
-{
-	WCHAR *ricardo_k = ar_temp;
-
-	MultiByteToWideChar(CP_UTF8, 0, (LPCSTR)pUTF8, -1, ricardo_k, AMANDA__SIZE_w);
-	return ricardo_k;
-}
-#define BucaneiroMin(a, b) ((a) < (b) ? (a) : (b))
-
-enum morcego_decoder_constants
-{
-
-	BE_INITIAL_STATE,
-	BE_DECODED,
-	BE_DECODED_BUT_NO_MORE_SAMPLES_AVAILABLE,
-	BE_ERROR_DURING_DECODE,
-	BE_DECODER_NOT_LOADED,
-
-};
-
-enum Amanda_Command
-{
-
-	KOCI_INIT__ = 1001,
-	KOCI_PROCESS__,
-	KOCI_FINISH__,
-
-};
-enum Amanda_Status
-{
-
-	PEREIRA_HAS_DATA = 1002,
-	PEREIRA_NO_MORE_DATA,
-
-};
-
-enum decoder_id_maria
-{
-	AMANDA_OPUS__ = 1001,
-	AMANDA_OGG_VORBIS,
-};
-
-typedef struct pedro_27_
-{
-	int64_t duracao_feline;
-	int64_t raw_total_ric;
-	int64_t sample_rate_v;
-	int64_t channels_p;
-	char media_description_m[1024];
-} juliete_struct;
-
-typedef struct pedro_k_
-{
-	char *vf;
-	char *filename_utf_8_m;
-	int *error_code_aline_;
-	int current_decoder_pedro;
-	int current_bitrate_juliete;
-	int the_andrea_command;
-	int decoder_status_mislaine;
-	int ret_m;
-	int prev_li_j;
-	int64_t bytes_in_the_buffer_paul;
-	char buffer_junior[192000];
-	char *ptr_data_position_douglas;
-	juliete_struct dados_do_audio_ar;
-
-} pedro_k;
-
 char *__stdcall svc_init_mp4_m(char *filename_utf_8_v,
 							   int *error_code_aline_,
 							   juliete_struct *dados_m);
@@ -1660,7 +1689,99 @@ char *__stdcall svc_init_mp4_m(__attribute__((unused)) char *filename_utf_8_v,
 							   __attribute__((unused)) int *error_code_aline_,
 							   __attribute__((unused)) juliete_struct *dados_m)
 {
-	return NULL;
+	// hacked at 15:24 17/oct/2021 by Amanda husband...
+	/*
+
+
+
+
+	for your pleasure...
+
+
+
+
+	*/
+
+	// first of all the initialization on Opus DLL,
+
+	char *ptr_shinkal;
+	(void)ptr_shinkal;
+	/*
+	(void)OV_CALLBACKS_STREAMONLY_NOCLOSE;
+	(void)OV_CALLBACKS_STREAMONLY;
+	(void)OV_CALLBACKS_NOCLOSE;
+	(void)OV_CALLBACKS_DEFAULT;*/
+
+	pedro_dprintf(0, "svc_init_mp4_m\n");
+	pedro_k *feline_p = calloc(sizeof(pedro_k), 1);
+	// assert(0);
+	if (NULL == feline_p)
+	{
+		*error_code_aline_ = 10001; // Cannot allocate memory
+		return NULL;
+	}
+	feline_p->current_decoder_pedro = AMANDA_MP4_AAC;
+	feline_p->error_code_aline_ = error_code_aline_;
+	assert(feline_p->error_code_aline_);
+	feline_p->filename_utf_8_m = calloc(AMANDA__SIZE, 1);
+
+	strcpy(feline_p->filename_utf_8_m, filename_utf_8_v);
+
+	*feline_p->error_code_aline_ = 0;
+	feline_p->the_andrea_command = KOCI_INIT__;
+
+	uncompress_aac_mp4(feline_p);
+	/*
+		 ogg_decode_file_shinkal("jota.ogg",
+
+	#ifdef WIN64
+								 "carlinhos.wav",
+	#else
+								 "edson.wav",
+	#endif
+
+								 &seconds_,
+								 &channels_,
+								 &samplerate_,
+								 media_description,
+								 &out_bitrate,
+								 feline_p);*/
+	// main_old_p(feline_p);
+
+	pedro_dprintf(0, "pode continuar amor...\n");
+	assert(error_code_aline_);
+	assert(feline_p);
+	assert(feline_p->error_code_aline_);
+	exit(27);
+	if (10004 == *feline_p->error_code_aline_)
+	{
+		pedro_dprintf(0, "arquivo nao é MP4/AAC\n");
+
+		return (char *)feline_p;
+	}
+
+	// if opus
+	// feline_p->dados_do_audio_ar.sample_rate_v = 48000;
+	// feline_p->dados_do_audio_ar.channels_p = 2;
+
+	pedro_dprintf(0, "return from call %d", *feline_p->error_code_aline_);
+
+	*dados_m = feline_p->dados_do_audio_ar;
+
+	pedro_dprintf(0, "data -> %lld\n", dados_m->duracao_feline);
+
+	if (0 == *feline_p->error_code_aline_)
+	{
+		return (char *)feline_p;
+	}
+	else
+	{
+		// any other error is fatal...
+		free(feline_p->filename_utf_8_m);
+		free(feline_p);
+
+		return NULL;
+	}
 }
 int __stdcall morcego_decode_libav_svc_process_mp4_m(__attribute__((unused)) char *struct_opus_m,
 													 __attribute__((unused)) int bytes_to_decode_m,
