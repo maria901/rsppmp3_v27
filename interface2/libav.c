@@ -389,7 +389,7 @@ int init_decoder2(morcego___i___instance__a__bucaneiro_engineering *mv_______, b
                                                                        &(mv_______->error_code_aline_),
                                                                        &mv_______->dados_do_audio_v27);
 
-     pedro_dprintf(0, "tamanho %lld\n", mv_______->dados_do_audio_v27.duracao_feline);
+     pedro_dprintf(-1, "tamanho %lld\n", mv_______->dados_do_audio_v27.duracao_feline);
 
 #ifdef THALIA_NEW_STANDALONE_AUDIO_PLAYER__
 
@@ -499,7 +499,7 @@ int init_decoder2(morcego___i___instance__a__bucaneiro_engineering *mv_______, b
                     if (ar_bw_maquisistem_bucaneiro_engineering_aurora_boreal_eletronica_som_video_cor_digipower_rsp_companhias)
                          fclose(ar_bw_maquisistem_bucaneiro_engineering_aurora_boreal_eletronica_som_video_cor_digipower_rsp_companhias);
 
-                    pedro_dprintf(0, "ta ai...%lld got %lld\n", nosso_ricardinho_bunda_mole, mv_______->libav_c___amanda_s_smart_ape_new_generated_duration);
+                    pedro_dprintf(-1, "ta ai...%lld got %lld\n", nosso_ricardinho_bunda_mole, mv_______->libav_c___amanda_s_smart_ape_new_generated_duration);
 
                     if (1 != nosso_ricardinho_bunda_mole)
                     {
@@ -508,7 +508,7 @@ int init_decoder2(morcego___i___instance__a__bucaneiro_engineering *mv_______, b
                          mv_______->libav_c___duracao = nosso_ricardinho_bunda_mole;
                          FormatContext->duration = mv_______->libav_c___duracao;
                          mv_______->libav_c___amanda_s_smart_ape_is_new_webm = false;
-                         pedro_dprintf(0, "consertado");
+                         pedro_dprintf(-1, "consertado");
                     }
                }
 
@@ -1501,10 +1501,10 @@ void seek2(morcego___i___instance__a__bucaneiro_engineering *mv_______, double v
      mv_______->libav_c___reinit_uf = 0;
      mv_______->libav_c___reinit_uf2 = 0;
 
-     pedro_dprintf(0, "raw max %lld\n", mv_______->dados_do_audio_v27.raw_total_ric);
+     pedro_dprintf(-1, "raw max %lld\n", mv_______->dados_do_audio_v27.raw_total_ric);
 
      mv_______->libav_c___is_seeking = 0;
-     pedro_dprintf(0, "opus seek running\n");
+     pedro_dprintf(-1, "opus seek running\n");
 
 #endif
      //("deu seek");
