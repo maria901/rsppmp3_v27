@@ -47,7 +47,7 @@
 extern FILE *outfile;
 
 int written = 0;
-//import external decoder mode flag
+// import external decoder mode flag
 extern int method_is_internal_pcm;
 void add_to_buffer(char *data, int len);
 
@@ -60,10 +60,12 @@ audio_file *open_audio_file(char *infile, int samplerate, int channels,
 
 	aufile->outputFormat = outputFormat;
 
+	(void)infile;
+
 	aufile->samplerate = samplerate;
 	aufile->channels = channels;
 	aufile->total_samples = 0;
-	aufile->fileType = fileType; //always 1
+	aufile->fileType = fileType; // always 1
 	aufile->channelMask = channelMask;
 
 	switch (outputFormat)
@@ -88,40 +90,41 @@ audio_file *open_audio_file(char *infile, int samplerate, int channels,
 
 	if (0 == method_is_internal_pcm)
 	{
-		aufile->sndfile = fopen((infile), "wb");
-
-		if (aufile->sndfile == NULL)
-		{
-			if (aufile)
-				free(aufile);
-			return NULL;
-		}
+		aufile->sndfile = NULL;
 	}
 	if (aufile->fileType == OUTPUT_WAV)
 	{
 		if (aufile->channelMask)
-			write_wav_extensible_header(aufile, aufile->channelMask);
+		{
+			; // write_wav_extensible_header(aufile, aufile->channelMask);
+		}
 		else
-			write_wav_header(aufile);
+		{
+			; // write_wav_header(aufile);
+		}
 	}
 
 	return aufile;
 }
 
-int write_audio_file(audio_file *aufile, void *sample_buffer, int samples, int offset)
+int write_audio_file(audio_file *aufile, void *sample_buffer, int samples, int offset, char *buffer_m)
 {
 	char *buf = (char *)sample_buffer;
 	switch (aufile->outputFormat)
 	{
 	case FAAD_FMT_16BIT:
-		return write_audio_16bit(aufile, buf + offset * 2, samples);
+		return write_audio_16bit(aufile, buf + 0 * 2, samples, buffer_m);
 	case FAAD_FMT_24BIT:
+		exit(27);
 		return write_audio_24bit(aufile, buf + offset * 4, samples);
 	case FAAD_FMT_32BIT:
+		exit(27);
 		return write_audio_32bit(aufile, buf + offset * 4, samples);
 	case FAAD_FMT_FLOAT:
+		exit(27);
 		return write_audio_float(aufile, buf + offset * 4, samples);
 	default:
+		exit(27);
 		return 0;
 	}
 
@@ -134,16 +137,20 @@ void close_audio_file(audio_file *aufile)
 	{
 		if ((aufile->fileType == OUTPUT_WAV) && (aufile->toStdio == 0))
 		{
+			/*
 			fseek(aufile->sndfile, 0, SEEK_SET);
 
 			if (aufile->channelMask)
 				write_wav_extensible_header(aufile, aufile->channelMask);
 			else
 				write_wav_header(aufile);
+			*/
 		}
 
 		if (aufile->toStdio == 0)
-			fclose(aufile->sndfile);
+		{
+			; // fclose(aufile->sndfile);
+		}
 	}
 
 	if (aufile)
@@ -233,7 +240,7 @@ static int write_wav_header(audio_file *aufile)
 	}
 	else
 	{
-		//add_to_buffer(header,sizeof(header));
+		// add_to_buffer(header,sizeof(header));
 	}
 	return 0;
 }
@@ -250,7 +257,7 @@ static int write_wav_extensible_header(audio_file *aufile, long channelMask)
 	*p++ = 'I';
 	*p++ = 'F';
 	*p++ = 'F';
-	
+
 	(void)channelMask;
 
 	word32 = (data_size + (68 - 8) < (float)MAXWAVESIZE) ? (unsigned long)data_size + (68 - 8) : (unsigned long)MAXWAVESIZE;
@@ -399,13 +406,13 @@ static int write_wav_extensible_header(audio_file *aufile, long channelMask)
 	}
 	else
 	{
-		//add_to_buffer(header,sizeof(header));
+		// add_to_buffer(header,sizeof(header));
 	}
 	return 0;
 }
 
 static int write_audio_16bit(audio_file *aufile, void *sample_buffer,
-							 unsigned int samples)
+							 unsigned int samples, char *buffer_m)
 {
 	int ret;
 	unsigned int i;
@@ -441,15 +448,23 @@ static int write_audio_16bit(audio_file *aufile, void *sample_buffer,
 	}
 	if (0 == method_is_internal_pcm)
 	{
-		ret = fwrite(data, samples, aufile->bits_per_sample / 8, aufile->sndfile);
+		// here...
+		// ret = fwrite(data, samples, aufile->bits_per_sample / 8, aufile->sndfile);
+
+		memcpy(buffer_m, data, samples * aufile->bits_per_sample / 8);
+
+		ret = samples * aufile->bits_per_sample / 8;
 	}
 	else
 	{
-		//add_to_buffer(data,samples* aufile->bits_per_sample/8);
+		// add_to_buffer(data,samples* aufile->bits_per_sample/8);
 
-		written += fwrite(data, 1, samples * aufile->bits_per_sample / 8, outfile);
+		memcpy(buffer_m, data, samples * aufile->bits_per_sample / 8);
+
+		// written += fwrite(data, 1, samples * aufile->bits_per_sample / 8, outfile);
 
 		ret = samples * aufile->bits_per_sample / 8;
+		written += ret;
 	}
 	if (data)
 		free(data);
