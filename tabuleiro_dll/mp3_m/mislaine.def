@@ -1,0 +1,7 @@
+EXPORTS
+
+
+svc_init_mp3_m                                @1007
+morcego_deinit_libav_svc_deinit_mp3_m         @1008
+morcego_decode_libav_svc_process_mp3_m        @1009
+svc_seek_mp3_m                                @1010
