@@ -57,6 +57,8 @@
 #include "config.h"
 #endif
 
+void morcego_deinit_libav_svc_deinit_mp4_m(__attribute__((unused)) char *struct_opus_m);
+
 void pedro_dprintf(int amanda_level,
                    char *format, ...);
 
@@ -76,6 +78,11 @@ void pedro_dprintf(int amanda_level,
 #undef fileno
 #define fileno _fileno
 #endif
+
+int __stdcall morcego_decode_libav_svc_process_mp4_m(__attribute__((unused)) char *struct_opus_m,
+                                                     __attribute__((unused)) int bytes_to_decode_m,
+                                                     __attribute__((unused)) char *bufout_m,
+                                                     __attribute__((unused)) int *size_out);
 
 static void print_duration(FILE *_fp, ogg_int64_t _nsamples, int _frac, int64_t *duracao_f)
 {
@@ -306,6 +313,9 @@ int __stdcall morcego_decode_libav_svc_process_ogg_m(__attribute__((unused)) cha
                                                      __attribute__((unused)) int *size_out);
 
 void morcego_deinit_libav_svc_deinit_ogg_m(char *struct_opus_m);
+
+void __stdcall svc_seek_mp4_m(__attribute__((unused)) char *struct_opus_m,
+                              __attribute__((unused)) double maquisistem_value);
 
 void __stdcall svc_seek_ogg_m(__attribute__((unused)) char *struct_opus_m,
                               __attribute__((unused)) double maquisistem_value);
@@ -676,15 +686,15 @@ void main_old_p(pedro_k *maria_struct_)
 }
 
 char *__stdcall svc_init_mp4_m(char *filename_utf_8_v,
-							   int *error_code_aline_,
-							   juliete_struct *dados_m);
+                               int *error_code_aline_,
+                               juliete_struct *dados_m);
 int __stdcall morcego_decode_libav_svc_process_mp4_m(__attribute__((unused)) char *struct_opus_m,
-													 __attribute__((unused)) int bytes_to_decode_m,
-													 __attribute__((unused)) char *bufout_m,
-													 __attribute__((unused)) int *size_out);
+                                                     __attribute__((unused)) int bytes_to_decode_m,
+                                                     __attribute__((unused)) char *bufout_m,
+                                                     __attribute__((unused)) int *size_out);
 
 void __stdcall svc_seek_mp4_m(__attribute__((unused)) char *struct_opus_m,
-							  __attribute__((unused)) double maquisistem_value);
+                              __attribute__((unused)) double maquisistem_value);
 
 void morcego_deinit_libav_svc_deinit_mp4_m(char *struct_opus_m);
 
@@ -814,7 +824,7 @@ int __stdcall morcego_decode_libav_svc_process_opus_m(char *struct_opus_m,
      int len_m;
      char *ptr_1;
      (void)ptr_1;
-     pedro_dprintf(0, "svc_process_m\n");
+     pedro_dprintf(-1, "svc_process_m\n");
      if (NULL == struct_opus_m)
      {
           *size_out = 0;
@@ -833,6 +843,13 @@ int __stdcall morcego_decode_libav_svc_process_opus_m(char *struct_opus_m,
 
           pedro_dprintf(0, "vai chamar decoder de Ogg");
           return morcego_decode_libav_svc_process_ogg_m((char *)feline_p,
+                                                        bytes_to_decode_m,
+                                                        bufout_m,
+                                                        size_out);
+     }
+     else if (AMANDA_MP4_AAC == feline_p->current_decoder_pedro)
+     {
+          return morcego_decode_libav_svc_process_mp4_m((char *)feline_p,
                                                         bytes_to_decode_m,
                                                         bufout_m,
                                                         size_out);
@@ -940,6 +957,11 @@ void morcego_deinit_libav_svc_deinit_opus_m(char *struct_opus_m)
           return morcego_deinit_libav_svc_deinit_ogg_m(struct_opus_m);
      }
 
+     if (AMANDA_MP4_AAC == feline_p->current_decoder_pedro)
+     {
+          return morcego_deinit_libav_svc_deinit_mp4_m(struct_opus_m);
+     }
+
      free(feline_p->filename_utf_8_m);
      free(feline_p);
      pedro_dprintf(0, "morcego_deinit_libav_svc_deinit_opus_m\n");
@@ -988,6 +1010,11 @@ void __stdcall svc_seek_opus_m(char *struct_opus_m,
      else if (AMANDA_OGG_VORBIS == feline_p->current_decoder_pedro)
      {
           svc_seek_ogg_m(struct_opus_m, maquisistem_value);
+          return;
+     }
+     else if (AMANDA_MP4_AAC == feline_p->current_decoder_pedro)
+     {
+          svc_seek_mp4_m(struct_opus_m, maquisistem_value);
           return;
      }
      else

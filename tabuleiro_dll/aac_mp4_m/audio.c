@@ -46,6 +46,9 @@
 
 extern FILE *outfile;
 
+void pedro_dprintf(int amanda_level,
+				   char *format, ...);
+
 int written = 0;
 // import external decoder mode flag
 extern int method_is_internal_pcm;
@@ -113,6 +116,7 @@ int write_audio_file(audio_file *aufile, void *sample_buffer, int samples, int o
 	switch (aufile->outputFormat)
 	{
 	case FAAD_FMT_16BIT:
+		// exit(27);
 		return write_audio_16bit(aufile, buf + 0 * 2, samples, buffer_m);
 	case FAAD_FMT_24BIT:
 		exit(27);
@@ -444,6 +448,10 @@ static int write_audio_16bit(audio_file *aufile, void *sample_buffer,
 	for (i = 0; i < samples; i++)
 	{
 		data[i * 2] = (char)(sample_buffer16[i] & 0xFF);
+		/*
+		if(2 < data[i * 2])
+		pedro_dprintf(0, "value 2 amor %d\n", (int)data[i * 2]);
+		*/
 		data[i * 2 + 1] = (char)((sample_buffer16[i] >> 8) & 0xFF);
 	}
 	if (0 == method_is_internal_pcm)

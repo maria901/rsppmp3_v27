@@ -18,6 +18,9 @@
  */
 #define AMANDA__SIZE_w (32767)
 
+#define MAX_CHANNELS 6 /* make this higher to support files with \
+					  more channels */
+
 #define AMANDA__SIZE_ww ((32767 * 2) + 2)
 
 #ifdef _WIN64
@@ -209,6 +212,18 @@ WCHAR *amanda_utf8towide_1_(char *pUTF8, WCHAR *ar_temp)
 	MultiByteToWideChar(CP_UTF8, 0, (LPCSTR)pUTF8, -1, ricardo_k, AMANDA__SIZE_w);
 	return ricardo_k;
 }
+
+/* FAAD file buffering routines */
+typedef struct
+{
+	long bytes_into_buffer;
+	long bytes_consumed;
+	long file_offset;
+	unsigned char *buffer;
+	int at_eof;
+	FILE *infile;
+} aac_buffer;
+
 #define BucaneiroMin(a, b) ((a) < (b) ? (a) : (b))
 
 enum morcego_decoder_constants
@@ -280,7 +295,7 @@ typedef struct pedro_k_
 	*/
 	// for your pleasure...
 
-	bool is_MP4_m;
+	int is_MP4_m;
 
 	/*
 
@@ -303,8 +318,48 @@ typedef struct pedro_k_
 	char buffer_junior_internal[192000];
 	long sampleId, numSamples;
 	audio_file *aufile;
-	// sector AAC
+	FILE *mp4File;
+	mp4ff_callback_t *mp4cb;
+	NeAACDecHandle hDecoder;
+	NeAACDecConfigurationPtr config;
+	NeAACDecFrameInfo frameInfo;
+	mp4AudioSpecificConfig mp4ASC;
+	unsigned char *buffer;
+	int buffer_size;
+	int first_time;
+	unsigned int useAacLength;
+	unsigned int initial;
+	unsigned int framesize;
+	unsigned long timescale;
+	bool exit_on_next_amanda;
+	bool wait_for_fix_m;
+	int64_t max_samples_v;
 
+	// sector AAC
+	int tagsize;
+	int posicionador_m;
+	// unsigned long samplerate;
+	// unsigned char channels;
+	// void *sample_buffer;
+	// audio_file *aufile;
+	FILE *adtsFile;
+	unsigned char *adtsData;
+	int adtsDataSize;
+	// NeAACDecHandle hDecoder;
+	// NeAACDecFrameInfo frameInfo;
+	char percents[200];
+	int bread, fileread;
+	int header_type;
+	int bitrate;
+	float length;
+	// int first_time;
+	aac_buffer b;
+	// int initial_pos_m;
+	int max_size_file_m;
+	int new_pos_m;
+	bool request_for_seek_m;
+	char ric_buffer[FAAD_MIN_STREAMSIZE * MAX_CHANNELS];
+	int apos_pos_ok_m;
 } pedro_k;
 
 #define VERSIONSTRING "OggDec 1.0\n"
@@ -390,9 +445,6 @@ rewrite_header(FILE *out, unsigned int written)
 	return 0;
 }
 
-#define MAX_CHANNELS 6 /* make this higher to support files with \
-					  more channels */
-
 extern int errno_18_27;
 
 extern int is_decoding;
@@ -409,9 +461,9 @@ int aac_decoder_status = 0;
 static int quiet = 0;
 
 int aac_percent = 0;
-double aac_seconds = 0.0;
-int aac_samplerate = 0;
-int aac_channels = 0;
+// double aac_seconds = 0.0;
+// int aac_samplerate = 0;
+// int aac_channels = 0;
 char aac_mode[300];
 int aac_bitrate = 0;
 static void faad_fprintf(FILE *stream, const char *fmt, ...)
@@ -428,20 +480,10 @@ static void faad_fprintf(FILE *stream, const char *fmt, ...)
 	}
 }
 
-/* FAAD file buffering routines */
-typedef struct
+static int fill_buffer(aac_buffer *b, pedro_k *feline_p)
 {
-	long bytes_into_buffer;
-	long bytes_consumed;
-	long file_offset;
-	unsigned char *buffer;
-	int at_eof;
-	FILE *infile;
-} aac_buffer;
 
-static int fill_buffer(aac_buffer *b)
-{
-	int bread;
+	int bread = 0;
 
 	if (b->bytes_consumed > 0)
 	{
@@ -453,13 +495,25 @@ static int fill_buffer(aac_buffer *b)
 
 		if (!b->at_eof)
 		{
-			bread = fread((void *)(b->buffer + b->bytes_into_buffer), 1,
-						  b->bytes_consumed, b->infile);
 
-			if (bread != b->bytes_consumed)
-				b->at_eof = 1;
+			{
 
-			b->bytes_into_buffer += bread;
+				bread = fread((void *)(b->buffer + b->bytes_into_buffer), 1,
+							  b->bytes_consumed, b->infile);
+				if (bread != b->bytes_consumed)
+					b->at_eof = 1;
+
+				b->bytes_into_buffer += bread;
+			}
+
+			if (feline_p->request_for_seek_m)
+			{
+				fseek(b->infile, (feline_p->new_pos_m /*+ feline_p->initial_pos_m*/),
+					  SEEK_SET);
+
+				feline_p->apos_pos_ok_m = ftell(b->infile);
+				pedro_dprintf(-20212810, "seek ok 3 \n");
+			}
 		}
 
 		b->bytes_consumed = 0;
@@ -495,7 +549,7 @@ static void advance_buffer(aac_buffer *b, int bytes)
 
 static int adts_sample_rates[] = {96000, 88200, 64000, 48000, 44100, 32000, 24000, 22050, 16000, 12000, 11025, 8000, 7350, 0, 0, 0};
 
-static int adts_parse(aac_buffer *b, int *bitrate, float *length)
+static int adts_parse(pedro_k *feline_p, aac_buffer *b, int *bitrate, float *length)
 {
 	int frames, frame_length;
 	int t_framelength = 0;
@@ -505,7 +559,7 @@ static int adts_parse(aac_buffer *b, int *bitrate, float *length)
 	/* Read all frames to ensure correct time and bitrate */
 	for (frames = 0; /* */; frames++)
 	{
-		fill_buffer(b);
+		fill_buffer(b, feline_p);
 
 		if (b->bytes_into_buffer > 7)
 		{
@@ -768,221 +822,419 @@ static void usage(void)
 	return;
 }
 
-static int decodeAACfile(char *aacfile, char *sndfile, char *adts_fn, int to_stdout,
+static void find_position_on_AAC_maria(char *filename_utf8_m, FILE *the_file_amanda, int position_koci)
+{
+	int pos_m = 0;
+	FILE *my_file_m;
+	int len_v;
+	int tagsize_m;
+	unsigned char temp_m[10] = {0};
+
+	(void)len_v;
+	(void)pos_m;
+	(void)the_file_amanda;
+
+	{
+		WCHAR *temp_a = malloc(AMANDA__SIZE_ww);
+		WCHAR *temp_a2 = malloc(AMANDA__SIZE_ww);
+		my_file_m = _wfopen(permissive_name_m_(amanda_utf8towide_1_(filename_utf8_m, temp_a), temp_a2), L"rb");
+		free(temp_a);
+		free(temp_a2);
+	}
+
+	if (my_file_m)
+	{
+		len_v = fread(temp_m, 1, 2, my_file_m);
+
+		if (!memcmp(temp_m, "ID3", 3))
+		{
+			/* high bit is not used */
+			tagsize_m = (temp_m[6] << 21) | (temp_m[7] << 14) |
+						(temp_m[8] << 7) | (temp_m[9] << 0);
+
+			tagsize_m += 10;
+
+			tagsize_m = max(tagsize_m, position_koci);
+
+			fseek(my_file_m,
+				  tagsize_m,
+				  SEEK_SET);
+		}
+		else
+		{
+			fseek(my_file_m,
+				  position_koci,
+				  SEEK_SET);
+		}
+
+	again_my_master_ric:;
+
+		len_v = fread(temp_m, 1, 2, my_file_m);
+
+		if (2 == len_v)
+		{
+
+			if ((0xFF == temp_m[0]) && ((temp_m[1] & 0xF6) == 0xF0))
+			{
+				// ok
+				fseek(the_file_amanda,
+					  ftell(my_file_m) - 2,
+					  SEEK_SET);
+			}
+			else
+			{
+				fseek(my_file_m,
+					  ftell(my_file_m) - 1,
+					  SEEK_SET);
+				goto again_my_master_ric;
+			}
+			goto saida_1_paulo;
+		}
+
+	saida_1_paulo:;
+		if (0 == 1)
+		{
+			goto saida_1_paulo;
+		}
+
+		fclose(my_file_m);
+	}
+}
+
+static int decodeAACfile(pedro_k *feline_p, char *aacfile, char *sndfile, char *adts_fn, int to_stdout,
 						 int def_srate, int object_type, int outputFormat, int fileType,
 						 int downMatrix, int infoOnly, int adts_out, int old_format,
 						 float *song_length)
 {
-	int tagsize;
-	unsigned long samplerate = 0;
-	unsigned char channels;
-	void *sample_buffer;
 
-	audio_file *aufile = NULL;
+	if (KOCI_INIT__ == feline_p->the_andrea_command)
+	{
+		pedro_dprintf(-20212810, "AAC init amor...\n");
+		feline_p->samplerate = 0;
+		feline_p->aufile = NULL;
+		feline_p->header_type = 0;
+		feline_p->bitrate = 0;
+		feline_p->length = 0;
+		feline_p->first_time = 1;
 
-	FILE *adtsFile;
-	unsigned char *adtsData;
-	int adtsDataSize;
+		feline_p->exit_on_next_amanda = false;
 
-	NeAACDecHandle hDecoder;
-	NeAACDecFrameInfo frameInfo;
-	NeAACDecConfigurationPtr config;
+		; // do nothing it is ok...
+	}
 
-	char percents[200];
-	int percent, old_percent = -1;
-	int bread, fileread;
-	int header_type = 0;
-	int bitrate = 0;
-	float length = 0;
+	if (KOCI_PROCESS__ == feline_p->the_andrea_command)
+	{
+		goto entering_function_pedro;
+	}
 
-	int first_time = 1;
+	if (KOCI_FINISH__ == feline_p->the_andrea_command)
+	{
+		pedro_dprintf(-20212810, "AAC end\n");
 
-	aac_buffer b;
+		goto exit_function_pedro;
+	}
+
+	double seconds_m;
+	int bytes_got_j;
+
+	// int first_time = 1;
+	(void)feline_p;
+	(void)song_length;
+	// aac_buffer b;
 	(void)downMatrix;
-	memset(&b, 0, sizeof(aac_buffer));
+	memset(&feline_p->b, 0, sizeof(aac_buffer));
 
 	if (adts_out)
 	{
-		adtsFile = fopen((adts_fn), "wb");
-		if (adtsFile == NULL)
+		{
+			WCHAR *temp_a = malloc(AMANDA__SIZE_ww);
+			WCHAR *temp_a2 = malloc(AMANDA__SIZE_ww);
+			feline_p->adtsFile = _wfopen(permissive_name_m_(amanda_utf8towide_1_(adts_fn, temp_a), temp_a2), L"rb");
+			free(temp_a);
+			free(temp_a2);
+		}
+
+		if (feline_p->adtsFile == NULL)
 		{
 			faad_fprintf(stderr, "Error opening file: %s\n", adts_fn);
 			return 1;
 		}
 	}
 
-	b.infile = fopen((aacfile), "rb");
-	if (b.infile == NULL)
+	{
+		WCHAR *temp_m = malloc(AMANDA__SIZE_ww);
+		WCHAR *temp2_m = malloc(AMANDA__SIZE_ww);
+
+		feline_p->b.infile = _wfopen(permissive_name_m_(amanda_utf8towide_1_(aacfile, temp_m), temp2_m), L"rb");
+
+		free(temp_m);
+		free(temp2_m);
+	}
+
+	if (feline_p->b.infile == NULL)
 	{
 		/* unable to open file */
 		faad_fprintf(stderr, "Error opening file: %s\n", aacfile);
+
+		*feline_p->error_code_aline_ = 10004; // Invalid AAC file
+
 		return 11;
 	}
 
-	fseek(b.infile, 0, SEEK_END);
-	fileread = ftell(b.infile);
-	fseek(b.infile, 0, SEEK_SET);
+	fseek(feline_p->b.infile, 0, SEEK_END);
+	feline_p->fileread = ftell(feline_p->b.infile);
 
-	if (!(b.buffer = (unsigned char *)malloc(FAAD_MIN_STREAMSIZE * MAX_CHANNELS)))
+	feline_p->max_size_file_m = feline_p->fileread;
+
+reinicio_m:;
+
+	pedro_dprintf(-20212810, "em reinicio\n");
+	if (true)
+	{
+		fseek(feline_p->b.infile, 0, SEEK_SET);
+		pedro_dprintf(-20212810, "antes 1 %d\n", ftell(feline_p->b.infile));
+		// aqui...
+
+		if (feline_p->request_for_seek_m)
+		{
+			find_position_on_AAC_maria(aacfile,
+									   feline_p->b.infile,
+									   feline_p->apos_pos_ok_m);
+			feline_p->posicionador_m = ftell(feline_p->b.infile);
+			// feline_p->request_for_seek_m = false;
+		}
+		else
+		{
+			feline_p->posicionador_m = 0;
+		}
+		pedro_dprintf(-20212810, "depois 1 %d\n", ftell(feline_p->b.infile));
+
+		// exit(27);
+	}
+
+	if (!(feline_p->b.buffer = (unsigned char *)malloc(FAAD_MIN_STREAMSIZE * MAX_CHANNELS)))
 	{
 		faad_fprintf(stderr, "Memory allocation error\n");
 		return 0;
 	}
-	memset(b.buffer, 0, FAAD_MIN_STREAMSIZE * MAX_CHANNELS);
+	memset(feline_p->b.buffer, 0, FAAD_MIN_STREAMSIZE * MAX_CHANNELS);
 
-	bread = fread(b.buffer, 1, FAAD_MIN_STREAMSIZE * MAX_CHANNELS, b.infile);
-	b.bytes_into_buffer = bread;
-	b.bytes_consumed = 0;
-	b.file_offset = 0;
-
-	if (bread != FAAD_MIN_STREAMSIZE * MAX_CHANNELS)
-		b.at_eof = 1;
-
-	tagsize = 0;
-	if (!memcmp(b.buffer, "ID3", 3))
+	if (true)
 	{
-		/* high bit is not used */
-		tagsize = (b.buffer[6] << 21) | (b.buffer[7] << 14) |
-				  (b.buffer[8] << 7) | (b.buffer[9] << 0);
-
-		tagsize += 10;
-		advance_buffer(&b, tagsize);
-		fill_buffer(&b);
+		feline_p->bread = fread(feline_p->b.buffer, 1, FAAD_MIN_STREAMSIZE * MAX_CHANNELS, feline_p->b.infile);
+		memcpy(feline_p->ric_buffer, feline_p->b.buffer, FAAD_MIN_STREAMSIZE * MAX_CHANNELS);
+	}
+	else
+	{
+		feline_p->bread = FAAD_MIN_STREAMSIZE * MAX_CHANNELS;
+		memcpy(feline_p->b.buffer, feline_p->ric_buffer, FAAD_MIN_STREAMSIZE * MAX_CHANNELS);
 	}
 
-	hDecoder = NeAACDecOpen();
+	feline_p->b.bytes_into_buffer = feline_p->bread;
+	feline_p->b.bytes_consumed = 0;
+	feline_p->b.file_offset = 0;
+
+	if (feline_p->bread != FAAD_MIN_STREAMSIZE * MAX_CHANNELS)
+		feline_p->b.at_eof = 1;
+
+	feline_p->tagsize = 0;
+	if (!memcmp(feline_p->b.buffer, "ID3", 3))
+	{
+		/* high bit is not used */
+		feline_p->tagsize = (feline_p->b.buffer[6] << 21) | (feline_p->b.buffer[7] << 14) |
+							(feline_p->b.buffer[8] << 7) | (feline_p->b.buffer[9] << 0);
+
+		feline_p->tagsize += 10;
+		advance_buffer(&feline_p->b, feline_p->tagsize);
+		fill_buffer(&feline_p->b, feline_p);
+	}
+
+	feline_p->hDecoder = NeAACDecOpen();
 
 	/* Set the default object type and samplerate */
 	/* This is useful for RAW AAC files */
-	config = NeAACDecGetCurrentConfiguration(hDecoder);
+	feline_p->config = NeAACDecGetCurrentConfiguration(feline_p->hDecoder);
 	if (def_srate)
-		config->defSampleRate = def_srate;
-	config->defObjectType = object_type;
-	config->outputFormat = outputFormat;
-	config->downMatrix = 1;
-	config->useOldADTSFormat = old_format;
+		feline_p->config->defSampleRate = def_srate;
+	feline_p->config->defObjectType = object_type;
+	feline_p->config->outputFormat = outputFormat;
+	feline_p->config->downMatrix = 1;
+	feline_p->config->useOldADTSFormat = old_format;
 	// config->dontUpSampleImplicitSBR = 1;
-	NeAACDecSetConfiguration(hDecoder, config);
+	NeAACDecSetConfiguration(feline_p->hDecoder, feline_p->config);
 
 	/* get AAC infos for printing */
-	header_type = 0;
-	if ((b.buffer[0] == 0xFF) && ((b.buffer[1] & 0xF6) == 0xF0))
+
+	if (true)
 	{
-		adts_parse(&b, &bitrate, &length);
-		fseek(b.infile, tagsize, SEEK_SET);
 
-		bread = fread(b.buffer, 1, FAAD_MIN_STREAMSIZE * MAX_CHANNELS, b.infile);
-		if (bread != FAAD_MIN_STREAMSIZE * MAX_CHANNELS)
-			b.at_eof = 1;
-		else
-			b.at_eof = 0;
-		b.bytes_into_buffer = bread;
-		b.bytes_consumed = 0;
-		b.file_offset = tagsize;
-
-		header_type = 1;
-	}
-	else if (memcmp(b.buffer, "ADIF", 4) == 0)
-	{
-		int skip_size = (b.buffer[4] & 0x80) ? 9 : 0;
-		bitrate = ((unsigned int)(b.buffer[4 + skip_size] & 0x0F) << 19) |
-				  ((unsigned int)b.buffer[5 + skip_size] << 11) |
-				  ((unsigned int)b.buffer[6 + skip_size] << 3) |
-				  ((unsigned int)b.buffer[7 + skip_size] & 0xE0);
-
-		length = (float)fileread;
-		if (length != 0)
+		feline_p->header_type = 0;
+		if ((feline_p->b.buffer[0] == 0xFF) && ((feline_p->b.buffer[1] & 0xF6) == 0xF0))
 		{
-			length = ((float)length * 8.f) / ((float)bitrate) + 0.5f;
+			adts_parse(feline_p, &feline_p->b, &feline_p->bitrate, &feline_p->length);
+			fseek(feline_p->b.infile, max(feline_p->tagsize, feline_p->posicionador_m), SEEK_SET);
+
+			feline_p->bread = fread(feline_p->b.buffer, 1, FAAD_MIN_STREAMSIZE * MAX_CHANNELS, feline_p->b.infile);
+			if (feline_p->bread != FAAD_MIN_STREAMSIZE * MAX_CHANNELS)
+				feline_p->b.at_eof = 1;
+			else
+				feline_p->b.at_eof = 0;
+			feline_p->b.bytes_into_buffer = feline_p->bread;
+			feline_p->b.bytes_consumed = 0;
+			feline_p->b.file_offset = feline_p->tagsize;
+
+			feline_p->header_type = 1;
 		}
+		else if (memcmp(feline_p->b.buffer, "ADIF", 4) == 0)
+		{
+			int skip_size = (feline_p->b.buffer[4] & 0x80) ? 9 : 0;
+			feline_p->bitrate = ((unsigned int)(feline_p->b.buffer[4 + skip_size] & 0x0F) << 19) |
+								((unsigned int)feline_p->b.buffer[5 + skip_size] << 11) |
+								((unsigned int)feline_p->b.buffer[6 + skip_size] << 3) |
+								((unsigned int)feline_p->b.buffer[7 + skip_size] & 0xE0);
 
-		bitrate = (int)((float)bitrate / 1000.0f + 0.5f);
+			feline_p->length = (float)feline_p->fileread;
+			if (feline_p->length != 0)
+			{
+				feline_p->length = ((float)feline_p->length * 8.f) / ((float)feline_p->bitrate) + 0.5f;
+			}
 
-		header_type = 2;
+			feline_p->bitrate = (int)((float)feline_p->bitrate / 1000.0f + 0.5f);
+
+			feline_p->header_type = 2;
+		}
 	}
+	//*song_length = feline_p->length;
 
-	*song_length = length;
-
-	fill_buffer(&b);
-	if ((bread = NeAACDecInit(hDecoder, b.buffer,
-							  b.bytes_into_buffer, &samplerate, &channels)) < 0)
+	fill_buffer(&feline_p->b, feline_p);
+	if ((feline_p->bread = NeAACDecInit(feline_p->hDecoder, feline_p->b.buffer,
+										feline_p->b.bytes_into_buffer, &feline_p->samplerate, &feline_p->channels)) < 0)
 	{
 		/* If some error initializing occured, skip the file */
-		printf("Error initializing decoder library.\n");
-		if (b.buffer)
-			free(b.buffer);
-		NeAACDecClose(hDecoder);
-		fclose(b.infile);
+		pedro_dprintf(-20212810, "Error initializing decoder library.\n");
+		if (feline_p->b.buffer)
+			free(feline_p->b.buffer);
+		NeAACDecClose(feline_p->hDecoder);
+		fclose(feline_p->b.infile);
+
+		*feline_p->error_code_aline_ = 10004; // Invalid AAC file
+
 		return 20;
 	}
-	advance_buffer(&b, bread);
-	fill_buffer(&b);
+	advance_buffer(&feline_p->b, feline_p->bread);
+	fill_buffer(&feline_p->b, feline_p);
 
-	/* print AAC file info */
-	faad_fprintf(stderr, "%s file info:\n", aacfile);
-	switch (header_type)
+	strcpy(feline_p->dados_do_audio_ar.media_description_m, "AAC");
+
+	switch (feline_p->header_type)
 	{
 	case 0:
-		faad_fprintf(stderr, "RAW\n\n");
+		// faad_fprintf(stderr, "RAW\n\n");
 		break;
 	case 1:
-		faad_fprintf(stderr, "ADTS, %.3f sec, %d kbps, %d Hz\n\n",
-					 length, bitrate, samplerate);
-		strcpy(aac_mode, "ADTS");
+		/*
+			faad_fprintf(stderr, "ADTS, %.3f sec, %d kbps, %d Hz\n\n",
+						 length, bitrate, feline_p->samplerate);
+						 */
+		strcpy(aac_mode, " ADTS");
+		strcat(feline_p->dados_do_audio_ar.media_description_m, " ADTS");
 		break;
 	case 2:
-		faad_fprintf(stderr, "ADIF, %.3f sec, %d kbps, %d Hz\n\n",
-					 length, bitrate, samplerate);
-		strcpy(aac_mode, "ADIF");
+		/*
+			faad_fprintf(stderr, "ADIF, %.3f sec, %d kbps, %d Hz\n\n",
+						 length, bitrate, feline_p->samplerate);*/
+		strcpy(aac_mode, " ADIF");
+
+		strcat(feline_p->dados_do_audio_ar.media_description_m, " ADIF");
 		break;
 	}
-	aac_seconds = length;
-	aac_samplerate = samplerate;
-	aac_channels = channels;
-	aac_bitrate = bitrate;
+
+	if (false == feline_p->request_for_seek_m)
+		seconds_m = feline_p->length;
+
+	if (false == feline_p->request_for_seek_m)
+		seconds_m = seconds_m * 1000.0 * 1000.0;
+
+	if (false == feline_p->request_for_seek_m)
+		feline_p->dados_do_audio_ar.duracao_feline = (int64_t)seconds_m;
+
+	if (false == feline_p->request_for_seek_m)
+		pedro_dprintf(-20212810, "seconds %lld\n", feline_p->dados_do_audio_ar.duracao_feline);
+
+	if (false == feline_p->request_for_seek_m)
+		feline_p->dados_do_audio_ar.sample_rate_v = feline_p->samplerate;
+
+	if (false == feline_p->request_for_seek_m)
+		feline_p->dados_do_audio_ar.channels_p = feline_p->channels;
+
+	if (true)
+	{
+		if (2 < feline_p->dados_do_audio_ar.channels_p)
+		{
+			/* If some error initializing occured, skip the file */
+			pedro_dprintf(-20212810, "More than 2 channels.\n");
+			if (feline_p->b.buffer)
+				free(feline_p->b.buffer);
+			NeAACDecClose(feline_p->hDecoder);
+			fclose(feline_p->b.infile);
+
+			*feline_p->error_code_aline_ = 10004; // Invalid AAC file
+
+			return 20;
+		}
+	}
+
 	if (infoOnly)
 	{
-		NeAACDecClose(hDecoder);
-		fclose(b.infile);
-		if (b.buffer)
-			free(b.buffer);
+		exit(27);
+		NeAACDecClose(feline_p->hDecoder);
+		fclose(feline_p->b.infile);
+		if (feline_p->b.buffer)
+			free(feline_p->b.buffer);
 		return 0;
 	}
 
+	feline_p->decoder_status_mislaine = PEREIRA_HAS_DATA;
+
+	// aqui...
+	// feline_p->request_for_seek_m = false;
+
+	feline_p->request_for_seek_m = false;
+
 	do
 	{
-		sample_buffer = NeAACDecDecode(hDecoder, &frameInfo,
-									   b.buffer, b.bytes_into_buffer);
+		feline_p->sample_buffer = NeAACDecDecode(feline_p->hDecoder, &feline_p->frameInfo,
+												 feline_p->b.buffer, feline_p->b.bytes_into_buffer);
 
 		if (adts_out == 1)
 		{
 			int skip = (old_format) ? 8 : 7;
-			adtsData = MakeAdtsHeader(&adtsDataSize, &frameInfo, old_format);
+			feline_p->adtsData = MakeAdtsHeader(&feline_p->adtsDataSize, &feline_p->frameInfo, old_format);
 
 			/* write the adts header */
-			fwrite(adtsData, 1, adtsDataSize, adtsFile);
+			fwrite(feline_p->adtsData, 1, feline_p->adtsDataSize, feline_p->adtsFile);
 
 			/* write the frame data */
-			if (frameInfo.header_type == ADTS)
-				fwrite(b.buffer + skip, 1, frameInfo.bytesconsumed - skip, adtsFile);
+			if (feline_p->frameInfo.header_type == ADTS)
+				fwrite(feline_p->b.buffer + skip, 1, feline_p->frameInfo.bytesconsumed - skip, feline_p->adtsFile);
 			else
-				fwrite(b.buffer, 1, frameInfo.bytesconsumed, adtsFile);
+				fwrite(feline_p->b.buffer, 1, feline_p->frameInfo.bytesconsumed, feline_p->adtsFile);
 		}
 
 		/* update buffer indices */
-		advance_buffer(&b, frameInfo.bytesconsumed);
+		advance_buffer(&feline_p->b, feline_p->frameInfo.bytesconsumed);
 
-		if (frameInfo.error > 0)
+		if (feline_p->frameInfo.error > 0)
 		{
 			faad_fprintf(stderr, "Error: %s\n",
-						 NeAACDecGetErrorMessage(frameInfo.error));
+						 NeAACDecGetErrorMessage(feline_p->frameInfo.error));
 		}
 
 		/* open the sound file now that the number of channels are known */
-		if (first_time && !frameInfo.error)
+		if (feline_p->first_time && !feline_p->frameInfo.error)
 		{
 			/* print some channel info */
-			print_channel_info(&frameInfo);
+			print_channel_info(&feline_p->frameInfo);
 
 			if (!adts_out)
 			{
@@ -992,24 +1244,26 @@ static int decodeAACfile(char *aacfile, char *sndfile, char *adts_fn, int to_std
 
 					/* estamos alterando aqui */
 
-					write_prelim_header(outfile, frameInfo.channels, frameInfo.samplerate);
+					// write_prelim_header(outfile, feline_p->frameInfo.channels, feline_p->frameInfo.samplerate);
 
-					aufile = open_audio_file(sndfile, frameInfo.samplerate, frameInfo.channels,
-											 outputFormat, fileType, aacChannelConfig2wavexChannelMask(&frameInfo));
+					feline_p->aufile = open_audio_file(sndfile, feline_p->frameInfo.samplerate, feline_p->frameInfo.channels,
+													   outputFormat, fileType, aacChannelConfig2wavexChannelMask(&feline_p->frameInfo));
 				}
 				else
 				{
-
-					write_prelim_header(outfile, frameInfo.channels, frameInfo.samplerate);
-					aufile = open_audio_file("-", frameInfo.samplerate, frameInfo.channels,
-											 outputFormat, fileType, aacChannelConfig2wavexChannelMask(&frameInfo));
+					/*
+					write_prelim_header(outfile, feline_p->frameInfo.channels, feline_p->frameInfo.samplerate);
+					feline_p->aufile = open_audio_file("-", feline_p->frameInfo.samplerate, feline_p->frameInfo.channels,
+													   outputFormat, fileType, aacChannelConfig2wavexChannelMask(&feline_p->frameInfo));
+					*/
 				}
-				if (aufile == NULL)
+				if (feline_p->aufile == NULL)
 				{
-					if (b.buffer)
-						free(b.buffer);
-					NeAACDecClose(hDecoder);
-					fclose(b.infile);
+					exit(27);
+					if (feline_p->b.buffer)
+						free(feline_p->b.buffer);
+					NeAACDecClose(feline_p->hDecoder);
+					fclose(feline_p->b.infile);
 					return 0;
 				}
 			}
@@ -1017,50 +1271,80 @@ static int decodeAACfile(char *aacfile, char *sndfile, char *adts_fn, int to_std
 			{
 				faad_fprintf(stderr, "Writing output MPEG-4 AAC ADTS file.\n\n");
 			}
-			first_time = 0;
+			feline_p->first_time = 0;
 		}
 
-		percent = min((int)(b.file_offset * 100) / fileread, 100);
-		if (percent > old_percent)
+		if ((feline_p->frameInfo.error == 0) && (feline_p->frameInfo.samples > 0) && (!adts_out))
 		{
-			old_percent = percent;
-			sprintf(percents, "%d%% decoding %s.", percent, aacfile);
-			faad_fprintf(stderr, "%s\r", percents);
-#ifdef _WIN32
-			SetConsoleTitle(percents);
-#endif
-		}
-
-		if ((frameInfo.error == 0) && (frameInfo.samples > 0) && (!adts_out))
-		{
-			if (write_audio_file(aufile, sample_buffer, frameInfo.samples, 0, NULL) == 0)
+			if ((bytes_got_j = write_audio_file(feline_p->aufile, feline_p->sample_buffer, feline_p->frameInfo.samples, 0, feline_p->buffer_junior_internal)) == 0)
 				break;
+
+			{
+				// static int counter_m = 0;
+				assert(192000 > bytes_got_j);
+
+				// pedro_dprintf(-20212810, "value amor %d %d\n", (int)feline_p->buffer_junior_internal[0], counter_m++);
+				memcpy(feline_p->buffer_junior, feline_p->buffer_junior_internal, bytes_got_j);
+				feline_p->ptr_data_position_douglas = feline_p->buffer_junior;
+				feline_p->bytes_in_the_buffer_paul += bytes_got_j;
+				feline_p->exit_on_next_amanda = true;
+				;
+			}
+		}
+
+	entering_function_pedro:;
+
+		if (feline_p->exit_on_next_amanda)
+		{
+			feline_p->exit_on_next_amanda = false;
+			return 0;
 		}
 
 		/* fill buffer */
-		fill_buffer(&b);
+		fill_buffer(&feline_p->b, feline_p);
 
-		if (b.bytes_into_buffer == 0)
-			sample_buffer = NULL; /* to make sure it stops now */
+		if (feline_p->request_for_seek_m)
+		{
+			// feline_p->request_for_seek_m = false;
+			if (feline_p->b.buffer)
+				free(feline_p->b.buffer);
 
-	} while (sample_buffer != NULL);
+			feline_p->b.buffer = NULL;
 
-	NeAACDecClose(hDecoder);
+			NeAACDecClose(feline_p->hDecoder);
+			pedro_dprintf(-20212810, "seek ok 1\n");
+			goto reinicio_m;
+		}
+
+		if (feline_p->b.bytes_into_buffer == 0)
+		{
+			pedro_dprintf(-20212810, "isso ai\n");
+			feline_p->sample_buffer = NULL; /* to make sure it stops now */
+		}
+
+	} while (feline_p->sample_buffer != NULL);
+	pedro_dprintf(-20212810, "aqui \n");
+	feline_p->decoder_status_mislaine = PEREIRA_NO_MORE_DATA;
+	return 0;
+
+exit_function_pedro:;
+
+	NeAACDecClose(feline_p->hDecoder);
 
 	if (adts_out == 1)
 	{
-		fclose(adtsFile);
+		fclose(feline_p->adtsFile);
 	}
 
-	fclose(b.infile);
+	fclose(feline_p->b.infile);
 
-	if (!first_time && !adts_out)
-		close_audio_file(aufile);
+	if (!feline_p->first_time && !adts_out)
+		close_audio_file(feline_p->aufile);
 
-	if (b.buffer)
-		free(b.buffer);
+	if (feline_p->b.buffer)
+		free(feline_p->b.buffer);
 
-	return frameInfo.error;
+	return feline_p->frameInfo.error;
 }
 
 static int GetAACTrack(mp4ff_t *infile)
@@ -1097,11 +1381,28 @@ static int decodeMP4file(pedro_k *feline_p, char *mp4file, char *sndfile, __attr
 						 __attribute__((unused)) int infoOnly, int adts_out, float *song_length)
 {
 
+	while (feline_p->wait_for_fix_m)
+	{
+		Sleep(50);
+	}
+
 	if (KOCI_INIT__ == feline_p->the_andrea_command)
 	{
+
+		pedro_dprintf(-20212810, "init\n");
+
+		feline_p->exit_on_next_amanda = false;
+
 		feline_p->ptr_data_position_douglas = feline_p->buffer_junior;
 
 		feline_p->bytes_in_the_buffer_paul = 0;
+
+		feline_p->first_time = 1;
+
+		feline_p->useAacLength = 1;
+
+		feline_p->initial = 1;
+
 		; // do nothing it is ok...
 	}
 
@@ -1112,6 +1413,8 @@ static int decodeMP4file(pedro_k *feline_p, char *mp4file, char *sndfile, __attr
 
 	if (KOCI_FINISH__ == feline_p->the_andrea_command)
 	{
+		pedro_dprintf(-20212810, "end\n");
+
 		goto exit_function_pedro;
 	}
 
@@ -1126,42 +1429,40 @@ static int decodeMP4file(pedro_k *feline_p, char *mp4file, char *sndfile, __attr
 
 	feline_p->aufile = NULL;
 
-	FILE *mp4File;
+	// FILE *mp4File;
 
-	NeAACDecHandle hDecoder;
-	NeAACDecConfigurationPtr config;
-	NeAACDecFrameInfo frameInfo;
-	mp4AudioSpecificConfig mp4ASC;
+	// NeAACDecHandle hDecoder;
+	// NeAACDecConfigurationPtr config;
+	// NeAACDecFrameInfo frameInfo;
+	// mp4AudioSpecificConfig mp4ASC;
 
-	unsigned char *buffer;
-	int buffer_size;
-
-	int first_time = 1;
+	// unsigned char *buffer;
+	// int buffer_size;
 
 	/* for gapless decoding */
-	unsigned int useAacLength = 1;
-	unsigned int initial = 1;
-	unsigned int framesize;
-	unsigned long timescale;
+	// unsigned int useAacLength = 1;
+	// unsigned int initial = 1;
+	// unsigned int framesize;
+	// unsigned long timescale;
 
 	(void)feline_p;
 
 	/* initialise the callback structure */
-	mp4ff_callback_t *mp4cb = malloc(sizeof(mp4ff_callback_t));
+	feline_p->mp4cb = malloc(sizeof(mp4ff_callback_t));
 
-	mp4File = fopen((mp4file), "rb");
-	mp4cb->read = read_callback;
-	mp4cb->seek = seek_callback;
-	mp4cb->user_data = mp4File;
+	feline_p->mp4File = fopen((mp4file), "rb");
+	feline_p->mp4cb->read = read_callback;
+	feline_p->mp4cb->seek = seek_callback;
+	feline_p->mp4cb->user_data = feline_p->mp4File;
 
-	hDecoder = NeAACDecOpen();
+	feline_p->hDecoder = NeAACDecOpen();
 
 	/* Set configuration */
-	config = NeAACDecGetCurrentConfiguration(hDecoder);
-	config->outputFormat = outputFormat;
-	config->downMatrix = 1;
+	feline_p->config = NeAACDecGetCurrentConfiguration(feline_p->hDecoder);
+	feline_p->config->outputFormat = outputFormat;
+	feline_p->config->downMatrix = 1;
 	// config->dontUpSampleImplicitSBR = 1;
-	NeAACDecSetConfiguration(hDecoder, config);
+	NeAACDecSetConfiguration(feline_p->hDecoder, feline_p->config);
 
 	(void)downMatrix;
 	/*
@@ -1175,61 +1476,62 @@ static int decodeMP4file(pedro_k *feline_p, char *mp4file, char *sndfile, __attr
 			}
 		}
 	*/
-	feline_p->infile = mp4ff_open_read(mp4cb);
+	feline_p->infile = mp4ff_open_read(feline_p->mp4cb);
 	if (!feline_p->infile)
 	{
 		/* unable to open file */
-		pedro_dprintf(0, "Error opening file: %s\n", mp4file);
+		pedro_dprintf(-20212810, "Error opening file: %s\n", mp4file);
 		*feline_p->error_code_aline_ = 10004; // Invalid MP4 file
 		return 1;
 	}
 
 	if ((feline_p->track = GetAACTrack(feline_p->infile)) < 0)
 	{
-		pedro_dprintf(0, "Unable to find correct AAC sound track in the MP4 file.\n");
-		NeAACDecClose(hDecoder);
+		pedro_dprintf(-20212810, "Unable to find correct AAC sound track in the MP4 file.\n");
+		NeAACDecClose(feline_p->hDecoder);
 		mp4ff_close(feline_p->infile);
-		free(mp4cb);
-		fclose(mp4File);
+		free(feline_p->mp4cb);
+		fclose(feline_p->mp4File);
 		*feline_p->error_code_aline_ = 10004; // Invalid MP4 file
 		return 1;
 	}
 
-	buffer = NULL;
-	buffer_size = 0;
-	mp4ff_get_decoder_config(feline_p->infile, feline_p->track, &buffer, (void *)&buffer_size);
+	feline_p->buffer = NULL;
+	feline_p->buffer_size = 0;
+	mp4ff_get_decoder_config(feline_p->infile, feline_p->track, &feline_p->buffer, (void *)&feline_p->buffer_size);
 
-	if (NeAACDecInit2(hDecoder, buffer, buffer_size,
+	if (NeAACDecInit2(feline_p->hDecoder, feline_p->buffer, feline_p->buffer_size,
 					  &feline_p->samplerate, &feline_p->channels) < 0)
 	{
 		/* If some error initializing occured, skip the file */
-		pedro_dprintf(0, "Error initializing decoder library.\n");
-		NeAACDecClose(hDecoder);
+		pedro_dprintf(-20212810, "Error initializing decoder library.\n");
+		NeAACDecClose(feline_p->hDecoder);
 		mp4ff_close(feline_p->infile);
-		free(mp4cb);
-		fclose(mp4File);
+		free(feline_p->mp4cb);
+		fclose(feline_p->mp4File);
 		*feline_p->error_code_aline_ = 10004; // Invalid MP4 file
 		return 1;
 	}
 
-	timescale = mp4ff_time_scale(feline_p->infile, feline_p->track);
-	framesize = 1024;
-	useAacLength = 0;
+	feline_p->timescale = mp4ff_time_scale(feline_p->infile, feline_p->track);
+	feline_p->framesize = 1024;
+	feline_p->useAacLength = 0;
 
-	if (buffer)
+	if (feline_p->buffer)
 	{
-		if (NeAACDecAudioSpecificConfig(buffer, buffer_size, &mp4ASC) >= 0)
+		if (NeAACDecAudioSpecificConfig(feline_p->buffer, feline_p->buffer_size, &feline_p->mp4ASC) >= 0)
 		{
-			if (mp4ASC.frameLengthFlag == 1)
-				framesize = 960;
-			if (mp4ASC.sbr_present_flag == 1)
-				framesize *= 2;
+			if (feline_p->mp4ASC.frameLengthFlag == 1)
+				feline_p->framesize = 960;
+			if (feline_p->mp4ASC.sbr_present_flag == 1)
+				feline_p->framesize *= 2;
 		}
-		free(buffer);
+		free(feline_p->buffer);
 	}
 
 	/* print some mp4 file info */
 	faad_fprintf(stderr, "%s file info:\n\n", mp4file);
+
 	{
 		char *tag = NULL, *item = NULL;
 		int k, j;
@@ -1237,22 +1539,37 @@ static int decodeMP4file(pedro_k *feline_p, char *mp4file, char *sndfile, __attr
 		long samples = mp4ff_num_samples(feline_p->infile, feline_p->track);
 		float f = 1024.0;
 		float seconds;
-		if (mp4ASC.sbr_present_flag == 1)
+		if (feline_p->mp4ASC.sbr_present_flag == 1)
 		{
 			f = f * 2.0;
 		}
-		seconds = (float)samples * (float)(f - 1.0) / (float)mp4ASC.samplingFrequency;
+		seconds = (float)samples * (float)(f - 1.0) / (float)feline_p->mp4ASC.samplingFrequency;
 
 		*song_length = seconds;
 
-		faad_fprintf(stderr, "%s\t%.3f secs, %d ch, %d Hz\n\n", ot[(mp4ASC.objectTypeIndex > 5) ? 0 : mp4ASC.objectTypeIndex], seconds, mp4ASC.channelsConfiguration, mp4ASC.samplingFrequency);
+		faad_fprintf(stderr, "%s\t%.3f secs, %d ch, %d Hz\n\n", ot[(feline_p->mp4ASC.objectTypeIndex > 5) ? 0 : feline_p->mp4ASC.objectTypeIndex], seconds, feline_p->mp4ASC.channelsConfiguration, feline_p->mp4ASC.samplingFrequency);
 
-		strcpy(aac_mode, ot[(mp4ASC.objectTypeIndex > 5) ? 0 : mp4ASC.objectTypeIndex]);
+		// strcpy(aac_mode, ot[(feline_p->mp4ASC.objectTypeIndex > 5) ? 0 : feline_p->mp4ASC.objectTypeIndex]);
 
-		aac_seconds = seconds;
+		// aac_seconds = seconds;
 
-		aac_samplerate = mp4ASC.samplingFrequency;
-		aac_channels = mp4ASC.channelsConfiguration;
+		seconds = seconds * 1000.0 * 1000.0;
+
+		feline_p->dados_do_audio_ar.duracao_feline = (int64_t)seconds;
+
+		pedro_dprintf(-20212810, "seconds %lld\n", feline_p->dados_do_audio_ar.duracao_feline);
+
+		strcpy(feline_p->dados_do_audio_ar.media_description_m, "MP4 ");
+		strcat(feline_p->dados_do_audio_ar.media_description_m, ot[(feline_p->mp4ASC.objectTypeIndex > 5) ? 0 : feline_p->mp4ASC.objectTypeIndex]);
+
+		// aac_samplerate = feline_p->mp4ASC.samplingFrequency;
+
+		feline_p->dados_do_audio_ar.sample_rate_v = feline_p->mp4ASC.samplingFrequency;
+
+		// aac_channels = feline_p->mp4ASC.channelsConfiguration;
+
+		feline_p->dados_do_audio_ar.channels_p = feline_p->mp4ASC.channelsConfiguration;
+
 		aac_bitrate = 0;
 #define PRINT_MP4_METADATA
 #ifdef PRINT_MP4_METADATA
@@ -1289,26 +1606,33 @@ static int decodeMP4file(pedro_k *feline_p, char *mp4file, char *sndfile, __attr
 	*/
 	feline_p->numSamples = mp4ff_num_samples(feline_p->infile, feline_p->track);
 
-entering_function_pedro:;
-
 	feline_p->decoder_status_mislaine = PEREIRA_HAS_DATA;
+
+	feline_p->max_samples_v = feline_p->numSamples;
 
 	for (feline_p->sampleId = 0; feline_p->sampleId < feline_p->numSamples; feline_p->sampleId++)
 	{
+		if (feline_p->exit_on_next_amanda)
+		{
+			feline_p->exit_on_next_amanda = false;
+			return 0;
+		}
+
+	entering_function_pedro:;
 		int rc;
 		long dur;
 		unsigned int sample_count;
 		unsigned int delay = 0;
 
 		/* get acces unit from MP4 file */
-		buffer = NULL;
-		buffer_size = 0;
+		feline_p->buffer = NULL;
+		feline_p->buffer_size = 0;
 
 		dur = mp4ff_get_sample_duration(feline_p->infile, feline_p->track, feline_p->sampleId);
-		rc = mp4ff_read_sample(feline_p->infile, feline_p->track, feline_p->sampleId, &buffer, (void *)&buffer_size);
+		rc = mp4ff_read_sample(feline_p->infile, feline_p->track, feline_p->sampleId, &feline_p->buffer, (void *)&feline_p->buffer_size);
 		if (rc == 0)
 		{
-			pedro_dprintf(0, "Reading from MP4 file failed.\n");
+			pedro_dprintf(-20212810, "Reading from MP4 file failed.\n");
 			/*
 			NeAACDecClose(hDecoder);
 			mp4ff_close(feline_p->infile);
@@ -1320,7 +1644,7 @@ entering_function_pedro:;
 			break; // just finish it...
 		}
 
-		feline_p->sample_buffer = NeAACDecDecode(hDecoder, &frameInfo, buffer, buffer_size);
+		feline_p->sample_buffer = NeAACDecDecode(feline_p->hDecoder, &feline_p->frameInfo, feline_p->buffer, feline_p->buffer_size);
 		/*
 				if (adts_out == 1)
 				{
@@ -1332,45 +1656,45 @@ entering_function_pedro:;
 					fwrite(buffer, 1, frameInfo.bytesconsumed, adtsFile);
 				}
 		*/
-		if (buffer)
-			free(buffer);
+		if (feline_p->buffer)
+			free(feline_p->buffer);
 
 		if (!noGapless)
 		{
 			if (feline_p->sampleId == 0)
 				dur = 0;
 
-			if (useAacLength || (timescale != feline_p->samplerate))
+			if (feline_p->useAacLength || (feline_p->timescale != feline_p->samplerate))
 			{
-				sample_count = frameInfo.samples;
+				sample_count = feline_p->frameInfo.samples;
 			}
 			else
 			{
-				sample_count = (unsigned int)(dur * frameInfo.channels);
-				if (sample_count > frameInfo.samples)
-					sample_count = frameInfo.samples;
+				sample_count = (unsigned int)(dur * feline_p->frameInfo.channels);
+				if (sample_count > feline_p->frameInfo.samples)
+					sample_count = feline_p->frameInfo.samples;
 
-				if (!useAacLength && !initial && (feline_p->sampleId < feline_p->numSamples / 2) && (sample_count != frameInfo.samples))
+				if (!feline_p->useAacLength && !feline_p->initial && (feline_p->sampleId < feline_p->numSamples / 2) && (sample_count != feline_p->frameInfo.samples))
 				{
-					pedro_dprintf(0, "MP4 seems to have incorrect frame duration, using values from AAC data.\n");
-					useAacLength = 1;
-					sample_count = frameInfo.samples;
+					pedro_dprintf(-20212810, "MP4 seems to have incorrect frame duration, using values from AAC data.\n");
+					feline_p->useAacLength = 1;
+					sample_count = feline_p->frameInfo.samples;
 				}
 			}
 
-			if (initial && (sample_count < framesize * frameInfo.channels) && (frameInfo.samples > sample_count))
-				delay = frameInfo.samples - sample_count;
+			if (feline_p->initial && (sample_count < feline_p->framesize * feline_p->frameInfo.channels) && (feline_p->frameInfo.samples > sample_count))
+				delay = feline_p->frameInfo.samples - sample_count;
 		}
 		else
 		{
-			sample_count = frameInfo.samples;
+			sample_count = feline_p->frameInfo.samples;
 		}
 
 		/* open the sound file now that the number of channels are known */
-		if (first_time && !frameInfo.error)
+		if (feline_p->first_time && !feline_p->frameInfo.error)
 		{
 			/* print some channel info */
-			print_channel_info(&frameInfo);
+			print_channel_info(&feline_p->frameInfo);
 
 			if (!adts_out)
 			{
@@ -1380,8 +1704,8 @@ entering_function_pedro:;
 
 					// write_prelim_header(outfile, frameInfo.channels, frameInfo.samplerate);
 
-					feline_p->aufile = open_audio_file(sndfile, frameInfo.samplerate, frameInfo.channels,
-											 outputFormat, fileType, aacChannelConfig2wavexChannelMask(&frameInfo));
+					feline_p->aufile = open_audio_file(sndfile, feline_p->frameInfo.samplerate, feline_p->frameInfo.channels,
+													   outputFormat, fileType, aacChannelConfig2wavexChannelMask(&feline_p->frameInfo));
 				}
 				/*
 				else
@@ -1406,11 +1730,11 @@ entering_function_pedro:;
 					}
 				*/
 			}
-			first_time = 0;
+			feline_p->first_time = 0;
 		}
 
 		if (sample_count > 0)
-			initial = 0;
+			feline_p->initial = 0;
 		/*
 				percent = min((int)(sampleId * 100) / numSamples, 100);
 
@@ -1428,24 +1752,28 @@ entering_function_pedro:;
 				}
 		*/
 
-		if ((frameInfo.error == 0) && (sample_count > 0) && (!adts_out))
+		if ((feline_p->frameInfo.error == 0) && (sample_count > 0) && (!adts_out))
 		{
 			if ((bytes_got_j = write_audio_file(feline_p->aufile, feline_p->sample_buffer, sample_count, delay, feline_p->buffer_junior_internal)) == 0)
 				break;
 
 			{
+				// static int counter_m = 0;
 				assert(192000 > bytes_got_j);
+
+				// pedro_dprintf(-20212810, "value amor %d %d\n", (int)feline_p->buffer_junior_internal[0], counter_m++);
 				memcpy(feline_p->buffer_junior, feline_p->buffer_junior_internal, bytes_got_j);
 				feline_p->ptr_data_position_douglas = feline_p->buffer_junior;
 				feline_p->bytes_in_the_buffer_paul += bytes_got_j;
-				return 0;
+				feline_p->exit_on_next_amanda = true;
+				;
 			}
 		}
 
-		if (frameInfo.error > 0)
+		if (feline_p->frameInfo.error > 0)
 		{
-			pedro_dprintf(0, "Warning: %s\n",
-						  NeAACDecGetErrorMessage(frameInfo.error));
+			pedro_dprintf(-20212810, "Warning: %s\n",
+						  NeAACDecGetErrorMessage(feline_p->frameInfo.error));
 		}
 	}
 
@@ -1454,7 +1782,7 @@ entering_function_pedro:;
 
 exit_function_pedro:;
 
-	NeAACDecClose(hDecoder);
+	NeAACDecClose(feline_p->hDecoder);
 	/*
 		if (adts_out == 1)
 		{
@@ -1463,13 +1791,14 @@ exit_function_pedro:;
 	*/
 	mp4ff_close(feline_p->infile);
 
-	if (!first_time && !adts_out)
+	if (!feline_p->first_time && !adts_out)
 		close_audio_file(feline_p->aufile);
 
-	free(mp4cb);
-	fclose(mp4File);
+	free(feline_p->mp4cb);
+	fclose(feline_p->mp4File);
 
-	return frameInfo.error;
+	// exit(27);
+	return feline_p->frameInfo.error;
 }
 int the_info_only = 0;
 
@@ -1477,7 +1806,7 @@ int the_aac_decoder(int argc, char *argv[], pedro_k *feline_p);
 
 int the_aac_decoder(__attribute__((unused)) int argc, __attribute__((unused)) char *argv[], pedro_k *feline_p)
 {
-	int result;
+	int result = 0;
 	int infoOnly = 0;
 	int writeToStdio = 0;
 	int object_type = LC;
@@ -1533,7 +1862,7 @@ int the_aac_decoder(__attribute__((unused)) int argc, __attribute__((unused)) ch
 	}
 	if (!hMP4File)
 	{
-		pedro_dprintf(0, "cannot open %s my love...\n", feline_p->filename_utf_8_m);
+		pedro_dprintf(-20212810, "cannot open %s my love...\n", feline_p->filename_utf_8_m);
 		*feline_p->error_code_aline_ = 10003; // if cannot open
 		return 30;
 	}
@@ -1546,29 +1875,41 @@ int the_aac_decoder(__attribute__((unused)) int argc, __attribute__((unused)) ch
 
 	feline_p->is_MP4_m = mp4file;
 
+	if (1 == mp4file)
+	{
+		;						//
+		feline_p->is_MP4_m = 1; // MP4
+	}
+	else
+	{
+		feline_p->is_MP4_m = 2; // AAC
+	}
+
 entering_position_in_the_code_m:;
 
-	// pedro_dprintf(0, "file is mp4 ? %d\n", mp4file);
+	// pedro_dprintf(-20212810, "file is mp4 ? %d\n", mp4file);
 
 	if (0 == 1)
 	{
 		goto entering_position_in_the_code_m;
 	}
 
-	if (feline_p->is_MP4_m)
+	if (1 == feline_p->is_MP4_m)
 	{
-		pedro_dprintf(0, "vai chamar mp4\n");
+		pedro_dprintf(-1, "vai chamar mp4\n");
 
-		exit(27);
+		// exit(27);
 		result = decodeMP4file(feline_p, feline_p->filename_utf_8_m, "nul", adtsFileName, writeToStdio,
 							   outputFormat, format, downMatrix, noGapless, infoOnly, adts_out, &length);
-	}
-	else
-	{
-		pedro_dprintf(0, "vai chamar aac\n");
 
-		exit(27);
-		result = decodeAACfile(feline_p->filename_utf_8_m, "nul", adtsFileName, writeToStdio,
+		// exit(27);
+	}
+	else if (2 == feline_p->is_MP4_m) // AAC
+	{
+		pedro_dprintf(-1, "vai chamar aac\n");
+
+		// exit(27);
+		result = decodeAACfile(feline_p, feline_p->filename_utf_8_m, "nul", adtsFileName, writeToStdio,
 							   def_srate, object_type, outputFormat, format, downMatrix, infoOnly, adts_out,
 							   old_format, &length);
 	}
@@ -1614,11 +1955,17 @@ int aac_mp4_decode_file_28_june_2011_08_46_am_real_decode(pedro_k *feline_p,
 	the_info_only = 0;
 	ret = decode_aac_file(feline_p);
 
-	*bitrate = aac_bitrate;
-	*channels_ = aac_channels;
-	*samplerate_ = aac_samplerate;
-	*seconds_ = aac_seconds;
-	strcpy(media_description, aac_mode);
+	(void)seconds_;
+	(void)channels_;
+	(void)samplerate_;
+	(void)media_description;
+	(void)bitrate;
+
+	//*bitrate = aac_bitrate;
+	//*channels_ = aac_channels;
+	//*samplerate_ = aac_samplerate;
+	//*seconds_ = aac_seconds;
+	// strcpy(media_description, aac_mode);
 	(void)only_retrieve_info;
 	return ret;
 }
@@ -1771,7 +2118,7 @@ char *__stdcall svc_init_mp4_m(__attribute__((unused)) char *filename_utf_8_v,
 	(void)OV_CALLBACKS_NOCLOSE;
 	(void)OV_CALLBACKS_DEFAULT;*/
 
-	pedro_dprintf(0, "svc_init_mp4_m\n");
+	pedro_dprintf(-1, "svc_init_mp4_m\n");
 	pedro_k *feline_p = calloc(sizeof(pedro_k), 1);
 	// assert(0);
 	if (NULL == feline_p)
@@ -1807,14 +2154,14 @@ char *__stdcall svc_init_mp4_m(__attribute__((unused)) char *filename_utf_8_v,
 								 feline_p);*/
 	// main_old_p(feline_p);
 
-	pedro_dprintf(0, "pode continuar amor...\n");
+	pedro_dprintf(-20212810, "pode continuar amor...\n");
 	assert(error_code_aline_);
 	assert(feline_p);
 	assert(feline_p->error_code_aline_);
-	exit(27);
+	// exit(27);
 	if (10004 == *feline_p->error_code_aline_)
 	{
-		pedro_dprintf(0, "arquivo nao é MP4/AAC\n");
+		pedro_dprintf(-20212810, "arquivo nao é MP4/AAC\n");
 
 		return (char *)feline_p;
 	}
@@ -1823,11 +2170,11 @@ char *__stdcall svc_init_mp4_m(__attribute__((unused)) char *filename_utf_8_v,
 	// feline_p->dados_do_audio_ar.sample_rate_v = 48000;
 	// feline_p->dados_do_audio_ar.channels_p = 2;
 
-	pedro_dprintf(0, "return from call %d", *feline_p->error_code_aline_);
+	pedro_dprintf(-20212810, "return from call %d", *feline_p->error_code_aline_);
 
 	*dados_m = feline_p->dados_do_audio_ar;
 
-	pedro_dprintf(0, "data -> %lld\n", dados_m->duracao_feline);
+	pedro_dprintf(-20212810, "data -> %lld\n", dados_m->duracao_feline);
 
 	if (0 == *feline_p->error_code_aline_)
 	{
@@ -1847,15 +2194,203 @@ int __stdcall morcego_decode_libav_svc_process_mp4_m(__attribute__((unused)) cha
 													 __attribute__((unused)) char *bufout_m,
 													 __attribute__((unused)) int *size_out)
 {
+
+	/*
+		double seconds_;
+		int channels_;
+		int samplerate_;
+		char media_description[1000];
+		//int out_bitrate;
+	*/
+
+	int len_m;
+	char *ptr_1;
+	(void)ptr_1;
+	pedro_dprintf(-1, "svc_MP4/AAC_process_m\n");
+	if (NULL == struct_opus_m)
+	{
+		*size_out = 0;
+		return BE_ERROR_DURING_DECODE;
+	}
+
+	pedro_k *feline_p = (void *)struct_opus_m;
+	(void)feline_p;
+
+	if (AMANDA_OPUS__ == feline_p->current_decoder_pedro)
+	{
+		pedro_dprintf(-20212810, "Error jfhty5756j498f");
+		exit(27);
+	}
+	else if (AMANDA_OGG_VORBIS == feline_p->current_decoder_pedro)
+	{
+		pedro_dprintf(-20212810, "Error ghyuj980");
+		exit(27);
+	}
+	else if (AMANDA_MP4_AAC == feline_p->current_decoder_pedro)
+	{
+		; // pass by
+	}
+	else
+	{
+		pedro_dprintf(-20212810, "Error 76jy87k7i89");
+		exit(27);
+	}
+
+	*size_out = 0;
+
+	//*maria_struct_->error_code_aline_ = 10005; // Error decoding Opus file
+	if (10005 == *feline_p->error_code_aline_)
+	{
+		return BE_ERROR_DURING_DECODE;
+	}
+
+again_amanda:;
+
+	if (0 == 1)
+	{
+		goto again_amanda;
+	}
+
+	if (PEREIRA_NO_MORE_DATA == feline_p->decoder_status_mislaine)
+	{
+
+		len_m = BucaneiroMin(feline_p->bytes_in_the_buffer_paul, bytes_to_decode_m);
+
+		memcpy(bufout_m, feline_p->ptr_data_position_douglas, len_m);
+		bufout_m += len_m;
+		feline_p->ptr_data_position_douglas += len_m;
+		*size_out += len_m;
+		feline_p->bytes_in_the_buffer_paul -= len_m;
+		bytes_to_decode_m -= len_m;
+		if (0 == feline_p->bytes_in_the_buffer_paul)
+		{
+			return BE_DECODED_BUT_NO_MORE_SAMPLES_AVAILABLE;
+		}
+
+		if (0 < feline_p->bytes_in_the_buffer_paul)
+		{
+			return BE_DECODED;
+		}
+
+		return BE_DECODED_BUT_NO_MORE_SAMPLES_AVAILABLE;
+	}
+
+	if (PEREIRA_HAS_DATA == feline_p->decoder_status_mislaine)
+	{
+		len_m = BucaneiroMin(feline_p->bytes_in_the_buffer_paul, bytes_to_decode_m);
+
+		bytes_to_decode_m -= len_m;
+		memcpy(bufout_m, feline_p->ptr_data_position_douglas, len_m);
+		bufout_m += len_m;
+		feline_p->ptr_data_position_douglas += len_m;
+
+		pedro_dprintf(-15, "val %lld\n", feline_p->ptr_data_position_douglas - feline_p->buffer_junior);
+
+		feline_p->bytes_in_the_buffer_paul -= len_m;
+		*size_out += len_m;
+		if (0 == bytes_to_decode_m)
+		{
+			return BE_DECODED;
+		}
+
+		if (0 == feline_p->bytes_in_the_buffer_paul)
+		{
+			feline_p->ptr_data_position_douglas = feline_p->buffer_junior;
+			feline_p->bytes_in_the_buffer_paul = 0;
+			feline_p->the_andrea_command = KOCI_PROCESS__;
+			{
+				uncompress_aac_mp4(feline_p);
+			}
+			goto again_amanda;
+		}
+
+		pedro_dprintf(-15, "passou e vai sair");
+		exit(27);
+	}
+
+	pedro_dprintf(-15, "passou e vai sair2");
+	exit(27);
 	return -27;
 }
+
+double
+getval_100(double max, double por);
+double
+getval_100(double max, double por)
+{
+
+	// a formula aqui ï¿½
+	// max / 100 * por
+
+	double maxa;
+	double porr;
+
+	maxa = (double)max;
+	porr = (double)por;
+
+	maxa = (maxa / 100.0) * porr;
+
+	return maxa;
+}
+
 void __stdcall svc_seek_mp4_m(__attribute__((unused)) char *struct_opus_m,
 							  __attribute__((unused)) double maquisistem_value)
 {
+
+	pedro_k *feline_p = (void *)struct_opus_m;
+
+	if (NULL == feline_p)
+	{
+		return;
+	}
+
+	if (0 == feline_p->is_MP4_m)
+	{
+		return;
+	}
+
+	if (1 == feline_p->is_MP4_m)
+	{
+		feline_p->wait_for_fix_m = true;
+
+		feline_p->sampleId = getval_100(feline_p->max_samples_v, maquisistem_value);
+
+		feline_p->wait_for_fix_m = false;
+	}
+	if (2 == feline_p->is_MP4_m)
+	{
+
+		feline_p->new_pos_m = getval_100(feline_p->max_size_file_m, maquisistem_value);
+		feline_p->request_for_seek_m = true;
+	}
+
 	return;
 }
 
 void morcego_deinit_libav_svc_deinit_mp4_m(__attribute__((unused)) char *struct_opus_m)
 {
+	/*
+	double seconds_;
+	int channels_;
+	int samplerate_;
+	char media_description[1000];
+	int out_bitrate;
+	*/
+
+	if (NULL == struct_opus_m)
+	{
+		pedro_dprintf(1001, "Erro 263746 no codigo");
+		exit(27);
+	}
+
+	pedro_k *feline_p = (void *)struct_opus_m;
+	feline_p->the_andrea_command = KOCI_FINISH__;
+
+	uncompress_aac_mp4(feline_p);
+
+	free(feline_p->filename_utf_8_m);
+	free(feline_p);
+	pedro_dprintf(-20212810, "saiu de deinit_MP4/AAC");
+	// exit(27);
 	return;
 }
