@@ -180,6 +180,10 @@ with different copies of the Libav dlls in the same process running
 
 Changelog: 
 
+What is new in 18.0.9  build 667471  'Sat 30/October/2021 09:38:25' codename 'Graffam'
+Fixed a bug that may cause the sound of wave out to go to 0 during seek 
+while paused, minor modifications
+
 What is new in 18.0.8  build 667470  'Sat 30/October/2021 08:19:24' codename 'Peeters'
 Added update of the video frame and audio position if the seek is called
 when the playback is paused, the replacement for Libav has the basic audio 

@@ -3461,11 +3461,8 @@ void __stdcall ShowCursor_(int enable)
  */
 void __stdcall SeekTo_10000(__int64 mv_instance, double seek)
 {
-	int newvalue = 0;
-	int first;
-	int second;
 	int savestate_m;
-	int save_volume_m;
+	DWORD save_volume_m;
 	check_mv_instance(mv_instance);
 	morcego___i___instance__a__bucaneiro_engineering *mv_______ =
 		(morcego___i___instance__a__bucaneiro_engineering *)(__INT32_OR_INT64)
@@ -3490,16 +3487,13 @@ void __stdcall SeekTo_10000(__int64 mv_instance, double seek)
 	{
 		savestate_m = mv_______->libav_c___donot_draw_video;
 		save_volume_m = mv_______->decoder_c___volume_m;
+
+		waveOutGetVolume(mv_______->decoder_c___phwo,
+						 &save_volume_m);
+
 		{
 
-			newvalue = newvalue * 0x28f; // I dont remember what is it, kkkk, but works..., this volume set API is just weird, low 16 bits set one channel and high 16 bits set the other channel
-			if (newvalue > 0xffff)
-			{
-				newvalue = 0xffff;
-			}
-			first = newvalue;
-			second = (first << 16) + newvalue;
-			(void)waveOutSetVolume(mv_______->decoder_c___phwo, second);
+			(void)waveOutSetVolume(mv_______->decoder_c___phwo, 0);
 		}
 
 		mv_______->libav_c___donot_draw_video = 1;
@@ -3510,14 +3504,7 @@ void __stdcall SeekTo_10000(__int64 mv_instance, double seek)
 		mv_______->libav_c___donot_draw_video = savestate_m;
 		Sleep(100);
 		{
-			newvalue = save_volume_m * 0x28f; // I dont remember what is it, kkkk, but works..., this volume set API is just weird, low 16 bits set one channel and high 16 bits set the other channel
-			if (newvalue > 0xffff)
-			{
-				newvalue = 0xffff;
-			}
-			first = newvalue;
-			second = (first << 16) + newvalue;
-			(void)waveOutSetVolume(mv_______->decoder_c___phwo, second);
+			(void)waveOutSetVolume(mv_______->decoder_c___phwo, save_volume_m);
 		}
 	}
 
