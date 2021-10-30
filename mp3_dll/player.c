@@ -31,6 +31,17 @@
  *                                                                              *
  *******************************************************************************/
 
+#include <xmmintrin.h>
+
+void _MM_SET_FLUSH_ZERO_MODE2(unsigned int __mode)
+{
+#ifdef WIN64
+     _mm_setcsr((_mm_getcsr() & ~_MM_FLUSH_ZERO_MASK) | __mode);
+#else
+     __builtin_ia32_ldmxcsr((__builtin_ia32_stmxcsr() & ~_MM_FLUSH_ZERO_MASK) | __mode);
+#endif
+}
+
 #define WINDOW_FLAG___ HWND_TOP
 #define SHOW_FLAG__ SWP_SHOWWINDOW | SWP_NOCOPYBITS
 #define NO_SHOW_FLAG__ SWP_HIDEWINDOW | SWP_NOCOPYBITS
@@ -131,7 +142,14 @@ reinicia_z:;
 
                mv_______->libav_c___size_of_window_width = w_i;
                mv_______->libav_c___size_of_window_height = h_i;
+
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wpointer-to-int-cast"
+
                mv_______->libav_c___player_hwnd = (int64_t)hwnd;
+
+#pragma GCC diagnostic pop
+
                // mv_______->libav_c___the_ratio = ratio_;
                mv_______->libav_c___adjust_top = 0;
                mv_______->libav_c___adjust_left = 0;
@@ -1055,7 +1073,7 @@ no_use_i:;
                   to avoid the Flush-to-zero x86 and x64 floating point problem that can cause the processor
                   usage to go up to 100% on 0 value samples (silence) */
 
-               _MM_SET_FLUSH_ZERO_MODE(_MM_FLUSH_ZERO_ON);
+               _MM_SET_FLUSH_ZERO_MODE2(_MM_FLUSH_ZERO_ON);
                //_MM_SET_FLUSH_ZERO_MODE(_MM_FLUSH_ZERO_OFF); to return to the standard mode
 
                // amanda_fix_dithering(mv_______->decoder_c___globalbuf, mv_______->decoder_c___ponto); // this was the fix before the _MM_SET_FLUSH_ZERO_MODE

@@ -30,8 +30,8 @@ LANGUAGE LANG_PORTUGUESE, SUBLANG_PORTUGUESE_BRAZILIAN
 IDR_MAINFRAME           ICON                                                     "new icon july_i.ico"
 
 VS_VERSION_INFO VERSIONINFO
- FILEVERSION 0,6,3,88003
- PRODUCTVERSION 0,6,3,88003
+ FILEVERSION 0,7,1,88011
+ PRODUCTVERSION 0,7,1,88011
  FILEFLAGSMASK 0x3fL
 #ifdef _DEBUG
  FILEFLAGS 0x1L
@@ -48,15 +48,15 @@ BEGIN
         BEGIN
             VALUE "Comments", "BinaryWork Corp. \0"
             VALUE "CompanyName", "https://NOMADE.sourceforge.net \0"
-            VALUE "FileDescription", "SQLite  Interface 65 bits \0"
-            VALUE "FileVersion", "0, 6, 3, 88003 \0"
+            VALUE "FileDescription", "SQLite  Interface 32 bits \0"
+            VALUE "FileVersion", "0, 7, 1, 88011 \0"
             VALUE "InternalName", "Amanda_27.DLL \0"
             VALUE "LegalCopyright", "Copyleft BW © 2021 \0"
             VALUE "LegalTrademarks", "Copyleft BW © 2021 \0"
             VALUE "OriginalFilename", "Amanda_27.DLL \0"
-            VALUE "PrivateBuild", "88003 \0"
-            VALUE "ProductName", "Amanda_27 0, 6, 3, 88003 65 bits \0"
-            VALUE "ProductVersion", "0, 6, 3, 88003 \0"
+            VALUE "PrivateBuild", "88011 \0"
+            VALUE "ProductName", "Amanda_27 0, 7, 1, 88011 32 bits \0"
+            VALUE "ProductVersion", "0, 7, 1, 88011 \0"
             VALUE "SpecialBuild", "amandaricardo_koci\0"
         END
     END

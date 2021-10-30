@@ -600,7 +600,7 @@ WIN_HideWindow(_THIS, SDL_Window * window)
 	pedro_dprintf(-1, "dentro de WIN_HideWindow 1");
 	HWND hwnd = ((SDL_WindowData *) window->driverdata)->hwnd;
 
-	pedro_dprintf(-1, "dentro de WIN_HideWindow 1b %I64d", (__int64) hwnd);
+	//pedro_dprintf(-1, "dentro de WIN_HideWindow 1b %I64d", (__int64) hwnd);
 
 	ShowWindow(hwnd, SW_HIDE);
 	pedro_dprintf(-1, "dentro de WIN_HideWindow 2");

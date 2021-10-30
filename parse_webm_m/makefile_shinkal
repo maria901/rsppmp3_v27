@@ -11,9 +11,24 @@ shinkal_480:
 
 	cp --preserve=timestamps parse_espirita.dll 'C:\cygwin64_amandaricardo_koci_10.2.0\bin\mp3dll'
 
+shinkal_480_amanda_x86:
+	i686-w64-mingw32-g++ -Iinclude -I. -std=c++11 \
+	-o parse_espirita.dll demo.cc libwebm_amanda_x86.a -static \
+	kkk_amanda.c mislaine.def -shared -Wl,-enable-stdcall-fixup
+	
+#	i686-w64-mingw32-strip.exe parse_espirita.dll
+
+	cp --preserve=timestamps *.cc *.c *makefile* *.a *.def 'C:\cygwin64_amandaricardo_koci_10.2.0\aoprojeto\parse_webm_m'
+
+	cp --preserve=timestamps parse_espirita.dll 'C:\cygwin64_amandaricardo_koci_10.2.0\bin_amanda_x86\mp3dll'
+
 shinkal_libs:
 	x86_64-w64-mingw32-g++ -Iinclude -I. -std=c++11 -c src/*.cc
 	x86_64-w64-mingw32-ar rcs libwebm.a *.o
+
+shinkal_libs_amanda_x86:
+	i686-w64-mingw32-g++ -Iinclude -I. -std=c++11 -c src/*.cc
+	i686-w64-mingw32-ar rcs libwebm_amanda_x86.a *.o
 
 exec_shinkal:
 	./parse_shinkal.exe file_m.webm

@@ -102,7 +102,16 @@ WINBASEAPI ULONGLONG WINAPI GetTickCount64(VOID);
 #include "../morcego/be_constants.h"
 
 #include "SDL_amanda/include/SDL.h"
-
+#ifdef FLAGS_AMANDA_X86
+#include <amanda_x86/libavcodec/avcodec.h>
+#include <amanda_x86/libavformat/avformat.h>
+#include <amanda_x86/libswscale/swscale.h>
+//#include <libpostproc/postprocess.h>
+#include <amanda_x86/libavdevice/avdevice.h>
+#include <amanda_x86/libavfilter/avfilter.h>
+#include <amanda_x86/libavutil/avutil.h>
+#include <amanda_x86/libavutil/cpu.h>
+#else
 #include <libavcodec/avcodec.h>
 #include <libavformat/avformat.h>
 #include <libswscale/swscale.h>
@@ -111,6 +120,7 @@ WINBASEAPI ULONGLONG WINAPI GetTickCount64(VOID);
 #include <libavfilter/avfilter.h>
 #include <libavutil/avutil.h>
 #include <libavutil/cpu.h>
+#endif
 
 #include "../mp3_dll/decoder.h"
 
@@ -738,12 +748,13 @@ void init_video(morcego___i___instance__a__bucaneiro_engineering *mv_______,
           else
           {
                pedro_dprintf(-1, "Iniciou sdl...");
-
+#ifdef WIN64
                if (0 != TTF_Init())
                {
                     pedro_dprintf(1001, "falhou na inicializacao de TTF_init\n");
                     exit(27);
                }
+#endif
           }
      }
 
@@ -1772,7 +1783,7 @@ int morcego_vermelho_player_thread(morcego___i___instance__a__bucaneiro_engineer
 
      mislaine_command.junior_last_frame[0] = -1;
      mislaine_command.junior_last_frame[1] = -1;
-
+#ifdef WIN64
      TTF_Font *Sans_i = TTF_OpenFont(get_ava_name(), 24);
 
      if (!Sans_i)
@@ -1781,7 +1792,7 @@ int morcego_vermelho_player_thread(morcego___i___instance__a__bucaneiro_engineer
 
           exit(27);
      }
-
+#endif
      AVSubtitle *sub_amanda_ptr_i;
      struct SwsContext *sub_convert_ctx_i = NULL;
      double time_spent = get_bucaneiro_tick();
@@ -2975,9 +2986,9 @@ finish:;
      mv_______->libav_c___video_thread_running = 0;
      mv_______->decoder_c___cancelflag = 0;
      ar_koci_force_exit = FALSE;
-
+#ifdef WIN64
      TTF_CloseFont(Sans_i);
-
+#endif
      if (sub_convert_ctx_i)
      {
           sws_freeContext(sub_convert_ctx_i);
@@ -3455,5 +3466,11 @@ char *get_pixel_format_info___(morcego___i___instance__a__bucaneiro_engineering 
         return fr;
    }
  */
+
+#endif
+
+#if 1
+
+
 
 #endif

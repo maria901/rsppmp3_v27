@@ -1,0 +1,142 @@
+AMANDA_FLAGS__=-O3 -Wall -Wfatal-errors -msse -Werror -Wno-restrict -Wextra -Wno-unused-function -I . \
+	-DFLAGS_AMANDA_X86
+ 
+amandaricardo_valquiria: bucaneiro
+
+bin_amanda_x86\interface2.dll: ../morcego/be_constants.h mv_from_be.h  ..\interface2\libav.c ..\interface2\makefile ..\morcego\be_constants.h ..\interface2\libav_video.c ..\interface2\playlist.c ..\interface2\interface2.def
+
+	@make amandaricardo_valquiria_amanda_x86 -f 'makefile_amanda_x86' -C ..\interface2
+	
+/bw_tmp/mp3_dll/allpass_amanda_x86.o: allpass.cpp ../morcego/be_constants.h mv_from_be.h 
+	i686-w64-mingw32-g++.exe -c -o /bw_tmp/mp3_dll/allpass_amanda_x86.o allpass.cpp $(AMANDA_FLAGS__)
+
+/bw_tmp/mp3_dll/analisys_amanda_x86.o: analisys.c ..\morcego\be_constants.h ../morcego/be_constants.h mv_from_be.h 
+	i686-w64-mingw32-gcc.exe -c -o /bw_tmp/mp3_dll/analisys_amanda_x86.o analisys.c $(AMANDA_FLAGS__)
+
+/bw_tmp/mp3_dll/audio_amanda_x86.o: audio.c ../morcego/be_constants.h mv_from_be.h 
+	i686-w64-mingw32-gcc.exe -c -o /bw_tmp/mp3_dll/audio_amanda_x86.o audio.c $(AMANDA_FLAGS__)
+
+bucaneiro: bin_amanda_x86\interface2.dll ../morcego/be_constants.h mv_from_be.h  interface1.def /bw_tmp/mp3_dll/decoder_amanda_x86.o /bw_tmp/mp3_dll/audio_amanda_x86.o /bw_tmp/mp3_dll/revmodel_amanda_x86.o /bw_tmp/mp3_dll/freeverb_plugin_2_amanda_x86.o /bw_tmp/mp3_dll/unicode_large_amanda_x86.o /bw_tmp/mp3_dll/rspini_amanda_x86.o /bw_tmp/mp3_dll/mp3wav_amanda_x86.o /bw_tmp/mp3_dll/id3_amanda_x86.o /bw_tmp/mp3_dll/fourier_amanda_x86.o /bw_tmp/mp3_dll/filebuffer_amanda_x86.o /bw_tmp/mp3_dll/amanda_s_smart_ape___folder_amanda_x86.o /bw_tmp/mp3_dll/iir_amanda_x86.o /bw_tmp/mp3_dll/gain_analysis_amanda_x86.o /bw_tmp/mp3_dll/analisys_amanda_x86.o /bw_tmp/mp3_dll/normalization_amanda_x86.o /bw_tmp/mp3_dll/dsp_amanda_x86.o /bw_tmp/mp3_dll/rc4_amanda_x86.o /bw_tmp/mp3_dll/freeverb_plugin_amanda_x86.o /bw_tmp/mp3_dll/allpass_amanda_x86.o /bw_tmp/mp3_dll/comb_amanda_x86.o /bw_tmp/mp3_dll/freeverb_plugin_2_amanda_x86.o /bw_tmp/mp3_dll/revmodel_amanda_x86.o /bw_tmp/mp3_dll/pedro_64_amanda_x86.o /bw_tmp/mp3_dll/amanda_s_smart_ape_sha512_k_amanda_x86.o /bw_tmp/mp3_dll/morcego_interface_amanda_x86.o /bw_tmp/mp3_dll/soundtouch_arp_amanda_x86.a
+
+	@/bw_tmp/amandaricardo_mvbuild26_33.exe amanda_file_counter_32.ini versio_n.ama.rc version_ricardo_mislaine_final_2_.rc aline_definitive_header_2_.h "32 bits" rspmp3ocx1.dll increase '2021' '../sqlite/new icon july_i.ico'
+
+	@i686-w64-mingw32-windres.exe -o /bw_tmp/mp3_dll/ver_amanda_x86.o -O coff version_ricardo_mislaine_final_2_.rc
+
+	@i686-w64-mingw32-gcc.exe -c -o /bw_tmp/mp3_dll/version_morcego_amanda_x86.o version_morcego.c $(AMANDA_FLAGS__)
+ 
+	i686-w64-mingw32-g++.exe -mdll ricardo.c -o rspmp3ocx1.dll interface1.def /bw_tmp/mp3_dll/ver_amanda_x86.o /bw_tmp/mp3_dll/decoder_amanda_x86.o /bw_tmp/mp3_dll/revmodel_amanda_x86.o /bw_tmp/mp3_dll/freeverb_plugin_2_amanda_x86.o /bw_tmp/mp3_dll/comb_amanda_x86.o /bw_tmp/mp3_dll/allpass_amanda_x86.o /bw_tmp/mp3_dll/freeverb_plugin_amanda_x86.o /bw_tmp/mp3_dll/rc4_amanda_x86.o /bw_tmp/mp3_dll/dsp_amanda_x86.o /bw_tmp/mp3_dll/normalization_amanda_x86.o /bw_tmp/mp3_dll/analisys_amanda_x86.o /bw_tmp/mp3_dll/gain_analysis_amanda_x86.o /bw_tmp/mp3_dll/iir_amanda_x86.o /bw_tmp/mp3_dll/amanda_s_smart_ape___folder_amanda_x86.o /bw_tmp/mp3_dll/pedro_64_amanda_x86.o /bw_tmp/mp3_dll/filebuffer_amanda_x86.o /bw_tmp/mp3_dll/fourier_amanda_x86.o /bw_tmp/mp3_dll/id3_amanda_x86.o /bw_tmp/mp3_dll/mp3wav_amanda_x86.o /bw_tmp/mp3_dll/rspini_amanda_x86.o /bw_tmp/mp3_dll/unicode_large_amanda_x86.o /bw_tmp/mp3_dll/audio_amanda_x86.o /bw_tmp/mp3_dll/version_morcego_amanda_x86.o /bw_tmp/mp3_dll/morcego_interface_amanda_x86.o /bw_tmp/mp3_dll/amanda_s_smart_ape_sha512_k_amanda_x86.o -lwinmm -lwininet /bw_tmp/mp3_dll/soundtouch_arp_amanda_x86.a /bin_amanda_x86/mp3dll/interface2.dll /bin_amanda_x86/mp3dll/AMANDA_27.DLL $(AMANDA_FLAGS__) -lpsapi -static \
+	-Wl,-enable-stdcall-fixup
+
+#	-static-libstdc++ -static-libgcc             \ will keep it here for historical reasons...
+
+	cp --preserve=timestamps rspmp3ocx1.dll /bin_amanda_x86/mp3dll/rspmp3ocx1.dll
+	cp --preserve=timestamps rspmp3ocx1.dll ../bin_amanda_x86/
+	rm rspmp3ocx1.dll
+	
+	@echo Amanda says that it is compiled....
+	$(LICAO_DE_VIDA_DO_MEU_AMOR)
+clean:
+	-rm *.???~
+	-rm *.unc-backup~
+clean_k_p: clean_k_p_pass_1 bucaneiro
+clean_k_p_pass_1:
+	touch .\morcego_libav\libav_interface_new\libav.c
+	touch .\morcego_libav\libav_interface_new\libav_video.c
+	-rm /bw_tmp/mp3_dll/*_amanda_x86.o
+	-rm /bw_tmp/mp3_dll/*_amanda_x86.a
+/bw_tmp/mp3_dll/comb_amanda_x86.o: comb.cpp ../morcego/be_constants.h mv_from_be.h 
+	i686-w64-mingw32-g++.exe -c -o /bw_tmp/mp3_dll/comb_amanda_x86.o comb.cpp $(AMANDA_FLAGS__)
+
+copy:
+	make copy -C "C:\aocprojeto\mp3 dll\ACME_mp3_dll_192_build_2072\bucaneiro\win32\mp3dll\mp3dll\bin\x86\Release"
+csharp:
+#																		??? porque isto ainda tá aqui amanda?
+	@make -C "C:\aocprojeto\mp3 dll\ACME_mp3_dll_192_build_2072\bucaneiro\win32\mp3dll\mp3dll"
+/bw_tmp/mp3_dll/decoder_amanda_x86.o: decoder.c win64.h player.c decoder.h ..\morcego\be_constants.h ../morcego/be_constants.h mv_from_be.h  be_xml.c
+	i686-w64-mingw32-gcc.exe -D__BUCANEIRO__ -c -o /bw_tmp/mp3_dll/decoder_amanda_x86.o decoder.c $(AMANDA_FLAGS__) -DPSAPI_VERSION=1
+	
+	cp decoder.c 'C:/Ava/documentation_kp/rsppmp3_doc_8.9.9/'
+	cp  player.c 'C:/Ava/documentation_kp/rsppmp3_doc_8.9.9/'
+
+/bw_tmp/mp3_dll/dsp_amanda_x86.o: dsp.c ../morcego/be_constants.h mv_from_be.h  ../morcego/be_constants.h mv_from_be.h 
+	i686-w64-mingw32-gcc.exe -c -o /bw_tmp/mp3_dll/dsp_amanda_x86.o dsp.c $(AMANDA_FLAGS__)
+	
+/bw_tmp/mp3_dll/filebuffer_amanda_x86.o: filebuffer.c ../morcego/be_constants.h mv_from_be.h 
+	i686-w64-mingw32-gcc.exe -c -o /bw_tmp/mp3_dll/filebuffer_amanda_x86.o filebuffer.c $(AMANDA_FLAGS__)
+
+/bw_tmp/mp3_dll/amanda_s_smart_ape___folder_amanda_x86.o: amanda_s_smart_ape___folder.c ../morcego/be_constants.h mv_from_be.h 
+	i686-w64-mingw32-gcc.exe -c -o /bw_tmp/mp3_dll/amanda_s_smart_ape___folder_amanda_x86.o amanda_s_smart_ape___folder.c $(AMANDA_FLAGS__) 
+
+/bw_tmp/mp3_dll/fourier_amanda_x86.o: fourier.c ../morcego/be_constants.h mv_from_be.h 
+	i686-w64-mingw32-gcc.exe -c -o /bw_tmp/mp3_dll/fourier_amanda_x86.o fourier.c $(AMANDA_FLAGS__)
+
+/bw_tmp/mp3_dll/freeverb_plugin_amanda_x86.o: freeverb_plugin.c ../morcego/be_constants.h mv_from_be.h 
+	i686-w64-mingw32-gcc.exe -c -o /bw_tmp/mp3_dll/freeverb_plugin_amanda_x86.o freeverb_plugin.c $(AMANDA_FLAGS__)
+
+/bw_tmp/mp3_dll/freeverb_plugin_2_amanda_x86.o: freeverb_plugin_2.cpp ../morcego/be_constants.h mv_from_be.h  denormals.h comb.h allpass.h
+	i686-w64-mingw32-g++.exe -c -o /bw_tmp/mp3_dll/freeverb_plugin_2_amanda_x86.o freeverb_plugin_2.cpp $(AMANDA_FLAGS__)
+
+/bw_tmp/mp3_dll/gain_analysis_amanda_x86.o: gain_analysis.c ../morcego/be_constants.h mv_from_be.h 
+	i686-w64-mingw32-gcc.exe -c -o /bw_tmp/mp3_dll/gain_analysis_amanda_x86.o gain_analysis.c $(AMANDA_FLAGS__)
+
+/bw_tmp/mp3_dll/id3_amanda_x86.o: id3.c ../morcego/be_constants.h mv_from_be.h 
+	i686-w64-mingw32-gcc.exe -c -o /bw_tmp/mp3_dll/id3_amanda_x86.o id3.c $(AMANDA_FLAGS__)
+
+/bw_tmp/mp3_dll/iir_amanda_x86.o: iir.c ../morcego/be_constants.h mv_from_be.h  spectrum60.c
+	i686-w64-mingw32-gcc.exe -c -o /bw_tmp/mp3_dll/iir_amanda_x86.o iir.c $(AMANDA_FLAGS__)
+
+#i686-w64-mingw32-gcc.exe -S -masm=intel $(AMANDA_FLAGS_) -o iir_sse.S iir.c
+/bw_tmp/mp3_dll/morcego_interface_amanda_x86.o: ../morcego/be_constants.h mv_from_be.h  ../morcego/morcego_interface.c
+	@make amandaricardo_valquiria_amanda_x86 -C ../morcego	
+	
+/bw_tmp/mp3_dll/mp3wav_amanda_x86.o: mp3wav.c ..\morcego\be_constants.h ../morcego/be_constants.h mv_from_be.h 
+	i686-w64-mingw32-gcc.exe -c -o /bw_tmp/mp3_dll/mp3wav_amanda_x86.o mp3wav.c $(AMANDA_FLAGS__)
+
+/bw_tmp/mp3_dll/normalization_amanda_x86.o: normalization.c ../morcego/be_constants.h mv_from_be.h 
+	i686-w64-mingw32-gcc.exe -c -o /bw_tmp/mp3_dll/normalization_amanda_x86.o normalization.c $(AMANDA_FLAGS__)
+
+/bw_tmp/mp3_dll/pedro_64_amanda_x86.o: pedro.c
+	i686-w64-mingw32-gcC -c -o /bw_tmp/mp3_dll/pedro_64_amanda_x86.o	pedro.c $(AMANDA_FLAGS__)
+
+/bw_tmp/mp3_dll/rc4_amanda_x86.o: audio.c ../morcego/be_constants.h mv_from_be.h 
+	i686-w64-mingw32-gcc.exe -c -o /bw_tmp/mp3_dll/rc4_amanda_x86.o rc4.c $(AMANDA_FLAGS__)
+
+/bw_tmp/mp3_dll/revmodel_amanda_x86.o: revmodel.cpp ../morcego/be_constants.h mv_from_be.h 
+	i686-w64-mingw32-g++.exe -c -o /bw_tmp/mp3_dll/revmodel_amanda_x86.o revmodel.cpp $(AMANDA_FLAGS__)
+	
+/bw_tmp/mp3_dll/amanda_s_smart_ape_sha512_k_amanda_x86.o: amanda_s_smart_ape_sha512_k.c ../morcego/be_constants.h mv_from_be.h 
+	i686-w64-mingw32-gcc.exe -c -o /bw_tmp/mp3_dll/amanda_s_smart_ape_sha512_k_amanda_x86.o amanda_s_smart_ape_sha512_k.c $(AMANDA_FLAGS__)
+
+/bw_tmp/mp3_dll/rspini_amanda_x86.o: rspini.c e_malloc.c ../morcego/be_constants.h mv_from_be.h 
+	i686-w64-mingw32-gcc.exe -c -o /bw_tmp/mp3_dll/rspini_amanda_x86.o rspini.c $(AMANDA_FLAGS__)
+
+/bw_tmp/mp3_dll/soundtouch_arp_amanda_x86.a: ../touch/SoundTouch.cpp ../touch/TDStretch.cpp ../touch/RateTransposer.cpp ../touch/FIRFilter.cpp ../touch/FIFOSampleBuffer.cpp ../touch/AAFilter.cpp ../touch/cpu_detect_x86_win.cpp ../touch/PeakFinder.cpp ../touch/BPMDetect.cpp ../touch/WavFile.cpp ../touch/RunParameters.cpp ../touch/interface.cpp
+	@make amandaricardo_valquiria_amanda_x86 -f 'makefile_amanda_x86' -C ../touch
+	
+/bw_tmp/mp3_dll/unicode_large_amanda_x86.o: unicode_large.c ../morcego/be_constants.h mv_from_be.h 
+	i686-w64-mingw32-gcc.exe -c -o /bw_tmp/mp3_dll/unicode_large_amanda_x86.o unicode_large.c $(AMANDA_FLAGS__)
+
+aline_clean:
+	-rm /bw_tmp/mp3_dll/*_amanda_x86.o
+	
+	echo pronto mister...
+
+smartape:
+
+	i686-w64-mingw32-gcc.exe -o /bw_tmp/amandaricardo_mvbuild26_33.exe smartape.c $(AMANDA_FLAGS__) $(JULIET_FLAGS) $(FELINE_FLAGS__) -DAMANDA_S_SMART_APE_ENABLE_WIDE_FUNCTION_
+	$(LICAO_DE_VIDA_DO_MEU_AMOR)
+
+	@/bw_tmp/amandaricardo_mvbuild26_33.exe amanda_s_smart_ape__counter.ini AssemblyInfo.smartape AssemblyInfo.cs AssemblyInfo.hh "1024 bits" 	AssemblyInfo.viu.cs increase
+
+	cp --preserve=timestamps AssemblyInfo.cs /aoprojeto/c#_sample/mp3dll/mp3dll/Properties/AssemblyInfo.cs
+
+smartape_v27: /bw_tmp/mp3_dll/smartape.c_kk_amanda_x86.o
+	i686-w64-mingw32-gcc.exe -o /bw_tmp/amandaricardo_mvbuild26_33.exe /bw_tmp/mp3_dll/smartape.c_kk_amanda_x86.o -O3
+	$(LICAO_DE_VIDA_DO_MEU_AMOR)
+
+/bw_tmp/mp3_dll/smartape.c_kk_amanda_x86.o: smartape.c
+	i686-w64-mingw32-gcc.exe -c -o /bw_tmp/mp3_dll/smartape.c_kk_amanda_x86.o smartape.c $(AMANDA_FLAGS__) $(JULIET_FLAGS) $(FELINE_FLAGS__)  -DAMANDA_S_SMART_APE_ENABLE_WIDE_FUNCTION_
+	$(LICAO_DE_VIDA_DO_MEU_AMOR)
+
+	i686-w64-mingw32-gcc.exe -o /bw_tmp/amandaricardo_mvbuild26_33.exe /bw_tmp/mp3_dll/smartape.c_kk_amanda_x86.o -O3
+	$(LICAO_DE_VIDA_DO_MEU_AMOR)

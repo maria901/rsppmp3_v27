@@ -93,7 +93,16 @@ double NOSBOR__O_AMIGO;
 #include "../morcego/be_constants.h"
 
 //#include "SDL\SDL.h"
-
+#ifdef FLAGS_AMANDA_X86
+#include <amanda_x86/libavcodec/avcodec.h>
+#include <amanda_x86/libavformat/avformat.h>
+#include <amanda_x86/libswscale/swscale.h>
+//#include <libpostproc/postprocess.h>
+#include <amanda_x86/libavdevice/avdevice.h>
+#include <amanda_x86/libavfilter/avfilter.h>
+#include <amanda_x86/libavutil/avutil.h>
+#include <amanda_x86/libavutil/cpu.h>
+#else
 #include <libavcodec/avcodec.h>
 #include <libavformat/avformat.h>
 #include <libswscale/swscale.h>
@@ -101,6 +110,8 @@ double NOSBOR__O_AMIGO;
 #include <libavdevice/avdevice.h>
 #include <libavfilter/avfilter.h>
 #include <libavutil/avutil.h>
+#include <libavutil/cpu.h>
+#endif
 /////////////////////////////////////////////////////////////////////////////
 // the main struct that holds the media information
 

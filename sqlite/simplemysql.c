@@ -934,3 +934,90 @@ char *sql = "DROP TABLE IF EXISTS Friends;"
 
 
 */
+
+#ifndef WIN64
+
+static void amandaricardo_pereira_koci_string_replace(char *data_feline,
+													  char *search_string_feline,
+													  char *dest_string_feline);
+/**
+ * Function to replace a string in Windows, developed by me 24 years ago and the
+ * bug was fixed during these years, now the number of bugs inside is low
+ *
+ */
+static void amandaricardo_pereira_koci_string_replace(char *data_feline,
+													  char *search_string_feline,
+													  char *dest_string_feline)
+{
+	int g;
+	int p;
+	int i;
+	int size_of_dest = strlen(dest_string_feline);
+	int size_of_search = strlen(search_string_feline);
+	int size_of_data = strlen(data_feline);
+	int data_position = 0;
+	char *data_large;
+	double asrc;
+	double a;
+	int size__;
+	if (0 == size_of_search)
+	{
+		asrc = 1.;
+	}
+	else
+	{
+		asrc = (double)size_of_search;
+	}
+	a = size_of_dest / asrc;
+	size__ = (int)ceil(a);
+	data_large = calloc((size_of_data * size__) + 1 + 100000, 1); //possible bug here...amanda
+	for (i = 0; i < size_of_data; i++)
+	{
+		if (data_feline[i] == search_string_feline[0])
+		{
+			int desloca = i;
+			for (p = 0; p < size_of_search; p++)
+			{
+				if (0 == data_feline[desloca])
+				{
+					goto jump_inside;
+				}
+				if (data_feline[desloca++] != search_string_feline[p])
+				{
+					goto jump_inside;
+				}
+			}
+
+			for (g = 0; g < size_of_dest; g++)
+			{
+				data_large[data_position] = dest_string_feline[g];
+				data_position++;
+			}
+			i += size_of_search - 1;
+		}
+		else
+		{
+		jump_inside:;
+			data_large[data_position++] = data_feline[i];
+		}
+	}
+	data_large[data_position] = 0;
+	/*
+	if(100000<strlen(data_large))
+	{
+		printf("Erro 1015: Tamanho de entradas superior a 100000 bytes, terminando o programa, contate o programador e mande um printscreen");
+		exit(25);
+	}
+	*/
+	strcpy(data_feline, data_large);
+	free(data_large);
+	return;
+}
+
+int __fastcall replacestringsensitive2_juliete(char *comando, char *source, char *dest)
+{
+	amandaricardo_pereira_koci_string_replace(comando, source, dest);
+	return -27;
+}
+
+#endif

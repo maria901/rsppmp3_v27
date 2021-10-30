@@ -25,7 +25,17 @@ decode_32k.o: decoder.c id3_jump.c
 madlib_32k.a:
 #	make ar_clear  -C ./mad
 	make amanda_32 -C ./mad
-	
+
+shinkal_480: pedro_32arp.o decode_32k.o madlib_32k.a madxlib_32k.o
+
+	i686-w64-mingw32-g++ -O3 mislaine.def -mdll -o ./amanda_32/svc_mp3.dll pedro_32arp.o decode_32k.o madlib_32k.a madxlib_32k.o -static-libstdc++ -static-libgcc 	  -lwinmm -lwininet madlib_32k.a
+		
+	cp --preserve=timestamps *.c *.h *.def makefile *.a 'C:\cygwin64_amandaricardo_koci_10.2.0\aoprojeto\tabuleiro_dll\mp3_m'
+
+#	cp --preserve=timestamps svc_mp4.dll 'C:\cygwin64_amandaricardo_koci_10.2.0\bin\mp3dll'
+	cp --preserve=timestamps ./amanda_32/svc_mp3.dll 'C:\cygwin64_amandaricardo_koci_10.2.0\bin\mp3dll_standalone_amanda_32'
+	cp --preserve=timestamps ./amanda_32/svc_mp3.dll 'C:\AMANDA AVA KOCI PEREIRA\nosso_trabalho\amanda_projects\project tabuleiro\opus_interface_m\amanda_32'
+
 ricardo_64: pedro_64arp.o decode_64k.o madlib_64k.a madxlib_64k.o
 
 	x86_64-w64-mingw32-g++ -O3 mislaine.def -mdll -o svc_mp3.dll pedro_64arp.o decode_64k.o madlib_64k.a madxlib_64k.o -static-libstdc++ -static-libgcc 	  -lwinmm -lwininet madlib_64k.a
@@ -52,3 +62,6 @@ madlib_64k.a:
 
 pedro_64arp.o: pedro.c
 	x86_64-w64-mingw32-gcc.exe -c -o pedro_64arp.o pedro.c $(AMANDA_FLAGS__) $(JULIET_FLAGS) $(FELINE_FLAGS__)
+
+pedro_32arp.o: pedro.c
+	i686-w64-mingw32-gcc.exe -c -o pedro_32arp.o pedro.c $(AMANDA_FLAGS__) $(JULIET_FLAGS) $(FELINE_FLAGS__)

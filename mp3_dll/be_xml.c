@@ -57,6 +57,21 @@
 #include /* amanda's smart ape */ <stdbool.h>
 #include /* amanda's smart ape */ <process.h>
 
+wchar_t *
+permissive_name_m_(const wchar_t *wname);
+
+/**
+ * To convert an utf-8 encoded filename to a wide string (WCHAR *), we
+ *  . provide two functions that are exactly the same because someone may
+ * use it in multi-thread code
+ *
+ * @param pUTF8 the input utf-8 encoded filename
+ *
+ * @return the static allocated WCHAR array with the filename as wide string
+ *
+ */
+WCHAR *amanda_utf8towide_3_(char *pUTF8);
+
 /**
  * Function to get our modified and limited xml implemented file... in 2021
  *

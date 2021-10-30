@@ -1,0 +1,76 @@
+AMANDA_FLAGS__=-O3 -Wall -Wfatal-errors -Werror
+FELINE_FLAGS__=-Wno-unused-function
+
+ AMANDA_PRINT__                           =
+
+amandaricardo_valquiria_amanda_x86: /bw_tmp/toush/SoundTouch_amanda_x86.o /bw_tmp/toush/TDStretch_amanda_x86.o /bw_tmp/toush/RateTransposer_amanda_x86.o /bw_tmp/toush/FIRFilter_amanda_x86.o /bw_tmp/toush/FIFOSampleBuffer_amanda_x86.o /bw_tmp/toush/AAFilter_amanda_x86.o /bw_tmp/toush/cpu_detect_x86_win_amanda_x86.o /bw_tmp/toush/PeakFinder_amanda_x86.o /bw_tmp/toush/BPMDetect_amanda_x86.o /bw_tmp/toush/WavFile_amanda_x86.o /bw_tmp/toush/RunParameters_amanda_x86.o /bw_tmp/toush/interface.2._amanda_x86.o 
+	i686-w64-mingw32-ar.exe rcs /bw_tmp/mp3_dll/soundtouch_arp_amanda_x86.a /bw_tmp/toush/SoundTouch_amanda_x86.o /bw_tmp/toush/TDStretch_amanda_x86.o /bw_tmp/toush/RateTransposer_amanda_x86.o /bw_tmp/toush/FIRFilter_amanda_x86.o /bw_tmp/toush/FIFOSampleBuffer_amanda_x86.o /bw_tmp/toush/AAFilter_amanda_x86.o /bw_tmp/toush/cpu_detect_x86_win_amanda_x86.o /bw_tmp/toush/PeakFinder_amanda_x86.o /bw_tmp/toush/BPMDetect_amanda_x86.o /bw_tmp/toush/WavFile_amanda_x86.o /bw_tmp/toush/RunParameters_amanda_x86.o /bw_tmp/toush/interface.2._amanda_x86.o 
+
+	$(AMANDA_PRINT__)
+
+/bw_tmp/toush/SoundTouch_amanda_x86.o : SoundTouch.cpp
+	i686-w64-mingw32-g++.exe -c -o /bw_tmp/toush/SoundTouch_amanda_x86.o SoundTouch.cpp $(AMANDA_FLAGS__) $(FELINE_FLAGS__)
+	
+	$(AMANDA_PRINT__)
+
+/bw_tmp/toush/TDStretch_amanda_x86.o : TDStretch.cpp
+	i686-w64-mingw32-g++.exe -c -o /bw_tmp/toush/TDStretch_amanda_x86.o TDStretch.cpp $(AMANDA_FLAGS__) $(FELINE_FLAGS__)
+	
+	$(AMANDA_PRINT__)
+
+/bw_tmp/toush/RateTransposer_amanda_x86.o : RateTransposer.cpp
+	i686-w64-mingw32-g++.exe -c -o /bw_tmp/toush/RateTransposer_amanda_x86.o RateTransposer.cpp $(AMANDA_FLAGS__) $(FELINE_FLAGS__)
+	
+	$(AMANDA_PRINT__)
+
+/bw_tmp/toush/FIRFilter_amanda_x86.o : FIRFilter.cpp
+	i686-w64-mingw32-g++.exe -c -o /bw_tmp/toush/FIRFilter_amanda_x86.o FIRFilter.cpp $(AMANDA_FLAGS__) $(FELINE_FLAGS__)
+	
+	$(AMANDA_PRINT__)
+
+/bw_tmp/toush/FIFOSampleBuffer_amanda_x86.o : FIFOSampleBuffer.cpp
+	i686-w64-mingw32-g++.exe -c -o /bw_tmp/toush/FIFOSampleBuffer_amanda_x86.o FIFOSampleBuffer.cpp $(AMANDA_FLAGS__) $(FELINE_FLAGS__)
+	
+	$(AMANDA_PRINT__)
+
+/bw_tmp/toush/AAFilter_amanda_x86.o : AAFilter.cpp
+	i686-w64-mingw32-g++.exe -c -o /bw_tmp/toush/AAFilter_amanda_x86.o AAFilter.cpp $(AMANDA_FLAGS__) $(FELINE_FLAGS__)
+	
+	$(AMANDA_PRINT__)
+
+/bw_tmp/toush/cpu_detect_x86_win_amanda_x86.o : cpu_detect_x86_win.cpp
+	i686-w64-mingw32-g++.exe -c -o /bw_tmp/toush/cpu_detect_x86_win_amanda_x86.o cpu_detect_x86_win.cpp $(AMANDA_FLAGS__) $(FELINE_FLAGS__)
+	
+	$(AMANDA_PRINT__)
+
+/bw_tmp/toush/PeakFinder_amanda_x86.o : PeakFinder.cpp
+	i686-w64-mingw32-g++.exe -c -o /bw_tmp/toush/PeakFinder_amanda_x86.o PeakFinder.cpp $(AMANDA_FLAGS__) $(FELINE_FLAGS__)
+	
+	$(AMANDA_PRINT__)
+
+/bw_tmp/toush/BPMDetect_amanda_x86.o : BPMDetect.cpp
+	i686-w64-mingw32-g++.exe -c -o /bw_tmp/toush/BPMDetect_amanda_x86.o BPMDetect.cpp $(AMANDA_FLAGS__) $(FELINE_FLAGS__)
+	
+	$(AMANDA_PRINT__)
+
+/bw_tmp/toush/WavFile_amanda_x86.o : WavFile.cpp
+	i686-w64-mingw32-g++.exe -c -o /bw_tmp/toush/WavFile_amanda_x86.o WavFile.cpp $(AMANDA_FLAGS__) $(FELINE_FLAGS__)
+	
+	$(AMANDA_PRINT__)
+
+/bw_tmp/toush/RunParameters_amanda_x86.o : RunParameters.cpp
+	i686-w64-mingw32-g++.exe -c -o /bw_tmp/toush/RunParameters_amanda_x86.o RunParameters.cpp $(AMANDA_FLAGS__) $(FELINE_FLAGS__)
+	
+	$(AMANDA_PRINT__)
+
+/bw_tmp/toush/interface.2._amanda_x86.o : interface.cpp
+	i686-w64-mingw32-g++.exe -c -o /bw_tmp/toush/interface.2._amanda_x86.o interface.cpp $(AMANDA_FLAGS__) $(FELINE_FLAGS__)
+	
+	$(AMANDA_PRINT__)
+
+clean:
+	-@rm *amanda_x86.orig >nulo  2>nulo
+	-@rm *.???~ >nulo  2>nulo
+	-@rm *.unc-backup~ >nulo 2>nulo
+	-@rm *~* >nulo    2>nulo
+	-@rm nulo

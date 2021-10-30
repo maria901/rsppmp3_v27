@@ -1,0 +1,566 @@
+#2021 July 19 - 05:53 - by amanda & ricardo
+AMANDA_FLAGS__=-Wall -Wfatal-errors -Werror
+APRENDENDO_COM_MEU_MORZAO=/bw_tmp/sdl_2.0/
+
+amanda_32: $(APRENDENDO_COM_MEU_MORZAO)SDL_atomic_amanda_x86.o $(APRENDENDO_COM_MEU_MORZAO)SDL_spinlock_amanda_x86.o $(APRENDENDO_COM_MEU_MORZAO)SDL_directsound_amanda_x86.o $(APRENDENDO_COM_MEU_MORZAO)SDL_diskaudio_amanda_x86.o $(APRENDENDO_COM_MEU_MORZAO)SDL_dummyaudio_amanda_x86.o $(APRENDENDO_COM_MEU_MORZAO)SDL_audio_amanda_x86.o   \
+	$(APRENDENDO_COM_MEU_MORZAO)SDL_audiocvt_amanda_x86.o $(APRENDENDO_COM_MEU_MORZAO)SDL_audiodev_amanda_x86.o $(APRENDENDO_COM_MEU_MORZAO)SDL_audiotypecvt_amanda_x86.o $(APRENDENDO_COM_MEU_MORZAO)SDL_mixer_amanda_x86.o $(APRENDENDO_COM_MEU_MORZAO)SDL_wave_amanda_x86.o $(APRENDENDO_COM_MEU_MORZAO)SDL_winmm_amanda_x86.o             \
+	$(APRENDENDO_COM_MEU_MORZAO)SDL_wasapi_amanda_x86.o $(APRENDENDO_COM_MEU_MORZAO)SDL_wasapi_win32_amanda_x86.o $(APRENDENDO_COM_MEU_MORZAO)SDL_windows_amanda_x86.o $(APRENDENDO_COM_MEU_MORZAO)SDL_xinput_amanda_x86.o $(APRENDENDO_COM_MEU_MORZAO)SDL_cpuinfo_amanda_x86.o $(APRENDENDO_COM_MEU_MORZAO)SDL_dynapi_amanda_x86.o           \
+	$(APRENDENDO_COM_MEU_MORZAO)SDL_clipboardevents_amanda_x86.o $(APRENDENDO_COM_MEU_MORZAO)SDL_displayevents_amanda_x86.o $(APRENDENDO_COM_MEU_MORZAO)SDL_dropevents_amanda_x86.o $(APRENDENDO_COM_MEU_MORZAO)SDL_events_amanda_x86.o $(APRENDENDO_COM_MEU_MORZAO)SDL_gesture_amanda_x86.o           \
+	$(APRENDENDO_COM_MEU_MORZAO)SDL_keyboard_amanda_x86.o $(APRENDENDO_COM_MEU_MORZAO)SDL_mouse_amanda_x86.o $(APRENDENDO_COM_MEU_MORZAO)SDL_quit_amanda_x86.o $(APRENDENDO_COM_MEU_MORZAO)SDL_touch_amanda_x86.o $(APRENDENDO_COM_MEU_MORZAO)SDL_windowevents_amanda_x86.o $(APRENDENDO_COM_MEU_MORZAO)SDL_rwops_amanda_x86.o                \
+	$(APRENDENDO_COM_MEU_MORZAO)SDL_sysfilesystem_amanda_x86.o $(APRENDENDO_COM_MEU_MORZAO)SDL_haptic_amanda_x86.o $(APRENDENDO_COM_MEU_MORZAO)SDL_dinputhaptic_amanda_x86.o $(APRENDENDO_COM_MEU_MORZAO)SDL_windowshaptic_amanda_x86.o $(APRENDENDO_COM_MEU_MORZAO)SDL_xinputhaptic_amanda_x86.o      \
+	$(APRENDENDO_COM_MEU_MORZAO)hid_amanda_x86.o $(APRENDENDO_COM_MEU_MORZAO)SDL_hidapijoystick_amanda_x86.o $(APRENDENDO_COM_MEU_MORZAO)SDL_hidapi_gamecube_amanda_x86.o $(APRENDENDO_COM_MEU_MORZAO)SDL_hidapi_ps4_amanda_x86.o $(APRENDENDO_COM_MEU_MORZAO)SDL_hidapi_rumble_amanda_x86.o           \
+	$(APRENDENDO_COM_MEU_MORZAO)SDL_hidapi_switch_amanda_x86.o $(APRENDENDO_COM_MEU_MORZAO)SDL_hidapi_xbox360_amanda_x86.o $(APRENDENDO_COM_MEU_MORZAO)SDL_hidapi_xbox360w_amanda_x86.o $(APRENDENDO_COM_MEU_MORZAO)SDL_hidapi_xboxone_amanda_x86.o             \
+	$(APRENDENDO_COM_MEU_MORZAO)SDL_gamecontroller_amanda_x86.o $(APRENDENDO_COM_MEU_MORZAO)SDL_joystick_amanda_x86.o $(APRENDENDO_COM_MEU_MORZAO)SDL_dinputjoystick_amanda_x86.o $(APRENDENDO_COM_MEU_MORZAO)SDL_mmjoystick_amanda_x86.o $(APRENDENDO_COM_MEU_MORZAO)SDL_windowsjoystick_amanda_x86.o \
+	$(APRENDENDO_COM_MEU_MORZAO)SDL_xinputjoystick_amanda_x86.o $(APRENDENDO_COM_MEU_MORZAO)e_atan2_amanda_x86.o $(APRENDENDO_COM_MEU_MORZAO)e_exp_amanda_x86.o $(APRENDENDO_COM_MEU_MORZAO)e_fmod_amanda_x86.o $(APRENDENDO_COM_MEU_MORZAO)e_log_amanda_x86.o $(APRENDENDO_COM_MEU_MORZAO)e_log10_amanda_x86.o $(APRENDENDO_COM_MEU_MORZAO)e_pow_amanda_x86.o $(APRENDENDO_COM_MEU_MORZAO)e_rem_pio2_amanda_x86.o          \
+	$(APRENDENDO_COM_MEU_MORZAO)e_sqrt_amanda_x86.o $(APRENDENDO_COM_MEU_MORZAO)k_cos_amanda_x86.o $(APRENDENDO_COM_MEU_MORZAO)k_rem_pio2_amanda_x86.o $(APRENDENDO_COM_MEU_MORZAO)k_sin_amanda_x86.o $(APRENDENDO_COM_MEU_MORZAO)kkk_tan_amanda_x86.o $(APRENDENDO_COM_MEU_MORZAO)s_atan_amanda_x86.o $(APRENDENDO_COM_MEU_MORZAO)s_copysign_amanda_x86.o $(APRENDENDO_COM_MEU_MORZAO)s_cos_amanda_x86.o $(APRENDENDO_COM_MEU_MORZAO)s_fabs_amanda_x86.o          \
+	$(APRENDENDO_COM_MEU_MORZAO)s_floor_amanda_x86.o $(APRENDENDO_COM_MEU_MORZAO)s_scalbn_amanda_x86.o $(APRENDENDO_COM_MEU_MORZAO)s_sin_amanda_x86.o $(APRENDENDO_COM_MEU_MORZAO)s_tan_amanda_x86.o $(APRENDENDO_COM_MEU_MORZAO)SDL_sysloadso_amanda_x86.o $(APRENDENDO_COM_MEU_MORZAO)SDL_power_amanda_x86.o $(APRENDENDO_COM_MEU_MORZAO)SDL_syspower_amanda_x86.o                 \
+	$(APRENDENDO_COM_MEU_MORZAO)SDL_shaders_d3d11_amanda_x86.o \
+	\
+	\
+	\
+	\
+	$(APRENDENDO_COM_MEU_MORZAO)SDL_render_d3d_amanda_x86.o \
+	\
+	\
+	\
+	\
+	$(APRENDENDO_COM_MEU_MORZAO)SDL_render_d3d11_amanda_x86.o $(APRENDENDO_COM_MEU_MORZAO)SDL_shaders_d3d_amanda_x86.o $(APRENDENDO_COM_MEU_MORZAO)SDL_render_gl_amanda_x86.o $(APRENDENDO_COM_MEU_MORZAO)SDL_shaders_gl_amanda_x86.o \
+	\
+	\
+	\
+	\
+	\
+	$(APRENDENDO_COM_MEU_MORZAO)SDL_render_gles2_amanda_x86.o \
+	\
+	\
+	\
+	\
+	\
+	$(APRENDENDO_COM_MEU_MORZAO)SDL_shaders_gles2_amanda_x86.o $(APRENDENDO_COM_MEU_MORZAO)SDL_d3dmath_amanda_x86.o $(APRENDENDO_COM_MEU_MORZAO)SDL_render_amanda_x86.o $(APRENDENDO_COM_MEU_MORZAO)SDL_yuv_sw_amanda_x86.o $(APRENDENDO_COM_MEU_MORZAO)SDL_blendfillrect_amanda_x86.o                 \
+	$(APRENDENDO_COM_MEU_MORZAO)SDL_blendline_amanda_x86.o $(APRENDENDO_COM_MEU_MORZAO)SDL_blendpoint_amanda_x86.o  $(APRENDENDO_COM_MEU_MORZAO)SDL_drawline_amanda_x86.o $(APRENDENDO_COM_MEU_MORZAO)SDL_drawpoint_amanda_x86.o $(APRENDENDO_COM_MEU_MORZAO)SDL_render_sw_amanda_x86.o $(APRENDENDO_COM_MEU_MORZAO)SDL_rotate_amanda_x86.o   \
+	$(APRENDENDO_COM_MEU_MORZAO)SDL_amanda_x86.o $(APRENDENDO_COM_MEU_MORZAO)SDL_assert_amanda_x86.o $(APRENDENDO_COM_MEU_MORZAO)SDL_dataqueue_amanda_x86.o $(APRENDENDO_COM_MEU_MORZAO)SDL_error_amanda_x86.o $(APRENDENDO_COM_MEU_MORZAO)SDL_hints_amanda_x86.o $(APRENDENDO_COM_MEU_MORZAO)SDL_log_amanda_x86.o $(APRENDENDO_COM_MEU_MORZAO)SDL_dummysensor_amanda_x86.o          \
+	$(APRENDENDO_COM_MEU_MORZAO)SDL_sensor_amanda_x86.o $(APRENDENDO_COM_MEU_MORZAO)SDL_getenv_amanda_x86.o $(APRENDENDO_COM_MEU_MORZAO)SDL_iconv_amanda_x86.o $(APRENDENDO_COM_MEU_MORZAO)SDL_kkkkk_malloc_amanda_x86.o $(APRENDENDO_COM_MEU_MORZAO)SDL_qsort_amanda_x86.o $(APRENDENDO_COM_MEU_MORZAO)SDL_stdlib_amanda_x86.o $(APRENDENDO_COM_MEU_MORZAO)SDL_string_amanda_x86.o  \
+	$(APRENDENDO_COM_MEU_MORZAO)SDL_strtokr_amanda_x86.o $(APRENDENDO_COM_MEU_MORZAO)SDL_syscond_amanda_x86.o $(APRENDENDO_COM_MEU_MORZAO)SDL_thread_amanda_x86.o $(APRENDENDO_COM_MEU_MORZAO)SDL_sysmutex_amanda_x86.o $(APRENDENDO_COM_MEU_MORZAO)SDL_syssem_amanda_x86.o $(APRENDENDO_COM_MEU_MORZAO)SDL_systhread_amanda_x86.o            \
+	$(APRENDENDO_COM_MEU_MORZAO)SDL_systls_amanda_x86.o $(APRENDENDO_COM_MEU_MORZAO)SDL_timer_amanda_x86.o $(APRENDENDO_COM_MEU_MORZAO)SDL_systimer_amanda_x86.o $(APRENDENDO_COM_MEU_MORZAO)SDL_nullevents_amanda_x86.o $(APRENDENDO_COM_MEU_MORZAO)SDL_nullframebuffer_amanda_x86.o $(APRENDENDO_COM_MEU_MORZAO)SDL_nullvideo_amanda_x86.o  \
+	$(APRENDENDO_COM_MEU_MORZAO)SDL_blit_amanda_x86.o $(APRENDENDO_COM_MEU_MORZAO)SDL_blit_0_amanda_x86.o $(APRENDENDO_COM_MEU_MORZAO)SDL_blit_1_amanda_x86.o $(APRENDENDO_COM_MEU_MORZAO)SDL_blit_A_amanda_x86.o $(APRENDENDO_COM_MEU_MORZAO)SDL_blit_auto_amanda_x86.o $(APRENDENDO_COM_MEU_MORZAO)SDL_blit_copy_amanda_x86.o $(APRENDENDO_COM_MEU_MORZAO)SDL_blit_N_amanda_x86.o  \
+	$(APRENDENDO_COM_MEU_MORZAO)SDL_blit_slow_amanda_x86.o $(APRENDENDO_COM_MEU_MORZAO)SDL_bmp_amanda_x86.o $(APRENDENDO_COM_MEU_MORZAO)SDL_clipboard_amanda_x86.o $(APRENDENDO_COM_MEU_MORZAO)SDL_egl_amanda_x86.o $(APRENDENDO_COM_MEU_MORZAO)SDL_fillrect_amanda_x86.o $(APRENDENDO_COM_MEU_MORZAO)SDL_pixels_amanda_x86.o $(APRENDENDO_COM_MEU_MORZAO)SDL_rect_amanda_x86.o      \
+	$(APRENDENDO_COM_MEU_MORZAO)SDL_RLEaccel_amanda_x86.o $(APRENDENDO_COM_MEU_MORZAO)SDL_shape_amanda_x86.o $(APRENDENDO_COM_MEU_MORZAO)SDL_stretch_amanda_x86.o $(APRENDENDO_COM_MEU_MORZAO)SDL_surface_amanda_x86.o $(APRENDENDO_COM_MEU_MORZAO)SDL_video_amanda_x86.o $(APRENDENDO_COM_MEU_MORZAO)SDL_vulkan_utils_amanda_x86.o           \
+	$(APRENDENDO_COM_MEU_MORZAO)SDL_yuv_amanda_x86.o $(APRENDENDO_COM_MEU_MORZAO)SDL_windowsclipboard_amanda_x86.o $(APRENDENDO_COM_MEU_MORZAO)SDL_windowsevents_amanda_x86.o $(APRENDENDO_COM_MEU_MORZAO)SDL_windowsframebuffer_amanda_x86.o                   \
+	$(APRENDENDO_COM_MEU_MORZAO)SDL_windowskeyboard_amanda_x86.o $(APRENDENDO_COM_MEU_MORZAO)SDL_windowsmessagebox_amanda_x86.o $(APRENDENDO_COM_MEU_MORZAO)SDL_windowsmodes_amanda_x86.o $(APRENDENDO_COM_MEU_MORZAO)SDL_windowsmouse_amanda_x86.o             \
+	$(APRENDENDO_COM_MEU_MORZAO)SDL_windowsopengl_amanda_x86.o $(APRENDENDO_COM_MEU_MORZAO)SDL_windowsopengles_amanda_x86.o $(APRENDENDO_COM_MEU_MORZAO)SDL_windowsshape_amanda_x86.o   $(APRENDENDO_COM_MEU_MORZAO)SDL_windowsvideo_amanda_x86.o             \
+	$(APRENDENDO_COM_MEU_MORZAO)SDL_windowsvulkan_amanda_x86.o   $(APRENDENDO_COM_MEU_MORZAO)SDL_windowswindow_amanda_x86.o   $(APRENDENDO_COM_MEU_MORZAO)yuv_rgb_amanda_x86.o $(APRENDENDO_COM_MEU_MORZAO)dprintf_kp_amanda_x86.o
+
+	/bw_tmp/amandaricardo_mvbuild26_33.exe ./amanda_file_counter_32.ini versio_n.ama.rc version_ricardo_mislaine_final_2_.rc aline_definitive_header_2_.h "64 bits" mod_sdl2_2_0_12_kp.dll increase
+
+	i686-w64-mingw32-windres -O coff -o $(APRENDENDO_COM_MEU_MORZAO)version64_amanda_x86.o version_ricardo_mislaine_final_2_.rc
+
+	i686-w64-mingw32-gcc.exe -mdll -o $(APRENDENDO_COM_MEU_MORZAO)mod_sdl2_2_0_12_kp.dll $(APRENDENDO_COM_MEU_MORZAO)SDL_atomic_amanda_x86.o $(APRENDENDO_COM_MEU_MORZAO)SDL_spinlock_amanda_x86.o          \
+	$(APRENDENDO_COM_MEU_MORZAO)SDL_directsound_amanda_x86.o $(APRENDENDO_COM_MEU_MORZAO)SDL_diskaudio_amanda_x86.o $(APRENDENDO_COM_MEU_MORZAO)SDL_dummyaudio_amanda_x86.o $(APRENDENDO_COM_MEU_MORZAO)SDL_audio_amanda_x86.o                                  \
+	$(APRENDENDO_COM_MEU_MORZAO)SDL_audiocvt_amanda_x86.o $(APRENDENDO_COM_MEU_MORZAO)SDL_audiodev_amanda_x86.o $(APRENDENDO_COM_MEU_MORZAO)SDL_audiotypecvt_amanda_x86.o $(APRENDENDO_COM_MEU_MORZAO)SDL_mixer_amanda_x86.o $(APRENDENDO_COM_MEU_MORZAO)SDL_wave_amanda_x86.o $(APRENDENDO_COM_MEU_MORZAO)SDL_winmm_amanda_x86.o             \
+	$(APRENDENDO_COM_MEU_MORZAO)SDL_wasapi_amanda_x86.o $(APRENDENDO_COM_MEU_MORZAO)SDL_wasapi_win32_amanda_x86.o $(APRENDENDO_COM_MEU_MORZAO)SDL_windows_amanda_x86.o $(APRENDENDO_COM_MEU_MORZAO)SDL_xinput_amanda_x86.o $(APRENDENDO_COM_MEU_MORZAO)SDL_cpuinfo_amanda_x86.o $(APRENDENDO_COM_MEU_MORZAO)SDL_dynapi_amanda_x86.o           \
+	$(APRENDENDO_COM_MEU_MORZAO)SDL_clipboardevents_amanda_x86.o $(APRENDENDO_COM_MEU_MORZAO)SDL_displayevents_amanda_x86.o $(APRENDENDO_COM_MEU_MORZAO)SDL_dropevents_amanda_x86.o $(APRENDENDO_COM_MEU_MORZAO)SDL_events_amanda_x86.o $(APRENDENDO_COM_MEU_MORZAO)SDL_gesture_amanda_x86.o           \
+	$(APRENDENDO_COM_MEU_MORZAO)SDL_keyboard_amanda_x86.o $(APRENDENDO_COM_MEU_MORZAO)SDL_mouse_amanda_x86.o $(APRENDENDO_COM_MEU_MORZAO)SDL_quit_amanda_x86.o $(APRENDENDO_COM_MEU_MORZAO)SDL_touch_amanda_x86.o $(APRENDENDO_COM_MEU_MORZAO)SDL_windowevents_amanda_x86.o $(APRENDENDO_COM_MEU_MORZAO)SDL_rwops_amanda_x86.o                \
+	$(APRENDENDO_COM_MEU_MORZAO)SDL_sysfilesystem_amanda_x86.o $(APRENDENDO_COM_MEU_MORZAO)SDL_haptic_amanda_x86.o $(APRENDENDO_COM_MEU_MORZAO)SDL_dinputhaptic_amanda_x86.o $(APRENDENDO_COM_MEU_MORZAO)SDL_windowshaptic_amanda_x86.o $(APRENDENDO_COM_MEU_MORZAO)SDL_xinputhaptic_amanda_x86.o      \
+	$(APRENDENDO_COM_MEU_MORZAO)hid_amanda_x86.o $(APRENDENDO_COM_MEU_MORZAO)SDL_hidapijoystick_amanda_x86.o $(APRENDENDO_COM_MEU_MORZAO)SDL_hidapi_gamecube_amanda_x86.o $(APRENDENDO_COM_MEU_MORZAO)SDL_hidapi_ps4_amanda_x86.o $(APRENDENDO_COM_MEU_MORZAO)SDL_hidapi_rumble_amanda_x86.o           \
+	$(APRENDENDO_COM_MEU_MORZAO)SDL_hidapi_switch_amanda_x86.o $(APRENDENDO_COM_MEU_MORZAO)SDL_hidapi_xbox360_amanda_x86.o $(APRENDENDO_COM_MEU_MORZAO)SDL_hidapi_xbox360w_amanda_x86.o $(APRENDENDO_COM_MEU_MORZAO)SDL_hidapi_xboxone_amanda_x86.o             \
+	$(APRENDENDO_COM_MEU_MORZAO)SDL_gamecontroller_amanda_x86.o $(APRENDENDO_COM_MEU_MORZAO)SDL_joystick_amanda_x86.o $(APRENDENDO_COM_MEU_MORZAO)SDL_dinputjoystick_amanda_x86.o $(APRENDENDO_COM_MEU_MORZAO)SDL_mmjoystick_amanda_x86.o $(APRENDENDO_COM_MEU_MORZAO)SDL_windowsjoystick_amanda_x86.o \
+	$(APRENDENDO_COM_MEU_MORZAO)SDL_xinputjoystick_amanda_x86.o $(APRENDENDO_COM_MEU_MORZAO)e_atan2_amanda_x86.o $(APRENDENDO_COM_MEU_MORZAO)e_exp_amanda_x86.o $(APRENDENDO_COM_MEU_MORZAO)e_fmod_amanda_x86.o $(APRENDENDO_COM_MEU_MORZAO)e_log_amanda_x86.o $(APRENDENDO_COM_MEU_MORZAO)e_log10_amanda_x86.o $(APRENDENDO_COM_MEU_MORZAO)e_pow_amanda_x86.o $(APRENDENDO_COM_MEU_MORZAO)e_rem_pio2_amanda_x86.o          \
+	$(APRENDENDO_COM_MEU_MORZAO)e_sqrt_amanda_x86.o $(APRENDENDO_COM_MEU_MORZAO)k_cos_amanda_x86.o $(APRENDENDO_COM_MEU_MORZAO)k_rem_pio2_amanda_x86.o $(APRENDENDO_COM_MEU_MORZAO)k_sin_amanda_x86.o $(APRENDENDO_COM_MEU_MORZAO)kkk_tan_amanda_x86.o $(APRENDENDO_COM_MEU_MORZAO)s_atan_amanda_x86.o $(APRENDENDO_COM_MEU_MORZAO)s_copysign_amanda_x86.o $(APRENDENDO_COM_MEU_MORZAO)s_cos_amanda_x86.o $(APRENDENDO_COM_MEU_MORZAO)s_fabs_amanda_x86.o          \
+	$(APRENDENDO_COM_MEU_MORZAO)s_floor_amanda_x86.o $(APRENDENDO_COM_MEU_MORZAO)s_scalbn_amanda_x86.o $(APRENDENDO_COM_MEU_MORZAO)s_sin_amanda_x86.o $(APRENDENDO_COM_MEU_MORZAO)s_tan_amanda_x86.o $(APRENDENDO_COM_MEU_MORZAO)SDL_sysloadso_amanda_x86.o $(APRENDENDO_COM_MEU_MORZAO)SDL_power_amanda_x86.o $(APRENDENDO_COM_MEU_MORZAO)SDL_syspower_amanda_x86.o                 \
+	$(APRENDENDO_COM_MEU_MORZAO)SDL_shaders_d3d11_amanda_x86.o \
+	\
+	\
+	\
+	\
+	$(APRENDENDO_COM_MEU_MORZAO)SDL_render_d3d_amanda_x86.o \
+	\
+	\
+	\
+	\
+	$(APRENDENDO_COM_MEU_MORZAO)SDL_render_d3d11_amanda_x86.o $(APRENDENDO_COM_MEU_MORZAO)SDL_shaders_d3d_amanda_x86.o $(APRENDENDO_COM_MEU_MORZAO)SDL_render_gl_amanda_x86.o $(APRENDENDO_COM_MEU_MORZAO)SDL_shaders_gl_amanda_x86.o \
+	\
+	\
+	\
+	\
+	\
+	$(APRENDENDO_COM_MEU_MORZAO)SDL_render_gles2_amanda_x86.o \
+	\
+	\
+	\
+	\
+	\
+	$(APRENDENDO_COM_MEU_MORZAO)SDL_shaders_gles2_amanda_x86.o $(APRENDENDO_COM_MEU_MORZAO)SDL_d3dmath_amanda_x86.o $(APRENDENDO_COM_MEU_MORZAO)SDL_render_amanda_x86.o $(APRENDENDO_COM_MEU_MORZAO)SDL_yuv_sw_amanda_x86.o $(APRENDENDO_COM_MEU_MORZAO)SDL_blendfillrect_amanda_x86.o                 \
+	$(APRENDENDO_COM_MEU_MORZAO)SDL_blendline_amanda_x86.o $(APRENDENDO_COM_MEU_MORZAO)SDL_blendpoint_amanda_x86.o  $(APRENDENDO_COM_MEU_MORZAO)SDL_drawline_amanda_x86.o $(APRENDENDO_COM_MEU_MORZAO)SDL_drawpoint_amanda_x86.o $(APRENDENDO_COM_MEU_MORZAO)SDL_render_sw_amanda_x86.o $(APRENDENDO_COM_MEU_MORZAO)SDL_rotate_amanda_x86.o   \
+	$(APRENDENDO_COM_MEU_MORZAO)SDL_amanda_x86.o $(APRENDENDO_COM_MEU_MORZAO)SDL_assert_amanda_x86.o $(APRENDENDO_COM_MEU_MORZAO)SDL_dataqueue_amanda_x86.o $(APRENDENDO_COM_MEU_MORZAO)SDL_error_amanda_x86.o $(APRENDENDO_COM_MEU_MORZAO)SDL_hints_amanda_x86.o $(APRENDENDO_COM_MEU_MORZAO)SDL_log_amanda_x86.o $(APRENDENDO_COM_MEU_MORZAO)SDL_dummysensor_amanda_x86.o          \
+	$(APRENDENDO_COM_MEU_MORZAO)SDL_sensor_amanda_x86.o $(APRENDENDO_COM_MEU_MORZAO)SDL_getenv_amanda_x86.o $(APRENDENDO_COM_MEU_MORZAO)SDL_iconv_amanda_x86.o $(APRENDENDO_COM_MEU_MORZAO)SDL_kkkkk_malloc_amanda_x86.o $(APRENDENDO_COM_MEU_MORZAO)SDL_qsort_amanda_x86.o $(APRENDENDO_COM_MEU_MORZAO)SDL_stdlib_amanda_x86.o $(APRENDENDO_COM_MEU_MORZAO)SDL_string_amanda_x86.o  \
+	$(APRENDENDO_COM_MEU_MORZAO)SDL_strtokr_amanda_x86.o $(APRENDENDO_COM_MEU_MORZAO)SDL_syscond_amanda_x86.o $(APRENDENDO_COM_MEU_MORZAO)SDL_thread_amanda_x86.o $(APRENDENDO_COM_MEU_MORZAO)SDL_sysmutex_amanda_x86.o $(APRENDENDO_COM_MEU_MORZAO)SDL_syssem_amanda_x86.o $(APRENDENDO_COM_MEU_MORZAO)SDL_systhread_amanda_x86.o            \
+	$(APRENDENDO_COM_MEU_MORZAO)SDL_systls_amanda_x86.o $(APRENDENDO_COM_MEU_MORZAO)SDL_timer_amanda_x86.o $(APRENDENDO_COM_MEU_MORZAO)SDL_systimer_amanda_x86.o $(APRENDENDO_COM_MEU_MORZAO)SDL_nullevents_amanda_x86.o $(APRENDENDO_COM_MEU_MORZAO)SDL_nullframebuffer_amanda_x86.o $(APRENDENDO_COM_MEU_MORZAO)SDL_nullvideo_amanda_x86.o  \
+	$(APRENDENDO_COM_MEU_MORZAO)SDL_blit_amanda_x86.o $(APRENDENDO_COM_MEU_MORZAO)SDL_blit_0_amanda_x86.o $(APRENDENDO_COM_MEU_MORZAO)SDL_blit_1_amanda_x86.o $(APRENDENDO_COM_MEU_MORZAO)SDL_blit_A_amanda_x86.o $(APRENDENDO_COM_MEU_MORZAO)SDL_blit_auto_amanda_x86.o $(APRENDENDO_COM_MEU_MORZAO)SDL_blit_copy_amanda_x86.o $(APRENDENDO_COM_MEU_MORZAO)SDL_blit_N_amanda_x86.o  \
+	$(APRENDENDO_COM_MEU_MORZAO)SDL_blit_slow_amanda_x86.o $(APRENDENDO_COM_MEU_MORZAO)SDL_bmp_amanda_x86.o $(APRENDENDO_COM_MEU_MORZAO)SDL_clipboard_amanda_x86.o $(APRENDENDO_COM_MEU_MORZAO)SDL_egl_amanda_x86.o $(APRENDENDO_COM_MEU_MORZAO)SDL_fillrect_amanda_x86.o $(APRENDENDO_COM_MEU_MORZAO)SDL_pixels_amanda_x86.o $(APRENDENDO_COM_MEU_MORZAO)SDL_rect_amanda_x86.o      \
+	$(APRENDENDO_COM_MEU_MORZAO)SDL_RLEaccel_amanda_x86.o $(APRENDENDO_COM_MEU_MORZAO)SDL_shape_amanda_x86.o $(APRENDENDO_COM_MEU_MORZAO)SDL_stretch_amanda_x86.o $(APRENDENDO_COM_MEU_MORZAO)SDL_surface_amanda_x86.o $(APRENDENDO_COM_MEU_MORZAO)SDL_video_amanda_x86.o $(APRENDENDO_COM_MEU_MORZAO)SDL_vulkan_utils_amanda_x86.o           \
+	$(APRENDENDO_COM_MEU_MORZAO)SDL_yuv_amanda_x86.o $(APRENDENDO_COM_MEU_MORZAO)SDL_windowsclipboard_amanda_x86.o $(APRENDENDO_COM_MEU_MORZAO)SDL_windowsevents_amanda_x86.o $(APRENDENDO_COM_MEU_MORZAO)SDL_windowsframebuffer_amanda_x86.o                   \
+	$(APRENDENDO_COM_MEU_MORZAO)SDL_windowskeyboard_amanda_x86.o $(APRENDENDO_COM_MEU_MORZAO)SDL_windowsmessagebox_amanda_x86.o $(APRENDENDO_COM_MEU_MORZAO)SDL_windowsmodes_amanda_x86.o $(APRENDENDO_COM_MEU_MORZAO)SDL_windowsmouse_amanda_x86.o             \
+	$(APRENDENDO_COM_MEU_MORZAO)SDL_windowsopengl_amanda_x86.o $(APRENDENDO_COM_MEU_MORZAO)SDL_windowsopengles_amanda_x86.o $(APRENDENDO_COM_MEU_MORZAO)SDL_windowsshape_amanda_x86.o $(APRENDENDO_COM_MEU_MORZAO)SDL_windowsvideo_amanda_x86.o             \
+	$(APRENDENDO_COM_MEU_MORZAO)SDL_windowsvulkan_amanda_x86.o $(APRENDENDO_COM_MEU_MORZAO)SDL_windowswindow_amanda_x86.o $(APRENDENDO_COM_MEU_MORZAO)yuv_rgb_amanda_x86.o $(APRENDENDO_COM_MEU_MORZAO)version64_amanda_x86.o $(APRENDENDO_COM_MEU_MORZAO)dprintf_kp_amanda_x86.o -ldxguid        \
+	-ldinput -lddraw -lwinmm -lGdi32 -lole32 -lsetupapi -lhid -limm32 -lversion -loleaut32 amanda.def
+
+	(cd /bw_tmp/sdl_2.0/ && cp --preserve=timestamps *.dll /bin_amanda_x86/mp3dll)
+
+#unc77.bat ../../src/video/SDL_video.c
+#unc77.bat ../../src/video/windows/SDL_windowswindow.c
+$(APRENDENDO_COM_MEU_MORZAO)dprintf_kp_amanda_x86.o: dprintf_kp.c
+	i686-w64-mingw32-gcc.exe -c $(AMANDA_FLAGS__) dprintf_kp.c -o $(APRENDENDO_COM_MEU_MORZAO)dprintf_kp_amanda_x86.o
+$(APRENDENDO_COM_MEU_MORZAO)SDL_atomic_amanda_x86.o: ../../src/atomic/SDL_atomic.c
+	i686-w64-mingw32-gcc.exe -c $(AMANDA_FLAGS__) -I "../../include" "../../src/atomic/SDL_atomic.c" -o $(APRENDENDO_COM_MEU_MORZAO)SDL_atomic_amanda_x86.o
+
+$(APRENDENDO_COM_MEU_MORZAO)SDL_spinlock_amanda_x86.o: ../../src/atomic/SDL_spinlock.c
+	i686-w64-mingw32-gcc.exe -c $(AMANDA_FLAGS__) -I "../../include" "../../src/atomic/SDL_spinlock.c" -o $(APRENDENDO_COM_MEU_MORZAO)SDL_spinlock_amanda_x86.o
+
+$(APRENDENDO_COM_MEU_MORZAO)SDL_directsound_amanda_x86.o: ../../src/audio/directsound/SDL_directsound.c
+	i686-w64-mingw32-gcc.exe -c $(AMANDA_FLAGS__) -I "../../include" "../../src/audio/directsound/SDL_directsound.c" -o $(APRENDENDO_COM_MEU_MORZAO)SDL_directsound_amanda_x86.o
+
+$(APRENDENDO_COM_MEU_MORZAO)SDL_diskaudio_amanda_x86.o: ../../src/audio/disk/SDL_diskaudio.c
+	i686-w64-mingw32-gcc.exe -c $(AMANDA_FLAGS__) -I "../../include" "../../src/audio/disk/SDL_diskaudio.c" -o $(APRENDENDO_COM_MEU_MORZAO)SDL_diskaudio_amanda_x86.o
+
+$(APRENDENDO_COM_MEU_MORZAO)SDL_dummyaudio_amanda_x86.o: ../../src/audio/dummy/SDL_dummyaudio.c
+	i686-w64-mingw32-gcc.exe -c $(AMANDA_FLAGS__) -I "../../include" "../../src/audio/dummy/SDL_dummyaudio.c" -o $(APRENDENDO_COM_MEU_MORZAO)SDL_dummyaudio_amanda_x86.o
+
+$(APRENDENDO_COM_MEU_MORZAO)SDL_audio_amanda_x86.o: ../../src/audio/SDL_audio.c
+	i686-w64-mingw32-gcc.exe -c $(AMANDA_FLAGS__) -I "../../include" "../../src/audio/SDL_audio.c" -o $(APRENDENDO_COM_MEU_MORZAO)SDL_audio_amanda_x86.o
+
+$(APRENDENDO_COM_MEU_MORZAO)SDL_audiocvt_amanda_x86.o: ../../src/audio/SDL_audiocvt.c
+	i686-w64-mingw32-gcc.exe -c $(AMANDA_FLAGS__) -I "../../include" "../../src/audio/SDL_audiocvt.c" -o $(APRENDENDO_COM_MEU_MORZAO)SDL_audiocvt_amanda_x86.o
+
+$(APRENDENDO_COM_MEU_MORZAO)SDL_audiodev_amanda_x86.o: ../../src/audio/SDL_audiodev.c
+	i686-w64-mingw32-gcc.exe -c $(AMANDA_FLAGS__) -I "../../include" "../../src/audio/SDL_audiodev.c" -o $(APRENDENDO_COM_MEU_MORZAO)SDL_audiodev_amanda_x86.o
+
+$(APRENDENDO_COM_MEU_MORZAO)SDL_audiotypecvt_amanda_x86.o: ../../src/audio/SDL_audiotypecvt.c
+	i686-w64-mingw32-gcc.exe -c $(AMANDA_FLAGS__) -I "../../include" "../../src/audio/SDL_audiotypecvt.c" -o $(APRENDENDO_COM_MEU_MORZAO)SDL_audiotypecvt_amanda_x86.o
+
+$(APRENDENDO_COM_MEU_MORZAO)SDL_mixer_amanda_x86.o: ../../src/audio/SDL_mixer.c
+	i686-w64-mingw32-gcc.exe -c $(AMANDA_FLAGS__) -I "../../include" "../../src/audio/SDL_mixer.c" -o $(APRENDENDO_COM_MEU_MORZAO)SDL_mixer_amanda_x86.o
+
+$(APRENDENDO_COM_MEU_MORZAO)SDL_wave_amanda_x86.o: ../../src/audio/SDL_wave.c
+	i686-w64-mingw32-gcc.exe -c $(AMANDA_FLAGS__) -I "../../include" "../../src/audio/SDL_wave.c" -o $(APRENDENDO_COM_MEU_MORZAO)SDL_wave_amanda_x86.o
+
+$(APRENDENDO_COM_MEU_MORZAO)SDL_winmm_amanda_x86.o: ../../src/audio/winmm/SDL_winmm.c
+	i686-w64-mingw32-gcc.exe -c $(AMANDA_FLAGS__) -I "../../include" "../../src/audio/winmm/SDL_winmm.c" -o $(APRENDENDO_COM_MEU_MORZAO)SDL_winmm_amanda_x86.o
+
+$(APRENDENDO_COM_MEU_MORZAO)SDL_wasapi_amanda_x86.o: ../../src/audio/wasapi/SDL_wasapi.c
+	i686-w64-mingw32-gcc.exe -c $(AMANDA_FLAGS__) -I "../../include" "../../src/audio/wasapi/SDL_wasapi.c" -o $(APRENDENDO_COM_MEU_MORZAO)SDL_wasapi_amanda_x86.o
+
+$(APRENDENDO_COM_MEU_MORZAO)SDL_wasapi_win32_amanda_x86.o: ../../src/audio/wasapi/SDL_wasapi_win32.c
+	i686-w64-mingw32-gcc.exe -c $(AMANDA_FLAGS__) -I "../../include" "../../src/audio/wasapi/SDL_wasapi_win32.c" -o $(APRENDENDO_COM_MEU_MORZAO)SDL_wasapi_win32_amanda_x86.o
+
+$(APRENDENDO_COM_MEU_MORZAO)SDL_windows_amanda_x86.o: ../../src/core/windows/SDL_windows.c
+	i686-w64-mingw32-gcc.exe -c $(AMANDA_FLAGS__) -I "../../include" "../../src/core/windows/SDL_windows.c" -o $(APRENDENDO_COM_MEU_MORZAO)SDL_windows_amanda_x86.o
+
+$(APRENDENDO_COM_MEU_MORZAO)SDL_xinput_amanda_x86.o: ../../src/core/windows/SDL_xinput.c
+	i686-w64-mingw32-gcc.exe -c $(AMANDA_FLAGS__) -I "../../include" "../../src/core/windows/SDL_xinput.c" -o $(APRENDENDO_COM_MEU_MORZAO)SDL_xinput_amanda_x86.o
+
+$(APRENDENDO_COM_MEU_MORZAO)SDL_cpuinfo_amanda_x86.o: ../../src/cpuinfo/SDL_cpuinfo.c
+	i686-w64-mingw32-gcc.exe -c $(AMANDA_FLAGS__) -I "../../include" "../../src/cpuinfo/SDL_cpuinfo.c" -o $(APRENDENDO_COM_MEU_MORZAO)SDL_cpuinfo_amanda_x86.o
+
+$(APRENDENDO_COM_MEU_MORZAO)SDL_dynapi_amanda_x86.o: ../../src/dynapi/SDL_dynapi.c
+	i686-w64-mingw32-gcc.exe -c $(AMANDA_FLAGS__) -I "../../include" "../../src/dynapi/SDL_dynapi.c" -o $(APRENDENDO_COM_MEU_MORZAO)SDL_dynapi_amanda_x86.o
+
+$(APRENDENDO_COM_MEU_MORZAO)SDL_clipboardevents_amanda_x86.o: ../../src/events/SDL_clipboardevents.c
+	i686-w64-mingw32-gcc.exe -c $(AMANDA_FLAGS__) -I "../../include" "../../src/events/SDL_clipboardevents.c" -o $(APRENDENDO_COM_MEU_MORZAO)SDL_clipboardevents_amanda_x86.o
+
+$(APRENDENDO_COM_MEU_MORZAO)SDL_displayevents_amanda_x86.o: ../../src/events/SDL_displayevents.c
+	i686-w64-mingw32-gcc.exe -c $(AMANDA_FLAGS__) -I "../../include" "../../src/events/SDL_displayevents.c" -o $(APRENDENDO_COM_MEU_MORZAO)SDL_displayevents_amanda_x86.o
+
+$(APRENDENDO_COM_MEU_MORZAO)SDL_dropevents_amanda_x86.o: ../../src/events/SDL_dropevents.c
+	i686-w64-mingw32-gcc.exe -c $(AMANDA_FLAGS__) -I "../../include" "../../src/events/SDL_dropevents.c" -o $(APRENDENDO_COM_MEU_MORZAO)SDL_dropevents_amanda_x86.o
+
+$(APRENDENDO_COM_MEU_MORZAO)SDL_events_amanda_x86.o: ../../src/events/SDL_events.c
+	i686-w64-mingw32-gcc.exe -c $(AMANDA_FLAGS__) -I "../../include" "../../src/events/SDL_events.c" -o $(APRENDENDO_COM_MEU_MORZAO)SDL_events_amanda_x86.o
+
+$(APRENDENDO_COM_MEU_MORZAO)SDL_gesture_amanda_x86.o: ../../src/events/SDL_gesture.c
+	i686-w64-mingw32-gcc.exe -c $(AMANDA_FLAGS__) -I "../../include" "../../src/events/SDL_gesture.c" -o $(APRENDENDO_COM_MEU_MORZAO)SDL_gesture_amanda_x86.o
+
+$(APRENDENDO_COM_MEU_MORZAO)SDL_keyboard_amanda_x86.o: ../../src/events/SDL_keyboard.c
+	i686-w64-mingw32-gcc.exe -c $(AMANDA_FLAGS__) -I "../../include" "../../src/events/SDL_keyboard.c" -o $(APRENDENDO_COM_MEU_MORZAO)SDL_keyboard_amanda_x86.o
+
+$(APRENDENDO_COM_MEU_MORZAO)SDL_mouse_amanda_x86.o: ../../src/events/SDL_mouse.c
+	i686-w64-mingw32-gcc.exe -c $(AMANDA_FLAGS__) -I "../../include" "../../src/events/SDL_mouse.c" -o $(APRENDENDO_COM_MEU_MORZAO)SDL_mouse_amanda_x86.o
+
+$(APRENDENDO_COM_MEU_MORZAO)SDL_quit_amanda_x86.o: ../../src/events/SDL_quit.c
+	i686-w64-mingw32-gcc.exe -c $(AMANDA_FLAGS__) -I "../../include" "../../src/events/SDL_quit.c" -o $(APRENDENDO_COM_MEU_MORZAO)SDL_quit_amanda_x86.o
+
+$(APRENDENDO_COM_MEU_MORZAO)SDL_touch_amanda_x86.o: ../../src/events/SDL_touch.c
+	i686-w64-mingw32-gcc.exe -c $(AMANDA_FLAGS__) -I "../../include" "../../src/events/SDL_touch.c" -o $(APRENDENDO_COM_MEU_MORZAO)SDL_touch_amanda_x86.o
+
+$(APRENDENDO_COM_MEU_MORZAO)SDL_windowevents_amanda_x86.o: ../../src/events/SDL_windowevents.c
+	i686-w64-mingw32-gcc.exe -c $(AMANDA_FLAGS__) -I "../../include" "../../src/events/SDL_windowevents.c" -o $(APRENDENDO_COM_MEU_MORZAO)SDL_windowevents_amanda_x86.o
+
+$(APRENDENDO_COM_MEU_MORZAO)SDL_rwops_amanda_x86.o: ../../src/file/SDL_rwops.c
+	i686-w64-mingw32-gcc.exe -c $(AMANDA_FLAGS__) -I "../../include" "../../src/file/SDL_rwops.c" -o $(APRENDENDO_COM_MEU_MORZAO)SDL_rwops_amanda_x86.o
+
+$(APRENDENDO_COM_MEU_MORZAO)SDL_sysfilesystem_amanda_x86.o: ../../src/filesystem/windows/SDL_sysfilesystem.c
+	i686-w64-mingw32-gcc.exe -c $(AMANDA_FLAGS__) -I "../../include" "../../src/filesystem/windows/SDL_sysfilesystem.c" -o $(APRENDENDO_COM_MEU_MORZAO)SDL_sysfilesystem_amanda_x86.o
+
+$(APRENDENDO_COM_MEU_MORZAO)SDL_haptic_amanda_x86.o: ../../src/haptic/SDL_haptic.c
+	i686-w64-mingw32-gcc.exe -c $(AMANDA_FLAGS__) -I "../../include" "../../src/haptic/SDL_haptic.c" -o $(APRENDENDO_COM_MEU_MORZAO)SDL_haptic_amanda_x86.o
+
+$(APRENDENDO_COM_MEU_MORZAO)SDL_dinputhaptic_amanda_x86.o: ../../src/haptic/windows/SDL_dinputhaptic.c
+	i686-w64-mingw32-gcc.exe -c $(AMANDA_FLAGS__) -I "../../include" "../../src/haptic/windows/SDL_dinputhaptic.c" -o $(APRENDENDO_COM_MEU_MORZAO)SDL_dinputhaptic_amanda_x86.o
+
+$(APRENDENDO_COM_MEU_MORZAO)SDL_windowshaptic_amanda_x86.o: ../../src/haptic/windows/SDL_windowshaptic.c
+	i686-w64-mingw32-gcc.exe -c $(AMANDA_FLAGS__) -I "../../include" "../../src/haptic/windows/SDL_windowshaptic.c" -o $(APRENDENDO_COM_MEU_MORZAO)SDL_windowshaptic_amanda_x86.o
+
+$(APRENDENDO_COM_MEU_MORZAO)SDL_xinputhaptic_amanda_x86.o: ../../src/haptic/windows/SDL_xinputhaptic.c
+	i686-w64-mingw32-gcc.exe -c $(AMANDA_FLAGS__) -I "../../include" "../../src/haptic/windows/SDL_xinputhaptic.c" -o $(APRENDENDO_COM_MEU_MORZAO)SDL_xinputhaptic_amanda_x86.o
+
+$(APRENDENDO_COM_MEU_MORZAO)hid_amanda_x86.o: ../../src/hidapi/windows/hid.c
+	i686-w64-mingw32-gcc.exe -c $(AMANDA_FLAGS__) -I "../../include" "../../src/hidapi/windows/hid.c" -o $(APRENDENDO_COM_MEU_MORZAO)hid_amanda_x86.o
+
+$(APRENDENDO_COM_MEU_MORZAO)SDL_hidapijoystick_amanda_x86.o: ../../src/joystick/hidapi/SDL_hidapijoystick.c
+	i686-w64-mingw32-gcc.exe -c $(AMANDA_FLAGS__) -I "../../include" "../../src/joystick/hidapi/SDL_hidapijoystick.c" -o $(APRENDENDO_COM_MEU_MORZAO)SDL_hidapijoystick_amanda_x86.o
+
+$(APRENDENDO_COM_MEU_MORZAO)SDL_hidapi_gamecube_amanda_x86.o: ../../src/joystick/hidapi/SDL_hidapi_gamecube.c
+	i686-w64-mingw32-gcc.exe -c $(AMANDA_FLAGS__) -I "../../include" "../../src/joystick/hidapi/SDL_hidapi_gamecube.c" -o $(APRENDENDO_COM_MEU_MORZAO)SDL_hidapi_gamecube_amanda_x86.o
+
+$(APRENDENDO_COM_MEU_MORZAO)SDL_hidapi_ps4_amanda_x86.o: ../../src/joystick/hidapi/SDL_hidapi_ps4.c
+	i686-w64-mingw32-gcc.exe -c $(AMANDA_FLAGS__) -I "../../include" "../../src/joystick/hidapi/SDL_hidapi_ps4.c" -o $(APRENDENDO_COM_MEU_MORZAO)SDL_hidapi_ps4_amanda_x86.o
+
+$(APRENDENDO_COM_MEU_MORZAO)SDL_hidapi_rumble_amanda_x86.o: ../../src/joystick/hidapi/SDL_hidapi_rumble.c
+	i686-w64-mingw32-gcc.exe -c $(AMANDA_FLAGS__) -I "../../include" "../../src/joystick/hidapi/SDL_hidapi_rumble.c" -o $(APRENDENDO_COM_MEU_MORZAO)SDL_hidapi_rumble_amanda_x86.o
+
+$(APRENDENDO_COM_MEU_MORZAO)SDL_hidapi_switch_amanda_x86.o: ../../src/joystick/hidapi/SDL_hidapi_switch.c
+	i686-w64-mingw32-gcc.exe -c $(AMANDA_FLAGS__) -I "../../include" "../../src/joystick/hidapi/SDL_hidapi_switch.c" -o $(APRENDENDO_COM_MEU_MORZAO)SDL_hidapi_switch_amanda_x86.o
+
+$(APRENDENDO_COM_MEU_MORZAO)SDL_hidapi_xbox360_amanda_x86.o: ../../src/joystick/hidapi/SDL_hidapi_xbox360.c
+	i686-w64-mingw32-gcc.exe -c $(AMANDA_FLAGS__) -I "../../include" "../../src/joystick/hidapi/SDL_hidapi_xbox360.c" -o $(APRENDENDO_COM_MEU_MORZAO)SDL_hidapi_xbox360_amanda_x86.o
+
+$(APRENDENDO_COM_MEU_MORZAO)SDL_hidapi_xbox360w_amanda_x86.o: ../../src/joystick/hidapi/SDL_hidapi_xbox360w.c
+	i686-w64-mingw32-gcc.exe -c $(AMANDA_FLAGS__) -I "../../include" "../../src/joystick/hidapi/SDL_hidapi_xbox360w.c" -o $(APRENDENDO_COM_MEU_MORZAO)SDL_hidapi_xbox360w_amanda_x86.o
+
+$(APRENDENDO_COM_MEU_MORZAO)SDL_hidapi_xboxone_amanda_x86.o: ../../src/joystick/hidapi/SDL_hidapi_xboxone.c
+	i686-w64-mingw32-gcc.exe -c $(AMANDA_FLAGS__) -I "../../include" "../../src/joystick/hidapi/SDL_hidapi_xboxone.c" -o $(APRENDENDO_COM_MEU_MORZAO)SDL_hidapi_xboxone_amanda_x86.o
+
+$(APRENDENDO_COM_MEU_MORZAO)SDL_gamecontroller_amanda_x86.o: ../../src/joystick/SDL_gamecontroller.c
+	i686-w64-mingw32-gcc.exe -c $(AMANDA_FLAGS__) -I "../../include" "../../src/joystick/SDL_gamecontroller.c" -o $(APRENDENDO_COM_MEU_MORZAO)SDL_gamecontroller_amanda_x86.o
+
+$(APRENDENDO_COM_MEU_MORZAO)SDL_joystick_amanda_x86.o: ../../src/joystick/SDL_joystick.c
+	i686-w64-mingw32-gcc.exe -c $(AMANDA_FLAGS__) -I "../../include" "../../src/joystick/SDL_joystick.c" -o $(APRENDENDO_COM_MEU_MORZAO)SDL_joystick_amanda_x86.o
+
+$(APRENDENDO_COM_MEU_MORZAO)SDL_dinputjoystick_amanda_x86.o: ../../src/joystick/windows/SDL_dinputjoystick.c
+	i686-w64-mingw32-gcc.exe -c $(AMANDA_FLAGS__) -I "../../include" "../../src/joystick/windows/SDL_dinputjoystick.c" -o $(APRENDENDO_COM_MEU_MORZAO)SDL_dinputjoystick_amanda_x86.o
+
+$(APRENDENDO_COM_MEU_MORZAO)SDL_mmjoystick_amanda_x86.o: ../../src/joystick/windows/SDL_mmjoystick.c
+	i686-w64-mingw32-gcc.exe -c $(AMANDA_FLAGS__) -I "../../include" "../../src/joystick/windows/SDL_mmjoystick.c" -o $(APRENDENDO_COM_MEU_MORZAO)SDL_mmjoystick_amanda_x86.o
+
+$(APRENDENDO_COM_MEU_MORZAO)SDL_windowsjoystick_amanda_x86.o: ../../src/joystick/windows/SDL_windowsjoystick.c
+	i686-w64-mingw32-gcc.exe -c $(AMANDA_FLAGS__) -I "../../include" "../../src/joystick/windows/SDL_windowsjoystick.c" -o $(APRENDENDO_COM_MEU_MORZAO)SDL_windowsjoystick_amanda_x86.o
+
+$(APRENDENDO_COM_MEU_MORZAO)SDL_xinputjoystick_amanda_x86.o: ../../src/joystick/windows/SDL_xinputjoystick.c
+	i686-w64-mingw32-gcc.exe -c $(AMANDA_FLAGS__) -I "../../include" "../../src/joystick/windows/SDL_xinputjoystick.c" -o $(APRENDENDO_COM_MEU_MORZAO)SDL_xinputjoystick_amanda_x86.o
+
+$(APRENDENDO_COM_MEU_MORZAO)e_atan2_amanda_x86.o: ../../src/libm/e_atan2.c
+	i686-w64-mingw32-gcc.exe -c $(AMANDA_FLAGS__) -I "../../include" "../../src/libm/e_atan2.c" -o $(APRENDENDO_COM_MEU_MORZAO)e_atan2_amanda_x86.o
+
+$(APRENDENDO_COM_MEU_MORZAO)e_exp_amanda_x86.o: ../../src/libm/e_exp.c
+	i686-w64-mingw32-gcc.exe -c $(AMANDA_FLAGS__) -I "../../include" "../../src/libm/e_exp.c" -o $(APRENDENDO_COM_MEU_MORZAO)e_exp_amanda_x86.o
+
+$(APRENDENDO_COM_MEU_MORZAO)e_fmod_amanda_x86.o: ../../src/libm/e_fmod.c
+	i686-w64-mingw32-gcc.exe -c $(AMANDA_FLAGS__) -I "../../include" "../../src/libm/e_fmod.c" -o $(APRENDENDO_COM_MEU_MORZAO)e_fmod_amanda_x86.o
+
+$(APRENDENDO_COM_MEU_MORZAO)e_log_amanda_x86.o: ../../src/libm/e_log.c
+	i686-w64-mingw32-gcc.exe -c $(AMANDA_FLAGS__) -I "../../include" "../../src/libm/e_log.c" -o $(APRENDENDO_COM_MEU_MORZAO)e_log_amanda_x86.o
+
+$(APRENDENDO_COM_MEU_MORZAO)e_log10_amanda_x86.o: ../../src/libm/e_log10.c
+	i686-w64-mingw32-gcc.exe -c $(AMANDA_FLAGS__) -I "../../include" "../../src/libm/e_log10.c" -o $(APRENDENDO_COM_MEU_MORZAO)e_log10_amanda_x86.o
+
+$(APRENDENDO_COM_MEU_MORZAO)e_pow_amanda_x86.o: ../../src/libm/e_pow.c
+	i686-w64-mingw32-gcc.exe -c $(AMANDA_FLAGS__) -I "../../include" "../../src/libm/e_pow.c" -o $(APRENDENDO_COM_MEU_MORZAO)e_pow_amanda_x86.o
+
+$(APRENDENDO_COM_MEU_MORZAO)e_rem_pio2_amanda_x86.o: ../../src/libm/e_rem_pio2.c
+	i686-w64-mingw32-gcc.exe -c $(AMANDA_FLAGS__) -I "../../include" "../../src/libm/e_rem_pio2.c" -o $(APRENDENDO_COM_MEU_MORZAO)e_rem_pio2_amanda_x86.o
+
+$(APRENDENDO_COM_MEU_MORZAO)e_sqrt_amanda_x86.o: ../../src/libm/e_sqrt.c
+	i686-w64-mingw32-gcc.exe -c $(AMANDA_FLAGS__) -I "../../include" "../../src/libm/e_sqrt.c" -o $(APRENDENDO_COM_MEU_MORZAO)e_sqrt_amanda_x86.o
+
+$(APRENDENDO_COM_MEU_MORZAO)k_cos_amanda_x86.o: ../../src/libm/k_cos.c
+	i686-w64-mingw32-gcc.exe -c $(AMANDA_FLAGS__) -I "../../include" "../../src/libm/k_cos.c" -o $(APRENDENDO_COM_MEU_MORZAO)k_cos_amanda_x86.o
+
+$(APRENDENDO_COM_MEU_MORZAO)k_rem_pio2_amanda_x86.o: ../../src/libm/k_rem_pio2.c
+	i686-w64-mingw32-gcc.exe -c $(AMANDA_FLAGS__) -I "../../include" "../../src/libm/k_rem_pio2.c" -o $(APRENDENDO_COM_MEU_MORZAO)k_rem_pio2_amanda_x86.o
+
+$(APRENDENDO_COM_MEU_MORZAO)k_sin_amanda_x86.o: ../../src/libm/k_sin.c
+	i686-w64-mingw32-gcc.exe -c $(AMANDA_FLAGS__) -I "../../include" "../../src/libm/k_sin.c" -o $(APRENDENDO_COM_MEU_MORZAO)k_sin_amanda_x86.o
+
+$(APRENDENDO_COM_MEU_MORZAO)kkk_tan_amanda_x86.o: ../../src/libm/k_tan.c
+	i686-w64-mingw32-gcc.exe -c $(AMANDA_FLAGS__) -I "../../include" "../../src/libm/k_tan.c" -o $(APRENDENDO_COM_MEU_MORZAO)kkk_tan_amanda_x86.o
+
+$(APRENDENDO_COM_MEU_MORZAO)s_atan_amanda_x86.o: ../../src/libm/s_atan.c
+	i686-w64-mingw32-gcc.exe -c $(AMANDA_FLAGS__) -I "../../include" "../../src/libm/s_atan.c" -o $(APRENDENDO_COM_MEU_MORZAO)s_atan_amanda_x86.o
+
+$(APRENDENDO_COM_MEU_MORZAO)s_copysign_amanda_x86.o: ../../src/libm/s_copysign.c
+	i686-w64-mingw32-gcc.exe -c $(AMANDA_FLAGS__) -I "../../include" "../../src/libm/s_copysign.c" -o $(APRENDENDO_COM_MEU_MORZAO)s_copysign_amanda_x86.o
+
+$(APRENDENDO_COM_MEU_MORZAO)s_cos_amanda_x86.o: ../../src/libm/s_cos.c
+	i686-w64-mingw32-gcc.exe -c $(AMANDA_FLAGS__) -I "../../include" "../../src/libm/s_cos.c" -o $(APRENDENDO_COM_MEU_MORZAO)s_cos_amanda_x86.o
+
+$(APRENDENDO_COM_MEU_MORZAO)s_fabs_amanda_x86.o: ../../src/libm/s_fabs.c
+	i686-w64-mingw32-gcc.exe -c $(AMANDA_FLAGS__) -I "../../include" "../../src/libm/s_fabs.c" -o $(APRENDENDO_COM_MEU_MORZAO)s_fabs_amanda_x86.o
+
+$(APRENDENDO_COM_MEU_MORZAO)s_floor_amanda_x86.o: ../../src/libm/s_floor.c
+	i686-w64-mingw32-gcc.exe -c $(AMANDA_FLAGS__) -I "../../include" "../../src/libm/s_floor.c" -o $(APRENDENDO_COM_MEU_MORZAO)s_floor_amanda_x86.o
+
+$(APRENDENDO_COM_MEU_MORZAO)s_scalbn_amanda_x86.o: ../../src/libm/s_scalbn.c
+	i686-w64-mingw32-gcc.exe -c $(AMANDA_FLAGS__) -I "../../include" "../../src/libm/s_scalbn.c" -o $(APRENDENDO_COM_MEU_MORZAO)s_scalbn_amanda_x86.o
+
+$(APRENDENDO_COM_MEU_MORZAO)s_sin_amanda_x86.o: ../../src/libm/s_sin.c
+	i686-w64-mingw32-gcc.exe -c $(AMANDA_FLAGS__) -I "../../include" "../../src/libm/s_sin.c" -o $(APRENDENDO_COM_MEU_MORZAO)s_sin_amanda_x86.o
+
+$(APRENDENDO_COM_MEU_MORZAO)s_tan_amanda_x86.o: ../../src/libm/s_tan.c
+	i686-w64-mingw32-gcc.exe -c $(AMANDA_FLAGS__) -I "../../include" "../../src/libm/s_tan.c" -o $(APRENDENDO_COM_MEU_MORZAO)s_tan_amanda_x86.o
+
+$(APRENDENDO_COM_MEU_MORZAO)SDL_sysloadso_amanda_x86.o: ../../src/loadso/windows/SDL_sysloadso.c
+	i686-w64-mingw32-gcc.exe -c $(AMANDA_FLAGS__) -I "../../include" "../../src/loadso/windows/SDL_sysloadso.c" -o $(APRENDENDO_COM_MEU_MORZAO)SDL_sysloadso_amanda_x86.o
+
+$(APRENDENDO_COM_MEU_MORZAO)SDL_power_amanda_x86.o: ../../src/power/SDL_power.c
+	i686-w64-mingw32-gcc.exe -c $(AMANDA_FLAGS__) -I "../../include" "../../src/power/SDL_power.c" -o $(APRENDENDO_COM_MEU_MORZAO)SDL_power_amanda_x86.o
+
+$(APRENDENDO_COM_MEU_MORZAO)SDL_syspower_amanda_x86.o: ../../src/power/windows/SDL_syspower.c
+	i686-w64-mingw32-gcc.exe -c $(AMANDA_FLAGS__) -I "../../include" "../../src/power/windows/SDL_syspower.c" -o $(APRENDENDO_COM_MEU_MORZAO)SDL_syspower_amanda_x86.o
+
+$(APRENDENDO_COM_MEU_MORZAO)SDL_shaders_d3d11_amanda_x86.o: ../../src/render/direct3d11/SDL_shaders_d3d11.c
+	i686-w64-mingw32-gcc.exe -c $(AMANDA_FLAGS__) -I "../../include" "../../src/render/direct3d11/SDL_shaders_d3d11.c" -o $(APRENDENDO_COM_MEU_MORZAO)SDL_shaders_d3d11_amanda_x86.o
+
+$(APRENDENDO_COM_MEU_MORZAO)SDL_render_d3d_amanda_x86.o: ../../src/render/direct3d/SDL_render_d3d.c
+	i686-w64-mingw32-gcc.exe -c $(AMANDA_FLAGS__) -I "../../include" "../../src/render/direct3d/SDL_render_d3d.c" -o $(APRENDENDO_COM_MEU_MORZAO)SDL_render_d3d_amanda_x86.o
+
+$(APRENDENDO_COM_MEU_MORZAO)SDL_render_d3d11_amanda_x86.o: ../../src/render/direct3d11/SDL_render_d3d11.c
+	i686-w64-mingw32-gcc.exe -c $(AMANDA_FLAGS__) -I "../../include" "../../src/render/direct3d11/SDL_render_d3d11.c" -o $(APRENDENDO_COM_MEU_MORZAO)SDL_render_d3d11_amanda_x86.o
+
+$(APRENDENDO_COM_MEU_MORZAO)SDL_shaders_d3d_amanda_x86.o: ../../src/render/direct3d/SDL_shaders_d3d.c
+	i686-w64-mingw32-gcc.exe -c $(AMANDA_FLAGS__) -I "../../include" "../../src/render/direct3d/SDL_shaders_d3d.c" -o $(APRENDENDO_COM_MEU_MORZAO)SDL_shaders_d3d_amanda_x86.o
+
+$(APRENDENDO_COM_MEU_MORZAO)SDL_render_gl_amanda_x86.o: ../../src/render/opengl/SDL_render_gl.c
+	i686-w64-mingw32-gcc.exe -c $(AMANDA_FLAGS__) -I "../../include" "../../src/render/opengl/SDL_render_gl.c" -o $(APRENDENDO_COM_MEU_MORZAO)SDL_render_gl_amanda_x86.o
+
+$(APRENDENDO_COM_MEU_MORZAO)SDL_shaders_gl_amanda_x86.o: ../../src/render/opengl/SDL_shaders_gl.c
+	i686-w64-mingw32-gcc.exe -c $(AMANDA_FLAGS__) -I "../../include" "../../src/render/opengl/SDL_shaders_gl.c" -o $(APRENDENDO_COM_MEU_MORZAO)SDL_shaders_gl_amanda_x86.o
+
+$(APRENDENDO_COM_MEU_MORZAO)SDL_render_gles2_amanda_x86.o: ../../src/render/opengles2/SDL_render_gles2.c
+	i686-w64-mingw32-gcc.exe -c $(AMANDA_FLAGS__) -I "../../include" "../../src/render/opengles2/SDL_render_gles2.c" -o $(APRENDENDO_COM_MEU_MORZAO)SDL_render_gles2_amanda_x86.o
+
+$(APRENDENDO_COM_MEU_MORZAO)SDL_shaders_gles2_amanda_x86.o: ../../src/render/opengles2/SDL_shaders_gles2.c
+	i686-w64-mingw32-gcc.exe -c $(AMANDA_FLAGS__) -I "../../include" "../../src/render/opengles2/SDL_shaders_gles2.c" -o $(APRENDENDO_COM_MEU_MORZAO)SDL_shaders_gles2_amanda_x86.o
+
+$(APRENDENDO_COM_MEU_MORZAO)SDL_d3dmath_amanda_x86.o: ../../src/render/SDL_d3dmath.c
+	i686-w64-mingw32-gcc.exe -c $(AMANDA_FLAGS__) -I "../../include" "../../src/render/SDL_d3dmath.c" -o $(APRENDENDO_COM_MEU_MORZAO)SDL_d3dmath_amanda_x86.o
+
+$(APRENDENDO_COM_MEU_MORZAO)SDL_render_amanda_x86.o: ../../src/render/SDL_render.c
+	i686-w64-mingw32-gcc.exe -c $(AMANDA_FLAGS__) -I "../../include" "../../src/render/SDL_render.c" -o $(APRENDENDO_COM_MEU_MORZAO)SDL_render_amanda_x86.o
+
+$(APRENDENDO_COM_MEU_MORZAO)SDL_yuv_sw_amanda_x86.o: ../../src/render/SDL_yuv_sw.c
+	i686-w64-mingw32-gcc.exe -c $(AMANDA_FLAGS__) -I "../../include" "../../src/render/SDL_yuv_sw.c" -o $(APRENDENDO_COM_MEU_MORZAO)SDL_yuv_sw_amanda_x86.o
+
+$(APRENDENDO_COM_MEU_MORZAO)SDL_blendfillrect_amanda_x86.o: ../../src/render/software/SDL_blendfillrect.c
+	i686-w64-mingw32-gcc.exe -c $(AMANDA_FLAGS__) -I "../../include" "../../src/render/software/SDL_blendfillrect.c" -o $(APRENDENDO_COM_MEU_MORZAO)SDL_blendfillrect_amanda_x86.o
+
+$(APRENDENDO_COM_MEU_MORZAO)SDL_blendline_amanda_x86.o: ../../src/render/software/SDL_blendline.c
+	i686-w64-mingw32-gcc.exe -c $(AMANDA_FLAGS__) -I "../../include" "../../src/render/software/SDL_blendline.c" -o $(APRENDENDO_COM_MEU_MORZAO)SDL_blendline_amanda_x86.o
+
+$(APRENDENDO_COM_MEU_MORZAO)SDL_blendpoint_amanda_x86.o: ../../src/render/software/SDL_blendpoint.c
+	i686-w64-mingw32-gcc.exe -c $(AMANDA_FLAGS__) -I "../../include" "../../src/render/software/SDL_blendpoint.c" -o $(APRENDENDO_COM_MEU_MORZAO)SDL_blendpoint_amanda_x86.o
+
+$(APRENDENDO_COM_MEU_MORZAO)SDL_drawline_amanda_x86.o: ../../src/render/software/SDL_drawline.c
+	i686-w64-mingw32-gcc.exe -c $(AMANDA_FLAGS__) -I "../../include" "../../src/render/software/SDL_drawline.c" -o $(APRENDENDO_COM_MEU_MORZAO)SDL_drawline_amanda_x86.o
+
+$(APRENDENDO_COM_MEU_MORZAO)SDL_drawpoint_amanda_x86.o: ../../src/render/software/SDL_drawpoint.c
+	i686-w64-mingw32-gcc.exe -c $(AMANDA_FLAGS__) -I "../../include" "../../src/render/software/SDL_drawpoint.c" -o $(APRENDENDO_COM_MEU_MORZAO)SDL_drawpoint_amanda_x86.o
+
+$(APRENDENDO_COM_MEU_MORZAO)SDL_render_sw_amanda_x86.o: ../../src/render/software/SDL_render_sw.c
+	i686-w64-mingw32-gcc.exe -c $(AMANDA_FLAGS__) -I "../../include" "../../src/render/software/SDL_render_sw.c" -o $(APRENDENDO_COM_MEU_MORZAO)SDL_render_sw_amanda_x86.o
+
+$(APRENDENDO_COM_MEU_MORZAO)SDL_rotate_amanda_x86.o: ../../src/render/software/SDL_rotate.c
+	i686-w64-mingw32-gcc.exe -c $(AMANDA_FLAGS__) -I "../../include" "../../src/render/software/SDL_rotate.c" -o $(APRENDENDO_COM_MEU_MORZAO)SDL_rotate_amanda_x86.o
+
+$(APRENDENDO_COM_MEU_MORZAO)SDL_amanda_x86.o: ../../src/SDL.c
+	i686-w64-mingw32-gcc.exe -c $(AMANDA_FLAGS__) -I "../../include" "../../src/SDL.c" -o $(APRENDENDO_COM_MEU_MORZAO)SDL_amanda_x86.o
+
+$(APRENDENDO_COM_MEU_MORZAO)SDL_assert_amanda_x86.o: ../../src/SDL_assert.c
+	i686-w64-mingw32-gcc.exe -c $(AMANDA_FLAGS__) -I "../../include" "../../src/SDL_assert.c" -o $(APRENDENDO_COM_MEU_MORZAO)SDL_assert_amanda_x86.o
+
+$(APRENDENDO_COM_MEU_MORZAO)SDL_dataqueue_amanda_x86.o: ../../src/SDL_dataqueue.c
+	i686-w64-mingw32-gcc.exe -c $(AMANDA_FLAGS__) -I "../../include" "../../src/SDL_dataqueue.c" -o $(APRENDENDO_COM_MEU_MORZAO)SDL_dataqueue_amanda_x86.o
+
+$(APRENDENDO_COM_MEU_MORZAO)SDL_error_amanda_x86.o: ../../src/SDL_error.c
+	i686-w64-mingw32-gcc.exe -c $(AMANDA_FLAGS__) -I "../../include" "../../src/SDL_error.c" -o $(APRENDENDO_COM_MEU_MORZAO)SDL_error_amanda_x86.o
+
+$(APRENDENDO_COM_MEU_MORZAO)SDL_hints_amanda_x86.o: ../../src/SDL_hints.c
+	i686-w64-mingw32-gcc.exe -c $(AMANDA_FLAGS__) -I "../../include" "../../src/SDL_hints.c" -o $(APRENDENDO_COM_MEU_MORZAO)SDL_hints_amanda_x86.o
+
+$(APRENDENDO_COM_MEU_MORZAO)SDL_log_amanda_x86.o: ../../src/SDL_log.c
+	i686-w64-mingw32-gcc.exe -c $(AMANDA_FLAGS__) -I "../../include" "../../src/SDL_log.c" -o $(APRENDENDO_COM_MEU_MORZAO)SDL_log_amanda_x86.o
+
+$(APRENDENDO_COM_MEU_MORZAO)SDL_dummysensor_amanda_x86.o: ../../src/sensor/dummy/SDL_dummysensor.c
+	i686-w64-mingw32-gcc.exe -c $(AMANDA_FLAGS__) -I "../../include" "../../src/sensor/dummy/SDL_dummysensor.c" -o $(APRENDENDO_COM_MEU_MORZAO)SDL_dummysensor_amanda_x86.o
+
+$(APRENDENDO_COM_MEU_MORZAO)SDL_sensor_amanda_x86.o: ../../src/sensor/SDL_sensor.c
+	i686-w64-mingw32-gcc.exe -c $(AMANDA_FLAGS__) -I "../../include" "../../src/sensor/SDL_sensor.c" -o $(APRENDENDO_COM_MEU_MORZAO)SDL_sensor_amanda_x86.o
+
+$(APRENDENDO_COM_MEU_MORZAO)SDL_getenv_amanda_x86.o: ../../src/stdlib/SDL_getenv.c
+	i686-w64-mingw32-gcc.exe -c $(AMANDA_FLAGS__) -I "../../include" "../../src/stdlib/SDL_getenv.c" -o $(APRENDENDO_COM_MEU_MORZAO)SDL_getenv_amanda_x86.o
+
+$(APRENDENDO_COM_MEU_MORZAO)SDL_iconv_amanda_x86.o: ../../src/stdlib/SDL_iconv.c
+	i686-w64-mingw32-gcc.exe -c $(AMANDA_FLAGS__) -I "../../include" "../../src/stdlib/SDL_iconv.c" -o $(APRENDENDO_COM_MEU_MORZAO)SDL_iconv_amanda_x86.o
+
+$(APRENDENDO_COM_MEU_MORZAO)SDL_kkkkk_malloc_amanda_x86.o: ../../src/stdlib/SDL_malloc.c
+	i686-w64-mingw32-gcc.exe -c $(AMANDA_FLAGS__) -I "../../include" "../../src/stdlib/SDL_malloc.c" -o $(APRENDENDO_COM_MEU_MORZAO)SDL_kkkkk_malloc_amanda_x86.o
+
+$(APRENDENDO_COM_MEU_MORZAO)SDL_qsort_amanda_x86.o: ../../src/stdlib/SDL_qsort.c
+	i686-w64-mingw32-gcc.exe -c $(AMANDA_FLAGS__) -I "../../include" "../../src/stdlib/SDL_qsort.c" -o $(APRENDENDO_COM_MEU_MORZAO)SDL_qsort_amanda_x86.o
+
+$(APRENDENDO_COM_MEU_MORZAO)SDL_stdlib_amanda_x86.o: ../../src/stdlib/SDL_stdlib.c
+	i686-w64-mingw32-gcc.exe -c $(AMANDA_FLAGS__) -I "../../include" "../../src/stdlib/SDL_stdlib.c" -o $(APRENDENDO_COM_MEU_MORZAO)SDL_stdlib_amanda_x86.o
+
+$(APRENDENDO_COM_MEU_MORZAO)SDL_string_amanda_x86.o: ../../src/stdlib/SDL_string.c
+	i686-w64-mingw32-gcc.exe -c $(AMANDA_FLAGS__) -I "../../include" "../../src/stdlib/SDL_string.c" -o $(APRENDENDO_COM_MEU_MORZAO)SDL_string_amanda_x86.o
+
+$(APRENDENDO_COM_MEU_MORZAO)SDL_strtokr_amanda_x86.o: ../../src/stdlib/SDL_strtokr.c
+	i686-w64-mingw32-gcc.exe -c $(AMANDA_FLAGS__) -I "../../include" "../../src/stdlib/SDL_strtokr.c" -o $(APRENDENDO_COM_MEU_MORZAO)SDL_strtokr_amanda_x86.o
+
+$(APRENDENDO_COM_MEU_MORZAO)SDL_syscond_amanda_x86.o: ../../src/thread/generic/SDL_syscond.c
+	i686-w64-mingw32-gcc.exe -c $(AMANDA_FLAGS__) -I "../../include" "../../src/thread/generic/SDL_syscond.c" -o $(APRENDENDO_COM_MEU_MORZAO)SDL_syscond_amanda_x86.o
+
+$(APRENDENDO_COM_MEU_MORZAO)SDL_thread_amanda_x86.o: ../../src/thread/SDL_thread.c
+	i686-w64-mingw32-gcc.exe -c $(AMANDA_FLAGS__) -I "../../include" "../../src/thread/SDL_thread.c" -o $(APRENDENDO_COM_MEU_MORZAO)SDL_thread_amanda_x86.o
+
+$(APRENDENDO_COM_MEU_MORZAO)SDL_sysmutex_amanda_x86.o: ../../src/thread/windows/SDL_sysmutex.c
+	i686-w64-mingw32-gcc.exe -c $(AMANDA_FLAGS__) -I "../../include" "../../src/thread/windows/SDL_sysmutex.c" -o $(APRENDENDO_COM_MEU_MORZAO)SDL_sysmutex_amanda_x86.o
+
+$(APRENDENDO_COM_MEU_MORZAO)SDL_syssem_amanda_x86.o: ../../src/thread/windows/SDL_syssem.c
+	i686-w64-mingw32-gcc.exe -c $(AMANDA_FLAGS__) -I "../../include" "../../src/thread/windows/SDL_syssem.c" -o $(APRENDENDO_COM_MEU_MORZAO)SDL_syssem_amanda_x86.o
+
+$(APRENDENDO_COM_MEU_MORZAO)SDL_systhread_amanda_x86.o: ../../src/thread/windows/SDL_systhread.c
+	i686-w64-mingw32-gcc.exe -c $(AMANDA_FLAGS__) -I "../../include" "../../src/thread/windows/SDL_systhread.c" -o $(APRENDENDO_COM_MEU_MORZAO)SDL_systhread_amanda_x86.o
+
+$(APRENDENDO_COM_MEU_MORZAO)SDL_systls_amanda_x86.o: ../../src/thread/windows/SDL_systls.c
+	i686-w64-mingw32-gcc.exe -c $(AMANDA_FLAGS__) -I "../../include" "../../src/thread/windows/SDL_systls.c" -o $(APRENDENDO_COM_MEU_MORZAO)SDL_systls_amanda_x86.o
+
+$(APRENDENDO_COM_MEU_MORZAO)SDL_timer_amanda_x86.o: ../../src/timer/SDL_timer.c
+	i686-w64-mingw32-gcc.exe -c $(AMANDA_FLAGS__) -I "../../include" "../../src/timer/SDL_timer.c" -o $(APRENDENDO_COM_MEU_MORZAO)SDL_timer_amanda_x86.o
+
+$(APRENDENDO_COM_MEU_MORZAO)SDL_systimer_amanda_x86.o: ../../src/timer/windows/SDL_systimer.c
+	i686-w64-mingw32-gcc.exe -c $(AMANDA_FLAGS__) -I "../../include" "../../src/timer/windows/SDL_systimer.c" -o $(APRENDENDO_COM_MEU_MORZAO)SDL_systimer_amanda_x86.o
+
+$(APRENDENDO_COM_MEU_MORZAO)SDL_nullevents_amanda_x86.o: ../../src/video/dummy/SDL_nullevents.c
+	i686-w64-mingw32-gcc.exe -c $(AMANDA_FLAGS__) -I "../../include" "../../src/video/dummy/SDL_nullevents.c" -o $(APRENDENDO_COM_MEU_MORZAO)SDL_nullevents_amanda_x86.o
+
+$(APRENDENDO_COM_MEU_MORZAO)SDL_nullframebuffer_amanda_x86.o: ../../src/video/dummy/SDL_nullframebuffer.c
+	i686-w64-mingw32-gcc.exe -c $(AMANDA_FLAGS__) -I "../../include" "../../src/video/dummy/SDL_nullframebuffer.c" -o $(APRENDENDO_COM_MEU_MORZAO)SDL_nullframebuffer_amanda_x86.o
+
+$(APRENDENDO_COM_MEU_MORZAO)SDL_nullvideo_amanda_x86.o: ../../src/video/dummy/SDL_nullvideo.c
+	i686-w64-mingw32-gcc.exe -c $(AMANDA_FLAGS__) -I "../../include" "../../src/video/dummy/SDL_nullvideo.c" -o $(APRENDENDO_COM_MEU_MORZAO)SDL_nullvideo_amanda_x86.o
+
+$(APRENDENDO_COM_MEU_MORZAO)SDL_blit_amanda_x86.o: ../../src/video/SDL_blit.c
+	i686-w64-mingw32-gcc.exe -c $(AMANDA_FLAGS__) -I "../../include" "../../src/video/SDL_blit.c" -o $(APRENDENDO_COM_MEU_MORZAO)SDL_blit_amanda_x86.o
+
+$(APRENDENDO_COM_MEU_MORZAO)SDL_blit_0_amanda_x86.o: ../../src/video/SDL_blit_0.c
+	i686-w64-mingw32-gcc.exe -c $(AMANDA_FLAGS__) -I "../../include" "../../src/video/SDL_blit_0.c" -o $(APRENDENDO_COM_MEU_MORZAO)SDL_blit_0_amanda_x86.o
+
+$(APRENDENDO_COM_MEU_MORZAO)SDL_blit_1_amanda_x86.o: ../../src/video/SDL_blit_1.c
+	i686-w64-mingw32-gcc.exe -c $(AMANDA_FLAGS__) -I "../../include" "../../src/video/SDL_blit_1.c" -o $(APRENDENDO_COM_MEU_MORZAO)SDL_blit_1_amanda_x86.o
+
+$(APRENDENDO_COM_MEU_MORZAO)SDL_blit_A_amanda_x86.o: ../../src/video/SDL_blit_A.c
+	i686-w64-mingw32-gcc.exe -c $(AMANDA_FLAGS__) -I "../../include" "../../src/video/SDL_blit_A.c" -o $(APRENDENDO_COM_MEU_MORZAO)SDL_blit_A_amanda_x86.o
+
+$(APRENDENDO_COM_MEU_MORZAO)SDL_blit_auto_amanda_x86.o: ../../src/video/SDL_blit_auto.c
+	i686-w64-mingw32-gcc.exe -c $(AMANDA_FLAGS__) -I "../../include" "../../src/video/SDL_blit_auto.c" -o $(APRENDENDO_COM_MEU_MORZAO)SDL_blit_auto_amanda_x86.o
+
+$(APRENDENDO_COM_MEU_MORZAO)SDL_blit_copy_amanda_x86.o: ../../src/video/SDL_blit_copy.c
+	i686-w64-mingw32-gcc.exe -c $(AMANDA_FLAGS__) -I "../../include" "../../src/video/SDL_blit_copy.c" -o $(APRENDENDO_COM_MEU_MORZAO)SDL_blit_copy_amanda_x86.o
+
+$(APRENDENDO_COM_MEU_MORZAO)SDL_blit_N_amanda_x86.o: ../../src/video/SDL_blit_N.c
+	i686-w64-mingw32-gcc.exe -c $(AMANDA_FLAGS__) -I "../../include" "../../src/video/SDL_blit_N.c" -o $(APRENDENDO_COM_MEU_MORZAO)SDL_blit_N_amanda_x86.o
+
+$(APRENDENDO_COM_MEU_MORZAO)SDL_blit_slow_amanda_x86.o: ../../src/video/SDL_blit_slow.c
+	i686-w64-mingw32-gcc.exe -c $(AMANDA_FLAGS__) -I "../../include" "../../src/video/SDL_blit_slow.c" -o $(APRENDENDO_COM_MEU_MORZAO)SDL_blit_slow_amanda_x86.o
+
+$(APRENDENDO_COM_MEU_MORZAO)SDL_bmp_amanda_x86.o: ../../src/video/SDL_bmp.c
+	i686-w64-mingw32-gcc.exe -c $(AMANDA_FLAGS__) -I "../../include" "../../src/video/SDL_bmp.c" -o $(APRENDENDO_COM_MEU_MORZAO)SDL_bmp_amanda_x86.o
+
+$(APRENDENDO_COM_MEU_MORZAO)SDL_clipboard_amanda_x86.o: ../../src/video/SDL_clipboard.c
+	i686-w64-mingw32-gcc.exe -c $(AMANDA_FLAGS__) -I "../../include" "../../src/video/SDL_clipboard.c" -o $(APRENDENDO_COM_MEU_MORZAO)SDL_clipboard_amanda_x86.o
+
+$(APRENDENDO_COM_MEU_MORZAO)SDL_egl_amanda_x86.o: ../../src/video/SDL_egl.c
+	i686-w64-mingw32-gcc.exe -c $(AMANDA_FLAGS__) -I "../../include" "../../src/video/SDL_egl.c" -o $(APRENDENDO_COM_MEU_MORZAO)SDL_egl_amanda_x86.o
+
+$(APRENDENDO_COM_MEU_MORZAO)SDL_fillrect_amanda_x86.o: ../../src/video/SDL_fillrect.c
+	i686-w64-mingw32-gcc.exe -c $(AMANDA_FLAGS__) -I "../../include" "../../src/video/SDL_fillrect.c" -o $(APRENDENDO_COM_MEU_MORZAO)SDL_fillrect_amanda_x86.o
+
+$(APRENDENDO_COM_MEU_MORZAO)SDL_pixels_amanda_x86.o: ../../src/video/SDL_pixels.c
+	i686-w64-mingw32-gcc.exe -c $(AMANDA_FLAGS__) -I "../../include" "../../src/video/SDL_pixels.c" -o $(APRENDENDO_COM_MEU_MORZAO)SDL_pixels_amanda_x86.o
+
+$(APRENDENDO_COM_MEU_MORZAO)SDL_rect_amanda_x86.o: ../../src/video/SDL_rect.c
+	i686-w64-mingw32-gcc.exe -c $(AMANDA_FLAGS__) -I "../../include" "../../src/video/SDL_rect.c" -o $(APRENDENDO_COM_MEU_MORZAO)SDL_rect_amanda_x86.o
+
+$(APRENDENDO_COM_MEU_MORZAO)SDL_RLEaccel_amanda_x86.o: ../../src/video/SDL_RLEaccel.c
+	i686-w64-mingw32-gcc.exe -c $(AMANDA_FLAGS__) -I "../../include" "../../src/video/SDL_RLEaccel.c" -o $(APRENDENDO_COM_MEU_MORZAO)SDL_RLEaccel_amanda_x86.o
+
+$(APRENDENDO_COM_MEU_MORZAO)SDL_shape_amanda_x86.o: ../../src/video/SDL_shape.c
+	i686-w64-mingw32-gcc.exe -c $(AMANDA_FLAGS__) -I "../../include" "../../src/video/SDL_shape.c" -o $(APRENDENDO_COM_MEU_MORZAO)SDL_shape_amanda_x86.o
+
+$(APRENDENDO_COM_MEU_MORZAO)SDL_stretch_amanda_x86.o: ../../src/video/SDL_stretch.c
+	i686-w64-mingw32-gcc.exe -c $(AMANDA_FLAGS__) -I "../../include" "../../src/video/SDL_stretch.c" -o $(APRENDENDO_COM_MEU_MORZAO)SDL_stretch_amanda_x86.o
+
+$(APRENDENDO_COM_MEU_MORZAO)SDL_surface_amanda_x86.o: ../../src/video/SDL_surface.c
+	i686-w64-mingw32-gcc.exe -c $(AMANDA_FLAGS__) -I "../../include" "../../src/video/SDL_surface.c" -o $(APRENDENDO_COM_MEU_MORZAO)SDL_surface_amanda_x86.o
+
+$(APRENDENDO_COM_MEU_MORZAO)SDL_video_amanda_x86.o: ../../src/video/SDL_video.c
+	i686-w64-mingw32-gcc.exe -c $(AMANDA_FLAGS__) -I "../../include" "../../src/video/SDL_video.c" -o $(APRENDENDO_COM_MEU_MORZAO)SDL_video_amanda_x86.o
+
+$(APRENDENDO_COM_MEU_MORZAO)SDL_vulkan_utils_amanda_x86.o: ../../src/video/SDL_vulkan_utils.c
+	i686-w64-mingw32-gcc.exe -c $(AMANDA_FLAGS__) -I "../../include" "../../src/video/SDL_vulkan_utils.c" -o $(APRENDENDO_COM_MEU_MORZAO)SDL_vulkan_utils_amanda_x86.o
+
+$(APRENDENDO_COM_MEU_MORZAO)SDL_yuv_amanda_x86.o: ../../src/video/SDL_yuv.c
+	i686-w64-mingw32-gcc.exe -c $(AMANDA_FLAGS__) -I "../../include" "../../src/video/SDL_yuv.c" -o $(APRENDENDO_COM_MEU_MORZAO)SDL_yuv_amanda_x86.o
+
+$(APRENDENDO_COM_MEU_MORZAO)SDL_windowsclipboard_amanda_x86.o: ../../src/video/windows/SDL_windowsclipboard.c
+	i686-w64-mingw32-gcc.exe -c $(AMANDA_FLAGS__) -I "../../include" "../../src/video/windows/SDL_windowsclipboard.c" -o $(APRENDENDO_COM_MEU_MORZAO)SDL_windowsclipboard_amanda_x86.o
+
+$(APRENDENDO_COM_MEU_MORZAO)SDL_windowsevents_amanda_x86.o: ../../src/video/windows/SDL_windowsevents.c
+	i686-w64-mingw32-gcc.exe -c $(AMANDA_FLAGS__) -I "../../include" "../../src/video/windows/SDL_windowsevents.c" -o $(APRENDENDO_COM_MEU_MORZAO)SDL_windowsevents_amanda_x86.o
+
+$(APRENDENDO_COM_MEU_MORZAO)SDL_windowsframebuffer_amanda_x86.o: ../../src/video/windows/SDL_windowsframebuffer.c
+	i686-w64-mingw32-gcc.exe -c $(AMANDA_FLAGS__) -I "../../include" "../../src/video/windows/SDL_windowsframebuffer.c" -o $(APRENDENDO_COM_MEU_MORZAO)SDL_windowsframebuffer_amanda_x86.o
+
+$(APRENDENDO_COM_MEU_MORZAO)SDL_windowskeyboard_amanda_x86.o: ../../src/video/windows/SDL_windowskeyboard.c
+	i686-w64-mingw32-gcc.exe -c $(AMANDA_FLAGS__) -I "../../include" "../../src/video/windows/SDL_windowskeyboard.c" -o $(APRENDENDO_COM_MEU_MORZAO)SDL_windowskeyboard_amanda_x86.o
+
+$(APRENDENDO_COM_MEU_MORZAO)SDL_windowsmessagebox_amanda_x86.o: ../../src/video/windows/SDL_windowsmessagebox.c
+	i686-w64-mingw32-gcc.exe -c $(AMANDA_FLAGS__) -I "../../include" "../../src/video/windows/SDL_windowsmessagebox.c" -o $(APRENDENDO_COM_MEU_MORZAO)SDL_windowsmessagebox_amanda_x86.o
+
+$(APRENDENDO_COM_MEU_MORZAO)SDL_windowsmodes_amanda_x86.o: ../../src/video/windows/SDL_windowsmodes.c
+	i686-w64-mingw32-gcc.exe -c $(AMANDA_FLAGS__) -I "../../include" "../../src/video/windows/SDL_windowsmodes.c" -o $(APRENDENDO_COM_MEU_MORZAO)SDL_windowsmodes_amanda_x86.o
+
+$(APRENDENDO_COM_MEU_MORZAO)SDL_windowsmouse_amanda_x86.o: ../../src/video/windows/SDL_windowsmouse.c
+	i686-w64-mingw32-gcc.exe -c $(AMANDA_FLAGS__) -I "../../include" "../../src/video/windows/SDL_windowsmouse.c" -o $(APRENDENDO_COM_MEU_MORZAO)SDL_windowsmouse_amanda_x86.o
+
+$(APRENDENDO_COM_MEU_MORZAO)SDL_windowsopengl_amanda_x86.o: ../../src/video/windows/SDL_windowsopengl.c
+	i686-w64-mingw32-gcc.exe -c $(AMANDA_FLAGS__) -I "../../include" "../../src/video/windows/SDL_windowsopengl.c" -o $(APRENDENDO_COM_MEU_MORZAO)SDL_windowsopengl_amanda_x86.o
+
+$(APRENDENDO_COM_MEU_MORZAO)SDL_windowsopengles_amanda_x86.o: ../../src/video/windows/SDL_windowsopengles.c
+	i686-w64-mingw32-gcc.exe -c $(AMANDA_FLAGS__) -I "../../include" "../../src/video/windows/SDL_windowsopengles.c" -o $(APRENDENDO_COM_MEU_MORZAO)SDL_windowsopengles_amanda_x86.o
+
+$(APRENDENDO_COM_MEU_MORZAO)SDL_windowsshape_amanda_x86.o: ../../src/video/windows/SDL_windowsshape.c
+	i686-w64-mingw32-gcc.exe -c $(AMANDA_FLAGS__) -I "../../include" "../../src/video/windows/SDL_windowsshape.c" -o $(APRENDENDO_COM_MEU_MORZAO)SDL_windowsshape_amanda_x86.o
+
+$(APRENDENDO_COM_MEU_MORZAO)SDL_windowsvideo_amanda_x86.o: ../../src/video/windows/SDL_windowsvideo.c
+	i686-w64-mingw32-gcc.exe -c $(AMANDA_FLAGS__) -I "../../include" "../../src/video/windows/SDL_windowsvideo.c" -o $(APRENDENDO_COM_MEU_MORZAO)SDL_windowsvideo_amanda_x86.o
+
+$(APRENDENDO_COM_MEU_MORZAO)SDL_windowsvulkan_amanda_x86.o: ../../src/video/windows/SDL_windowsvulkan.c
+	i686-w64-mingw32-gcc.exe -c $(AMANDA_FLAGS__) -I "../../include" "../../src/video/windows/SDL_windowsvulkan.c" -o $(APRENDENDO_COM_MEU_MORZAO)SDL_windowsvulkan_amanda_x86.o
+
+$(APRENDENDO_COM_MEU_MORZAO)SDL_windowswindow_amanda_x86.o: ../../src/video/windows/SDL_windowswindow.c
+	i686-w64-mingw32-gcc.exe -c $(AMANDA_FLAGS__) -I "../../include" "../../src/video/windows/SDL_windowswindow.c" -o $(APRENDENDO_COM_MEU_MORZAO)SDL_windowswindow_amanda_x86.o
+
+$(APRENDENDO_COM_MEU_MORZAO)yuv_rgb_amanda_x86.o: ../../src/video/yuv2rgb/yuv_rgb.c
+	i686-w64-mingw32-gcc.exe -c $(AMANDA_FLAGS__) -I "../../include" "../../src/video/yuv2rgb/yuv_rgb.c" -o $(APRENDENDO_COM_MEU_MORZAO)yuv_rgb_amanda_x86.o
+amanda_smart_ape_clean:
+	(cd $(APRENDENDO_COM_MEU_MORZAO) && rm -f *_amanda_x86.o)

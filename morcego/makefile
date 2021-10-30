@@ -20,3 +20,8 @@ clean:
 	-@rm *.?~ >nulo 2>nulo
 	-@rm nulo
 	@echo Amanda it is ok...
+
+
+amandaricardo_valquiria_amanda_x86: ../mp3_dll/mv_from_be.h be_constants.h
+
+	i686-w64-mingw32-gcc.exe -c -o /bw_tmp/mp3_dll/morcego_interface_amanda_x86.o morcego_interface.c $(AMANDA_FLAGS__)

@@ -45,6 +45,19 @@ shinkal_480: pedro_64arp.o aac_mp4_decode_64k.o audio_64k.o libfaad_64k.a libmp4
 	cp --preserve=timestamps svc_mp4.dll 'C:\cygwin64_amandaricardo_koci_10.2.0\bin\mp3dll_standalone'
 	cp --preserve=timestamps svc_mp4.dll 'C:\AMANDA AVA KOCI PEREIRA\nosso_trabalho\amanda_projects\project tabuleiro\opus_interface_m'
 
+shinkal_4800: pedro_32arp.o aac_mp4_decode_32k.o audio_32k.o libfaad_32k.a libmp4_32k.a
+
+	i686-w64-mingw32-gcc.exe -O3 mislaine.def -mdll -o ./amanda_32/svc_mp4.dll pedro_32arp.o aac_mp4_decode_32k.o audio_32k.o libfaad_32k.a libmp4_32k.a
+
+	cp --preserve=timestamps *.c *.h *.def makefile *.a 'C:\cygwin64_amandaricardo_koci_10.2.0\aoprojeto\tabuleiro_dll\aac_mp4_m'
+
+#	cp --preserve=timestamps svc_mp4.dll 'C:\cygwin64_amandaricardo_koci_10.2.0\bin\mp3dll'
+	cp --preserve=timestamps ./amanda_32/svc_mp4.dll 'C:\cygwin64_amandaricardo_koci_10.2.0\bin\mp3dll_standalone_amanda_32'
+	cp --preserve=timestamps ./amanda_32/svc_mp4.dll 'C:\AMANDA AVA KOCI PEREIRA\nosso_trabalho\amanda_projects\project tabuleiro\opus_interface_m\amanda_32'
+
 
 pedro_64arp.o: pedro.c
 	x86_64-w64-mingw32-gcc.exe -c -o pedro_64arp.o pedro.c $(AMANDA_FLAGS__) $(JULIET_FLAGS) $(Z) $(FELINE_FLAGS__)
+
+pedro_32arp.o: pedro.c
+	i686-w64-mingw32-gcc.exe -c -o pedro_32arp.o pedro.c $(AMANDA_FLAGS__) $(JULIET_FLAGS) $(Z) $(FELINE_FLAGS__)

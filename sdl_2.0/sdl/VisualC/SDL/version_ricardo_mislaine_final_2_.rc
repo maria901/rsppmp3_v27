@@ -28,8 +28,8 @@ LANGUAGE LANG_PORTUGUESE, SUBLANG_PORTUGUESE_BRAZILIAN
 //
 
 VS_VERSION_INFO VERSIONINFO
- FILEVERSION 0,0,6,6
- PRODUCTVERSION 0,0,6,6
+ FILEVERSION 0,0,7,7
+ PRODUCTVERSION 0,0,7,7
  FILEFLAGSMASK 0x3fL
 #ifdef _DEBUG
  FILEFLAGS 0x1L
@@ -47,14 +47,14 @@ BEGIN
             VALUE "Comments", "BinaryWork Corp \0"
             VALUE "CompanyName", "BW 2020 ©\0"
             VALUE "FileDescription", "Modified SDL library 64 bits \0"
-            VALUE "FileVersion", "0, 0, 6, 6 \0"
+            VALUE "FileVersion", "0, 0, 7, 7 \0"
             VALUE "InternalName", "mod_sdl2_2_0_12_kp.dll \0"
             VALUE "LegalCopyright", "Copyright © 2020 BW \0"
             VALUE "LegalTrademarks", "http://nomade.sourceforge.net/?AR=true&ar_debug=1 \0"
             VALUE "OriginalFilename", "mod_sdl2_2_0_12_kp.dll \0"
-            VALUE "PrivateBuild", "6 \0"
-            VALUE "ProductName", "Modified SDL library 0, 0, 6, 6 64 bits \0"
-            VALUE "ProductVersion", "0, 0, 6, 6 \0"
+            VALUE "PrivateBuild", "7 \0"
+            VALUE "ProductName", "Modified SDL library 0, 0, 7, 7 64 bits \0"
+            VALUE "ProductVersion", "0, 0, 7, 7 \0"
             VALUE "SpecialBuild", "amandaricardo_koci\0"
         END
     END
