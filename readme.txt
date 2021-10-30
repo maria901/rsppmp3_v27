@@ -180,6 +180,13 @@ with different copies of the Libav dlls in the same process running
 
 Changelog: 
 
+What is new in 18.0.8  build 667470  'Sat 30/October/2021 08:19:24' codename 'Peeters'
+Added update of the video frame and audio position if the seek is called
+when the playback is paused, the replacement for Libav has the basic audio 
+formats supported, today will be added also wav pcm playback 16 bits
+Notice that if we add all the formats supported by Libav it will also 
+be huge, minor modifications
+
 What is new in 16.0.9  build 667271  'Thu 14/October/2021 06:19:45' codename 'Daly'
 Small modifications and added a new function to show the video bitrate,
 if available of course, notice that some webm files don't report a video bitrate

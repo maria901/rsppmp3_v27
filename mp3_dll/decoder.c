@@ -3505,8 +3505,8 @@ void __stdcall SeekTo_10000(__int64 mv_instance, double seek)
 		mv_______->libav_c___donot_draw_video = 1;
 		// seek2(mv_______, mv_______->decoder_c___seekto);
 		PlaybackResume(mv_instance);
-		Sleep(500);
-		PlaybackPause(mv_instance);		
+		Sleep(500); // ok for 25 fps
+		PlaybackPause(mv_instance);
 		mv_______->libav_c___donot_draw_video = savestate_m;
 		Sleep(100);
 		{
