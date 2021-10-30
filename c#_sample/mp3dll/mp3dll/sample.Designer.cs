@@ -1276,7 +1276,7 @@ namespace mp3dll
 			this.button5.Name = "button5";
 			this.button5.Size = new System.Drawing.Size(67, 22);
 			this.button5.TabIndex = 147;
-			this.button5.Text = "Amanda";
+			this.button5.Text = "Default";
 			this.button5.UseVisualStyleBackColor = true;
 			this.button5.Click += new System.EventHandler(this.Button5Click);
 			// 

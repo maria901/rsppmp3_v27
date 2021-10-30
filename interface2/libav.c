@@ -1530,6 +1530,88 @@ void seek2(morcego___i___instance__a__bucaneiro_engineering *mv_______, double v
 #endif
      //("deu seek");
 }
+
+/**
+ * 19/nov/2011 - the position to seek in percent as double, it is
+ * precise enough, (problems with matroska (webm) at this moment,
+ * it will seek just to a position close of the real desired position,
+ * will be fixed soon).
+ */
+void seek2_v27(morcego___i___instance__a__bucaneiro_engineering *mv_______, double value)
+{
+
+#ifndef THALIA_NEW_STANDALONE_AUDIO_PLAYER__
+     /**
+
+      */
+     /// dprintf("seeking... debug4\n");
+     //mv_______->libav_c___reinit_uf = 0;
+     //mv_______->libav_c___reinit_uf2 = 0;
+
+     AVFormatContext *FormatContext = (AVFormatContext *)mv_______->libav_c___FormatContext_ptr;
+     if (mv_______->libav_c___mode_is_free_play || (FormatContext && (-1 != mv_______->libav_c___audiostream)))
+     {
+          mv_______->libav_c___is_seeking = 1;
+
+          //Sleep(50); // for safety
+          value = getval_100((double)mv_______->libav_c___duracao, value);
+
+          mv_______->decoder_c___newsecond_copy = 0;
+
+          if ((__int64)value > mv_______->libav_c___duracao)
+          {
+               value = mv_______->libav_c___duracao - 1;
+          }
+          if (value < 0)
+          {
+               value = 0;
+          }
+          /**
+               int av_seek_frame(
+           */
+          if (0 && !mv_______->libav_c___mode_is_free_play)
+          {
+               mv_______->libav_c___morcego =
+                   av_seek_frame(FormatContext, -1, (__int64)value,
+                                 AVSEEK_FLAG_BACKWARD);
+
+               if (mv_______->libav_c___morcego < 0)
+               {
+                    mv_______->libav_c___morcego =
+                        av_seek_frame(FormatContext, -1, (__int64)value,
+                                      AVSEEK_FLAG_BACKWARD | AVSEEK_FLAG_ANY);
+               }
+          }
+          if (mv_______->libav_c___video_ready_to_play)
+          {
+
+               AVFormatContext *FormatContext = (AVFormatContext *)mv_______->libav_c___FormatContext_ptr_video;
+               mv_______->libav_c___morcego =
+                   av_seek_frame(FormatContext, -1, (__int64)value,
+                                 AVSEEK_FLAG_BACKWARD);
+
+               if (mv_______->libav_c___morcego < 0)
+               {
+                    mv_______->libav_c___morcego =
+                        av_seek_frame(FormatContext, -1, (__int64)value,
+                                      AVSEEK_FLAG_BACKWARD | AVSEEK_FLAG_ANY);
+               }
+          }
+          mv_______->libav_c___is_seeking = 0;
+     }
+#else
+
+     mv_______->libav_c___reinit_uf = 0;
+     mv_______->libav_c___reinit_uf2 = 0;
+
+     pedro_dprintf(-1, "raw max %lld\n", mv_______->dados_do_audio_v27.raw_total_ric);
+
+     mv_______->libav_c___is_seeking = 0;
+     pedro_dprintf(-1, "opus seek running\n");
+
+#endif
+     //("deu seek");
+}
 int get_number_of_audio_tracks_internal(morcego___i___instance__a__bucaneiro_engineering *mv_______, char *utf8_filename, char *error_message)
 {
 

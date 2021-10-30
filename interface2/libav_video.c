@@ -1883,7 +1883,7 @@ int morcego_vermelho_player_thread(morcego___i___instance__a__bucaneiro_engineer
      mv_______->libav_c___uvPitch_kp = mv_______->libav_c___adjusted_i_width_for_directx / 2;
 
 final:;
-     while (mv_______->libav_c___is_seeking)
+     while (mv_______->libav_c___is_seeking && false == mv_______->libav_c___m_update_video)
      {
 
           ready_to_adjust = 0;
@@ -1906,7 +1906,7 @@ final:;
           if (1)
           {
 
-               if (mv_______->libav_c___is_seeking)
+               if (mv_______->libav_c___is_seeking && false == mv_______->libav_c___m_update_video)
                {
                     ready_to_adjust = 0;
                     ajuste_de_sincronizacao = 0;
@@ -2047,6 +2047,21 @@ final:;
 
                     while (mv_______->libav_c___pause_video_thread || !mv_______->libav_c___initiate_playback)
                     {
+                         /*
+                         if(true == mv_______->libav_c___m_already_seek && mv_______->libav_c___m_update_video)
+                         {
+                              pedro_dprintf(-1, "seek internal %f\n", mv_______->morcego_interface_c___seek_m_v27);
+                              seek2_v27(mv_______, mv_______->morcego_interface_c___seek_m_v27);
+                              mv_______->libav_c___m_update_counter++;
+
+                              if(4 < mv_______->libav_c___m_update_counter)
+                              {
+                                   mv_______->libav_c___m_update_video = false;
+                              }
+                              //mv_______->libav_c___m_update_video = false;
+                              break;
+                         }
+                         */
                          ready_to_adjust = 0;
                          ajuste_de_sincronizacao = 0;
                          ajuste_de_sincronizacao_second = 0;

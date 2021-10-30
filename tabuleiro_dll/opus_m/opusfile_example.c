@@ -56,7 +56,13 @@
 #ifdef HAVE_CONFIG_H
 #include "config.h"
 #endif
-
+void __stdcall svc_seek_mp3_m(__attribute__((unused)) char *struct_opus_m,
+                              __attribute__((unused)) double maquisistem_value);
+int __stdcall morcego_decode_libav_svc_process_mp3_m(__attribute__((unused)) char *struct_opus_m,
+                                                     __attribute__((unused)) int bytes_to_decode_m,
+                                                     __attribute__((unused)) char *bufout_m,
+                                                     __attribute__((unused)) int *size_out);
+void morcego_deinit_libav_svc_deinit_mp3_m(__attribute__((unused)) char *struct_opus_m);
 void morcego_deinit_libav_svc_deinit_mp4_m(__attribute__((unused)) char *struct_opus_m);
 
 void pedro_dprintf(int amanda_level,
@@ -270,6 +276,7 @@ enum decoder_id_maria
      AMANDA_OPUS__ = 1001,
      AMANDA_OGG_VORBIS,
      AMANDA_MP4_AAC,
+     AMANDA_MP3,
 };
 
 typedef struct pedro_27_
@@ -688,6 +695,9 @@ void main_old_p(pedro_k *maria_struct_)
 char *__stdcall svc_init_mp4_m(char *filename_utf_8_v,
                                int *error_code_aline_,
                                juliete_struct *dados_m);
+char *__stdcall svc_init_mp3_m(char *filename_utf_8_v,
+                               int *error_code_aline_,
+                               juliete_struct *dados_m);
 int __stdcall morcego_decode_libav_svc_process_mp4_m(__attribute__((unused)) char *struct_opus_m,
                                                      __attribute__((unused)) int bytes_to_decode_m,
                                                      __attribute__((unused)) char *bufout_m,
@@ -781,6 +791,36 @@ char *__stdcall svc_init_opus_m(char *filename_utf_8_v,
                {
                     pedro_dprintf(0, "file isnot MP4/AAC \n");
                     // here mp3 now or free and exit
+
+                    ptr_shinkal = svc_init_mp3_m(filename_utf_8_v,
+                                                 error_code_aline_,
+                                                 dados_m);
+
+                    if (ptr_shinkal)
+                    {
+                         free(feline_p->filename_utf_8_m);
+                         free(feline_p);
+
+                         feline_p = (void *)ptr_shinkal;
+                    }
+
+                    if (NULL == ptr_shinkal)
+                    {
+                         pedro_dprintf(0, "MP3 returns NULL \n");
+                         ; // do nothing, ok
+                    }
+                    if (10004 == *feline_p->error_code_aline_)
+                    {
+                         pedro_dprintf(0, "file isnot MP3 \n");
+
+                         morcego_deinit_libav_svc_deinit_mp3_m((char *)feline_p);
+                         return NULL;
+                         //ok...
+                    }
+                    else
+                    {
+                         return (char *)feline_p;
+                    }
                }
                else
                {
@@ -850,6 +890,13 @@ int __stdcall morcego_decode_libav_svc_process_opus_m(char *struct_opus_m,
      else if (AMANDA_MP4_AAC == feline_p->current_decoder_pedro)
      {
           return morcego_decode_libav_svc_process_mp4_m((char *)feline_p,
+                                                        bytes_to_decode_m,
+                                                        bufout_m,
+                                                        size_out);
+     }
+     else if (AMANDA_MP3 == feline_p->current_decoder_pedro)
+     {
+          return morcego_decode_libav_svc_process_mp3_m((char *)feline_p,
                                                         bytes_to_decode_m,
                                                         bufout_m,
                                                         size_out);
@@ -1015,6 +1062,11 @@ void __stdcall svc_seek_opus_m(char *struct_opus_m,
      else if (AMANDA_MP4_AAC == feline_p->current_decoder_pedro)
      {
           svc_seek_mp4_m(struct_opus_m, maquisistem_value);
+          return;
+     }
+     else if (AMANDA_MP3 == feline_p->current_decoder_pedro)
+     {
+          svc_seek_mp3_m(struct_opus_m, maquisistem_value);
           return;
      }
      else

@@ -1103,6 +1103,17 @@ reinicio_m:;
 
 			feline_p->header_type = 2;
 		}
+		else
+		{
+			if (feline_p->b.buffer)
+				free(feline_p->b.buffer);
+			NeAACDecClose(feline_p->hDecoder);
+			fclose(feline_p->b.infile);
+
+			*feline_p->error_code_aline_ = 10004; // Invalid AAC file
+
+			return 20;
+		}
 	}
 	//*song_length = feline_p->length;
 
@@ -1450,7 +1461,14 @@ static int decodeMP4file(pedro_k *feline_p, char *mp4file, char *sndfile, __attr
 	/* initialise the callback structure */
 	feline_p->mp4cb = malloc(sizeof(mp4ff_callback_t));
 
-	feline_p->mp4File = fopen((mp4file), "rb");
+	{
+		WCHAR *temp_a = malloc(AMANDA__SIZE_ww);
+		WCHAR *temp_a2 = malloc(AMANDA__SIZE_ww);
+		feline_p->mp4File = _wfopen(permissive_name_m_(amanda_utf8towide_1_(mp4file, temp_a), temp_a2), L"rb");
+		free(temp_a);
+		free(temp_a2);
+	}
+
 	feline_p->mp4cb->read = read_callback;
 	feline_p->mp4cb->seek = seek_callback;
 	feline_p->mp4cb->user_data = feline_p->mp4File;
@@ -1480,14 +1498,14 @@ static int decodeMP4file(pedro_k *feline_p, char *mp4file, char *sndfile, __attr
 	if (!feline_p->infile)
 	{
 		/* unable to open file */
-		pedro_dprintf(-20212810, "Error opening file: %s\n", mp4file);
+		pedro_dprintf(-20211029, "Error opening file: %s\n", mp4file);
 		*feline_p->error_code_aline_ = 10004; // Invalid MP4 file
 		return 1;
 	}
 
 	if ((feline_p->track = GetAACTrack(feline_p->infile)) < 0)
 	{
-		pedro_dprintf(-20212810, "Unable to find correct AAC sound track in the MP4 file.\n");
+		pedro_dprintf(-20211029, "Unable to find correct AAC sound track in the MP4 file.\n");
 		NeAACDecClose(feline_p->hDecoder);
 		mp4ff_close(feline_p->infile);
 		free(feline_p->mp4cb);
@@ -1504,7 +1522,7 @@ static int decodeMP4file(pedro_k *feline_p, char *mp4file, char *sndfile, __attr
 					  &feline_p->samplerate, &feline_p->channels) < 0)
 	{
 		/* If some error initializing occured, skip the file */
-		pedro_dprintf(-20212810, "Error initializing decoder library.\n");
+		pedro_dprintf(-20211029, "Error initializing decoder library.\n");
 		NeAACDecClose(feline_p->hDecoder);
 		mp4ff_close(feline_p->infile);
 		free(feline_p->mp4cb);

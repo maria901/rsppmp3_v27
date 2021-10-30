@@ -704,6 +704,10 @@ no_use_i:;
 
      mv_______->decoder_c___newsecond_copy = 0;
      pedro_dprintf(-1, "never appear here c");
+
+     mv_______->libav_c___m_already_seek = false;
+     mv_______->libav_c___m_update_video = false;
+     mv_______->libav_c___m_update_counter = 0;
      while (1)
      {
      retornaaqui:
@@ -829,10 +833,13 @@ no_use_i:;
 #ifndef THALIA_NEW_STANDALONE_AUDIO_PLAYER__
 
                          morcego_seek_100_libav(mv_______, mv_______->decoder_c___seekto);
+
 #else
 
                          svc_seek_opus_m(mv_______->libav_c___thalia_stand_alone_player_, mv_______->decoder_c___seekto);
 #endif
+                         mv_______->libav_c___m_already_seek = true;
+
                          retf = getvalf(fixotime,
                                         mv_______->decoder_c___seekto);
                          deslocamento = retf;

@@ -13,7 +13,7 @@ ricardo_64: opusfile_example.c.64m.o pedro_64arp.o win32utf8.c.o
 	-shared -o svc_opus.dll                    \
 	mislaine.def                               \
 	pedro_64arp.o                              \
-	-Wl,-enable-stdcall-fixup win32utf8.c.o opusfile_example.c.64m.o svc_ogg.dll svc_mp4.dll -L./ -lopusfile_x64 -logg_x64  -lopus_x64 $(AMANDA_FLAGS__) $(FELINE_FLAGS__)
+	-Wl,-enable-stdcall-fixup win32utf8.c.o opusfile_example.c.64m.o svc_ogg.dll svc_mp4.dll svc_mp3.dll -L./ -lopusfile_x64 -logg_x64  -lopus_x64 $(AMANDA_FLAGS__) $(FELINE_FLAGS__)
 	cp --preserve=timestamps *.def *.a *.h *.c makefile 'C:\cygwin64_amandaricardo_koci_10.2.0\aoprojeto\tabuleiro_dll\opus_m'
 
 	cp --preserve=timestamps svc_opus.dll 'C:\cygwin64_amandaricardo_koci_10.2.0\bin\mp3dll'

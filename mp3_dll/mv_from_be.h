@@ -35,7 +35,7 @@
  *                                                                              *
  *******************************************************************************/
 #include "stdio.h"
-#ifndef TIA_LUCIA_E_TIO_MARCAO 
+#ifndef TIA_LUCIA_E_TIO_MARCAO
 #define TIA_LUCIA_E_TIO_MARCAO
 
 extern FILE *ar_bw_maquisistem_bucaneiro_engineering_aurora_boreal_eletronica_som_video_cor_digipower_rsp_companhias;
@@ -414,6 +414,13 @@ typedef struct morcego_instance_be_
      void *libav_c___bmp;
      char libav_c___cancel_video_thread;
      char libav_c___pause_video_thread;
+
+     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+     // added 00:35
+     bool libav_c___m_update_video;
+     bool libav_c___m_already_seek;
+     int libav_c___m_update_counter;
+     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
      char libav_c___initiate_playback;
      char libav_c___video_thread_running;
      double libav_c___deslocacao;
@@ -499,6 +506,10 @@ typedef struct morcego_instance_be_
      //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
      // setor de morcego_interface_c___
      double morcego_interface_c___seek;
+     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+     // added oct 2021
+     double morcego_interface_c___seek_m_v27;
+     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
      int morcego_interface_c___decoder_in_use;
      int morcego_interface_c___decoder_state;
      short morcego_interface_c___short_temp[100000];
@@ -715,6 +726,10 @@ typedef struct morcego_instance_be_
      char decoder_c___globalbuf2[BE_TAMANHO2________];
      spectrum decoder_c___spec;
      int decoder_c___valuetoset;
+     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+     //
+     int decoder_c___volume_m;
+     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
      int decoder_c___salvadata;
      int decoder_c___rightvalf;
      int decoder_c___rightval;
@@ -1113,6 +1128,8 @@ int __stdcall morcego_decode_libav_svc_process_opus_m(char *struct_opus_m,
  */
 char __fastcall *
 decimalparabinario_64__amanda_s_smart_ape(uint64_t value, bool show_amanda_s_smart_ape_split_or_not);
+
+void seek2_v27(morcego___i___instance__a__bucaneiro_engineering *mv_______, double value);
 
 #endif
 

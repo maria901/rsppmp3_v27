@@ -26,7 +26,7 @@ madlib_32k.a:
 #	make ar_clear  -C ./mad
 	make amanda_32 -C ./mad
 	
-ricardo_64: pedro_64arp.o decode_64k.o madlib_64k.a madxlib_64k.o playmp3_64k.o
+ricardo_64: pedro_64arp.o decode_64k.o madlib_64k.a madxlib_64k.o
 
 	x86_64-w64-mingw32-g++ -O3 mislaine.def -mdll -o svc_mp3.dll pedro_64arp.o decode_64k.o madlib_64k.a madxlib_64k.o -static-libstdc++ -static-libgcc 	  -lwinmm -lwininet madlib_64k.a
 		

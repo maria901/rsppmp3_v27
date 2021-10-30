@@ -1,4 +1,4 @@
-//2021 amanda & ricardo
+// 2021 amanda & ricardo
 
 #define uchar unsigned char
 #define uint unsigned int
@@ -15,7 +15,15 @@ id3v2tag_check(char *filename)
 	uint fatia4;
 	int tamanho;
 
-	if ((astdin = fopen(filename, "rb")) == NULL)
+	{
+		WCHAR *temp_a = malloc(AMANDA__SIZE_ww);
+		WCHAR *temp_a2 = malloc(AMANDA__SIZE_ww);
+		astdin = _wfopen(permissive_name_m_(amanda_utf8towide_1_(filename, temp_a), temp_a2), L"rb");
+		free(temp_a);
+		free(temp_a2);
+	}
+
+	if (astdin == NULL)
 	{
 		return 0;
 	}

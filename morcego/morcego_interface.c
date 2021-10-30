@@ -1159,6 +1159,8 @@ void morcego_seek_100_libav(morcego___i___instance__a__bucaneiro_engineering *mv
           if (0 == is_mp3)
           {
                mv_______->morcego_interface_c___seek = valor; // ready
+			   mv_______->morcego_interface_c___seek_m_v27 = valor;
+			   pedro_dprintf(-1, "ok 0, pegou o valor %f\n", mv_______->morcego_interface_c___seek_m_v27);
           }
           else
           {
@@ -1175,6 +1177,8 @@ void morcego_seek_100_libav(morcego___i___instance__a__bucaneiro_engineering *mv
                }
                mv_______->morcego_interface_c___seek = ret;
                mv_______->morcego_interface_c___seek += be_copy->mp3_adjust;
+			   mv_______->morcego_interface_c___seek_m_v27 = mv_______->morcego_interface_c___seek;
+			   pedro_dprintf(-1, "ok, pegou o valor %f\n", mv_______->morcego_interface_c___seek_m_v27);
           }
      }
 }

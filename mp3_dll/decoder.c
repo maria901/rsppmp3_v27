@@ -3461,6 +3461,11 @@ void __stdcall ShowCursor_(int enable)
  */
 void __stdcall SeekTo_10000(__int64 mv_instance, double seek)
 {
+	int newvalue = 0;
+	int first;
+	int second;
+	int savestate_m;
+	int save_volume_m;
 	check_mv_instance(mv_instance);
 	morcego___i___instance__a__bucaneiro_engineering *mv_______ =
 		(morcego___i___instance__a__bucaneiro_engineering *)(__INT32_OR_INT64)
@@ -3475,6 +3480,47 @@ void __stdcall SeekTo_10000(__int64 mv_instance, double seek)
 		seek = 0;
 	}
 	mv_______->decoder_c___seekto = seek;
+
+	/*
+	aqui mesmo amor...
+	*/
+	mv_______->libav_c___m_update_counter = 0;
+
+	if (mv_______->decoder_c___pauseflag)
+	{
+		savestate_m = mv_______->libav_c___donot_draw_video;
+		save_volume_m = mv_______->decoder_c___volume_m;
+		{
+
+			newvalue = newvalue * 0x28f; // I dont remember what is it, kkkk, but works..., this volume set API is just weird, low 16 bits set one channel and high 16 bits set the other channel
+			if (newvalue > 0xffff)
+			{
+				newvalue = 0xffff;
+			}
+			first = newvalue;
+			second = (first << 16) + newvalue;
+			(void)waveOutSetVolume(mv_______->decoder_c___phwo, second);
+		}
+
+		mv_______->libav_c___donot_draw_video = 1;
+		// seek2(mv_______, mv_______->decoder_c___seekto);
+		PlaybackResume(mv_instance);
+		Sleep(500);
+		PlaybackPause(mv_instance);		
+		mv_______->libav_c___donot_draw_video = savestate_m;
+		Sleep(100);
+		{
+			newvalue = save_volume_m * 0x28f; // I dont remember what is it, kkkk, but works..., this volume set API is just weird, low 16 bits set one channel and high 16 bits set the other channel
+			if (newvalue > 0xffff)
+			{
+				newvalue = 0xffff;
+			}
+			first = newvalue;
+			second = (first << 16) + newvalue;
+			(void)waveOutSetVolume(mv_______->decoder_c___phwo, second);
+		}
+	}
+
 	return;
 }
 /**
@@ -3663,6 +3709,9 @@ int __stdcall SetVolumeGain(__int64 mv_instance, int value)
 	morcego___i___instance__a__bucaneiro_engineering *mv_______ =
 		(morcego___i___instance__a__bucaneiro_engineering *)(__INT32_OR_INT64)
 			mv_instance;
+
+	mv_______->decoder_c___volume_m = value;
+
 	mv_______->decoder_c___valuetoset = value;
 	return 0;
 }

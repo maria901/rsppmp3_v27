@@ -34,6 +34,8 @@
  *     (+55)41 9627 1708 - isto está sempre ligado (eu acho...)                 *
  *                                                                              *
  *******************************************************************************/
+ #endif
+ #endif
  
 void process_playlist_junior_filho_do_ricardo(morcego___i___instance__a__bucaneiro_engineering * mv_______);
 
