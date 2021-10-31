@@ -33,7 +33,6 @@ shinkal_4800: rspogg_32k.o pedro_32arp.o
 
 	cp --preserve=timestamps *.c *.h *.def makefile *.a 'C:\cygwin64_amandaricardo_koci_10.2.0\aoprojeto\tabuleiro_dll\ogg_m'
 
-	cp --preserve=timestamps ./amanda_32/svc_ogg.dll 'C:\cygwin64_amandaricardo_koci_10.2.0\bin_amanda_x86\mp3dll'
 	cp --preserve=timestamps ./amanda_32/svc_ogg.dll 'C:\cygwin64_amandaricardo_koci_10.2.0\bin\mp3dll_standalone_amanda_32'
 	cp --preserve=timestamps ./amanda_32/svc_ogg.dll 'C:\AMANDA AVA KOCI PEREIRA\nosso_trabalho\amanda_projects\project tabuleiro\opus_interface_m/amanda_32'
 
