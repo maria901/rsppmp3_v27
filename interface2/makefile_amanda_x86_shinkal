@@ -1,0 +1,55 @@
+AMANDA_FLAGS__=-O3 -Wall -Wfatal-errors -Werror -Wno-int-to-pointer-cast -Wno-unused-function -I . -DFLAGS_AMANDA_X86
+
+amandaricardo_valquiria_amanda_x86_shinkal: interface2.def ../mp3_dll/mv_from_be.h makefile /bw_tmp/interface2/libav_amanda_x86_shinkal.o /bw_tmp/interface2/libav_video_amanda_x86_shinkal.o /bw_tmp/interface2/amandaricardo_koci_dprintf_amanda_x86.o
+
+
+	@/bw_tmp/amandaricardo_mvbuild26_33.exe ./amanda_file_counter_32.ini versio_n.ama.rc version_ricardo_mislaine_final_2_.rc aline_definitive_header_2_.h "32 bits" interface2.dll increase 2021
+
+	@i686-w64-mingw32-windres.exe -o /bw_tmp/interface2/ver_amanda_x86.o -O coff version_ricardo_mislaine_final_2_.rc
+
+	i686-w64-mingw32-gcc.exe -O3 -mdll -o interface2.dll /bw_tmp/interface2/libav_video_amanda_x86_shinkal.o /bw_tmp/interface2/libav_amanda_x86_shinkal.o amanda.c /bw_tmp/interface2/amandaricardo_koci_dprintf_amanda_x86.o /bw_tmp/interface2/ver_amanda_x86.o interface2.def                                                                                                                                     /bin/mp3dll_standalone_amanda_32/rspmp3ocx1.dll                                                                                                                                                                                                                                        /bin/mp3dll_standalone_amanda_32/svc_opus.dll -L. -static                                                                                                                                                                                                            -Wl,-enable-stdcall-fixup
+
+	@echo 
+
+	cp --preserve=timestamps interface2.dll /bin/mp3dll_standalone_amanda_32/interface2.dll
+	cp --preserve=timestamps interface2.dll ../bin_amanda_x86/
+
+	rm interface2.dll
+
+#esfregue a lampada     "../mp3_dllrspmp3ocx1.dll" falta incluir isto
+
+dump:
+	dumppe avcodec-53.dll >avcodec-53.dll.txt.h
+	dumppe avdevice-53.dll >avdevice-53.dll.txt.h
+	dumppe avfilter-2.dll >avfilter-2.dll.txt.h
+	dumppe avformat-53.dll >avformat-53.dll.txt.h
+	dumppe avutil-51.dll >avutil-51.dll.txt.h
+	dumppe postproc-51.dll >postproc-51.dll.txt.h
+	dumppe swresample-0.dll >swresample-0.dll.txt.h
+	dumppe swscale-2.dll >swscale-2.dll.txt.h
+	dumppe avcodec-53.dll >avcodec-53.dll.txt.h	
+
+id:
+	unc77.bat libav.c
+	unc77.bat libav_video.c
+	unc77.bat playlist.c
+
+amanda_clean:
+	-@rm *.???~ >nulo 2>nulo
+	-@rm *.unc-backup~	>nulo 2>nulo
+	-@rm *.?~ >nulo 2>nulo
+
+/bw_tmp/interface2/libav_amanda_x86_shinkal.o: libav.c libav_video.c ../mp3_dll/mv_from_be.h AV_SAMPLE_FMT_U8P_k_p.c AV_SAMPLE_FMT_S16P_k_p.c AV_SAMPLE_FMT_S32P_k_p.c AV_SAMPLE_FMT_FLTP_k_p.c AV_SAMPLE_FMT_DBL_k_p.c AV_SAMPLE_FMT_S64P_k_p.c AV_SAMPLE_FMT_U8_k_p.c AV_SAMPLE_FMT_S16_k_p.c AV_SAMPLE_FMT_S32_k_p.c AV_SAMPLE_FMT_S64_k_p.c AV_SAMPLE_FMT_FLT_k_p.c AV_SAMPLE_FMT_DBLP_k_p.c ../morcego/be_constants.h
+
+	i686-w64-mingw32-gcc.exe -c -o /bw_tmp/interface2/libav_amanda_x86_shinkal.o libav.c $(AMANDA_FLAGS__) -DTHALIA_NEW_STANDALONE_AUDIO_PLAYER__ -DMINHA_AMANDA_
+	
+/bw_tmp/interface2/libav_video_amanda_x86_shinkal.o: libav_video.c libav.c ../mp3_dll/mv_from_be.h playlist.c ../morcego/be_constants.h
+
+	i686-w64-mingw32-gcc.exe -c -o /bw_tmp/interface2/libav_video_amanda_x86_shinkal.o libav_video.c $(AMANDA_FLAGS__)  -DTHALIA_NEW_STANDALONE_AUDIO_PLAYER__ -DMINHA_AMANDA_
+	
+/bw_tmp/interface2/amandaricardo_koci_dprintf_amanda_x86.o : amandaricardo_koci_dprintf.c
+	i686-w64-mingw32-gcc.exe -c -o /bw_tmp/interface2/amandaricardo_koci_dprintf_amanda_x86.o amandaricardo_koci_dprintf.c $(AMANDA_FLAGS__)
+
+feline_test:
+	i686-w64-mingw32-gcc.exe -c -o maria.exe amanda_and_ricardo_test.c $(AMANDA_FLAGS__)
+	

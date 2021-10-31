@@ -1364,32 +1364,6 @@ void deinit2(morcego___i___instance__a__bucaneiro_engineering *mv_______)
 /**
    Wrapper to file support of the libav, not is use anymore
  */
-int ffms_wchar_open(const char *fname, WCHAR *mode)
-{
-     int ret;
-     /*
-
-        switch (*mode)
-        {
-        case 'a':
-        oflags = O_CREAT | (rw ? O_RDWR : O_WRONLY);
-        break;
-        case 'r':
-        oflags = rw ? O_RDWR : O_RDONLY;
-        break;
-        case 'w':
-        oflags = O_TRUNC | O_CREAT | (rw ? O_RDWR : O_WRONLY);
-        break;
-        default:
-        return (NULL);
-        }
-
-      */
-     unicode_large *ul = calloc(sizeof(unicode_large), 1);
-     ret = _wopen(utf8towide_fixed(ul, fname), O_RDONLY | O_BINARY);
-     free(ul);
-     return ret;
-}
 
 /**
    Wrapper to file support of the libav, come from the ffms2.dll project.
