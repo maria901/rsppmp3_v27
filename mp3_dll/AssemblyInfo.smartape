@@ -1,5 +1,5 @@
- 
- /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+
+/********************************************************************************
  *                                                                              *
  *        Licensa de Cópia (C) <2021>  <Corporação do Trabalho Binário>         *
  *                                                                              *
@@ -17,18 +17,20 @@
  *     Licensa Pública Menor junto com este programa                            *
  *     Se não, veja <http://www.gnu.org/licenses/>.                             *
  *                                                                              *
- *     Suporte: https://arsoftware.net.br/binarywork_____________________       *
- *     Mirrors: https://locacaodiaria.com.br/corporacaodotrabalhobinario/       *
- *              http: //nomade.sourceforge.net/binarywork_______________/       *
+ *     Suporte: https://nomade.sourceforge.io/                                  *
  *                                                                              *
- *     E-mails direto dos felizes programadores:                                *
- *     Ricardinho:    arsoftware25@gmail.com    ricardo@arsoftware.net.br       *
- *     Koci______:    arsoftware10@gmail.com    am_koci@arsoftware.net.br       *
+ ********************************************************************************
+
+      E-mails:
+      maria@arsoftware.net.br
+      pedro@locacaodiaria.com.br
+
+ ********************************************************************************
  *                                                                              *
- *     contato imediato(para uma resposta muita rápida) WhatsApp                *
- *     (+55)41 9627 1708 - isto está sempre ligado (eu acho...)                 *      
+ *     contato imediato(para uma resposta muito rápida) WhatsApp                *
+ *     (+55)41 9627 1708 - isto está sempre ligado (eu acho...)                 *
  *                                                                              *
- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *  **/
+ *******************************************************************************/
  
 using System;
 using System.Reflection;
@@ -37,12 +39,12 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle ("mp3dll")]
+[assembly: AssemblyTitle ("mp3dll $_number_of_bits_")]
 [assembly: AssemblyDescription ("hi from amanda & ricardo")]
 [assembly: AssemblyConfiguration ("")]
 [assembly: AssemblyCompany ("BinaryWork Corp.")]
 [assembly: AssemblyProduct ("mp3dll")]
-[assembly: AssemblyCopyright ("Copyright ©  2021")]
+[assembly: AssemblyCopyright ("Copyright ©  $_ano_meu_amor..._ ;-)")]
 [assembly: AssemblyTrademark ("Copyright © BinaryWork Corp.")]
 [assembly: AssemblyCulture ("")]
 // Setting ComVisible to false makes the types in this assembly not visible 

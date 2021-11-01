@@ -693,8 +693,16 @@ char *__stdcall svc_init_ogg_m(__attribute__((unused)) char *filename_utf_8_v,
      assert(feline_p->error_code_aline_);
      if (10004 == *feline_p->error_code_aline_)
      {
-          pedro_dprintf(0, "file isnot ogg will return and try MP4/AAC\n");
+          pedro_dprintf(0, "1 file isnot ogg will return and try MP4/AAC\n");
           // free(feline_p);
+          return (char *)feline_p;
+     }
+     if (10003 == *feline_p->error_code_aline_)
+     {
+          pedro_dprintf(0, "2 file isnot ogg will return and try MP4/AAC\n");
+          // free(feline_p);
+
+          *feline_p->error_code_aline_ = 10004;
           return (char *)feline_p;
      }
 

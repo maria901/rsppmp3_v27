@@ -28,7 +28,7 @@ madlib_32k.a:
 
 shinkal_480: pedro_32arp.o decode_32k.o madlib_32k.a madxlib_32k.o
 
-	i686-w64-mingw32-g++ -O3 mislaine.def -mdll -o ./amanda_32/svc_mp3.dll pedro_32arp.o decode_32k.o madlib_32k.a madxlib_32k.o -static-libstdc++ -static-libgcc 	  -lwinmm -lwininet madlib_32k.a
+	i686-w64-mingw32-g++ -O3 mislaine.def -mdll -o ./amanda_32/svc_mp3.dll pedro_32arp.o decode_32k.o madlib_32k.a madxlib_32k.o -static-libstdc++ -static-libgcc -lwinmm -lwininet madlib_32k.a -Wl,-enable-stdcall-fixup
 		
 	cp --preserve=timestamps *.c *.h *.def makefile *.a 'C:\cygwin64_amandaricardo_koci_10.2.0\aoprojeto\tabuleiro_dll\mp3_m'
 
@@ -38,7 +38,7 @@ shinkal_480: pedro_32arp.o decode_32k.o madlib_32k.a madxlib_32k.o
 
 ricardo_64: pedro_64arp.o decode_64k.o madlib_64k.a madxlib_64k.o
 
-	x86_64-w64-mingw32-g++ -O3 mislaine.def -mdll -o svc_mp3.dll pedro_64arp.o decode_64k.o madlib_64k.a madxlib_64k.o -static-libstdc++ -static-libgcc 	  -lwinmm -lwininet madlib_64k.a
+	x86_64-w64-mingw32-g++ -O3 mislaine.def -mdll -o svc_mp3.dll pedro_64arp.o decode_64k.o madlib_64k.a madxlib_64k.o -static-libstdc++ -static-libgcc -lwinmm -lwininet madlib_64k.a -Wl,-enable-stdcall-fixup
 		
 	cp --preserve=timestamps *.c *.h *.def makefile *.a 'C:\cygwin64_amandaricardo_koci_10.2.0\aoprojeto\tabuleiro_dll\mp3_m'
 

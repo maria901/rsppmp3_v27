@@ -30,12 +30,32 @@
 
 #include <Mmsystem.h>
 
-extern int madbitrate;
-
-extern int mad_mp3_is_valid;
+#define MAGIC_AMANDA_VALUE__ 4608
 
 void pedro_dprintf(int amanda_level,
                    char *format, ...);
+
+int64_t decode_mad_MP3(char *amanda_buf_in,
+                       int input_len_ric,
+                       char *amanda_buf_out,
+                       __attribute__((unused)) int size_maria,
+                       int *size_out_feline,
+                       int *not_in_use_pedro);
+
+int64_t decode_mad_MP3(char *amanda_buf_in,
+                       int input_len_ric,
+                       char *amanda_buf_out,
+                       __attribute__((unused)) int size_maria,
+                       int *size_out_feline,
+                       int *not_in_use_pedro)
+{
+     (void)not_in_use_pedro;
+
+     memcpy(amanda_buf_out, amanda_buf_in,
+            input_len_ric);
+     *size_out_feline = input_len_ric;
+     return -27;
+}
 /**
  * The maximum size of an utf-8 encoded filename with the max limit of a file in Windows
  */
@@ -217,6 +237,7 @@ enum decoder_id_maria
      AMANDA_OGG_VORBIS,
      AMANDA_MP4_AAC,
      AMANDA_MP3,
+     AMANDA_RIC_WAV_PCM,
 };
 
 typedef struct pedro_27_
@@ -227,6 +248,23 @@ typedef struct pedro_27_
      int64_t channels_p;
      char media_description_m[1024];
 } juliete_struct;
+
+/////////////////////////////////////////////////////////////////////////////
+typedef struct _wavefile
+{
+     char riff[4];         // '4
+     int bytes;            // '8
+     char wave[4];         // '12
+     char format[4];       // '16
+     int chunksize;        // '20
+     short formattag;      // '22
+     short channels;       // '24
+     int samplespersecond; // '28
+     int avebytespersec;   // '32
+     short blockalign;     // '34
+     short bitspersample;  // '36
+     char pad[8];          // '44
+} wavefile;
 
 typedef struct pedro_k_
 {
@@ -259,112 +297,63 @@ typedef struct pedro_k_
      bool wait_for_fix_m;
      int new_position_v;
      bool request_for_seek_ric;
+
+     int the_bitrate_my_love_m;
+
+     wavefile wav;
+     int waveinicial_j;
+     int deslocacaodewav_f;
 } pedro_k;
-
-int decode_mad_MP3(char *bufmp3, int len, char *out, int outlimit,
-                   int *outsize, int *large);
-
-int Exit_mad_MP3(void);
-
-int Init_mad_MP3(void);
-/*These are the informations that you can gather
-   from an mp3 file using the madlib library
- */
-extern int mad_force_exit; // do not use
-extern int valid_xing;
-extern int madsamplerate;  // sample rate
-extern int madlayer;       // layer
-extern int madchannel;     // channels
-extern int numberofframes; // the number of frames
-extern char madmode[];
-extern int madsample_per_frame;
-extern int madbitrate;        // the bitrate
-extern double madmpegversion; // mpeg version
-extern int mad_mp3_is_valid;
 
 #define VERSIONSTRING "OggDec 1.0\n"
 
-static const int bits = 16;
-
-unsigned char headbuf[44]; /* The whole buffer */
-
-#define WRITE_U32(buf, x)                                \
-     *(buf) = (unsigned char)((x)&0xff);                 \
-     *((buf) + 1) = (unsigned char)(((x) >> 8) & 0xff);  \
-     *((buf) + 2) = (unsigned char)(((x) >> 16) & 0xff); \
-     *((buf) + 3) = (unsigned char)(((x) >> 24) & 0xff);
-
-#define WRITE_U16(buf, x)                \
-     *(buf) = (unsigned char)((x)&0xff); \
-     *((buf) + 1) = (unsigned char)(((x) >> 8) & 0xff);
-
-/*
- * Some of this based on ao/src/ao_wav.c
- */
-static int
-write_prelim_header(FILE *out, int channels, int samplerate)
+static void
+adjustwavepoint_m(FILE *astdin);
+static void
+adjustwavepoint_m(FILE *astdin)
 {
+     int ret;
+     char *ptr = NULL;
+     char fatia[1000];
+     memset(fatia, 0, 1000);
+     ret = _fseeki64(astdin, 0, 0);
+     ret = fread(fatia, 1, 100, astdin);
 
-     int knownlength = 0;
-
-     unsigned int size = 0x7fffffff;
-     // int channels = 2;
-     // int samplerate = 44100;
-     int bytespersec = channels * samplerate * bits / 8;
-     int align = channels * bits / 8;
-     int samplesize = bits;
-
-     if (knownlength)
-          size = (unsigned int)knownlength;
-
-     memcpy(headbuf, "RIFF", 4);
-     WRITE_U32(headbuf + 4, size - 8);
-     memcpy(headbuf + 8, "WAVE", 4);
-     memcpy(headbuf + 12, "fmt ", 4);
-     WRITE_U32(headbuf + 16, 16);
-     WRITE_U16(headbuf + 20, 1); /* format */
-     WRITE_U16(headbuf + 22, channels);
-     WRITE_U32(headbuf + 24, samplerate);
-     WRITE_U32(headbuf + 28, bytespersec);
-     WRITE_U16(headbuf + 32, align);
-     WRITE_U16(headbuf + 34, samplesize);
-     memcpy(headbuf + 36, "data", 4);
-     WRITE_U32(headbuf + 40, size - 44);
-
-     if (fwrite(headbuf, 1, 44, out) != 44)
+     // thinktwice1);
+     if (100 == ret)
      {
-          // printf ("ERROR: Failed to write wav header: %s\n", strerror (errno));
-          return 1;
+          // dprintf             ("fazendo a deslocacao \n");
+          ptr = fatia;
+
+          while ((ptr - fatia) < 100)
+          {
+
+               if (0 == memcmp(ptr, "data", 4))
+               {
+                    // dprintf             ("achou na posicao %d \n", ptr - fatia);
+
+                    ret = _fseeki64(astdin,
+                                    (ptr - fatia) + 8,
+                                    0);
+
+                    goto achouwav;
+               }
+
+               ptr++;
+
+               // dprintf             ("nao achou , deslocado ->  %d \n", ptr - fatia);
+          }
+
+          ret = _fseeki64(astdin, 60, 0);
+     }
+     else
+     {
+          ret = _fseeki64(astdin, 60, 0);
      }
 
-     return 0;
+     ;
+achouwav:;
 }
-
-static int
-rewrite_header(FILE *out, unsigned int written)
-{
-     unsigned int length = written;
-
-     length += 44;
-
-     WRITE_U32(headbuf + 4, length - 8);
-     WRITE_U32(headbuf + 40, length - 44);
-     if (fseek(out, 0, SEEK_SET) != 0)
-     {
-          // printf ("ERROR: Failed to seek on seekable file: %s\n",
-          // strerror (errno));
-          return 1;
-     }
-
-     if (fwrite(headbuf, 1, 44, out) != 44)
-     {
-          // printf ("ERROR: Failed to write wav header: %s\n", strerror (errno));
-          return 1;
-     }
-     return 0;
-}
-
-#include "id3_jump.c"
 
 int main_shinkal64_do_ric(pedro_k *feline_p);
 int main_shinkal64_do_ric(pedro_k *feline_p)
@@ -387,10 +376,14 @@ int main_shinkal64_do_ric(pedro_k *feline_p)
           feline_p->len = 0;
           feline_p->large = 1;
           feline_p->isize = 0;
+          feline_p->dados_do_audio_ar.sample_rate_v = 0;
 
-          madbitrate = 0;
-          madchannel = 0;
-          madsamplerate = 0;
+          feline_p->the_bitrate_my_love_m = 0;
+
+          feline_p->dados_do_audio_ar.channels_p = 0;
+          // madbitrate = 0;
+          // madchannel = 0;
+          // madsamplerate = 0;
      }
 
      if (KOCI_PROCESS__ == feline_p->the_andrea_command)
@@ -400,14 +393,11 @@ int main_shinkal64_do_ric(pedro_k *feline_p)
 
      if (KOCI_FINISH__ == feline_p->the_andrea_command)
      {
-          pedro_dprintf(0, "MP3 end mylove\n");
+          pedro_dprintf(0, "ric wav pcm end mylove\n");
 
           goto exit_function_pedro;
      }
 
-     int id3_tag_size_z;
-
-     Init_mad_MP3();
      if (true)
      {
 
@@ -421,9 +411,9 @@ int main_shinkal64_do_ric(pedro_k *feline_p)
 
           if (NULL == feline_p->myfile)
           {
-               pedro_dprintf(0, "Error openning file %s\n", feline_p->filename_utf_8_m);
+               pedro_dprintf(0, "1 Error openning file %s\n", feline_p->filename_utf_8_m);
 
-               *feline_p->error_code_aline_ = 10004; // Invalid MP3 file
+               *feline_p->error_code_aline_ = 10004; // Invalid MP4 file
                return 1;
 
                // goto saida;
@@ -435,19 +425,92 @@ int main_shinkal64_do_ric(pedro_k *feline_p)
 
           fseek(feline_p->myfile, 0, SEEK_SET);
 
-          id3_tag_size_z = id3v2tag_check(feline_p->filename_utf_8_m);
+          fread(&feline_p->wav, 1, sizeof(feline_p->wav), feline_p->myfile);
+          if (feline_p->wav.riff[0] != 'R' || feline_p->wav.riff[1] != 'I' ||
+              feline_p->wav.riff[2] != 'F' ||
+              feline_p->wav.riff[3] != 'F')
+          {
 
-          if (id3_tag_size_z)
-               pedro_dprintf(0, "ID3 tag size %d\n\n", id3_tag_size_z);
+               fclose(feline_p->myfile);
+               feline_p->myfile = NULL;
 
-          fseek(feline_p->myfile, id3_tag_size_z, SEEK_SET);
+               pedro_dprintf(0, "Not a wav file %s\n", feline_p->filename_utf_8_m);
+               *feline_p->error_code_aline_ = 10004; // Invalid wav file
+               return 1;
+          }
 
-          // outfile = fopen("outfile.out_k.wav", "wb");
+          if (feline_p->wav.wave[0] != 'W' || feline_p->wav.wave[1] != 'A' ||
+              feline_p->wav.wave[2] != 'V' ||
+              feline_p->wav.wave[3] != 'E')
+          {
+
+               fclose(feline_p->myfile);
+               feline_p->myfile = NULL;
+               pedro_dprintf(0, "Not a wav file %s\n", feline_p->filename_utf_8_m);
+               *feline_p->error_code_aline_ = 10004; // Invalid wav file
+               return 1;
+          }
+          if (feline_p->wav.formattag != 1)
+          {
+
+               fclose(feline_p->myfile);
+               feline_p->myfile = NULL;
+               pedro_dprintf(0, "Not a wav file %s\n", feline_p->filename_utf_8_m);
+               *feline_p->error_code_aline_ = 10004; // Invalid wav file
+               return 1;
+          }
+          if (feline_p->wav.bitspersample != 8 && feline_p->wav.bitspersample != 16)
+          {
+
+               fclose(feline_p->myfile);
+               feline_p->myfile = NULL;
+               pedro_dprintf(0, "Not a wav file %s\n", feline_p->filename_utf_8_m);
+               *feline_p->error_code_aline_ = 10004; // Invalid wav file
+               return 1;
+          }
+          if (feline_p->wav.channels != 1 && feline_p->wav.channels != 2)
+          {
+
+               fclose(feline_p->myfile);
+               feline_p->myfile = NULL;
+               pedro_dprintf(0, "Not a wav file %s\n", feline_p->filename_utf_8_m);
+               *feline_p->error_code_aline_ = 10004; // Invalid wav file
+               return 1;
+          }
+          if (feline_p->wav.samplespersecond < 8000 || feline_p->wav.samplespersecond > 48000)
+          {
+
+               fclose(feline_p->myfile);
+               feline_p->myfile = NULL;
+               pedro_dprintf(0, "Not a wav file %s\n", feline_p->filename_utf_8_m);
+               *feline_p->error_code_aline_ = 10004; // Invalid wav file
+               return 1;
+          }
+
+          if (16 != feline_p->wav.bitspersample)
+          {
+
+               fclose(feline_p->myfile);
+               feline_p->myfile = NULL;
+               pedro_dprintf(0, "Not a wav file %s\n", feline_p->filename_utf_8_m);
+               *feline_p->error_code_aline_ = 10004; // Invalid wav file
+               return 1;
+          }
+
+          feline_p->dados_do_audio_ar.sample_rate_v = feline_p->wav.samplespersecond;
+
+          feline_p->dados_do_audio_ar.channels_p = feline_p->wav.channels;
+
+          adjustwavepoint_m(feline_p->myfile);
+
+          feline_p->waveinicial_j = ftell(feline_p->myfile);
+
+          feline_p->deslocacaodewav_f = ftell(feline_p->myfile) % 4;
 
           feline_p->decoder_status_mislaine = PEREIRA_HAS_DATA;
 
      retornamp3:;
-
+exit(27);
           if (feline_p->request_for_seek_ric)
           {
                feline_p->request_for_seek_ric = false;
@@ -456,9 +519,11 @@ int main_shinkal64_do_ric(pedro_k *feline_p)
                      SEEK_SET);
           }
 
+entering_function_pedro:;
+
           feline_p->len = fread(feline_p->bufmp3,
                                 sizeof(char),
-                                feline_p->large,
+                                MAGIC_AMANDA_VALUE__,
                                 feline_p->myfile);
           /*
                     {
@@ -467,48 +532,57 @@ int main_shinkal64_do_ric(pedro_k *feline_p)
                          // printf("Reading...% d\n", size);
                     }
           */
-          if (feline_p->len <= 0 && 0 != feline_p->large)
+          if (0 == feline_p->len)
           {
                pedro_dprintf(0, "End of stream my love\n");
                goto saida;
           }
-
-     entering_function_pedro:;
-     processa:;
+    
           feline_p->chaveador =
               decode_mad_MP3(feline_p->bufmp3,
                              feline_p->len,
                              feline_p->out,
-                             4608,
+                             MAGIC_AMANDA_VALUE__,
                              &feline_p->isize,
                              &feline_p->large);
      }
+
+     /*
      if (0 != feline_p->chaveador)
      {
           goto retornamp3;
      }
+     */
 
-     if (0 != madsamplerate && 0 == feline_p->dados_do_audio_ar.duracao_feline)
+     if (0 != feline_p->dados_do_audio_ar.sample_rate_v && 0 == feline_p->dados_do_audio_ar.duracao_feline)
      {
 
-          feline_p->dados_do_audio_ar.sample_rate_v = madsamplerate;
+          // feline_p->dados_do_audio_ar.sample_rate_v = madsamplerate;
 
           // aac_channels = feline_p->mp4ASC.channelsConfiguration;
 
-          feline_p->dados_do_audio_ar.channels_p = madchannel;
+          // feline_p->dados_do_audio_ar.channels_p = madchannel;
 
-          if (0 != madbitrate)
+          if (0 == feline_p->dados_do_audio_ar.duracao_feline)
           {
 
-               pedro_dprintf(-1, "bitrate amor... %d calc %d \n", madbitrate, feline_p->file_size_m / 240);
+               // pedro_dprintf(-1, "bitrate amor... %d calc %d \n", madbitrate, feline_p->file_size_m / 240);
+               /*
+                              a_m = feline_p->file_size_m;
 
-               a_m = feline_p->file_size_m;
+                              a_m = a_m / feline_p->the_bitrate_my_love_m;
 
-               a_m = a_m / madbitrate;
+                              a_m = a_m / 12.5;
+               */
+               strcpy(feline_p->dados_do_audio_ar.media_description_m, "wav pcm 16 bits");
+               feline_p->the_bitrate_my_love_m = (int)((double)
+                                                           feline_p->dados_do_audio_ar.sample_rate_v *
+                                                       16.0 * (double)feline_p->dados_do_audio_ar.channels_p);
 
-               a_m = a_m / 12.5;
-
-               a_m = a_m * 1000.0 * 100.0;
+               a_m =
+                   (double)feline_p->wav.bytes /
+                   (double)feline_p->wav.avebytespersec;
+               a_m = a_m * 1000.0;
 
                feline_p->dados_do_audio_ar.duracao_feline = a_m;
           }
@@ -532,7 +606,7 @@ int main_shinkal64_do_ric(pedro_k *feline_p)
           }
      }
 
-     goto processa;
+     goto retornamp3;
 
 saida:;
 
@@ -541,7 +615,6 @@ saida:;
 
 exit_function_pedro:;
 
-     Exit_mad_MP3();
      if (feline_p->myfile)
      {
           fclose(feline_p->myfile);
@@ -550,15 +623,15 @@ exit_function_pedro:;
      return 0;
 }
 
-char *__stdcall svc_init_mp3_m(__attribute__((unused)) char *filename_utf_8_v,
-                               __attribute__((unused)) int *error_code_aline_,
-                               __attribute__((unused)) juliete_struct *dados_m);
+char *__stdcall svc_init_ric_pcm_m(__attribute__((unused)) char *filename_utf_8_v,
+                                   __attribute__((unused)) int *error_code_aline_,
+                                   __attribute__((unused)) juliete_struct *dados_m);
 
-char *__stdcall svc_init_mp3_m(__attribute__((unused)) char *filename_utf_8_v,
-                               __attribute__((unused)) int *error_code_aline_,
-                               __attribute__((unused)) juliete_struct *dados_m)
+char *__stdcall svc_init_ric_pcm_m(__attribute__((unused)) char *filename_utf_8_v,
+                                   __attribute__((unused)) int *error_code_aline_,
+                                   __attribute__((unused)) juliete_struct *dados_m)
 {
-     pedro_dprintf(0, "dentro de svc_init_mp3_m\n");
+     pedro_dprintf(0, "dentro de svc_init_ric_pcm_m\n");
      // hacked at 15:24 17/oct/2021 by Amanda husband...
      /*
 
@@ -590,7 +663,7 @@ char *__stdcall svc_init_mp3_m(__attribute__((unused)) char *filename_utf_8_v,
           *error_code_aline_ = 10001; // Cannot allocate memory
           return NULL;
      }
-     feline_p->current_decoder_pedro = AMANDA_MP3;
+     feline_p->current_decoder_pedro = AMANDA_RIC_WAV_PCM;
      feline_p->error_code_aline_ = error_code_aline_;
      assert(feline_p->error_code_aline_);
      feline_p->filename_utf_8_m = calloc(AMANDA__SIZE, 1);
@@ -622,12 +695,6 @@ char *__stdcall svc_init_mp3_m(__attribute__((unused)) char *filename_utf_8_v,
 
           return (char *)feline_p;
      }
-     if (10003 == *feline_p->error_code_aline_)
-     {
-          pedro_dprintf(-20212810, "arquivo nao é MP3\n");
-          *feline_p->error_code_aline_ = 10004;
-          return (char *)feline_p;
-     }
 
      // if opus
      // feline_p->dados_do_audio_ar.sample_rate_v = 48000;
@@ -654,29 +721,21 @@ char *__stdcall svc_init_mp3_m(__attribute__((unused)) char *filename_utf_8_v,
      return NULL;
 }
 
-int __stdcall morcego_decode_libav_svc_process_mp3_m(__attribute__((unused)) char *struct_opus_m,
-                                                     __attribute__((unused)) int bytes_to_decode_m,
-                                                     __attribute__((unused)) char *bufout_m,
-                                                     __attribute__((unused)) int *size_out);
+int __stdcall morcego_decode_libav_svc_process_ric_pcm_m(__attribute__((unused)) char *struct_opus_m,
+                                                         __attribute__((unused)) int bytes_to_decode_m,
+                                                         __attribute__((unused)) char *bufout_m,
+                                                         __attribute__((unused)) int *size_out);
 
-int __stdcall morcego_decode_libav_svc_process_mp3_m(__attribute__((unused)) char *struct_opus_m,
-                                                     __attribute__((unused)) int bytes_to_decode_m,
-                                                     __attribute__((unused)) char *bufout_m,
-                                                     __attribute__((unused)) int *size_out)
+int __stdcall morcego_decode_libav_svc_process_ric_pcm_m(__attribute__((unused)) char *struct_opus_m,
+                                                         __attribute__((unused)) int bytes_to_decode_m,
+                                                         __attribute__((unused)) char *bufout_m,
+                                                         __attribute__((unused)) int *size_out)
 {
-
-     /*
-          double seconds_;
-          int channels_;
-          int samplerate_;
-          char media_description[1000];
-          //int out_bitrate;
-     */
 
      int len_m;
      char *ptr_1;
      (void)ptr_1;
-     pedro_dprintf(-1, "svc_MP4/AAC_process_m\n");
+     pedro_dprintf(-1, "svc_wav_pcm_process_m\n");
      if (NULL == struct_opus_m)
      {
           *size_out = 0;
@@ -702,6 +761,11 @@ int __stdcall morcego_decode_libav_svc_process_mp3_m(__attribute__((unused)) cha
           exit(27);
      }
      else if (AMANDA_MP3 == feline_p->current_decoder_pedro)
+     {
+          pedro_dprintf(1001, "Error fr564gth");
+          exit(27);
+     }
+     else if (AMANDA_RIC_WAV_PCM == feline_p->current_decoder_pedro)
      {
           ; // pass by
      }
@@ -808,10 +872,10 @@ getval_100(double max, double por)
      return maxa;
 }
 
-void __stdcall svc_seek_mp3_m(__attribute__((unused)) char *struct_opus_m,
-                              __attribute__((unused)) double maquisistem_value);
-void __stdcall svc_seek_mp3_m(__attribute__((unused)) char *struct_opus_m,
-                              __attribute__((unused)) double maquisistem_value)
+void __stdcall svc_seek_ric_pcm_m(__attribute__((unused)) char *struct_opus_m,
+                                  __attribute__((unused)) double maquisistem_value);
+void __stdcall svc_seek_ric_pcm_m(__attribute__((unused)) char *struct_opus_m,
+                                  __attribute__((unused)) double maquisistem_value)
 {
 
      pedro_k *feline_p = (void *)struct_opus_m;
@@ -831,17 +895,10 @@ void __stdcall svc_seek_mp3_m(__attribute__((unused)) char *struct_opus_m,
 
      return;
 }
-void morcego_deinit_libav_svc_deinit_mp3_m(__attribute__((unused)) char *struct_opus_m);
-void morcego_deinit_libav_svc_deinit_mp3_m(__attribute__((unused)) char *struct_opus_m)
+void morcego_deinit_libav_svc_deinit_ric_pcm_m(__attribute__((unused)) char *struct_opus_m);
+void morcego_deinit_libav_svc_deinit_ric_pcm_m(__attribute__((unused)) char *struct_opus_m)
 {
      (void)struct_opus_m;
-     /*
-double seconds_;
-int channels_;
-int samplerate_;
-char media_description[1000];
-int out_bitrate;
-*/
 
      if (NULL == struct_opus_m)
      {
@@ -856,7 +913,7 @@ int out_bitrate;
      pedro_dprintf(0, "finalizou\n");
      free(feline_p->filename_utf_8_m);
      free(feline_p);
-     pedro_dprintf(-20212810, "saiu de deinit_MP3");
+     pedro_dprintf(-20212810, "saiu de deinit_wav pcm");
      // exit(27);
      return;
 }

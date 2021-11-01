@@ -56,6 +56,21 @@
 #ifdef HAVE_CONFIG_H
 #include "config.h"
 #endif
+
+char *__stdcall svc_init_ric_pcm_m(__attribute__((unused)) char *filename_utf_8_v,
+                                   __attribute__((unused)) int *error_code_aline_,
+                                   __attribute__((unused)) char *dados_m);
+
+int __stdcall morcego_decode_libav_svc_process_ric_pcm_m(__attribute__((unused)) char *struct_opus_m,
+                                                         __attribute__((unused)) int bytes_to_decode_m,
+                                                         __attribute__((unused)) char *bufout_m,
+                                                         __attribute__((unused)) int *size_out);
+
+void __stdcall svc_seek_ric_pcm_m(__attribute__((unused)) char *struct_opus_m,
+                                  __attribute__((unused)) double maquisistem_value);
+
+void morcego_deinit_libav_svc_deinit_ric_pcm_m(__attribute__((unused)) char *struct_opus_m);
+
 void __stdcall svc_seek_mp3_m(__attribute__((unused)) char *struct_opus_m,
                               __attribute__((unused)) double maquisistem_value);
 int __stdcall morcego_decode_libav_svc_process_mp3_m(__attribute__((unused)) char *struct_opus_m,
@@ -277,6 +292,7 @@ enum decoder_id_maria
      AMANDA_OGG_VORBIS,
      AMANDA_MP4_AAC,
      AMANDA_MP3,
+     AMANDA_RIC_WAV_PCM,
 };
 
 typedef struct pedro_27_
@@ -762,7 +778,7 @@ char *__stdcall svc_init_opus_m(char *filename_utf_8_v,
 
           if (NULL == ptr_shinkal)
           {
-               pedro_dprintf(0, "ogg returns NULL \n");
+               pedro_dprintf(0, "aaa ogg returns NULL \n");
                ; // do nothing, no memory, I supose...
           }
           else if (10004 == *feline_p->error_code_aline_)
@@ -772,7 +788,7 @@ char *__stdcall svc_init_opus_m(char *filename_utf_8_v,
 
                ptr_shinkal = svc_init_mp4_m(filename_utf_8_v,
                                             error_code_aline_,
-                                            dados_m);
+                                            (void *)dados_m);
 
                if (ptr_shinkal)
                {
@@ -812,10 +828,42 @@ char *__stdcall svc_init_opus_m(char *filename_utf_8_v,
                     if (10004 == *feline_p->error_code_aline_)
                     {
                          pedro_dprintf(0, "file isnot MP3 \n");
-
+                         /*
                          morcego_deinit_libav_svc_deinit_mp3_m((char *)feline_p);
                          return NULL;
-                         //ok...
+                         */
+                         // ok...
+
+                         ptr_shinkal = svc_init_ric_pcm_m(filename_utf_8_v,
+                                                          error_code_aline_,
+                                                          (void *)dados_m);
+
+                         if (ptr_shinkal)
+                         {
+                              free(feline_p->filename_utf_8_m);
+                              free(feline_p);
+
+                              feline_p = (void *)ptr_shinkal;
+                         }
+
+                         if (NULL == ptr_shinkal)
+                         {
+                              pedro_dprintf(0, "wav pcm returns NULL \n");
+                              ; // do nothing, ok
+                         }
+                         if (10004 == *feline_p->error_code_aline_)
+                         {
+                              pedro_dprintf(0, "file isnot wav pcm \n");
+
+                              morcego_deinit_libav_svc_deinit_ric_pcm_m((char *)feline_p);
+                              return NULL;
+
+                              // ok...
+                         }
+                         else
+                         {
+                              return (char *)feline_p;
+                         }
                     }
                     else
                     {
@@ -900,6 +948,13 @@ int __stdcall morcego_decode_libav_svc_process_opus_m(char *struct_opus_m,
                                                         bytes_to_decode_m,
                                                         bufout_m,
                                                         size_out);
+     }
+     else if (AMANDA_RIC_WAV_PCM == feline_p->current_decoder_pedro)
+     {
+          return morcego_decode_libav_svc_process_ric_pcm_m((char *)feline_p,
+                                                            bytes_to_decode_m,
+                                                            bufout_m,
+                                                            size_out);
      }
      else
      {
@@ -1009,6 +1064,16 @@ void morcego_deinit_libav_svc_deinit_opus_m(char *struct_opus_m)
           return morcego_deinit_libav_svc_deinit_mp4_m(struct_opus_m);
      }
 
+     if (AMANDA_MP3 == feline_p->current_decoder_pedro)
+     {
+          return morcego_deinit_libav_svc_deinit_mp3_m(struct_opus_m);
+     }
+
+     if (AMANDA_RIC_WAV_PCM == feline_p->current_decoder_pedro)
+     {
+          return morcego_deinit_libav_svc_deinit_ric_pcm_m(struct_opus_m);
+     }
+
      free(feline_p->filename_utf_8_m);
      free(feline_p);
      pedro_dprintf(0, "morcego_deinit_libav_svc_deinit_opus_m\n");
@@ -1067,6 +1132,11 @@ void __stdcall svc_seek_opus_m(char *struct_opus_m,
      else if (AMANDA_MP3 == feline_p->current_decoder_pedro)
      {
           svc_seek_mp3_m(struct_opus_m, maquisistem_value);
+          return;
+     }
+     else if (AMANDA_RIC_WAV_PCM == feline_p->current_decoder_pedro)
+     {
+          svc_seek_ric_pcm_m(struct_opus_m, maquisistem_value);
           return;
      }
      else

@@ -47,7 +47,7 @@ shinkal_480: pedro_64arp.o aac_mp4_decode_64k.o audio_64k.o libfaad_64k.a libmp4
 
 shinkal_4800: pedro_32arp.o aac_mp4_decode_32k.o audio_32k.o libfaad_32k.a libmp4_32k.a
 
-	i686-w64-mingw32-gcc.exe -O3 mislaine.def -mdll -o ./amanda_32/svc_mp4.dll pedro_32arp.o aac_mp4_decode_32k.o audio_32k.o libfaad_32k.a libmp4_32k.a
+	i686-w64-mingw32-gcc.exe -O3 mislaine.def -mdll -o ./amanda_32/svc_mp4.dll pedro_32arp.o aac_mp4_decode_32k.o audio_32k.o libfaad_32k.a libmp4_32k.a -Wl,-enable-stdcall-fixup
 
 	cp --preserve=timestamps *.c *.h *.def makefile *.a 'C:\cygwin64_amandaricardo_koci_10.2.0\aoprojeto\tabuleiro_dll\aac_mp4_m'
 

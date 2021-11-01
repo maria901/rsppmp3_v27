@@ -127,9 +127,13 @@ smartape:
 #x86_64-w64-mingw32-gcc.exe -o /bw_tmp/amandaricardo_mvbuild26_33.exe smartape.c $(AMANDA_FLAGS__) $(JULIET_FLAGS) $(FELINE_FLAGS__) -DAMANDA_S_SMART_APE_ENABLE_WIDE_FUNCTION_
 	$(LICAO_DE_VIDA_DO_MEU_AMOR)
 
-	@/bw_tmp/amandaricardo_mvbuild26_33.exe amanda_s_smart_ape__counter.ini AssemblyInfo.smartape AssemblyInfo.cs AssemblyInfo.hh "1024 bits" 	AssemblyInfo.viu.cs increase
+	@/bw_tmp/amandaricardo_mvbuild26_33.exe amanda_s_smart_ape__counter.ini AssemblyInfo.smartape AssemblyInfo.cs AssemblyInfo.hh "64 bits" 	AssemblyInfo.viu.cs increase '2021' '../sqlite/new icon july_i.ico'
 
 	cp --preserve=timestamps AssemblyInfo.cs /aoprojeto/c#_sample/mp3dll/mp3dll/Properties/AssemblyInfo.cs
+
+	@/bw_tmp/amandaricardo_mvbuild26_33.exe amanda_s_smart_ape__counter.ini AssemblyInfo.smartape AssemblyInfo.cs AssemblyInfo.hh "32 bits" 	AssemblyInfo.viu.cs increase '2021' '../sqlite/new icon july_i.ico'
+
+	cp --preserve=timestamps 'AssemblyInfo.cs' 'C:/cygwin64_amandaricardo_koci_10.2.0/aoprojeto/c#_sample_amanda_x86/mp3dll/mp3dll/Properties'
 
 smartape_v27: /bw_tmp/mp3_dll/smartape.c_kk.o
 	x86_64-w64-mingw32-gcc.exe -o /bw_tmp/amandaricardo_mvbuild26_33.exe /bw_tmp/mp3_dll/smartape.c_kk.o -O3

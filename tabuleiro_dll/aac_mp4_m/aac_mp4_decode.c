@@ -2184,6 +2184,12 @@ char *__stdcall svc_init_mp4_m(__attribute__((unused)) char *filename_utf_8_v,
 		return (char *)feline_p;
 	}
 
+	if (10003 == *feline_p->error_code_aline_)
+	{
+		pedro_dprintf(-20212810, "arquivo nao é MP4/AAC\n");
+		*feline_p->error_code_aline_ = 10004;
+		return (char *)feline_p;
+	}
 	// if opus
 	// feline_p->dados_do_audio_ar.sample_rate_v = 48000;
 	// feline_p->dados_do_audio_ar.channels_p = 2;

@@ -37,12 +37,12 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle ("mp3dll")]
+[assembly: AssemblyTitle ("mp3dll 64 bits")]
 [assembly: AssemblyDescription ("hi from amanda & ricardo")]
 [assembly: AssemblyConfiguration ("")]
 [assembly: AssemblyCompany ("BinaryWork Corp.")]
 [assembly: AssemblyProduct ("mp3dll")]
-[assembly: AssemblyCopyright ("Copyright ©  2021")]
+[assembly: AssemblyCopyright ("Copyright ©  2021 ;-)")]
 [assembly: AssemblyTrademark ("Copyright © BinaryWork Corp.")]
 [assembly: AssemblyCulture ("")]
 // Setting ComVisible to false makes the types in this assembly not visible 
@@ -60,5 +60,5 @@ using System.Runtime.InteropServices;
 // You can specify all the values or you can default the Build and Revision Numbers 
 // by using the '*' as shown below:
 // [assembly: AssemblyVersion("1.0.*")]
-[assembly: AssemblyVersion ("3.5.4.359") ]
-[assembly: AssemblyFileVersion ("3.5.4.359")]
+[assembly: AssemblyVersion ("3.5.7.362") ]
+[assembly: AssemblyFileVersion ("3.5.7.362")]
