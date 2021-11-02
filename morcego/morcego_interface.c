@@ -750,6 +750,7 @@ int morcego_extract_wav(morcego___i___instance__a__bucaneiro_engineering *mv____
      // int64_t            file_size_
      audio_file *wav_stream = NULL;
      bool already_achincalhar = false;
+     bool disable_webm_handling_m = false;
      char int_buffer[4096];
      char signature_amanda_s_smart_ape[MAXPATH_UTF_8_MODE_AMANDA_S_SMART_APE] = {
          0,
@@ -801,6 +802,18 @@ int morcego_extract_wav(morcego___i___instance__a__bucaneiro_engineering *mv____
 
      pedro_dprintf(-1, "Depois de init libav ");
      amanda_s_smart_ape_timestamp = get_bucaneiro_tick();
+
+     pedro_dprintf(-1, "file out %s\n", out_wav_file);
+
+     if (0 == strcmp("lpt1", out_wav_file))
+     {
+          ;
+     }
+     else
+     {
+          disable_webm_handling_m = true;
+          goto force_enter_m;
+     }
 
      if (false == mv_______->libav_c___amanda_s_smart_ape_is_new_webm)
      {
@@ -858,6 +871,11 @@ int morcego_extract_wav(morcego___i___instance__a__bucaneiro_engineering *mv____
 
      if (false == mv_______->libav_c___amanda_s_smart_ape__check_and_get_webm_fix_if_true)
      {
+          if (0 == 1)
+          {
+               goto force_enter_m;
+          }
+     force_enter_m:;
 
           wav_stream =
               open_audio_file(out_wav_file, be->be_samplerate, be->be_channels, wav_mode,
@@ -1052,7 +1070,7 @@ again:;
 
 saida_amanda_s_smart_ape:
 
-     if (false == mv_______->libav_c___amanda_s_smart_ape__check_and_get_webm_fix_if_true)
+     if (disable_webm_handling_m || false == mv_______->libav_c___amanda_s_smart_ape__check_and_get_webm_fix_if_true)
      {
           if (wav_stream)
                close_audio_file(wav_stream);
@@ -1066,73 +1084,77 @@ saida_amanda_s_smart_ape:
 
      mv_______->be_for_wav_convert = NULL;
 
-     if (-1 == mv_______->libav_c___amanda_s_smart_ape_new_generated_duration) // uma coisa por vez...
+     if (false == disable_webm_handling_m)
      {
-          mv_______->libav_c___amanda_s_smart_ape_new_generated_duration = generated_size_amanda_s_smart_ape; // nao é isso?
-
-          mv_______->libav_c___amanda_s_smart_ape_new_generated_duration =
-
-              ((double)(mv_______->libav_c___amanda_s_smart_ape_new_generated_duration) / (double)(be->be_samplerate) / (double)be->be_channels) / 2. * 1000000.0;
-
-          // pensei que fosse serio...
-
-          if (mv_______->libav_c___amanda_s_smart_ape_use_cache)
+          if (-1 == mv_______->libav_c___amanda_s_smart_ape_new_generated_duration) // uma coisa por vez...
           {
-               if (true == mv_______->libav_c___amanda_s_smart_ape_is_new_webm)
+               mv_______->libav_c___amanda_s_smart_ape_new_generated_duration = generated_size_amanda_s_smart_ape; // nao é isso?
+
+               mv_______->libav_c___amanda_s_smart_ape_new_generated_duration =
+
+                   ((double)(mv_______->libav_c___amanda_s_smart_ape_new_generated_duration) / (double)(be->be_samplerate) / (double)be->be_channels) / 2. * 1000000.0;
+
+               // pensei que fosse serio...
+
+               if (mv_______->libav_c___amanda_s_smart_ape_use_cache)
                {
-
-                    // save... se nao estiver carregado, checa se tem o item ou nao
-                    if (mv_______->libav_c___has_an_entry)
+                    if (true == mv_______->libav_c___amanda_s_smart_ape_is_new_webm)
                     {
-                         // update
 
-                         strcpy(mv_______->libav_c___SQL_call_by_amanda, "update Amanda_27_cache set webm________________amanda_s_smart_ape = '");
-
-                         sprintf(mv_______->libav_c___SQL_call_by_amanda + strlen(mv_______->libav_c___SQL_call_by_amanda), "%lld", mv_______->libav_c___amanda_s_smart_ape_new_generated_duration);
-
-                         strcat(mv_______->libav_c___SQL_call_by_amanda, "' where entry_______________amanda_s_smart_ape = '");
-
-                         strcpy(mv_______->libav_c___SQL_temp_by_amanda, mv_______->libav_c___signature___________amanda_s_smart_ape);
-
-                         morcego_encoder_amanda_s_smart_ape(mv_______->libav_c___SQL_temp_by_amanda);
-
-                         strcat(mv_______->libav_c___SQL_call_by_amanda, mv_______->libav_c___SQL_temp_by_amanda);
-
-                         strcat(mv_______->libav_c___SQL_call_by_amanda, "';;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;");
-
-                         if (amanda_s_smart_ape_do_sql(mv_______->libav_c___SQL_call_by_amanda))
+                         // save... se nao estiver carregado, checa se tem o item ou nao
+                         if (mv_______->libav_c___has_an_entry)
                          {
+                              // update
+
+                              strcpy(mv_______->libav_c___SQL_call_by_amanda, "update Amanda_27_cache set webm________________amanda_s_smart_ape = '");
+
+                              sprintf(mv_______->libav_c___SQL_call_by_amanda + strlen(mv_______->libav_c___SQL_call_by_amanda), "%lld", mv_______->libav_c___amanda_s_smart_ape_new_generated_duration);
+
+                              strcat(mv_______->libav_c___SQL_call_by_amanda, "' where entry_______________amanda_s_smart_ape = '");
+
+                              strcpy(mv_______->libav_c___SQL_temp_by_amanda, mv_______->libav_c___signature___________amanda_s_smart_ape);
+
+                              morcego_encoder_amanda_s_smart_ape(mv_______->libav_c___SQL_temp_by_amanda);
+
+                              strcat(mv_______->libav_c___SQL_call_by_amanda, mv_______->libav_c___SQL_temp_by_amanda);
+
+                              strcat(mv_______->libav_c___SQL_call_by_amanda, "';;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;");
+
+                              if (amanda_s_smart_ape_do_sql(mv_______->libav_c___SQL_call_by_amanda))
+                              {
+                              }
+                              else
+                              {
+                              }
                          }
                          else
                          {
+
+                              assert(strlen(signature_amanda_s_smart_ape));
+
+                              sprintf(mv_______->libav_c___webm________________amanda_s_smart_ape, "%lld", mv_______->libav_c___amanda_s_smart_ape_new_generated_duration);
+
+                              mv_______->libav_c___normalization_repla_amanda_s_smart_ape[0] = '\0';
+
+                              mv_______->libav_c___normalization_BENOR_amanda_s_smart_ape[0] = 0x0;
+
+                              mv_______->libav_c___normalization_valu3_amanda_s_smart_ape[0] = 0b0;
+
+                              if (amanda_s_smart_ape_add_entry(signature_amanda_s_smart_ape, mv_______->libav_c___webm________________amanda_s_smart_ape, mv_______->libav_c___normalization_repla_amanda_s_smart_ape, mv_______->libav_c___normalization_BENOR_amanda_s_smart_ape,
+                                                               mv_______->libav_c___normalization_valu3_amanda_s_smart_ape))
+                              {
+                              }
+                              // here, por parts...
+                              // ja passa os 4...
+
+                              // vamos...
                          }
-                    }
-                    else
-                    {
-
-                         assert(strlen(signature_amanda_s_smart_ape));
-
-                         sprintf(mv_______->libav_c___webm________________amanda_s_smart_ape, "%lld", mv_______->libav_c___amanda_s_smart_ape_new_generated_duration);
-
-                         mv_______->libav_c___normalization_repla_amanda_s_smart_ape[0] = '\0';
-
-                         mv_______->libav_c___normalization_BENOR_amanda_s_smart_ape[0] = 0x0;
-
-                         mv_______->libav_c___normalization_valu3_amanda_s_smart_ape[0] = 0b0;
-
-                         if (amanda_s_smart_ape_add_entry(signature_amanda_s_smart_ape, mv_______->libav_c___webm________________amanda_s_smart_ape, mv_______->libav_c___normalization_repla_amanda_s_smart_ape, mv_______->libav_c___normalization_BENOR_amanda_s_smart_ape,
-                                                          mv_______->libav_c___normalization_valu3_amanda_s_smart_ape))
-                         {
-                         }
-                         // here, por parts...
-                         // ja passa os 4...
-
-                         // vamos...
                     }
                }
           }
+
+          mv_______->libav_c___amanda_s_smart_ape__check_and_get_webm_fix_if_true = false;
      }
-     mv_______->libav_c___amanda_s_smart_ape__check_and_get_webm_fix_if_true = false;
 
      amanda_s_smart_ape_timestamp = get_bucaneiro_tick() - amanda_s_smart_ape_timestamp;
 
@@ -1159,8 +1181,8 @@ void morcego_seek_100_libav(morcego___i___instance__a__bucaneiro_engineering *mv
           if (0 == is_mp3)
           {
                mv_______->morcego_interface_c___seek = valor; // ready
-			   mv_______->morcego_interface_c___seek_m_v27 = valor;
-			   pedro_dprintf(-1, "ok 0, pegou o valor %f\n", mv_______->morcego_interface_c___seek_m_v27);
+               mv_______->morcego_interface_c___seek_m_v27 = valor;
+               pedro_dprintf(-1, "ok 0, pegou o valor %f\n", mv_______->morcego_interface_c___seek_m_v27);
           }
           else
           {
@@ -1177,8 +1199,8 @@ void morcego_seek_100_libav(morcego___i___instance__a__bucaneiro_engineering *mv
                }
                mv_______->morcego_interface_c___seek = ret;
                mv_______->morcego_interface_c___seek += be_copy->mp3_adjust;
-			   mv_______->morcego_interface_c___seek_m_v27 = mv_______->morcego_interface_c___seek;
-			   pedro_dprintf(-1, "ok, pegou o valor %f\n", mv_______->morcego_interface_c___seek_m_v27);
+               mv_______->morcego_interface_c___seek_m_v27 = mv_______->morcego_interface_c___seek;
+               pedro_dprintf(-1, "ok, pegou o valor %f\n", mv_______->morcego_interface_c___seek_m_v27);
           }
      }
 }
@@ -1202,6 +1224,10 @@ static int __stdcall init_decoder(morcego___i___instance__a__bucaneiro_engineeri
 
      set_this_thread_to_idle_17_55_23_june_2011();
      pedro_dprintf(-15102021, "found 1");
+
+     pedro_dprintf(-1, "input 1 %s\n", mv_______->morcego_interface_c___filename_);
+     pedro_dprintf(-1, "output 1 %s\n", mv_______->morcego_interface_c___out_wav_file_);
+
      morcego_extract_wav(mv_______, mv_______->morcego_interface_c___filename_, mv_______->morcego_interface_c___out_wav_file_, mv_______->morcego_interface_c___wav_mode_,
                          mv_______->morcego_interface_c___the_track);
      pedro_dprintf(-15102021, "found 2");

@@ -450,7 +450,7 @@ static int write_audio_16bit(audio_file *aufile, void *sample_buffer,
 		data[i * 2] = (char)(sample_buffer16[i] & 0xFF);
 		/*
 		if(2 < data[i * 2])
-		pedro_dprintf(0, "value 2 amor %d\n", (int)data[i * 2]);
+		pedro_dprintf(-1, "value 2 amor %d\n", (int)data[i * 2]);
 		*/
 		data[i * 2 + 1] = (char)((sample_buffer16[i] >> 8) & 0xFF);
 	}

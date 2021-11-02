@@ -3894,6 +3894,10 @@ int __stdcall ConvertMP3ToWavExtended(__int64 mv_instance, char *input, char *ou
 	morcego_property_bag *pb = malloc(sizeof(morcego_property_bag));
 	memset(pb, 0, sizeof(morcego_property_bag));
 	pb->int64_1 = track; // track
+	
+	pedro_dprintf(-1, "input %s\n", input);
+	pedro_dprintf(-1, "output %s\n", output);
+	
 	strcpy(pb->string_1, input);
 	strcpy(pb->string_2, output);
 	pb->int64_2 = tipo_de_wav;

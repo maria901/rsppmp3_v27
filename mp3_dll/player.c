@@ -520,7 +520,7 @@ no_use_i:;
 
      */
 
-     pedro_dprintf(-1, "Antes 1");
+     pedro_dprintf(-1, "chamado sim\n");
      (void)ConvertMP3ToWavExtended(converted_long_int_amanda_s_smart_ape, (void *)filename,
                                    (void *)"lpt1", 1,
                                    mv_______->decoder_c___track);
