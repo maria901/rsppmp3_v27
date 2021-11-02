@@ -297,6 +297,7 @@ typedef struct pedro_k_
      bool wait_for_fix_m;
      int new_position_v;
      bool request_for_seek_ric;
+     bool request_for_seek_ric2;
 
      int the_bitrate_my_love_m;
 
@@ -509,17 +510,43 @@ int main_shinkal64_do_ric(pedro_k *feline_p)
 
           feline_p->decoder_status_mislaine = PEREIRA_HAS_DATA;
 
+     entering_function_pedro:;
      retornamp3:;
-exit(27);
-          if (feline_p->request_for_seek_ric)
+          // exit(27);
+          if (feline_p->request_for_seek_ric2)
           {
-               feline_p->request_for_seek_ric = false;
+               feline_p->request_for_seek_ric2 = false;
                fseek(feline_p->myfile,
                      feline_p->new_position_v,
                      SEEK_SET);
-          }
 
-entering_function_pedro:;
+               pedro_dprintf(-1, "after pos %d\n", ftell(feline_p->myfile));
+
+               if (feline_p->deslocacaodewav_f !=
+                   ftell(feline_p->myfile) % 4)
+               {
+                    fseek(feline_p->myfile, 1,
+                                SEEK_CUR);
+               }
+               if (feline_p->deslocacaodewav_f !=
+                   ftell(feline_p->myfile) % 4)
+               {
+                    fseek(feline_p->myfile, 1,
+                                SEEK_CUR);
+               }
+               if (feline_p->deslocacaodewav_f !=
+                   ftell(feline_p->myfile) % 4)
+               {
+                    fseek(feline_p->myfile, 1,
+                                SEEK_CUR);
+               }
+               if (feline_p->deslocacaodewav_f !=
+                   ftell(feline_p->myfile) % 4)
+               {
+                    fseek(feline_p->myfile, 1,
+                                SEEK_CUR);
+               }
+          }
 
           feline_p->len = fread(feline_p->bufmp3,
                                 sizeof(char),
@@ -537,7 +564,7 @@ entering_function_pedro:;
                pedro_dprintf(0, "End of stream my love\n");
                goto saida;
           }
-    
+
           feline_p->chaveador =
               decode_mad_MP3(feline_p->bufmp3,
                              feline_p->len,
@@ -582,7 +609,7 @@ entering_function_pedro:;
                a_m =
                    (double)feline_p->wav.bytes /
                    (double)feline_p->wav.avebytespersec;
-               a_m = a_m * 1000.0;
+               a_m = a_m * 1000.0 * 1000.0;
 
                feline_p->dados_do_audio_ar.duracao_feline = a_m;
           }
@@ -889,7 +916,10 @@ void __stdcall svc_seek_ric_pcm_m(__attribute__((unused)) char *struct_opus_m,
           feline_p->wait_for_fix_m = true;
 
           feline_p->new_position_v = getval_100(feline_p->file_size_m, maquisistem_value);
-          feline_p->request_for_seek_ric = true;
+
+          pedro_dprintf(0, "new pos %d \n", feline_p->new_position_v);
+
+          feline_p->request_for_seek_ric2 = true;
           feline_p->wait_for_fix_m = false;
      }
 

@@ -228,6 +228,23 @@ typedef struct pedro_27_
      char media_description_m[1024];
 } juliete_struct;
 
+/////////////////////////////////////////////////////////////////////////////
+typedef struct _wavefile
+{
+     char riff[4];         // '4
+     int bytes;            // '8
+     char wave[4];         // '12
+     char format[4];       // '16
+     int chunksize;        // '20
+     short formattag;      // '22
+     short channels;       // '24
+     int samplespersecond; // '28
+     int avebytespersec;   // '32
+     short blockalign;     // '34
+     short bitspersample;  // '36
+     char pad[8];          // '44
+} wavefile;
+
 typedef struct pedro_k_
 {
      char *vf;
@@ -259,6 +276,9 @@ typedef struct pedro_k_
      bool wait_for_fix_m;
      int new_position_v;
      bool request_for_seek_ric;
+
+     wavefile wav;
+
 } pedro_k;
 
 int decode_mad_MP3(char *bufmp3, int len, char *out, int outlimit,
@@ -442,7 +462,22 @@ int main_shinkal64_do_ric(pedro_k *feline_p)
 
           fseek(feline_p->myfile, id3_tag_size_z, SEEK_SET);
 
-          // outfile = fopen("outfile.out_k.wav", "wb");
+          fread(&feline_p->wav, 1, sizeof(feline_p->wav), feline_p->myfile);
+          if ('R' == feline_p->wav.riff[0] &&
+              'I' == feline_p->wav.riff[1] &&
+              'F' == feline_p->wav.riff[2] &&
+              'F' == feline_p->wav.riff[3])
+          {
+
+               fclose(feline_p->myfile);
+               feline_p->myfile = NULL;
+
+               pedro_dprintf(0, "File is wav pcm %s\n", feline_p->filename_utf_8_m);
+               *feline_p->error_code_aline_ = 10004; // Invalid wav file
+               return 1;
+          }
+
+          fseek(feline_p->myfile, id3_tag_size_z, SEEK_SET);
 
           feline_p->decoder_status_mislaine = PEREIRA_HAS_DATA;
 
@@ -618,7 +653,7 @@ char *__stdcall svc_init_mp3_m(__attribute__((unused)) char *filename_utf_8_v,
      // exit(27);
      if (10004 == *feline_p->error_code_aline_)
      {
-          pedro_dprintf(-20212810, "arquivo nao é MP4/AAC\n");
+          pedro_dprintf(-20212810, "arquivo nao é MP3\n");
 
           return (char *)feline_p;
      }
