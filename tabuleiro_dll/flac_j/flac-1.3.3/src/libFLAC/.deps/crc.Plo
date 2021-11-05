@@ -1,0 +1,27 @@
+crc.lo: crc.c ../../config.h include/private/crc.h \
+ ../../include/FLAC/ordinals.h \
+ /usr/lib/gcc/x86_64-w64-mingw32/11/include/stdint.h \
+ /usr/x86_64-w64-mingw32/sys-root/mingw/include/stdint.h \
+ /usr/x86_64-w64-mingw32/sys-root/mingw/include/crtdefs.h \
+ /usr/x86_64-w64-mingw32/sys-root/mingw/include/corecrt.h \
+ /usr/x86_64-w64-mingw32/sys-root/mingw/include/_mingw.h \
+ /usr/x86_64-w64-mingw32/sys-root/mingw/include/_mingw_mac.h \
+ /usr/x86_64-w64-mingw32/sys-root/mingw/include/_mingw_secapi.h \
+ /usr/x86_64-w64-mingw32/sys-root/mingw/include/vadefs.h \
+ /usr/x86_64-w64-mingw32/sys-root/mingw/include/sdks/_mingw_ddk.h \
+ /usr/lib/gcc/x86_64-w64-mingw32/11/include/stddef.h \
+ /usr/x86_64-w64-mingw32/sys-root/mingw/include/stddef.h
+../../config.h:
+include/private/crc.h:
+../../include/FLAC/ordinals.h:
+/usr/lib/gcc/x86_64-w64-mingw32/11/include/stdint.h:
+/usr/x86_64-w64-mingw32/sys-root/mingw/include/stdint.h:
+/usr/x86_64-w64-mingw32/sys-root/mingw/include/crtdefs.h:
+/usr/x86_64-w64-mingw32/sys-root/mingw/include/corecrt.h:
+/usr/x86_64-w64-mingw32/sys-root/mingw/include/_mingw.h:
+/usr/x86_64-w64-mingw32/sys-root/mingw/include/_mingw_mac.h:
+/usr/x86_64-w64-mingw32/sys-root/mingw/include/_mingw_secapi.h:
+/usr/x86_64-w64-mingw32/sys-root/mingw/include/vadefs.h:
+/usr/x86_64-w64-mingw32/sys-root/mingw/include/sdks/_mingw_ddk.h:
+/usr/lib/gcc/x86_64-w64-mingw32/11/include/stddef.h:
+/usr/x86_64-w64-mingw32/sys-root/mingw/include/stddef.h:
