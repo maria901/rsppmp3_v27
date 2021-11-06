@@ -412,7 +412,7 @@ int init_decoder2(morcego___i___instance__a__bucaneiro_engineering *mv_______, b
 
      if (NULL == mv_______->libav_c___thalia_stand_alone_player_ || 10004 == mv_______->error_code_aline_)
      {
-          strcpy(be_data->be_error_message, "Can't open the Opus, Ogg Vorbis, MP3, MP4 or AAC media file");
+          strcpy(be_data->be_error_message, "Can't open the Opus, Ogg Vorbis, MP3, MP4, AAC, WAV pcm or FLAC media file");
           returnvalue = 10;
           goto saida;
      }
