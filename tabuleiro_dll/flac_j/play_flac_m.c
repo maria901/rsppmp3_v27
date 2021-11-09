@@ -280,11 +280,11 @@ reinit_player_flac_do_ric:;
             goto reinit_player_flac_do_ric;
         }
 
-        memset(feline_p, 0, sizeof(*feline_p));
+        // memset(feline_p, 0, sizeof(*feline_p));
 
         feline_p->filename_utf_8_m = filename_utf8_ric;
         feline_p->error_code_aline_ = error_code_aline_;
-        feline_p->current_decoder_pedro = AMANDA_RIC_FLAC;
+        // feline_p->current_decoder_pedro = AMANDA_RIC_FLAC;
 
         feline_p->requested_to_seek_m = seek_me_ric;
 
@@ -310,6 +310,7 @@ reinit_player_flac_do_ric:;
 
     if (KOCI_PROCESS__ == feline_p->the_andrea_command)
     {
+        pedro_dprintf(-1, "KOCI_PROCESS__ \n");
         goto entering_function_pedro;
     }
 
@@ -343,19 +344,19 @@ reinit_player_flac_do_ric:;
                                      NULL,
                                      feline_p);
 
-        pedro_dprintf(-20211105, "main got %d return error %d", feline_p->len, feline_p->error_value_p);
-/*
-        if (0 == feline_p->len &&
-            feline_p->requested_to_seek_m)
-        {
+        pedro_dprintf(-1, "main got %d return error %d", feline_p->len, feline_p->error_value_p);
+        /*
+                if (0 == feline_p->len &&
+                    feline_p->requested_to_seek_m)
+                {
 
-            seek_me_ric = true;
-            to_position_m = feline_p->new_position_v;
-            strcpy(filename_utf8_ric, feline_p->filename_utf_8_m);
-            feline_p->the_andrea_command = KOCI_INIT__;
-            goto reinit_player_flac_do_ric;
-        }
-*/
+                    seek_me_ric = true;
+                    to_position_m = feline_p->new_position_v;
+                    strcpy(filename_utf8_ric, feline_p->filename_utf_8_m);
+                    feline_p->the_andrea_command = KOCI_INIT__;
+                    goto reinit_player_flac_do_ric;
+                }
+        */
         /*
                   {
                        static int size = 0;
@@ -365,7 +366,7 @@ reinit_player_flac_do_ric:;
         */
         if (0 == feline_p->len)
         {
-            pedro_dprintf(-20211105, "End of stream my love\n");
+            pedro_dprintf(-1, "End of stream my love\n");
             goto saida;
         }
 
@@ -430,7 +431,7 @@ reinit_player_flac_do_ric:;
             feline_p->ptr_data_position_douglas = feline_p->buffer_junior;
             feline_p->bytes_in_the_buffer_paul += feline_p->isize;
             // feline_p->exit_on_next_amanda = true;
-
+            pedro_dprintf(-1, "data got %d address %p\n", feline_p->isize, feline_p->bytes_in_the_buffer_paul);
             return 0;
             ;
         }
@@ -495,7 +496,7 @@ char *__stdcall svc_init_flac_do_ric_da_amanda_m(__attribute__((unused)) char *f
     (void)OV_CALLBACKS_NOCLOSE;
     (void)OV_CALLBACKS_DEFAULT;*/
 
-    pedro_dprintf(0, "svc_init_mp4_m\n");
+    pedro_dprintf(-1, "svc_init_flac_m\n");
     pedro_k *feline_p = calloc(sizeof(pedro_k), 1);
     // assert(0);
     if (NULL == feline_p)
@@ -515,13 +516,13 @@ char *__stdcall svc_init_flac_do_ric_da_amanda_m(__attribute__((unused)) char *f
 
     main_shinkal64_do_ric(feline_p);
 
-    pedro_dprintf(-20211105, "saiu de main_shinkal64_do_ric...\n");
+    pedro_dprintf(-1, "saiu de main_shinkal64_do_ric...\n");
 
-    pedro_dprintf(-20211105, "duracao %lld\n", feline_p->dados_do_audio_ar.duracao_feline);
+    pedro_dprintf(-1, "duracao %lld\n", feline_p->dados_do_audio_ar.duracao_feline);
 
     if (0 == feline_p->dados_do_audio_ar.duracao_feline)
     {
-        pedro_dprintf(0, "erro 10004 em flac\n");
+        pedro_dprintf(-1, "erro 10004 em flac\n");
         *feline_p->error_code_aline_ = 10004;
     }
 
@@ -576,7 +577,7 @@ int __stdcall morcego_decode_libav_svc_process_flac_do_ric_da_amanda_m(__attribu
     int len_m;
     char *ptr_1;
     (void)ptr_1;
-    pedro_dprintf(-20211105, " inside svc_process_flac_m\n");
+    pedro_dprintf(-1, " inside svc_process_flac_m\n");
     if (NULL == struct_opus_m)
     {
         *size_out = 0;
@@ -649,11 +650,17 @@ again_amanda:;
         bytes_to_decode_m -= len_m;
         if (0 == feline_p->bytes_in_the_buffer_paul)
         {
+            pedro_dprintf(-1, "BE_DECODED_BUT_NO_MORE_SAMPLES_AVAILABLE bytes_to_decode_m %d *size_out %d\n",
+                          bytes_to_decode_m,
+                          *size_out);
             return BE_DECODED_BUT_NO_MORE_SAMPLES_AVAILABLE;
         }
 
         if (0 < feline_p->bytes_in_the_buffer_paul)
         {
+            pedro_dprintf(-1, "BE_DECODED bytes_to_decode_m %d *size_out %d\n",
+                          bytes_to_decode_m,
+                          *size_out);
             return BE_DECODED;
         }
 
@@ -675,6 +682,9 @@ again_amanda:;
         *size_out += len_m;
         if (0 == bytes_to_decode_m)
         {
+            pedro_dprintf(-1, "BE_DECODED 2 bytes_to_decode_m %d *size_out %d\n",
+                          bytes_to_decode_m,
+                          *size_out);
             return BE_DECODED;
         }
 
@@ -684,7 +694,7 @@ again_amanda:;
             feline_p->bytes_in_the_buffer_paul = 0;
             feline_p->the_andrea_command = KOCI_PROCESS__;
             {
-
+                pedro_dprintf(-1, "Calling again main_shinkal64_do_ric\n");
                 main_shinkal64_do_ric(feline_p);
             }
             goto again_amanda;
@@ -765,7 +775,7 @@ void morcego_deinit_libav_svc_deinit_flac_do_ric_da_amanda_m(__attribute__((unus
     pedro_dprintf(-20211105, "flac finalizou\n");
     free(feline_p->filename_utf_8_m);
     free(feline_p);
-    pedro_dprintf(0, "saiu de deinit_flac");
+    pedro_dprintf(-1, "saiu de deinit_flac");
     // exit(27);
     return;
 }

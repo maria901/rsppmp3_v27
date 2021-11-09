@@ -420,7 +420,7 @@ unsigned __stdcall my_thread_function_v27(void *my_argument_z)
         ok = false;
         *feline_p->error_code_aline_ = 10004;
     }
-    pedro_dprintf(-20211105, "init 7\n");
+    pedro_dprintf(-1, "init 7\n");
     if (ok)
     {
         pedro_dprintf(-20211105, "init 7.1\n");
@@ -536,7 +536,7 @@ FLAC__StreamDecoderWriteStatus write_callback(const FLAC__StreamDecoder *decoder
     feline_p->bytes_to_consume_j = 0;
     short_ptr_j = (short *)feline_p->internal_buf_r;
 
-    pedro_dprintf(-20211105, "size of item %d\n", frame->header.blocksize);
+    pedro_dprintf(-1, "***size of item %d\n", frame->header.blocksize);
 
     for (i = 0; i < frame->header.blocksize; i++)
     {
@@ -558,7 +558,7 @@ FLAC__StreamDecoderWriteStatus write_callback(const FLAC__StreamDecoder *decoder
                 }
                 Sleep(5);
             }
-            pedro_dprintf(-20211105, "reinit decoding...\n");
+            pedro_dprintf(-1, "reinit decoding...\n");
             short_ptr_j = (short *)feline_p->internal_buf_r;
             feline_p->bytes_to_consume_j = 0;
         }
@@ -575,11 +575,11 @@ FLAC__StreamDecoderWriteStatus write_callback(const FLAC__StreamDecoder *decoder
         */
     }
     pedro_dprintf(-20211105, "saindo 1 de write 1\n");
-    pedro_dprintf(-20211105, "saiu \n");
+    pedro_dprintf(-1, "&&&saiu \n");
 
     if (feline_p->bytes_to_consume_j)
     {
-        pedro_dprintf(-20211105, "tem bytes aqui... \n");
+        pedro_dprintf(-1, "!!!tem bytes aqui... \n");
         feline_p->my_command_decoder_m = AMANDA_CANNOT_DECODE;
         feline_p->my_command_player_m = AMANDA_CAN_CONSUME;
 
@@ -606,7 +606,7 @@ FLAC__StreamDecoderWriteStatus write_callback(const FLAC__StreamDecoder *decoder
     if (feline_p->request_for_seek_ric)
     {
         feline_p->request_for_seek_ric = false;
-        pedro_dprintf(-20211105, "dando seek 9\n");
+        pedro_dprintf(-1, "---->dando seek 9\n");
         if (!FLAC__stream_decoder_seek_absolute((void *)feline_p->decoder_m,
                                                 (FLAC__uint64)feline_p->new_position_v))
         {
