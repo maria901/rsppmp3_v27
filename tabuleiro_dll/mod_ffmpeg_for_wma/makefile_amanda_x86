@@ -1,0 +1,222 @@
+
+AMANDA_FLAGS__=-O0 -Wfatal-errors -Werror
+
+amanda_32: switch_xxx.a util_m_x86.a format_m_x86.a ar_obj/k__p_fft23_init_x86.o ar_obj/k__p_fft22_init_x86.o ar_obj/k__p_fft21_init_x86.o ar_obj/k__p_fft20_init_x86.o ar_obj/k__p_fft19_init_x86.o ar_obj/k__p_fft18_init_x86.o ar_obj/k__p_fft17_init_x86.o ar_obj/k__p_fft16_init_x86.o ar_obj/k__p_fft15_init_x86.o ar_obj/k__p_fft14_init_x86.o ar_obj/k__p_fft13_init_x86.o ar_obj/k__p_fft12_init_x86.o ar_obj/k__p_fft11_init_x86.o ar_obj/k__p_fft10_init_x86.o ar_obj/k__p_fft9_init_x86.o ar_obj/k__p_fft8_init_x86.o ar_obj/k__p_fft7_init_x86.o ar_obj/k__p_fft6_init_x86.o ar_obj/k__p_fft5_init_x86.o ar_obj/k__p_fft4_init_x86.o ar_obj/k__p_fft3_init_x86.o ar_obj/k__p_fft2_init_x86.o ar_obj/k__p_fft1_init_x86.o ar_obj/k__p_dci_init_x86.o ar_obj/k__p_options_x86.o ar_obj/k__p_allcodecs_x86.o 
+	
+	i686-w64-mingw32-gcc.exe -c libavcodec/cabac.c -o ar_obj/cabac_x86.o $(AMANDA_FLAGS__) -I. -include libavcodec/vlc.h -DHAVE_AV_CONFIG_H
+
+	i686-w64-mingw32-gcc.exe -c libavcodec/h264dec.c -o ar_obj/h264dec_x86.o $(AMANDA_FLAGS__) -I. -include libavcodec/vlc.h -DHAVE_AV_CONFIG_H
+
+	i686-w64-mingw32-gcc.exe -o ar_obj/ffmpeg_v.dll -mdll ar_obj/interface_3_m.def ar_obj/k__p_options_x86.o \
+	ar_obj/k__p_allcodecs_x86.o 'ar_obj/rico.c' $(AMANDA_FLAGS__) -I. ar_obj/cabac_x86.o ar_obj/h264dec_x86.o ar_obj/libavcodec_do_ric_da_amanda_x86.a ar_obj/libavutil_do_ric_da_amanda_x86.a -liconv ar_obj/k__p_dci_init_x86.o ar_obj/k__p_fft1_init_x86.o ar_obj/k__p_fft2_init_x86.o ar_obj/k__p_fft3_init_x86.o ar_obj/k__p_fft4_init_x86.o ar_obj/k__p_fft5_init_x86.o ar_obj/k__p_fft6_init_x86.o ar_obj/k__p_fft7_init_x86.o ar_obj/k__p_fft8_init_x86.o ar_obj/k__p_fft9_init_x86.o ar_obj/k__p_fft10_init_x86.o ar_obj/k__p_fft11_init_x86.o ar_obj/k__p_fft12_init_x86.o ar_obj/k__p_fft13_init_x86.o ar_obj/k__p_fft14_init_x86.o ar_obj/k__p_fft15_init_x86.o ar_obj/k__p_fft16_init_x86.o ar_obj/k__p_fft17_init_x86.o ar_obj/k__p_fft18_init_x86.o ar_obj/k__p_fft19_init_x86.o ar_obj/k__p_fft20_init_x86.o ar_obj/k__p_fft21_init_x86.o ar_obj/libavutil_do_ric_da_amanda_x86.a ar_obj/k__p_fft22_init_x86.o ar_obj/k__p_fft23_init_x86.o ar_obj/libavformat_do_ric_da_amanda_x86.a ar_obj/libavcodec_do_ric_da_amanda_x86.a ar_obj/libavutil_do_ric_da_amanda_x86.a -lz -lwsock32 -lws2_32 -static
+
+	i686-w64-mingw32-strip.Exe ar_obj/ffmpeg_v.dll
+
+	cp ar_obj/ffmpeg_v.dll 'C:\cygwin64_amandaricardo_koci_10.2.0\bin\mp3dll_standalone_amanda_32'
+
+	echo 'hardly compiled my love...'
+
+switch_xxx.a:
+	cp config_x86.h config.h
+
+ar_obj/k__p_fft23_init_x86.o: libavcodec/x86/h264_intrapred_init.c makefile_amanda config.h
+	i686-w64-mingw32-gcc.exe -c -o ar_obj/k__p_fft23_init_x86.o ./libavcodec/x86/h264_intrapred_init.c $(AMANDA_FLAGS__) -I.
+
+ar_obj/k__p_fft22_init_x86.o: libavcodec/x86/constants.c makefile_amanda config.h
+	i686-w64-mingw32-gcc.exe -c -o ar_obj/k__p_fft22_init_x86.o ./libavcodec/x86/constants.c $(AMANDA_FLAGS__) -I.
+
+ar_obj/k__p_fft21_init_x86.o: libavcodec/x86/hpeldsp_vp3_init.c makefile_amanda config.h
+	i686-w64-mingw32-gcc.exe -c -o ar_obj/k__p_fft21_init_x86.o ./libavcodec/x86/hpeldsp_vp3_init.c $(AMANDA_FLAGS__) -I.
+
+ar_obj/k__p_fft20_init_x86.o: libavutil/x86/imgutils_init.c makefile_amanda config.h
+	i686-w64-mingw32-gcc.exe -c -o ar_obj/k__p_fft20_init_x86.o ./libavutil/x86/imgutils_init.c $(AMANDA_FLAGS__) -I.
+
+ar_obj/k__p_fft19_init_x86.o: libavutil/x86/float_dsp_init.c makefile_amanda config.h
+	i686-w64-mingw32-gcc.exe -c -o ar_obj/k__p_fft19_init_x86.o ./libavutil/x86/float_dsp_init.c $(AMANDA_FLAGS__) -I.
+
+ar_obj/k__p_fft18_init_x86.o: libavutil/x86/cpu.c makefile_amanda config.h
+	i686-w64-mingw32-gcc.exe -c -o ar_obj/k__p_fft18_init_x86.o ./libavutil/x86/cpu.c $(AMANDA_FLAGS__) -I.
+
+ar_obj/k__p_fft17_init_x86.o: libavcodec/x86/h264_qpel.c makefile_amanda config.h
+	i686-w64-mingw32-gcc.exe -c -o ar_obj/k__p_fft17_init_x86.o ./libavcodec/x86/h264_qpel.c $(AMANDA_FLAGS__) -I.
+
+ar_obj/k__p_fft16_init_x86.o: libavcodec/x86/snowdsp.c makefile_amanda config.h
+	i686-w64-mingw32-gcc.exe -c -o ar_obj/k__p_fft16_init_x86.o ./libavcodec/x86/snowdsp.c $(AMANDA_FLAGS__) -I.
+
+ar_obj/k__p_fft15_init_x86.o: libavcodec/x86/me_cmp_init.c makefile_amanda config.h
+	i686-w64-mingw32-gcc.exe -c -o ar_obj/k__p_fft15_init_x86.o ./libavcodec/x86/me_cmp_init.c $(AMANDA_FLAGS__) -I.
+
+ar_obj/k__p_fft14_init_x86.o: libavcodec/x86/idctdsp_init.c makefile_amanda config.h
+	i686-w64-mingw32-gcc.exe -c -o ar_obj/k__p_fft14_init_x86.o ./libavcodec/x86/idctdsp_init.c $(AMANDA_FLAGS__) -I.
+
+ar_obj/k__p_fft13_init_x86.o: libavcodec/x86/hpeldsp_init.c makefile_amanda config.h
+	i686-w64-mingw32-gcc.exe -c -o ar_obj/k__p_fft13_init_x86.o ./libavcodec/x86/hpeldsp_init.c $(AMANDA_FLAGS__) -I.
+
+ar_obj/k__p_fft12_init_x86.o: libavcodec/x86/h264chroma_init.c makefile_amanda config.h
+	i686-w64-mingw32-gcc.exe -c -o ar_obj/k__p_fft12_init_x86.o ./libavcodec/x86/h264chroma_init.c $(AMANDA_FLAGS__) -I.
+
+ar_obj/k__p_fft11_init_x86.o: libavcodec/x86/h263dsp_init.c makefile_amanda config.h
+	i686-w64-mingw32-gcc.exe -c -o ar_obj/k__p_fft11_init_x86.o ./libavcodec/x86/h263dsp_init.c $(AMANDA_FLAGS__) -I.
+
+ar_obj/k__p_fft10_init_x86.o: libavcodec/x86/blockdsp_init.c makefile_amanda config.h
+	i686-w64-mingw32-gcc.exe -c -o ar_obj/k__p_fft10_init_x86.o ./libavcodec/x86/blockdsp_init.c $(AMANDA_FLAGS__) -I.
+
+ar_obj/k__p_fft9_init_x86.o: libavcodec/x86/xvididct_init.c makefile_amanda config.h
+	i686-w64-mingw32-gcc.exe -c -o ar_obj/k__p_fft9_init_x86.o ./libavcodec/x86/xvididct_init.c $(AMANDA_FLAGS__) -I.
+
+ar_obj/k__p_fft8_init_x86.o: libavcodec/x86/videodsp_init.c makefile_amanda config.h
+	i686-w64-mingw32-gcc.exe -c -o ar_obj/k__p_fft8_init_x86.o ./libavcodec/x86/videodsp_init.c $(AMANDA_FLAGS__) -I.
+
+ar_obj/k__p_fft7_init_x86.o: libavcodec/x86/vc1dsp_init.c makefile_amanda config.h
+	i686-w64-mingw32-gcc.exe -c -o ar_obj/k__p_fft7_init_x86.o ./libavcodec/x86/vc1dsp_init.c $(AMANDA_FLAGS__) -I.
+
+ar_obj/k__p_fft6_init_x86.o: libavcodec/x86/qpeldsp_init.c makefile_amanda config.h
+	i686-w64-mingw32-gcc.exe -c -o ar_obj/k__p_fft6_init_x86.o ./libavcodec/x86/qpeldsp_init.c $(AMANDA_FLAGS__) -I.
+
+ar_obj/k__p_fft5_init_x86.o: libavcodec/x86/mpegvideodsp.c makefile_amanda config.h
+	i686-w64-mingw32-gcc.exe -c -o ar_obj/k__p_fft5_init_x86.o ./libavcodec/x86/mpegvideodsp.c $(AMANDA_FLAGS__) -I.
+
+ar_obj/k__p_fft4_init_x86.o: libavcodec/x86/mpegvideo.c makefile_amanda config.h
+	i686-w64-mingw32-gcc.exe -c -o ar_obj/k__p_fft4_init_x86.o ./libavcodec/x86/mpegvideo.c $(AMANDA_FLAGS__) -I.
+
+ar_obj/k__p_options_x86.o: libavcodec/options.c makefile_amanda config.h
+	i686-w64-mingw32-gcc.exe -c -o ar_obj/k__p_options_x86.o ./libavcodec/options.c $(AMANDA_FLAGS__) -I.
+
+ar_obj/k__p_fft3_init_x86.o: libavcodec/x86/h264dsp_init.c makefile_amanda config.h
+	i686-w64-mingw32-gcc.exe -c -o ar_obj/k__p_fft3_init_x86.o ./libavcodec/x86/h264dsp_init.c $(AMANDA_FLAGS__) -I.
+
+ar_obj/k__p_fft2_init_x86.o: libavcodec/x86/lossless_audiodsp_init.c makefile_amanda config.h
+	i686-w64-mingw32-gcc.exe -c -o ar_obj/k__p_fft2_init_x86.o ./libavcodec/x86/lossless_audiodsp_init.c $(AMANDA_FLAGS__) -I.
+
+ar_obj/k__p_dci_init_x86.o: libavcodec/x86/dct_init.c makefile_amanda config.h
+	i686-w64-mingw32-gcc.exe -c -o ar_obj/k__p_dci_init_x86.o ./libavcodec/x86/dct_init.c $(AMANDA_FLAGS__) -I.
+
+ar_obj/k__p_fft1_init_x86.o: libavcodec/x86/fft_init.c makefile_amanda config.h
+	i686-w64-mingw32-gcc.exe -c -o ar_obj/k__p_fft1_init_x86.o ./libavcodec/x86/fft_init.c $(AMANDA_FLAGS__) -I.
+
+ar_obj/k__p_allcodecs_x86.o: libavcodec/allcodecs.c makefile_amanda config.h codec_list.c
+	i686-w64-mingw32-gcc.exe -c -o ar_obj/k__p_allcodecs_x86.o ./libavcodec/allcodecs.c $(AMANDA_FLAGS__) -I.
+
+all_m_encdec_x86.a: makefile_amanda
+	-rm *.o
+	i686-w64-mingw32-gcc.exe -c libavcodec/*.c $(AMANDA_FLAGS__) -I. -include libavcodec/vlc.h -DHAVE_AV_CONFIG_H
+
+	i686-w64-mingw32-ar.EXE rcs ar_obj/libavcodec_do_ric_da_amanda_x86.a *.o
+	rm *.o
+
+util_m_x86.a: makefile_amanda
+	-rm *.o
+	i686-w64-mingw32-gcc.exe -c libavutil/adler32.c        $(AMANDA_FLAGS__) -I. -DHAVE_AV_CONFIG_H
+	i686-w64-mingw32-gcc.exe -c libavutil/aes.c            $(AMANDA_FLAGS__) -I. -DHAVE_AV_CONFIG_H
+	i686-w64-mingw32-gcc.exe -c libavutil/aes_ctr.c        $(AMANDA_FLAGS__) -I. -DHAVE_AV_CONFIG_H
+	i686-w64-mingw32-gcc.exe -c libavutil/audio_fifo.c     $(AMANDA_FLAGS__) -I. -DHAVE_AV_CONFIG_H
+	i686-w64-mingw32-gcc.exe -c libavutil/avstring.c       $(AMANDA_FLAGS__) -I. -DHAVE_AV_CONFIG_H
+	i686-w64-mingw32-gcc.exe -c libavutil/avsscanf.c       $(AMANDA_FLAGS__) -I. -DHAVE_AV_CONFIG_H
+	i686-w64-mingw32-gcc.exe -c libavutil/base64.c         $(AMANDA_FLAGS__) -I. -DHAVE_AV_CONFIG_H
+	i686-w64-mingw32-gcc.exe -c libavutil/blowfish.c       $(AMANDA_FLAGS__) -I. -DHAVE_AV_CONFIG_H
+	i686-w64-mingw32-gcc.exe -c libavutil/bprint.c         $(AMANDA_FLAGS__) -I. -DHAVE_AV_CONFIG_H
+	i686-w64-mingw32-gcc.exe -c libavutil/buffer.c         $(AMANDA_FLAGS__) -I. -DHAVE_AV_CONFIG_H
+	i686-w64-mingw32-gcc.exe -c libavutil/cast5.c          $(AMANDA_FLAGS__) -I. -DHAVE_AV_CONFIG_H
+	i686-w64-mingw32-gcc.exe -c libavutil/camellia.c       $(AMANDA_FLAGS__) -I. -DHAVE_AV_CONFIG_H
+	i686-w64-mingw32-gcc.exe -c libavutil/channel_layout.c $(AMANDA_FLAGS__) -I. -DHAVE_AV_CONFIG_H
+	i686-w64-mingw32-gcc.exe -c libavutil/color_utils.c    $(AMANDA_FLAGS__) -I. -DHAVE_AV_CONFIG_H
+	i686-w64-mingw32-gcc.exe -c libavutil/cpu.c            $(AMANDA_FLAGS__) -I. -DHAVE_AV_CONFIG_H
+	i686-w64-mingw32-gcc.exe -c libavutil/crc.c            $(AMANDA_FLAGS__) -I. -DHAVE_AV_CONFIG_H
+	i686-w64-mingw32-gcc.exe -c libavutil/des.c            $(AMANDA_FLAGS__) -I. -DHAVE_AV_CONFIG_H
+	i686-w64-mingw32-gcc.exe -c libavutil/detection_bbox.c $(AMANDA_FLAGS__) -I. -DHAVE_AV_CONFIG_H
+	i686-w64-mingw32-gcc.exe -c libavutil/dict.c           $(AMANDA_FLAGS__) -I. -DHAVE_AV_CONFIG_H
+	i686-w64-mingw32-gcc.exe -c libavutil/display.c        $(AMANDA_FLAGS__) -I. -DHAVE_AV_CONFIG_H
+	i686-w64-mingw32-gcc.exe -c libavutil/dovi_meta.c      $(AMANDA_FLAGS__) -I. -DHAVE_AV_CONFIG_H
+	i686-w64-mingw32-gcc.exe -c libavutil/downmix_info.c   $(AMANDA_FLAGS__) -I. -DHAVE_AV_CONFIG_H
+	i686-w64-mingw32-gcc.exe -c libavutil/encryption_info.c   $(AMANDA_FLAGS__) -I. -DHAVE_AV_CONFIG_H
+	i686-w64-mingw32-gcc.exe -c libavutil/error.c          $(AMANDA_FLAGS__) -I. -DHAVE_AV_CONFIG_H
+	i686-w64-mingw32-gcc.exe -c libavutil/eval.c           $(AMANDA_FLAGS__) -I. -DHAVE_AV_CONFIG_H
+	i686-w64-mingw32-gcc.exe -c libavutil/fifo.c           $(AMANDA_FLAGS__) -I. -DHAVE_AV_CONFIG_H
+	i686-w64-mingw32-gcc.exe -c libavutil/file.c           $(AMANDA_FLAGS__) -I. -DHAVE_AV_CONFIG_H
+	i686-w64-mingw32-gcc.exe -c libavutil/file_open.c      $(AMANDA_FLAGS__) -I. -DHAVE_AV_CONFIG_H
+	i686-w64-mingw32-gcc.exe -c libavutil/float_dsp.c      $(AMANDA_FLAGS__) -I. -DHAVE_AV_CONFIG_H
+	i686-w64-mingw32-gcc.exe -c libavutil/fixed_dsp.c      $(AMANDA_FLAGS__) -I. -DHAVE_AV_CONFIG_H
+	i686-w64-mingw32-gcc.exe -c libavutil/frame.c          $(AMANDA_FLAGS__) -I. -DHAVE_AV_CONFIG_H
+	i686-w64-mingw32-gcc.exe -c libavutil/hash.c           $(AMANDA_FLAGS__) -I. -DHAVE_AV_CONFIG_H
+	i686-w64-mingw32-gcc.exe -c libavutil/hdr_dynamic_metadata.c  $(AMANDA_FLAGS__) -I. -DHAVE_AV_CONFIG_H
+	i686-w64-mingw32-gcc.exe -c libavutil/hmac.c           $(AMANDA_FLAGS__) -I. -DHAVE_AV_CONFIG_H
+	i686-w64-mingw32-gcc.exe -c libavutil/hwcontext.c      $(AMANDA_FLAGS__) -I. -DHAVE_AV_CONFIG_H
+	i686-w64-mingw32-gcc.exe -c libavutil/imgutils.c       $(AMANDA_FLAGS__) -I. -DHAVE_AV_CONFIG_H
+	i686-w64-mingw32-gcc.exe -c libavutil/integer.c        $(AMANDA_FLAGS__) -I. -DHAVE_AV_CONFIG_H
+	i686-w64-mingw32-gcc.exe -c libavutil/intmath.c        $(AMANDA_FLAGS__) -I. -DHAVE_AV_CONFIG_H
+	i686-w64-mingw32-gcc.exe -c libavutil/lfg.c            $(AMANDA_FLAGS__) -I. -DHAVE_AV_CONFIG_H
+	i686-w64-mingw32-gcc.exe -c libavutil/lls.c            $(AMANDA_FLAGS__) -I. -DHAVE_AV_CONFIG_H
+	i686-w64-mingw32-gcc.exe -c libavutil/log.c            $(AMANDA_FLAGS__) -I. -DHAVE_AV_CONFIG_H
+	i686-w64-mingw32-gcc.exe -c libavutil/log2_tab.c       $(AMANDA_FLAGS__) -I. -DHAVE_AV_CONFIG_H
+	i686-w64-mingw32-gcc.exe -c libavutil/mathematics.c    $(AMANDA_FLAGS__) -I. -DHAVE_AV_CONFIG_H
+	i686-w64-mingw32-gcc.exe -c libavutil/mastering_display_metadata.c $(AMANDA_FLAGS__) -I. -DHAVE_AV_CONFIG_H
+	i686-w64-mingw32-gcc.exe -c libavutil/md5.c            $(AMANDA_FLAGS__) -I. -DHAVE_AV_CONFIG_H
+	i686-w64-mingw32-gcc.exe -c libavutil/mem.c            $(AMANDA_FLAGS__) -I. -DHAVE_AV_CONFIG_H
+	i686-w64-mingw32-gcc.exe -c libavutil/murmur3.c        $(AMANDA_FLAGS__) -I. -DHAVE_AV_CONFIG_H
+	i686-w64-mingw32-gcc.exe -c libavutil/opt.c            $(AMANDA_FLAGS__) -I. -DHAVE_AV_CONFIG_H
+	i686-w64-mingw32-gcc.exe -c libavutil/parseutils.c     $(AMANDA_FLAGS__) -I. -DHAVE_AV_CONFIG_H
+	i686-w64-mingw32-gcc.exe -c libavutil/pixdesc.c        $(AMANDA_FLAGS__) -I. -DHAVE_AV_CONFIG_H
+	i686-w64-mingw32-gcc.exe -c libavutil/pixelutils.c     $(AMANDA_FLAGS__) -I. -DHAVE_AV_CONFIG_H
+	i686-w64-mingw32-gcc.exe -c libavutil/random_seed.c    $(AMANDA_FLAGS__) -I. -DHAVE_AV_CONFIG_H
+	i686-w64-mingw32-gcc.exe -c libavutil/rational.c       $(AMANDA_FLAGS__) -I. -DHAVE_AV_CONFIG_H
+	i686-w64-mingw32-gcc.exe -c libavutil/reverse.c        $(AMANDA_FLAGS__) -I. -DHAVE_AV_CONFIG_H
+	i686-w64-mingw32-gcc.exe -c libavutil/rc4.c            $(AMANDA_FLAGS__) -I. -DHAVE_AV_CONFIG_H
+	i686-w64-mingw32-gcc.exe -c libavutil/ripemd.c         $(AMANDA_FLAGS__) -I. -DHAVE_AV_CONFIG_H
+	i686-w64-mingw32-gcc.exe -c libavutil/samplefmt.c      $(AMANDA_FLAGS__) -I. -DHAVE_AV_CONFIG_H
+	i686-w64-mingw32-gcc.exe -c libavutil/sha.c            $(AMANDA_FLAGS__) -I. -DHAVE_AV_CONFIG_H
+	i686-w64-mingw32-gcc.exe -c libavutil/sha512.c         $(AMANDA_FLAGS__) -I. -DHAVE_AV_CONFIG_H
+	i686-w64-mingw32-gcc.exe -c libavutil/slicethread.c    $(AMANDA_FLAGS__) -I. -DHAVE_AV_CONFIG_H
+	i686-w64-mingw32-gcc.exe -c libavutil/spherical.c      $(AMANDA_FLAGS__) -I. -DHAVE_AV_CONFIG_H
+	i686-w64-mingw32-gcc.exe -c libavutil/stereo3d.c       $(AMANDA_FLAGS__) -I. -DHAVE_AV_CONFIG_H
+	i686-w64-mingw32-gcc.exe -c libavutil/threadmessage.c  $(AMANDA_FLAGS__) -I. -DHAVE_AV_CONFIG_H
+	i686-w64-mingw32-gcc.exe -c libavutil/time.c           $(AMANDA_FLAGS__) -I. -DHAVE_AV_CONFIG_H
+	i686-w64-mingw32-gcc.exe -c libavutil/timecode.c       $(AMANDA_FLAGS__) -I. -DHAVE_AV_CONFIG_H
+	i686-w64-mingw32-gcc.exe -c libavutil/tree.c           $(AMANDA_FLAGS__) -I. -DHAVE_AV_CONFIG_H
+	i686-w64-mingw32-gcc.exe -c libavutil/twofish.c        $(AMANDA_FLAGS__) -I. -DHAVE_AV_CONFIG_H
+	i686-w64-mingw32-gcc.exe -c libavutil/utils.c          $(AMANDA_FLAGS__) -I. -DHAVE_AV_CONFIG_H
+	i686-w64-mingw32-gcc.exe -c libavutil/xga_font_data.c  $(AMANDA_FLAGS__) -I. -DHAVE_AV_CONFIG_H
+	i686-w64-mingw32-gcc.exe -c libavutil/xtea.c           $(AMANDA_FLAGS__) -I. -DHAVE_AV_CONFIG_H	
+	i686-w64-mingw32-gcc.exe -c libavutil/tea.c            $(AMANDA_FLAGS__) -I. -DHAVE_AV_CONFIG_H
+	i686-w64-mingw32-gcc.exe -c libavutil/tx.c             $(AMANDA_FLAGS__) -I. -DHAVE_AV_CONFIG_H
+	i686-w64-mingw32-gcc.exe -c libavutil/tx_float.c       $(AMANDA_FLAGS__) -I. -DHAVE_AV_CONFIG_H
+	i686-w64-mingw32-gcc.exe -c libavutil/tx_double.c      $(AMANDA_FLAGS__) -I. -DHAVE_AV_CONFIG_H
+	i686-w64-mingw32-gcc.exe -c libavutil/tx_int32.c       $(AMANDA_FLAGS__) -I. -DHAVE_AV_CONFIG_H
+	i686-w64-mingw32-gcc.exe -c libavutil/video_enc_params.c $(AMANDA_FLAGS__) -I. -DHAVE_AV_CONFIG_H
+	i686-w64-mingw32-gcc.exe -c libavutil/film_grain_params.c $(AMANDA_FLAGS__) -I. -DHAVE_AV_CONFIG_H
+
+	i686-w64-mingw32-ar.EXE rcs ar_obj/libavutil_do_ric_da_amanda_x86.a *.o
+	rm *.o
+
+format_m_x86.a: makefile_amanda
+	-rm *.o
+	i686-w64-mingw32-gcc.exe -c libavformat/allformats.c        $(AMANDA_FLAGS__) -I. -DHAVE_AV_CONFIG_H
+	i686-w64-mingw32-gcc.exe -c libavformat/avio.c              $(AMANDA_FLAGS__) -I. -DHAVE_AV_CONFIG_H
+	i686-w64-mingw32-gcc.exe -c libavformat/aviobuf.c           $(AMANDA_FLAGS__) -I. -DHAVE_AV_CONFIG_H
+	i686-w64-mingw32-gcc.exe -c libavformat/demux.c             $(AMANDA_FLAGS__) -I. -DHAVE_AV_CONFIG_H
+	i686-w64-mingw32-gcc.exe -c libavformat/dump.c              $(AMANDA_FLAGS__) -I. -DHAVE_AV_CONFIG_H
+	i686-w64-mingw32-gcc.exe -c libavformat/format.c            $(AMANDA_FLAGS__) -I. -DHAVE_AV_CONFIG_H
+	i686-w64-mingw32-gcc.exe -c libavformat/id3v1.c             $(AMANDA_FLAGS__) -I. -DHAVE_AV_CONFIG_H
+	i686-w64-mingw32-gcc.exe -c libavformat/id3v2.c             $(AMANDA_FLAGS__) -I. -DHAVE_AV_CONFIG_H
+	i686-w64-mingw32-gcc.exe -c libavformat/metadata.c          $(AMANDA_FLAGS__) -I. -DHAVE_AV_CONFIG_H
+	i686-w64-mingw32-gcc.exe -c libavformat/mux.c               $(AMANDA_FLAGS__) -I. -DHAVE_AV_CONFIG_H
+	i686-w64-mingw32-gcc.exe -c libavformat/options.c           $(AMANDA_FLAGS__) -I. -DHAVE_AV_CONFIG_H
+	i686-w64-mingw32-gcc.exe -c libavformat/os_support.c        $(AMANDA_FLAGS__) -I. -DHAVE_AV_CONFIG_H
+	i686-w64-mingw32-gcc.exe -c libavformat/protocols.c         $(AMANDA_FLAGS__) -I. -DHAVE_AV_CONFIG_H
+	i686-w64-mingw32-gcc.exe -c libavformat/riff.c              $(AMANDA_FLAGS__) -I. -DHAVE_AV_CONFIG_H
+	i686-w64-mingw32-gcc.exe -c libavformat/riffdec.c           $(AMANDA_FLAGS__) -I. -DHAVE_AV_CONFIG_H
+	i686-w64-mingw32-gcc.exe -c libavformat/sdp.c               $(AMANDA_FLAGS__) -I. -DHAVE_AV_CONFIG_H
+	i686-w64-mingw32-gcc.exe -c libavformat/seek.c              $(AMANDA_FLAGS__) -I. -DHAVE_AV_CONFIG_H
+	i686-w64-mingw32-gcc.exe -c libavformat/url.c               $(AMANDA_FLAGS__) -I. -DHAVE_AV_CONFIG_H
+	i686-w64-mingw32-gcc.exe -c libavformat/utils.c             $(AMANDA_FLAGS__) -I. -DHAVE_AV_CONFIG_H
+	i686-w64-mingw32-gcc.exe -c libavformat/asfdec_f.c          $(AMANDA_FLAGS__) -I. -DHAVE_AV_CONFIG_H
+	i686-w64-mingw32-gcc.exe -c libavformat/asf.c               $(AMANDA_FLAGS__) -I. -DHAVE_AV_CONFIG_H
+	i686-w64-mingw32-gcc.exe -c libavformat/asfcrypt.c          $(AMANDA_FLAGS__) -I. -DHAVE_AV_CONFIG_H
+	i686-w64-mingw32-gcc.exe -c libavformat/avlanguage.c        $(AMANDA_FLAGS__) -I. -DHAVE_AV_CONFIG_H
+	i686-w64-mingw32-gcc.exe -c libavformat/asfdec_o.c          $(AMANDA_FLAGS__) -I. -DHAVE_AV_CONFIG_H
+	i686-w64-mingw32-gcc.exe -c libavformat/file.c              $(AMANDA_FLAGS__) -I. -DHAVE_AV_CONFIG_H
+	i686-w64-mingw32-gcc.exe -c libavformat/network.c           $(AMANDA_FLAGS__) -I. -DHAVE_AV_CONFIG_H
+
+	i686-w64-mingw32-ar.EXE rcs ar_obj/libavformat_do_ric_da_amanda_x86.a *.o
+	rm *.o
+
+	

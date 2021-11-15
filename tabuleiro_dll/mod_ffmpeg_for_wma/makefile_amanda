@@ -1,7 +1,7 @@
 
 AMANDA_FLAGS__=-O0 -Wfatal-errors -Werror
 
-ricardo_64: format_m_x64.a ar_obj/k__p_fft23_init_x64.o ar_obj/k__p_fft22_init_x64.o ar_obj/k__p_fft21_init_x64.o ar_obj/k__p_fft20_init_x64.o ar_obj/k__p_fft19_init_x64.o ar_obj/k__p_fft18_init_x64.o ar_obj/k__p_fft17_init_x64.o ar_obj/k__p_fft16_init_x64.o ar_obj/k__p_fft15_init_x64.o ar_obj/k__p_fft14_init_x64.o ar_obj/k__p_fft13_init_x64.o ar_obj/k__p_fft12_init_x64.o ar_obj/k__p_fft11_init_x64.o ar_obj/k__p_fft10_init_x64.o ar_obj/k__p_fft9_init_x64.o ar_obj/k__p_fft8_init_x64.o ar_obj/k__p_fft7_init_x64.o ar_obj/k__p_fft6_init_x64.o ar_obj/k__p_fft5_init_x64.o ar_obj/k__p_fft4_init_x64.o ar_obj/k__p_fft3_init_x64.o ar_obj/k__p_fft2_init_x64.o ar_obj/k__p_fft1_init_x64.o ar_obj/k__p_dci_init_x64.o ar_obj/k__p_options_x64.o ar_obj/k__p_allcodecs_x64.o 
+ricardo_64: switch_xxx.a format_m_x64.a ar_obj/k__p_fft23_init_x64.o ar_obj/k__p_fft22_init_x64.o ar_obj/k__p_fft21_init_x64.o ar_obj/k__p_fft20_init_x64.o ar_obj/k__p_fft19_init_x64.o ar_obj/k__p_fft18_init_x64.o ar_obj/k__p_fft17_init_x64.o ar_obj/k__p_fft16_init_x64.o ar_obj/k__p_fft15_init_x64.o ar_obj/k__p_fft14_init_x64.o ar_obj/k__p_fft13_init_x64.o ar_obj/k__p_fft12_init_x64.o ar_obj/k__p_fft11_init_x64.o ar_obj/k__p_fft10_init_x64.o ar_obj/k__p_fft9_init_x64.o ar_obj/k__p_fft8_init_x64.o ar_obj/k__p_fft7_init_x64.o ar_obj/k__p_fft6_init_x64.o ar_obj/k__p_fft5_init_x64.o ar_obj/k__p_fft4_init_x64.o ar_obj/k__p_fft3_init_x64.o ar_obj/k__p_fft2_init_x64.o ar_obj/k__p_fft1_init_x64.o ar_obj/k__p_dci_init_x64.o ar_obj/k__p_options_x64.o ar_obj/k__p_allcodecs_x64.o 
 	
 	x86_64-w64-mingw32-gcc.exe -c libavcodec/cabac.c -o ar_obj/cabac.o $(AMANDA_FLAGS__) -I. -include libavcodec/vlc.h -DHAVE_AV_CONFIG_H
 
@@ -15,6 +15,10 @@ ricardo_64: format_m_x64.a ar_obj/k__p_fft23_init_x64.o ar_obj/k__p_fft22_init_x
 	cp ar_obj/ffmpeg_v.dll 'C:\cygwin64_amandaricardo_koci_10.2.0\bin\mp3dll_standalone'
 
 	echo 'hardly compiled my love...'
+
+switch_xxx.a:
+	cp config_x64.h config.h
+	echo 'iniciou ric'
 
 ar_obj/k__p_fft23_init_x64.o: libavcodec/x86/h264_intrapred_init.c makefile_amanda config.h
 	x86_64-w64-mingw32-gcc.exe -c -o ar_obj/k__p_fft23_init_x64.o ./libavcodec/x86/h264_intrapred_init.c $(AMANDA_FLAGS__) -I.
