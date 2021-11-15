@@ -1,4 +1,4 @@
-// Allpass filter implementation
+ // Allpass filter implementation
 //
 // Written by Jezar at Dreampoint, June 2000
 // http://www.dreampoint.co.uk

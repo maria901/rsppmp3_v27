@@ -103,6 +103,20 @@ double NOSBOR__O_AMIGO;
 #include <amanda_x86/libavutil/avutil.h>
 #include <amanda_x86/libavutil/cpu.h>
 #else
+
+#ifdef THALIA_NEW_STANDALONE_AUDIO_PLAYER__
+
+#include <mod_m_ffmpeg/libavcodec/avcodec.h>
+#include <mod_m_ffmpeg/libavformat/avformat.h>
+#include <mod_m_ffmpeg/libswscale/swscale.h>
+//#include <libpostproc/postprocess.h>
+#include <mod_m_ffmpeg/libavdevice/avdevice.h>
+#include <mod_m_ffmpeg/libavfilter/avfilter.h>
+#include <mod_m_ffmpeg/libavutil/avutil.h>
+#include <mod_m_ffmpeg/libavutil/cpu.h>
+
+#else
+
 #include <libavcodec/avcodec.h>
 #include <libavformat/avformat.h>
 #include <libswscale/swscale.h>
@@ -111,6 +125,8 @@ double NOSBOR__O_AMIGO;
 #include <libavfilter/avfilter.h>
 #include <libavutil/avutil.h>
 #include <libavutil/cpu.h>
+#endif
+
 #endif
 /////////////////////////////////////////////////////////////////////////////
 // the main struct that holds the media information
@@ -307,7 +323,7 @@ int init_decoder2(morcego___i___instance__a__bucaneiro_engineering *mv_______, b
 #ifndef THALIA_NEW_STANDALONE_AUDIO_PLAYER__
      AVCodecContext *pCodecCtx = avcodec_alloc_context3(NULL);
 #else
-     AVCodecContext *pCodecCtx = NULL;
+     AVCodecContext *pCodecCtx = avcodec_alloc_context3(NULL);
 #endif
 
      AVFormatContext *FormatContext = NULL;
@@ -328,10 +344,14 @@ int init_decoder2(morcego___i___instance__a__bucaneiro_engineering *mv_______, b
 
      // avcodec_register_all();
      (void)pCodecCtx;
+     /*
 #ifndef THALIA_NEW_STANDALONE_AUDIO_PLAYER__
-     /* here...my love*/
+
      pCodecCtx->thread_count = 0;
 #endif
+     */
+     pCodecCtx->thread_count = 0;
+
      mv_______->libav_c___audiostream = -1;
 
 #if 0
@@ -339,11 +359,12 @@ int init_decoder2(morcego___i___instance__a__bucaneiro_engineering *mv_______, b
 	av_log_set_level (AV_LOG_ERROR);
 #else
      pedro_dprintf(-1, "log quiet");
-
-#ifndef THALIA_NEW_STANDALONE_AUDIO_PLAYER__
+     /*
+     #ifndef THALIA_NEW_STANDALONE_AUDIO_PLAYER__
+          av_log_set_level(AV_LOG_QUIET);
+     #endif
+     */
      av_log_set_level(AV_LOG_QUIET);
-#endif
-
 #endif
 
      pedro_dprintf(-1, "dentro de init_decoder2 saida");
@@ -379,8 +400,29 @@ int init_decoder2(morcego___i___instance__a__bucaneiro_engineering *mv_______, b
      {
           strcpy(be_data->be_error_message, "Can't open the media file");
           returnvalue = 10;
+
+          //pedro_dprintf(0, "nao pode abrir o arquivo %s\n", be_data->sourcefile);
+          //exit(27);
           goto saida;
      }
+
+     //pedro_dprintf(0, "abriu o arquivo\n");
+     //exit(27);
+
+#else
+
+     if (avformat_open_input(&FormatContext, be_data->sourcefile, NULL, (AVDictionary **)(NULL)) != 0)
+     {
+          strcpy(be_data->be_error_message, "Can't open the media file");
+          returnvalue = 10;
+
+          pedro_dprintf(0, "nao pode abrir o arquivo %s\n", be_data->sourcefile);
+          //exit(27);
+          //goto saida;
+     }
+
+     pedro_dprintf(0, "abriu o arquivo\n");
+     //exit(27);
 
 #endif
 
@@ -518,11 +560,10 @@ int init_decoder2(morcego___i___instance__a__bucaneiro_engineering *mv_______, b
 
                          pedro_dprintf(-1, "my ... hack required -> %0.3f", get_bucaneiro_tick() - NOSBOR__O_AMIGO);
 
-                         if (1 != cardo__)//vai passar 3 vezes se nao der certo, ok?...só que nunca vai acontecer...
+                         if (1 != cardo__) // vai passar 3 vezes se nao der certo, ok?...só que nunca vai acontecer...
                          {
                               mv_______->decoder_c___tio = cardo__;
                          }
-
                     }
                     else
                     {
@@ -1530,15 +1571,15 @@ void seek2_v27(morcego___i___instance__a__bucaneiro_engineering *mv_______, doub
 
       */
      /// dprintf("seeking... debug4\n");
-     //mv_______->libav_c___reinit_uf = 0;
-     //mv_______->libav_c___reinit_uf2 = 0;
+     // mv_______->libav_c___reinit_uf = 0;
+     // mv_______->libav_c___reinit_uf2 = 0;
 
      AVFormatContext *FormatContext = (AVFormatContext *)mv_______->libav_c___FormatContext_ptr;
      if (mv_______->libav_c___mode_is_free_play || (FormatContext && (-1 != mv_______->libav_c___audiostream)))
      {
           mv_______->libav_c___is_seeking = 1;
 
-          //Sleep(50); // for safety
+          // Sleep(50); // for safety
           value = getval_100((double)mv_______->libav_c___duracao, value);
 
           mv_______->decoder_c___newsecond_copy = 0;

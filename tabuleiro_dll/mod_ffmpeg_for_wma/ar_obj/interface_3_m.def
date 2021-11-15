@@ -1,0 +1,5 @@
+EXPORTS
+
+avcodec_alloc_context3                                                       @9001
+av_log_set_level                                                             @9002
+avformat_open_input                                                          @9003

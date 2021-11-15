@@ -7,7 +7,7 @@ amandaricardo_valquiria: interface2.def ../mp3_dll/mv_from_be.h makefile /bw_tmp
 
 	@x86_64-w64-mingw32-windres.exe -o /bw_tmp/interface2/ver.o -O coff version_ricardo_mislaine_final_2_.rc
 
-	x86_64-w64-mingw32-gcc.exe -O3 -mdll -o interface2.dll /bw_tmp/interface2/libav_video_shinkal.o /bw_tmp/interface2/libav_shinkal.o amanda.c /bw_tmp/interface2/amandaricardo_koci_dprintf.o /bw_tmp/interface2/ver.o interface2.def  /bin/mp3dll/rspmp3ocx1.dll /bin/mp3dll/svc_opus.dll -L. -static
+	x86_64-w64-mingw32-gcc.exe -O3 -mdll -o interface2.dll /bw_tmp/interface2/libav_video_shinkal.o /bw_tmp/interface2/libav_shinkal.o amanda.c /bw_tmp/interface2/amandaricardo_koci_dprintf.o /bw_tmp/interface2/ver.o interface2.def  /bin/mp3dll/rspmp3ocx1.dll /bin/mp3dll/svc_opus.dll /bin/mp3dll_standalone/ffmpeg_v.dll -L. -static
 
 	@echo 
 
@@ -41,11 +41,11 @@ amanda_clean:
 
 /bw_tmp/interface2/libav_shinkal.o: libav.c libav_video.c ../mp3_dll/mv_from_be.h AV_SAMPLE_FMT_U8P_k_p.c AV_SAMPLE_FMT_S16P_k_p.c AV_SAMPLE_FMT_S32P_k_p.c AV_SAMPLE_FMT_FLTP_k_p.c AV_SAMPLE_FMT_DBL_k_p.c AV_SAMPLE_FMT_S64P_k_p.c AV_SAMPLE_FMT_U8_k_p.c AV_SAMPLE_FMT_S16_k_p.c AV_SAMPLE_FMT_S32_k_p.c AV_SAMPLE_FMT_S64_k_p.c AV_SAMPLE_FMT_FLT_k_p.c AV_SAMPLE_FMT_DBLP_k_p.c ../morcego/be_constants.h
 
-	x86_64-w64-mingw32-gcc.exe -c -o /bw_tmp/interface2/libav_shinkal.o libav.c -DTHALIA_NEW_STANDALONE_AUDIO_PLAYER__ $(AMANDA_FLAGS__) -DMINHA_AMANDA_
+	x86_64-w64-mingw32-gcc.exe -c -o /bw_tmp/interface2/libav_shinkal.o libav.c -DTHALIA_NEW_STANDALONE_AUDIO_PLAYER__ $(AMANDA_FLAGS__) -DMINHA_AMANDA_ -I./mod_m_ffmpeg
 	
 /bw_tmp/interface2/libav_video_shinkal.o: libav_video.c libav.c ../mp3_dll/mv_from_be.h playlist.c ../morcego/be_constants.h
 
-	x86_64-w64-mingw32-gcc.exe -c -o /bw_tmp/interface2/libav_video_shinkal.o libav_video.c -DTHALIA_NEW_STANDALONE_AUDIO_PLAYER__ $(AMANDA_FLAGS__) -DMINHA_AMANDA_
+	x86_64-w64-mingw32-gcc.exe -c -o /bw_tmp/interface2/libav_video_shinkal.o libav_video.c -DTHALIA_NEW_STANDALONE_AUDIO_PLAYER__ $(AMANDA_FLAGS__) -DMINHA_AMANDA_ -I./mod_m_ffmpeg
 	
 /bw_tmp/interface2/amandaricardo_koci_dprintf.o : amandaricardo_koci_dprintf.c
 	x86_64-w64-mingw32-gcc.exe -c -o /bw_tmp/interface2/amandaricardo_koci_dprintf.o amandaricardo_koci_dprintf.c $(AMANDA_FLAGS__)
