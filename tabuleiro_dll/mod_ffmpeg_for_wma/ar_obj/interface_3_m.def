@@ -20,3 +20,4 @@ av_packet_unref                                                              @90
 av_frame_free                                                                @9033
 av_packet_free                                                               @9034
 av_frame_unref                                                               @9035
+av_seek_frame                                                                @9036

@@ -853,7 +853,11 @@ no_use_i:;
                          morcego_seek_100_libav(mv_______, mv_______->decoder_c___seekto);
 
 #else
-
+if(mv_______->libav_c___m_mode_is_ffmpeg)
+{
+	morcego_seek_100_libav(mv_______, mv_______->decoder_c___seekto);
+}
+else
                          svc_seek_opus_m(mv_______->libav_c___thalia_stand_alone_player_, mv_______->decoder_c___seekto);
 #endif
                          mv_______->libav_c___m_already_seek = true;

@@ -233,6 +233,13 @@ int analize(morcego___i___instance__a__bucaneiro_engineering *mv_______, __attri
 		player_decoder_status =
 			morcego_decode_libav(mv_______, 4608, mv_______->analisys_c___out, &isize);
 #else
+	
+if(mv_______->libav_c___m_mode_is_ffmpeg)
+{
+	player_decoder_status =
+			morcego_decode_libav(mv_______, 4608, mv_______->analisys_c___out, &isize);
+}
+else
 		player_decoder_status =
 			morcego_decode_libav_svc_process_opus_m(mv_______->libav_c___thalia_stand_alone_player_,
 													4608, mv_______->analisys_c___out, &isize);

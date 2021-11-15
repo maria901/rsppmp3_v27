@@ -391,6 +391,7 @@ void set_debug_value(int val);
 int morcego_init_libav(morcego___i___instance__a__bucaneiro_engineering *mv_______, be_libav_struct *be_data, int morcego_is_mp3)
 {
      int returnvalue = 0;
+	 pedro_dprintf(-1, "morcego_init_libav called\n");
      mv_______->libav_c___amanda_s_smart_ape__is_open = true;
 
      init();
@@ -529,7 +530,8 @@ int morcego_init_libav(morcego___i___instance__a__bucaneiro_engineering *mv_____
           saida:;
                if (returnvalue)
                {
-                    morcego_deinit_libav(mv_______);
+				   //pedro_dprintf(-1, "will call morcego_deinit_libav from init, return %d\n", returnvalue);
+                   //morcego_deinit_libav(mv_______);, for safety...it will call anyway...
                }
                pedro_dprintf(-1, "morcego_init_libav f");
 
@@ -668,13 +670,26 @@ void morcego_deinit_libav(morcego___i___instance__a__bucaneiro_engineering *mv__
 {
      // assert(0 && "vai chamar deinit");
 
+pedro_dprintf(-1, "morcego_deinit_libav called \n");
+
 #ifdef THALIA_NEW_STANDALONE_AUDIO_PLAYER__
-     morcego_deinit_libav_svc_deinit_opus_m(mv_______->libav_c___thalia_stand_alone_player_);
+
+if(mv_______->libav_c___m_mode_is_ffmpeg)
+{
+	pedro_dprintf(-1, "Mode is @@@ ffmpeg\n");
+}
+else
+{
+		pedro_dprintf(-1, "###vai deinit \n");
+		morcego_deinit_libav_svc_deinit_opus_m(mv_______->libav_c___thalia_stand_alone_player_);
+		pedro_dprintf(-1, "###passou \n");
+}
 #endif
 
      mv_______->morcego_interface_c___decoder_in_use = 0;
+	 pedro_dprintf(-1, "***vai deinit \n");
      deinit2(mv_______);
-
+	 pedro_dprintf(-1, "***passou \n");
      //("deinit");
      mv_______->libav_c___amanda_s_smart_ape__is_open = false;
 
@@ -792,7 +807,7 @@ int morcego_extract_wav(morcego___i___instance__a__bucaneiro_engineering *mv____
 
      strcpy(mv_______->libav_c___signature___________amanda_s_smart_ape, signature_amanda_s_smart_ape);
 
-     pedro_dprintf(-1, "Antes de init libav ");
+     pedro_dprintf(-1, "morcego_init_libav 123 ");
      if (morcego_init_libav(mv_______, be, 0))
      {
           strcpy(mv_______->morcego_interface_c___message___, be->be_error_message);
@@ -911,10 +926,12 @@ again:;
 
      if (mv_______->libav_c___m_mode_is_ffmpeg)
      {
+		 pedro_dprintf(-1, "morcego_decode_libav 123 ");
           ret_amanda_s_smart_ape = morcego_decode_libav(mv_______, sizeof(int_buffer), int_buffer, &size_out);
      }
      else
      {
+		 pedro_dprintf(-1, "morcego_decode_libav_svc_process_opus_m 123 ");
           ret_amanda_s_smart_ape = morcego_decode_libav_svc_process_opus_m(mv_______->libav_c___thalia_stand_alone_player_,
                                                                            sizeof(int_buffer),
                                                                            int_buffer, &size_out);
@@ -1084,6 +1101,9 @@ saida_amanda_s_smart_ape:
                close_audio_file(wav_stream);
      }
      mv_______->morcego_interface_c___decoder_in_use = 0;
+	 
+	 pedro_dprintf(-1, "aqui 2\n");
+	 pedro_dprintf(-1, "morcego_deinit_libav 123 ");
      morcego_deinit_libav(mv_______);
 
      mv_______->morcego_interface_c___porcentagem = 100;

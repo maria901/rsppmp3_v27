@@ -401,12 +401,12 @@ int init_decoder2(morcego___i___instance__a__bucaneiro_engineering *mv_______, b
           strcpy(be_data->be_error_message, "Can't open the media file");
           returnvalue = 10;
 
-          // pedro_dprintf(0, "nao pode abrir o arquivo %s\n", be_data->sourcefile);
+          // pedro_dprintf(-1, "nao pode abrir o arquivo %s\n", be_data->sourcefile);
           // exit(27);
           goto saida;
      }
 
-     // pedro_dprintf(0, "abriu o arquivo\n");
+     // pedro_dprintf(-1, "abriu o arquivo\n");
      // exit(27);
 
 #else
@@ -416,9 +416,9 @@ int init_decoder2(morcego___i___instance__a__bucaneiro_engineering *mv_______, b
      if (avformat_open_input(&FormatContext, be_data->sourcefile, NULL, (AVDictionary **)(NULL)) != 0)
      {
           strcpy(be_data->be_error_message, "Can't open the media file");
-          returnvalue = 10;
+          returnvalue = 0;
 
-          pedro_dprintf(0, "nao pode abrir o arquivo %s\n", be_data->sourcefile);
+          pedro_dprintf(-20211115, "nao pode abrir o arquivo %s\n", be_data->sourcefile);
           // exit(27);
           // goto saida;
 
@@ -426,7 +426,7 @@ int init_decoder2(morcego___i___instance__a__bucaneiro_engineering *mv_______, b
      }
      else
      {
-          pedro_dprintf(0, "abriu o arquivo\n");
+          pedro_dprintf(-20211115, "abriu o arquivo\n");
      }
      // exit(27);
 
@@ -563,7 +563,7 @@ int init_decoder2(morcego___i___instance__a__bucaneiro_engineering *mv_______, b
                                    already_missing = true;
                               }
                               mv_______->libav_c___audiostream = i;
-                              pedro_dprintf(0, "track found 2 at %d\n", i);
+                              pedro_dprintf(-20211115, "track found 2 at %d\n", i);
                               goto achou2;
                          }
                     }
@@ -734,7 +734,7 @@ int init_decoder2(morcego___i___instance__a__bucaneiro_engineering *mv_______, b
                mv_______->libav_c___seconds = (double)((double)(mv_______->dados_do_audio_v27.duracao_feline) / 1000000.0);
           }
 
-          // pedro_dprintf(0, "exiting on line %d\n", __LINE__);
+          // pedro_dprintf(-20211115, "exiting on line %d\n", __LINE__);
           // exit(27);
 #endif
 
@@ -795,7 +795,7 @@ int init_decoder2(morcego___i___instance__a__bucaneiro_engineering *mv_______, b
 
                mv_______->libav_c___audio_timebase = 0.000021;
           }
-          // pedro_dprintf(0, "exiting line %d\n", __LINE__);
+          // pedro_dprintf(-20211115, "exiting line %d\n", __LINE__);
           // exit(27);
 #endif
           /*
@@ -849,7 +849,7 @@ int init_decoder2(morcego___i___instance__a__bucaneiro_engineering *mv_______, b
                pedro_dprintf(-1, "passou de avcodec_find_decoder");
 
                /*
-               pedro_dprintf(0, "tem codec %p\n", Codec);
+               pedro_dprintf(-20211115, "tem codec %p\n", Codec);
                exit(27);
                */
 
@@ -908,7 +908,7 @@ int init_decoder2(morcego___i___instance__a__bucaneiro_engineering *mv_______, b
                          */
           }
           /*
-          pedro_dprintf(0, "exiting on line %d\n", __LINE__);
+          pedro_dprintf(-20211115, "exiting on line %d\n", __LINE__);
           exit(27);
           */
 #endif
@@ -1059,7 +1059,7 @@ int init_decoder2(morcego___i___instance__a__bucaneiro_engineering *mv_______, b
                be_data->be_seconds = mv_______->libav_c___seconds;
           }
           /*
-          pedro_dprintf(0, "exiting on line %d\n", __LINE__);
+          pedro_dprintf(-20211115, "exiting on line %d\n", __LINE__);
           exit(27);
           */
 #endif
@@ -1292,7 +1292,7 @@ saida:;
      pedro_dprintf(-1, "saindo de initdecoder 2");
 
      /*
-     pedro_dprintf(0, "exiting on line %d error %d \n", __LINE__, returnvalue);
+     pedro_dprintf(-20211115, "exiting on line %d error %d \n", __LINE__, returnvalue);
      exit(27);
      */
 
@@ -1391,6 +1391,7 @@ void __stdcall get_sample_format_info_k_p(
 int decode2(morcego___i___instance__a__bucaneiro_engineering *mv_______, char *buf, int *size_out)
 {
 
+pedro_dprintf(-20211115, "running decode2\n");
      // mv_______->libav_c___mode_is_free_play=1; //for debug
 
 #ifndef THALIA_NEW_STANDALONE_AUDIO_PLAYER__
@@ -2059,6 +2060,7 @@ void deinit2(morcego___i___instance__a__bucaneiro_engineering *mv_______)
      }
 
 #else
+	
      AVCodecContext *pCodecCtx = (void *)mv_______->libav_c___pCodecCtx_ptr;
      AVFormatContext *FormatContext = (AVFormatContext *)mv_______->libav_c___FormatContext_ptr;
      if (FormatContext)
@@ -2076,6 +2078,7 @@ void deinit2(morcego___i___instance__a__bucaneiro_engineering *mv_______)
           pCodecCtx = NULL;
           mv_______->libav_c___pCodecCtx_ptr = NULL;
      }
+	 
 #endif
 }
 
@@ -2224,6 +2227,66 @@ void seek2(morcego___i___instance__a__bucaneiro_engineering *mv_______, double v
      }
 #else
 
+if(mv_______->libav_c___m_mode_is_ffmpeg)
+{
+	    mv_______->libav_c___reinit_uf = 0;
+     mv_______->libav_c___reinit_uf2 = 0;
+
+     AVFormatContext *FormatContext = (AVFormatContext *)mv_______->libav_c___FormatContext_ptr;
+     if (mv_______->libav_c___mode_is_free_play || (FormatContext && (-1 != mv_______->libav_c___audiostream)))
+     {
+          mv_______->libav_c___is_seeking = 1;
+
+          Sleep(50); // for safety
+          value = getval_100((double)mv_______->libav_c___duracao, value);
+
+          mv_______->decoder_c___newsecond_copy = 0;
+
+          if ((__int64)value > mv_______->libav_c___duracao)
+          {
+               value = mv_______->libav_c___duracao - 1;
+          }
+          if (value < 0)
+          {
+               value = 0;
+          }
+          /**
+               int av_seek_frame(
+           */
+          if (!mv_______->libav_c___mode_is_free_play)
+          {
+               mv_______->libav_c___morcego =
+                   av_seek_frame(FormatContext, -1, (__int64)value,
+                                 AVSEEK_FLAG_BACKWARD);
+
+               if (mv_______->libav_c___morcego < 0)
+               {
+                    mv_______->libav_c___morcego =
+                        av_seek_frame(FormatContext, -1, (__int64)value,
+                                      AVSEEK_FLAG_BACKWARD | AVSEEK_FLAG_ANY);
+               }
+          }
+          if (mv_______->libav_c___video_ready_to_play)
+          {
+
+               AVFormatContext *FormatContext = (AVFormatContext *)mv_______->libav_c___FormatContext_ptr_video;
+               mv_______->libav_c___morcego =
+                   av_seek_frame(FormatContext, -1, (__int64)value,
+                                 AVSEEK_FLAG_BACKWARD);
+
+               if (mv_______->libav_c___morcego < 0)
+               {
+                    mv_______->libav_c___morcego =
+                        av_seek_frame(FormatContext, -1, (__int64)value,
+                                      AVSEEK_FLAG_BACKWARD | AVSEEK_FLAG_ANY);
+               }
+          }
+          mv_______->libav_c___is_seeking = 0;
+     }
+
+}
+else
+{
      mv_______->libav_c___reinit_uf = 0;
      mv_______->libav_c___reinit_uf2 = 0;
 
@@ -2231,7 +2294,7 @@ void seek2(morcego___i___instance__a__bucaneiro_engineering *mv_______, double v
 
      mv_______->libav_c___is_seeking = 0;
      pedro_dprintf(-1, "opus seek running\n");
-
+}
 #endif
      //("deu seek");
 }
@@ -2306,6 +2369,64 @@ void seek2_v27(morcego___i___instance__a__bucaneiro_engineering *mv_______, doub
      }
 #else
 
+if(mv_______->libav_c___m_mode_is_ffmpeg)
+{
+	
+     AVFormatContext *FormatContext = (AVFormatContext *)mv_______->libav_c___FormatContext_ptr;
+     if (mv_______->libav_c___mode_is_free_play || (FormatContext && (-1 != mv_______->libav_c___audiostream)))
+     {
+          mv_______->libav_c___is_seeking = 1;
+
+          // Sleep(50); // for safety
+          value = getval_100((double)mv_______->libav_c___duracao, value);
+
+          mv_______->decoder_c___newsecond_copy = 0;
+
+          if ((__int64)value > mv_______->libav_c___duracao)
+          {
+               value = mv_______->libav_c___duracao - 1;
+          }
+          if (value < 0)
+          {
+               value = 0;
+          }
+          /**
+               int av_seek_frame(
+           */
+          if (0 && !mv_______->libav_c___mode_is_free_play)
+          {
+               mv_______->libav_c___morcego =
+                   av_seek_frame(FormatContext, -1, (__int64)value,
+                                 AVSEEK_FLAG_BACKWARD);
+
+               if (mv_______->libav_c___morcego < 0)
+               {
+                    mv_______->libav_c___morcego =
+                        av_seek_frame(FormatContext, -1, (__int64)value,
+                                      AVSEEK_FLAG_BACKWARD | AVSEEK_FLAG_ANY);
+               }
+          }
+          if (mv_______->libav_c___video_ready_to_play)
+          {
+
+               AVFormatContext *FormatContext = (AVFormatContext *)mv_______->libav_c___FormatContext_ptr_video;
+               mv_______->libav_c___morcego =
+                   av_seek_frame(FormatContext, -1, (__int64)value,
+                                 AVSEEK_FLAG_BACKWARD);
+
+               if (mv_______->libav_c___morcego < 0)
+               {
+                    mv_______->libav_c___morcego =
+                        av_seek_frame(FormatContext, -1, (__int64)value,
+                                      AVSEEK_FLAG_BACKWARD | AVSEEK_FLAG_ANY);
+               }
+          }
+          mv_______->libav_c___is_seeking = 0;
+     }
+
+}
+else
+{
      mv_______->libav_c___reinit_uf = 0;
      mv_______->libav_c___reinit_uf2 = 0;
 
@@ -2313,7 +2434,7 @@ void seek2_v27(morcego___i___instance__a__bucaneiro_engineering *mv_______, doub
 
      mv_______->libav_c___is_seeking = 0;
      pedro_dprintf(-1, "opus seek running\n");
-
+}
 #endif
      //("deu seek");
 }
