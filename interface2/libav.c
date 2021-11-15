@@ -401,15 +401,17 @@ int init_decoder2(morcego___i___instance__a__bucaneiro_engineering *mv_______, b
           strcpy(be_data->be_error_message, "Can't open the media file");
           returnvalue = 10;
 
-          //pedro_dprintf(0, "nao pode abrir o arquivo %s\n", be_data->sourcefile);
-          //exit(27);
+          // pedro_dprintf(0, "nao pode abrir o arquivo %s\n", be_data->sourcefile);
+          // exit(27);
           goto saida;
      }
 
-     //pedro_dprintf(0, "abriu o arquivo\n");
-     //exit(27);
+     // pedro_dprintf(0, "abriu o arquivo\n");
+     // exit(27);
 
 #else
+
+     mv_______->libav_c___m_mode_is_ffmpeg = true;
 
      if (avformat_open_input(&FormatContext, be_data->sourcefile, NULL, (AVDictionary **)(NULL)) != 0)
      {
@@ -417,12 +419,16 @@ int init_decoder2(morcego___i___instance__a__bucaneiro_engineering *mv_______, b
           returnvalue = 10;
 
           pedro_dprintf(0, "nao pode abrir o arquivo %s\n", be_data->sourcefile);
-          //exit(27);
-          //goto saida;
-     }
+          // exit(27);
+          // goto saida;
 
-     pedro_dprintf(0, "abriu o arquivo\n");
-     //exit(27);
+          mv_______->libav_c___m_mode_is_ffmpeg = false;
+     }
+     else
+     {
+          pedro_dprintf(0, "abriu o arquivo\n");
+     }
+     // exit(27);
 
 #endif
 
@@ -442,24 +448,26 @@ int init_decoder2(morcego___i___instance__a__bucaneiro_engineering *mv_______, b
 */
 #ifdef THALIA_NEW_STANDALONE_AUDIO_PLAYER__
 
-     mv_______->dados_do_audio_v27.duracao_feline = 0;
-
-     mv_______->libav_c___thalia_stand_alone_player_ = svc_init_opus_m(be_data->sourcefile,
-                                                                       &(mv_______->error_code_aline_),
-                                                                       &mv_______->dados_do_audio_v27);
-
-     pedro_dprintf(-1, "tamanho %lld\n", mv_______->dados_do_audio_v27.duracao_feline);
-
-#ifdef THALIA_NEW_STANDALONE_AUDIO_PLAYER__
-
-     if (NULL == mv_______->libav_c___thalia_stand_alone_player_ || 10004 == mv_______->error_code_aline_)
+     if (mv_______->libav_c___m_mode_is_ffmpeg)
      {
-          strcpy(be_data->be_error_message, "Can't open the Opus, Ogg Vorbis, MP3, MP4, AAC, WAV pcm or FLAC media file");
-          returnvalue = 10;
-          goto saida;
      }
+     else
+     {
+          mv_______->dados_do_audio_v27.duracao_feline = 0;
 
-#endif
+          mv_______->libav_c___thalia_stand_alone_player_ = svc_init_opus_m(be_data->sourcefile,
+                                                                            &(mv_______->error_code_aline_),
+                                                                            &mv_______->dados_do_audio_v27);
+
+          pedro_dprintf(-1, "tamanho %lld\n", mv_______->dados_do_audio_v27.duracao_feline);
+
+          if (NULL == mv_______->libav_c___thalia_stand_alone_player_ || 10004 == mv_______->error_code_aline_)
+          {
+               strcpy(be_data->be_error_message, "Can't open the Opus, Ogg Vorbis, MP3, MP4, AAC, WAV pcm or FLAC media file");
+               returnvalue = 10;
+               goto saida;
+          }
+     }
 
 #endif
      // assert(0 && "no lbav");
@@ -518,6 +526,61 @@ int init_decoder2(morcego___i___instance__a__bucaneiro_engineering *mv_______, b
 
      achou:;
      }
+#else
+
+     if (mv_______->libav_c___m_mode_is_ffmpeg)
+     {
+          if (avformat_find_stream_info(FormatContext, (AVDictionary **)(NULL)) < 0)
+          {
+               if (mv_______->libav_c___video_ready_to_play)
+               {
+                    mv_______->libav_c___mode_is_free_play = 1;
+               }
+               else
+               {
+                    strcpy(be_data->be_error_message, "Can't find the stream information");
+
+                    pedro_dprintf(-1, "avformat_find_stream_info error");
+
+                    avformat_close_input(&FormatContext);
+                    mv_______->libav_c___FormatContext_ptr = NULL;
+                    FormatContext = NULL;
+                    returnvalue = 20;
+               }
+          }
+          pedro_dprintf(-1, "passou de avformat_find_stream_info");
+          {
+               int counter = 0;
+               for (i = 0; i < FormatContext->nb_streams; i++)
+                    if (FormatContext->streams[i]->codecpar->codec_type == AVMEDIA_TYPE_AUDIO)
+                    {
+                         counter++;
+                         if (counter == be_data->track_to_play_or_decode)
+                         {
+                              if (false == already_missing)
+                              {
+                                   pedro_dprintf(1001, "@@track support missing, 06/july/2021\n");
+                                   already_missing = true;
+                              }
+                              mv_______->libav_c___audiostream = i;
+                              pedro_dprintf(0, "track found 2 at %d\n", i);
+                              goto achou2;
+                         }
+                    }
+               if (mv_______->libav_c___video_ready_to_play)
+               {
+                    mv_______->libav_c___mode_is_free_play = 1;
+               }
+               else
+               {
+                    strcpy(be_data->be_error_message, "The track resquested was not found");
+                    returnvalue = 30;
+                    goto saida;
+               }
+
+          achou2:;
+          }
+     }
 
 #endif
 
@@ -534,8 +597,22 @@ int init_decoder2(morcego___i___instance__a__bucaneiro_engineering *mv_______, b
 
           mv_______->libav_c___duracao = FormatContext->duration;
 #else
-          mv_______->libav_c___audiostream = 0;
-          mv_______->libav_c___duracao = mv_______->dados_do_audio_v27.duracao_feline;
+          if (mv_______->libav_c___m_mode_is_ffmpeg)
+          {
+               if (-1 == mv_______->libav_c___audiostream)
+               {
+                    strcpy(be_data->be_error_message, "Audio stream not found");
+                    returnvalue = 40;
+                    goto saida;
+               }
+
+               mv_______->libav_c___duracao = FormatContext->duration;
+          }
+          else
+          {
+               mv_______->libav_c___audiostream = 0;
+               mv_______->libav_c___duracao = mv_______->dados_do_audio_v27.duracao_feline;
+          }
 
 #endif
 #ifndef THALIA_NEW_STANDALONE_AUDIO_PLAYER__
@@ -587,7 +664,17 @@ int init_decoder2(morcego___i___instance__a__bucaneiro_engineering *mv_______, b
 
                // mv_______->libav_c___duracao =
           }
+#else
+/*
+          if (mv_______->libav_c___m_mode_is_ffmpeg)
+          {
+               // exit(27);
+               if (false)
+               {
 
+               }
+          }
+*/
 #endif
 
 #ifndef THALIA_NEW_STANDALONE_AUDIO_PLAYER__
@@ -615,10 +702,40 @@ int init_decoder2(morcego___i___instance__a__bucaneiro_engineering *mv_______, b
                goto saida;
           }
 #else
+          if (mv_______->libav_c___m_mode_is_ffmpeg)
+          {
+               if (mv_______->libav_c___amanda_s_smart_ape_is_new_webm)
+               {
+                    mv_______->libav_c___duracao = mv_______->libav_c___amanda_s_smart_ape_new_generated_duration;
+                    FormatContext->duration = mv_______->libav_c___duracao;
+                    pedro_dprintf(-1, "value of duration %lld\n", mv_______->libav_c___duracao);
+                    //[8272] value of duration 212683187  _amanda_debug_
+                    /*
 
-          be_data->length = mv_______->dados_do_audio_v27.duracao_feline;
-          mv_______->libav_c___seconds = (double)((double)(mv_______->dados_do_audio_v27.duracao_feline) / 1000000.0);
+                    C:\Users\User\Downloads\sample_960x540.webm
 
+                    */
+               }
+
+               be_data->length = (double)mv_______->libav_c___duracao;
+
+               mv_______->libav_c___seconds = (double)((double)(FormatContext->duration) / 1000000.0);
+
+               if (!pCodecCtx)
+               {
+                    strcpy(be_data->be_error_message, "Cannot allocate memory");
+                    returnvalue = 9000;
+                    goto saida;
+               }
+          }
+          else
+          {
+               be_data->length = mv_______->dados_do_audio_v27.duracao_feline;
+               mv_______->libav_c___seconds = (double)((double)(mv_______->dados_do_audio_v27.duracao_feline) / 1000000.0);
+          }
+
+          // pedro_dprintf(0, "exiting on line %d\n", __LINE__);
+          // exit(27);
 #endif
 
 #ifndef THALIA_NEW_STANDALONE_AUDIO_PLAYER__
@@ -646,10 +763,40 @@ int init_decoder2(morcego___i___instance__a__bucaneiro_engineering *mv_______, b
                // exit(27);
           }
 #else
-          strcpy(be_data->be__magic_value__format_name, mv_______->dados_do_audio_v27.media_description_m);
+          if (mv_______->libav_c___m_mode_is_ffmpeg)
+          {
+               ret_k_p = avcodec_parameters_to_context(pCodecCtx, FormatContext->streams[mv_______->libav_c___audiostream]->codecpar);
+               if (ret_k_p < 0)
+               {
+                    strcpy(be_data->be_error_message, "Cannot allocate memory");
+                    returnvalue = 9001;
+                    goto saida;
+               }
 
-          mv_______->libav_c___audio_timebase = 0.000021;
+               mv_______->libav_c___pCodecCtx_ptr = pCodecCtx;
 
+               strcpy(be_data->be__magic_value__format_name,
+                      FormatContext->iformat->long_name);
+
+               pedro_dprintf(-1, "data amor -> %s", be_data->be__magic_value__format_name);
+
+               {
+                    double den = FormatContext->streams[(int)mv_______->libav_c___audiostream]->time_base.den;
+                    double num = FormatContext->streams[(int)mv_______->libav_c___audiostream]->time_base.num;
+                    mv_______->libav_c___audio_timebase = num / den;
+
+                    // pedro_dprintf(-1, "timebase %f", mv_______->libav_c___audio_timebase);
+                    // exit(27);
+               }
+          }
+          else
+          {
+               strcpy(be_data->be__magic_value__format_name, mv_______->dados_do_audio_v27.media_description_m);
+
+               mv_______->libav_c___audio_timebase = 0.000021;
+          }
+          // pedro_dprintf(0, "exiting line %d\n", __LINE__);
+          // exit(27);
 #endif
           /*
 
@@ -696,27 +843,73 @@ int init_decoder2(morcego___i___instance__a__bucaneiro_engineering *mv_______, b
           }
 #else
 
-          strcpy(be_data->be_codec_name, mv_______->dados_do_audio_v27.media_description_m);
-
-          strcpy(be_data->be_media_information, be_data->be_codec_name);
-
-          pedro_dprintf(-1, "data -> %s", be_data->be_codec_name);
-
-          // exit(27);
-
-          if (mv_______->libav_c___video_ready_to_play)
+          if (mv_______->libav_c___m_mode_is_ffmpeg)
           {
-               strcat(be_data->be_media_information, " - ");
-               strcat(be_data->be_media_information, mv_______->libav_c___video_codec);
+               Codec = (void *)avcodec_find_decoder(pCodecCtx->codec_id);
+               pedro_dprintf(-1, "passou de avcodec_find_decoder");
+
+               /*
+               pedro_dprintf(0, "tem codec %p\n", Codec);
+               exit(27);
+               */
+
+               if (NULL == Codec)
+               {
+                    strcpy(be_data->be_error_message, "Can't initiate the decoder 1");
+                    returnvalue = 50;
+                    goto saida;
+               }
+
+               strcpy(be_data->be_codec_name, Codec->name ? Codec->name : "unknown");
+
+               strcpy(be_data->be_media_information, be_data->be_codec_name);
+
+               pedro_dprintf(-1, "data -> %s", be_data->be_codec_name);
+
+               // exit(27);
+
+               if (mv_______->libav_c___video_ready_to_play)
+               {
+                    strcat(be_data->be_media_information, " - ");
+                    strcat(be_data->be_media_information, mv_______->libav_c___video_codec);
+               }
+
+               if (0 !=
+                   strcmp(be_data->be_codec_name, be_data->be__magic_value__format_name))
+               {
+                    strcat(be_data->be_media_information, " - ");
+                    strcat(be_data->be_media_information,
+                           be_data->be__magic_value__format_name);
+               }
           }
-/*
-          if (0 !=
-              strcmp(be_data->be_codec_name, be_data->be__magic_value__format_name))
+          else
           {
-               strcat(be_data->be_media_information, " - ");
-               strcat(be_data->be_media_information,
-                      be_data->be__magic_value__format_name);
+               strcpy(be_data->be_codec_name, mv_______->dados_do_audio_v27.media_description_m);
+
+               strcpy(be_data->be_media_information, be_data->be_codec_name);
+
+               pedro_dprintf(-1, "data -> %s", be_data->be_codec_name);
+
+               // exit(27);
+
+               if (mv_______->libav_c___video_ready_to_play)
+               {
+                    strcat(be_data->be_media_information, " - ");
+                    strcat(be_data->be_media_information, mv_______->libav_c___video_codec);
+               }
+               /*
+                         if (0 !=
+                             strcmp(be_data->be_codec_name, be_data->be__magic_value__format_name))
+                         {
+                              strcat(be_data->be_media_information, " - ");
+                              strcat(be_data->be_media_information,
+                                     be_data->be__magic_value__format_name);
+                         }
+                         */
           }
+          /*
+          pedro_dprintf(0, "exiting on line %d\n", __LINE__);
+          exit(27);
           */
 #endif
 
@@ -785,21 +978,90 @@ int init_decoder2(morcego___i___instance__a__bucaneiro_engineering *mv_______, b
 
 // exit(27);
 #else
+          if (mv_______->libav_c___m_mode_is_ffmpeg)
+          {
 
-          mv_______->libav_c___BitsPerSample = 32;
-          mv_______->libav_c___original_bitrate_k_p = 32;
-          mv_______->libav_c___BitsPerSample = 16;
-          be_data->be_bitrate = 0;
-          mv_______->libav_c___original_number_of_channels_k_p = mv_______->dados_do_audio_v27.channels_p;
-          mv_______->libav_c___channels_ = mv_______->dados_do_audio_v27.channels_p;
-          be_data->be_channels = mv_______->dados_do_audio_v27.channels_p;
-          mv_______->libav_c___sample_rate = mv_______->dados_do_audio_v27.sample_rate_v; // for opus only, mp3 and others need to retrieve from data
-          mv_______->libav_c___sample_fmt_ = 8;
-          be_data->sample_format = 8;
-          be_data->be_samplerate = mv_______->dados_do_audio_v27.sample_rate_v;
-          be_data->be_bits_per_sample = 16;
-          be_data->be_seconds = mv_______->libav_c___seconds;
+               if (Codec->capabilities & AV_CODEC_CAP_TRUNCATED)
+               {
+                    pCodecCtx->flags |= AV_CODEC_FLAG_TRUNCATED;
+                    // we do not send complete frames, I yet don't know if
+                    // this can affect our audio player..., but since it is
+                    // in the libav documentation I will keep it this way
+               }
 
+               if (avcodec_open2(pCodecCtx, Codec, NULL) < 0)
+               {
+                    strcpy(be_data->be_error_message, "Can't open the decoder");
+                    returnvalue = 60;
+                    avcodec_free_context(&pCodecCtx);
+                    mv_______->libav_c___pCodecCtx_ptr = NULL; // why???
+                    pCodecCtx = NULL;
+                    goto saida;
+               }
+               pedro_dprintf(-1, "passou de avcodec_open2");
+               mv_______->libav_c___BitsPerSample = av_get_bytes_per_sample(pCodecCtx->sample_fmt) * 8;
+
+               mv_______->libav_c___original_bitrate_k_p = mv_______->libav_c___BitsPerSample;
+
+               mv_______->libav_c___BitsPerSample = 16; // hack ...
+
+               pedro_dprintf(-1, "0 Bits per sample %d", mv_______->libav_c___BitsPerSample);
+
+               mv_______->libav_c___pCodecCtx_ptr = pCodecCtx;
+               /*
+                  if (AV_SAMPLE_FMT_S32==pCodecCtx->sample_fmt
+                    && pCodecCtx->bits_per_raw_sample)
+                    mv_______->libav_c___BitsPerSample = pCodecCtx->bits_per_raw_sample;
+                */
+               // hack again
+
+               be_data->be_bitrate = pCodecCtx->bit_rate;
+
+               pedro_dprintf(-1, "audio bitrate %d\n", pCodecCtx->bit_rate);
+
+               mv_______->libav_c___channels_ = pCodecCtx->channels;
+
+               mv_______->libav_c___original_number_of_channels_k_p = mv_______->libav_c___channels_;
+
+               if (2 < mv_______->libav_c___channels_)
+               {
+                    mv_______->libav_c___channels_ = 2;
+               }
+
+               be_data->be_channels = mv_______->libav_c___channels_;
+
+               mv_______->libav_c___sample_rate = pCodecCtx->sample_rate;
+
+               mv_______->libav_c___sample_fmt_ = pCodecCtx->sample_fmt; // 1
+
+               be_data->sample_format = mv_______->libav_c___sample_fmt_;
+
+               be_data->be_samplerate = mv_______->libav_c___sample_rate;
+
+               be_data->be_bits_per_sample = mv_______->libav_c___BitsPerSample;
+
+               be_data->be_seconds = mv_______->libav_c___seconds;
+          }
+          else
+          {
+               mv_______->libav_c___BitsPerSample = 32;
+               mv_______->libav_c___original_bitrate_k_p = 32;
+               mv_______->libav_c___BitsPerSample = 16;
+               be_data->be_bitrate = 0;
+               mv_______->libav_c___original_number_of_channels_k_p = mv_______->dados_do_audio_v27.channels_p;
+               mv_______->libav_c___channels_ = mv_______->dados_do_audio_v27.channels_p;
+               be_data->be_channels = mv_______->dados_do_audio_v27.channels_p;
+               mv_______->libav_c___sample_rate = mv_______->dados_do_audio_v27.sample_rate_v; // for opus only, mp3 and others need to retrieve from data
+               mv_______->libav_c___sample_fmt_ = 8;
+               be_data->sample_format = 8;
+               be_data->be_samplerate = mv_______->dados_do_audio_v27.sample_rate_v;
+               be_data->be_bits_per_sample = 16;
+               be_data->be_seconds = mv_______->libav_c___seconds;
+          }
+          /*
+          pedro_dprintf(0, "exiting on line %d\n", __LINE__);
+          exit(27);
+          */
 #endif
      }
      else
@@ -879,6 +1141,80 @@ int init_decoder2(morcego___i___instance__a__bucaneiro_engineering *mv_______, b
           be_data->be_bits_per_sample = 16;
 
           be_data->be_seconds = mv_______->libav_c___seconds;
+#else
+
+          if (mv_______->libav_c___m_mode_is_ffmpeg)
+          {
+
+               mv_______->libav_c___audio_frame = -1;
+
+               AVFormatContext *FormatContext =
+                   (AVFormatContext *)mv_______->libav_c___FormatContext_ptr_video;
+
+               mv_______->libav_c___duracao = FormatContext->duration;
+
+               // mprintf("valor %I64d ",mv_______->libav_c___duracao);
+
+               be_data->length = (double)mv_______->libav_c___duracao;
+
+               mv_______->libav_c___seconds = (double)((double)(FormatContext->duration) / 1000000.0);
+
+               /////aqui meu amor...
+               pCodecCtx = mv_______->libav_c___pCodecCtx_ptr_video;
+
+               strcpy(be_data->be__magic_value__format_name,
+                      FormatContext->iformat->long_name);
+
+               Codec = (void *)avcodec_find_decoder(pCodecCtx->codec_id);
+
+               if (NULL == Codec)
+               {
+                    strcpy(be_data->be_error_message, "Can't initiate the decoder 2");
+                    returnvalue = 50;
+                    goto saida;
+               }
+
+               strcpy(be_data->be_codec_name, Codec->name ? Codec->name : "unknown");
+
+               strcpy(be_data->be_media_information, be_data->be_codec_name);
+
+               if (mv_______->libav_c___video_ready_to_play)
+               {
+                    strcat(be_data->be_media_information, " - ");
+                    strcat(be_data->be_media_information, mv_______->libav_c___video_codec);
+               }
+
+               if (0 !=
+                   strcmp(be_data->be_codec_name, be_data->be__magic_value__format_name))
+               {
+                    strcat(be_data->be_media_information, " - ");
+                    strcat(be_data->be_media_information,
+                           be_data->be__magic_value__format_name);
+               }
+
+               mv_______->libav_c___original_bitrate_k_p = 16;
+               mv_______->libav_c___original_number_of_channels_k_p = 2;
+               mv_______->libav_c___BitsPerSample = 16;
+
+               be_data->be_bitrate = 0;
+
+               mv_______->libav_c___channels_ = 2;
+
+               be_data->be_channels = 2;
+
+               mv_______->libav_c___sample_rate = 44100;
+
+               mv_______->libav_c___sample_fmt_ = 1;
+
+               be_data->sample_format = mv_______->libav_c___sample_fmt_;
+
+               be_data->be_samplerate = mv_______->libav_c___sample_rate;
+
+               be_data->be_bits_per_sample = 16;
+
+               be_data->be_seconds = mv_______->libav_c___seconds;
+          }
+
 #endif
      }
 
@@ -954,6 +1290,11 @@ saida:;
      //("saiu de init 2");
 
      pedro_dprintf(-1, "saindo de initdecoder 2");
+
+     /*
+     pedro_dprintf(0, "exiting on line %d error %d \n", __LINE__, returnvalue);
+     exit(27);
+     */
 
      return returnvalue;
 }
@@ -1368,7 +1709,326 @@ final_ha_ha_ha_ha_ha:;
 
      av_packet_free(&packet_ptr);
      //("saiu de decode audio");
+#else
 
+     if (mv_______->libav_c___m_mode_is_ffmpeg)
+     {
+
+          if (mv_______->libav_c___mode_is_free_play)
+          {
+               *size_out = 0;
+               if (mv_______->libav_c___video_thread_running)
+               {
+                    memcpy(buf, mv_______->libav_c___empty_data, 4096); // what is this my love?...why not memset?
+                    *size_out = 4096;
+                    return BE_DECODED;
+               }
+               else
+               {
+                    *size_out = 0;
+                    return BE_DECODED_BUT_NO_MORE_SAMPLES_AVAILABLE;
+               }
+          }
+          int got_frame = 0;
+          AVFrame *decoded_frame = NULL;
+          // char *buffer_v11=av_malloc(192000);
+          AVCodecContext *pCodecCtx = (void *)mv_______->libav_c___pCodecCtx_ptr;
+          AVFormatContext *FormatContext = (AVFormatContext *)mv_______->libav_c___FormatContext_ptr;
+          // the packet
+          AVPacket *packet_ptr = av_packet_alloc();
+          *size_out = 0;
+          // memset (packet_ptr, 0, sizeof (AVPacket));
+     final:;
+          while (mv_______->libav_c___is_seeking)
+          {
+               Sleep(15);
+          }
+          if (!mv_______->libav_c___pCodecCtx_ptr || !mv_______->libav_c___FormatContext_ptr)
+          {
+               assert(0);
+               goto final_ha_ha_ha_ha_ha;
+          }
+          while (av_read_frame(FormatContext, packet_ptr) >= 0)
+          {
+
+               if (mv_______->libav_c___is_seeking)
+               {
+                    av_packet_unref(packet_ptr);
+                    goto final;
+               }
+               if (!mv_______->libav_c___pCodecCtx_ptr || !mv_______->libav_c___FormatContext_ptr)
+               {
+                    assert(0);
+                    goto final_ha_ha_ha_ha_ha;
+               }
+               if (packet_ptr->stream_index == mv_______->libav_c___audiostream)
+               {
+
+                    if (AV_NOPTS_VALUE == packet_ptr->pts)
+                    {
+                         // ("packet.pts == AV_NOPTS_VALUE\n");
+                         setdebuginformation_multithread(mv_______, "Missing presentation timestamp, on some frames");
+                    }
+
+                    mv_______->libav_c___audio_frame = packet_ptr->pts;
+
+                    pedro_dprintf(-1, "Audio update ----------");
+
+                    if (!mv_______->libav_c___pCodecCtx_ptr || !mv_______->libav_c___FormatContext_ptr)
+                    {
+                         assert(0);
+                         goto final_ha_ha_ha_ha_ha;
+                    }
+                    /*
+                                                  if (!decoded_frame)
+                                                  {
+                                                            if (!(decoded_frame = av_frame_alloc()))
+                                                            {
+                                                                      fprintf(stderr, "Could not allocate audio frame\n");
+                                                                      assert(0 && "Could not allocate audio frame\n");
+                                                            }
+                                                  }
+                                                  else
+                                                            av_frame_unref(decoded_frame);
+                     */
+                    assert(NULL == decoded_frame);
+
+                    decoded_frame = av_frame_alloc();
+
+                    /*
+                                                  mv_______->libav_c___morcego =
+                                                            avcodec_decode_audio4 (pCodecCtx, decoded_frame, &got_frame
+                                                                                        , packet_ptr);
+                                                  if (mv_______->libav_c___morcego < 0)
+                                                  {
+                                                            if (decoded_frame)
+                                                            {
+                                                                      av_frame_unref(decoded_frame);
+                                                                      decoded_frame = NULL;
+                                                            }
+                                                            av_packet_unref (packet_ptr);
+
+                                                            continue;
+                                                  }
+                     */
+                    mv_______->libav_c___morcego = avcodec_send_packet(pCodecCtx, packet_ptr);
+                    if (mv_______->libav_c___morcego < 0 && mv_______->libav_c___morcego != AVERROR(EAGAIN) && mv_______->libav_c___morcego != AVERROR_EOF)
+                    {
+                         av_packet_unref(packet_ptr);
+
+                         if (decoded_frame)
+                         {
+                              av_frame_unref(decoded_frame);
+                              av_frame_free(&decoded_frame);
+                              decoded_frame = NULL;
+                         }
+
+                         continue;
+                    }
+                    else
+                    {
+                         if (mv_______->libav_c___morcego >= 0)
+                              packet_ptr->size = 0;
+
+                         mv_______->libav_c___morcego = avcodec_receive_frame(pCodecCtx, decoded_frame);
+                         if (mv_______->libav_c___morcego >= 0)
+                              got_frame = 1;
+                         else
+                         {
+                              got_frame = 0;
+
+                              if (decoded_frame)
+                              {
+                                   av_frame_unref(decoded_frame);
+                                   av_frame_free(&decoded_frame);
+                                   decoded_frame = NULL;
+                              }
+
+                              av_packet_unref(packet_ptr);
+                              continue;
+                         }
+                    }
+
+                    /*
+                       mv_______->libav_c___morcego =
+                              avcodec_decode_audio3 (pCodecCtx, (int16_t *) buffer_v11,
+                                                          &buffer_size, packet_ptr);
+                       if (mv_______->libav_c___morcego < 0)
+                       {
+
+                              av_free_packet (packet_ptr);
+
+                              continue;
+
+                       }
+                     */
+                    /*
+                       if (buffer_size)
+                       {
+                              memcpy (buf, buffer_v11, buffer_size);
+                     * size_out = buffer_size;
+
+                              av_free_packet (packet_ptr);
+                              av_free(buffer_v11);
+                              av_free(packet_ptr);
+                              //("saiu de decode audio");
+                              return BE_DECODED;
+                       }
+                     */
+                    if (got_frame)
+                    {
+                         int frame_processed_k_p = 0;
+                         char sample_info_k_p[300];
+                         int data_size = av_samples_get_buffer_size(NULL, pCodecCtx->channels,
+                                                                    decoded_frame->nb_samples,
+                                                                    pCodecCtx->sample_fmt, 1);
+
+                         if (0 == mv_______->libav_c___sample_rate_format_string[0])
+                         {
+                              get_sample_format_info_k_p(
+                                  pCodecCtx->sample_fmt,
+                                  mv_______->libav_c___sample_rate_format_string,
+                                  sample_info_k_p);
+                         }
+                         /*
+
+                            enum AVSampleFormat {
+                            AV_SAMPLE_FMT_NONE = -1,
+                            AV_SAMPLE_FMT_U8,          ///< unsigned 8 bits - yes
+                            AV_SAMPLE_FMT_S16,         ///< signed 16 bits  - yes
+                            AV_SAMPLE_FMT_S32,         ///< signed 32 bits  - yes
+                            AV_SAMPLE_FMT_FLT,         ///< float           - yes
+                            AV_SAMPLE_FMT_DBL,         ///< double          - yes
+
+                            AV_SAMPLE_FMT_U8P,         ///< unsigned 8 bits, planar - yes
+                            AV_SAMPLE_FMT_S16P,        ///< signed 16 bits, planar  - yes
+                            AV_SAMPLE_FMT_S32P,        ///< signed 32 bits, planar  - yes
+                            AV_SAMPLE_FMT_FLTP,        ///< float, planar           - yes
+                            AV_SAMPLE_FMT_DBLP,        ///< double, planar          - yes
+                            AV_SAMPLE_FMT_S64,         ///< signed 64 bits          - yes
+                            AV_SAMPLE_FMT_S64P,        ///< signed 64 bits, planar  - yes
+
+                            AV_SAMPLE_FMT_NB           ///< Number of sample formats. DO NOT USE if linking dynamically
+
+                          */
+
+                         /*****************************************************************************
+                          * This is the part of the code that handles the sample format
+                          * now with full 5.1 and 7.1 channels support in systems that have only stereo
+                          * output, notice that for the moment in a real 5.1 and 7.1 system all the
+                          * channels will be mixed and sent to the front speakers, this limitation will
+                          * be solved in the next week (27-October-2020)
+                          *****************************************************************************
+                          * Some of the formats was not tested fully, but must work
+                          *****************************************************************************/
+
+                         if (AV_SAMPLE_FMT_U8P == pCodecCtx->sample_fmt)
+                         {
+#include "AV_SAMPLE_FMT_U8P_k_p.c"
+                         }
+
+                         if (AV_SAMPLE_FMT_S16P == pCodecCtx->sample_fmt)
+                         {
+#include "AV_SAMPLE_FMT_S16P_k_p.c"
+                         }
+
+                         if (AV_SAMPLE_FMT_FLTP == pCodecCtx->sample_fmt)
+                         {
+#include "AV_SAMPLE_FMT_FLTP_k_p.c"
+                         }
+
+                         if (AV_SAMPLE_FMT_DBLP == pCodecCtx->sample_fmt)
+                         {
+#include "AV_SAMPLE_FMT_DBLP_k_p.c"
+                         }
+
+                         if (AV_SAMPLE_FMT_S32P == pCodecCtx->sample_fmt) // untested, please check
+                         {
+#include "AV_SAMPLE_FMT_S32P_k_p.c"
+                         }
+
+                         if (AV_SAMPLE_FMT_S64P == pCodecCtx->sample_fmt) // untested, please check
+                         {
+#include "AV_SAMPLE_FMT_S64P_k_p.c"
+                         }
+
+                         if (AV_SAMPLE_FMT_U8 == pCodecCtx->sample_fmt)
+                         {
+#include "AV_SAMPLE_FMT_U8_k_p.c"
+                         }
+
+                         if (AV_SAMPLE_FMT_S16 == pCodecCtx->sample_fmt)
+                         {
+#include "AV_SAMPLE_FMT_S16_k_p.c"
+                         }
+
+                         if (AV_SAMPLE_FMT_S32 == pCodecCtx->sample_fmt)
+                         {
+#include "AV_SAMPLE_FMT_S32_k_p.c"
+                         }
+
+                         if (AV_SAMPLE_FMT_S64 == pCodecCtx->sample_fmt)
+                         {
+#include "AV_SAMPLE_FMT_S64_k_p.c"
+                         }
+
+                         if (AV_SAMPLE_FMT_FLT == pCodecCtx->sample_fmt)
+                         {
+#include "AV_SAMPLE_FMT_FLT_k_p.c"
+                         }
+
+                         if (AV_SAMPLE_FMT_DBL == pCodecCtx->sample_fmt)
+                         {
+#include "AV_SAMPLE_FMT_DBL_k_p.c"
+                         }
+
+                         if (!frame_processed_k_p)
+                         {
+                              pedro_dprintf(-1, "bits %d data_size %d format %s\n", (int)mv_______->libav_c___original_bitrate_k_p, data_size, mv_______->libav_c___sample_rate_format_string);
+
+                              mprintf("The format \' %s \' is not supported at this moment, please contact the developer at arsoftware10@gmail.com and send a printscreen of this error, now the application will exit and return an error 25\n", mv_______->libav_c___sample_rate_format_string);
+                              exit(25);
+                         }
+
+                         av_packet_unref(packet_ptr);
+
+                         av_frame_unref(decoded_frame);
+                         av_frame_free(&decoded_frame);
+                         decoded_frame = NULL;
+
+                         pedro_dprintf(-1, "size out %d", *size_out);
+                         av_packet_free(&packet_ptr);
+
+                         return BE_DECODED;
+                    }
+
+                    if (decoded_frame)
+                    {
+
+                         av_frame_unref(decoded_frame);
+                         av_frame_free(&decoded_frame);
+                         decoded_frame = NULL;
+                    }
+               }
+               av_packet_unref(packet_ptr);
+               if (!mv_______->libav_c___pCodecCtx_ptr || !mv_______->libav_c___FormatContext_ptr)
+               {
+                    assert(0);
+                    goto final_ha_ha_ha_ha_ha;
+               }
+          }
+
+     // aqui1
+     final_ha_ha_ha_ha_ha:;
+          // av_free(buffer_v11);
+          av_packet_unref(packet_ptr);
+
+          av_frame_free(&decoded_frame);
+          // av_frame_free(&decoded_frame);
+
+          av_packet_free(&packet_ptr);
+          //("saiu de decode audio");
+     }
 #endif
      return BE_DECODED_BUT_NO_MORE_SAMPLES_AVAILABLE;
 }
@@ -1396,6 +2056,25 @@ void deinit2(morcego___i___instance__a__bucaneiro_engineering *mv_______)
 
           FormatContext = NULL;
           mv_______->libav_c___FormatContext_ptr = NULL;
+     }
+
+#else
+     AVCodecContext *pCodecCtx = (void *)mv_______->libav_c___pCodecCtx_ptr;
+     AVFormatContext *FormatContext = (AVFormatContext *)mv_______->libav_c___FormatContext_ptr;
+     if (FormatContext)
+     {
+
+          avformat_close_input(&FormatContext);
+
+          FormatContext = NULL;
+          mv_______->libav_c___FormatContext_ptr = NULL;
+     }
+     if (pCodecCtx)
+     {
+          //("fechou codec de audio");
+          avcodec_free_context(&pCodecCtx);
+          pCodecCtx = NULL;
+          mv_______->libav_c___pCodecCtx_ptr = NULL;
      }
 #endif
 }

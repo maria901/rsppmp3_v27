@@ -897,10 +897,17 @@ no_use_i:;
                     player_decoder_status =
                         morcego_decode_libav(mv_______, 4096, (char *)out, &isize);
 #else
-                    player_decoder_status = morcego_decode_libav_svc_process_opus_m(mv_______->libav_c___thalia_stand_alone_player_,
-                                                                                    4096,
-                                                                                    (char *)out,
-                                                                                    &isize);
+
+                    if (mv_______->libav_c___m_mode_is_ffmpeg)
+                    {
+                         player_decoder_status =
+                             morcego_decode_libav(mv_______, 4096, (char *)out, &isize);
+                    }
+                    else
+                         player_decoder_status = morcego_decode_libav_svc_process_opus_m(mv_______->libav_c___thalia_stand_alone_player_,
+                                                                                         4096,
+                                                                                         (char *)out,
+                                                                                         &isize);
 #endif
                     pedro_dprintf(-1, "ret %d isize %d", player_decoder_status, isize);
 

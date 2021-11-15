@@ -538,7 +538,7 @@ int morcego_init_libav(morcego___i___instance__a__bucaneiro_engineering *mv_____
      }
 }
 
-#ifndef THALIA_NEW_STANDALONE_AUDIO_PLAYER__
+#if 1
 /**
  * This is the function to decode to pcm 16 bits
  */
@@ -908,9 +908,17 @@ again:;
 #ifndef THALIA_NEW_STANDALONE_AUDIO_PLAYER__
      ret_amanda_s_smart_ape = morcego_decode_libav(mv_______, sizeof(int_buffer), int_buffer, &size_out);
 #else
-     ret_amanda_s_smart_ape = morcego_decode_libav_svc_process_opus_m(mv_______->libav_c___thalia_stand_alone_player_,
-                                                                      sizeof(int_buffer),
-                                                                      int_buffer, &size_out);
+
+     if (mv_______->libav_c___m_mode_is_ffmpeg)
+     {
+          ret_amanda_s_smart_ape = morcego_decode_libav(mv_______, sizeof(int_buffer), int_buffer, &size_out);
+     }
+     else
+     {
+          ret_amanda_s_smart_ape = morcego_decode_libav_svc_process_opus_m(mv_______->libav_c___thalia_stand_alone_player_,
+                                                                           sizeof(int_buffer),
+                                                                           int_buffer, &size_out);
+     }
 #endif
      processed += size_out;
 
