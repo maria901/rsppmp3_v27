@@ -350,7 +350,7 @@ int init_decoder2(morcego___i___instance__a__bucaneiro_engineering *mv_______, b
      pCodecCtx->thread_count = 0;
 #endif
      */
-     pCodecCtx->thread_count = 0;
+     pCodecCtx->thread_count = 1;
 
      mv_______->libav_c___audiostream = -1;
 
@@ -918,10 +918,23 @@ int init_decoder2(morcego___i___instance__a__bucaneiro_engineering *mv_______, b
           if (Codec->capabilities & AV_CODEC_CAP_TRUNCATED)
           {
                pCodecCtx->flags |= AV_CODEC_FLAG_TRUNCATED;
-               // we do not send complete frames, I yet don't know if
-               // this can affect our audio player..., but since it is
-               // in the libav documentation I will keep it this way
+               // exit(27);
+               //  we do not send complete frames, I yet don't know if
+               //  this can affect our audio player..., but since it is
+               //  in the libav documentation I will keep it this way
           }
+
+          // pCodecCtx->sample_fmt = AV_SAMPLE_FMT_S16;
+
+          // pCodecCtx->flags |= AV_CODEC_FLAG_GLOBAL_HEADER;
+          /*
+          AVDictionary *opts = NULL;
+
+        if (!av_dict_get(opts, "threads", NULL, 0))
+            av_dict_set(&opts, "threads", "1", 0);
+
+av_dict_set(&opts, "threads", "1", 0);
+*/
 
           if (avcodec_open2(pCodecCtx, Codec, NULL) < 0)
           {
@@ -932,6 +945,7 @@ int init_decoder2(morcego___i___instance__a__bucaneiro_engineering *mv_______, b
                pCodecCtx = NULL;
                goto saida;
           }
+
           pedro_dprintf(-1, "passou de avcodec_open2");
           mv_______->libav_c___BitsPerSample = av_get_bytes_per_sample(pCodecCtx->sample_fmt) * 8;
 
@@ -984,9 +998,10 @@ int init_decoder2(morcego___i___instance__a__bucaneiro_engineering *mv_______, b
                if (Codec->capabilities & AV_CODEC_CAP_TRUNCATED)
                {
                     pCodecCtx->flags |= AV_CODEC_FLAG_TRUNCATED;
-                    // we do not send complete frames, I yet don't know if
-                    // this can affect our audio player..., but since it is
-                    // in the libav documentation I will keep it this way
+                    // exit(27);
+                    //  we do not send complete frames, I yet don't know if
+                    //  this can affect our audio player..., but since it is
+                    //  in the libav documentation I will keep it this way
                }
 
                if (avcodec_open2(pCodecCtx, Codec, NULL) < 0)
@@ -1390,14 +1405,14 @@ void __stdcall get_sample_format_info_k_p(
 // esta eh a funcao que tem que ser alterada para a versao nova, ok?...
 int decode2(morcego___i___instance__a__bucaneiro_engineering *mv_______, char *buf, int *size_out)
 {
-
-pedro_dprintf(-20211115, "running decode2\n");
+     pedro_dprintf(-20211115, "running decode2\n");
      // mv_______->libav_c___mode_is_free_play=1; //for debug
 
 #ifndef THALIA_NEW_STANDALONE_AUDIO_PLAYER__
 
      if (mv_______->libav_c___mode_is_free_play)
      {
+
           *size_out = 0;
           if (mv_______->libav_c___video_thread_running)
           {
@@ -1417,7 +1432,17 @@ pedro_dprintf(-20211115, "running decode2\n");
      AVCodecContext *pCodecCtx = (void *)mv_______->libav_c___pCodecCtx_ptr;
      AVFormatContext *FormatContext = (AVFormatContext *)mv_______->libav_c___FormatContext_ptr;
      // the packet
-     AVPacket *packet_ptr = av_packet_alloc();
+
+     if (NULL == mv_______->libav_c___m_packet_ptr)
+     {
+          mv_______->libav_c___m_packet_ptr = (char *)av_packet_alloc();
+     }
+     else
+     {
+          *size_out = 0;
+          goto join_again;
+     }
+
      *size_out = 0;
      // memset (packet_ptr, 0, sizeof (AVPacket));
 final:;
@@ -1430,12 +1455,13 @@ final:;
           assert(0);
           goto final_ha_ha_ha_ha_ha;
      }
-     while (av_read_frame(FormatContext, packet_ptr) >= 0)
+     while (av_read_frame(FormatContext, (AVPacket *)mv_______->libav_c___m_packet_ptr) >= 0)
      {
 
           if (mv_______->libav_c___is_seeking)
           {
-               av_packet_unref(packet_ptr);
+               av_packet_unref((AVPacket *)mv_______->libav_c___m_packet_ptr);
+               // exit(27);
                goto final;
           }
           if (!mv_______->libav_c___pCodecCtx_ptr || !mv_______->libav_c___FormatContext_ptr)
@@ -1443,16 +1469,17 @@ final:;
                assert(0);
                goto final_ha_ha_ha_ha_ha;
           }
-          if (packet_ptr->stream_index == mv_______->libav_c___audiostream)
+
+          if (((AVPacket *)mv_______->libav_c___m_packet_ptr)->stream_index == mv_______->libav_c___audiostream)
           {
 
-               if (AV_NOPTS_VALUE == packet_ptr->pts)
+               if (AV_NOPTS_VALUE == ((AVPacket *)mv_______->libav_c___m_packet_ptr)->pts)
                {
                     // ("packet.pts == AV_NOPTS_VALUE\n");
                     setdebuginformation_multithread(mv_______, "Missing presentation timestamp, on some frames");
                }
 
-               mv_______->libav_c___audio_frame = packet_ptr->pts;
+               mv_______->libav_c___audio_frame = ((AVPacket *)mv_______->libav_c___m_packet_ptr)->pts;
 
                pedro_dprintf(-1, "Audio update ----------");
 
@@ -1473,9 +1500,15 @@ final:;
                                              else
                                                        av_frame_unref(decoded_frame);
                 */
-               assert(NULL == decoded_frame);
 
-               decoded_frame = av_frame_alloc();
+          again1_koci:;
+
+               // if (0 == again_call_j)
+               {
+                    assert(NULL == decoded_frame);
+
+                    decoded_frame = av_frame_alloc();
+               }
 
                /*
                                              mv_______->libav_c___morcego =
@@ -1493,10 +1526,18 @@ final:;
                                                        continue;
                                              }
                 */
-               mv_______->libav_c___morcego = avcodec_send_packet(pCodecCtx, packet_ptr);
+
+               mv_______->libav_c___morcego = avcodec_send_packet(pCodecCtx, ((AVPacket *)mv_______->libav_c___m_packet_ptr));
+
+               mv_______->libav_c___j_again_call_j = false;
+               if (AVERROR(EAGAIN) == mv_______->libav_c___morcego && mv_______->libav_c___morcego != AVERROR_EOF)
+               {
+                    mv_______->libav_c___j_again_call_j = true;
+               }
+
                if (mv_______->libav_c___morcego < 0 && mv_______->libav_c___morcego != AVERROR(EAGAIN) && mv_______->libav_c___morcego != AVERROR_EOF)
                {
-                    av_packet_unref(packet_ptr);
+                    av_packet_unref(((AVPacket *)mv_______->libav_c___m_packet_ptr));
 
                     if (decoded_frame)
                     {
@@ -1510,9 +1551,23 @@ final:;
                else
                {
                     if (mv_______->libav_c___morcego >= 0)
-                         packet_ptr->size = 0;
+                    {
+                         ((AVPacket *)mv_______->libav_c___m_packet_ptr)->size = 0;
+                    }
 
                     mv_______->libav_c___morcego = avcodec_receive_frame(pCodecCtx, decoded_frame);
+
+                    /*
+                    if (27 == again_call_j)
+                    {
+
+                         av_frame_unref(decoded_frame);
+                         av_frame_free(&decoded_frame);
+                         decoded_frame = NULL;
+
+                         goto again1_koci;
+                    }
+*/
                     if (mv_______->libav_c___morcego >= 0)
                          got_frame = 1;
                     else
@@ -1526,37 +1581,12 @@ final:;
                               decoded_frame = NULL;
                          }
 
-                         av_packet_unref(packet_ptr);
+                         av_packet_unref(((AVPacket *)mv_______->libav_c___m_packet_ptr));
+
                          continue;
                     }
                }
 
-               /*
-                  mv_______->libav_c___morcego =
-                         avcodec_decode_audio3 (pCodecCtx, (int16_t *) buffer_v11,
-                                                     &buffer_size, packet_ptr);
-                  if (mv_______->libav_c___morcego < 0)
-                  {
-
-                         av_free_packet (packet_ptr);
-
-                         continue;
-
-                  }
-                */
-               /*
-                  if (buffer_size)
-                  {
-                         memcpy (buf, buffer_v11, buffer_size);
-                * size_out = buffer_size;
-
-                         av_free_packet (packet_ptr);
-                         av_free(buffer_v11);
-                         av_free(packet_ptr);
-                         //("saiu de decode audio");
-                         return BE_DECODED;
-                  }
-                */
                if (got_frame)
                {
                     int frame_processed_k_p = 0;
@@ -1671,15 +1701,20 @@ final:;
                          mprintf("The format \' %s \' is not supported at this moment, please contact the developer at arsoftware10@gmail.com and send a printscreen of this error, now the application will exit and return an error 25\n", mv_______->libav_c___sample_rate_format_string);
                          exit(25);
                     }
-
-                    av_packet_unref(packet_ptr);
-
+                    if (false == mv_______->libav_c___j_again_call_j)
+                    {
+                         av_packet_unref(((AVPacket *)mv_______->libav_c___m_packet_ptr));
+                    }
                     av_frame_unref(decoded_frame);
                     av_frame_free(&decoded_frame);
                     decoded_frame = NULL;
 
-                    pedro_dprintf(-1, "size out %d", *size_out);
-                    av_packet_free(&packet_ptr);
+                    if (*size_out)
+                    {
+                         //*size_out = 2048;
+                    }
+
+                    // av_packet_free(&packet_ptr);
 
                     return BE_DECODED;
                }
@@ -1692,23 +1727,32 @@ final:;
                     decoded_frame = NULL;
                }
           }
-          av_packet_unref(packet_ptr);
+          av_packet_unref(((AVPacket *)mv_______->libav_c___m_packet_ptr));
           if (!mv_______->libav_c___pCodecCtx_ptr || !mv_______->libav_c___FormatContext_ptr)
           {
                assert(0);
                goto final_ha_ha_ha_ha_ha;
+          }
+
+     join_again:;
+
+          if (true == mv_______->libav_c___j_again_call_j)
+          {
+               goto again1_koci;
           }
      }
 
 // aqui1
 final_ha_ha_ha_ha_ha:;
      // av_free(buffer_v11);
-     av_packet_unref(packet_ptr);
+     av_packet_unref(((AVPacket *)mv_______->libav_c___m_packet_ptr));
 
      av_frame_free(&decoded_frame);
      // av_frame_free(&decoded_frame);
 
-     av_packet_free(&packet_ptr);
+     av_packet_free((AVPacket **)&mv_______->libav_c___m_packet_ptr);
+
+     mv_______->libav_c___m_packet_ptr = NULL;
      //("saiu de decode audio");
 #else
 
@@ -1717,6 +1761,7 @@ final_ha_ha_ha_ha_ha:;
 
           if (mv_______->libav_c___mode_is_free_play)
           {
+
                *size_out = 0;
                if (mv_______->libav_c___video_thread_running)
                {
@@ -1736,7 +1781,17 @@ final_ha_ha_ha_ha_ha:;
           AVCodecContext *pCodecCtx = (void *)mv_______->libav_c___pCodecCtx_ptr;
           AVFormatContext *FormatContext = (AVFormatContext *)mv_______->libav_c___FormatContext_ptr;
           // the packet
-          AVPacket *packet_ptr = av_packet_alloc();
+
+          if (NULL == mv_______->libav_c___m_packet_ptr)
+          {
+               mv_______->libav_c___m_packet_ptr = (char *)av_packet_alloc();
+          }
+          else
+          {
+               *size_out = 0;
+               goto join_again;
+          }
+
           *size_out = 0;
           // memset (packet_ptr, 0, sizeof (AVPacket));
      final:;
@@ -1749,12 +1804,13 @@ final_ha_ha_ha_ha_ha:;
                assert(0);
                goto final_ha_ha_ha_ha_ha;
           }
-          while (av_read_frame(FormatContext, packet_ptr) >= 0)
+          while (av_read_frame(FormatContext, (AVPacket *)mv_______->libav_c___m_packet_ptr) >= 0)
           {
 
                if (mv_______->libav_c___is_seeking)
                {
-                    av_packet_unref(packet_ptr);
+                    av_packet_unref((AVPacket *)mv_______->libav_c___m_packet_ptr);
+                    // exit(27);
                     goto final;
                }
                if (!mv_______->libav_c___pCodecCtx_ptr || !mv_______->libav_c___FormatContext_ptr)
@@ -1762,16 +1818,17 @@ final_ha_ha_ha_ha_ha:;
                     assert(0);
                     goto final_ha_ha_ha_ha_ha;
                }
-               if (packet_ptr->stream_index == mv_______->libav_c___audiostream)
+
+               if (((AVPacket *)mv_______->libav_c___m_packet_ptr)->stream_index == mv_______->libav_c___audiostream)
                {
 
-                    if (AV_NOPTS_VALUE == packet_ptr->pts)
+                    if (AV_NOPTS_VALUE == ((AVPacket *)mv_______->libav_c___m_packet_ptr)->pts)
                     {
                          // ("packet.pts == AV_NOPTS_VALUE\n");
                          setdebuginformation_multithread(mv_______, "Missing presentation timestamp, on some frames");
                     }
 
-                    mv_______->libav_c___audio_frame = packet_ptr->pts;
+                    mv_______->libav_c___audio_frame = ((AVPacket *)mv_______->libav_c___m_packet_ptr)->pts;
 
                     pedro_dprintf(-1, "Audio update ----------");
 
@@ -1792,9 +1849,15 @@ final_ha_ha_ha_ha_ha:;
                                                   else
                                                             av_frame_unref(decoded_frame);
                      */
-                    assert(NULL == decoded_frame);
 
-                    decoded_frame = av_frame_alloc();
+               again1_koci:;
+
+                    // if (0 == again_call_j)
+                    {
+                         assert(NULL == decoded_frame);
+
+                         decoded_frame = av_frame_alloc();
+                    }
 
                     /*
                                                   mv_______->libav_c___morcego =
@@ -1812,10 +1875,18 @@ final_ha_ha_ha_ha_ha:;
                                                             continue;
                                                   }
                      */
-                    mv_______->libav_c___morcego = avcodec_send_packet(pCodecCtx, packet_ptr);
+
+                    mv_______->libav_c___morcego = avcodec_send_packet(pCodecCtx, ((AVPacket *)mv_______->libav_c___m_packet_ptr));
+
+                    mv_______->libav_c___j_again_call_j = false;
+                    if (AVERROR(EAGAIN) == mv_______->libav_c___morcego && mv_______->libav_c___morcego != AVERROR_EOF)
+                    {
+                         mv_______->libav_c___j_again_call_j = true;
+                    }
+
                     if (mv_______->libav_c___morcego < 0 && mv_______->libav_c___morcego != AVERROR(EAGAIN) && mv_______->libav_c___morcego != AVERROR_EOF)
                     {
-                         av_packet_unref(packet_ptr);
+                         av_packet_unref(((AVPacket *)mv_______->libav_c___m_packet_ptr));
 
                          if (decoded_frame)
                          {
@@ -1829,9 +1900,23 @@ final_ha_ha_ha_ha_ha:;
                     else
                     {
                          if (mv_______->libav_c___morcego >= 0)
-                              packet_ptr->size = 0;
+                         {
+                              ((AVPacket *)mv_______->libav_c___m_packet_ptr)->size = 0;
+                         }
 
                          mv_______->libav_c___morcego = avcodec_receive_frame(pCodecCtx, decoded_frame);
+
+                         /*
+                         if (27 == again_call_j)
+                         {
+
+                              av_frame_unref(decoded_frame);
+                              av_frame_free(&decoded_frame);
+                              decoded_frame = NULL;
+
+                              goto again1_koci;
+                         }
+     */
                          if (mv_______->libav_c___morcego >= 0)
                               got_frame = 1;
                          else
@@ -1845,37 +1930,12 @@ final_ha_ha_ha_ha_ha:;
                                    decoded_frame = NULL;
                               }
 
-                              av_packet_unref(packet_ptr);
+                              av_packet_unref(((AVPacket *)mv_______->libav_c___m_packet_ptr));
+
                               continue;
                          }
                     }
 
-                    /*
-                       mv_______->libav_c___morcego =
-                              avcodec_decode_audio3 (pCodecCtx, (int16_t *) buffer_v11,
-                                                          &buffer_size, packet_ptr);
-                       if (mv_______->libav_c___morcego < 0)
-                       {
-
-                              av_free_packet (packet_ptr);
-
-                              continue;
-
-                       }
-                     */
-                    /*
-                       if (buffer_size)
-                       {
-                              memcpy (buf, buffer_v11, buffer_size);
-                     * size_out = buffer_size;
-
-                              av_free_packet (packet_ptr);
-                              av_free(buffer_v11);
-                              av_free(packet_ptr);
-                              //("saiu de decode audio");
-                              return BE_DECODED;
-                       }
-                     */
                     if (got_frame)
                     {
                          int frame_processed_k_p = 0;
@@ -1990,15 +2050,20 @@ final_ha_ha_ha_ha_ha:;
                               mprintf("The format \' %s \' is not supported at this moment, please contact the developer at arsoftware10@gmail.com and send a printscreen of this error, now the application will exit and return an error 25\n", mv_______->libav_c___sample_rate_format_string);
                               exit(25);
                          }
-
-                         av_packet_unref(packet_ptr);
-
+                         if (false == mv_______->libav_c___j_again_call_j)
+                         {
+                              av_packet_unref(((AVPacket *)mv_______->libav_c___m_packet_ptr));
+                         }
                          av_frame_unref(decoded_frame);
                          av_frame_free(&decoded_frame);
                          decoded_frame = NULL;
 
-                         pedro_dprintf(-1, "size out %d", *size_out);
-                         av_packet_free(&packet_ptr);
+                         if (*size_out)
+                         {
+                              //*size_out = 2048;
+                         }
+
+                         // av_packet_free(&packet_ptr);
 
                          return BE_DECODED;
                     }
@@ -2011,23 +2076,32 @@ final_ha_ha_ha_ha_ha:;
                          decoded_frame = NULL;
                     }
                }
-               av_packet_unref(packet_ptr);
+               av_packet_unref(((AVPacket *)mv_______->libav_c___m_packet_ptr));
                if (!mv_______->libav_c___pCodecCtx_ptr || !mv_______->libav_c___FormatContext_ptr)
                {
                     assert(0);
                     goto final_ha_ha_ha_ha_ha;
+               }
+
+          join_again:;
+
+               if (true == mv_______->libav_c___j_again_call_j)
+               {
+                    goto again1_koci;
                }
           }
 
      // aqui1
      final_ha_ha_ha_ha_ha:;
           // av_free(buffer_v11);
-          av_packet_unref(packet_ptr);
+          av_packet_unref(((AVPacket *)mv_______->libav_c___m_packet_ptr));
 
           av_frame_free(&decoded_frame);
           // av_frame_free(&decoded_frame);
 
-          av_packet_free(&packet_ptr);
+          av_packet_free((AVPacket **)&mv_______->libav_c___m_packet_ptr);
+
+          mv_______->libav_c___m_packet_ptr = NULL;
           //("saiu de decode audio");
      }
 #endif
@@ -2060,7 +2134,7 @@ void deinit2(morcego___i___instance__a__bucaneiro_engineering *mv_______)
      }
 
 #else
-	
+
      AVCodecContext *pCodecCtx = (void *)mv_______->libav_c___pCodecCtx_ptr;
      AVFormatContext *FormatContext = (AVFormatContext *)mv_______->libav_c___FormatContext_ptr;
      if (FormatContext)
@@ -2078,7 +2152,7 @@ void deinit2(morcego___i___instance__a__bucaneiro_engineering *mv_______)
           pCodecCtx = NULL;
           mv_______->libav_c___pCodecCtx_ptr = NULL;
      }
-	 
+
 #endif
 }
 
@@ -2227,74 +2301,73 @@ void seek2(morcego___i___instance__a__bucaneiro_engineering *mv_______, double v
      }
 #else
 
-if(mv_______->libav_c___m_mode_is_ffmpeg)
-{
-	    mv_______->libav_c___reinit_uf = 0;
-     mv_______->libav_c___reinit_uf2 = 0;
-
-     AVFormatContext *FormatContext = (AVFormatContext *)mv_______->libav_c___FormatContext_ptr;
-     if (mv_______->libav_c___mode_is_free_play || (FormatContext && (-1 != mv_______->libav_c___audiostream)))
+     if (mv_______->libav_c___m_mode_is_ffmpeg)
      {
-          mv_______->libav_c___is_seeking = 1;
+          mv_______->libav_c___reinit_uf = 0;
+          mv_______->libav_c___reinit_uf2 = 0;
 
-          Sleep(50); // for safety
-          value = getval_100((double)mv_______->libav_c___duracao, value);
-
-          mv_______->decoder_c___newsecond_copy = 0;
-
-          if ((__int64)value > mv_______->libav_c___duracao)
+          AVFormatContext *FormatContext = (AVFormatContext *)mv_______->libav_c___FormatContext_ptr;
+          if (mv_______->libav_c___mode_is_free_play || (FormatContext && (-1 != mv_______->libav_c___audiostream)))
           {
-               value = mv_______->libav_c___duracao - 1;
-          }
-          if (value < 0)
-          {
-               value = 0;
-          }
-          /**
-               int av_seek_frame(
-           */
-          if (!mv_______->libav_c___mode_is_free_play)
-          {
-               mv_______->libav_c___morcego =
-                   av_seek_frame(FormatContext, -1, (__int64)value,
-                                 AVSEEK_FLAG_BACKWARD);
+               mv_______->libav_c___is_seeking = 1;
 
-               if (mv_______->libav_c___morcego < 0)
+               Sleep(50); // for safety
+               value = getval_100((double)mv_______->libav_c___duracao, value);
+
+               mv_______->decoder_c___newsecond_copy = 0;
+
+               if ((__int64)value > mv_______->libav_c___duracao)
+               {
+                    value = mv_______->libav_c___duracao - 1;
+               }
+               if (value < 0)
+               {
+                    value = 0;
+               }
+               /**
+                    int av_seek_frame(
+                */
+               if (!mv_______->libav_c___mode_is_free_play)
                {
                     mv_______->libav_c___morcego =
                         av_seek_frame(FormatContext, -1, (__int64)value,
-                                      AVSEEK_FLAG_BACKWARD | AVSEEK_FLAG_ANY);
+                                      AVSEEK_FLAG_BACKWARD);
+
+                    if (mv_______->libav_c___morcego < 0)
+                    {
+                         mv_______->libav_c___morcego =
+                             av_seek_frame(FormatContext, -1, (__int64)value,
+                                           AVSEEK_FLAG_BACKWARD | AVSEEK_FLAG_ANY);
+                    }
                }
-          }
-          if (mv_______->libav_c___video_ready_to_play)
-          {
-
-               AVFormatContext *FormatContext = (AVFormatContext *)mv_______->libav_c___FormatContext_ptr_video;
-               mv_______->libav_c___morcego =
-                   av_seek_frame(FormatContext, -1, (__int64)value,
-                                 AVSEEK_FLAG_BACKWARD);
-
-               if (mv_______->libav_c___morcego < 0)
+               if (mv_______->libav_c___video_ready_to_play)
                {
+
+                    AVFormatContext *FormatContext = (AVFormatContext *)mv_______->libav_c___FormatContext_ptr_video;
                     mv_______->libav_c___morcego =
                         av_seek_frame(FormatContext, -1, (__int64)value,
-                                      AVSEEK_FLAG_BACKWARD | AVSEEK_FLAG_ANY);
+                                      AVSEEK_FLAG_BACKWARD);
+
+                    if (mv_______->libav_c___morcego < 0)
+                    {
+                         mv_______->libav_c___morcego =
+                             av_seek_frame(FormatContext, -1, (__int64)value,
+                                           AVSEEK_FLAG_BACKWARD | AVSEEK_FLAG_ANY);
+                    }
                }
+               mv_______->libav_c___is_seeking = 0;
           }
-          mv_______->libav_c___is_seeking = 0;
      }
+     else
+     {
+          mv_______->libav_c___reinit_uf = 0;
+          mv_______->libav_c___reinit_uf2 = 0;
 
-}
-else
-{
-     mv_______->libav_c___reinit_uf = 0;
-     mv_______->libav_c___reinit_uf2 = 0;
+          pedro_dprintf(-1, "raw max %lld\n", mv_______->dados_do_audio_v27.raw_total_ric);
 
-     pedro_dprintf(-1, "raw max %lld\n", mv_______->dados_do_audio_v27.raw_total_ric);
-
-     mv_______->libav_c___is_seeking = 0;
-     pedro_dprintf(-1, "opus seek running\n");
-}
+          mv_______->libav_c___is_seeking = 0;
+          pedro_dprintf(-1, "opus seek running\n");
+     }
 #endif
      //("deu seek");
 }
@@ -2369,72 +2442,71 @@ void seek2_v27(morcego___i___instance__a__bucaneiro_engineering *mv_______, doub
      }
 #else
 
-if(mv_______->libav_c___m_mode_is_ffmpeg)
-{
-	
-     AVFormatContext *FormatContext = (AVFormatContext *)mv_______->libav_c___FormatContext_ptr;
-     if (mv_______->libav_c___mode_is_free_play || (FormatContext && (-1 != mv_______->libav_c___audiostream)))
+     if (mv_______->libav_c___m_mode_is_ffmpeg)
      {
-          mv_______->libav_c___is_seeking = 1;
 
-          // Sleep(50); // for safety
-          value = getval_100((double)mv_______->libav_c___duracao, value);
-
-          mv_______->decoder_c___newsecond_copy = 0;
-
-          if ((__int64)value > mv_______->libav_c___duracao)
+          AVFormatContext *FormatContext = (AVFormatContext *)mv_______->libav_c___FormatContext_ptr;
+          if (mv_______->libav_c___mode_is_free_play || (FormatContext && (-1 != mv_______->libav_c___audiostream)))
           {
-               value = mv_______->libav_c___duracao - 1;
-          }
-          if (value < 0)
-          {
-               value = 0;
-          }
-          /**
-               int av_seek_frame(
-           */
-          if (0 && !mv_______->libav_c___mode_is_free_play)
-          {
-               mv_______->libav_c___morcego =
-                   av_seek_frame(FormatContext, -1, (__int64)value,
-                                 AVSEEK_FLAG_BACKWARD);
+               mv_______->libav_c___is_seeking = 1;
 
-               if (mv_______->libav_c___morcego < 0)
+               // Sleep(50); // for safety
+               value = getval_100((double)mv_______->libav_c___duracao, value);
+
+               mv_______->decoder_c___newsecond_copy = 0;
+
+               if ((__int64)value > mv_______->libav_c___duracao)
+               {
+                    value = mv_______->libav_c___duracao - 1;
+               }
+               if (value < 0)
+               {
+                    value = 0;
+               }
+               /**
+                    int av_seek_frame(
+                */
+               if (0 && !mv_______->libav_c___mode_is_free_play)
                {
                     mv_______->libav_c___morcego =
                         av_seek_frame(FormatContext, -1, (__int64)value,
-                                      AVSEEK_FLAG_BACKWARD | AVSEEK_FLAG_ANY);
+                                      AVSEEK_FLAG_BACKWARD);
+
+                    if (mv_______->libav_c___morcego < 0)
+                    {
+                         mv_______->libav_c___morcego =
+                             av_seek_frame(FormatContext, -1, (__int64)value,
+                                           AVSEEK_FLAG_BACKWARD | AVSEEK_FLAG_ANY);
+                    }
                }
-          }
-          if (mv_______->libav_c___video_ready_to_play)
-          {
-
-               AVFormatContext *FormatContext = (AVFormatContext *)mv_______->libav_c___FormatContext_ptr_video;
-               mv_______->libav_c___morcego =
-                   av_seek_frame(FormatContext, -1, (__int64)value,
-                                 AVSEEK_FLAG_BACKWARD);
-
-               if (mv_______->libav_c___morcego < 0)
+               if (mv_______->libav_c___video_ready_to_play)
                {
+
+                    AVFormatContext *FormatContext = (AVFormatContext *)mv_______->libav_c___FormatContext_ptr_video;
                     mv_______->libav_c___morcego =
                         av_seek_frame(FormatContext, -1, (__int64)value,
-                                      AVSEEK_FLAG_BACKWARD | AVSEEK_FLAG_ANY);
+                                      AVSEEK_FLAG_BACKWARD);
+
+                    if (mv_______->libav_c___morcego < 0)
+                    {
+                         mv_______->libav_c___morcego =
+                             av_seek_frame(FormatContext, -1, (__int64)value,
+                                           AVSEEK_FLAG_BACKWARD | AVSEEK_FLAG_ANY);
+                    }
                }
+               mv_______->libav_c___is_seeking = 0;
           }
-          mv_______->libav_c___is_seeking = 0;
      }
+     else
+     {
+          mv_______->libav_c___reinit_uf = 0;
+          mv_______->libav_c___reinit_uf2 = 0;
 
-}
-else
-{
-     mv_______->libav_c___reinit_uf = 0;
-     mv_______->libav_c___reinit_uf2 = 0;
+          pedro_dprintf(-1, "raw max %lld\n", mv_______->dados_do_audio_v27.raw_total_ric);
 
-     pedro_dprintf(-1, "raw max %lld\n", mv_______->dados_do_audio_v27.raw_total_ric);
-
-     mv_______->libav_c___is_seeking = 0;
-     pedro_dprintf(-1, "opus seek running\n");
-}
+          mv_______->libav_c___is_seeking = 0;
+          pedro_dprintf(-1, "opus seek running\n");
+     }
 #endif
      //("deu seek");
 }
@@ -2546,4 +2618,18 @@ saida:;
      return 1;
 
 #endif
+}
+
+void just_free_libav_v(morcego___i___instance__a__bucaneiro_engineering *mv_______)
+{
+
+     if (mv_______->libav_c___m_packet_ptr)
+     {
+          av_packet_free((AVPacket **)&mv_______->libav_c___m_packet_ptr);
+
+          mv_______->libav_c___m_packet_ptr = NULL;
+          // exit(27);
+     }
+
+     return;
 }

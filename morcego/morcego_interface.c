@@ -547,6 +547,7 @@ int morcego_init_libav(morcego___i___instance__a__bucaneiro_engineering *mv_____
 int morcego_decode_libav(morcego___i___instance__a__bucaneiro_engineering *mv_______, int bytes_to_decode, char *bufout, int *size_out)
 {
 
+
      be_libav_struct *be_copy;
      if (mv_______->be_for_wav_convert)
      {
@@ -582,6 +583,7 @@ int morcego_decode_libav(morcego___i___instance__a__bucaneiro_engineering *mv___
           {
 
                mv_______->morcego_interface_c___bytes_available_in_buffer = 0;
+			   //exit(27);
                mv_______->morcego_interface_c___buffer_address = mv_______->morcego_interface_c___internal_buffer;
 
                seek2(mv_______, mv_______->morcego_interface_c___seek);
@@ -617,8 +619,6 @@ again:;
           bytespegos += fatia_copiada;
           if (0 == bytes_to_decode)
           {
-               pedro_dprintf(-1, " BE_DECODED %d", *size_out);
-
                return BE_DECODED;
           }
      }
@@ -637,7 +637,7 @@ again:;
      while (1)
      {
           returnvalue = BE_DECODED;
-
+		  
           decode2(mv_______, mv_______->morcego_interface_c___buffer, &size_out_b);
 
           mv_______->morcego_interface_c___restante = size_out_b;
@@ -648,6 +648,7 @@ again:;
                   /*mv_______->morcego_interface_c___adjusted_bps this is a hac to force 16 bits because the decoder always convert all audio formats to 16 bits*/ 16, be_copy->sample_format, be_copy->be_channels);
 
           memcpy(mv_______->morcego_interface_c___buffer_address, mv_______->morcego_interface_c___buffer, mv_______->morcego_interface_c___after_conversion_size);
+		  		  		  
           mv_______->morcego_interface_c___bytes_available_in_buffer += mv_______->morcego_interface_c___after_conversion_size;
 
           if (!mv_______->morcego_interface_c___restante)

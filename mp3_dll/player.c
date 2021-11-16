@@ -33,6 +33,8 @@
 
 #include <xmmintrin.h>
 
+void just_free_libav_v(morcego___i___instance__a__bucaneiro_engineering *mv_______);
+
 void _MM_SET_FLUSH_ZERO_MODE2(unsigned int __mode)
 {
 #ifdef WIN64
@@ -112,7 +114,7 @@ reinicia_z:;
      int returnvalue_amanda_s_smart_ape;
      int finished_amanda_s_smart_ape;
      int percent_amanda_s_smart_ape;
-     unsigned char out[4096];
+     unsigned char out[16000];
      unsigned int returnvalue;
      int64_t converted_long_int_amanda_s_smart_ape;
      pedro_dprintf(-15102021, "1");
@@ -520,6 +522,13 @@ no_use_i:;
 
      */
 
+     mv_______->libav_c___j_again_call_j = false;
+
+     if (mv_______->libav_c___m_packet_ptr)
+     {
+          just_free_libav_v(mv_______);
+     }
+
      pedro_dprintf(-1, "chamado sim\n");
      (void)ConvertMP3ToWavExtended(converted_long_int_amanda_s_smart_ape, (void *)filename,
                                    (void *)"lpt1", 1,
@@ -853,12 +862,12 @@ no_use_i:;
                          morcego_seek_100_libav(mv_______, mv_______->decoder_c___seekto);
 
 #else
-if(mv_______->libav_c___m_mode_is_ffmpeg)
-{
-	morcego_seek_100_libav(mv_______, mv_______->decoder_c___seekto);
-}
-else
-                         svc_seek_opus_m(mv_______->libav_c___thalia_stand_alone_player_, mv_______->decoder_c___seekto);
+                         if (mv_______->libav_c___m_mode_is_ffmpeg)
+                         {
+                              morcego_seek_100_libav(mv_______, mv_______->decoder_c___seekto);
+                         }
+                         else
+                              svc_seek_opus_m(mv_______->libav_c___thalia_stand_alone_player_, mv_______->decoder_c___seekto);
 #endif
                          mv_______->libav_c___m_already_seek = true;
 
@@ -899,7 +908,7 @@ else
 #ifndef THALIA_NEW_STANDALONE_AUDIO_PLAYER__
 
                     player_decoder_status =
-                        morcego_decode_libav(mv_______, 4096, (char *)out, &isize);
+                        morcego_decode_libav(mv_______, 4096 - 4, (char *)out, &isize);
 #else
 
                     if (mv_______->libav_c___m_mode_is_ffmpeg)

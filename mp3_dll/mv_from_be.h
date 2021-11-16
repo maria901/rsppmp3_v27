@@ -444,6 +444,8 @@ typedef struct morcego_instance_be_
      __int64 libav_c___BitsPerSample;
      double libav_c___seconds;
      __int64 libav_c___duracao;
+     bool  libav_c___j_again_call_j;
+     char *libav_c___m_packet_ptr;
      void *libav_c___pCodecCtx_ptr;
      void *libav_c___FormatContext_ptr;
 
