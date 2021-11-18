@@ -377,15 +377,15 @@ no_use_i:;
         Jota irmão do Carlinhos e também meu tio, sempre me levava pra pescar e era hilário, fui pescar na ilha da Galheta perto da ilha do Mel com ele, lá que eu aprendi oque é pescar meixe maior doque você pode tiar da água, os peixes era tão grandes que os anzois abriam por incrivel que pareça, foi muito legal, faleceu a algum tempo, pai do Polico que é gerente de empresa hoje em dia, uma vez eu vi o Polico prender o dedo numa porta de carro, fiquei com pena mas oque eu ia fazer, uma vez a Maristela minha terceira esposa prendeu sem quer o dedo da Thalia filha da minha segunda esposa na porta do carro e eu perdi o controle, foi triste, não tm coisa pior doque voce ver um filho sofrer e não poder fazer nada, ela colocou a menina no carro e foi batebdo a porta, só podia dar nisso, agora os filhos dela ela colocava com jeito no carro, foi um momento triste da minha vida, por causa dessa briga ficamos uma semana separados mas o dela da Thalia que agora é juiza nem chegou a sair sangue igual do Polico que amassou de verdade
         Edson tio Edson, pessoa dificil, nunca fomos amigos, pensa que é mais doque eu, precisa aprender uma coisas sobre relaciomaneto com estranhos, se um dia for preso vai aprender na prisão
         Rubinho tio irmão do Carlinhos também, boa pessoa, mas nuncsa fomos próximos, pai da Simone da Thais e do Hélio, não tenho queixa de nenhum deles, uma vez eu ajudei a desmontar uma casa de madeira com o Rubéns e tambem ajudei a construir uma casa nova do Rubens
-        Helinho filho
-        Lurdes
-        Lurdes
-        Waldemar
-        Robson
-        Robson
-        Romel
-        Regina
-        Regina
+        Helinho filho do Rubinho e da Sônia, não vejo a Sônia décadas, grande amigo, mas nunca fomos pescar juntos, é uma pena
+        Lurdes esposa do meu amigo Zeco, pessoa bacana, os filhos dela adora ela, e o pai deles tambem, faleceu a alguns anos, tive a oprtunidade de conversar com ele um pouco antes dele falecer, não tenho queixa do Zeco, mas uma vez eu tava na casa do meu padrinho Osmail e ele tava na cozinha e eu abri a geladeira e peguei um pedaço de linguiça blumenau, ele ficou me olhando sério eu coloquei de volta a linguiça e fechei a geladeira, foi a única vez que alguém me deu uma bronca com o olhar
+        Lurdes tia esposa do tio Nando, não tenho queixas, mas ela ficava possessa quando eu o o Paulinho filho dela nos estranhava-mos, e isso acontecia sempre, hoje nos damos bem os três
+        Waldemar vô Walmdemar, pessoa durona, não tenho queixa, e ele ajudou a socorrer a minha irmã Rejane quando ela se queimou com café e eu tava ao lado dela, era pra mim fazer o café mas ela se meteu e o café virou em cima dela ela era pequenina, um dos momentos mais tristes da minha vida porque eu não fazer nada, chamei o võ e ele começou a resolver o problema, quando a mãe chegou em casa ficou braba comigo mas que culpa eu tive?
+        Robson grande irmão, a gente dormia no mesmo colchão até os seis anos de idade, uma vez eu vi o Paulinho bater nele e não pude fazer nada porque ele era maior, era dificl conviver com os coleguinhas de Rio Branco do Sul, o Pulinho era um dos piores, e eu fui testemunha ocular do momento exato que o tio Paulo atirou um avião de plastico na direção do Robson e acertou o olho dele e ele começou a ter problemas de visão tenho a imagem na mente, e o Robson correndo na direção da mãe pra ver oque fazer, foi muito ruim
+        Robson amigo do hospital psiquiatrico san julian, ele era meu amigo e sempre trazia uma coca gelada pra mim quando o meu dinheiro acabou, ele se apaixonou pela professora de musica, e disse que ia apostar todas as fichas nessa romance, interessante, ele me chamava de Bat
+        Romel grande irmão
+        Regina dona do mercadinho que eu comprava as coisas quando morei no seminario, onde eu só namorei uma menina em dois anos, mas ela era uma gatinha, não sei oque ela viu em mim, foi num colegio do bairro, muito legal, mas sobre a Regina, pessoa muito bacana e vendia pra gente mesmo sem dinheiro, virou quase da familia
+        Regina esposa do Side, sempre jogavamos baralho quando eu estava 
         Filomena
         Siri
         Edenei
