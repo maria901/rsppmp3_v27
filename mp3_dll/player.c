@@ -350,28 +350,34 @@ no_use_i:;
         Sil irmã da Edna, grande amiga, eu levava a vó dela no hospital Erasto Gaertner pra tratamento e ela ia junto, mãe do Ícaro
         Ícaro filho da Sil, tinha três anos de idade
         China grande amigo, me ajudou muito durante todo o tempo que eu morei na Vila Verde, ensinei pra ele coisas sobre comércio de software na Internet pra ele me ajudar a vender software, nunca saimos na porrada por incrível que pareça
-        Testa amigo meu e do China, hilário, não tinha tempo ruim pra ele
-        Nilson
-        Sirlei
-        Elvis
-        Marcelo
-        Paulo
-        Paulo
-        Paulo
-        Dito
-        Luiz
-        Cide
-        Side
-        Sanderson
-        Silvia
-        Vitória
-        Renata
-        Carlinhos
-        Carlinhos
-        Jota
-        Edson
-        Rubinho
-        Helinho
+        Testa amigo meu e do China, hilário, não tinha tempo ruim pra ele, grande amigo, uma vez eu jantei na casa da família dele
+        Nilson grande amigo, graças a ele minha empresa de software não faliu em 98 quando a mãe do Junior me deu um ponta pé na bunda, mas infelizmente este amigo fez uma coisa que eu nunca perdoei, não vou entrar em detalhes, mas é uma coisa que amigo nunca faria, mas é uma coisa que EU faço com meus amigos americanos progrmadores
+        Sirlei esposa do Nilson, mãe da Cibele, grande amiga
+        Sirlei mãe da Kelly minha vizinha do tempo que eu morava em Curitiba, quando morei com a minha vó em 2004 eu tava sempre na papalaria deles comprando bala
+        Elvis grande amigo, nunca mais vi, era meu vizinho, uma vez eu socorri uns acidentados com o fiat da empresa que eu trabalhava e cheguei em casa com o carro cheio de sangue, foi ele que lavou o carro inteiro e removeu o sangue todo, ninguém dos acidentados morreu mesmo eles tendo perdido muito sangue, eu só socorri dois acidentes em todo o tempo que eu tive carteira, se mudaram para longe, mas a amixade vai durar pra sempre
+        Marcelo meu tio que é mais novo que eu, grande companheiro de infãncia, evitava que a gente fizesse grandes cagadas porque pelo menos ele tinha a cabeça no lugar, hoje é dono de uma empresa bem sucedida, vive uma boa vida e é casado mas não tem filhos mas disse que ter ter, espor que seja antes dos 60
+        Marcelo grande amigo de Coronel Vivida, quando eu tive problemas com a mãe da Ale eu dormi umas noites na casa da mãe dele por não ter outro lugar pra ficar, foram tempos dificeis, ele tinha um curso de informatica junto com a esposa dele que era muito bacana
+        Cleyton grande amigo, primo do China, depois que fizemos amizade eu passava muito tempo com ele e com a Marilda esposa dele e a filha deles, eles foram cuidar de uma chacara em Registro do pai dele e fui eu que levei, queriam que eu levasse uma leitoa no porta malas do carro, kkkkkkkkkkk, claro que não faria isso
+        Marilda esposa do Cleyton, grande amiga, minha comadre, pessoa adoravel
+        Marcela filha da Melinda o do James, conheço desde que nsceu e era eu que consertava o computador dela quando dava problema
+        Eduardo amigo advogado (ou Juiz) de Coronel Vivida, o pai dele meu amigo também o Egidio era Juiz da cidade, fizemos grande amizade e eu sempre tava consertando o computador dele quando entrava virus, grande amigão, tinha poucos amigos em Coronel Vivida o pessoal achava que eu era algum ladrão famoso da Internet e que a Policia Federal logo iam me prender, he he he, olha a cabeça dessa gente, mas alguns lá eram meus amigos como o Chicão e familia, eles tinham um açougue que eu comprava toda hora uma vez trouxe um vinho de coco pro Chicão que se comprava em Campo Largo porque todo mês tinha que ir buscar os Dolares em Curitiba, que também eram muitos, por sorte porque eu sou um bom programador de DLLs e ActiveX
+        Paulo tio Paulo, grande amigo de infãncia, nunca me bateu, se preocupava muito comigo, não tenho queixa dele
+        Paulo primo Paulo da tia Mena, grande amigo, foi caminhoneiro, mas nunca fui viajar com ele, gstaria de ter ido, o problema seria ter que parar a cada meia hora pra urinar, kkkkkkkkkkkkkkkk, pai do Linho e dos outros primos que eu não lembro o nome, gente finissima
+        Paulo primo Paulo da tia Lurdes mulher do tio Nando, grande amigo, mas a gente não se dava bem quando eramos criança, ele era dificil de lidar, hoje somos amigos no Facebook
+        Dito grande primo, como eu sempre ia nos fins de semana na casa da Tia Mena somos bons amigos, ele que me ensinou a jogar fliperama oque mais alguns anos mais tarde seria meu primeiro emprego oficial, não tenho queixa dele, a não ser o fato que qualquer coisinha ele me batia, era maior que eu dois anos, eu nunca consegui bater nele, ele me levava no som do bairro dele mas nao era a minha praia
+        Luiz primo mais proximo, não tenho queixas, nos damos sempre bem, nunca brigamos, nunca me bateu nem nunca bati nele, somos amigos no Facebook
+        Cide grande primo, como era mais velho não tinhamos muito em comum mas o tio Paulo conta historias da convivência com ele, não tenho queixa, estava no casamento dele que dura até hoje, mas não sei nome da filha
+        Side filho do meu padrasto, grande colega, não tenho queixas dele
+        Sanderson irmão do Side, chorou muito quando o pai dele morreu semana passada, gostava muito do pai e estava na hora que a mãe descobriu que ele morreu, eu infelizmente não pude fazer nada, foi de repente
+        Silvia irmã do Sanderson, não tenho queixa, nunca conversamos
+        Vitória filha do Silvinho só aparece algumas vezes, ou aparecia antes do vô dela falecer
+        Renata ate onde eu sei é esposa do Silvinho, o filho bombeiro do Silvio que faleceu semana passada
+        Carlinhos grande Crlinhos filho da Lurdes do Zeco, faziamos cada arte quando eramos crianças que não da para por nos livros, amigos muito arteros os dele também no Xaxim em Curitiba
+        Carlinhos meu ex-padrasto, faleceu a alguns meses, trabalhei com ele com pintura de carro, pessoa dificil, mas tinhamos boa amizade
+        Jota irmão do Carlinhos e também meu tio, sempre me levava pra pescar e era hilário, fui pescar na ilha da Galheta perto da ilha do Mel com ele, lá que eu aprendi oque é pescar meixe maior doque você pode tiar da água, os peixes era tão grandes que os anzois abriam por incrivel que pareça, foi muito legal, faleceu a algum tempo, pai do Polico que é gerente de empresa hoje em dia, uma vez eu vi o Polico prender o dedo numa porta de carro, fiquei com pena mas oque eu ia fazer, uma vez a Maristela minha terceira esposa prendeu sem quer o dedo da Thalia filha da minha segunda esposa na porta do carro e eu perdi o controle, foi triste, não tm coisa pior doque voce ver um filho sofrer e não poder fazer nada, ela colocou a menina no carro e foi batebdo a porta, só podia dar nisso, agora os filhos dela ela colocava com jeito no carro, foi um momento triste da minha vida, por causa dessa briga ficamos uma semana separados mas o dela da Thalia que agora é juiza nem chegou a sair sangue igual do Polico que amassou de verdade
+        Edson tio Edson, pessoa dificil, nunca fomos amigos, pensa que é mais doque eu, precisa aprender uma coisas sobre relaciomaneto com estranhos, se um dia for preso vai aprender na prisão
+        Rubinho tio irmão do Carlinhos também, boa pessoa, mas nuncsa fomos próximos, pai da Simone da Thais e do Hélio, não tenho queixa de nenhum deles, uma vez eu ajudei a desmontar uma casa de madeira com o Rubéns e tambem ajudei a construir uma casa nova do Rubens
+        Helinho filho
         Lurdes
         Lurdes
         Waldemar
