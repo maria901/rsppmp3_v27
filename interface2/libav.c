@@ -930,11 +930,11 @@ int init_decoder2(morcego___i___instance__a__bucaneiro_engineering *mv_______, b
           /*
           AVDictionary *opts = NULL;
 
-        if (!av_dict_get(opts, "threads", NULL, 0))
-            av_dict_set(&opts, "threads", "1", 0);
+          if (!av_dict_get(opts, "threads", NULL, 0))
+          av_dict_set(&opts, "threads", "1", 0);
 
-av_dict_set(&opts, "threads", "1", 0);
-*/
+          av_dict_set(&opts, "threads", "1", 0);
+          */
 
           if (avcodec_open2(pCodecCtx, Codec, NULL) < 0)
           {
@@ -1530,7 +1530,7 @@ final:;
                mv_______->libav_c___morcego = avcodec_send_packet(pCodecCtx, ((AVPacket *)mv_______->libav_c___m_packet_ptr));
 
                mv_______->libav_c___j_again_call_j = false;
-               if (AVERROR(EAGAIN) == mv_______->libav_c___morcego && mv_______->libav_c___morcego != AVERROR_EOF)
+               if (AVERROR(EAGAIN) == mv_______->libav_c___morcego && mv_______->libav_c___morcego != AVERROR_EOF)//what is this ?, the first check is enough ric..., I will keep for funny reasons kkkkkk
                {
                     mv_______->libav_c___j_again_call_j = true;
                }

@@ -328,28 +328,29 @@ no_use_i:;
      mv_______->decoder_c___tio = -2;
      /*
 
-        Braulio Zanotto, professor de educação fisica
+        Braulio Zanotto, professor de educação fisica e juiz de futebol
         Vinicus, filho do Braulio
-        Vladinei
-        Magnani
-        Pereira
-        Xu
-        Eduardo, me ensinou sobre encryptação em 82 a encryptacao se chamava Zenit Polar
-        Adriana
-        Andreia
-        Maciel
-        Tabushi
-        Viviane
-        Aercio
-        Débora
-        Célio
-        Célia
-        Paola
-        Edna
-        Sil
-        Ícaro
-        China
-        Testa
+        Vladinei amigo de 1982 do colegio Pedro II
+        Magnani amigo de ano desconhecido do colegio
+        Pereira amigo do Pedro II, otimo jogador de futebol junto com o Xu, estava comigo no alistamento militar no colegio militar de Curitiba
+        Xu grande amigo otimo jogador de futebol no colegio Pedro II
+        Eduardo, me ensinou sobre encryptação em 82 a encryptacao se chamava Zenit Polar, grande amigo, so discutimos uma unica vez e ele tomava cerveja junto com o Pereira ja em 82
+        Adriana uma amiguinha do colegio Nivaldo Braba por quem eu me apaixonei, e no fim do ano teve um amigo secreto e saiu pra mim comprar um presente pra ela , alguem sujeriu um broche, e eu comprei e presenteei, adoraria saber se ela ainda tem esse broche...
+        Andreia amiga minha e da Adriana porquem eu tambem me apaixonei, e somente uma vez acompanhei ela ate a casa dela quando estava perto da casa dela ela disse que eu deveria voltar dali mesmo e nao ir ate a casa dela, esta gostava mesmo de mim
+        Maciel amigo do Pereira e do Xu tambem, grande amigo como todos os outros uma unica vez eu o Pereira e o Maciel saimos fazer bagunça no bairro seminario uma tarde, foi muito legal
+        Tabushi triste historia aconteceu, eu e o Maciel estavamos brincando de jogar pedra num e no outro e o Tabushi tava perto mas distrido, de repente eu joguei uma pedra grande no Maciel mas a pedra foi em direção ao Tabushi e ele tava distrido e claro a pedra pegou na cabeça dele, começou a sair sangue quando o Tabushi viu o sangue disparou na minha direção e como ele tinha uns kilos a mais nao conseguiu me pegar e eu corri pra casa, no dia seguinte achei que ele ia me dar uma surra logo que chegasse no colegio mas ele com a cabeça enfaixada apenas disse que não batia em criança, foi muito triste, podeia ter acertado o olho dele dai seria uma problema pro resto da vida
+        Viviane amiga do Aercio e de mim, o Aercio vivia tirando sarro dela e ela ficava braba, ela sempre usava o mesmo tenis nao estragava nunca, eu achava ela uma gata mas nunca me apaixonei
+        Aercio um dos melhores amigos, grande gozador, junto com outro amigo que eu nao lembro o nome mas estava tambem comigo no alistamento no colegio militar de Curitiba, uma vez o Aercio trouxe uma bicicleta com problemas pra escola e um amigo dele foi andar com ela e ela estragou ele disse na hora "vai pagar", o cara tentou se livrar do problema na ele ficou pegando no pé dele, foi hilário, bons tempos, foi nesse ano que eu ganhei minha unica medalha de campeão em alguma coisa, foi no campeonato de futebol da escola nossa sala ganhou do colegio inteiro não em pergunte como, não me lembro se marquei gol, foi muito legal
+        Débora uma amiguinha do colegio no mesmo tempo de Aercio e Viviane ela gostava de mim mas não adimitia, as vezes ela seguia a gente dentro do banheiro dos meninos, kkkkk, mas logo saia, muito engraçado, na outra sala do colegio tinha uma menina que vivia puxando papo comigo, só ela e a Debora gostaram de mim na época de colégio
+        Célio amigo da Vila Verde e filho do dono da casa que eu morava, gente finissima queria lembrar do nome do irmão dele também, pessoa muito legal este irmão e esposa eles não sabiam oque fazer pra me agradar lá fiz muita amizade com o pai e a mão deles também vivia indo na casa dos parentes deles de Curitiba, todo dia a gente saia pra algum evento eu que carregava todo mundo, e nunca cobrava a gasolina, grande Célio
+        Célia minha tia Célia, eu gostava dela mas ela não gostava de ninguém, ela morreu nova fui eu que cuidei de todo o enterro dela e fui eu que paguei tudo acompanhado da mãe e da tia Mena e da vó Elisa que não paravam de chorar um só minuto, quem emprestou o Fuke pra gente fazer a correria foi o Carlinhos, meu ex-padrasto 
+        Célia filha do tio Alexandre irmã do Maúricio, eu era apaixonado por ela em 82, a gente ia toda hora na casa dela mas ela nunca demonstrou o menor interesse de namorar comigo, mas ela sabia sim que eu era ligadão nela, mora em Foz do Iguaçu hoje em dia
+        Paola filha da Célia mãe do China da Vila Verde, eu me apaixonei por ela logo que conheci, demorou pra mim parar de pensar nela
+        Edna irmã da Paola, tivemos um breve namoro de uma semana
+        Sil irmã da Edna, grande amiga, eu levava a vó dela no hospital Erasto Gaertner pra tratamento e ela ia junto, mãe do Ícaro
+        Ícaro filho da Sil, tinha três anos de idade
+        China grande amigo, me ajudou muito durante todo o tempo que eu morei na Vila Verde, ensinei pra ele coisas sobre comércio de software na Internet pra ele me ajudar a vender software, nunca saimos na porrada por incrível que pareça
+        Testa amigo meu e do China, hilário, não tinha tempo ruim pra ele
         Nilson
         Sirlei
         Elvis
@@ -462,7 +463,7 @@ no_use_i:;
         Madrinha Tereza
         Tio Pedro
         Vô Pedro
-        Madalena
+        Madalena uma pessoa por que eu me apaixonei e nunca perguntei o nome dela
         Jaqueline
         Razera
         Andréa
@@ -482,6 +483,9 @@ no_use_i:;
         Leoni
         Vera
         Vinicius
+
+        
+
 
 
 
