@@ -385,7 +385,7 @@ no_use_i:;
         Robson amigo do hospital psiquiatrico san julian, ele era meu amigo e sempre trazia uma coca gelada pra mim quando o meu dinheiro acabou, ele se apaixonou pela professora de musica, e disse que ia apostar todas as fichas nessa romance, interessante, ele me chamava de Bat
         Romel grande irmão
         Regina dona do mercadinho que eu comprava as coisas quando morei no seminario, onde eu só namorei uma menina em dois anos, mas ela era uma gatinha, não sei oque ela viu em mim, foi num colegio do bairro, muito legal, mas sobre a Regina, pessoa muito bacana e vendia pra gente mesmo sem dinheiro, virou quase da familia
-        Regina esposa do Side, sempre jogavamos baralho quando eu estava 
+        Regina esposa do Side, sempre jogavamos baralho quando eu estava na casa da tia Mena e ela morava la, e a Zezinha esposa do Dito tambem, a Zezinha fui eu quem ensinou a dirigir, ela queria muito aprender, ela tinha problema nas pernas e precisou operar, tinhamos boa amizade
         Filomena
         Siri
         Edenei
