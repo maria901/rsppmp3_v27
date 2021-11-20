@@ -78,9 +78,23 @@
 
 #include "be_xml.c"
 
+/**
+ * To fix the GetTickCount bug, it don't wrap after one month running...
+ *
+ * @return WINBASEAPI
+ */
 WINBASEAPI ULONGLONG WINAPI GetTickCount64(VOID);
 
-// tag1
+/**
+ * @file decoder.c
+ * @author Amanda Husband (amanda@husband.com)
+ * @brief large enough, will receive up to 8kb of data at the maximum
+ * @version 0.1.53647856
+ * @date 2021-11-20 12:30
+ *
+ * @copyright Copyleft (c) 2021
+ *
+ */
 #define tamanho ((100000 * 2))
 #define tamanho2 (tamanho)
 
@@ -88,7 +102,8 @@ WINBASEAPI ULONGLONG WINAPI GetTickCount64(VOID);
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 /**
- * The maximum size of an utf-8 encoded filename with the max limit of a file in Windows
+ * The maximum size of an utf-8 encoded filename with the max limit
+ *  of a file in Windows (it is enough (updated 20/nov/2021))
  */
 #define AMANDA__SIZE ((32767 * 6) + 2)
 /**
@@ -98,13 +113,12 @@ WINBASEAPI ULONGLONG WINAPI GetTickCount64(VOID);
 #define AMANDA__SIZE_w (32767)
 
 /**
- * To convert an utf-8 encoded filename to a wide string (WCHAR *), we
- *  . provide two functions that are exactly the same because someone may
- * use it in multi-thread code
+ * To convert an utf-8 encoded filename to a wide string (WCHAR *)
  *
  * @param pUTF8 the input utf-8 encoded filename
  *
- * @return the static allocated WCHAR array with the filename as wide string
+ * @return the static allocated WCHAR array with the filename as wide
+ *  string (single thread for the moment, you can change it (21/nov/2021))
  *
  */
 WCHAR *amanda_utf8towide_3_(char *pUTF8)
@@ -116,11 +130,13 @@ WCHAR *amanda_utf8towide_3_(char *pUTF8)
 }
 
 /**
- * To convert an input wide string to a utf-8 encoded filename on return
+ * To convert an input wide string to a utf-8 encoded filename on return,
+ *  will be modified in a near future to support multi-thread players (21/nov/2021)
  *
  * @param pUSC2_maria the wide string to be converted
  *
- * @return it will return the static allocated char * string with the utf-8 encoded filename
+ * @return it will return the static allocated char * string with the utf-8 encoded filename, large enough to
+ *  wide paths
  *
  */
 char *valquiria_wide_to_utf8_3_(WCHAR *pUSC2_maria)
@@ -132,6 +148,9 @@ char *valquiria_wide_to_utf8_3_(WCHAR *pUSC2_maria)
 }
 
 /**
+ * @brief Important: may have a bug in the input string if it is less than 2 bytes, may
+ * access byte 3 and four or more, please check (21/nov/2021 11:57)
+ * 
  * To make the path wide mode aware, stolen from libarchive
  *
  * 15/september/2021 10:14, last visit 16/09/2021 22:36 by bhond..., last visit 21/sep/2021 03:57...
@@ -583,7 +602,11 @@ volatile int is_registered = 1;
 void pass_debug_function(void *val);
 
 /**
- * (not in use these days, everything is sent to DebugView) It will add the debug information to be shown on the sample project, but notice that when debugging we only send the information to OutPutDebugStringA
+ *
+ * (not in use these days (21/nov/2021), everything is sent to DebugView) It
+ * will add the debug information to be shown on the sample project, but
+ * notice that when debugging we only send the information to
+ * OutPutDebugStringA
  *
  *
  */
@@ -630,7 +653,8 @@ get_debuginformation_multithread(morcego___i___instance__a__bucaneiro_engineerin
 }
 
 /**
- * This will return a string with the time representation of the double value, I spent a few minutes trying to figure out how to implement it, it was 2004
+ * This will return a string with the time representation of the double
+ * value, I spent a few minutes trying to figure out how to implement it, it was 2004
  */
 static char *
 secondtostring(double value)
@@ -653,7 +677,7 @@ secondtostring(double value)
 	return fixo; // single thread only for the moment
 }
 /**
- * It will return the number of soundcards installed and working, in case you have 10 soundcards installed
+ * It will return the number of soundcards installed and working, in case you have 10 soundcards installed (or a BlueTooth phone)
  *
  */
 int getdev()
@@ -786,7 +810,10 @@ int initplayer(morcego___i___instance__a__bucaneiro_engineering *mv_______)
 
 	return ret;
 }
-
+/**
+ * @brief a pre-defined time slice enough (21/nov/2021)
+ * 
+ */
 #define TEST_1 5
 /**
  * This series of functions just send slices of the pcm data to the sound card
@@ -1059,7 +1086,16 @@ int play_number_1_26_june_2011(morcego___i___instance__a__bucaneiro_engineering 
 
 	return 0;
 }
-
+/**
+ * @brief one of the copies of the functions that send wav data to
+ * the soundcard (21/nov/2021)
+ * 
+ * @param mv_______ our amazing struct to simulate a class in C
+ * @param buf the input wav data
+ * @param len the size
+ * @return int as far as I know it is always 0, we always use int as 
+ * return even if not used 
+ */
 int play_number_2_26_june_2011(morcego___i___instance__a__bucaneiro_engineering *
 								   mv_______,
 							   uchar *buf, uint len)
@@ -1679,16 +1715,29 @@ id3v2tag_multithread(morcego___i___instance__a__bucaneiro_engineering *mv_______
 }
 
 /**
- * It will set the volume
+ * @brief It will set the volume
  *
- * buf is the signed short sized samples
+ * \param buf is the signed short sized samples (input as uchar(20/nov/2021))
  *
- * len is the whole size of the bytes in the signed short samples
+ * \param len is the whole size of the bytes in the signed short samples
+ *
+ * \return nothing as you may expect 
+ *
+ * \copyright ric the great, father and Amanda husband in 2022
+ *
+ * @file decoder.c
+ * 
+ * @author Amanda Husband (amanda@husband.com)
+ * 
+ * @version -57687.1234.53647856 build 647584657364902
+ * 
+ * @date 2021-nov-20 
+ * 
  */
 void setvolume2(morcego___i___instance__a__bucaneiro_engineering *mv_______,
 				uchar *buf, uint len)
 {
-	signed short *fatia; // notice that it is ´signed´ no matter what it means
+	signed short *fatia; // notice that it is ´signed´ no matter what it means, nobody use it as 'signed'
 	int tempo;
 	int *fatia2 = &tempo;
 	float temp;
@@ -1715,7 +1764,24 @@ void setvolume2(morcego___i___instance__a__bucaneiro_engineering *mv_______,
 }
 
 /**
- * volume is set here
+ * @brief It will set the volume
+ *
+ * \param buf is the signed short sized samples (input as uchar(20/nov/2021 ))
+ *
+ * \param len is the whole size of the bytes in the signed short samples
+ *
+ * \return nothing as you may expect 
+ *
+ * \copyright ric the great, father and Amanda husband in 2022
+ *
+ * @file decoder.c
+ * 
+ * @author Amanda Husband (amanda@husband.com)
+ * 
+ * @version -57687.1234.53647856
+ * 
+ * @date 2021-nov-20 
+ * 
  */
 int setvolume3(morcego___i___instance__a__bucaneiro_engineering *mv_______,
 			   uchar *buf, uint len)
@@ -1751,23 +1817,36 @@ int setvolume3(morcego___i___instance__a__bucaneiro_engineering *mv_______,
 }
 
 /**
- * Main decoder (player) function.
+ * \brief Main decoder (player) function.
+ * 
  * \param filename the file to play as a utf-8 encoded C string
- * \return 0 if no error or the error value<br>
+ * 
+ * \return 0 if no error or the error value
+ * 
  */
 int morcego_play(
 	morcego___i___instance__a__bucaneiro_engineering *mv_______,
 	unsigned char
 		*filename,
 	int track);
-// this is where the magic occurs
+/**
+ * @file decoder.c
+ * @author your name (you@domain.com)
+ * @brief this is where the magic occurs, Amanda husband said...
+ * @version 45364758.6374856.98846746557 build 25
+ * @date 2021-11-20 13:50
+ * 
+ * @copyright Copyright (c) 2021
+ * 
+ */
 #include "player.c"
 
 /**
- * It will call the player function
+ * @brief It will call the player function
  */
 int __stdcall startapi2(morcego___i___instance__a__bucaneiro_engineering *mv_______)
 {
+
 	mv_______->decoder_c___flagdewave = 0;
 	mv_______->decoder_c___intreturn2 = 0;
 	// thinktwice1);
@@ -1784,7 +1863,9 @@ int __stdcall startapi2(morcego___i___instance__a__bucaneiro_engineering *mv____
 }
 
 /**
- * As you can see it was copied from the BW OGG Vorbis OCX code (my ocx, of course), and it will create the player thread, it will be modified soon to avoid the thread problem of msvcrt.DLL
+ * As you can see it was copied from the BW OGG Vorbis OCX code (my ocx, of course), and it will create
+ * the player thread, it will be modified soon to avoid the thread problem of msvcrt.DLL (before 25/dec/2021)
+ *
  */
 int __stdcall playogg /* because this code was borrowed from Ogg Vorbis code 20 years ago */ (morcego___i___instance__a__bucaneiro_engineering *mv_______)
 {
@@ -1860,9 +1941,35 @@ int checkinit(morcego___i___instance__a__bucaneiro_engineering *mv_______)
 }
 
 /**
- * Back in the VB5 days this function was the main interface to the DLL, this is why
- * today we have an interface2.dll for the video functions
+ * 
  *
+ */
+
+/**
+ * @brief Back in the VB5 (1996 (yes, it is old(as usual...))) days this function was
+ * the main interface to the DLL, this is why today we have an interface2.dll
+ * for the video functions
+ *
+ * \param argumento1 int in win32 and int64_t in win64 first argument
+ *
+ * \param argumento2 int in win32 and int64_t in win64 next argument
+ *
+ * \param argumento3 int in win32 and int64_t in win64 next argument
+ *
+ * \param argumento4 int in win32 and int64_t in win64 next argument
+ *
+ * \return int the value for each different entry, and it can be a lot, it was at least
+ *
+ * \copyright ric the great, father and Amanda husband in 2022 and above until year 5000000000
+ *
+ * @file decoder.c
+ * 
+ * @author Amanda Husband (amanda@husband.com)
+ * 
+ * @version -57687.1234.53647856
+ * 
+ * @date 2021-nov-20  13:56
+ * 
  */
 int __stdcall interface1(__attribute__((unused)) __INT32_OR_INT64 argumento1, __attribute__((unused)) __INT32_OR_INT64 argumento2,
 						 __attribute__((unused)) __INT32_OR_INT64 argumento3, __attribute__((unused)) __INT32_OR_INT64 argumento4)
@@ -1873,7 +1980,7 @@ int __stdcall interface1(__attribute__((unused)) __INT32_OR_INT64 argumento1, __
 
 /**
 
-   It will copy the src to the destination dest (utf-8 encoded)
+   @brief It will copy the src to the destination dest (utf-8 encoded)
    If the function succeeds, the return value is nonzero.
 
    If the function fails, the return value is zero. To get extended error information, call GetLastError.
@@ -1890,7 +1997,7 @@ int rsplink(char *dest, char *src)
 	return ret;
 }
 
-/* Maria Ava Pereira ***********************************************************
+/* Maria Ava Pereira (melhor Maria Pereira Koci...) ****************************
  *******************************************************************************
  *******************************************************************************
  *******************************************************************************
@@ -1900,10 +2007,17 @@ int rsplink(char *dest, char *src)
 HMODULE instances[1000] = {
 	0,
 };
+
+/**
+ * @brief not in use at this moment, but maybe in 5000000000 years...
+ * 
+ * @return char* , yes it is the path of the temp folder of the system if win95 or the user path if windows 11
+ * 
+ */
 extern char *__cdecl rspgettemppath(void);
 
 /**
- * It will retrieve the ini (now (2021) xml file) file for the application running
+ * @brief It will retrieve the ini (now (2021) xml file) file for the application running
  * the mp3 dll, utf-8 encoded as usual.
  *
  */
@@ -1938,10 +2052,10 @@ int __stdcall write_ini_xml(char *app_name, char *key_name, char *data,
 int __stdcall read_ini_xml(char *app_name, char *key_name, char *data,
 						   int *out_len, char *ini_file);
 /**
- * It will create a new instance of the decoder, this is the first function that need to be called
+ * @brief It will create a new instance of the decoder, this is the first function that need to be called
  */
 __int64
-BE_CreateDecoder()
+BE_CreateDecoder(void)
 {
 	morcego___i___instance__a__bucaneiro_engineering *mv_______;
 	mv_______ =
@@ -1949,7 +2063,7 @@ BE_CreateDecoder()
 			calloc(sizeof(morcego___i___instance__a__bucaneiro_engineering), 1);
 	if (mv_______)
 	{
-		mv_______->sIgnature = 0xbadc0da;
+		mv_______->sIgnature = 0xbadc0da; // as usual could be too 0xdeadbeef
 		mv_______->decoder_c___the_track = 1;
 		mv_______->decoder_c___morcego_channels = 2;
 		mv_______->decoder_c___globalrange = 50;
@@ -1983,7 +2097,7 @@ BE_CreateDecoder()
 		assert(mv_______->libav_c___sample_rate_format_string);
 
 		// added November 2020
-		memset(mv_______->libav_c___amanda_video_thread_error_message_kp, 0, 8 * 8);
+		memset(mv_______->libav_c___amanda_video_thread_error_message_kp, 0, 8 * 8); // why not calloc? I don't know Amanda...
 		mv_______->libav_c___amanda_video_thread_error_value_kp = 0;
 		mv_______->libav_c___screen_kp = NULL;
 		mv_______->libav_c___renderer_kp = NULL;
@@ -2006,7 +2120,7 @@ BE_CreateDecoder()
 }
 
 /**
- * It will close the instance of the decoder.
+ * \brief It will close the instance of the decoder.
  */
 void BE_CloseDecoder(__int64 *instance_64)
 {
@@ -2034,7 +2148,7 @@ void BE_CloseDecoder(__int64 *instance_64)
 	}
 }
 /**
- * It will retrieve the information from the ini (now xml) file
+ * @brief It will retrieve the information from the ini (now xml) file
  *
  */
 int __stdcall GetSettings(char *key, char *data, char *defaulT)
@@ -2671,7 +2785,7 @@ int __stdcall SaveSettings(char *key, char *data)
 }
 
 /**
- * It will check to see if a valid instance was passed
+ * @brief It will check to see if a valid instance was passed
  */
 void check_mv_instance(__int64 mv_instance)
 {
@@ -2696,7 +2810,7 @@ void check_mv_instance(__int64 mv_instance)
 }
 
 /**
- * It will cancel the playback
+ * @brief It will cancel the playback
  */
 int morcego_cancel(morcego___i___instance__a__bucaneiro_engineering *mv_______)
 {
@@ -2736,7 +2850,7 @@ int morcego_cancel(morcego___i___instance__a__bucaneiro_engineering *mv_______)
 }
 
 /**
- * Internal function to initiate the playback
+ * @brief Internal function to initiate the playback
  */
 int morcego_open(morcego___i___instance__a__bucaneiro_engineering *mv_______,
 				 __INT32_OR_INT64 argumento2, __INT32_OR_INT64 argumento3)
@@ -2754,6 +2868,7 @@ int morcego_open(morcego___i___instance__a__bucaneiro_engineering *mv_______,
  *
  * @param track_ even if not 1 it will play only for the moment the first detected audio
  * track (soon we will be fixing it (November/2020))
+ * 
  */
 void pass_information_to_replay(morcego___i___instance__a__bucaneiro_engineering *mv_______,
 								char *file, int loop_, int track_)
@@ -2762,10 +2877,13 @@ void pass_information_to_replay(morcego___i___instance__a__bucaneiro_engineering
 	mv_______->decoder_c___will_loop = loop_;
 	mv_______->decoder_c___track = track_;
 }
+
 /**
+ *
  * It will retrieve the parent of the window passed, it is required in the new
  * Desktop window playback mode (2021)
  *
+ * Stolen from VLC...
  *
  */
 HWND GetRealParent(HWND hWnd)
@@ -2780,7 +2898,7 @@ HWND GetRealParent(HWND hWnd)
 }
 
 /**
- * Helper function to play the video in the Desktop
+ * @brief Helper function to play the video in the Desktop
  * window (2021)
  *
  *
@@ -2813,13 +2931,13 @@ int __stdcall PlayInDesktop(__int64 mv_instance, int enable_i, int system_screen
 }
 
 /**
- * It will play the media file
+ * @brief It will play the media file
  *
  * filename is utf-8
  *
  * loop: will define if it loops
  *
- * track: the track to play (for the moment just 1)
+ * track: the track to play (start from 1)
  *
  * hwnd: the first window that will be the background of the player
  *
@@ -2838,7 +2956,6 @@ int __stdcall PlayInDesktop(__int64 mv_instance, int enable_i, int system_screen
  * subtitle_i: the subtitle index to show if one is in the video media file, only Bitmap based
  * subtitles are supported at this moment
  *
- * is the number of audio track to play, starting from 1 (usually 1)
  */
 int __stdcall Play(__int64 mv_instance, char *filename, int loop, int track, __attribute__((unused)) __int64 hwnd_,
 				   __attribute__((unused)) __int64 player_hwnd_,
@@ -2977,6 +3094,7 @@ int __stdcall IntReturn(__int64 mv_instance)
 			mv_instance;
 	return mv_______->decoder_c___intreturn + mv_______->decoder_c___pauseflag;
 }
+
 /**
  * As far as I remember it will retrieve the progress position of the media to wav conversion, take a look in the sources to learn more
  *
@@ -3015,6 +3133,7 @@ int morcego_pause(morcego___i___instance__a__bucaneiro_engineering *mv_______)
 
 	return 0;
 }
+
 /**
  * The function to pause the playback, if it is running, of course
  *
@@ -3032,6 +3151,7 @@ int __stdcall PlaybackPause(__int64 mv_instance)
 		mv_______->libav_c___audio_position_real;
 	return morcego_pause(mv_______);
 }
+
 /**
  * The internal function to resume the playback, if it was open with Open or if it was paused
  *
@@ -3062,6 +3182,7 @@ int morcego_resume(morcego___i___instance__a__bucaneiro_engineering *mv_______)
 	}
 	return 0;
 }
+
 /**
  * The function to resume the playback, if it was open with Open or if it was paused
  *
@@ -3080,6 +3201,7 @@ int __stdcall PlaybackResume(__int64 mv_instance)
 	pedro_dprintf(-1, "passou 1");
 	return morcego_resume(mv_______);
 }
+
 /**
  * To cancel the playback, just it
  *
@@ -3098,6 +3220,7 @@ int __stdcall PlaybackCancel(__int64 mv_instance)
 
 	return ret;
 }
+
 /**
  * The internal function to get the sample rate of the loaded media file
  *
@@ -3111,6 +3234,7 @@ int morcego_samplerate(morcego___i___instance__a__bucaneiro_engineering *
 	}
 	return mv_______->decoder_c___intsamplerate;
 }
+
 /**
  * The function to get the sample rate of the loaded media file
  *
@@ -3583,6 +3707,14 @@ int __stdcall PlayBackPosition(__int64 mv_instance)
 	return ret;
 }
 
+/**
+ * @brief Internal function, please check the code
+ * 
+ * @param mv_______ the main struct of the DLL
+ * @param argumento2 a pointer disguised as an int
+ * @return int 
+ * 
+ */
 int morcego_be_getplaybackposition_2(morcego___i___instance__a__bucaneiro_engineering *mv_______,
 									 __INT32_OR_INT64 argumento2)
 {
@@ -3658,17 +3790,18 @@ double __stdcall PlayBackPosition_AV_TIME_BASE(__int64 mv_instance)
 
 	return val;
 }
+
 /**
- * To set the priority of the player
- *
- * @param priority
- *
- * 0 - Idle processor time
- *
- * 1 - Normal processor time
- *
- * 2 - High processor time
- *
+ * @brief To set the priority of the player, only
+ * important in slow machines, in fast machines it
+ * is almost irrelevant
+ * 
+ * @param mv_instance the instance
+ * @param priority <br>
+ * 0 - Idle processor time<br>
+ * 1 - Normal processor time<br>
+ * 2 - High processor time<br>
+ * @return int 
  */
 int __stdcall SetPriority(__int64 mv_instance, int priority)
 {
@@ -3683,8 +3816,9 @@ int __stdcall SetPriority(__int64 mv_instance, int priority)
  * This function will change the volume of the playback
  * In the version 2.5.0 this function was modified, now it range from 0 to 100 and not from 0 to 10 anymore
  *
- * Notice that this function access the system mixer, then it affect the volume of any file playing (at least below windows 7), if
- * you want to change only the playback of the file playing in the control, then use the InternalVolume
+ * Notice that this function access the system mixer, then it affect the
+ * volume of any file playing (at least below windows 7), if you want to
+ * change only the playback of the file playing in the control, then use the InternalVolume
  * function, now the InternalVolume function is the preferred way to change volume playback
  *
  * A value of 0 will mute the playback, a value of 100 to maximum volume
@@ -3703,7 +3837,7 @@ int __stdcall SetVolumeGain(__int64 mv_instance, int value)
 	return 0;
 }
 /**
- * To set the wav out that will play the media file
+ * To set the wav out that will play the media file, very useful
  *
  */
 int __stdcall SetWaveOutDevice(__int64 mv_instance, int device)
@@ -3715,6 +3849,7 @@ int __stdcall SetWaveOutDevice(__int64 mv_instance, int device)
 	mv_______->decoder_c___intwaveout = device;
 	return 0;
 }
+
 /**
  * To get the name of the wav out devices, just informative
  *
@@ -3728,7 +3863,9 @@ int __stdcall GetWaveOutDevicesName(__int64 mv_instance, int device, char *data)
 	return 0;
 }
 /**
- * Not in use these days (November/2020), because Libav don't inform this
+ *
+ * @brief Not in use these days (November/2020), because Libav don't
+ * inform this, but could (I will think about it)
  *
  */
 int morcego_isvbr(morcego___i___instance__a__bucaneiro_engineering *mv_______)
@@ -3752,7 +3889,9 @@ int __stdcall GetVBR(__int64 mv_instance)
 	return morcego_isvbr(mv_______);
 }
 /**
- * To get the bitrate of the media file, may include not only the audio but video bitrate too in some cases
+ * To get the bitrate of the media file, may include not only the audio but
+ * video bitrate too in some cases, then it will audio bitrate plus video
+ * bitrate as you is already expecting
  *
  */
 int __stdcall GetBitrate(__int64 mv_instance)
@@ -3768,7 +3907,7 @@ int __stdcall GetBitrate(__int64 mv_instance)
 	return mv_______->decoder_c___bitrate;
 }
 /**
- * (Added October 2021) To get the video bitrate of the media file
+ * @brief (Added October 2021) To get the video bitrate of the media file
  *
  */
 int __stdcall GetBitrate_Video(__int64 mv_instance)
@@ -3784,7 +3923,7 @@ int __stdcall GetBitrate_Video(__int64 mv_instance)
 	return mv_______->libav_c___video_bitrate_m;
 }
 /**
- * Not in use these days anymore, we keep it for compatibility with older software
+ * @brief Not in use these days anymore, we keep it for compatibility with older software
  *
  */
 int __stdcall GetMpegVersion(__int64 mv_instance, char *version)
@@ -3801,7 +3940,7 @@ int __stdcall GetMpegVersion(__int64 mv_instance, char *version)
 	return 0;
 }
 /**
- * It will return the media information about the file, if available
+ * @brief It will return the media information about the file, if available
  *
  */
 int __stdcall GetMediaInformation(__int64 mv_instance, char *layer_)
@@ -3894,10 +4033,10 @@ int __stdcall ConvertMP3ToWavExtended(__int64 mv_instance, char *input, char *ou
 	morcego_property_bag *pb = malloc(sizeof(morcego_property_bag));
 	memset(pb, 0, sizeof(morcego_property_bag));
 	pb->int64_1 = track; // track
-	
+
 	pedro_dprintf(-1, "input %s\n", input);
 	pedro_dprintf(-1, "output %s\n", output);
-	
+
 	strcpy(pb->string_1, input);
 	strcpy(pb->string_2, output);
 	pb->int64_2 = tipo_de_wav;
@@ -5160,7 +5299,9 @@ int __fastcall DetectChangeInSoundCards_i_internal(void) // not really necessary
 
 ////////////////////////////////////////////////////////////////////////
 /* Bucaneiro **********************************************************Amanda***
- *******************************************************************************
+
+		  *************************2020/2021/2022**********************
+
  ************Paul***********************************Lucrecia********************
  *********************************Deus******************************************
  *******************************************************************************
@@ -5210,7 +5351,8 @@ inicio:
 	}
 }
 /**
- * Equivalent to C# Trim(), this is what we was using before the knowledge about the Trim method of csharp, this is not a joke
+ * Equivalent to C# Trim(), this is what we was using before the
+ *  knowledge about the Trim method of csharp, this is not a joke
  *
  */
 void removespace(char *data)
@@ -5291,7 +5433,7 @@ int morcego_geterrorstring(morcego___i___instance__a__bucaneiro_engineering *mv_
 		break;
 	case 300:
 		strcpy((char *)argumento3,
-			   "Tampering detected , please reinstall the component");
+			   "Tampering detected , please reinstall the component"); // 1996 code
 		break;
 	case 900:
 		strcpy((char *)argumento3, "Unknown event");
@@ -5403,7 +5545,7 @@ int __stdcall About()
 	void mprintf_about(char *format, ...);
 	mprintf_about("Brazilian GPL 3 DLL to play and decode"
 				  " any media file"
-				  " supported by ffmpeg (Libav) with some wave effects and equalizer");
+				  " supported by ffmpeg (Libav) with some wave effects and 44100 only samplerate based equalizer");
 	return 0xdeadbeef;
 }
 /**
@@ -5501,8 +5643,9 @@ void BucaneiroStereoToMono(char *buffer, int len)
 	return;
 }
 /**
- * It will retrieve whether the player is in multiplayer mode, now with Libav the player is never multiplayer, maybe
- * again in the future when we make the whole code of the DLL multiplayer capable, a lot of time to do this is required
+ * It will retrieve whether the player is in multiplayer mode, now with Libav the player is never multiplayer
+ * (but soon it will 21/nov/2021 ), maybe again in the future when we make the whole code of the DLL
+ * multiplayer capable, a lot of time to do this is required
  *
  */
 void __stdcall IsMultiplayer(__int64 mv_instance, int multiplayer_or_not)
@@ -5570,7 +5713,7 @@ void __stdcall PassWindowInformation(__int64 mv_instance,
 	mv_______->libav_c___request_for_adjust = 1;
 }
 /**
- * To retrieve the video information, very informative
+ * To retrieve the video informartion, very informative
  *
  */
 void __stdcall GetVideoInfo(__int64 mv_instance, char *data)
@@ -5625,7 +5768,7 @@ void __stdcall GetWindowSize(__int64 mv_instance, int *w, int *h)
 }
 /**
  * It will return the pixel format (but notice that in October/2020
- * it was modified, and for the moment is incomplete) and a few other
+ * it was modified, and for the moment it is incomplete) and a few other
  * informations about the video rate, audio and video sync
  *
  */
@@ -5680,7 +5823,8 @@ void __stdcall DisableWidthLimit(__int64 mv_instance)
  * To know whether the media file is a playlist file (.wpl for Windows
  * Media Player or .jun for rsppmp3 DLL), filename can be Unicode
  * (utf-8 based), these are the only playlist files handled
- * for the moment by the DLL, soon Winamp playlists will be supported
+ * for the moment by the DLL, soon Winamp (an old mp3 player from 1997)
+ *  playlists will be supported
  *
  */
 int __stdcall Is_WPL_Playlist(__int64 mv_instance, char *filename_utf8)
@@ -6178,7 +6322,7 @@ int __stdcall get_next_item_z(int64_t *item_got_z, int64_t *item_number_z)
 				{
 					pedro_dprintf(1001, "Items skipped to get a file that was not played yet -> %d\n", items_skipped_i);
 
-					pedro_dprintf(1001, "Item got in the first try item got %lld item number %lld\n", *item_got_z, *item_number_z);
+					pedro_dprintf(1001, "Item got in the first try, item got %lld item number %lld\n", *item_got_z, *item_number_z);
 				}
 
 				return 0;
@@ -6419,27 +6563,9 @@ int __stdcall get_video_size_z(char *media_file_utf8_z,
 	mv_______->libav_c___width_of_window = -1;
 	mv_______->libav_c___height_of_window = -1;
 
-	/*
-	   ret = MP3.Open(number, MP3.wide2utf8(filename.Text), loop_, int.Parse(track.Text),
-	   video_p.Handle.ToInt64(),
-	   video_f_p.Handle.ToInt64(),
-	   video_p.Width,
-	   video_p.Height,
-	   the_ratio,
-	   video_p.Left,
-	   video_p.Top);
-	 */
 	Open(number_z, media_file_utf8_z, 0, 1, hwnd_z,
 		 player_hwnd_z,
 		 width__z, height__z, 0, left_z, top_z, 0);
-	/*
-	   while(-1 == SampleRate(number_z))
-	   {
-		Sleep(50);
-	   }
-	 */
-
-	// PlaybackCancel(number_z);
 
 	return 0;
 }
@@ -6489,7 +6615,7 @@ int __stdcall get_video_data(int *width_z, int *height_z, char *ratio_string_z, 
 	}
 }
 /**
- * It will close the media file
+ * It will close the media file ;-)
  */
 int __stdcall unload_media_file_z()
 {
@@ -6510,7 +6636,7 @@ int __stdcall unload_media_file_z()
  */
 int __stdcall memory_usage__z(char *data_z)
 {
-	//#pragma message "amanda & MathMan compiling Tar DLL at " __TIME__ "..."
+	//#pragma message "amanda & MathMan compiling Tar (Tar?) DLL at " __TIME__ "..."
 	/*
 																																													¯\_(^^)_/¯
 	 */
@@ -6523,7 +6649,7 @@ int __stdcall memory_usage__z(char *data_z)
 		goto inside_Z;
 	}
 
-	if (GetTickCount64() > oldvalue_Z)
+	if (GetTickCount64() > oldvalue_Z) // to avoi the GetTickCount bug for one month running...search for it on Google
 	{
 
 	inside_Z:;
@@ -6546,7 +6672,9 @@ int __stdcall memory_usage__z(char *data_z)
 	return 0;
 }
 /**
- * Function required when cache is used, cache will gather information about normalization and duration of files that don't have it available
+ * Function required when cache is used, cache will gather information about normalization
+ *  and duration of files that don't have it available ( some raw new WebM files ), it is
+ *  really handy (21/nov/2021 11:48)
  */
 void __stdcall Amanda_s_Smart_Ape_Use_Cache(__int64 mv_instance, int value_amanda_s_smart_ape)
 {
