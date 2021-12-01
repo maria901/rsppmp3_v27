@@ -87,6 +87,8 @@ int morcego_play(
         *filename,
     int track)
 {
+
+     pedro_dprintf(-1, "dentro ric\n");
 reinicia_z:;
      RECT rect;
      char *myptr;

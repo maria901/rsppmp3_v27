@@ -3957,7 +3957,7 @@ int __stdcall GetMediaInformation(__int64 mv_instance, char *layer_)
 	return 0;
 }
 /**
- * Not in use these days anymore, but we cannot just remove this function
+ * @brief Not in use these days anymore, but we cannot just remove this function
  *
  */
 int __stdcall GetMpegMode(__int64 mv_instance, char *mode_)
@@ -3973,8 +3973,11 @@ int __stdcall GetMpegMode(__int64 mv_instance, char *mode_)
 	strcpy(mode_, mv_______->dsp_c___mode);
 	return 0;
 }
+
 /**
- * Function to convert a media file to wav pcm in various formats, not only signed 16 bits
+ * @brief Function to convert a media file to wav pcm in various
+ * formats, not only signed 16 bits (not 64 bits PCM, documentation
+ * unavailable for it but people say that this do exist)
  *
  */
 int __stdcall ConvertMP3ToWav(__int64 mv_instance, char *input, char *output,
@@ -3988,7 +3991,13 @@ int __stdcall ConvertMP3ToWav(__int64 mv_instance, char *input, char *output,
 	return convertmp3towav(mv_______, input, output, tipo, track);
 	return ret;
 }
-
+/**
+ * @brief Internal use, please check the code
+ * 
+ * @param mv_______ 
+ * @param argumento2 
+ * @return int 
+ */
 int morcego_converttowav_be(morcego___i___instance__a__bucaneiro_engineering *
 								mv_______,
 							__INT32_OR_INT64 argumento2)
@@ -4001,7 +4010,9 @@ int morcego_converttowav_be(morcego___i___instance__a__bucaneiro_engineering *
 	return 0;
 }
 /**
- * New function to convert a media file to wav pcm in various formats, not only signed 16 bits, preferred method to convert to wav
+ * @brief New function to convert a media file to wav pcm in various
+ * formats, not only signed 16 bits, preferred method to convert to wav
+ * (modified in October/2021 to fix a return value bug)
  *
  * @param input input file
  * @param output the output file
@@ -4011,6 +4022,8 @@ int morcego_converttowav_be(morcego___i___instance__a__bucaneiro_engineering *
  * if 4 IEEE float wav<br>
  * 5 is available but 64 bits FLOAT are not supported
  * yet because the documentation about this wav file is vague
+ * 
+ * @return int 0 if no error, 1 if already running
  */
 int __stdcall ConvertMP3ToWavExtended(__int64 mv_instance, char *input, char *output, int tipo_de_wav, int track)
 {
@@ -4049,7 +4062,7 @@ saida_amanda_s_smart_ape:
 	return returnvalue_amanda_s_smart_ape; // always 0...weird...
 }
 /**
- * It will enable or disable the equalizer
+ * @brief It will enable or disable the equalizer
  *
  */
 int __stdcall EnableEqualizer(__int64 mv_instance, int enable)
@@ -4062,7 +4075,7 @@ int __stdcall EnableEqualizer(__int64 mv_instance, int enable)
 	return 0;
 }
 /**
- * To pass the equalizer settings if it is running and enabled
+ * @brief To pass the equalizer settings if it is running and enabled
  *
  */
 int __stdcall EqualizerSettings(__int64 mv_instance,
@@ -4089,7 +4102,7 @@ int __stdcall EqualizerSettings(__int64 mv_instance,
 	return 0;
 }
 /**
- * Enable or disable the preamplifier, 1 will enable
+ * @brief Enable or disable the preamplifier, 1 will enable
  *
  */
 int __stdcall EnablePreamplifier(__int64 mv_instance, int enable)
@@ -4102,7 +4115,7 @@ int __stdcall EnablePreamplifier(__int64 mv_instance, int enable)
 	return 0;
 }
 /**
- * The setting for the preamplifier if it is enabled, 50 means no gain, 100 means the double of the gain and so on
+ * @brief The setting for the preamplifier if it is enabled, 50 means no gain, 100 means the double of the gain and so on
  *
  */
 int __stdcall PreamplifierValue(__int64 mv_instance, int value)
@@ -4115,9 +4128,11 @@ int __stdcall PreamplifierValue(__int64 mv_instance, int value)
 	return 0;
 }
 /**
- * It can set the internal volume, for the argument 100 means the default volume, 200 means the double of the volume, it can be usefull
- * if the media file has too low volume, but notice that the normalization function that can adjust automagically the volume of the low volume
- * media file, give it a try EnableOnTheFlyVolumeNormalization
+ * @brief It can set the internal volume, for the argument 100 means the default
+ * volume, 200 means the double of the volume, it can be useful
+ * if the media file has too low volume, but notice that the
+ * normalization function that can adjust automagically the
+ * volume of the low volume media file, give it a try EnableOnTheFlyVolumeNormalization
  *
  */
 int morcego_internalvolume(morcego___i___instance__a__bucaneiro_engineering *
@@ -4137,9 +4152,13 @@ int morcego_internalvolume(morcego___i___instance__a__bucaneiro_engineering *
 	mv_______->decoder_c___intvolume2 = vol2int;
 	return 0;
 }
+
 /**
- * It can set the internal volume, for the argument 100 means the default volume, 200 means the double of the volume, it can be usefull
- * if the media file has too low volume, but notice that the normalization function that can adjust automagically the volume of the low volume
+ *
+ * @brief It can set the internal volume, for the argument 100 means the default
+ * volume, 200 means the double of the volume, it can be usefull
+ * if the media file has too low volume, but notice that the
+ * normalization function that can adjust automagically the volume of the low volume
  * media file, give it a try EnableOnTheFlyVolumeNormalization
  *
  */
@@ -4153,17 +4172,19 @@ int __stdcall InternalVolume(__int64 mv_instance, int value)
 	return 0;
 }
 /**
- * This function will enable or disable the on the fly volume normalization, it can make a very low volume media file
+ * @brief This function will enable or disable the on the fly volume normalization, it can make a very low volume media file
  * play as if it was a normal record as any other
  *
- * If mode is 0 then no normalization
+ * @param mode <br>If mode is 0 then no normalization<br>
  *
- * if 1 the normalization will be based on the whole file
+ * if 1 the normalization will be based on the whole file,
+ * ReplayGain method<br>
  *
  * if 2 then only 30 seconds will be used to generate the
- * normalization value
+ * normalization value, ReplayGain method<br>
  *
- * if 3 the new recommended method BENormalize will be used
+ * if 3 the new recommended method, BENormalize
+ * method (recommended, developed by my-self in 2004)<br>
  *
  */
 int __stdcall EnableOnTheFlyVolumeNormalization(__int64 mv_instance, int mode)
@@ -4184,13 +4205,18 @@ int __stdcall EnableOnTheFlyVolumeNormalization(__int64 mv_instance, int mode)
 
 	return 0;
 }
+
 /**
- * This function will make the equalizer to provide the double of the gain
+ * 
+ * @brief This function will make the equalizer to provide the
+ * double of the gain
  *
- * It was added because some users have reported that the response of the equalizer was not enough
+ * It was added because some users have reported that the response
+ * of the equalizer was not enough
  *
- * Now it provides more gain than Winamp or Media Player equalizer, indeed, it can even introduce a
- * little noise or distortion when the equalizer gain is set to the maximum
+ * Now it provides more gain than Winamp or Media Player equalizer,
+ * indeed, it can even introduce a little noise or distortion when
+ * the equalizer gain is set to the maximum
  *
  */
 int __stdcall DoubleBuffer(__int64 mv_instance, int enable)
@@ -4203,7 +4229,7 @@ int __stdcall DoubleBuffer(__int64 mv_instance, int enable)
 	return 0;
 }
 /**
- * To know whether the playback is paused
+ * @brief To know whether the playback is paused
  *
  */
 int __stdcall PauseState(__int64 mv_instance)
@@ -4215,7 +4241,7 @@ int __stdcall PauseState(__int64 mv_instance)
 	return mv_______->decoder_c___pauseflag;
 }
 /**
- * To know whether the volume normalization is being used
+ * @brief To know whether the volume normalization is being used
  *
  */
 int __stdcall IsUsingNormalization(__int64 mv_instance)
@@ -4230,8 +4256,9 @@ int __stdcall IsUsingNormalization(__int64 mv_instance)
 	}
 	return 0;
 }
+
 /**
- * To retrieve the volume multiplication level, this means that by this value each signed short sample is
+ * @brief To retrieve the volume multiplication level, this means that by this value each signed short sample is
  * being multiplied, ex 1.000000 means no volume adjust
  *
  */
@@ -4254,8 +4281,10 @@ int morcego_normalizationdata(morcego___i___instance__a__bucaneiro_engineering *
 	}
 	return 0;
 }
+
 /**
- * To retrieve the volume multiplication level, this means that by this value each signed short sample is
+ * @brief To retrieve the volume multiplication level, this means
+ * that by this value each signed short sample is
  * being multiplied, ex 1.000000 means no volume adjust
  *
  */
@@ -4267,8 +4296,10 @@ int __stdcall NormalizationFactor(__int64 mv_instance, char *value)
 							  (__INT32_OR_INT64)value);
 	return 0;
 }
+
 /**
- * It will retrieve the peak value for the left channel, please examine the sources to see if it is correct
+ * @brief It will retrieve the peak value for the left channel,
+ * please examine the sources to see if it is correct
  *
  */
 int morcego_getleftchannel(morcego___i___instance__a__bucaneiro_engineering *
@@ -4290,6 +4321,7 @@ int morcego_getleftchannel(morcego___i___instance__a__bucaneiro_engineering *
 	}
 	return ret;
 }
+
 /**
  * It will retrieve the peak value for the left channel, please examine the sources to see if it is correct
  *
@@ -4309,7 +4341,8 @@ int __stdcall GetPeak(__int64 mv_instance)
 	return morcego_getleftchannel(mv_______);
 }
 /**
- * Function to get the id3 v1 data, examine the sources to see whether the file can be normal or utf-8 encoded...
+ * @brief Function to get the id3 v1 data, examine the sources to see
+ * whether the file can be normal or utf-8 encoded...
  *
  */
 int __stdcall Read_ID3_v1_tag(__int64 mv_instance, char *filename, int *Track,
@@ -4365,7 +4398,7 @@ int __stdcall Generate_ID3v1Genre(__int64 mv_instance, int pos, char *data)
 	return 0;
 }
 /**
- * To retrieve the id3 v1 comment
+ * @brief To retrieve the id3 v1 comment
  *
  */
 int morcego_wv1Comment(morcego___i___instance__a__bucaneiro_engineering *
@@ -4389,21 +4422,21 @@ int morcego_wv1Comment(morcego___i___instance__a__bucaneiro_engineering *
 	return 0;
 }
 /**
- * This fuction will write the id3 v1 tag on the file
+ * @brief This fuction will write the id3 v1 tag on the file
  *
  * The MP3 file (not utf-8 encoded), examine the sources to confirm
  *
  * \return
  *
- * 0 - no error
+ * 0 - no error<br>
  *
- * 1 - cannot open mp3 file
+ * 1 - cannot open mp3 file<br>
  *
- * 2 - file is too small
+ * 2 - file is too small<br>
  *
- * 3 - invalid file
+ * 3 - invalid file<br>
  *
- * 4 - file is read only
+ * 4 - file is read only<br>
  *
  */
 int __stdcall Write_ID3_v1_tag(__int64 mv_instance, char *filename, int Track, char *Title,
@@ -4437,7 +4470,7 @@ int __stdcall Write_ID3_v1_tag(__int64 mv_instance, char *filename, int Track, c
 	return id3v1tag_ok_write(mv_______, filename);
 }
 /**
- * To remove the id3 v1 tag, if it do exist
+ * @brief To remove the id3 v1 tag, if it do exist
  *
  */
 int __stdcall Remove_ID3V1_tag(__int64 mv_instance, char *filename)

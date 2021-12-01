@@ -436,8 +436,8 @@ int morcego_init_libav(morcego___i___instance__a__bucaneiro_engineering *mv_____
                returnvalue = 2;
                goto saida;
           }
-          pedro_dprintf(-15102021, "morcego_init_libav d");
-          pedro_dprintf(-15102021,
+          pedro_dprintf(-20211130, "morcego_init_libav d");
+          pedro_dprintf(-20211130,
                         "passou de init_decoder2");
 
           mv_______->morcego_interface_c___adjusted_bps =
@@ -533,7 +533,7 @@ int morcego_init_libav(morcego___i___instance__a__bucaneiro_engineering *mv_____
 				   //pedro_dprintf(-1, "will call morcego_deinit_libav from init, return %d\n", returnvalue);
                    //morcego_deinit_libav(mv_______);, for safety...it will call anyway...
                }
-               pedro_dprintf(-1, "morcego_init_libav f");
+               pedro_dprintf(-20211130, "morcego _init_libav f %d \n", returnvalue);
 
                return returnvalue;
           }
@@ -548,6 +548,7 @@ int morcego_decode_libav(morcego___i___instance__a__bucaneiro_engineering *mv___
 {
 
 
+	pedro_dprintf(-20211130, "dentro de morcego_decode_libav \n");
      be_libav_struct *be_copy;
      if (mv_______->be_for_wav_convert)
      {
@@ -688,9 +689,9 @@ else
 #endif
 
      mv_______->morcego_interface_c___decoder_in_use = 0;
-	 pedro_dprintf(-1, "***vai deinit \n");
+	 pedro_dprintf(-20211130, "***vai deinit \n");
      deinit2(mv_______);
-	 pedro_dprintf(-1, "***passou \n");
+	 pedro_dprintf(-20211130, "***passou \n");
      //("deinit");
      mv_______->libav_c___amanda_s_smart_ape__is_open = false;
 
@@ -808,7 +809,7 @@ int morcego_extract_wav(morcego___i___instance__a__bucaneiro_engineering *mv____
 
      strcpy(mv_______->libav_c___signature___________amanda_s_smart_ape, signature_amanda_s_smart_ape);
 
-     pedro_dprintf(-1, "morcego_init_libav 123 ");
+     pedro_dprintf(-20211130, "morcego_init_libav 123 ");
      if (morcego_init_libav(mv_______, be, 0))
      {
           strcpy(mv_______->morcego_interface_c___message___, be->be_error_message);
@@ -816,7 +817,7 @@ int morcego_extract_wav(morcego___i___instance__a__bucaneiro_engineering *mv____
           goto saida_amanda_s_smart_ape;
      }
 
-     pedro_dprintf(-1, "Depois de init libav ");
+     pedro_dprintf(-20211130, "Depois de init libav ");
      amanda_s_smart_ape_timestamp = get_bucaneiro_tick();
 
      pedro_dprintf(-1, "file out %s\n", out_wav_file);
@@ -833,11 +834,11 @@ int morcego_extract_wav(morcego___i___instance__a__bucaneiro_engineering *mv____
 
      if (false == mv_______->libav_c___amanda_s_smart_ape_is_new_webm)
      {
-
+		  pedro_dprintf(-20211130, "achei 6 kkkk");
           goto saida_amanda_s_smart_ape;
      }
 
-     pedro_dprintf(-15102021, "achei 7 kkkk");
+     pedro_dprintf(-20211130, "achei 7 kkkk");
      {
 
           amanda_s_smart_ape_timestamp = get_bucaneiro_tick() - amanda_s_smart_ape_timestamp;
@@ -862,11 +863,12 @@ int morcego_extract_wav(morcego___i___instance__a__bucaneiro_engineering *mv____
 
                if ('\0' == mv_______->libav_c___webm________________amanda_s_smart_ape[0])
                {
+				   pedro_dprintf(-20211130, "achei 77 kkkk");
                     ; // vai decodificar se nao tiver aqui entra a modificacao...
                }
                else
                {
-
+pedro_dprintf(-20211130, "achei 7777 kkkk");
                     if (mv_______->libav_c___amanda_s_smart_ape_use_cache)
 
                     {
@@ -884,7 +886,7 @@ int morcego_extract_wav(morcego___i___instance__a__bucaneiro_engineering *mv____
           {
           }
      }
-
+pedro_dprintf(-20211130, "achei 7.2 kkkk");
      if (false == mv_______->libav_c___amanda_s_smart_ape__check_and_get_webm_fix_if_true)
      {
           if (0 == 1)
@@ -907,6 +909,7 @@ int morcego_extract_wav(morcego___i___instance__a__bucaneiro_engineering *mv____
      }
 
 again:;
+pedro_dprintf(-20211130, "achei 7.3 kkkk");
      //
      int por;
      mv_______->morcego_interface_c___percent = getpor__int64(be->be_size_of_pcm_data, processed);
@@ -922,7 +925,11 @@ again:;
           pedro_dprintf(-1, "*******Decoding the file for webm...morcego"), already_achincalhar = true;
 
 #ifndef THALIA_NEW_STANDALONE_AUDIO_PLAYER__
+
+	 pedro_dprintf(-20211130, "achei 7.5 kkkk");
      ret_amanda_s_smart_ape = morcego_decode_libav(mv_______, sizeof(int_buffer), int_buffer, &size_out);
+	 pedro_dprintf(-20211130, "achei 7.6 kkkk");
+	 
 #else
 
      if (mv_______->libav_c___m_mode_is_ffmpeg)
@@ -1103,10 +1110,10 @@ saida_amanda_s_smart_ape:
      }
      mv_______->morcego_interface_c___decoder_in_use = 0;
 	 
-	 pedro_dprintf(-1, "aqui 2\n");
-	 pedro_dprintf(-1, "morcego_deinit_libav 123 ");
+	 pedro_dprintf(-20211130, "aqui 2\n");
+	 pedro_dprintf(-20211130, "morcego_deinit_libav 1235 ");
      morcego_deinit_libav(mv_______);
-
+	pedro_dprintf(-20211130, "morcego_deinit_libav 1236 ");
      mv_______->morcego_interface_c___porcentagem = 100;
      mv_______->morcego_interface_c___returnvalue_wav = returnvalue;
      mv_______->morcego_interface_c___finished_wav = 1;
