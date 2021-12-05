@@ -433,7 +433,7 @@ int init_decoder2(morcego___i___instance__a__bucaneiro_engineering *mv_______, b
           pedro_dprintf(-20211130, "2 abriu o arquivo\n");
      }
      // exit(27);
-     
+
      pedro_dprintf(-20211130, "passou em libav.c\n");
 
 #endif
@@ -502,7 +502,7 @@ int init_decoder2(morcego___i___instance__a__bucaneiro_engineering *mv_______, b
                returnvalue = 20;
           }
      }
-     
+
      pedro_dprintf(-20211130, "vai abrir em libav.c 4\n");
 
      pedro_dprintf(-1, "passou de avformat_find_stream_info");
@@ -535,8 +535,8 @@ int init_decoder2(morcego___i___instance__a__bucaneiro_engineering *mv_______, b
           }
 
      achou:;
-     
-     pedro_dprintf(-20211130, "vai abrir em libav.c 5\n");
+
+          pedro_dprintf(-20211130, "vai abrir em libav.c 5\n");
      }
 #else
 
@@ -602,7 +602,7 @@ int init_decoder2(morcego___i___instance__a__bucaneiro_engineering *mv_______, b
 
 #ifndef THALIA_NEW_STANDALONE_AUDIO_PLAYER__
 
-     pedro_dprintf(-20211130, "vai abrir em libav.c 8 \n");
+          pedro_dprintf(-20211130, "vai abrir em libav.c 8 \n");
           if (-1 == mv_______->libav_c___audiostream)
           {
                strcpy(be_data->be_error_message, "Audio stream not found");
@@ -632,8 +632,8 @@ int init_decoder2(morcego___i___instance__a__bucaneiro_engineering *mv_______, b
 #endif
 #ifndef THALIA_NEW_STANDALONE_AUDIO_PLAYER__
           // exit(27);
-          
-     pedro_dprintf(-20211130, "vai abrir em libav.c 9\n");
+
+          pedro_dprintf(-20211130, "vai abrir em libav.c 9\n");
 
           if (0x8000000000000000 ==
               (uint64_t)(mv_______->libav_c___duracao))
@@ -645,26 +645,26 @@ int init_decoder2(morcego___i___instance__a__bucaneiro_engineering *mv_______, b
                     cardo__ = 0;
                     FILE *ar_bw_maquisistem_bucaneiro_engineering_aurora_boreal_eletronica_som_video_cor_digipower_rsp_companhias;
 
-     pedro_dprintf(-20211130, "vai abrir em libav.c 11\n");
+                    pedro_dprintf(-20211130, "vai abrir em libav.c 11\n");
                     ar_bw_maquisistem_bucaneiro_engineering_aurora_boreal_eletronica_som_video_cor_digipower_rsp_companhias = _wfopen(permissive_name_m_(amanda_utf8towide_3_(be_data->sourcefile)), L"rb");
 
-     pedro_dprintf(-20211130, "vai abrir em libav.c 11.1 \n");
+                    pedro_dprintf(-20211130, "vai abrir em libav.c 11.1 \n");
                     if (-2 == mv_______->decoder_c___tio)
                     {
                          NOSBOR__O_AMIGO = get_bucaneiro_tick(); // eu tambem sou conhecido como "O otimizador de Curitiba..."
 
-     pedro_dprintf(-20211130, "vai abrir em libav.c 11.2 \n");
+                         pedro_dprintf(-20211130, "vai abrir em libav.c 11.2 \n");
                          cardo__ = kkk_get_damaged_webm_duration_by_bhond(ar_bw_maquisistem_bucaneiro_engineering_aurora_boreal_eletronica_som_video_cor_digipower_rsp_companhias);
 
-     pedro_dprintf(-20211130, "vai abrir em libav.c 11.3 \n");
+                         pedro_dprintf(-20211130, "vai abrir em libav.c 11.3 \n");
                          pedro_dprintf(-1, "my ... hack required -> %0.3f", get_bucaneiro_tick() - NOSBOR__O_AMIGO);
 
                          if (1 != cardo__) // vai passar 3 vezes se nao der certo, ok?...só que nunca vai acontecer...
                          {
                               mv_______->decoder_c___tio = cardo__;
                          }
-                         
-     pedro_dprintf(-20211130, "vai abrir em libav.c 12\n");
+
+                         pedro_dprintf(-20211130, "vai abrir em libav.c 12\n");
                     }
                     else
                     {
@@ -675,7 +675,7 @@ int init_decoder2(morcego___i___instance__a__bucaneiro_engineering *mv_______, b
 
                     pedro_dprintf(-1, "ta ai...%lld got %lld\n", cardo__, mv_______->libav_c___amanda_s_smart_ape_new_generated_duration);
 
-     pedro_dprintf(-20211130, "vai abrir em libav.c 13 \n");
+                    pedro_dprintf(-20211130, "vai abrir em libav.c 13 \n");
                     if (1 != cardo__)
                     {
                          ; // Mr. Do
@@ -687,7 +687,7 @@ int init_decoder2(morcego___i___instance__a__bucaneiro_engineering *mv_______, b
                     }
                }
 
-     pedro_dprintf(-20211130, "vai abrir em libav.c 14\n");
+               pedro_dprintf(-20211130, "vai abrir em libav.c 14\n");
                // mv_______->libav_c___duracao =
           }
 #else
@@ -705,7 +705,7 @@ int init_decoder2(morcego___i___instance__a__bucaneiro_engineering *mv_______, b
 
 #ifndef THALIA_NEW_STANDALONE_AUDIO_PLAYER__
 
-     pedro_dprintf(-20211130, "vai abrir em libav.c 15 \n");
+          pedro_dprintf(-20211130, "vai abrir em libav.c 15 \n");
           if (mv_______->libav_c___amanda_s_smart_ape_is_new_webm)
           {
                mv_______->libav_c___duracao = mv_______->libav_c___amanda_s_smart_ape_new_generated_duration;
@@ -723,7 +723,7 @@ int init_decoder2(morcego___i___instance__a__bucaneiro_engineering *mv_______, b
 
           mv_______->libav_c___seconds = (double)((double)(FormatContext->duration) / 1000000.0);
 
-     pedro_dprintf(-20211130, "vai abrir em libav.c 17\n");
+          pedro_dprintf(-20211130, "vai abrir em libav.c 17\n");
           if (!pCodecCtx)
           {
                strcpy(be_data->be_error_message, "Cannot allocate memory");
@@ -769,8 +769,7 @@ int init_decoder2(morcego___i___instance__a__bucaneiro_engineering *mv_______, b
 
 #ifndef THALIA_NEW_STANDALONE_AUDIO_PLAYER__
 
-
-     pedro_dprintf(-20211130, "vai abrir em libav.c 20\n");
+          pedro_dprintf(-20211130, "vai abrir em libav.c 20\n");
 
           ret_k_p = avcodec_parameters_to_context(pCodecCtx, FormatContext->streams[mv_______->libav_c___audiostream]->codecpar);
           if (ret_k_p < 0)
@@ -787,7 +786,7 @@ int init_decoder2(morcego___i___instance__a__bucaneiro_engineering *mv_______, b
 
           pedro_dprintf(-1, "data amor -> %s", be_data->be__magic_value__format_name);
 
-     pedro_dprintf(-20211130, "vai abrir em libav.c 21\n");
+          pedro_dprintf(-20211130, "vai abrir em libav.c 21\n");
           {
                double den = FormatContext->streams[(int)mv_______->libav_c___audiostream]->time_base.den;
                double num = FormatContext->streams[(int)mv_______->libav_c___audiostream]->time_base.num;
@@ -846,8 +845,7 @@ int init_decoder2(morcego___i___instance__a__bucaneiro_engineering *mv_______, b
 
 #ifndef THALIA_NEW_STANDALONE_AUDIO_PLAYER__
 
-
-     pedro_dprintf(-20211130, "vai abrir em libav.c 22\n");
+          pedro_dprintf(-20211130, "vai abrir em libav.c 22\n");
 
           Codec = (void *)avcodec_find_decoder(pCodecCtx->codec_id);
           pedro_dprintf(-1, "passou de avcodec_find_decoder");
@@ -872,7 +870,7 @@ int init_decoder2(morcego___i___instance__a__bucaneiro_engineering *mv_______, b
                strcat(be_data->be_media_information, mv_______->libav_c___video_codec);
           }
 
-     pedro_dprintf(-20211130, "vai abrir em libav.c 23\n");
+          pedro_dprintf(-20211130, "vai abrir em libav.c 23\n");
 
           if (0 !=
               strcmp(be_data->be_codec_name, be_data->be__magic_value__format_name))
@@ -955,7 +953,7 @@ int init_decoder2(morcego___i___instance__a__bucaneiro_engineering *mv_______, b
 
 #ifndef THALIA_NEW_STANDALONE_AUDIO_PLAYER__
 
-     pedro_dprintf(-20211130, "vai abrir em libav.c 25\n");
+          pedro_dprintf(-20211130, "vai abrir em libav.c 25\n");
 
           if (Codec->capabilities & AV_CODEC_CAP_TRUNCATED)
           {
@@ -1354,7 +1352,7 @@ saida:;
      exit(27);
      */
 
-          pedro_dprintf(-20211130, "passou de avcodec_open2 3");
+     pedro_dprintf(-20211130, "passou de avcodec_open2 3");
 
      return returnvalue;
 }
@@ -1575,7 +1573,7 @@ final:;
                mv_______->libav_c___morcego = avcodec_send_packet(pCodecCtx, ((AVPacket *)mv_______->libav_c___m_packet_ptr));
 
                mv_______->libav_c___j_again_call_j = false;
-               if (AVERROR(EAGAIN) == mv_______->libav_c___morcego && mv_______->libav_c___morcego != AVERROR_EOF)//what is this ?, the first check is enough ric..., I will keep for funny reasons kkkkkk
+               if (AVERROR(EAGAIN) == mv_______->libav_c___morcego && mv_______->libav_c___morcego != AVERROR_EOF) // what is this ?, the first check is enough ric..., I will keep for funny reasons kkkkkk
                {
                     mv_______->libav_c___j_again_call_j = true;
                }
@@ -2159,21 +2157,21 @@ void deinit2(morcego___i___instance__a__bucaneiro_engineering *mv_______)
 
 #ifndef THALIA_NEW_STANDALONE_AUDIO_PLAYER__
 
-pedro_dprintf(-20211130, "morcego_deinit_libav a ");
+     pedro_dprintf(-20211130, "morcego_deinit_libav a ");
 
      deinit2_video(mv_______);
-	 
-pedro_dprintf(-20211130, "morcego_deinit_libav a.1 ");
+
+     pedro_dprintf(-20211130, "morcego_deinit_libav a.1 ");
 
      AVCodecContext *pCodecCtx = (void *)mv_______->libav_c___pCodecCtx_ptr;
-	 
-pedro_dprintf(-20211130, "morcego_deinit_libav a.2 ");
+
+     pedro_dprintf(-20211130, "morcego_deinit_libav a.2 ");
 
      AVFormatContext *FormatContext = (AVFormatContext *)mv_______->libav_c___FormatContext_ptr;
-	
-pedro_dprintf(-20211130, "morcego_deinit_libav a.3 ");
-	 
-pedro_dprintf(-20211130, "morcego_deinit_libav b ");
+
+     pedro_dprintf(-20211130, "morcego_deinit_libav a.3 ");
+
+     pedro_dprintf(-20211130, "morcego_deinit_libav b ");
 
      if (FormatContext)
      {
@@ -2192,7 +2190,7 @@ pedro_dprintf(-20211130, "morcego_deinit_libav b ");
           mv_______->libav_c___FormatContext_ptr = NULL;
      }
 
-pedro_dprintf(-20211130, "morcego_deinit_libav c ");
+     pedro_dprintf(-20211130, "morcego_deinit_libav c ");
 
 #else
 

@@ -1577,5 +1577,42 @@ namespace mp3dll
 			}
 			*/
 		}
+		
+		//\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+		// these apis are for debug purposes only
+		
+		[DllImport("ffmpeg_v.DLL")]
+		public static extern int
+			download_ar_from_net(string filename_utf8, string dest_file_utf_8);
+				
+		[DllImport("ffmpeg_v.DLL")]
+		public static extern int
+			close_ar_and_deinit();
+				
+		[DllImport("ffmpeg_v.DLL")]
+		public static extern int
+			get_ar_returnvalue();
+				
+		[DllImport("ffmpeg_v.DLL")]
+		public static extern int
+			is_ar_running();
+				
+		[DllImport("ffmpeg_v.DLL")]
+		public static extern int
+			ar_progress();
+				
+		[DllImport("ffmpeg_v.DLL")]
+		public static extern int
+			ar_pause();
+				
+		[DllImport("ffmpeg_v.DLL")]
+		public static extern int
+			ar_resume();
+				
+		[DllImport("ffmpeg_v.DLL")]
+		public static extern int
+			ar_cancel();
+				
+		
 	}
 }

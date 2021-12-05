@@ -1,0 +1,8 @@
+C:\cygwin64_amandaricardo_koci_10.2.0\aoprojeto\download_ar\download_ar\download_ar\bin\Release\download_ar.exe.config
+C:\cygwin64_amandaricardo_koci_10.2.0\aoprojeto\download_ar\download_ar\download_ar\bin\Release\download_ar.exe
+C:\cygwin64_amandaricardo_koci_10.2.0\aoprojeto\download_ar\download_ar\download_ar\obj\Release\download_ar.csprojResolveAssemblyReference.cache
+C:\cygwin64_amandaricardo_koci_10.2.0\aoprojeto\download_ar\download_ar\download_ar\obj\Release\download_ar.exe
+C:\teacher_ric\ffmpeg_mine\ffmpeg\t_r_obj\mp3dll_standalone\download_ar.exe.config
+C:\teacher_ric\ffmpeg_mine\ffmpeg\t_r_obj\mp3dll_standalone\download_ar.exe
+C:\cygwin64_amandaricardo_koci_10.2.0\aoprojeto\download_ar\download_ar\download_ar\obj\Release\download_ar.MainForm.resources
+C:\cygwin64_amandaricardo_koci_10.2.0\aoprojeto\download_ar\download_ar\download_ar\obj\Release\download_ar.csproj.GenerateResource.Cache

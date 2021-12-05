@@ -1,5 +1,5 @@
- 
- /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+
+/********************************************************************************
  *                                                                              *
  *        Licensa de Cópia (C) <2021>  <Corporação do Trabalho Binário>         *
  *                                                                              *
@@ -17,18 +17,20 @@
  *     Licensa Pública Menor junto com este programa                            *
  *     Se não, veja <http://www.gnu.org/licenses/>.                             *
  *                                                                              *
- *     Suporte: https://arsoftware.net.br/binarywork_____________________       *
- *     Mirrors: https://locacaodiaria.com.br/corporacaodotrabalhobinario/       *
- *              http: //nomade.sourceforge.net/binarywork_______________/       *
+ *     Suporte: https://nomade.sourceforge.io/                                  *
  *                                                                              *
- *     E-mails direto dos felizes programadores:                                *
- *     Ricardinho:    arsoftware25@gmail.com    ricardo@arsoftware.net.br       *
- *     Koci______:    arsoftware10@gmail.com    am_koci@arsoftware.net.br       *
+ ********************************************************************************
+
+      E-mails:
+      maria@arsoftware.net.br
+      pedro@locacaodiaria.com.br
+
+ ********************************************************************************
  *                                                                              *
- *     contato imediato(para uma resposta muita rápida) WhatsApp                *
- *     (+55)41 9627 1708 - isto está sempre ligado (eu acho...)                 *      
+ *     contato imediato(para uma resposta muito rápida) WhatsApp                *
+ *     (+55)41 9627 1708 - isto está sempre ligado (eu acho...)                 *
  *                                                                              *
- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *  **/
+ *******************************************************************************/
  
 using System;
 using System.Reflection;
@@ -60,5 +62,5 @@ using System.Runtime.InteropServices;
 // You can specify all the values or you can default the Build and Revision Numbers 
 // by using the '*' as shown below:
 // [assembly: AssemblyVersion("1.0.*")]
-[assembly: AssemblyVersion ("3.5.8.363") ]
-[assembly: AssemblyFileVersion ("3.5.8.363")]
+[assembly: AssemblyVersion ("3.6.8.373") ]
+[assembly: AssemblyFileVersion ("3.6.8.373")]

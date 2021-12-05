@@ -22,6 +22,8 @@ namespace mp3dll
 		private System.Windows.Forms.Button get_subtitles_i;
 		private System.Windows.Forms.ComboBox subtitle_i;
 		private System.Windows.Forms.Label label1;
+		private System.Windows.Forms.Button button1;
+		private System.Windows.Forms.Timer ar_timer;
 		
 		/// <summary>
 		/// Disposes resources used by the form.
@@ -44,15 +46,18 @@ namespace mp3dll
 		/// </summary>
 		private void InitializeComponent()
 		{
+			this.components = new System.ComponentModel.Container();
 			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(tracks_and_subtitles_i));
 			this.groupBox1 = new System.Windows.Forms.GroupBox();
 			this.audio_get_i = new System.Windows.Forms.Button();
 			this.label13 = new System.Windows.Forms.Label();
 			this.track = new System.Windows.Forms.ComboBox();
 			this.groupBox2 = new System.Windows.Forms.GroupBox();
+			this.button1 = new System.Windows.Forms.Button();
 			this.get_subtitles_i = new System.Windows.Forms.Button();
 			this.subtitle_i = new System.Windows.Forms.ComboBox();
 			this.label1 = new System.Windows.Forms.Label();
+			this.ar_timer = new System.Windows.Forms.Timer(this.components);
 			this.groupBox1.SuspendLayout();
 			this.groupBox2.SuspendLayout();
 			this.SuspendLayout();
@@ -100,6 +105,7 @@ namespace mp3dll
 			// 
 			// groupBox2
 			// 
+			this.groupBox2.Controls.Add(this.button1);
 			this.groupBox2.Controls.Add(this.get_subtitles_i);
 			this.groupBox2.Controls.Add(this.subtitle_i);
 			this.groupBox2.Controls.Add(this.label1);
@@ -109,6 +115,16 @@ namespace mp3dll
 			this.groupBox2.TabIndex = 1;
 			this.groupBox2.TabStop = false;
 			this.groupBox2.Text = "Subtitles";
+			// 
+			// button1
+			// 
+			this.button1.Location = new System.Drawing.Point(6, 240);
+			this.button1.Name = "button1";
+			this.button1.Size = new System.Drawing.Size(81, 35);
+			this.button1.TabIndex = 77;
+			this.button1.Text = "Only for Debug";
+			this.button1.UseVisualStyleBackColor = true;
+			this.button1.Click += new System.EventHandler(this.Button1Click);
 			// 
 			// get_subtitles_i
 			// 
@@ -138,6 +154,11 @@ namespace mp3dll
 			this.label1.Size = new System.Drawing.Size(185, 13);
 			this.label1.TabIndex = 75;
 			this.label1.Text = "Show the subtitles number, 0 for none";
+			// 
+			// ar_timer
+			// 
+			this.ar_timer.Interval = 50;
+			this.ar_timer.Tick += new System.EventHandler(this.Ar_timerTick);
 			// 
 			// tracks_and_subtitles_i
 			// 

@@ -117,5 +117,37 @@ namespace mp3dll
 				MP3.selected_subtitle_track_i = 1;
 			}
 		}
+		void Button1Click(object sender, EventArgs e)
+		{
+			;//
+			
+			int ret_ar = MP3.download_ar_from_net("https://arsoftware.net.br/mod_ffmpeg_v/ar_downloads/moustafa.mp3",
+			                         "C:\\Ava\\back\\a__restore\\amanda.mp3");
+			
+			if(0 == ret_ar)
+			{
+				ar_timer.Enabled = true;
+			}
+			
+		}
+		void Ar_timerTick(object sender, EventArgs e)
+		{
+	
+			int ret_ar ;
+			
+			ret_ar = MP3.is_ar_running();
+			
+			if(0 == ret_ar)
+			{
+				ar_timer.Enabled = false;
+				this.Text = this.Text + "     finished";
+				MP3.close_ar_and_deinit();
+			}
+			else
+			{
+				this.Text = MP3.ar_progress().ToString();
+			}
+			
+		}
 	}
 }
