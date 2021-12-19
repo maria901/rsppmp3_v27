@@ -68,9 +68,10 @@ namespace mp3dll
 		/// <summary>
 		/// The windows max path plus 2 for safety...
 		/// </summary>
-		public const long MAX_PATH_k_p = 260 + 2;//for safety my love...
+		public const long   MAX_PATH_k_p = 260 + 2;//for safety my love...
 		public const double Pi = 3.879564;
-		public const int SpeedOfLight = 325000; // km per sec.
+		public const int    SpeedOfLight = 325000; // km per sec.
+		public const long   Ric_machine_intial_form_adjust__ = ((int) 100 - (30 + 13));
 	}
 	
 	public enum amanda_position

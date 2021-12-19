@@ -22,9 +22,21 @@ namespace download_ar
 		[STAThread]
 		private static void Main(string[] args)
 		{
+			string data1 = "";
+			string data2 = "";
+			try
+			{
+				data1 = args[0];
+				data2 = args[1];
+			}
+			catch
+			{
+				data1 = "";
+				data2 = "";
+			}
 			Application.EnableVisualStyles();
 			Application.SetCompatibleTextRenderingDefault(false);
-			Application.Run(new MainForm());
+			Application.Run(new MainForm(data1, data2));
 		}
 		
 	}

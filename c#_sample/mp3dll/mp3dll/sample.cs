@@ -50,6 +50,9 @@ namespace mp3dll
 	/// </summary>
 	public partial class sample : Form
 	{
+		internal  long stored_width_amanda_ava_koci____ = -1;
+		internal  int  last_update_of_video = 0;
+		internal  long fullscreen_mode_defined = -1;
 		protected const int bar_pos_top_p = 590;
 		long   item_got_z    =    0;
 		long   item_number_z =    0;
@@ -207,10 +210,12 @@ namespace mp3dll
 			}
 			if ("Escape" == keyData.ToString())
 			{
+				fullscreen_mode_defined = -1;
 				if(mode_is_ricardo_window)
 				{
 					
 					this.Width = ori_width;
+					
 					this.Height = ori_height;
 					this.Top = 0;
 					this.Left = 0;
@@ -305,6 +310,17 @@ namespace mp3dll
 				next_point_z:
 					;
 				this.Height = 706;
+				
+				if(System.IO.File.Exists( "C:\\Ava\\ar_flag_de_locacao.va"))
+				{
+					
+					if(this.Height != Screen.PrimaryScreen.WorkingArea.Height)
+					{
+						
+						this.Height = Screen.PrimaryScreen.WorkingArea.Height;
+						
+					}
+				}
 			}
 			if ("F11" == keyData.ToString())
 			{
@@ -319,6 +335,8 @@ namespace mp3dll
 				if (0 == fullscreen_state_)
 				{
 					fullscreen_state_ = 1;
+					
+					MP3.pedro_dprintf(-1, "calling default_w_Click from ProcessCmd");
 					default_w_Click(null, null);
 				}
 				else
@@ -427,6 +445,7 @@ namespace mp3dll
 		StringBuilder memory_usage_z = new StringBuilder(300);
 		private void timer1_Tick(object sender, EventArgs e)
 		{
+			int saved_fullscreen_size = (int)fullscreen_mode_defined;
 			string new_string;
 			/**
 			 * media file not loaded yet
@@ -547,7 +566,7 @@ namespace mp3dll
 			if(0 == MP3.GetBitrate_Video(number))
 			{
 				/*
-				*  Console.Write(String.Format("{0:0.00}", 123.456789));
+				 *  Console.Write(String.Format("{0:0.00}", 123.456789));
 				Console.Write(String.Format("{0:0.00}", 12345.6));
 				Console.Write(String.Format("{0:0.00}", 123456));
 				Output
@@ -555,11 +574,11 @@ namespace mp3dll
 				123.46
 				12345.60
 				123456.00
-				*/
+				 */
 				label7.Text = "Audio Bitrate: " + String.Format("{0:0.0000}", ((double)MP3.GetBitrate(number) / 1000.0)) + " kbits";
 			}
 			else
-				label7.Text = "Audio Bitrate: " + String.Format("{0:0.0000}", ((double)MP3.GetBitrate(number) / 1000.0)) + 
+				label7.Text = "Audio Bitrate: " + String.Format("{0:0.0000}", ((double)MP3.GetBitrate(number) / 1000.0)) +
 					" kbits   -   Video Bitrate: " + String.Format("{0:0.0000}", ((double)MP3.GetBitrate_Video(number) / 1000.0))  + " kbits";
 
 			MP3.GetMpegMode(number, time);
@@ -695,7 +714,7 @@ namespace mp3dll
 					MP3.clean_up_memory_p();
 					
 					desktop_playback_settings();
-										
+					
 					if("-1" != new_waveout_settings_Pk)
 					{
 						MP3.SaveSettings("waveout", new_waveout_settings_Pk);
@@ -714,8 +733,93 @@ namespace mp3dll
 					disable_standby.EnableConstantDisplayAndPower(true);
 					
 					main_timer.Enabled = true;
+					
+					fullscreen_mode_defined = saved_fullscreen_size;
+					
+					MP3.pedro_dprintf(-1, "mode " + fullscreen_mode_defined);
+					
+					if(1 == fullscreen_mode_defined)
+					{
+						//button5
+						button25_Click(null, null);
+					}
+					
+					if(2 == fullscreen_mode_defined)
+					{
+						default_w_Click(null, null);
+					}
+					
+					if(3 == fullscreen_mode_defined)
+					{
+						fs_by_heigth_Click(null, null);
+					}
+					if(4 == fullscreen_mode_defined)
+					{
+						fs_50_Click(null, null);
+					}
+					last_update_of_video = 0;
+					if(-1 != fullscreen_mode_defined)
+					{
+						esconde_t_Tick(null, null);
+					}
 				}
 			}
+			
+			
+			
+			if(2 > last_update_of_video)
+			{
+				
+				MP3.pedro_dprintf(-1, "mode inside last " + fullscreen_mode_defined);
+				
+				if(1 == fullscreen_mode_defined)
+				{
+					//button5
+					button25_Click(null, null);
+				}
+				
+				if(2 == fullscreen_mode_defined)
+				{
+					default_w_Click(null, null);
+				}
+				
+				if(3 == fullscreen_mode_defined)
+				{
+					fs_by_heigth_Click(null, null);
+				}
+				if(4 == fullscreen_mode_defined)
+				{
+					fs_50_Click(null, null);
+				}
+				last_update_of_video++;
+				if(-1 != fullscreen_mode_defined)
+				{
+					play_v13
+						.Top = 14950;
+					pause_v13
+						.Top = 14950;
+					resume_v13
+						.Top = 14950;
+					cancel_v13
+						.Top = 14950;
+					progressbar_27_51_z_v21.Top = 14950;
+					esconde_t_Tick(null, null);
+				}
+			}
+			
+			//amanda27
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
 			
 		}
 		private void button2_Click(object sender, EventArgs e)
@@ -1133,6 +1237,19 @@ namespace mp3dll
 				
 			}
 			filetowav.Focus();
+			
+			if(System.IO.File.Exists( "C:\\Ava\\ar_flag_de_locacao.va"))
+			{
+				this.Height = Screen.PrimaryScreen.WorkingArea.Height;
+				
+				this.Left = (int)Amanda_Constants.Ric_machine_intial_form_adjust__;
+				
+				this.Width = this.Width - (int)(double)/* to a laugh... */(long)(int)(int)Amanda_Constants.Ric_machine_intial_form_adjust__;
+				
+				stored_width_amanda_ava_koci____ = this.Width;
+				
+				this.WindowState = FormWindowState.Maximized;
+			}
 		}
 
 		private void nobuffer_MouseUp(object sender, MouseEventArgs e)
@@ -1177,6 +1294,7 @@ namespace mp3dll
 		}
 		private void button4_Click(object sender, EventArgs e)
 		{
+			fullscreen_mode_defined = -1;
 			bool did_it_d = false;
 			int ret;
 			
@@ -1350,7 +1468,7 @@ namespace mp3dll
 		{
 			bool did_it_d = false;
 			int ret;
-						
+			
 			if("-1" != new_waveout_settings_Pk)
 			{
 				MP3.SaveSettings("waveout", new_waveout_settings_Pk);
@@ -1988,7 +2106,7 @@ namespace mp3dll
 
 		private void button25_Click(object sender, EventArgs e)
 		{
-			
+			fullscreen_mode_defined = 1;
 			(new Thread(new ThreadStart(my_thread_fullscreen_fix_p))).Start();
 			can_scape_z = true;
 			pause_state_ = 0;
@@ -2002,6 +2120,7 @@ namespace mp3dll
 				this.Left = 0;
 				this.Top  = 0;
 				this.Width  = Screen.PrimaryScreen.Bounds.Width;
+				
 				this.Height = Screen.PrimaryScreen.Bounds.Height;
 				
 				fullscreen_state_ = 1;
@@ -2058,13 +2177,21 @@ namespace mp3dll
 
 		private void video_p_MouseClick(object sender, MouseEventArgs e)
 		{
+			fullscreen_mode_defined = -1;
 			this.FormBorderStyle = FormBorderStyle.Sizable;
 			this.WindowState = FormWindowState.Normal;
 			
+			if(System.IO.File.Exists( "C:\\Ava\\ar_flag_de_locacao.va"))
+			{
+				this.Left = (int) 100 - (30 + 13);
+				//this.WindowState = FormWindowState.Maximized;
+			}
 			if(mode_is_ricardo_window)
 			{
 				
 				this.Width = ori_width;
+				
+				
 				this.Height = ori_height;
 				this.Top = 0;
 				this.Left = 0;
@@ -2220,6 +2347,22 @@ namespace mp3dll
 					video_f_p.Width = 20;
 					video_f_p.Left = 80;
 
+				}
+			}
+			if(System.IO.File.Exists( "C:\\Ava\\ar_flag_de_locacao.va"))
+			{
+				if(this.Width != (int)(double)stored_width_amanda_ava_koci____)
+				{
+					
+					this.Width = (int)(double) stored_width_amanda_ava_koci____;
+					
+				}
+				
+				if(this.Height != Screen.PrimaryScreen.WorkingArea.Height)
+				{
+					
+					this.Height = Screen.PrimaryScreen.WorkingArea.Height;
+					
 				}
 			}
 		}
@@ -2518,7 +2661,7 @@ namespace mp3dll
 
 		private void esconde_t_Tick(object sender, EventArgs e)
 		{
-			if (play_v13.Top < 5000)
+			if (play_v13.Top < 15000)
 			{
 				esconde_t.Interval = 50;
 				play_v13
@@ -2558,7 +2701,8 @@ namespace mp3dll
 
 		private void default_w_Click(object sender, EventArgs e)
 		{
-			
+			MP3.pedro_dprintf(-1, "called default_w_Click (mode 2)");
+			fullscreen_mode_defined = 2;
 			(new Thread(new ThreadStart(my_thread_fullscreen_fix_p))).Start();
 			can_scape_z = true;
 			pause_state_ = 0;
@@ -2577,6 +2721,7 @@ namespace mp3dll
 				this.Left = 0;
 				this.Top  = 0;
 				this.Width  = Screen.PrimaryScreen.Bounds.Width;
+				
 				this.Height = Screen.PrimaryScreen.Bounds.Height;
 				
 				fs.Enabled = true;
@@ -2779,6 +2924,7 @@ namespace mp3dll
 
 		private void fs_50_Click(object sender, EventArgs e)
 		{
+			fullscreen_mode_defined = 4;
 			(new Thread(new ThreadStart(my_thread_fullscreen_fix_p))).Start();
 			can_scape_z = true;
 			pause_state_ = 0;
@@ -2797,6 +2943,7 @@ namespace mp3dll
 				this.Left = 0;
 				this.Top  = 0;
 				this.Width  = Screen.PrimaryScreen.Bounds.Width;
+				
 				this.Height = Screen.PrimaryScreen.Bounds.Height;
 
 				fs.Enabled = true;
@@ -2902,6 +3049,7 @@ namespace mp3dll
 				this.Left = 0;
 				this.Top  = 0;
 				this.Width  = Screen.PrimaryScreen.Bounds.Width;
+				
 				this.Height = Screen.PrimaryScreen.Bounds.Height;
 
 				fs.Enabled = true;
@@ -2990,6 +3138,8 @@ namespace mp3dll
 
 		private void fs_by_heigth_Click(object sender, EventArgs e)
 		{
+			fullscreen_mode_defined = 3;
+			
 			(new Thread(new ThreadStart(my_thread_fullscreen_fix_p))).Start();
 			can_scape_z = true;
 			pause_state_ = 0;
@@ -3008,6 +3158,7 @@ namespace mp3dll
 				this.Left = 0;
 				this.Top  = 0;
 				this.Width  = Screen.PrimaryScreen.Bounds.Width;
+				
 				this.Height = Screen.PrimaryScreen.Bounds.Height;
 
 				fs.Enabled = true;
@@ -3140,6 +3291,7 @@ namespace mp3dll
 				this.Left = 0;
 				this.Top  = 0;
 				this.Width  = Screen.PrimaryScreen.Bounds.Width;
+				
 				this.Height = Screen.PrimaryScreen.Bounds.Height;
 
 				fs.Enabled = true;
@@ -3246,6 +3398,7 @@ namespace mp3dll
 				this.Left = 0;
 				this.Top  = 0;
 				this.Width  = Screen.PrimaryScreen.Bounds.Width;
+				
 				this.Height = Screen.PrimaryScreen.Bounds.Height;
 
 				fs.Enabled = true;
@@ -3604,6 +3757,7 @@ namespace mp3dll
 		
 		void Button2Click_amanda(object sender, EventArgs e)
 		{
+			fullscreen_mode_defined = -1;
 			int new_window_w = -1;
 			int ret_arp_ = 0;
 			bool adjust_me_please_i = false;
@@ -3614,6 +3768,7 @@ namespace mp3dll
 				new_window_w = int.Parse(message.ToString());
 				adjust_me_please_i = true;
 				ori_width  = this.Width;
+				
 				ori_height = this.Height;
 				mode_is_ricardo_window = true;
 				
