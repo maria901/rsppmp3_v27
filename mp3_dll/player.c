@@ -345,7 +345,7 @@ no_use_i:;
         Aercio um dos melhores amigos, grande gozador, junto com outro amigo que eu nao lembro o nome mas estava tambem comigo no alistamento no colegio militar de Curitiba, uma vez o Aercio trouxe uma bicicleta com problemas pra escola e um amigo dele foi andar com ela e ela estragou ele disse na hora "vai pagar", o cara tentou se livrar do problema na ele ficou pegando no pé dele, foi hilário, bons tempos, foi nesse ano que eu ganhei minha unica medalha de campeão em alguma coisa, foi no campeonato de futebol da escola nossa sala ganhou do colegio inteiro não em pergunte como, não me lembro se marquei gol, foi muito legal
         Débora uma amiguinha do colegio no mesmo tempo de Aercio e Viviane ela gostava de mim mas não adimitia, as vezes ela seguia a gente dentro do banheiro dos meninos, kkkkk, mas logo saia, muito engraçado, na outra sala do colegio tinha uma menina que vivia puxando papo comigo, só ela e a Debora gostaram de mim na época de colégio
         Célio amigo da Vila Verde e filho do dono da casa que eu morava, gente finissima queria lembrar do nome do irmão dele também, pessoa muito legal este irmão e esposa eles não sabiam oque fazer pra me agradar lá fiz muita amizade com o pai e a mão deles também vivia indo na casa dos parentes deles de Curitiba, todo dia a gente saia pra algum evento eu que carregava todo mundo, e nunca cobrava a gasolina, grande Célio
-        Célia minha tia Célia, eu gostava dela mas ela não gostava de ninguém, ela morreu nova fui eu que cuidei de todo o enterro dela e fui eu que paguei tudo acompanhado da mãe e da tia Mena e da vó Elisa que não paravam de chorar um só minuto, quem emprestou o Fuke pra gente fazer a correria foi o Carlinhos, meu ex-padrasto 
+        Célia minha tia Célia, eu gostava dela mas ela não gostava de ninguém, ela morreu nova fui eu que cuidei de todo o enterro dela e fui eu que paguei tudo acompanhado da mãe e da tia Mena e da vó Elisa que não paravam de chorar um só minuto, quem emprestou o Fuke pra gente fazer a correria foi o Carlinhos, meu ex-padrasto
         Célia filha do tio Alexandre irmã do Maúricio, eu era apaixonado por ela em 82, a gente ia toda hora na casa dela mas ela nunca demonstrou o menor interesse de namorar comigo, mas ela sabia sim que eu era ligadão nela, mora em Foz do Iguaçu hoje em dia
         Paola filha da Célia mãe do China da Vila Verde, eu me apaixonei por ela logo que conheci, demorou pra mim parar de pensar nela
         Edna irmã da Paola, tivemos um breve namoro de uma semana
@@ -374,7 +374,7 @@ no_use_i:;
         Silvia irmã do Sanderson, não tenho queixa, nunca conversamos
         Vitória filha do Silvinho só aparece algumas vezes, ou aparecia antes do vô dela falecer
         Renata ate onde eu sei é esposa do Silvinho, o filho bombeiro do Silvio que faleceu semana passada
-        Carlinhos grande Crlinhos filho da Lurdes do Zeco, faziamos cada arte quando eramos crianças que não da para por nos livros, amigos muito arteros os dele também no Xaxim em Curitiba
+        Carlinhos grande Carlinhos filho da Lurdes do Zeco, faziamos cada arte quando eramos crianças que não da para por nos livros, amigos muito arteros os dele também no Xaxim em Curitiba
         Carlinhos meu ex-padrasto, faleceu a alguns meses, trabalhei com ele com pintura de carro, pessoa dificil, mas tinhamos boa amizade
         Jota irmão do Carlinhos e também meu tio, sempre me levava pra pescar e era hilário, fui pescar na ilha da Galheta perto da ilha do Mel com ele, lá que eu aprendi oque é pescar meixe maior doque você pode tiar da água, os peixes era tão grandes que os anzois abriam por incrivel que pareça, foi muito legal, faleceu a algum tempo, pai do Polico que é gerente de empresa hoje em dia, uma vez eu vi o Polico prender o dedo numa porta de carro, fiquei com pena mas oque eu ia fazer, uma vez a Maristela minha terceira esposa prendeu sem quer o dedo da Thalia filha da minha segunda esposa na porta do carro e eu perdi o controle, foi triste, não tm coisa pior doque voce ver um filho sofrer e não poder fazer nada, ela colocou a menina no carro e foi batebdo a porta, só podia dar nisso, agora os filhos dela ela colocava com jeito no carro, foi um momento triste da minha vida, por causa dessa briga ficamos uma semana separados mas o dela da Thalia que agora é juiza nem chegou a sair sangue igual do Polico que amassou de verdade
         Edson tio Edson, pessoa dificil, nunca fomos amigos, pensa que é mais doque eu, precisa aprender uma coisas sobre relaciomaneto com estranhos, se um dia for preso vai aprender na prisão
@@ -388,8 +388,8 @@ no_use_i:;
         Romel grande irmão
         Regina dona do mercadinho que eu comprava as coisas quando morei no seminario, onde eu só namorei uma menina em dois anos, mas ela era uma gatinha, não sei oque ela viu em mim, foi num colegio do bairro, muito legal, mas sobre a Regina, pessoa muito bacana e vendia pra gente mesmo sem dinheiro, virou quase da familia
         Regina esposa do Side, sempre jogavamos baralho quando eu estava na casa da tia Mena e ela morava la, e a Zezinha esposa do Dito tambem, a Zezinha fui eu quem ensinou a dirigir, ela queria muito aprender, ela tinha problema nas pernas e precisou operar, tinhamos boa amizade
-        Filomena
-        Siri
+        Filomena, oque falar da minha tia Mena, não vejo a hora de encontrar ela, gosto muito dela desde que me conheço por gente e na adolescência inteira eu normalmente passava os fins de semana na casa dela jogando baralho e curtindo, só meu deu bronca uma vez que eu briguei com meu primo Sergio
+        Siri, grande tio Siri, gostava muito de mim, só tenho lembrança boa dele
         Edenei
         Elcio
         Arliuze
@@ -414,7 +414,7 @@ no_use_i:;
         Cezinha
         Tata
         Ale
-        MIslaine
+        MISLAINE
         Marlene
         Soeli
         Maristela
@@ -426,33 +426,31 @@ no_use_i:;
         Linho
         Zezinha
         Denise
-        Diva
+        Diva, esta tia gostava muito de mim até eu terminar o namoro por vontade deles com a filha dela, a partir dai me ignorou pra sempre, disse pra mim "a porta da rua é de serventia da casa", neste dia a filha dela chorou na minha frente
         Dilson
-        MAriane
-        Cleyton
-        Marilda
-        MAriane
-        Marilene
-        Selma
-        Edinho
-        Edinho
-        Elzinha
-        Douglas
-        Lucrecia
-        Eliza
-        Célia
-        Célia
-        Elisa
-        Lucilene
-        Jô
-        Jô
-        Jorge
+        MAriane, irmã da Marilda
+        Cleyton, grande amigo primo do China e marido da Marilda, pai da minha afilhada que não lembro o nome, viajamos muitas vezes pra visitar meus filhos na praia e ir ate São Paulo em registro no sitio do pai dele
+        Marilda, grande amiga e comadre, fizemos grande amizade eu ela e o Cleyton
+        Marilene, irmã da minha primeira esposa, sempre fomos bons amigos
+        Selma, filha da tia Doca, nunca fomos muito amigos
+        Edinho, filho da tia Doca, tinhamos boa amizade
+        Elzinha, minha madrasta, já é falecida
+        Douglas, este é o meu pai, ele me ensinou eletrônica e me ensinou que a vida é dura
+        Lucrecia, ha ha ha, esta é minha mãe querida, gosoto muito dela desde que me conheço por gente, lembro do dia que ela me disse que eu tinha que beijar o rosto e não a boca mais, isto foi em 76
+        Eliza, grande vó, me deu meu primeiro evangelho aos 5 anos e sempre me levava na igreja Quadrangular, ela dizia que queria que eu fosse pastor quando crescesse, mas eu sou espirita, meio levado da breca mas sou, e adoro ajudar os outros de todas as formas possiveis
+        Célia, grande tia, a gente não se dava muito bem mas eu gostava dela, uma vez ela telefonou pro meu orfanato no Xaxim e disse que eu sempre ia na casa da vó em vez de ir de volta para o orfanato direto, mas eu gostava dela como gosto de todos da minha familia
+        Célia, filha do tio Alexandre, eu gostei dela durante anos, até começar a gostar da Claudetee da minha prima filha do tio Celso
+        Elisa, amiga do centro de Matinhos, temos boa amizade
+        Lucilene, grande dirigente do centro de Matinhos, temos boa amizade e sempre que tem oportunidade me da umas alfinetadas referente as coisas que destoam da minha dita religião espírita
+        Jô, esposa do meu amigo Osvaldo, eu tinha boa amizade com eles
+        Jô, coordenadora do centro de Matinhos, trabalhou já com a minha filha Aline em um colégio
+        Jorge, grande amigo do centro de MAtinhos, sempre me ajuda quando eu preciso
         Jorge ?
-        Mateus
-        Mateus
-        Cleusa
-        Cleusa
-        Kiko
+        Mateus, sobrinho da minha ex-namorada, tive pouca convivência com ele e com a minha afilhada Luciane
+        Mateus, filho da minha segunda esposa com outra pessoa, hoje em dia nos damos bem
+        Cleusa, mãe do meu amigo Nilson, temos boa amizade
+        Cleusa, esposa do meu amigo e parente da minha segunda esposa o Kiko, tinhamos boa amizade
+        Kiko, fizemos boa amizade, parente da minha segunda esposa
         Vó Santa
         Tio Pedro
         Orlei
@@ -492,7 +490,7 @@ no_use_i:;
         Vera
         Vinicius
 
-        
+
 
 
 
@@ -533,6 +531,10 @@ no_use_i:;
 
 
      */
+
+     mv_______->libav_c___first_call_rotate_j = false;
+     
+     mv_______->libav_c___rotation_value_m = NULL;
 
      mv_______->libav_c___j_again_call_j = false;
 

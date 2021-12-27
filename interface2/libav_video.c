@@ -72,6 +72,8 @@
 #error Erro Ricardo...
 #endif
 
+#define CONFIG_AVFILTER 1001
+
 #include <windows.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -121,6 +123,8 @@ WINBASEAPI ULONGLONG WINAPI GetTickCount64(VOID);
 #include <libavutil/avutil.h>
 #include <libavutil/cpu.h>
 #endif
+
+double av_display_rotation_get(const int32_t matrix[9]);
 
 #include "../mp3_dll/decoder.h"
 
@@ -709,9 +713,28 @@ void adjust_video(morcego___i___instance__a__bucaneiro_engineering *mv_______)
           adjust_definitive_function_i(mv_______);
      }
 }
+
+double get_rotation_m(int32_t *displaymatrix)
+{
+     double theta = 0;
+     if (displaymatrix)
+          theta = -round(av_display_rotation_get((int32_t *)displaymatrix));
+
+     theta -= 360 * floor(theta / 360 + 0.9 / 360);
+
+     if (fabs(theta - 90 * round(theta / 90)) > 2)
+          av_log(NULL, AV_LOG_WARNING, "Odd rotation angle.\n"
+                                       "If you want to help, upload a sample "
+                                       "of this file to https://streams.videolan.org/upload/ "
+                                       "and contact the ffmpeg-devel mailing list. (ffmpeg-devel@ffmpeg.org)");
+
+     return theta;
+}
+
 void init_video(morcego___i___instance__a__bucaneiro_engineering *mv_______,
                 be_libav_struct *be_data)
 {
+
      int ret_k_p;
      int i;
 
@@ -757,7 +780,7 @@ void init_video(morcego___i___instance__a__bucaneiro_engineering *mv_______,
 #endif
           }
      }
-		pedro_dprintf(-20211130, "Next... a");
+     pedro_dprintf(-20211130, "Next... a");
      mv_______->libav_c___canquit = 1;
 
      if (mv_______->decoder_c___cancelflag)
@@ -772,16 +795,16 @@ void init_video(morcego___i___instance__a__bucaneiro_engineering *mv_______,
      mv_______->libav_c___videostream = -1;
 
      mv_______->libav_c___dict_1_video = NULL;
-pedro_dprintf(-20211130, "Next... b");
+     pedro_dprintf(-20211130, "Next... b");
      if (avformat_open_input(&FormatContext, be_data->sourcefile, NULL,
                              (AVDictionary **)(NULL)) != 0)
      {
-		 pedro_dprintf(-20211130, "Next... c");
+          pedro_dprintf(-20211130, "Next... c");
           strcpy(be_data->be_error_message, "Can't open the media file");
 
           goto saida;
      }
-pedro_dprintf(-20211130, "Next... d");
+     pedro_dprintf(-20211130, "Next... d");
      if (mv_______->decoder_c___cancelflag)
      {
           goto saida;
@@ -791,12 +814,12 @@ pedro_dprintf(-20211130, "Next... d");
          avformat_find_stream_info(FormatContext,
                                    (AVDictionary **)(NULL)))
      {
-		 pedro_dprintf(-20211130, "Next... e");
+          pedro_dprintf(-20211130, "Next... e");
           deinit2_video(mv_______);
 
           goto saida;
      }
-	pedro_dprintf(-20211130, "Next... f");
+     pedro_dprintf(-20211130, "Next... f");
      if (mv_______->decoder_c___cancelflag)
      {
           goto saida;
@@ -816,7 +839,7 @@ pedro_dprintf(-20211130, "Next... d");
      {
           goto saida;
      }
-	 pedro_dprintf(-20211130, "Next... g");
+     pedro_dprintf(-20211130, "Next... g");
      pCodecCtx = avcodec_alloc_context3(NULL);
 
      if (!pCodecCtx)
@@ -892,6 +915,18 @@ pedro_dprintf(-20211130, "Next... d");
           double num = FormatContext->streams[(int)mv_______->libav_c___videostream]->time_base.num;
           mv_______->libav_c___video_timebase = num / den;
      }
+
+     mv_______->libav_c___rotation_value_m = (int32_t *)av_stream_get_side_data(FormatContext->streams[(int)mv_______->libav_c___videostream], AV_PKT_DATA_DISPLAYMATRIX, NULL);
+
+     pedro_dprintf(0, "vai amor %p", mv_______->libav_c___rotation_value_m);
+
+     if (NULL != mv_______->libav_c___rotation_value_m)
+     {
+          mv_______->libav_c___theta_m = get_rotation_m(mv_______->libav_c___rotation_value_m);
+          pedro_dprintf(0, "theta %f", mv_______->libav_c___theta_m);
+     }
+
+     // exit(27);
 
      if (NULL == Codec)
      {
@@ -1086,7 +1121,7 @@ pedro_dprintf(-20211130, "Next... d");
      }
 
      video_player_thread(mv_______);
-	pedro_dprintf(-20211130, "nunca chega aqui 1");
+     pedro_dprintf(-20211130, "nunca chega aqui 1");
      while (!mv_______->libav_c___video_thread_running)
      {
           amanda_locked++;
@@ -1240,7 +1275,7 @@ char maria_decoded_something;
 int morcego_vermelho_player_thread_koci(morcego___i___instance__a__bucaneiro_engineering *mv_______)
 {
 
-	pedro_dprintf(-20211130, "dentro de morcego_vermelho_player_thread_koci\n");
+     pedro_dprintf(-20211130, "dentro de morcego_vermelho_player_thread_koci\n");
      AVCodecContext *pCodecCtx_sub_i = NULL;
 
      AVCodec *Codec_i = NULL;
@@ -1274,18 +1309,18 @@ int morcego_vermelho_player_thread_koci(morcego___i___instance__a__bucaneiro_eng
      libav_c____decoder_feline_running = KOCI_DECODER_LOADED;
 
      mv_______->libav_c___displacement_for_see_adjust_k_p = -1;
-pedro_dprintf(-20211130, "Next2... a");
+     pedro_dprintf(-20211130, "Next2... a");
      if (0 != mv_______->libav_c___use_subtitles_track_i)
      {
           for (i_i = 0; i_i < FormatContext->nb_streams; i_i++)
                if (FormatContext->streams[i_i]->codecpar->codec_type == /*AVMEDIA_TYPE_AUDIO*/ AVMEDIA_TYPE_SUBTITLE)
                {
-pedro_dprintf(-20211130, "Next2... a.1");
+                    pedro_dprintf(-20211130, "Next2... a.1");
                     count_i++; //...
 
                     if (count_i == mv_______->libav_c___use_subtitles_track_i)
                     {
-						pedro_dprintf(-20211130, "Next2... a.2");
+                         pedro_dprintf(-20211130, "Next2... a.2");
                          mv_______->libav_c___decode_subtitle = true;
                          the_subtitle_stream_i = i_i;
                          mv_______->libav_c___the_subtitle_stream_i = the_subtitle_stream_i;
@@ -1330,15 +1365,15 @@ pedro_dprintf(-20211130, "Next2... a.1");
                     }
                }
      }
-	 
-pedro_dprintf(-20211130, "Next2... b");
+
+     pedro_dprintf(-20211130, "Next2... b");
 
      mv_______->libav_c___the_sub_pointer_____i = (void *)&sub_amanda_;
 
      while (av_read_frame(FormatContext, packet_ptr_pereira_koci_forever) >= 0)
      {
 
-pedro_dprintf(-20211130, "Next2... c");
+          pedro_dprintf(-20211130, "Next2... c");
 
           data_used_z = false;
           pedro_dprintf(-1, "dentro de decoder thread ");
@@ -1355,7 +1390,7 @@ pedro_dprintf(-20211130, "Next2... c");
                if (packet_ptr_pereira_koci_forever->stream_index == the_subtitle_stream_i)
                {
 
-pedro_dprintf(-20211130, "Next2... d");
+                    pedro_dprintf(-20211130, "Next2... d");
 
                     if (has_data_and_need_free_sub_i)
                     {
@@ -1370,7 +1405,7 @@ pedro_dprintf(-20211130, "Next2... d");
                          avsubtitle_free(&sub_amanda_);
                     }
 
-pedro_dprintf(-20211130, "Next2... d.1");
+                    pedro_dprintf(-20211130, "Next2... d.1");
 
                     if (false == alternating_i)
                     {
@@ -1389,7 +1424,7 @@ pedro_dprintf(-20211130, "Next2... d.1");
                          if (packet_ptr_pereira_koci_forever->pts != AV_NOPTS_VALUE)
                               mv_______->libav_c___subtitle_pts________i = mv_______->libav_c___subtitle_timebase___i * packet_ptr_pereira_koci_forever->pts;
 
-pedro_dprintf(-20211130, "Next2... d.3");
+                         pedro_dprintf(-20211130, "Next2... d.3");
                          ret_i = avcodec_decode_subtitle2(pCodecCtx_sub_i, &sub_amanda_, &got_frame_i, packet_ptr_pereira_koci_forever);
 
                          if (0 > ret_i)
@@ -1403,7 +1438,7 @@ pedro_dprintf(-20211130, "Next2... d.3");
 
                                    // exit(27);
 
-pedro_dprintf(-20211130, "Next2... d.4");
+                                   pedro_dprintf(-20211130, "Next2... d.4");
                                    if (0 == sub_amanda_.format)
                                    {
                                         mv_______->libav_c___has_bitmap__________i = true;
@@ -1501,7 +1536,7 @@ pedro_dprintf(-20211130, "Next2... d.4");
           if (packet_ptr_pereira_koci_forever->stream_index == mv_______->libav_c___videostream)
           {
 
-pedro_dprintf(-20211130, "Next2... f");
+               pedro_dprintf(-20211130, "Next2... f");
                double amanda_pts = packet_ptr_pereira_koci_forever->pts;
 
                if (mv_______->libav_c___cancel_video_thread || mv_______->decoder_c___cancelflag || ar_koci_force_exit)
@@ -1514,11 +1549,11 @@ pedro_dprintf(-20211130, "Next2... f");
 
                amanda_tempo = get_bucaneiro_tick();
 
-pedro_dprintf(-20211130, "Next2... ff, %p %p", pCodecCtx, packet_ptr_pereira_koci_forever);
+               pedro_dprintf(-20211130, "Next2... ff, %p %p", pCodecCtx, packet_ptr_pereira_koci_forever);
 
                amandaricardo_used = avcodec_send_packet(pCodecCtx, packet_ptr_pereira_koci_forever);
-			   
-pedro_dprintf(-20211130, "Next2... ff2");
+
+               pedro_dprintf(-20211130, "Next2... ff2");
 
                if (amandaricardo_used < 0 && amandaricardo_used != AVERROR(EAGAIN) && amandaricardo_used != AVERROR_EOF)
                {
@@ -1537,8 +1572,45 @@ pedro_dprintf(-20211130, "Next2... ff2");
 
                     if (frameFinished)
                     {
-						
-pedro_dprintf(-20211130, "Next2... f.1");
+
+                         /*
+
+                         here ric pFrame_ptr_koci
+
+                         */
+
+                         if (NULL != mv_______->libav_c___rotation_value_m)
+                         {
+                              // mv_______->libav_c___theta_m = get_rotation_m(mv_______->libav_c___rotation_value_m);
+                              pedro_dprintf(0, "theta 2 %f", mv_______->libav_c___theta_m);
+
+#if CONFIG_AVFILTER
+                              static AVFilterGraph *graph = NULL;
+                              static AVFilterContext *filt_out = NULL;
+                              static AVFilterContext *filt_in = NULL;
+                              static int last_w = 0;
+                              static int last_h = 0;
+                              static enum AVPixelFormat last_format = -2;
+                              static int last_serial = -1;
+                              static int last_vfilter_idx = 0;
+#endif
+
+                              if (false == mv_______->libav_c___first_call_rotate_j)
+                              {
+                                   mv_______->libav_c___first_call_rotate_j = true;
+
+                                   graph = NULL;
+                                   filt_out = NULL;
+                                   filt_in = NULL;
+                                   last_w = 0;
+                                   last_h = 0;
+                                   last_format = -2;
+                                   last_serial = -1;
+                                   last_vfilter_idx = 0;
+                              }
+                         }
+
+                         pedro_dprintf(-20211130, "Next2... f.1");
                          if (-1 == counter_z)
                          {
                               pedro_dprintf(-1, "ok\n");
@@ -1554,7 +1626,7 @@ pedro_dprintf(-20211130, "Next2... f.1");
 
                               pedro_dprintf(-1, "Frame got 8.0 %p %p\n", pFrame_ptr_koci, packet_ptr_pereira_koci_forever);
 
-pedro_dprintf(-20211130, "Next2... f.3");
+                              pedro_dprintf(-20211130, "Next2... f.3");
                               while (AMANDA_RICARDO_DECODER_DATA_IS_READY_TO_PLAY == mislaine_command.juliete_decoder_status[mislaine_command.aline_array_index_decoder]) // aonde verifica isto seta o AMANDA_RICARDO_DECODER_IS_WORKING
                               {
 
@@ -1584,7 +1656,7 @@ pedro_dprintf(-20211130, "Next2... f.3");
 
                               mislaine_command.aline_array_index_decoder = mislaine_command.aline_array_index_decoder % 2;
 
-pedro_dprintf(-20211130, "Next2... f.4");
+                              pedro_dprintf(-20211130, "Next2... f.4");
                               while (AMANDA_RICARDO_DECODER_DATA_IS_READY_TO_PLAY == mislaine_command.juliete_decoder_status[mislaine_command.aline_array_index_decoder]) // aonde verifica isto seta o AMANDA_RICARDO_DECODER_IS_WORKING
                               {
 
@@ -1634,9 +1706,9 @@ pedro_dprintf(-20211130, "Next2... f.4");
                               }
                          }
 
-pedro_dprintf(-20211130, "Next2... f.5");
+                              pedro_dprintf(-20211130, "Next2... f.5");
 
-                         break;
+                              break;
                          case 1:
                          {
                          }
@@ -1684,7 +1756,7 @@ pedro_dprintf(-20211130, "Next2... f.5");
 
 koci_finish:;
 
-pedro_dprintf(-20211130, "Next2... f.6");
+     pedro_dprintf(-20211130, "Next2... f.6");
      libav_c____decoder_feline_running = KOCI_DECODER_THREAD_FINISHED;
      return 0;
 }
@@ -3030,22 +3102,22 @@ void deinit2_video(morcego___i___instance__a__bucaneiro_engineering *mv_______)
      pedro_dprintf(-20211130, "chamou deinit2_video %p\n", mv_______);
      if (1 == mv_______->libav_c___video_ready_to_play)
      {
-		 pedro_dprintf(-20211130, "chamou deinit2_video b %p\n", mv_______);
+          pedro_dprintf(-20211130, "chamou deinit2_video b %p\n", mv_______);
           mv_______->libav_c___cancel_video_thread = 1;
           while (mv_______->libav_c___video_thread_running)
           {
-			  pedro_dprintf(-20211130, "chamou deinit2_video c %p\n", mv_______);
+               pedro_dprintf(-20211130, "chamou deinit2_video c %p\n", mv_______);
                Sleep(15);
           }
-		  pedro_dprintf(-20211130, "chamou deinit2_video c %p\n", mv_______);
+          pedro_dprintf(-20211130, "chamou deinit2_video c %p\n", mv_______);
           mv_______->libav_c___cancel_video_thread = 0;
      }
-	pedro_dprintf(-20211130, "chamou deinit2_video 2");
+     pedro_dprintf(-20211130, "chamou deinit2_video 2");
      AVCodecContext *pCodecCtx =
          (void *)mv_______->libav_c___pCodecCtx_ptr_video;
      AVFormatContext *FormatContext =
          (AVFormatContext *)mv_______->libav_c___FormatContext_ptr_video;
-	pedro_dprintf(-20211130, "chamou deinit2_video 3");
+     pedro_dprintf(-20211130, "chamou deinit2_video 3");
      /*
         SDL_Overlay *bmp = (void *)mv_______->libav_c___bmp;
         if (bmp)
@@ -3054,13 +3126,13 @@ void deinit2_video(morcego___i___instance__a__bucaneiro_engineering *mv_______)
              mv_______->libav_c___bmp = NULL;
         }
       */
-	  pedro_dprintf(-20211130, "chamou deinit2_video 5");
+     pedro_dprintf(-20211130, "chamou deinit2_video 5");
      if (FormatContext)
      {
-pedro_dprintf(-20211130, "chamou deinit2_video 6");
+          pedro_dprintf(-20211130, "chamou deinit2_video 6");
           if (pCodecCtx)
           {
-			  pedro_dprintf(-20211130, "chamou deinit2_video 7");
+               pedro_dprintf(-20211130, "chamou deinit2_video 7");
                avcodec_free_context(&pCodecCtx);
                pCodecCtx = NULL;
                mv_______->libav_c___pCodecCtx_ptr_video = NULL;
@@ -3070,7 +3142,7 @@ pedro_dprintf(-20211130, "chamou deinit2_video 6");
 
           if (pCodecCtx)
           {
-			  pedro_dprintf(-20211130, "chamou deinit2_video 8");
+               pedro_dprintf(-20211130, "chamou deinit2_video 8");
                avcodec_free_context(&pCodecCtx);
                mv_______->libav_c___pCodecCtx_sub_i = NULL;
           }
@@ -3503,7 +3575,5 @@ char *get_pixel_format_info___(morcego___i___instance__a__bucaneiro_engineering 
 #endif
 
 #if 1
-
-
 
 #endif
