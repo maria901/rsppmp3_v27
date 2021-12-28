@@ -124,6 +124,121 @@ WINBASEAPI ULONGLONG WINAPI GetTickCount64(VOID);
 #include <libavutil/cpu.h>
 #endif
 
+#define SAMPLE_ARRAY_SIZE (8 * 65536)
+
+typedef struct VideoState
+{
+     //   SDL_Thread *read_tid;
+     const AVInputFormat *iformat;
+     int abort_request;
+     int force_refresh;
+     int paused;
+     int last_paused;
+     int queue_attachments_req;
+     int seek_req;
+     int seek_flags;
+     int64_t seek_pos;
+     int64_t seek_rel;
+     int read_pause_return;
+     AVFormatContext *ic;
+     int realtime;
+
+     //  Clock audclk;
+     //  Clock vidclk;
+     //  Clock extclk;
+
+     //  FrameQueue pictq;
+     //  FrameQueue subpq;
+     // FrameQueue sampq;
+
+     // Decoder auddec;
+     // Decoder viddec;
+     // Decoder subdec;
+
+     int audio_stream;
+
+     int av_sync_type;
+
+     double audio_clock;
+     int audio_clock_serial;
+     double audio_diff_cum; /* used for AV difference average computation */
+     double audio_diff_avg_coef;
+     double audio_diff_threshold;
+     int audio_diff_avg_count;
+     AVStream *audio_st;
+     // PacketQueue audioq;
+     int audio_hw_buf_size;
+     uint8_t *audio_buf;
+     uint8_t *audio_buf1;
+     unsigned int audio_buf_size; /* in bytes */
+     unsigned int audio_buf1_size;
+     int audio_buf_index; /* in bytes */
+     int audio_write_buf_size;
+     int audio_volume;
+     int muted;
+     // struct AudioParams audio_src;
+#if CONFIG_AVFILTER
+     // struct AudioParams audio_filter_src;
+#endif
+     // struct AudioParams audio_tgt;
+     // struct SwrContext *swr_ctx;
+     int frame_drops_early;
+     int frame_drops_late;
+
+     enum ShowMode
+     {
+          SHOW_MODE_NONE = -1,
+          SHOW_MODE_VIDEO = 0,
+          SHOW_MODE_WAVES,
+          SHOW_MODE_RDFT,
+          SHOW_MODE_NB
+     } show_mode;
+
+     int16_t sample_array[SAMPLE_ARRAY_SIZE];
+     int sample_array_index;
+     int last_i_start;
+     // RDFTContext *rdft;
+     int rdft_bits;
+     // FFTSample *rdft_data;
+     int xpos;
+     double last_vis_time;
+     // SDL_Texture *vis_texture;
+     // SDL_Texture *sub_texture;
+     // SDL_Texture *vid_texture;
+
+     int subtitle_stream;
+     // AVStream *subtitle_st;
+     // PacketQueue subtitleq;
+
+     double frame_timer;
+     double frame_last_returned_time;
+     double frame_last_filter_delay;
+     int video_stream;
+     AVStream *video_st;
+     // PacketQueue videoq;
+     double max_frame_duration; // maximum duration of a frame - above this, we consider the jump a timestamp discontinuity
+     struct SwsContext *img_convert_ctx;
+     struct SwsContext *sub_convert_ctx;
+     int eof;
+
+     char *filename;
+     int width, height, xleft, ytop;
+     int step;
+
+#if CONFIG_AVFILTER
+     int vfilter_idx;
+     AVFilterContext *in_video_filter;  // the first filter in the video chain
+     AVFilterContext *out_video_filter; // the last filter in the video chain
+     AVFilterContext *in_audio_filter;  // the first filter in the audio chain
+     AVFilterContext *out_audio_filter; // the last filter in the audio chain
+     AVFilterGraph *agraph;             // audio filter graph
+#endif
+
+     int last_video_stream, last_audio_stream, last_subtitle_stream;
+
+     SDL_cond *continue_read_thread;
+} VideoState;
+
 double av_display_rotation_get(const int32_t matrix[9]);
 
 #include "../mp3_dll/decoder.h"
@@ -1276,6 +1391,11 @@ int morcego_vermelho_player_thread_koci(morcego___i___instance__a__bucaneiro_eng
 {
 
      pedro_dprintf(-20211130, "dentro de morcego_vermelho_player_thread_koci\n");
+
+    // int ret;
+
+     VideoState *is = calloc(1, sizeof(VideoState));
+
      AVCodecContext *pCodecCtx_sub_i = NULL;
 
      AVCodec *Codec_i = NULL;
@@ -1299,6 +1419,8 @@ int morcego_vermelho_player_thread_koci(morcego___i___instance__a__bucaneiro_eng
      amandaricardo_koci_deslocador_decoder = 0;
      amandaricardo_koci_player_exited_at = 0;
      maria_decoded_something = 0;
+
+     mv_______->libav_c___first_call_rotate_j = false;
 
      while (FALSE == mv_______->libav_c___player_ar_ready)
      {
@@ -1572,7 +1694,7 @@ int morcego_vermelho_player_thread_koci(morcego___i___instance__a__bucaneiro_eng
 
                     if (frameFinished)
                     {
-
+#if 0
                          /*
 
                          here ric pFrame_ptr_koci
@@ -1582,22 +1704,174 @@ int morcego_vermelho_player_thread_koci(morcego___i___instance__a__bucaneiro_eng
                          if (NULL != mv_______->libav_c___rotation_value_m)
                          {
                               // mv_______->libav_c___theta_m = get_rotation_m(mv_______->libav_c___rotation_value_m);
-                              pedro_dprintf(0, "theta 2 %f", mv_______->libav_c___theta_m);
+                              pedro_dprintf(-1, "theta 2 %f", mv_______->libav_c___theta_m);
 
 #if CONFIG_AVFILTER
-                              static AVFilterGraph *graph = NULL;
-                              static AVFilterContext *filt_out = NULL;
-                              static AVFilterContext *filt_in = NULL;
-                              static int last_w = 0;
-                              static int last_h = 0;
-                              static enum AVPixelFormat last_format = -2;
-                              static int last_serial = -1;
-                              static int last_vfilter_idx = 0;
+                              __attribute__((unused)) static AVFilterGraph *graph = NULL;
+                              __attribute__((unused)) static AVFilterContext *filt_out = NULL;
+                              __attribute__((unused)) static AVFilterContext *filt_in = NULL;
+                              __attribute__((unused)) static int last_w = 0;
+                              __attribute__((unused)) static int last_h = 0;
+                              __attribute__((unused)) static enum AVPixelFormat last_format = -2;
+                              __attribute__((unused)) static int last_serial = -1;
+                              __attribute__((unused)) static int last_vfilter_idx = 0;
 #endif
+
+/* Note: this macro adds a filter before the lastly added filter, so the
+ * processing order of the filters is in reverse */
+#define INSERT_FILT(name, arg)                                                  \
+     do                                                                         \
+     {                                                                          \
+          AVFilterContext *filt_ctx;                                            \
+                                                                                \
+          ret = avfilter_graph_create_filter(&filt_ctx,                         \
+                                             avfilter_get_by_name(name),        \
+                                             "ffplay_" name, arg, NULL, graph); \
+          if (ret < 0)                                                          \
+               goto fail;                                                       \
+                                                                                \
+          /*ret = avfilter_link(filt_ctx, 0, last_filter, 0);*/                     \
+          if (ret < 0)                                                          \
+               goto fail;                                                       \
+                                                                                \
+          last_filter = filt_ctx;                                               \
+     } while (0)
 
                               if (false == mv_______->libav_c___first_call_rotate_j)
                               {
+                                   
+
                                    mv_______->libav_c___first_call_rotate_j = true;
+
+
+
+
+
+
+
+
+
+
+
+
+    enum AVPixelFormat pix_fmts[FF_ARRAY_ELEMS(sdl_texture_format_map)];
+    char sws_flags_str[512] = "";//faster
+    char buffersrc_args[256];
+    int ret;
+    AVFilterContext *filt_src = NULL, *filt_out = NULL, *last_filter = NULL;
+    AVCodecParameters *codecpar = is->video_st->codecpar;
+    AVRational fr = av_guess_frame_rate(is->ic, is->video_st, NULL);
+    AVDictionaryEntry *e = NULL;
+    int nb_pix_fmts = 0;
+    int i, j;
+
+    for (i = 0; i < renderer_info.num_texture_formats; i++) {
+        for (j = 0; j < FF_ARRAY_ELEMS(sdl_texture_format_map) - 1; j++) {
+            if (renderer_info.texture_formats[i] == sdl_texture_format_map[j].texture_fmt) {
+                pix_fmts[nb_pix_fmts++] = sdl_texture_format_map[j].format;
+                break;
+            }
+        }
+    }
+    pix_fmts[nb_pix_fmts] = AV_PIX_FMT_NONE;
+
+    while ((e = av_dict_get(sws_dict, "", e, AV_DICT_IGNORE_SUFFIX))) {
+        if (!strcmp(e->key, "sws_flags")) {
+            av_strlcatf(sws_flags_str, sizeof(sws_flags_str), "%s=%s:", "flags", e->value);
+        } else
+            av_strlcatf(sws_flags_str, sizeof(sws_flags_str), "%s=%s:", e->key, e->value);
+    }
+    if (strlen(sws_flags_str))
+        sws_flags_str[strlen(sws_flags_str)-1] = '\0';
+
+    graph->scale_sws_opts = av_strdup(sws_flags_str);
+
+    snprintf(buffersrc_args, sizeof(buffersrc_args),
+             "video_size=%dx%d:pix_fmt=%d:time_base=%d/%d:pixel_aspect=%d/%d",
+             frame->width, frame->height, frame->format,
+             is->video_st->time_base.num, is->video_st->time_base.den,
+             codecpar->sample_aspect_ratio.num, FFMAX(codecpar->sample_aspect_ratio.den, 1));
+    if (fr.num && fr.den)
+        av_strlcatf(buffersrc_args, sizeof(buffersrc_args), ":frame_rate=%d/%d", fr.num, fr.den);
+
+    if ((ret = avfilter_graph_create_filter(&filt_src,
+                                            avfilter_get_by_name("buffer"),
+                                            "ffplay_buffer", buffersrc_args, NULL,
+                                            graph)) < 0)
+        goto fail;
+
+    ret = avfilter_graph_create_filter(&filt_out,
+                                       avfilter_get_by_name("buffersink"),
+                                       "ffplay_buffersink", NULL, NULL, graph);
+    if (ret < 0)
+        goto fail;
+
+    if ((ret = av_opt_set_int_list(filt_out, "pix_fmts", pix_fmts,  AV_PIX_FMT_NONE, AV_OPT_SEARCH_CHILDREN)) < 0)
+        goto fail;
+
+    last_filter = filt_out;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                   double theta = mv_______->libav_c___theta_m;
+
+                                   if (fabs(theta - 90) < 1.0)
+                                   {
+                                        INSERT_FILT("transpose", "clock");
+                                   }
+                                   else if (fabs(theta - 180) < 1.0)
+                                   {
+                                        INSERT_FILT("hflip", NULL);
+                                        INSERT_FILT("vflip", NULL);
+                                   }
+                                   else if (fabs(theta - 270) < 1.0)
+                                   {
+                                        INSERT_FILT("transpose", "cclock");
+                                   }
+                                   else if (fabs(theta) > 1.0)
+                                   {
+                                        char rotate_buf[64];
+                                        snprintf(rotate_buf, sizeof(rotate_buf), "%f*PI/180", theta);
+                                        INSERT_FILT("rotate", rotate_buf);
+                                   }
 
                                    graph = NULL;
                                    filt_out = NULL;
@@ -1607,8 +1881,11 @@ int morcego_vermelho_player_thread_koci(morcego___i___instance__a__bucaneiro_eng
                                    last_format = -2;
                                    last_serial = -1;
                                    last_vfilter_idx = 0;
+
+                                   pedro_dprintf(0, "vamos ric");
                               }
                          }
+#endif
 
                          pedro_dprintf(-20211130, "Next2... f.1");
                          if (-1 == counter_z)
@@ -1758,6 +2035,15 @@ koci_finish:;
 
      pedro_dprintf(-20211130, "Next2... f.6");
      libav_c____decoder_feline_running = KOCI_DECODER_THREAD_FINISHED;
+
+     free(is);
+
+     return 0;
+
+     //fail:;
+
+     pedro_dprintf(0, "fail called");
+     exit(27);
      return 0;
 }
 
