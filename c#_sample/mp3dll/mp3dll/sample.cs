@@ -867,6 +867,7 @@ namespace mp3dll
 		bool force_fullscreen_slider_adjust_i = false;
 
 		public long number = MP3.number;
+		public long number_v28 = MP3.number_v28;
 		string nome_da_dll;
 		int already=0;
 		
@@ -1294,6 +1295,24 @@ namespace mp3dll
 		}
 		private void button4_Click(object sender, EventArgs e)
 		{
+			//amanda27  play
+			if(MP3.mode_is_ffplay_c_m)
+			{
+				MP3.Play_ffplay(number_v28, MP3.wide2utf8(filename.Text),
+				                0,
+				                0,
+				                0,
+				                0,
+				                0,
+				                0,
+				                0.0,
+				                0,
+				                0,
+				                0);
+				              
+				
+				return;
+			}
 			fullscreen_mode_defined = -1;
 			bool did_it_d = false;
 			int ret;
@@ -1666,6 +1685,14 @@ namespace mp3dll
 
 		private void button8_Click(object sender, EventArgs e)
 		{
+			//amanda27 cancel
+			if(MP3.mode_is_ffplay_c_m)
+			{
+				MP3.PlaybackCancel_ffplay(number_v28);
+				
+				return;
+			}
+			
 			main_timer.Enabled = false;
 			MP3.is_playlist = false;
 			MP3.PlaybackCancel(number);
@@ -1910,6 +1937,8 @@ namespace mp3dll
 			
 			main_timer.Enabled = false;
 			MP3.PlaybackCancel(number);
+			MP3.PlaybackCancel_ffplay(number_v28);
+			MP3.closedecoder_j(ref number_v28);
 			MP3.BE_CloseDecoder(ref number);
 		}
 
@@ -4081,6 +4110,11 @@ namespace mp3dll
 		void Button5Click(object sender, EventArgs e)
 		{
 			filename.Text = "C:\\cygwin64_amandaricardo_koci_10.2.0\\Amandinha\\Amanda.jun";
+		}
+		void Button6Click(object sender, EventArgs e)
+		{
+			;//
+			MP3.mode_is_ffplay_c_m = true;
 		}
 		
 	}

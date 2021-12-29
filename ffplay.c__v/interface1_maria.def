@@ -1,0 +1,7 @@
+DESCRIPTION "BinaryWork Corp. debug (beta) version amanda_00002853 - December 2021 ?"
+EXPORTS
+
+closedecoder_j                                                           @5353
+createplayer_m                                                           @2828
+Play_ffplay                                                              @2727
+PlaybackCancel_ffplay                                                    @5252

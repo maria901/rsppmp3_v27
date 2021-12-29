@@ -105,14 +105,14 @@
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="mp3dll.exe" size="2189824">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="mp3dll.exe" size="2190336">
       <assemblyIdentity name="mp3dll" version="3.6.7.372" language="neutral" processorArchitecture="amd64" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>qXavBmgD8lbevfrf1cNIPXNGma264WJirWZW+zgPp8c=</dsig:DigestValue>
+        <dsig:DigestValue>T0wFK4x6xL1DgTr/Ik8IBhY3I/MM4pa+GVRe2CTkcus=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>

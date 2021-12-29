@@ -31,7 +31,7 @@
  *     (+55)41 9627 1708 - isto está sempre ligado (eu acho...)                 *
  *                                                                              *
  *******************************************************************************/
-   
+
 /*
  * 
 If you have time and want to contribute , just finish the documentation of:
@@ -131,6 +131,9 @@ namespace mp3dll
 	/// </remarks>
 	public class MP3
 	{
+		
+		public   static bool   mode_is_ffplay_c_m        = false;
+		
 		internal static sample sample_copy_i             = null;
 		internal static amanda_search search_copy        = null;
 		internal static sample sample_copy_ar            = null;
@@ -1173,7 +1176,7 @@ namespace mp3dll
 		[DllImport("rspmp3ocx1.dll")]
 		public static extern void
 			Amanda_s_Smart_Ape_Use_Cache(long mv_instance,
-			                                  int enable_amanda_s_smart_ape_enable);
+			                             int enable_amanda_s_smart_ape_enable);
 		
 		/// <summary>
 		/// to show um aboutbox of the dll, very simple
@@ -1300,7 +1303,7 @@ namespace mp3dll
 		public extern static
 			int
 			GetNumberOfSubtitles(long mv_instance, string utf8_filename,
-			                       StringBuilder error_message);
+			                     StringBuilder error_message);
 
 		/// <summary>
 		/// it will create a decoder, this is the first function that need to be called
@@ -1310,12 +1313,43 @@ namespace mp3dll
 		public extern static
 			long BE_CreateDecoder();
 
-		/// <summary>
-		/// this is the last function that need to be called, it will free all the memory allocated and close the decoder
-		/// </summary>
-		/// <param name="instance_64"></param>
-		[DllImport("rspmp3ocx1.dll")]
+		//88888888888888888888888888888888888888888888888888888888888
+		//sector of ffplay.c based code
+		
+		[DllImport("ffplay_ab.dll")]
 		public extern static
+			long createplayer_m();
+		
+		[DllImport("ffplay_ab.dll")]
+		public extern static
+			void closedecoder_j(ref long instance_64);
+		
+		[DllImport("ffplay_ab.dll")]
+		public extern static
+			int Play_ffplay(long mv_instance,
+			                string utf8_filename_a, // 888888888888888888888888888888888888888888888888888888 amanda
+			                int loop_j,            // 8888888888888888888888888888888888888888888888888888888 junior
+			                int track_m,           // 88888888888888888888888888888888888888888888888888888 mislaine
+			                long hwnd_j,        // 888888888888888888888888888888888888888888888888888888888 juliete
+			                long player_hwnd_m, // 88888888888888888888888888888888888888888888888888888888888 maria
+			                int width_t,           // 8888888888888888888888888888888888888888888888888888888 thalia
+			                int height_j,          // 8888888888888888888888888888888888888888888888888888888 junior
+			                double ratio_p,        // 88888888888888888888888888888888888888888888888888888888 pedro
+			                int left_v,            // 8888888888888888888888888888888888888888888888888888 valquiria
+			                int top_a,             // 8888888888888888888888888888888888888888888888888888888 amanda
+			                int subtitle_i_r);
+		
+		[DllImport("ffplay_ab.dll")]
+		public extern static
+			int PlaybackCancel_ffplay(long mv_instance);
+					
+			//88888888888888888888888888888888888888888888888888888888888
+			/// <summary>
+			/// this is the last function that need to be called, it will free all the memory allocated and close the decoder
+			/// </summary>
+			/// <param name="instance_64"></param>
+			[DllImport("rspmp3ocx1.dll")]
+			public extern static
 			void BE_CloseDecoder(ref long instance_64);
 
 		/// <summary>
@@ -1473,8 +1507,9 @@ namespace mp3dll
 		public extern static
 			void DisableWidthLimit(long mv_instance);
 
-		public static int wave_mode = 1;
-		public static long number = MP3.BE_CreateDecoder();
+		public static int wave_mode   =                      1;
+		public static long number     = MP3.BE_CreateDecoder();
+		public static long number_v28 = MP3.createplayer_m()  ;
 		
 		public static double full_screen_player_position;
 		public static morcego_ratio f_ratio;
@@ -1576,7 +1611,7 @@ namespace mp3dll
 				SetProcessWorkingSetSize(System.Diagnostics.Process.
 				                         GetCurrentProcess().Handle, -1, -1);
 			}
-			*/
+			 */
 		}
 		
 		//\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
@@ -1585,35 +1620,35 @@ namespace mp3dll
 		[DllImport("ffmpeg_v.DLL")]
 		public static extern int
 			download_ar_from_net(string filename_utf8, string dest_file_utf_8);
-				
+		
 		[DllImport("ffmpeg_v.DLL")]
 		public static extern int
 			close_ar_and_deinit();
-				
+		
 		[DllImport("ffmpeg_v.DLL")]
 		public static extern int
 			get_ar_returnvalue();
-				
+		
 		[DllImport("ffmpeg_v.DLL")]
 		public static extern int
 			is_ar_running();
-				
+		
 		[DllImport("ffmpeg_v.DLL")]
 		public static extern int
 			ar_progress();
-				
+		
 		[DllImport("ffmpeg_v.DLL")]
 		public static extern int
 			ar_pause();
-				
+		
 		[DllImport("ffmpeg_v.DLL")]
 		public static extern int
 			ar_resume();
-				
+		
 		[DllImport("ffmpeg_v.DLL")]
 		public static extern int
 			ar_cancel();
-				
+		
 		
 	}
 }

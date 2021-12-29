@@ -150,6 +150,7 @@ namespace mp3dll
 			this.size_i = new System.Windows.Forms.TextBox();
 			this.label11 = new System.Windows.Forms.Label();
 			this.button5 = new System.Windows.Forms.Button();
+			this.button6 = new System.Windows.Forms.Button();
 			this.menu.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.play_v12)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.pause_v12)).BeginInit();
@@ -1280,11 +1281,22 @@ namespace mp3dll
 			this.button5.UseVisualStyleBackColor = true;
 			this.button5.Click += new System.EventHandler(this.Button5Click);
 			// 
+			// button6
+			// 
+			this.button6.Location = new System.Drawing.Point(464, 64);
+			this.button6.Name = "button6";
+			this.button6.Size = new System.Drawing.Size(85, 22);
+			this.button6.TabIndex = 148;
+			this.button6.Text = "Mode ffplay.c";
+			this.button6.UseVisualStyleBackColor = true;
+			this.button6.Click += new System.EventHandler(this.Button6Click);
+			// 
 			// sample
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.ClientSize = new System.Drawing.Size(1294, 708);
+			this.Controls.Add(this.button6);
 			this.Controls.Add(this.button5);
 			this.Controls.Add(this.label11);
 			this.Controls.Add(this.size_i);
@@ -1535,6 +1547,7 @@ namespace mp3dll
 		private System.Windows.Forms.Label label11;
 		private System.Windows.Forms.ToolStripMenuItem tracksToolStripMenuItem;
 		private System.Windows.Forms.Button button5;
+		private System.Windows.Forms.Button button6;
 	}
 }
 

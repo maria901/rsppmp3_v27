@@ -55,6 +55,8 @@
 
 #include "win64.h"
 
+#include "mv_from_AR.h"
+
 #include "config.h"
 #include <inttypes.h>
 #include <math.h>
@@ -4062,6 +4064,8 @@ int main(int argc, char **argv)
 
      init_dynload();
 
+     pedro_dprintf(0, "argc %d file %s\n", argc, argv[1]);
+
      av_log_set_flags(AV_LOG_SKIP_REPEATED);
      parse_loglevel(argc, argv, options);
 
@@ -4077,6 +4081,8 @@ int main(int argc, char **argv)
      show_banner(argc, argv, options);
 
      parse_options(NULL, argc, argv, options, opt_input_file);
+
+     input_filename = argv[1];
 
      if (!input_filename)
      {
@@ -4167,34 +4173,70 @@ int main(int argc, char **argv)
      return 0;
 }
 
+// 8888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888
+//  At Tue 28/December/2021 23:23:44
+
 __INT32_OR_INT64 my_thread_handle_v = -1;
 
-#include "mv_from_AR.h"
+/**
+ * Main decoder (player) function.
+ * \param filename the file to play as a utf-8 encoded C string
+ * \return 0 if no error or the error value<br>
+ */
+int morcego_play(
+    cardo___i___ava__a__aurora_boreal *a_ajtmampjv_r,
+    unsigned char
+        *filename_ava,
+    int track_ric)
+{
+     static char file_ric[5000];
+     int returnvalue_m = 0;
+     _MM_SET_FLUSH_ZERO_MODE2();
 
-static unsigned __stdcall my_thread_function_v28(void *my_argument_z)
+     pedro_dprintf(0, "tocando \n");
+
+     // aqui
+
+     int argc = 2;
+
+     static char *argv_ar[6];
+     strcpy(file_ric, filename_ava);
+     argv_ar[0] = "my_ar_executable.exe";
+
+     pedro_dprintf(0, "file in %s", filename_ava);
+     argv_ar[1] = file_ric;
+
+     returnvalue_m = main(argc, argv_ar);
+
+     pedro_dprintf(0, "file amor %s\n", filename_ava);
+     Sleep(3000);
+
+     pedro_dprintf(0, "saiu do player ric \n");
+     return returnvalue_m;
+}
+
+unsigned __stdcall my_thread_function_v28(void *my_argument_z)
 {
 
-     my_thread_struct_z *ptr_my_struct_z = (void *)my_argument_z;
+     cardo___i___ava__a__aurora_boreal *ptr_my_struct_z = (void *)my_argument_z;
 
      // free(my_argument_z);
+
+     pedro_dprintf(0, "file 11 %s", ptr_my_struct_z->decoder_c___filename);
+
+     ptr_my_struct_z->decoder_c___intreturn2 = ptr_my_struct_z->decoder_c___intreturn = morcego_play(ptr_my_struct_z, ptr_my_struct_z->decoder_c___filename, ptr_my_struct_z->decoder_c___track);
+
      _endthreadex(0);
 
      return 27 + 51;
-}
-
-int64_t __stdcall createplayer_m(void)
-{
-
-     return 0;
-
 }
 
 int __stdcall Play_ffplay(int64_t mv_instance,
                           char *utf8_filename_a, // 888888888888888888888888888888888888888888888888888888 amanda
                           int loop_j,            // 888888888888888888888888888888888888888888888888888888 junior
                           int track_m,           // 8888888888888888888888888888888888888888888888888888 mislaine
-                          long hwnd_j,           // 88888888888888888888888888888888888888888888888888888 juliete
-                          long player_hwnd_m,    // 8888888888888888888888888888888888888888888888888888888 maria
+                          int64_t hwnd_j,        // 88888888888888888888888888888888888888888888888888888 juliete
+                          int64_t player_hwnd_m, // 8888888888888888888888888888888888888888888888888888888 maria
                           int width_t,           // 888888888888888888888888888888888888888888888888888888 thalia
                           int height_j,          // 888888888888888888888888888888888888888888888888888888 junior
                           double ratio_p,        // 8888888888888888888888888888888888888888888888888888888 pedro
@@ -4203,7 +4245,77 @@ int __stdcall Play_ffplay(int64_t mv_instance,
                           int subtitle_i_r)      // 88888888888888888888888888888888888888888888888888888 ricardo
 {
 
+     check_mv_instance(mv_instance);
+
+     pedro_dprintf(0, "Dentro de play, e file %s", utf8_filename_a);
+
+     cardo___i___ava__a__aurora_boreal *a_ajtmampjv_r =
+         (cardo___i___ava__a__aurora_boreal *)(__INT32_OR_INT64)
+             mv_instance;
+
+     a_ajtmampjv_r->libav_c___sample_rate_format_string[0] = '\0';
+
+     pedro_dprintf(-1, "veja %s", a_ajtmampjv_r->libav_c___sample_rate_format_string);
+
+     if (a_ajtmampjv_r->decoder_c___notloaded)
+     {
+          return -1;
+     }
+
+     while (-1 == morcego_cancel(a_ajtmampjv_r))
+     {
+     }
+
+     // a_ajtmampjv_r->libav_c___show_in_position____i = position_i;
+
+     a_ajtmampjv_r->libav_c___use_subtitles_track_i = subtitle_i_r;
+
+     a_ajtmampjv_r->libav_c___hwnd = (int64_t)hwnd_j;
+     a_ajtmampjv_r->libav_c___size_of_window_width = width_t;
+     a_ajtmampjv_r->libav_c___size_of_window_height = height_j;
+     a_ajtmampjv_r->libav_c___player_hwnd = (int64_t)player_hwnd_m;
+
+     a_ajtmampjv_r->ffmepegue_a_r_p_k_player_hwnd = (int64_t)player_hwnd_m;
+
+     a_ajtmampjv_r->libav_c___the_ratio = ratio_p;
+     a_ajtmampjv_r->libav_c___adjust_left = left_v;
+     a_ajtmampjv_r->libav_c___adjust_top = top_a;
+
+pedro_dprintf(0, "file 1 %s", utf8_filename_a);
+     pass_information_to_replay(a_ajtmampjv_r, utf8_filename_a, loop_j, track_m);
+pedro_dprintf(0, "file 2 %s", utf8_filename_a);
+     // a_ajtmampjv_r->decoder_c___phwo = 0;//fix
+     if (loop_j)
+     {
+          a_ajtmampjv_r->decoder_c___intloop = 1;
+     }
+     a_ajtmampjv_r->decoder_c___intplayback = 1;
+     a_ajtmampjv_r->decoder_c___initial_init_playback_value = 1;
+pedro_dprintf(0, "file 3 %s", utf8_filename_a);
+     morcego_open((cardo___i___ava__a__aurora_boreal
+                       *)(__INT32_OR_INT64)mv_instance,
+                  (__INT32_OR_INT64)utf8_filename_a, (__INT32_OR_INT64)track_m);
+pedro_dprintf(0, "file 4 %s", utf8_filename_a);
+     pedro_dprintf(-1, "Sai de play");
      return 0;
 }
-
-int __stdcall closedecoder_j(int64_t *memory_to_free_a);
+/*
+printf("\nWhile playing:\n"
+            "q, ESC              quit\n"
+            "f                   toggle full screen\n"
+            "p, SPC              pause\n"
+            "m                   toggle mute\n"
+            "9, 0                decrease and increase volume respectively\n"
+            "/, *                decrease and increase volume respectively\n"
+            "a                   cycle audio channel in the current program\n"
+            "v                   cycle video channel\n"
+            "t                   cycle subtitle channel in the current program\n"
+            "c                   cycle program\n"
+            "w                   cycle video filters or show modes\n"
+            "s                   activate frame-step mode\n"
+            "left/right          seek backward/forward 10 seconds or to custom interval if -seek_interval is set\n"
+            "down/up             seek backward/forward 1 minute\n"
+            "page down/page up   seek backward/forward 10 minutes\n"
+            "right mouse click   seek to percentage in file corresponding to fraction of width\n"
+            "left double-click   toggle full screen\n");
+            */
