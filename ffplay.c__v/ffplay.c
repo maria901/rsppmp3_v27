@@ -92,6 +92,11 @@
 #include <SDL.h>
 #include <SDL_thread.h>
 
+// 888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888
+
+cardo___i___ava__a__aurora_boreal *ra_struct = NULL;
+
+// 888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888
 #include "cmdutils.h"
 
 const char program_name[] = "ffplay";
@@ -444,6 +449,7 @@ static const struct TextureFormatEntry
 #if CONFIG_AVFILTER
 static int opt_add_vfilter(void *optctx, const char *opt, const char *arg)
 {
+     pedro_dprintf(0, "called filerlist\n");
      GROW_ARRAY(vfilters_list, nb_vfilters);
      vfilters_list[nb_vfilters - 1] = arg;
      return 0;
@@ -532,13 +538,13 @@ static int packet_queue_init(PacketQueue *q)
      q->mutex = SDL_CreateMutex();
      if (!q->mutex)
      {
-          av_log(NULL, AV_LOG_FATAL, "SDL_CreateMutex(): %s\n", SDL_GetError());
+          pedro_dprintf(0, "SDL_CreateMutex(): %s\n", SDL_GetError());
           return AVERROR(ENOMEM);
      }
      q->cond = SDL_CreateCond();
      if (!q->cond)
      {
-          av_log(NULL, AV_LOG_FATAL, "SDL_CreateCond(): %s\n", SDL_GetError());
+          pedro_dprintf(0, "SDL_CreateCond(): %s\n", SDL_GetError());
           return AVERROR(ENOMEM);
      }
      q->abort_request = 1;
@@ -780,12 +786,12 @@ static int frame_queue_init(FrameQueue *f, PacketQueue *pktq, int max_size, int 
      memset(f, 0, sizeof(FrameQueue));
      if (!(f->mutex = SDL_CreateMutex()))
      {
-          av_log(NULL, AV_LOG_FATAL, "SDL_CreateMutex(): %s\n", SDL_GetError());
+          pedro_dprintf(0, "SDL_CreateMutex(): %s\n", SDL_GetError());
           return AVERROR(ENOMEM);
      }
      if (!(f->cond = SDL_CreateCond()))
      {
-          av_log(NULL, AV_LOG_FATAL, "SDL_CreateCond(): %s\n", SDL_GetError());
+          pedro_dprintf(0, "SDL_CreateCond(): %s\n", SDL_GetError());
           return AVERROR(ENOMEM);
      }
      f->pktq = pktq;
@@ -1030,7 +1036,7 @@ static int upload_texture(SDL_Texture **tex, AVFrame *frame, struct SwsContext *
           }
           else
           {
-               av_log(NULL, AV_LOG_FATAL, "Cannot initialize the conversion context\n");
+               pedro_dprintf(0, "Cannot initialize the conversion context\n");
                ret = -1;
           }
           break;
@@ -1127,7 +1133,7 @@ static void video_image_display(VideoState *is)
                                                                          0, NULL, NULL, NULL);
                               if (!is->sub_convert_ctx)
                               {
-                                   av_log(NULL, AV_LOG_FATAL, "Cannot initialize the conversion context\n");
+                                   pedro_dprintf(0, "Cannot initialize the conversion context\n");
                                    return;
                               }
                               if (!SDL_LockTexture(is->sub_texture, (SDL_Rect *)sub_rect, (void **)pixels, pitch))
@@ -2090,8 +2096,13 @@ static int configure_video_filters(AVFilterGraph *graph, VideoState *is, const c
      if (strlen(sws_flags_str))
           sws_flags_str[strlen(sws_flags_str) - 1] = '\0';
 
+
+
      graph->scale_sws_opts = av_strdup(sws_flags_str);
 
+
+     pedro_dprintf(0, "veja -> .%s.", sws_flags_str);
+//assert(0);
      snprintf(buffersrc_args, sizeof(buffersrc_args),
               "video_size=%dx%d:pix_fmt=%d:time_base=%d/%d:pixel_aspect=%d/%d",
               frame->width, frame->height, frame->format,
@@ -2401,6 +2412,9 @@ static int video_thread(void *arg)
                     goto the_end;
                }
                graph->nb_threads = filter_nbthreads;
+
+               vfilters_list = NULL;
+               
                if ((ret = configure_video_filters(graph, is, vfilters_list ? vfilters_list[is->vfilter_idx] : NULL, frame)) < 0)
                {
                     SDL_Event event;
@@ -2423,8 +2437,11 @@ static int video_thread(void *arg)
           if (ret < 0)
                goto the_end;
 
+pedro_dprintf(0, "a1");
+
           while (ret >= 0)
           {
+               
                is->frame_last_returned_time = av_gettime_relative() / 1000000.0;
 
                ret = av_buffersink_get_frame_flags(filt_out, frame, 0);
@@ -2435,6 +2452,8 @@ static int video_thread(void *arg)
                     ret = 0;
                     break;
                }
+
+pedro_dprintf(0, "a3");
 
                is->frame_last_filter_delay = av_gettime_relative() / 1000000.0 - is->frame_last_returned_time;
                if (fabs(is->frame_last_filter_delay) > AV_NOSYNC_THRESHOLD / 10.0)
@@ -2447,7 +2466,10 @@ static int video_thread(void *arg)
                av_frame_unref(frame);
 #if CONFIG_AVFILTER
                if (is->videoq.serial != is->viddec.pkt_serial)
+               {
+                    pedro_dprintf(0, "saiu final \n");
                     break;
+               }
           }
 #endif
 
@@ -2669,7 +2691,7 @@ static int audio_decode_frame(VideoState *is)
           }
           if (len2 == out_count)
           {
-               av_log(NULL, AV_LOG_WARNING, "audio buffer is probably too small\n");
+               pedro_dprintf(0, "audio buffer is probably too small\n");
                if (swr_init(is->swr_ctx) < 0)
                     swr_free(&is->swr_ctx);
           }
@@ -2788,8 +2810,8 @@ static int audio_open(void *opaque, int64_t wanted_channel_layout, int wanted_nb
      wanted_spec.userdata = opaque;
      while (!(audio_dev = SDL_OpenAudioDevice(NULL, 0, &wanted_spec, &spec, SDL_AUDIO_ALLOW_FREQUENCY_CHANGE | SDL_AUDIO_ALLOW_CHANNELS_CHANGE)))
      {
-          av_log(NULL, AV_LOG_WARNING, "SDL_OpenAudio (%d channels, %d Hz): %s\n",
-                 wanted_spec.channels, wanted_spec.freq, SDL_GetError());
+          pedro_dprintf(0, "SDL_OpenAudio (%d channels, %d Hz): %s\n",
+                        wanted_spec.channels, wanted_spec.freq, SDL_GetError());
           wanted_spec.channels = next_nb_channels[FFMIN(7, wanted_spec.channels)];
           if (!wanted_spec.channels)
           {
@@ -2883,11 +2905,11 @@ static int stream_component_open(VideoState *is, int stream_index)
      if (!codec)
      {
           if (forced_codec_name)
-               av_log(NULL, AV_LOG_WARNING,
-                      "No codec could be found with name '%s'\n", forced_codec_name);
+               pedro_dprintf(0,
+                             "No codec could be found with name '%s'\n", forced_codec_name);
           else
-               av_log(NULL, AV_LOG_WARNING,
-                      "No decoder could be found for codec %s\n", avcodec_get_name(avctx->codec_id));
+               pedro_dprintf(0,
+                             "No decoder could be found for codec %s\n", avcodec_get_name(avctx->codec_id));
           ret = AVERROR(EINVAL);
           goto fail;
      }
@@ -3048,7 +3070,7 @@ static int read_thread(void *arg)
 
      if (!wait_mutex)
      {
-          av_log(NULL, AV_LOG_FATAL, "SDL_CreateMutex(): %s\n", SDL_GetError());
+          pedro_dprintf(0, "SDL_CreateMutex(): %s\n", SDL_GetError());
           ret = AVERROR(ENOMEM);
           goto fail;
      }
@@ -3059,14 +3081,14 @@ static int read_thread(void *arg)
      pkt = av_packet_alloc();
      if (!pkt)
      {
-          av_log(NULL, AV_LOG_FATAL, "Could not allocate packet.\n");
+          pedro_dprintf(0, "Could not allocate packet.\n");
           ret = AVERROR(ENOMEM);
           goto fail;
      }
      ic = avformat_alloc_context();
      if (!ic)
      {
-          av_log(NULL, AV_LOG_FATAL, "Could not allocate context.\n");
+          pedro_dprintf(0, "Could not allocate context.\n");
           ret = AVERROR(ENOMEM);
           goto fail;
      }
@@ -3113,8 +3135,8 @@ static int read_thread(void *arg)
 
           if (err < 0)
           {
-               av_log(NULL, AV_LOG_WARNING,
-                      "%s: could not find codec parameters\n", is->filename);
+               pedro_dprintf(0,
+                             "%s: could not find codec parameters\n", is->filename);
                ret = -1;
                goto fail;
           }
@@ -3143,8 +3165,8 @@ static int read_thread(void *arg)
           ret = avformat_seek_file(ic, -1, INT64_MIN, timestamp, INT64_MAX, 0);
           if (ret < 0)
           {
-               av_log(NULL, AV_LOG_WARNING, "%s: could not seek to position %0.3f\n",
-                      is->filename, (double)timestamp / AV_TIME_BASE);
+               pedro_dprintf(0, "%s: could not seek to position %0.3f\n",
+                             is->filename, (double)timestamp / AV_TIME_BASE);
           }
      }
 
@@ -3219,8 +3241,8 @@ static int read_thread(void *arg)
 
      if (is->video_stream < 0 && is->audio_stream < 0)
      {
-          av_log(NULL, AV_LOG_FATAL, "Failed to open file '%s' or configure filtergraph\n",
-                 is->filename);
+          pedro_dprintf(0, "Failed to open file '%s' or configure filtergraph\n",
+                        is->filename);
           ret = -1;
           goto fail;
      }
@@ -3432,7 +3454,7 @@ static VideoState *stream_open(const char *filename,
 
      if (!(is->continue_read_thread = SDL_CreateCond()))
      {
-          av_log(NULL, AV_LOG_FATAL, "SDL_CreateCond(): %s\n", SDL_GetError());
+          pedro_dprintf(0, "SDL_CreateCond(): %s\n", SDL_GetError());
           goto fail;
      }
 
@@ -3441,9 +3463,9 @@ static VideoState *stream_open(const char *filename,
      init_clock(&is->extclk, &is->extclk.serial);
      is->audio_clock_serial = -1;
      if (startup_volume < 0)
-          av_log(NULL, AV_LOG_WARNING, "-volume=%d < 0, setting to 0\n", startup_volume);
+          pedro_dprintf(0, "-volume=%d < 0, setting to 0\n", startup_volume);
      if (startup_volume > 100)
-          av_log(NULL, AV_LOG_WARNING, "-volume=%d > 100, setting to 100\n", startup_volume);
+          pedro_dprintf(0, "-volume=%d > 100, setting to 100\n", startup_volume);
      startup_volume = av_clip(startup_volume, 0, 100);
      startup_volume = av_clip(SDL_MIX_MAXVOLUME * startup_volume / 100, 0, SDL_MIX_MAXVOLUME);
      is->audio_volume = startup_volume;
@@ -3452,7 +3474,7 @@ static VideoState *stream_open(const char *filename,
      is->read_tid = SDL_CreateThread(read_thread, "read_thread", is);
      if (!is->read_tid)
      {
-          av_log(NULL, AV_LOG_FATAL, "SDL_CreateThread(): %s\n", SDL_GetError());
+          pedro_dprintf(0, "SDL_CreateThread(): %s\n", SDL_GetError());
      fail:
           stream_close(is);
           return NULL;
@@ -3771,6 +3793,7 @@ static void event_loop(VideoState *cur_stream)
                     }
                }
           case SDL_MOUSEMOTION:
+
                if (cursor_hidden)
                {
                     SDL_ShowCursor(1);
@@ -3816,6 +3839,7 @@ static void event_loop(VideoState *cur_stream)
                          ts += cur_stream->ic->start_time;
                     stream_seek(cur_stream, ts, 0, 0);
                }
+
                break;
           case SDL_WINDOWEVENT:
                switch (event.window.event)
@@ -3839,12 +3863,18 @@ static void event_loop(VideoState *cur_stream)
           default:
                break;
           }
+
+          if (ra_struct->ffmepegue_a_r_p_k_cancelflag)
+          {
+               pedro_dprintf(0, "Exiting from loop\n");
+               return;
+          }
      }
 }
 
 static int opt_frame_size(void *optctx, const char *opt, const char *arg)
 {
-     av_log(NULL, AV_LOG_WARNING, "Option -s is deprecated, use -video_size.\n");
+     pedro_dprintf(0, "Option -s is deprecated, use -video_size.\n");
      return opt_default(NULL, "video_size", arg);
 }
 
@@ -3865,7 +3895,7 @@ static int opt_format(void *optctx, const char *opt, const char *arg)
      file_iformat = av_find_input_format(arg);
      if (!file_iformat)
      {
-          av_log(NULL, AV_LOG_FATAL, "Unknown input format: %s\n", arg);
+          pedro_dprintf(0, "Unknown input format: %s\n", arg);
           return AVERROR(EINVAL);
      }
      return 0;
@@ -3873,7 +3903,7 @@ static int opt_format(void *optctx, const char *opt, const char *arg)
 
 static int opt_frame_pix_fmt(void *optctx, const char *opt, const char *arg)
 {
-     av_log(NULL, AV_LOG_WARNING, "Option -pix_fmt is deprecated, use -pixel_format.\n");
+     pedro_dprintf(0, "Option -pix_fmt is deprecated, use -pixel_format.\n");
      return opt_default(NULL, "pixel_format", arg);
 }
 
@@ -3917,9 +3947,9 @@ static void opt_input_file(void *optctx, const char *filename)
 {
      if (input_filename)
      {
-          av_log(NULL, AV_LOG_FATAL,
-                 "Argument '%s' provided as input filename, but '%s' was already specified.\n",
-                 filename, input_filename);
+          pedro_dprintf(0,
+                        "Argument '%s' provided as input filename, but '%s' was already specified.\n",
+                        filename, input_filename);
           exit(1);
      }
      if (!strcmp(filename, "-"))
@@ -4087,9 +4117,9 @@ int main(int argc, char **argv)
      if (!input_filename)
      {
           show_usage();
-          av_log(NULL, AV_LOG_FATAL, "An input file must be specified\n");
-          av_log(NULL, AV_LOG_FATAL,
-                 "Use -h to get full help or, even better, run 'man %s'\n", program_name);
+          pedro_dprintf(0, "An input file must be specified\n");
+          pedro_dprintf(0,
+                        "Use -h to get full help or, even better, run 'man %s'\n", program_name);
           exit(1);
      }
 
@@ -4111,8 +4141,8 @@ int main(int argc, char **argv)
           flags &= ~SDL_INIT_VIDEO;
      if (SDL_Init(flags))
      {
-          av_log(NULL, AV_LOG_FATAL, "Could not initialize SDL - %s\n", SDL_GetError());
-          av_log(NULL, AV_LOG_FATAL, "(Did you set the DISPLAY variable?)\n");
+          pedro_dprintf(0, "Could not initialize SDL - %s\n", SDL_GetError());
+          pedro_dprintf(0, "(Did you set the DISPLAY variable?)\n");
           exit(1);
      }
 
@@ -4126,7 +4156,7 @@ int main(int argc, char **argv)
 #if SDL_VERSION_ATLEAST(2, 0, 5)
                flags |= SDL_WINDOW_ALWAYS_ON_TOP;
 #else
-               av_log(NULL, AV_LOG_WARNING, "Your SDL version doesn't support SDL_WINDOW_ALWAYS_ON_TOP. Feature will be inactive.\n");
+               pedro_dprintf(0, "Your SDL version doesn't support SDL_WINDOW_ALWAYS_ON_TOP. Feature will be inactive.\n");
 #endif
           if (borderless)
                flags |= SDL_WINDOW_BORDERLESS;
@@ -4136,14 +4166,21 @@ int main(int argc, char **argv)
 #ifdef SDL_HINT_VIDEO_X11_NET_WM_BYPASS_COMPOSITOR
           SDL_SetHint(SDL_HINT_VIDEO_X11_NET_WM_BYPASS_COMPOSITOR, "0");
 #endif
+
           window = SDL_CreateWindow(program_name, SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, default_width, default_height, flags);
+
+          /*
+                    pedro_dprintf(0, "handle %p", (void *)ra_struct->ffmepegue_a_r_p_k_player_hwnd);
+                    window = SDL_CreateWindowFrom((void *)ra_struct->ffmepegue_a_r_p_k_player_hwnd);
+          */
+         
           SDL_SetHint(SDL_HINT_RENDER_SCALE_QUALITY, "linear");
           if (window)
           {
                renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC);
                if (!renderer)
                {
-                    av_log(NULL, AV_LOG_WARNING, "Failed to initialize a hardware accelerated renderer: %s\n", SDL_GetError());
+                    pedro_dprintf(0, "Failed to initialize a hardware accelerated renderer: %s\n", SDL_GetError());
                     renderer = SDL_CreateRenderer(window, -1, 0);
                }
                if (renderer)
@@ -4154,7 +4191,7 @@ int main(int argc, char **argv)
           }
           if (!window || !renderer || !renderer_info.num_texture_formats)
           {
-               av_log(NULL, AV_LOG_FATAL, "Failed to create window or renderer: %s", SDL_GetError());
+               pedro_dprintf(0, "Failed to create window or renderer: %s", SDL_GetError());
                do_exit(NULL);
           }
      }
@@ -4162,7 +4199,7 @@ int main(int argc, char **argv)
      is = stream_open(input_filename, file_iformat);
      if (!is)
      {
-          av_log(NULL, AV_LOG_FATAL, "Failed to initialize VideoState!\n");
+          pedro_dprintf(0, "Failed to initialize VideoState!\n");
           do_exit(NULL);
      }
 
@@ -4195,6 +4232,8 @@ int morcego_play(
 
      pedro_dprintf(0, "tocando \n");
 
+     a_ajtmampjv_r->ffmepegue_a_r_p_k_cancelflag = 0;
+
      // aqui
 
      int argc = 2;
@@ -4206,7 +4245,11 @@ int morcego_play(
      pedro_dprintf(0, "file in %s", filename_ava);
      argv_ar[1] = file_ric;
 
+     ra_struct = a_ajtmampjv_r;
+
      returnvalue_m = main(argc, argv_ar);
+
+     ra_struct = NULL;
 
      pedro_dprintf(0, "file amor %s\n", filename_ava);
      Sleep(3000);
@@ -4275,15 +4318,17 @@ int __stdcall Play_ffplay(int64_t mv_instance,
      a_ajtmampjv_r->libav_c___size_of_window_height = height_j;
      a_ajtmampjv_r->libav_c___player_hwnd = (int64_t)player_hwnd_m;
 
+     pedro_dprintf(0, "player handle %p", a_ajtmampjv_r->libav_c___player_hwnd);
+
      a_ajtmampjv_r->ffmepegue_a_r_p_k_player_hwnd = (int64_t)player_hwnd_m;
 
      a_ajtmampjv_r->libav_c___the_ratio = ratio_p;
      a_ajtmampjv_r->libav_c___adjust_left = left_v;
      a_ajtmampjv_r->libav_c___adjust_top = top_a;
 
-pedro_dprintf(0, "file 1 %s", utf8_filename_a);
+     pedro_dprintf(0, "file 1 %s", utf8_filename_a);
      pass_information_to_replay(a_ajtmampjv_r, utf8_filename_a, loop_j, track_m);
-pedro_dprintf(0, "file 2 %s", utf8_filename_a);
+     pedro_dprintf(0, "file 2 %s", utf8_filename_a);
      // a_ajtmampjv_r->decoder_c___phwo = 0;//fix
      if (loop_j)
      {
@@ -4291,11 +4336,11 @@ pedro_dprintf(0, "file 2 %s", utf8_filename_a);
      }
      a_ajtmampjv_r->decoder_c___intplayback = 1;
      a_ajtmampjv_r->decoder_c___initial_init_playback_value = 1;
-pedro_dprintf(0, "file 3 %s", utf8_filename_a);
+     pedro_dprintf(0, "file 3 %s", utf8_filename_a);
      morcego_open((cardo___i___ava__a__aurora_boreal
                        *)(__INT32_OR_INT64)mv_instance,
                   (__INT32_OR_INT64)utf8_filename_a, (__INT32_OR_INT64)track_m);
-pedro_dprintf(0, "file 4 %s", utf8_filename_a);
+     pedro_dprintf(0, "file 4 %s", utf8_filename_a);
      pedro_dprintf(-1, "Sai de play");
      return 0;
 }

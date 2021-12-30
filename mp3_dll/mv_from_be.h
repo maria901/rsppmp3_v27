@@ -514,6 +514,15 @@ typedef struct morcego_instance_be_
      double libav_c___theta_m;
 
      ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+     // added 29/dec/2021
+
+     int libav_c___new_rotated_width__a;
+     int libav_c___new_rotated_height_a;
+     int libav_c___new_rotate_format_v;
+     bool libav_c___already_adjusted_for_rotate_j;
+     bool libav_c___can_play_ric;
+
+     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
      // added 15/nov/2021 09:31
 
      bool libav_c___m_mode_is_ffmpeg;

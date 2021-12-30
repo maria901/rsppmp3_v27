@@ -41,7 +41,7 @@ typedef struct cardo___i___ava__a__aurora_boreal__
     char ffmepegue_a_r_p_k_filename_media_utf_8[5000];
 
     int64_t ffmepegue_a_r_p_k_player_hwnd;
-
+    int ffmepegue_a_r_p_k_cancelflag;
     // old values
     char libav_c___sample_rate_format_string[1024];
     int decoder_c___notloaded;

@@ -10,7 +10,7 @@ amanda_48: amanda_48_cmdutils_x64k.o pedro.c_x64k.o folder_k___p.c_x64k.o
 	@echo '                                                                                                          '
 	@echo '                                                                                                          '
 	@echo '                                                                                                          '
-	@x86_64-w64-mingw32-gcc.exe -o ffplay.exe ffplay.c folder_k___p.c_x64k.o pedro.c_x64k.o amanda_48_cmdutils_x64k.o x64_libav/avcodec-59.dll x64_libav/avdevice-59.dll x64_libav/avfilter-8.dll x64_libav/avformat-59.dll x64_libav/avutil-57.dll x64_libav/postproc-56.dll x64_libav/swresample-4.dll x64_libav/swscale-6.dll x64_libav/SDL2.dll $(AMANDA_FLAGS__)
+#	@x86_64-w64-mingw32-gcc.exe -o ffplay.exe ffplay.c folder_k___p.c_x64k.o pedro.c_x64k.o amanda_48_cmdutils_x64k.o x64_libav/avcodec-59.dll x64_libav/avdevice-59.dll x64_libav/avfilter-8.dll x64_libav/avformat-59.dll x64_libav/avutil-57.dll x64_libav/postproc-56.dll x64_libav/swresample-4.dll x64_libav/swscale-6.dll x64_libav/SDL2.dll $(AMANDA_FLAGS__)
 	@x86_64-w64-mingw32-gcc.exe -o ffplay_ab.dll -shared interface1_maria.def ffplay.c folder_k___p.c_x64k.o pedro.c_x64k.o amanda_48_cmdutils_x64k.o x64_libav/avcodec-59.dll x64_libav/avdevice-59.dll x64_libav/avfilter-8.dll x64_libav/avformat-59.dll x64_libav/avutil-57.dll x64_libav/postproc-56.dll x64_libav/swresample-4.dll x64_libav/swscale-6.dll x64_libav/SDL2.dll $(AMANDA_FLAGS__)
 	@echo '                                                                                                          '
 	@echo '                                                                                                          '

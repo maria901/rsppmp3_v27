@@ -293,12 +293,14 @@ int __stdcall playogg_v28_v53 /* because this code was borrowed from Ogg Vorbis 
 int __stdcall PlaybackCancel_ffplay(__int64 mv_instance)
 {
     check_mv_instance(mv_instance);
-    cardo___i___ava__a__aurora_boreal *mv_______ =
+    cardo___i___ava__a__aurora_boreal *a_ajtmampjv_r =
         (cardo___i___ava__a__aurora_boreal *)(__INT32_OR_INT64)
             mv_instance;
     int ret;
 
-    while (-1 == (ret = morcego_cancel(mv_______)))
+    a_ajtmampjv_r->ffmepegue_a_r_p_k_cancelflag = 27;
+
+    while (-1 == (ret = morcego_cancel(a_ajtmampjv_r)))
     {
     }
 

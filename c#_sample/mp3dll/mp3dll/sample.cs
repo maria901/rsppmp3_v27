@@ -1295,6 +1295,12 @@ namespace mp3dll
 		}
 		private void button4_Click(object sender, EventArgs e)
 		{
+			/*
+			 * video_p.Handle.ToInt64(),
+				               video_f_p.Handle.ToInt64(),
+			 * 
+			 * 
+			 * */
 			//amanda27  play
 			if(MP3.mode_is_ffplay_c_m)
 			{
@@ -1302,14 +1308,14 @@ namespace mp3dll
 				                0,
 				                0,
 				                0,
-				                0,
+				                video_f_p.Handle.ToInt64(),
 				                0,
 				                0,
 				                0.0,
 				                0,
 				                0,
 				                0);
-				              
+				//Environment.Exit(0);
 				
 				return;
 			}

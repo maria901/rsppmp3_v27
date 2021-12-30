@@ -239,7 +239,34 @@ typedef struct VideoState
      SDL_cond *continue_read_thread;
 } VideoState;
 
+#define AV_NOSYNC_THRESHOLD 10.0
+
+AVFormatContext *ic;
+AVStream *video_st;
+
+__attribute__((unused)) static const char **vfilters_list = NULL;
+__attribute__((unused)) static int nb_vfilters = 0;
+__attribute__((unused)) static char *afilters = NULL;
+
+static int filter_nbthreads = 0;
+
+static SDL_RendererInfo renderer_info = {0};
+
+AVRational av_buffersink_get_time_base(const AVFilterContext *ctx);
+
+int64_t av_gettime_relative(void);
+
+int av_buffersink_get_frame_flags(AVFilterContext *ctx, AVFrame *frame, int flags);
+
+int av_buffersrc_add_frame(AVFilterContext *ctx, AVFrame *frame);
+
+AVRational av_buffersink_get_frame_rate(const AVFilterContext *ctx);
+
 double av_display_rotation_get(const int32_t matrix[9]);
+
+const char *av_get_pix_fmt_name(enum AVPixelFormat pix_fmt);
+
+size_t av_strlcatf(char *dst, size_t size, const char *fmt, ...) av_printf_format(3, 4);
 
 #include "../mp3_dll/decoder.h"
 
@@ -351,11 +378,25 @@ int adjust_window_position_and_size(morcego___i___instance__a__bucaneiro_enginee
      char temp[1024] = {0};
 
      AVCodecContext *pCodecCtx = (void *)mv_______->libav_c___pCodecCtx_ptr_video;
-     mv_______->libav_c___width = pCodecCtx->width;
-     mv_______->libav_c___height = pCodecCtx->height;
 
-     mv_______->libav_c___width_of_window = pCodecCtx->width;
-     mv_______->libav_c___height_of_window = pCodecCtx->height;
+     if (NULL != mv_______->libav_c___rotation_value_m && (90 == mv_______->libav_c___theta_m || 270 == mv_______->libav_c___theta_m))
+     {
+
+          mv_______->libav_c___width = pCodecCtx->height;
+          mv_______->libav_c___height = pCodecCtx->width;
+
+          mv_______->libav_c___width_of_window = pCodecCtx->height;
+          mv_______->libav_c___height_of_window = pCodecCtx->width;
+     }
+     else
+     {
+          // exit(27);
+          mv_______->libav_c___width = pCodecCtx->width;
+          mv_______->libav_c___height = pCodecCtx->height;
+
+          mv_______->libav_c___width_of_window = pCodecCtx->width;
+          mv_______->libav_c___height_of_window = pCodecCtx->height;
+     }
 
      pedro_dprintf(-1, "w h %d %d\n", pCodecCtx->width, pCodecCtx->height);
      /*
@@ -365,6 +406,16 @@ int adjust_window_position_and_size(morcego___i___instance__a__bucaneiro_enginee
               mv_______->libav_c___width,
               mv_______->libav_c___height);
      */
+
+     if (NULL != mv_______->libav_c___rotation_value_m && (90 == mv_______->libav_c___theta_m || 270 == mv_______->libav_c___theta_m))
+     {
+          int temp_ric;
+          temp_ric = pCodecCtx->sample_aspect_ratio.den;
+          pCodecCtx->sample_aspect_ratio.den = pCodecCtx->sample_aspect_ratio.num;
+          pCodecCtx->sample_aspect_ratio.num = temp_ric;
+          // exit(27);
+     }
+
      switch (mv_______->libav_c___the_ratio)
      {
      case BE_AUTO_______:
@@ -556,7 +607,12 @@ int adjust_window_position_and_size(morcego___i___instance__a__bucaneiro_enginee
           mv_______->libav_c___ajuste_width = 0;
           if (mv_______->libav_c___inputwidth < 0 || mv_______->libav_c___inputwidth > 10000 || 0 == mv_______->libav_c___inputwidth)
           {
-               mv_______->libav_c___inputwidth = pCodecCtx->width;
+               if (NULL != mv_______->libav_c___rotation_value_m && (90 == mv_______->libav_c___theta_m || 270 == mv_______->libav_c___theta_m))
+               {
+                    mv_______->libav_c___inputwidth = pCodecCtx->height;
+               }
+               else
+                    mv_______->libav_c___inputwidth = pCodecCtx->width;
           }
           mv_______->libav_c___the_width = mv_______->libav_c___inputwidth;
 
@@ -572,6 +628,8 @@ int adjust_window_position_and_size(morcego___i___instance__a__bucaneiro_enginee
           }
      }
 
+     pedro_dprintf(-20211230, "tamanhos %d %d", mv_______->libav_c___the_width, mv_______->libav_c___the_height);
+// assert(0);
 saida:
 
     ;
@@ -689,6 +747,19 @@ int restart_video(morcego___i___instance__a__bucaneiro_engineering *mv_______)
                ;
           }
 
+          if (mv_______->libav_c___renderer_kp)
+          {
+               if (!SDL_GetRendererInfo(mv_______->libav_c___renderer_kp, &renderer_info))
+                    pedro_dprintf(-20211230, "2 Initialized %s renderer.\n", renderer_info.name);
+          }
+
+          if (!renderer_info.num_texture_formats)
+          {
+               pedro_dprintf(-20211230, "Failed to create window or renderer: %s", SDL_GetError());
+               returnvalue_kp = 1026;
+               goto saida_amanda_kp;
+          }
+
           {
 
                mv_______->libav_c___adjusted_i_width_for_directx = mv_______->libav_c___the_width;
@@ -713,16 +784,30 @@ int restart_video(morcego___i___instance__a__bucaneiro_engineering *mv_______)
           {
                pedro_dprintf(-1, "Criou a textura");
           }
+          pedro_dprintf(-20211230, "restart video ");
 
           assert(NULL == mv_______->libav_c___sc_kp);
-
-          mv_______->libav_c___sc_kp = (void *)sws_getContext(pCodecCtx->width, pCodecCtx->height,
-                                                              pCodecCtx->pix_fmt, mv_______->libav_c___adjusted_i_width_for_directx, mv_______->libav_c___the_height,
-                                                              AV_PIX_FMT_YUV420P,
-                                                              VIDEO_CONVERSION_MODE,
-                                                              NULL,
-                                                              NULL,
-                                                              NULL);
+          if (NULL != mv_______->libav_c___rotation_value_m && (90 == mv_______->libav_c___theta_m || 270 == mv_______->libav_c___theta_m))
+          {
+               pedro_dprintf(-20211230, "restart video 1 ");
+               mv_______->libav_c___sc_kp = (void *)sws_getContext(pCodecCtx->height, pCodecCtx->width, pCodecCtx->pix_fmt, mv_______->libav_c___adjusted_i_width_for_directx, mv_______->libav_c___the_height, AV_PIX_FMT_YUV420P,
+                                                                   VIDEO_CONVERSION_MODE,
+                                                                   NULL,
+                                                                   NULL,
+                                                                   NULL);
+               pedro_dprintf(-20211230, "restart video 2");
+          }
+          else
+          {
+               pedro_dprintf(-20211230, "restart video 3");
+               mv_______->libav_c___sc_kp = (void *)sws_getContext(pCodecCtx->width, pCodecCtx->height,
+                                                                   pCodecCtx->pix_fmt, mv_______->libav_c___adjusted_i_width_for_directx, mv_______->libav_c___the_height,
+                                                                   AV_PIX_FMT_YUV420P,
+                                                                   VIDEO_CONVERSION_MODE,
+                                                                   NULL,
+                                                                   NULL,
+                                                                   NULL);
+          }
 
           if (NULL == mv_______->libav_c___sc_kp)
           {
@@ -910,6 +995,9 @@ void init_video(morcego___i___instance__a__bucaneiro_engineering *mv_______,
      mv_______->libav_c___videostream = -1;
 
      mv_______->libav_c___dict_1_video = NULL;
+
+     mv_______->libav_c___can_play_ric = false;
+
      pedro_dprintf(-20211130, "Next... b");
      if (avformat_open_input(&FormatContext, be_data->sourcefile, NULL,
                              (AVDictionary **)(NULL)) != 0)
@@ -1031,14 +1119,17 @@ void init_video(morcego___i___instance__a__bucaneiro_engineering *mv_______,
           mv_______->libav_c___video_timebase = num / den;
      }
 
+     ic = FormatContext;
+     video_st = FormatContext->streams[(int)mv_______->libav_c___videostream];
+
      mv_______->libav_c___rotation_value_m = (int32_t *)av_stream_get_side_data(FormatContext->streams[(int)mv_______->libav_c___videostream], AV_PKT_DATA_DISPLAYMATRIX, NULL);
 
-     pedro_dprintf(0, "vai amor %p", mv_______->libav_c___rotation_value_m);
+     pedro_dprintf(-20211230, "vai amor %p", mv_______->libav_c___rotation_value_m);
 
      if (NULL != mv_______->libav_c___rotation_value_m)
      {
           mv_______->libav_c___theta_m = get_rotation_m(mv_______->libav_c___rotation_value_m);
-          pedro_dprintf(0, "theta %f", mv_______->libav_c___theta_m);
+          pedro_dprintf(-20211230, "theta %f", mv_______->libav_c___theta_m);
      }
 
      // exit(27);
@@ -1179,6 +1270,18 @@ void init_video(morcego___i___instance__a__bucaneiro_engineering *mv_______,
      else
      {
           pedro_dprintf(-1, "criou o render");
+     }
+
+     if (mv_______->libav_c___renderer_kp)
+     {
+          if (!SDL_GetRendererInfo(mv_______->libav_c___renderer_kp, &renderer_info))
+               pedro_dprintf(-20211230, "2 Initialized %s renderer.\n", renderer_info.name);
+     }
+
+     if (!renderer_info.num_texture_formats)
+     {
+          pedro_dprintf(-20211230, "Failed to create window or renderer: %s", SDL_GetError());
+          goto saida;
      }
 
      {
@@ -1387,14 +1490,232 @@ __int64 amandaricardo_koci_player_exited_at;
 
 char maria_decoded_something;
 
+static const struct TextureFormatEntry
+{
+     enum AVPixelFormat format;
+     int texture_fmt;
+} sdl_texture_format_map[] = {
+    {AV_PIX_FMT_RGB8, SDL_PIXELFORMAT_RGB332},
+    {AV_PIX_FMT_RGB444, SDL_PIXELFORMAT_RGB444},
+    {AV_PIX_FMT_RGB555, SDL_PIXELFORMAT_RGB555},
+    {AV_PIX_FMT_BGR555, SDL_PIXELFORMAT_BGR555},
+    {AV_PIX_FMT_RGB565, SDL_PIXELFORMAT_RGB565},
+    {AV_PIX_FMT_BGR565, SDL_PIXELFORMAT_BGR565},
+    {AV_PIX_FMT_RGB24, SDL_PIXELFORMAT_RGB24},
+    {AV_PIX_FMT_BGR24, SDL_PIXELFORMAT_BGR24},
+    {AV_PIX_FMT_0RGB32, SDL_PIXELFORMAT_RGB888},
+    {AV_PIX_FMT_0BGR32, SDL_PIXELFORMAT_BGR888},
+    {AV_PIX_FMT_NE(RGB0, 0BGR), SDL_PIXELFORMAT_RGBX8888},
+    {AV_PIX_FMT_NE(BGR0, 0RGB), SDL_PIXELFORMAT_BGRX8888},
+    {AV_PIX_FMT_RGB32, SDL_PIXELFORMAT_ARGB8888},
+    {AV_PIX_FMT_RGB32_1, SDL_PIXELFORMAT_RGBA8888},
+    {AV_PIX_FMT_BGR32, SDL_PIXELFORMAT_ABGR8888},
+    {AV_PIX_FMT_BGR32_1, SDL_PIXELFORMAT_BGRA8888},
+    {AV_PIX_FMT_YUV420P, SDL_PIXELFORMAT_IYUV},
+    {AV_PIX_FMT_YUYV422, SDL_PIXELFORMAT_YUY2},
+    {AV_PIX_FMT_UYVY422, SDL_PIXELFORMAT_UYVY},
+    {AV_PIX_FMT_NONE, SDL_PIXELFORMAT_UNKNOWN},
+};
+static int configure_filtergraph(AVFilterGraph *graph, const char *filtergraph,
+                                 AVFilterContext *source_ctx, AVFilterContext *sink_ctx)
+{
+     int ret, i;
+     int nb_filters = graph->nb_filters;
+     AVFilterInOut *outputs = NULL, *inputs = NULL;
+
+     if (filtergraph)
+     {
+          outputs = avfilter_inout_alloc();
+          inputs = avfilter_inout_alloc();
+          if (!outputs || !inputs)
+          {
+               ret = AVERROR(ENOMEM);
+               goto fail;
+          }
+
+          outputs->name = av_strdup("in");
+          outputs->filter_ctx = source_ctx;
+          outputs->pad_idx = 0;
+          outputs->next = NULL;
+
+          inputs->name = av_strdup("out");
+          inputs->filter_ctx = sink_ctx;
+          inputs->pad_idx = 0;
+          inputs->next = NULL;
+
+          if ((ret = avfilter_graph_parse_ptr(graph, filtergraph, &inputs, &outputs, NULL)) < 0)
+               goto fail;
+     }
+     else
+     {
+          if ((ret = avfilter_link(source_ctx, 0, sink_ctx, 0)) < 0)
+               goto fail;
+     }
+
+     /* Reorder the filters to ensure that inputs of the custom filters are merged first */
+     for (i = 0; i < graph->nb_filters - nb_filters; i++)
+          FFSWAP(AVFilterContext *, graph->filters[i], graph->filters[i + nb_filters]);
+
+     ret = avfilter_graph_config(graph, NULL);
+fail:
+     avfilter_inout_free(&outputs);
+     avfilter_inout_free(&inputs);
+     return ret;
+}
+
+int configure_video_filters(AVFilterGraph *graph, VideoState *is, const char *vfilters, AVFrame *frame)
+{
+     is->ic = ic;
+     is->video_st = video_st;
+     enum AVPixelFormat pix_fmts[FF_ARRAY_ELEMS(sdl_texture_format_map)];
+     char sws_flags_str[512] = "";
+     char buffersrc_args[256];
+     int ret;
+     AVFilterContext *filt_src = NULL, *filt_out = NULL, *last_filter = NULL;
+     AVCodecParameters *codecpar = is->video_st->codecpar;
+     AVRational fr = av_guess_frame_rate(is->ic, is->video_st, NULL);
+     __attribute__((unused)) const AVDictionaryEntry *e = NULL;
+     int nb_pix_fmts = 0;
+     int i, j;
+
+     for (i = 0; i < renderer_info.num_texture_formats; i++)
+     {
+          for (j = 0; j < FF_ARRAY_ELEMS(sdl_texture_format_map) - 1; j++)
+          {
+               if (renderer_info.texture_formats[i] == sdl_texture_format_map[j].texture_fmt)
+               {
+                    pix_fmts[nb_pix_fmts++] = sdl_texture_format_map[j].format;
+                    break;
+               }
+          }
+     }
+     pix_fmts[nb_pix_fmts] = AV_PIX_FMT_NONE;
+     /*
+                                   while ((e = av_dict_get(sws_dict, "", e, AV_DICT_IGNORE_SUFFIX)))
+                                   {
+                                        if (!strcmp(e->key, "sws_flags"))
+                                        {
+                                             av_strlcatf(sws_flags_str, sizeof(sws_flags_str), "%s=%s:", "flags", e->value);
+                                        }
+                                        else
+                                             av_strlcatf(sws_flags_str, sizeof(sws_flags_str), "%s=%s:", e->key, e->value);
+                                   }
+     */
+
+     if (strlen(sws_flags_str))
+          sws_flags_str[strlen(sws_flags_str) - 1] = '\0';
+
+     graph->scale_sws_opts = av_strdup(sws_flags_str);
+
+     snprintf(buffersrc_args, sizeof(buffersrc_args),
+              "video_size=%dx%d:pix_fmt=%d:time_base=%d/%d:pixel_aspect=%d/%d",
+              frame->width, frame->height, frame->format,
+              is->video_st->time_base.num, is->video_st->time_base.den,
+              codecpar->sample_aspect_ratio.num, FFMAX(codecpar->sample_aspect_ratio.den, 1));
+     if (fr.num && fr.den)
+          av_strlcatf(buffersrc_args, sizeof(buffersrc_args), ":frame_rate=%d/%d", fr.num, fr.den);
+
+     if ((ret = avfilter_graph_create_filter(&filt_src,
+                                             avfilter_get_by_name("buffer"),
+                                             "ffplay_buffer", buffersrc_args, NULL,
+                                             graph)) < 0)
+          goto fail;
+
+     ret = avfilter_graph_create_filter(&filt_out,
+                                        avfilter_get_by_name("buffersink"),
+                                        "ffplay_buffersink", NULL, NULL, graph);
+     if (ret < 0)
+          goto fail;
+
+     if ((ret = av_opt_set_int_list(filt_out, "pix_fmts", pix_fmts, AV_PIX_FMT_NONE, AV_OPT_SEARCH_CHILDREN)) < 0)
+          goto fail;
+
+     last_filter = filt_out;
+
+/* Note: this macro adds a filter before the lastly added filter, so the
+ * processing order of the filters is in reverse */
+#define INSERT_FILT(name, arg)                                                  \
+     do                                                                         \
+     {                                                                          \
+          AVFilterContext *filt_ctx;                                            \
+                                                                                \
+          ret = avfilter_graph_create_filter(&filt_ctx,                         \
+                                             avfilter_get_by_name(name),        \
+                                             "ffplay_" name, arg, NULL, graph); \
+          if (ret < 0)                                                          \
+               goto fail;                                                       \
+                                                                                \
+          ret = avfilter_link(filt_ctx, 0, last_filter, 0);                     \
+          if (ret < 0)                                                          \
+               goto fail;                                                       \
+                                                                                \
+          last_filter = filt_ctx;                                               \
+     } while (0)
+
+     if (true)
+     {
+          int32_t *displaymatrix = (int32_t *)av_stream_get_side_data(is->video_st, AV_PKT_DATA_DISPLAYMATRIX, NULL);
+          double theta = get_rotation_m(displaymatrix);
+
+          if (fabs(theta - 90) < 1.0)
+          {
+               INSERT_FILT("transpose", "clock");
+          }
+          else if (fabs(theta - 180) < 1.0)
+          {
+               INSERT_FILT("hflip", NULL);
+               INSERT_FILT("vflip", NULL);
+          }
+          else if (fabs(theta - 270) < 1.0)
+          {
+               INSERT_FILT("transpose", "cclock");
+          }
+          else if (fabs(theta) > 1.0)
+          {
+               char rotate_buf[64];
+               snprintf(rotate_buf, sizeof(rotate_buf), "%f*PI/180", theta);
+               INSERT_FILT("rotate", rotate_buf);
+          }
+     }
+
+     if ((ret = configure_filtergraph(graph, vfilters, filt_src, last_filter)) < 0)
+          goto fail;
+
+     is->in_video_filter = filt_src;
+     is->out_video_filter = filt_out;
+
+     goto continua_ric;
+
+fail:
+
+     pedro_dprintf(-20211230, "falhou rotate number 75867587\n");
+     exit(27);
+
+continua_ric:;
+     return ret;
+}
+
 int morcego_vermelho_player_thread_koci(morcego___i___instance__a__bucaneiro_engineering *mv_______)
 {
 
+     if (NULL == &sdl_texture_format_map[0])
+     {
+          goto compiler_happy_m;
+     }
+compiler_happy_m:;
+
      pedro_dprintf(-20211130, "dentro de morcego_vermelho_player_thread_koci\n");
 
-    // int ret;
+     AVFilterGraph *graph = NULL;
+
+     // int ret;
 
      VideoState *is = calloc(1, sizeof(VideoState));
+
+     is->ic = ic;
+     is->video_st = video_st;
+
+     bool already_set_rotate_j = false;
 
      AVCodecContext *pCodecCtx_sub_i = NULL;
 
@@ -1694,198 +2015,138 @@ int morcego_vermelho_player_thread_koci(morcego___i___instance__a__bucaneiro_eng
 
                     if (frameFinished)
                     {
-#if 0
-                         /*
-
-                         here ric pFrame_ptr_koci
-
-                         */
-
                          if (NULL != mv_______->libav_c___rotation_value_m)
                          {
-                              // mv_______->libav_c___theta_m = get_rotation_m(mv_______->libav_c___rotation_value_m);
-                              pedro_dprintf(-1, "theta 2 %f", mv_______->libav_c___theta_m);
+
+                              // VideoState *is = arg;
+                              // AVFrame *frame = av_frame_alloc();
+                              __attribute__((unused)) static double pts;
+                              __attribute__((unused)) static double duration;
+                              int ret;
+                              __attribute__((unused)) AVRational tb = is->video_st->time_base;
+                              __attribute__((unused)) AVRational frame_rate = av_guess_frame_rate(is->ic, is->video_st, NULL);
 
 #if CONFIG_AVFILTER
-                              __attribute__((unused)) static AVFilterGraph *graph = NULL;
-                              __attribute__((unused)) static AVFilterContext *filt_out = NULL;
-                              __attribute__((unused)) static AVFilterContext *filt_in = NULL;
-                              __attribute__((unused)) static int last_w = 0;
-                              __attribute__((unused)) static int last_h = 0;
-                              __attribute__((unused)) static enum AVPixelFormat last_format = -2;
-                              __attribute__((unused)) static int last_serial = -1;
-                              __attribute__((unused)) static int last_vfilter_idx = 0;
+
+                              static AVFilterContext *filt_out = NULL;
+                              static AVFilterContext *filt_in = NULL;
+                              static int last_w = 0;
+                              static int last_h = 0;
+                              static enum AVPixelFormat last_format = -2;
+                              static int last_serial = -1;
+                              // static int last_vfilter_idx = 0;
 #endif
 
-/* Note: this macro adds a filter before the lastly added filter, so the
- * processing order of the filters is in reverse */
-#define INSERT_FILT(name, arg)                                                  \
-     do                                                                         \
-     {                                                                          \
-          AVFilterContext *filt_ctx;                                            \
-                                                                                \
-          ret = avfilter_graph_create_filter(&filt_ctx,                         \
-                                             avfilter_get_by_name(name),        \
-                                             "ffplay_" name, arg, NULL, graph); \
-          if (ret < 0)                                                          \
-               goto fail;                                                       \
-                                                                                \
-          /*ret = avfilter_link(filt_ctx, 0, last_filter, 0);*/                     \
-          if (ret < 0)                                                          \
-               goto fail;                                                       \
-                                                                                \
-          last_filter = filt_ctx;                                               \
-     } while (0)
-
-                              if (false == mv_______->libav_c___first_call_rotate_j)
+                              if (false == already_set_rotate_j)
                               {
-                                   
-
-                                   mv_______->libav_c___first_call_rotate_j = true;
-
-
-
-
-
-
-
-
-
-
-
-
-    enum AVPixelFormat pix_fmts[FF_ARRAY_ELEMS(sdl_texture_format_map)];
-    char sws_flags_str[512] = "";//faster
-    char buffersrc_args[256];
-    int ret;
-    AVFilterContext *filt_src = NULL, *filt_out = NULL, *last_filter = NULL;
-    AVCodecParameters *codecpar = is->video_st->codecpar;
-    AVRational fr = av_guess_frame_rate(is->ic, is->video_st, NULL);
-    AVDictionaryEntry *e = NULL;
-    int nb_pix_fmts = 0;
-    int i, j;
-
-    for (i = 0; i < renderer_info.num_texture_formats; i++) {
-        for (j = 0; j < FF_ARRAY_ELEMS(sdl_texture_format_map) - 1; j++) {
-            if (renderer_info.texture_formats[i] == sdl_texture_format_map[j].texture_fmt) {
-                pix_fmts[nb_pix_fmts++] = sdl_texture_format_map[j].format;
-                break;
-            }
-        }
-    }
-    pix_fmts[nb_pix_fmts] = AV_PIX_FMT_NONE;
-
-    while ((e = av_dict_get(sws_dict, "", e, AV_DICT_IGNORE_SUFFIX))) {
-        if (!strcmp(e->key, "sws_flags")) {
-            av_strlcatf(sws_flags_str, sizeof(sws_flags_str), "%s=%s:", "flags", e->value);
-        } else
-            av_strlcatf(sws_flags_str, sizeof(sws_flags_str), "%s=%s:", e->key, e->value);
-    }
-    if (strlen(sws_flags_str))
-        sws_flags_str[strlen(sws_flags_str)-1] = '\0';
-
-    graph->scale_sws_opts = av_strdup(sws_flags_str);
-
-    snprintf(buffersrc_args, sizeof(buffersrc_args),
-             "video_size=%dx%d:pix_fmt=%d:time_base=%d/%d:pixel_aspect=%d/%d",
-             frame->width, frame->height, frame->format,
-             is->video_st->time_base.num, is->video_st->time_base.den,
-             codecpar->sample_aspect_ratio.num, FFMAX(codecpar->sample_aspect_ratio.den, 1));
-    if (fr.num && fr.den)
-        av_strlcatf(buffersrc_args, sizeof(buffersrc_args), ":frame_rate=%d/%d", fr.num, fr.den);
-
-    if ((ret = avfilter_graph_create_filter(&filt_src,
-                                            avfilter_get_by_name("buffer"),
-                                            "ffplay_buffer", buffersrc_args, NULL,
-                                            graph)) < 0)
-        goto fail;
-
-    ret = avfilter_graph_create_filter(&filt_out,
-                                       avfilter_get_by_name("buffersink"),
-                                       "ffplay_buffersink", NULL, NULL, graph);
-    if (ret < 0)
-        goto fail;
-
-    if ((ret = av_opt_set_int_list(filt_out, "pix_fmts", pix_fmts,  AV_PIX_FMT_NONE, AV_OPT_SEARCH_CHILDREN)) < 0)
-        goto fail;
-
-    last_filter = filt_out;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                   double theta = mv_______->libav_c___theta_m;
-
-                                   if (fabs(theta - 90) < 1.0)
-                                   {
-                                        INSERT_FILT("transpose", "clock");
-                                   }
-                                   else if (fabs(theta - 180) < 1.0)
-                                   {
-                                        INSERT_FILT("hflip", NULL);
-                                        INSERT_FILT("vflip", NULL);
-                                   }
-                                   else if (fabs(theta - 270) < 1.0)
-                                   {
-                                        INSERT_FILT("transpose", "cclock");
-                                   }
-                                   else if (fabs(theta) > 1.0)
-                                   {
-                                        char rotate_buf[64];
-                                        snprintf(rotate_buf, sizeof(rotate_buf), "%f*PI/180", theta);
-                                        INSERT_FILT("rotate", rotate_buf);
-                                   }
-
-                                   graph = NULL;
+                                   already_set_rotate_j = true;
+                                   frame_rate = av_guess_frame_rate(is->ic, is->video_st, NULL);
                                    filt_out = NULL;
                                    filt_in = NULL;
                                    last_w = 0;
                                    last_h = 0;
                                    last_format = -2;
                                    last_serial = -1;
-                                   last_vfilter_idx = 0;
+                                   // last_vfilter_idx = 0;
+                              }
 
-                                   pedro_dprintf(0, "vamos ric");
+                              {
+
+                                   pedro_dprintf(-20211230, "na entrada -> %d %d %d", pFrame_ptr_koci->width, pFrame_ptr_koci->height, pFrame_ptr_koci->format);
+                                   // assert(0);
+
+#if CONFIG_AVFILTER
+                                   if (last_w != pFrame_ptr_koci->width || last_h != pFrame_ptr_koci->height || last_format != pFrame_ptr_koci->format)
+                                   {
+                                        pedro_dprintf(-20211230,
+                                                      "Video frame changed from size:%dx%d format:%s serial:%d to size:%dx%d format:%s serial:%d\n",
+                                                      last_w, last_h,
+                                                      (const char *)av_x_if_null(av_get_pix_fmt_name(last_format), "none"), last_serial,
+                                                      pFrame_ptr_koci->width, pFrame_ptr_koci->height,
+                                                      (const char *)av_x_if_null(av_get_pix_fmt_name(pFrame_ptr_koci->format), "none"), 0);
+                                        avfilter_graph_free(&graph);
+                                        graph = avfilter_graph_alloc();
+                                        if (!graph)
+                                        {
+                                             pedro_dprintf(-20211230, "memory error, 8756478 \n");
+                                             exit(27);
+                                        }
+                                        graph->nb_threads = filter_nbthreads;
+                                        if ((ret = configure_video_filters(graph, is, vfilters_list ? vfilters_list[is->vfilter_idx] : NULL, pFrame_ptr_koci)) < 0)
+                                        {
+                                             pedro_dprintf(-20211230, "unexpected error, 837492654 \n");
+                                             exit(27);
+                                        }
+                                        filt_in = is->in_video_filter;
+                                        filt_out = is->out_video_filter;
+                                        last_w = pFrame_ptr_koci->width;
+                                        last_h = pFrame_ptr_koci->height;
+                                        last_format = pFrame_ptr_koci->format;
+                                        last_serial = 1;
+                                        // last_vfilter_idx = is->vfilter_idx;
+                                        frame_rate = av_buffersink_get_frame_rate(filt_out);
+                                   }
+                                   pedro_dprintf(-20211230, "antes 1\n");
+                                   ret = av_buffersrc_add_frame(filt_in, pFrame_ptr_koci);
+                                   pedro_dprintf(-20211230, "antes 2\n");
+                                   if (ret < 0)
+                                   {
+                                        pedro_dprintf(-20211230, "unexpected error, 986083452 \n");
+                                        exit(27);
+                                   }
+                                   pedro_dprintf(-20211230, "antes 3\n");
+                                   pedro_dprintf(-20211230, "a1");
+
+                                   while (ret >= 0)
+                                   {
+
+                                        is->frame_last_returned_time = av_gettime_relative() / 1000000.0;
+
+                                        ret = av_buffersink_get_frame_flags(filt_out, pFrame_ptr_koci, 0);
+                                        if (ret < 0)
+                                        {
+                                             /*
+                                             if (ret == AVERROR_EOF)
+                                                  is->viddec.finished = is->viddec.pkt_serial;*/
+                                             ret = 0;
+                                             break;
+                                        }
+
+                                        pedro_dprintf(-20211230, "a3");
+
+                                        is->frame_last_filter_delay = av_gettime_relative() / 1000000.0 - is->frame_last_returned_time;
+                                        if (fabs(is->frame_last_filter_delay) > AV_NOSYNC_THRESHOLD / 10.0)
+                                             is->frame_last_filter_delay = 0;
+                                        tb = av_buffersink_get_time_base(filt_out);
+#endif
+                                        /*
+                                        duration = (frame_rate.num && frame_rate.den ? av_q2d((AVRational){frame_rate.den, frame_rate.num}) : 0);
+                                        pts = (frame->pts == AV_NOPTS_VALUE) ? NAN : frame->pts * av_q2d(tb);
+                                        ret = queue_picture(is, frame, pts, duration, frame->pkt_pos, is->viddec.pkt_serial);
+                                        av_frame_unref(frame);
+                                        */
+#if CONFIG_AVFILTER
+                                        // if (is->videoq.serial != is->viddec.pkt_serial)
+                                        {
+                                             // pedro_dprintf(-20211230, "saiu final 9876789\n");
+                                             // break;
+                                        }
+                                   }
+#endif
+
+                                   mv_______->libav_c___new_rotate_format_v = pFrame_ptr_koci->format;
+
+                                   mv_______->libav_c___new_rotated_width__a = pFrame_ptr_koci->width;
+
+                                   mv_______->libav_c___new_rotated_height_a = pFrame_ptr_koci->height;
+
+                                   pedro_dprintf(-20211230, "na saida -> %d %d %d", pFrame_ptr_koci->width, pFrame_ptr_koci->height, mv_______->libav_c___new_rotate_format_v);
+
+                                   mv_______->libav_c___can_play_ric = true;
+                                   // pedro_dprintf(-20211230, "saiu aqui kjfhtyu");
+                                   // exit(27);
                               }
                          }
-#endif
 
                          pedro_dprintf(-20211130, "Next2... f.1");
                          if (-1 == counter_z)
@@ -2038,11 +2299,14 @@ koci_finish:;
 
      free(is);
 
+     if (graph)
+          avfilter_graph_free(&graph);
+
      return 0;
 
-     //fail:;
+     // fail:;
 
-     pedro_dprintf(0, "fail called");
+     pedro_dprintf(-20211230, "fail called");
      exit(27);
      return 0;
 }
@@ -2138,6 +2402,9 @@ int morcego_vermelho_player_thread(morcego___i___instance__a__bucaneiro_engineer
      DWORD style_kp;
 
      amanda_locked = 0;
+
+     mv_______->libav_c___already_adjusted_for_rotate_j = false;
+
      mv_______->libav_c___the_subtitle_stream_i = -2;
      mv_______->libav_c___decode_subtitle = false;
 
@@ -2246,13 +2513,26 @@ int morcego_vermelho_player_thread(morcego___i___instance__a__bucaneiro_engineer
           mv_______->libav_c___sc_kp = NULL;
      }
 
-     mv_______->libav_c___sc_kp = (void *)sws_getContext(pCodecCtx->width, pCodecCtx->height,
-                                                         pCodecCtx->pix_fmt, mv_______->libav_c___adjusted_i_width_for_directx, mv_______->libav_c___the_height,
-                                                         AV_PIX_FMT_YUV420P,
-                                                         VIDEO_CONVERSION_MODE,
-                                                         NULL,
-                                                         NULL,
-                                                         NULL);
+     if (NULL != mv_______->libav_c___rotation_value_m && (90 == mv_______->libav_c___theta_m || 270 == mv_______->libav_c___theta_m))
+     {
+          mv_______->libav_c___sc_kp = (void *)sws_getContext(pCodecCtx->height, pCodecCtx->width,
+                                                              pCodecCtx->pix_fmt, mv_______->libav_c___adjusted_i_width_for_directx, mv_______->libav_c___the_height,
+                                                              AV_PIX_FMT_YUV420P,
+                                                              VIDEO_CONVERSION_MODE,
+                                                              NULL,
+                                                              NULL,
+                                                              NULL);
+     }
+     else
+     {
+          mv_______->libav_c___sc_kp = (void *)sws_getContext(pCodecCtx->width, pCodecCtx->height,
+                                                              pCodecCtx->pix_fmt, mv_______->libav_c___adjusted_i_width_for_directx, mv_______->libav_c___the_height,
+                                                              AV_PIX_FMT_YUV420P,
+                                                              VIDEO_CONVERSION_MODE,
+                                                              NULL,
+                                                              NULL,
+                                                              NULL);
+     }
 
      if (NULL == mv_______->libav_c___sc_kp)
      {
@@ -2516,12 +2796,23 @@ final:;
                                              {
                                                   amanda_timer = get_bucaneiro_tick();
 
-                                                  sws_scale((struct SwsContext *)mv_______->libav_c___sc_kp, (const uint8_t *const *)pFrame_ptr_koci_player->data, pFrame_ptr_koci_player->linesize,
-                                                            0, pCodecCtx->height, pict.data, pict.linesize);
-                                                  pedro_dprintf(-1, "-tempo decorrido %f", (get_bucaneiro_tick() - amanda_timer) * 1000.);
+                                                  if (NULL != mv_______->libav_c___rotation_value_m && (90 == mv_______->libav_c___theta_m || 270 == mv_______->libav_c___theta_m))
+                                                  {
+                                                       sws_scale((struct SwsContext *)mv_______->libav_c___sc_kp, (const uint8_t *const *)pFrame_ptr_koci_player->data, pFrame_ptr_koci_player->linesize,
+                                                                 0, pCodecCtx->width, pict.data, pict.linesize);
+                                                       pedro_dprintf(-1, "-tempo decorrido %f", (get_bucaneiro_tick() - amanda_timer) * 1000.);
 
-                                                  mv_______->libav_c___pixel_format = pCodecCtx->pix_fmt;
+                                                       mv_______->libav_c___pixel_format = pCodecCtx->pix_fmt;
+                                                  }
+                                                  else
+                                                  {
 
+                                                       sws_scale((struct SwsContext *)mv_______->libav_c___sc_kp, (const uint8_t *const *)pFrame_ptr_koci_player->data, pFrame_ptr_koci_player->linesize,
+                                                                 0, pCodecCtx->height, pict.data, pict.linesize);
+                                                       pedro_dprintf(-1, "-tempo decorrido %f", (get_bucaneiro_tick() - amanda_timer) * 1000.);
+
+                                                       mv_______->libav_c___pixel_format = pCodecCtx->pix_fmt;
+                                                  }
                                                   // getbucaneiro_tick() %f dif %f--debug7\n",get_bucaneiro_tick(),(get_bucaneiro_tick()-time_spentb)*1000);
 
                                                   amanda_timer = get_bucaneiro_tick();
@@ -2637,17 +2928,25 @@ final:;
                                   NULL != mv_______->libav_c___screen_kp &&
                                   NULL != mv_______->libav_c___sc_kp)
                               {
+                                   if (NULL != mv_______->libav_c___rotation_value_m && (90 == mv_______->libav_c___theta_m || 270 == mv_______->libav_c___theta_m))
+                                   {
 
-                                   sws_scale((struct SwsContext *)mv_______->libav_c___sc_kp, (const uint8_t *const *)pFrame_ptr_koci_player->data, pFrame_ptr_koci_player->linesize,
-                                             0, pCodecCtx->height, pict.data, pict.linesize);
+                                        sws_scale((struct SwsContext *)mv_______->libav_c___sc_kp, (const uint8_t *const *)pFrame_ptr_koci_player->data, pFrame_ptr_koci_player->linesize,
+                                                  0, pCodecCtx->width, pict.data, pict.linesize);
 
-                                   pedro_dprintf(-1, "w w y y %d %d %d %d\n", pCodecCtx->width, pFrame_ptr_koci_player->width,
-                                                 pCodecCtx->height, pFrame_ptr_koci_player->height);
+                                        pedro_dprintf(-1, "-tempo decorrido %f", (get_bucaneiro_tick() - amanda_timer) * 1000.);
 
-                                   pedro_dprintf(-1, "-tempo decorrido %f", (get_bucaneiro_tick() - amanda_timer) * 1000.);
+                                        mv_______->libav_c___pixel_format = pCodecCtx->pix_fmt;
+                                   }
+                                   else
+                                   {
+                                        sws_scale((struct SwsContext *)mv_______->libav_c___sc_kp, (const uint8_t *const *)pFrame_ptr_koci_player->data, pFrame_ptr_koci_player->linesize,
+                                                  0, pCodecCtx->height, pict.data, pict.linesize);
 
-                                   mv_______->libav_c___pixel_format = pCodecCtx->pix_fmt;
+                                        pedro_dprintf(-1, "-tempo decorrido %f", (get_bucaneiro_tick() - amanda_timer) * 1000.);
 
+                                        mv_______->libav_c___pixel_format = pCodecCtx->pix_fmt;
+                                   }
                                    // getbucaneiro_tick() %f dif %f--debug7\n",get_bucaneiro_tick(),(get_bucaneiro_tick()-time_spentb)*1000);
 
                                    amanda_timer = get_bucaneiro_tick();
