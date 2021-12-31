@@ -2933,6 +2933,12 @@ int __stdcall PlayInDesktop(__int64 mv_instance, int enable_i, int system_screen
 /**
  * @brief It will play the media file
  *
+ * Changelog:
+ * (30/dec/2021 13:00)
+ * Added support to the playback of media files that
+ * need to be rotated, tested with 90 degrees, code
+ * borrowed from ffplay.c
+ * 
  * filename is utf-8
  *
  * loop: will define if it loops
@@ -3013,6 +3019,12 @@ int __stdcall Play(__int64 mv_instance, char *filename, int loop, int track, __a
 /**
  * The same as Play but will not initiate the playback without a resume call
  *
+ * Changelog:
+ * (30/dec/2021 13:00)
+ * Added support to the playback of media files that
+ * need to be rotated, tested with 90 degrees, code
+ * borrowed from ffplay.c
+ * 
  * filename is utf-8
  *
  * @param loop        will define if it loops
