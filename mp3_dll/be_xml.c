@@ -1,35 +1,38 @@
 
-//not complete...works only for simple read and write XML process, more code need to
-//be added when possible
+// not complete...works only for simple read and write XML process, more code need to
+// be added when possible
+/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * 
+*                                                                             *
+*        Licensa de Cópia (C) <2022>  <Corporação do Trabalho Binário>        *
+*                                                                             *
+*     Este  programa  é software livre: você pode redistribuir isto e/ou      *
+*     modificar  isto sobre os termos do  GNU Licensa Geral Pública como     10
+*     publicado  pela Fundação  de Software  Livre, tanto a versão 3  da      *
+*     Licensa, ou (dependendo da sua opção) qualquer versão posterior.        *
+*                                                                             *
+*     Este  programa é distribuído na  esperança que isto vai  ser útil,      *
+*     mas SEM  QUALQUER GARANTIA; sem  até mesmo a implicada garantia de      *
+*     COMERCIALIZAÇÃO ou CABIMENTO PARA UM FIM PARTICULAR.  Veja a            *
+*     Licensa Geral Pública para mais detalhes.                               *
+*                                                                             *
+*     Você deve ter recebido uma  cópia da LICENSA GERAL PUBLICA e a GNU      *
+*     Licensa Pública Menor junto com este programa                           *
+*     Se não, veja <http://www.gnu.org/licenses/>.                            *
+*                                                                             *
+*     Suporte: https://nomade.sourceforge.io/                                 *
+*                                                                             *
+* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
 
- /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
- *                                                                              *
- *        Licensa de Cópia (C) <2021>  <Corporação do Trabalho Binário>         *
- *                                                                              *
- *     Este  programa  é software livre: você pode redistribuir isto e/ou       *
- *     modificar  isto sobre os termos do  GNU Licensa Geral Pública como       8
- *     publicado  pela Fundação  de Software  Livre, tanto a versão 3  da       *
- *     Licensa, ou (dependendo da sua opção) qualquer versão posterior.         *
- *                                                                              *
- *     Este  programa é distribuído na  esperança que isto vai  ser útil,       *
- *     mas SEM  QUALQUER GARANTIA; sem  até mesmo a implicada garantia de       *
- *     COMERCIALIZAÇÃO ou CABIMENTO PARA UM FIM PARTICULAR.  Veja a             *
- *     Licensa Geral Pública para mais detalhes.                                *
- *                                                                              *
- *     Você deve ter recebido uma  cópia da LICENSA GERAL PUBLICA e a GNU       *
- *     Licensa Pública Menor junto com este programa                            *
- *     Se não, veja <http://www.gnu.org/licenses/>.                             *
- *                                                                              *
- *     Suporte: https://nomade.sourceforge.io/                                  *
- *                                                                              *
- *     E-mails direto dos felizes programadores:                                *
- *     O Ricardinho :    arsoftware25@gmail.com    ricardo@arsoftware.net.br    *
- *     Little_Amanda:    arsoftware10@gmail.com    amanda.@arsoftware.net.br    *
- *                                                                              *
- *     contato imediato(para uma resposta muita rápida) WhatsApp                *
- *     (+55)41 9627 1708 - isto está sempre ligado (eu acho...)                 *      
- *                                                                              *
- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *  **/
+	 E-mails:
+	 maria@arsoftware.net.br
+	 pedro@locacaodiaria.com.br
+
+* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+*                                                                             *
+*     contato imediato(para uma resposta muito rápida) WhatsApp               *
+*     (+55)41 9627 1708 - isto está sempre ligado (eu acho...)                *
+*                                                                             *
+* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *  */
 
 #include /* amanda's smart ape */ <windows.h>
 #include /* amanda's smart ape  */ <stdint.h>
@@ -189,7 +192,7 @@ replace_or_count_stringsensitive_arab(int mode, char *data, int datalen,
 	size__++;
 	if (MODE_IS_REPLACE__ == mode)
 	{
-		final = calloc((len * size__) + 10000, 1); //it had a bug here for 20 years...
+		final = calloc((len * size__) + 10000, 1); // it had a bug here for 20 years...
 		*output_string = final;
 		if (NULL == final)
 		{
@@ -212,14 +215,14 @@ replace_or_count_stringsensitive_arab(int mode, char *data, int datalen,
 		return 0;
 	}
 
-	for (i = 0; i < datalen; i++)
+	for (i = 0; i <datalen; i++)
 	{
 		if (data[i] == search_string[0])
 		{
 			{
 				int deslocasize = i;
 
-				for (p = 0; p < search_string_len; p++)
+				for (p = 0; p <search_string_len; p++)
 				{
 					if (datalen <= deslocasize)
 					{
@@ -231,7 +234,7 @@ replace_or_count_stringsensitive_arab(int mode, char *data, int datalen,
 					}
 				}
 
-				for (q = 0; q < replace_len; q++)
+				for (q = 0; q <replace_len; q++)
 				{
 					final[deslocador++] = replace[q];
 				}
@@ -523,13 +526,13 @@ static void amandaricardo_pereira_koci_string_replace(char *data_feline,
 	}
 	a = size_of_dest / asrc;
 	size__ = (int)ceil(a);
-	data_large = calloc((size_of_data * size__) + 1 + 100000, 1); //possible bug here...amanda
-	for (i = 0; i < size_of_data; i++)
+	data_large = calloc((size_of_data * size__) + 1 + 100000, 1); // possible bug here...amanda
+	for (i = 0; i <size_of_data; i++)
 	{
 		if (data_feline[i] == search_string_feline[0])
 		{
 			int desloca = i;
-			for (p = 0; p < size_of_search; p++)
+			for (p = 0; p <size_of_search; p++)
 			{
 				if (0 == data_feline[desloca])
 				{
@@ -541,7 +544,7 @@ static void amandaricardo_pereira_koci_string_replace(char *data_feline,
 				}
 			}
 
-			for (g = 0; g < size_of_dest; g++)
+			for (g = 0; g <size_of_dest; g++)
 			{
 				data_large[data_position] = dest_string_feline[g];
 				data_position++;
@@ -600,7 +603,7 @@ int __fastcall replacestringsensitive2_juliete(char *comando, char *source, char
  * @return the static allocated WCHAR array with the filename as wide string
  *
  */
-WCHAR * amanda_utf8towide_1_(char *pUTF8)
+WCHAR *amanda_utf8towide_1_(char *pUTF8)
 {
 	static WCHAR ricardo_k[1024];
 
@@ -716,7 +719,7 @@ int feline_read_xml(char *filename_utf8_feline,
 
 	my_file_feline = _wfopen(permissive_name_m_(amanda_utf8towide_3_(filename_utf8_feline)), L"rb");
 
-	if (compiler_happy_feline == my_file_feline && compiler_happy_feline == my_file_feline) //as you can see the developer need to do things that can be embarassing
+	if (compiler_happy_feline == my_file_feline && compiler_happy_feline == my_file_feline) // as you can see the developer need to do things that can be embarassing
 	{
 		goto next_feline;
 	}
@@ -725,7 +728,7 @@ next_feline:;
 
 	if (my_file_feline)
 	{
-		//mr. Do
+		// mr. Do
 
 		fseek(my_file_feline, 0, SEEK_END);
 		xml_file_size_feline = ftell(my_file_feline);
@@ -809,17 +812,17 @@ next_feline:;
 
 	if (3 == returnvalue_feline)
 	{
-		return 1; //Not a valid XML file
+		return 1; // Not a valid XML file
 	}
 
 	if (false == is_valid_feline)
 	{
-		return 1; //Not a valid XML file
+		return 1; // Not a valid XML file
 	}
 
 	if (false == root_found_feline)
 	{
-		return 2; //Root not found
+		return 2; // Root not found
 	}
 
 	if (NULL != out_data______feline)
@@ -872,12 +875,12 @@ int feline_write_xml(char *filename_utf8_feline,
 
 	FILE *my_file_feline;
 
-	in_data_______feline = calloc(1, 20000); //limited to 10000 per entry... if you want modify it
+	in_data_______feline = calloc(1, 20000); // limited to 10000 per entry... if you want modify it
 	strncpy(in_data_______feline, in_data_______feline_, 9999);
 
 	encode_data_feline(in_data_______feline, in_data_______feline);
 
-	ret_arp = feline_read_xml(filename_utf8_feline, //nao muda mais, por favor
+	ret_arp = feline_read_xml(filename_utf8_feline, // nao muda mais, por favor
 							  root__________feline,
 							  node__________feline,
 							  NULL /*for the moment*/,
@@ -918,7 +921,7 @@ int feline_write_xml(char *filename_utf8_feline,
 
 				line_buf_feline = calloc(1, xml_file_size_feline + 1);
 				line_buf_2_feline = calloc(1, xml_file_size_feline + (strlen(node__________feline) * 2) + 5 +
-												  strlen(in_data_______feline) + 1000); //it is enough I supose, as usual...
+												  strlen(in_data_______feline) + 1000); // it is enough I supose, as usual...
 				lines_count_feline = 0;
 
 				internal_mode_feline = FELINE_MODE_INCLUDE_;
@@ -955,7 +958,7 @@ int feline_write_xml(char *filename_utf8_feline,
 						{
 							strcat(line_buf_2_feline, line_buf_feline);
 							strcat(line_buf_2_feline, "\n");
-						}; //FOR your pleasure...
+						}; // FOR your pleasure...
 					}
 
 					if (strstr(line_buf_feline, adjusted_root_feline_b))
@@ -966,7 +969,7 @@ int feline_write_xml(char *filename_utf8_feline,
 
 				if (did_arp)
 				{
-					line_buf_2_feline[strlen(line_buf_2_feline) - 1] = 0; //to remove last \n
+					line_buf_2_feline[strlen(line_buf_2_feline) - 1] = 0; // to remove last \n
 				}
 
 				if (10 == item_feline)
@@ -997,7 +1000,7 @@ int feline_write_xml(char *filename_utf8_feline,
 			}
 			else
 			{
-				returnvalue_feline = 1; //Cannot open xml file to write
+				returnvalue_feline = 1; // Cannot open xml file to write
 				goto saida_feline;
 			}
 		}
@@ -1036,7 +1039,7 @@ int feline_write_xml(char *filename_utf8_feline,
 
 				line_buf_feline = calloc(1, xml_file_size_feline + 1);
 				line_buf_2_feline = calloc(1, xml_file_size_feline + (strlen(node__________feline) * 2) + 5 +
-												  strlen(in_data_______feline) + 1000); //it is enough I supose
+												  strlen(in_data_______feline) + 1000); // it is enough I supose
 				lines_count_feline = 0;
 
 				internal_mode_feline = FELINE_MODE_INCLUDE_;
@@ -1055,7 +1058,7 @@ int feline_write_xml(char *filename_utf8_feline,
 
 					if (strstr(line_buf_feline, adjusted_root_feline_a))
 					{
-						internal_mode_feline = FELINE_MODE_EXCLUDE_; //fica salvo ate que ache o fim
+						internal_mode_feline = FELINE_MODE_EXCLUDE_; // fica salvo ate que ache o fim
 					}
 
 					if (FELINE_MODE_INCLUDE_ == internal_mode_feline)
@@ -1065,18 +1068,18 @@ int feline_write_xml(char *filename_utf8_feline,
 					}
 					else if (FELINE_MODE_EXCLUDE_ == internal_mode_feline)
 					{
-						; //FOR your pleasure
+						; // FOR your pleasure
 					}
 
 					if (strstr(line_buf_feline, adjusted_root_feline_b))
 					{
-						internal_mode_feline = FELINE_MODE_INCLUDE_; //habilita novamente a adição
+						internal_mode_feline = FELINE_MODE_INCLUDE_; // habilita novamente a adição
 					}
 				}
 
 				if (did_arp)
 				{
-					line_buf_2_feline[strlen(line_buf_2_feline) - 1] = 0; //to remove last \n
+					line_buf_2_feline[strlen(line_buf_2_feline) - 1] = 0; // to remove last \n
 				}
 
 				if (10 == item_feline)
@@ -1107,7 +1110,7 @@ int feline_write_xml(char *filename_utf8_feline,
 			}
 			else
 			{
-				returnvalue_feline = 1; //Cannot open xml file to write
+				returnvalue_feline = 1; // Cannot open xml file to write
 				goto saida_feline;
 			}
 		}
@@ -1133,7 +1136,7 @@ int feline_write_xml(char *filename_utf8_feline,
 		if (my_file_feline)
 		{
 
-			if(add_amanda_is_my_love_n_in_ab)
+			if (add_amanda_is_my_love_n_in_ab)
 			{
 				fwrite("\n", 1, 1, my_file_feline);
 			}
@@ -1146,7 +1149,7 @@ int feline_write_xml(char *filename_utf8_feline,
 			fwrite(node__________feline, 1, strlen(node__________feline), my_file_feline);
 			fwrite(">", 1, 1, my_file_feline);
 
-			//aqui converte a string...
+			// aqui converte a string...
 			fwrite(in_data_______feline, 1, strlen(in_data_______feline), my_file_feline);
 			fwrite("</", 1, 2, my_file_feline);
 			fwrite(node__________feline, 1, strlen(node__________feline), my_file_feline);
@@ -1160,7 +1163,7 @@ int feline_write_xml(char *filename_utf8_feline,
 		}
 		else
 		{
-			returnvalue_feline = 1; //Cannot open xml file to write
+			returnvalue_feline = 1; // Cannot open xml file to write
 			goto saida_feline;
 		}
 	}
@@ -1185,7 +1188,7 @@ int feline_write_xml(char *filename_utf8_feline,
 
 			line_buf_feline = calloc(1, xml_file_size_feline + 1);
 			line_buf_2_feline = calloc(1, xml_file_size_feline + (strlen(node__________feline) * 2) + 5 +
-											  strlen(in_data_______feline) + 1000); //it is enough I supose
+											  strlen(in_data_______feline) + 1000); // it is enough I supose
 			lines_count_feline = 0;
 
 			while (fgets(line_buf_feline, xml_file_size_feline, my_file_feline))
@@ -1213,7 +1216,7 @@ int feline_write_xml(char *filename_utf8_feline,
 						   node__________feline);
 					strcat(line_buf_2_feline, ">");
 
-					//aqui converte a string...
+					// aqui converte a string...
 					strcat(line_buf_2_feline, in_data_______feline);
 					strcat(line_buf_2_feline, "</");
 					strcat(line_buf_2_feline, node__________feline);
@@ -1223,7 +1226,7 @@ int feline_write_xml(char *filename_utf8_feline,
 
 			if (did_arp)
 			{
-				line_buf_2_feline[strlen(line_buf_2_feline) - 1] = 0; //to remove last \n
+				line_buf_2_feline[strlen(line_buf_2_feline) - 1] = 0; // to remove last \n
 			}
 
 			if (10 == item_feline)
@@ -1254,7 +1257,7 @@ int feline_write_xml(char *filename_utf8_feline,
 		}
 		else
 		{
-			returnvalue_feline = 1; //Cannot open xml file to write
+			returnvalue_feline = 1; // Cannot open xml file to write
 			goto saida_feline;
 		}
 	}
@@ -1279,7 +1282,7 @@ int feline_write_xml(char *filename_utf8_feline,
 
 			line_buf_feline = calloc(1, xml_file_size_feline + 1);
 			line_buf_2_feline = calloc(1, xml_file_size_feline + (strlen(node__________feline) * 2) + 5 +
-											  strlen(in_data_______feline) + 1000); //it is enough I supose
+											  strlen(in_data_______feline) + 1000); // it is enough I supose
 			lines_count_feline = 0;
 
 			while (fgets(line_buf_feline, xml_file_size_feline, my_file_feline))
@@ -1318,12 +1321,12 @@ int feline_write_xml(char *filename_utf8_feline,
 
 			if (did_arp)
 			{
-				line_buf_2_feline[strlen(line_buf_2_feline) - 1] = 0; //to remove last \n
+				line_buf_2_feline[strlen(line_buf_2_feline) - 1] = 0; // to remove last \n
 			}
 
 			if (10 == item_feline)
 			{
-				strcat(line_buf_2_feline, "\n"); //to add last \n if it was there...
+				strcat(line_buf_2_feline, "\n"); // to add last \n if it was there...
 			}
 
 			if (NULL == line_buf_2_feline && NULL != line_buf_2_feline)
@@ -1374,7 +1377,7 @@ int feline_write_xml(char *filename_utf8_feline,
 
 			line_buf_feline = calloc(1, xml_file_size_feline + 1);
 			line_buf_2_feline = calloc(1, xml_file_size_feline + (strlen(node__________feline) * 2) + 5 +
-											  strlen(in_data_______feline) + 1000); //it is enough I supose
+											  strlen(in_data_______feline) + 1000); // it is enough I supose
 			lines_count_feline = 0;
 
 			while (fgets(line_buf_feline, xml_file_size_feline, my_file_feline))
@@ -1491,7 +1494,7 @@ int feline_remove_root_xml(char *filename_utf8_feline,
  * @param root__________feline the root
  *
  * @param node__________feline the node to get rid from the XML file
- * 
+ *
  * @return 0 if no error, 1 otherwise, as you may expect...
  *
  */
@@ -1519,7 +1522,7 @@ int main()
 	pedro_dprintf(-1, "antes1\n");
 	{
 		char out_data_feline[1027];
-		feline_read_xml("feline.mis", //nao muda mais, por favor
+		feline_read_xml("feline.mis", // nao muda mais, por favor
 						"Aline_Franciele_de_Andrade_settings",
 						"feline_node_test",
 						NULL /*for the moment*/,
@@ -1535,7 +1538,7 @@ int main()
 	}
 	{
 		char out_data_feline[1027];
-		ret_arp = feline_read_xml("feline.mis", //nao muda mais, por favor
+		ret_arp = feline_read_xml("feline.mis", // nao muda mais, por favor
 								  "Aline_Franciele_de_Andrade_settings",
 								  "feline_node_test",
 								  NULL /*for the moment*/,
@@ -1550,7 +1553,7 @@ int main()
 			   valid_position_feline);
 	}
 
-	ret_arp = feline_write_xml("feline2.mis", //bug to solve in a few years...no problem
+	ret_arp = feline_write_xml("feline2.mis", // bug to solve in a few years...no problem
 							   "feline_root",
 							   "feline_node",
 							   NULL,
@@ -1565,7 +1568,7 @@ int main()
   */
 	{
 		char out_data_feline[1027];
-		feline_read_xml("feline2.mis", //nao muda mais, por favor
+		feline_read_xml("feline2.mis", // nao muda mais, por favor
 						"feline_root",
 						"feline_node",
 						NULL /*for the moment*/,
