@@ -1,6 +1,6 @@
 /********************************************************************************
  *                                                                              *
- *        Licensa de Cópia (C) <2021>  <Corporação do Trabalho Binário>         *
+ *        Licensa de Cópia (C) <2022>  <Corporação do Trabalho Binário>         *
  *                                                                              *
  *     Este  programa  é software livre: você pode redistribuir isto e/ou       *
  *     modificar  isto sobre os termos do  GNU Licensa Geral Pública como       8
@@ -38,7 +38,7 @@ First of all: thanks to the developers of:
 Libav(ffmpeg)
 SDL
 Rabbit MP3 DLL
-Dialog Medien MP3 OCX
+Dialog Medien MP3 OCX, this project started when I tested this ActiveX OCX
 Maplay 1.2, sorry Jeff...
 Netshow 2.0
 
@@ -70,7 +70,7 @@ Now back to the technical information...
 			// if 1 it will simulate a delay in the audio, if 2 in the video
 			
 			test also to see if the return from hibernation and suspend state is
-			working as expected, my tests passed, but we will test again in Win10
+			working as expected, my tests passed, but we will test again in Win10 someday
 			
 			~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~			
 
@@ -79,12 +79,12 @@ site   : https://sourceforge.net/projects/rsppmp3
 
 GitHub : https://github.com/maria901/rsppmp3_v27
 
-Win32(soon)/64 Dll to play all audio and video that are supported by the library Libav
-
-If you need 32 bits version just now you need to use the release 5.2.3
+Win32(soon will be updated, people are not compiled 32 bits version
+anymore these days)/64 Dll to play all audio and video that are supported
+by the library Libav
 
 Libav is provided as GPL and LGPL, soon our binary packages will have both methods, for the moment
-it is only GPL
+it is only GPL (if this is a problem to you)
 
 rspmp3ocx1.dll and interface2.dll compiled with gcc 11.1.0, SDL2 (mod) compiled
 also with the same version.
@@ -98,8 +98,10 @@ The files are available in the following folders:
 /sdl_2.0          <- the sources for our modified SDL 2.0 library, ready to be compiled again if needed
 /sqlite           <- sources for the Amanda_27.DLL, it is just a wrapper for SQLite, recommended the latest SQLite library
 /touch            <- sources for the C++ library SoundTouch that allows the change in playback speed in many modes
+/parse_webm_m     <- sources for the webm fix DLL, required for some raw WebM files that don't have a complete header and that need to be generated from scratch and fast, the DLL is parse_espirita.dll
+/ffplay.c__v      <- source for the additional exectable that is ffplay.c compiled, now it is part of the project, can be useful for debugging purposes and to borrow features from ffpla.c to rsppmp3, the rotate code was an example
 
-Documentation of the version 19.4.6 available online at:
+Documentation of the version 20.3.6 available online at:
 https://arsoftware.net.br/binarywork/Amanda_Ava_Pereira/rsppmp3_doc_8.9.9/html/decoder_8c.html
                 http://nomade.sf.net/Amanda_Ava_Pereira/rsppmp3_doc_8.9.9/html/decoder_8c.html
 				
@@ -110,8 +112,9 @@ The documentation will be updated soon...
 Description
 
 - Ability to play media files in the following formats:
-All media formats supported by ffmpeg (new webm files (2021), flv avi mov rm ra including the new amazingly fast and
-advanced rsp format (.ricardo4) (:-)) and many many more)
+All media formats supported by ffmpeg (new webm files (2021/2022), flv avi mov
+rm ra including the new amazingly fast and advanced rsp format (.ricardo4) (:-)) and
+many many more)
 - It has a high quality (we supose) graphical equalizer (copied (as usual) from the XMMS project), as
 far as we know it is optimized for 44100 (soon 48000) sample rate, we will be using the Shibatch version later,
 because some people say that it is a real high quality version)
@@ -179,6 +182,13 @@ with different copies of the Libav dlls in the same process running
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Changelog: 
+
+What is new in 20.3.6  build 667698  'Mon 03/January/2022 12:41:17' codename 'Ratier'
+Too many modification was added but not documented, sorry, we will try to 
+keep the changelog (this file) updated in the future, for the moment we will 
+just say that now the DLL can rotate the media file if it is required to 
+appear correctly, the other enhacementes I don't remeber at this moment but 
+they are a lot, each single day, as usual, minor modifications.
 
 What is new in 18.0.9  build 667471  'Sat 30/October/2021 09:38:25' codename 'Graffam'
 Fixed a bug that may cause the sound of wave out to go to 0 during seek 
@@ -966,7 +976,8 @@ Uninstall: Delete the folder
 Important: 
 1-No access to the registry from the DLL (maybe from Libav or SDL, please check
 if it is a problem to you),
-it is Windows 7/8/10 safe at least my portions of the code
+it is Windows 7/8/10 safe at least my portions of the code ( not tested by us
+in win 11, sorry )
 
 			~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
